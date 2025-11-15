@@ -2,40 +2,85 @@
 import Layout from '~/layouts/LandingLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import AgencyTrust from '~/components/widgets/AgencyTrust.astro';
+import AuditIncludes from '~/components/widgets/AuditIncludes.astro';
+import AuditBookingForm from '~/components/widgets/AuditBookingForm.astro';
+
+interface FormData {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  email: string;
+  phone: string;
+  message?: string;
+}
 
 const metadata = {
-  title: 'Lead Generation Landing Page Demo',
+  title: 'Free Growth Audit — Lead Generation for B2B SaaS & Agencies',
+  description: 'Book your free personalized growth audit. We analyze your SEO, content strategy, and conversion funnel to identify quick wins and long-term opportunities.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero2 Widget ******************* -->
+  <!-- Hero Widget - Attention & Value Prop ******************* -->
 
   <Hero
-    tagline="Lead Generation Landing Demo"
-    title="Effective Lead Generation Landing Page: Unlock the Secrets"
-    subtitle="Discover the secrets to creating a Landing Page that turns curious visitors into eager leads. (Your Hero should grab attention instantly. Use a powerful headline that speaks directly to your target audience.)"
+    tagline="Free Growth Audit"
+    title="Turn Visitors Into Qualified Leads"
+    subtitle="Get a personalized video audit showing exactly how to attract higher-intent traffic and convert it into meetings using AI-driven SEO, strategic content, and conversion optimization." 
     actions={[
-      { variant: 'primary', text: 'Call to Action', href: '#', icon: 'tabler:square-rounded-arrow-right' },
-      { text: 'Learn more', href: '#' },
+      { variant: 'primary', text: 'Book Your Free Audit', href: '#audit-form', icon: 'tabler:square-rounded-arrow-right', 'data-ga-event': 'cta_click', 'data-ga-label': 'hero_scroll_to_form' },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1597423498219-04418210827d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80',
-      alt: 'Magnet attracting screws. Lead generation landing page demo',
+      alt: 'Dashboard showing growth metrics — lead generation results',
     }}
   />
 
-  <CallToAction
-    title="Coming soon"
-    subtitle="We are working on the content of these demo pages. You will see them very soon. Stay tuned Stay tuned!"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Download Template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        icon: 'tabler:download',
-      },
-    ]}
-  />
+  <!-- Trust & Credibility Section -->
+  <AgencyTrust />
+
+  <!-- What's Included in Audit -->
+  <AuditIncludes />
+
+  <!-- Lead Capture Form - Primary Conversion Element ========== -->
+  <section class="bg-slate-100 dark:bg-slate-950 py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <AuditBookingForm id="audit-form" />
+    </div>
+  </section>
+
+  <!-- Booking Link Section (Alternative) -->
+  <section class="bg-white dark:bg-slate-900 py-12 md:py-16 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+        Prefer to schedule directly?
+      </h3>
+      <a
+        href="https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
+        data-ga-event="cta_click"
+        data-ga-label="book_audit_alternative"
+      >
+        Book directly on our calendar →
+      </a>
+    </div>
+  </section>
+
+  <!-- Structured data for LandingPage (helps rich results) -->
+  <script type="application/ld+json">
+    {`{
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ZiaFlow",
+      "description": "AI-driven SEO and conversion optimization for B2B SaaS and agencies",
+      "url": "https://ziaflow.com",
+      "telephone": "+1-XXX-XXX-XXXX",
+      "email": "info@ziaflow.com",
+      "areaServed": "US",
+      "priceRange": "$$"
+    }`}
+  </script>
 </Layout>

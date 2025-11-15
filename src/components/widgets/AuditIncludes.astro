@@ -1,0 +1,73 @@
+---
+/**
+ * AuditIncludes - Clarifies what's in the free audit
+ * Reduces friction by showing clear next-step value
+ */
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className = '' } = Astro.props;
+---
+
+<section class:list={['audit-includes bg-white dark:bg-slate-900 py-12 md:py-16', className]} {id}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Headline -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+        What's Included in Your Free Audit
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300">
+        A personalized 30-minute video audit covering everything you need to know.
+      </p>
+    </div>
+
+    <!-- Audit Components Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Technical SEO -->
+      <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+        <div class="text-4xl mb-4">🔧</div>
+        <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Technical SEO Audit</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">
+          Site structure, Core Web Vitals, mobile usability, indexation issues, and quick wins to implement.
+        </p>
+      </div>
+
+      <!-- Content Strategy -->
+      <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+        <div class="text-4xl mb-4">📝</div>
+        <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Content Strategy Review</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">
+          AI-powered keyword gaps, topic opportunities, and a prioritized content roadmap for 90 days.
+        </p>
+      </div>
+
+      <!-- Conversion Analysis -->
+      <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+        <div class="text-4xl mb-4">📈</div>
+        <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white">Conversion Funnel Analysis</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm">
+          Landing page UX review, CTA placement, form friction points, and high-impact optimization recommendations.
+        </p>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="mt-12 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+      <div class="flex gap-4">
+        <div class="text-2xl">✓</div>
+        <div>
+          <p class="text-slate-900 dark:text-white font-semibold mb-2">What You Get</p>
+          <ul class="text-slate-600 dark:text-slate-300 text-sm space-y-1">
+            <li>• Actionable report delivered within 48 hours</li>
+            <li>• No credit card required</li>
+            <li>• No high-pressure sales call (unless you want one)</li>
+            <li>• Easy next-step recommendations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

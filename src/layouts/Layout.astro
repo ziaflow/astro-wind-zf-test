@@ -11,6 +11,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import { ANALYTICS } from 'astrowind:config';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -41,6 +42,18 @@ const { language, textDirection } = I18N;
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">
+    {ANALYTICS?.vendors?.googleTagManager?.id ? (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${ANALYTICS.vendors.googleTagManager.id}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+          title="gtm"
+        />
+      </noscript>
+    ) : null}
+
     <slot />
 
     <BasicScripts />

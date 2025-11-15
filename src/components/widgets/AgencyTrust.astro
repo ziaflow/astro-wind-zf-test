@@ -1,0 +1,82 @@
+---
+/**
+ * AgencyTrust - Social proof and credibility section
+ * Displays client logos, testimonial, and key metrics
+ */
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className = '' } = Astro.props;
+---
+
+<section class:list={['agency-trust bg-slate-50 dark:bg-slate-800 py-12 md:py-16', className]} {id}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Headline -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+        Trusted by Leading B2B Companies
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        We've helped over 200+ companies grow qualified leads and improve conversion rates.
+      </p>
+    </div>
+
+    <!-- Key Metrics Bar -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="text-center">
+        <p class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">+42%</p>
+        <p class="text-slate-600 dark:text-slate-300">Avg. qualified leads growth</p>
+      </div>
+      <div class="text-center">
+        <p class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">+18%</p>
+        <p class="text-slate-600 dark:text-slate-300">Avg. conversion rate improvement</p>
+      </div>
+      <div class="text-center">
+        <p class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">200+</p>
+        <p class="text-slate-600 dark:text-slate-300">Projects launched</p>
+      </div>
+    </div>
+
+    <!-- Client Logos (Placeholder) -->
+    <div class="mb-12">
+      <p class="text-center text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-6">
+        Trusted by
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        <!-- Replace with actual client logos -->
+        <div class="h-12 w-24 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-500 text-xs">
+          Logo 1
+        </div>
+        <div class="h-12 w-24 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-500 text-xs">
+          Logo 2
+        </div>
+        <div class="h-12 w-24 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-500 text-xs">
+          Logo 3
+        </div>
+        <div class="h-12 w-24 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-500 text-xs">
+          Logo 4
+        </div>
+        <div class="h-12 w-24 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-500 text-xs">
+          Logo 5
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="bg-white dark:bg-slate-900 rounded-lg shadow-md p-8 border border-slate-200 dark:border-slate-700 max-w-2xl mx-auto">
+      <p class="text-slate-600 dark:text-slate-300 italic mb-4">
+        "ZiaFlow helped us go from 30 qualified leads/month to over 120 in just 4 months. Their AI-driven content strategy and conversion optimization dramatically improved our sales pipeline."
+      </p>
+      <div class="flex items-center">
+        <div class="h-10 w-10 bg-blue-600 rounded-full mr-3"></div>
+        <div>
+          <p class="font-semibold text-slate-900 dark:text-white">Sarah Chen</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">VP Marketing, TechStart Inc.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

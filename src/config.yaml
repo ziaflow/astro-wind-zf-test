@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: ZiaFlow
+  site: 'https://ziaflow.com'
   base: '/'
   trailingSlash: false
 
@@ -9,22 +9,22 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: ZiaFlow — Your Partner in Digital Transformation
+    template: '%s — ZiaFlow'
+  description: "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Rank higher, convert better."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: ZiaFlow
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    handle: '@ziaflow'
+    site: '@ziaflow'
     cardType: summary_large_image
 
 i18n:
@@ -67,6 +67,10 @@ analytics:
   vendors:
     googleAnalytics:
       id: null # or "G-XXXXXXXXXX"
+    googleTagManager:
+      id: 'GTM-5Q2JZPVG' # Google Tag Manager container ID
+    clarity:
+      id: null # Microsoft Clarity project id, e.g. "abcd1234"
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
