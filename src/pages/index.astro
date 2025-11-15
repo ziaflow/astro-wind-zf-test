@@ -13,37 +13,24 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 
 const metadata = {
-  title: 'SaaS Landing Page',
+  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="header">
-    <Header
-      {...headerData}
-      actions={[
-        {
-          variant: 'secondary',
-          text: 'Login',
-          href: '#',
-        },
-        {
-          variant: 'primary',
-          text: 'Sign Up',
-          href: '#',
-        },
-      ]}
-      isSticky
-    />
-  </Fragment>
+  <!-- Hero Widget ******************* -->
 
-  <!-- Hero2 Widget ******************* -->
-
-  <Hero2
-    tagline="ZiaFlow SaaS Template"
+  <Hero
     actions={[
-      { variant: 'primary', target: '_blank', text: 'Contact Us', href: 'https://github.com/arthelokyo/astrowind' },
-      { text: 'About Us', href: '#features' },
+      {
+        variant: 'primary',
+        text: 'Get template',
+        href: 'https://github.com/arthelokyo/astrowind',
+        target: '_blank',
+        icon: 'tabler:download',
+      },
+      { text: 'Learn more', href: '#features' },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
