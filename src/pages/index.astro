@@ -1,13 +1,10 @@
 ---
-import { Fragment } from 'astro/jsx-runtime';
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
@@ -46,12 +43,12 @@ const metadata = {
 
   {/* Trust & Stats Bar */}
   <Stats
-    items={[
-      { label: 'Businesses helped', value: '120+' },
-      { label: 'Average Growth', value: '240%' },
-      { label: 'Google Reviews', value: '4.9★' },
-      { label: 'Client Revenue', value: '$12M+' },
-      { label: 'Certified Partners', value: 'Microsoft | TikTok' }
+    stats={[
+      { title: 'Businesses helped', amount: '120+' },
+      { title: 'Average Growth', amount: '240%' },
+      { title: 'Google Reviews', amount: '4.9★' },
+      { title: 'Client Revenue', amount: '$12M+' },
+      { title: 'Certified Partners', amount: 'Microsoft | TikTok' },
     ]}
     tagline="Trusted by Arizona’s Leading Brands"
   />
@@ -128,7 +125,7 @@ const metadata = {
 
   {/* Testimonials */}
   <Note
-    content={`"Working with ZiaFlow tripled our website inquiries in weeks. Their team delivered on every promise." — Jane D., Scottsdale HVAC ★★★★★`}
+    description={`"Working with ZiaFlow tripled our website inquiries in weeks. Their team delivered on every promise." — Jane D., Scottsdale HVAC ★★★★★`}
   />
 
   {/* Why ZiaFlow / Differentiators */}
