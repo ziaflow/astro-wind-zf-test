@@ -14,234 +14,186 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'ZiaFlow - Your Partner in Digital Transformation',
+  title: 'Phoenix Marketing Agency & Web Development | ZiaFlow',
+  description: 'Accelerate growth with SEO, automation, PPC, and custom web development. Based in Phoenix, AZ. Certified Microsoft & TikTok Partner. Get your free strategy session!',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  {/* Hero Widget ******************* */}
+  {/* Hero Section */}
   <Hero
-    tagline="Digital Transformation Made Simple"
-    title="Grow Smarter, Not Harder"
-    subtitle="ZiaFlow empowers businesses with custom development, intelligent automation, and results-driven marketing. Transform your operations and accelerate growth with tailored SaaS solutions."
+    tagline="Phoenix Marketing Agency & Web Development"
+    title="Accelerate Your Growth with ZiaFlow"
+    subtitle="ROI-driven SEO, automation, PPC, and custom web solutions—trusted by 120+ Arizona businesses."
     actions={[
       {
         variant: 'primary',
-        text: 'Get Started',
-        href: '#services',
+        text: 'Get My Free Strategy Session',
+        href: '#contact',
       },
       {
         variant: 'secondary',
-        text: 'View Our Work',
+        text: 'See Our Case Studies',
         href: '#case-studies',
       },
     ]}
   >
     <Fragment slot="subtitle">
-      <span class="font-semibold">Custom Web Development</span> · <span class="font-semibold">SEO & PPC</span> · <span class="font-semibold">Workflow Automation</span>
+      <span class="font-semibold">240% Avg. Traffic Growth</span> · <span class="font-semibold">Microsoft & TikTok Partner</span> · <span class="font-semibold">E-commerce + Home Services</span>
     </Fragment>
   </Hero>
 
-  {/* Note Widget ******************* */}
-  <Note
-    content="Trusted by startups and growing businesses across Phoenix and beyond. ZiaFlow combines technical expertise with deep industry understanding."
+  {/* Trust & Stats Bar */}
+  <Stats
+    items={[
+      { label: 'Businesses helped', value: '120+' },
+      { label: 'Average Growth', value: '240%' },
+      { label: 'Google Reviews', value: '4.9★' },
+      { label: 'Client Revenue', value: '$12M+' },
+      { label: 'Certified Partners', value: 'Microsoft | TikTok' }
+    ]}
+    tagline="Trusted by Arizona’s Leading Brands"
   />
 
-  {/* Features Widget *************** */}
+  {/* Service Grid */}
   <Features
     id="services"
-    tagline="Our Services"
-    title="Comprehensive Digital Solutions"
-    subtitle="From custom development to marketing automation, we deliver end-to-end solutions that drive measurable results."
+    tagline="Expert Digital Marketing & Web Development"
+    title="Our Core Services"
+    subtitle="Grow faster with SEO, web development, PPC, automation, and e-commerce solutions."
     items={[
       {
-        title: 'Custom Development',
-        description: 'Tailored web, mobile, and app development solutions built to scale with your business. We create responsive, user-friendly interfaces backed by robust architecture.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'SEO & Local Optimization',
-        description: 'Dominate local search results with expert SEO strategies and Google Local Service Ad optimization. Drive qualified leads directly to your business.',
+        title: 'Phoenix SEO Services',
+        description: 'Rank #1 on Google, drive more local traffic, and book more jobs.',
         icon: 'tabler:search',
       },
       {
-        title: 'PPC Advertising',
-        description: 'Strategic paid advertising campaigns across Google, Microsoft, Meta, TikTok, LinkedIn, and Reddit. Maximize ROI with data-driven targeting.',
+        title: 'Custom Web Development',
+        description: 'Conversion-focused websites for mobile and desktop—built for Phoenix and beyond.',
+        icon: 'tabler:devices-pc',
+      },
+      {
+        title: 'PPC Management',
+        description: 'Maximize ROI on Google, Bing, Facebook, and TikTok Ads.',
         icon: 'tabler:ad',
       },
       {
         title: 'Marketing Automation',
-        description: 'Streamline your marketing operations with intelligent automation. Nurture leads, personalize customer journeys, and scale your outreach effortlessly.',
+        description: 'Automate email, CRM, and review requests to save time and grow sales.',
         icon: 'tabler:mail-forward',
       },
       {
-        title: 'Workflow Automation',
-        description: 'Eliminate repetitive tasks and optimize business processes. Save countless hours with custom automation that integrates seamlessly with your existing systems.',
-        icon: 'tabler:arrows-shuffle',
+        title: 'E-commerce Solutions',
+        description: 'Shopify, WooCommerce, and custom platforms for serious online growth.',
+        icon: 'tabler:shopping-cart',
       },
       {
-        title: 'CRM & ERP Solutions',
-        description: 'Centralize customer data and streamline operations with customized CRM and ERP implementations tailored to your business workflows.',
-        icon: 'tabler:database',
+        title: 'SaaS & Workflow Automation',
+        description: 'Streamline your business with tailored automation and SaaS workflows.',
+        icon: 'tabler:arrows-shuffle',
       },
     ]}
   />
 
-  {/* Content Widget **************** */}
+  {/* Case Studies Preview */}
   <Content
     isReversed
-    tagline="Our Approach"
-    title="Technical Expertise Meets Business Strategy"
+    tagline="Proven Results"
+    title="Real Outcomes for Arizona Businesses"
     items={[
       {
-        title: 'Industry-Aligned Solutions',
-        description: 'We do not just build technology - we craft solutions aligned with your specific business objectives and industry challenges.',
+        title: 'Scottsdale Plumbing',
+        description: '210% more leads in 3 months via local SEO.',
       },
       {
-        title: 'Scalable Architecture',
-        description: 'Future-proof infrastructure that grows with your business, from startup to enterprise.',
+        title: 'Tempe Fashion Boutique',
+        description: 'Doubled online sales with web redesign & automation.',
       },
       {
-        title: 'Data-Driven Decisions',
-        description: 'Comprehensive analytics and reporting keep you informed and in control of your digital transformation journey.',
+        title: 'Mesa Home Services',
+        description: 'Automated review generation for 50+ new 5-star reviews.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      alt: 'Business analytics dashboard',
+      src: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      alt: 'Growth chart and case study results',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">Building on Modern Foundations</h3>
-      <p>Gain a competitive advantage with cutting-edge technology and industry-leading practices that deliver real business value.</p>
+      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">Results That Matter</h3>
+      <p>See how ZiaFlow has transformed home services, e-commerce, and B2B firms across Arizona.</p>
     </Fragment>
   </Content>
 
-  {/* Steps Widget ****************** */}
-  <Steps
-    title="How We Work"
-    items={[
-      {
-        title: 'Step 1: Discovery & Strategy',
-        description: 'We start by understanding your business goals, challenges, and opportunities. Every engagement begins with strategic planning aligned to your objectives.',
-        icon: 'tabler:target',
-      },
-      {
-        title: 'Step 2: Custom Solution Design',
-        description: 'Our team designs tailored solutions leveraging the right technology stack for your specific needs - no cookie-cutter approaches.',
-        icon: 'tabler:tool',
-      },
-      {
-        title: 'Step 3: Development & Implementation',
-        description: 'Expert execution with agile methodology. We build, test, and deploy with precision while keeping you informed every step of the way.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Step 4: Optimize & Scale',
-        description: 'Launch is just the beginning. We provide ongoing optimization, support, and analytics to ensure continuous improvement and growth.',
-        icon: 'tabler:chart-line',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-      alt: 'Team collaboration',
-    }}
+  {/* Testimonials */}
+  <Note
+    content={`"Working with ZiaFlow tripled our website inquiries in weeks. Their team delivered on every promise." — Jane D., Scottsdale HVAC ★★★★★`}
   />
-  {/* Features2 Widget ************** */}
+
+  {/* Why ZiaFlow / Differentiators */}
   <Features2
     title="Why Choose ZiaFlow?"
-    subtitle="We are not just service providers - we are your strategic partners in digital transformation."
+    subtitle="Local expertise, national results—strategies for e-commerce, home services, and B2B."
     tagline="The ZiaFlow Difference"
     items={[
-      {
-        title: 'Affordable for Growing Businesses',
-        description: 'Competitive pricing designed for startups and small businesses that need enterprise-quality solutions.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Proven Track Record',
-        description: 'Our work speaks for itself. Consistently delivering results that transform operations and drive revenue.',
-        icon: 'tabler:trophy',
-      },
-      {
-        title: 'Rapid Implementation',
-        description: 'Efficient processes and expert execution mean faster time-to-value for your investment.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Dedicated Support',
-        description: 'Responsive, knowledgeable support when you need it. We are invested in your long-term success.',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Custom Tailored',
-        description: 'Every solution is built specifically for your business - no generic templates or one-size-fits-all approaches.',
-        icon: 'tabler:adjustments',
-      },
-      {
-        title: 'Transparent Communication',
-        description: 'Clear reporting, honest timelines, and open dialogue throughout every engagement.',
-        icon: 'tabler:messages',
-      },
+      { title: 'Microsoft/TikTok Partner', description: 'Certified, cutting-edge campaigns.' },
+      { title: 'Phoenix-Based Team', description: 'Real local experts serving Arizona.' },
+      { title: 'Proven Track Record', description: 'Consistent results that drive business success.' },
+      { title: 'Results-Driven', description: 'ROI-focused strategies, visible outcomes.' },
+      { title: 'Full-Stack Solutions', description: 'From web dev to automation, we cover all bases.' },
+      { title: 'Transparent Communication', description: 'Regular reporting and dedicated support.' },
     ]}
   />
 
-  {/* CallToAction Widget *********** */}
+  {/* Call-to-Action */}
   <CallToAction
-    title="Ready to Transform Your Business?"
-    subtitle="Join the growing number of businesses that have streamlined their operations and accelerated growth with ZiaFlow's solutions."
+    title="Ready to Grow Your Business?"
+    subtitle="Book your free strategy session and discover how ZiaFlow delivers better SEO, web development, and automation for Phoenix-area companies."
     actions={[
-      {
-        variant: 'primary',
-        text: 'Schedule a Consultation',
-        href: '/contact',
-      },
-      {
-        variant: 'secondary',
-        text: 'View Services',
-        href: '#services',
-      },
+      { variant: 'primary', text: 'Request Consultation', href: '#contact' },
+      { variant: 'secondary', text: 'Explore Services', href: '#services' },
     ]}
   />
 
-  {/* BlogLatestPosts Widget ******** */}
+  {/* Blog & Insights */}
   <BlogLatestPosts
-    title="Insights & Expertise"
-    information="Explore our latest thoughts on digital transformation, automation, and growth strategies."
+    title="Digital Marketing Insights"
+    information="Latest tips on SEO, automation, lead generation, and local business growth in Phoenix."
   />
 
-  {/* FAQs Widget ******************* */}
+  {/* FAQs */}
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Get answers to common questions about our services, process, and approach."
+    subtitle="Everything you need to know before working with ZiaFlow."
     tagline="FAQs"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'What types of businesses do you work with?',
-        description: 'We specialize in working with startups, small businesses, and growing companies across industries. Our solutions are particularly valuable for businesses looking to scale operations through automation and digital transformation.',
+        title: 'What industries do you specialize in?',
+        description: 'Home services, e-commerce, B2B, professional services, & more—see our case studies for details.',
       },
       {
-        title: 'How long does a typical project take?',
-        description: 'Project timelines vary based on scope and complexity. Simple automation projects can be completed in 2-4 weeks, while custom development projects typically range from 8-16 weeks. We provide detailed timelines during the discovery phase.',
+        title: 'How long until I see results?',
+        description: 'Most clients see measurable growth in 30-90 days, depending on campaign and goals.',
       },
       {
-        title: 'Do you provide ongoing support after launch?',
-        description: 'Absolutely. We offer comprehensive support and maintenance packages to ensure your solutions continue performing optimally. We also provide analytics, reporting, and continuous optimization.',
+        title: 'Do you help with Google reviews?',
+        description: 'Yes! Our automation campaigns help clients earn 5-star reviews fast.',
       },
       {
-        title: 'What makes ZiaFlow different from other agencies?',
-        description: 'We combine technical expertise with deep business understanding. Rather than just executing tasks, we act as strategic partners who understand your industry challenges and align solutions to your business objectives.',
+        title: 'Is ZiaFlow certified?',
+        description: 'We are certified partners with Microsoft, TikTok, and multiple major platforms.',
       },
       {
-        title: 'Can you integrate with our existing systems?',
-        description: 'Yes! We specialize in creating solutions that work seamlessly with your existing tech stack, whether that is CRMs, ERPs, marketing platforms, or custom systems.',
+        title: 'What makes you the top Phoenix marketing agency?',
+        description: 'Proven outcomes, transparent reporting, and a dedicated, local team.',
       },
       {
-        title: 'What is your pricing structure?',
-        description: 'We offer competitive, transparent pricing tailored to your specific needs and budget. After our discovery consultation, we provide detailed proposals with clear scope and investment requirements.',
+        title: 'Do you offer free consultations?',
+        description: 'Absolutely. Every engagement starts with a free strategy session and audit.',
       },
     ]}
   />
+
 </Layout>
