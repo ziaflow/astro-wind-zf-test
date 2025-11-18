@@ -7,218 +7,217 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'Services - Digital Transformation Solutions | ZiaFlow',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
-
   <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
+    tagline="Our Services"
+    title="Transform Your Business with Custom Solutions"
+    subtitle="From intelligent automation to strategic marketing and custom development, ZiaFlow delivers comprehensive digital solutions that drive measurable results. We combine technical expertise with deep industry knowledge to create solutions tailored to your unique business needs."
+    actions={[
+      { variant: 'primary', text: 'Schedule Consultation', href: '/contact' },
+      { variant: 'secondary', text: 'View Case Studies', href: '#testimonials' }
+    ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
+      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Digital transformation services',
     }}
   />
 
   <!-- Features2 Widget ************** -->
-
   <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
+    title="Comprehensive Digital Solutions"
+    subtitle="Every service is designed to accelerate growth, streamline operations, and maximize ROI for your business."
     columns={3}
     items={[
       {
-        title: 'Educational',
+        title: 'Custom Web Development',
         description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
+          'Build responsive, scalable web applications tailored to your business. From e-commerce platforms to SaaS products, we create digital experiences that engage users and drive conversions.',
+        icon: 'tabler:code',
       },
       {
-        title: 'Interior Design',
+        title: 'Mobile App Development',
         description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
+          'Native and cross-platform mobile applications that extend your reach. We build intuitive iOS and Android apps that seamlessly integrate with your existing systems.',
+        icon: 'tabler:device-mobile',
       },
       {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
+        title: 'SEO & Local Optimization',
         description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
+          'Dominate local search results and attract qualified leads. Our expert SEO strategies and Google Local Service Ad optimization put your business in front of customers actively searching for your services.',
+        icon: 'tabler:search',
       },
       {
-        title: 'Blog',
+        title: 'PPC Advertising',
         description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
+          'Data-driven paid advertising campaigns across Google Ads, Microsoft Ads, Meta, TikTok, LinkedIn, and Reddit. Maximize ROI with precise targeting and continuous optimization.',
+        icon: 'tabler:ad',
       },
       {
-        title: 'Business',
+        title: 'Marketing Automation',
         description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
+          'Streamline lead nurturing and customer communication with intelligent automation. Personalize customer journeys at scale while saving countless hours of manual work.',
+        icon: 'tabler:mail-forward',
       },
       {
-        title: 'Branding',
+        title: 'Workflow Automation',
         description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
+          'Eliminate repetitive tasks and optimize business processes. Custom automation solutions that integrate with your existing systems to boost productivity and reduce errors.',
+        icon: 'tabler:robot',
       },
       {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
+        title: 'CRM Implementation',
         description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
+          'Centralize customer data and improve relationships with customized CRM solutions. From Salesforce to HubSpot to custom builds, we tailor systems to match your sales process.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'ERP Solutions',
+        description:
+          'Streamline operations with enterprise resource planning systems designed for your workflows. Integrate finance, inventory, and operations into one cohesive platform.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Strategic Consulting',
+        description:
+          'Expert guidance on digital transformation, technology selection, and implementation roadmaps. We help you navigate complex decisions with industry-aligned strategies.',
+        icon: 'tabler:bulb',
       },
     ]}
   />
 
   <!-- Content Widget **************** -->
-
   <Content
     isReversed
     items={[
       {
-        title: 'High-Quality Designs',
+        title: 'Tailored to Your Business',
         description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
+          'No cookie-cutter solutions. Every project is customized to your specific industry, challenges, and objectives. We take time to understand your business before recommending technology.',
+        icon: 'tabler:adjustments',
       },
       {
-        title: 'Customization Tools',
+        title: 'Scalable Architecture',
         description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
+          'Future-proof solutions built to grow with your business. Whether you are a startup or scaling enterprise, our architecture accommodates increased users, data, and functionality.',
+        icon: 'tabler:trending-up',
       },
       {
-        title: 'Pre-Designed Elements',
+        title: 'Seamless Integration',
         description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
+          'Work with your existing tech stack. Our solutions integrate smoothly with CRMs, ERPs, marketing platforms, and custom systems you already use.',
+        icon: 'tabler:plug',
       },
       {
-        title: 'Preview and Mockup Views',
+        title: 'Ongoing Support',
         description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
+          'Launch is just the beginning. We provide continuous optimization, analytics, reporting, and responsive support to ensure your solutions deliver lasting value.',
+        icon: 'tabler:lifebuoy',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
+      alt: 'Team collaboration',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">How We Work</h3>
     </Fragment>
   </Content>
 
   <!-- Content Widget **************** -->
-
   <Content
     isAfterContent
     items={[
       {
-        title: 'Time Savings',
+        title: 'Save Time & Resources',
         description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
+          'Automation eliminates hours of repetitive work. Our clients report saving 10,000+ hours collectively, allowing teams to focus on high-value activities that drive growth.',
         icon: 'tabler:clock',
       },
       {
-        title: 'Professional Appearance',
+        title: 'Increase Revenue',
         description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
+          'Strategic SEO, PPC, and marketing automation drive qualified leads and conversions. Better systems and processes translate directly to improved bottom-line results.',
+        icon: 'tabler:chart-line',
       },
       {
-        title: 'Cost-Efficiency',
+        title: 'Reduce Costs',
         description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
+          'Streamlined operations and automated workflows reduce labor costs and eliminate errors. Get enterprise capabilities at prices designed for growing businesses.',
         icon: 'tabler:coin',
       },
       {
-        title: 'Instant Download',
+        title: 'Rapid Implementation',
         description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
+          'Efficient processes mean faster time-to-value. Simple automation projects launch in 2-4 weeks, while custom development typically ranges from 8-16 weeks.',
+        icon: 'tabler:rocket',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+      alt: 'Business growth',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Measurable Results</h3>
     </Fragment>
   </Content>
 
   <!-- Testimonials Widget *********** -->
-
   <Testimonials
-    title="Words from real customers"
+    id="testimonials"
+    title="What Our Clients Say"
     testimonials={[
       {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
+        testimonial: `ZiaFlow has been nothing short of exceptional. Their expertise in automation and marketing has transformed how we operate. Response time is incredible - even early morning or late night questions get answered promptly.`,
+        name: 'Sarah M.',
+        job: 'Business Owner',
         image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
+          src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Client testimonial',
         },
       },
       {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
+        testimonial: `Working with ZiaFlow has been a game changer. They delivered exactly what we needed - custom solutions that actually solve our problems. No black magic BS, just skilled professionals who know what they are doing.`,
+        name: 'Michael T.',
+        job: 'Operations Director',
         image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
+          src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Client testimonial',
         },
       },
       {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
+        testimonial: `The automation solutions ZiaFlow built for us have saved countless hours every week. The ROI was evident within the first month. They truly understand business needs, not just technology.`,
+        name: 'Jennifer L.',
+        job: 'Marketing Manager',
         image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
+          src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Client testimonial',
         },
       },
     ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
   />
 
   <!-- CallToAction Widget *********** -->
-
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
+        text: 'Schedule Free Consultation',
+        href: '/contact',
+      },
+      {
+        variant: 'secondary',
+        text: 'View Pricing',
+        href: '/pricing',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
+    title="Ready to Transform Your Business?"
+    subtitle="Let's discuss your challenges, goals, and how our solutions can drive measurable results for your organization."
   />
 </Layout>

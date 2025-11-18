@@ -19,7 +19,7 @@ export const headerData = {
       href: getBlogPermalink(),
     },
     {
-      text: 'Our Work',
+      text: 'Services',
       href: getPermalink('/services'),
     },
   ],
@@ -28,18 +28,6 @@ export const headerData = {
 
 export const footerData = {
   links: [
-    {
-      title: 'Product',
-      links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
-      ],
-    },
     {
       title: 'Services',
       links: [
@@ -51,7 +39,7 @@ export const footerData = {
       ],
     },
     {
-      title: 'Support',
+      title: 'Blog',
       links: [
         { text: 'Docs', href: '#' },
         { text: 'Community Forum', href: '#' },
@@ -61,7 +49,7 @@ export const footerData = {
       ],
     },
     {
-      title: 'Company',
+      title: 'ZiaFlow',
       links: [
         { text: 'About', href: '#' },
         { text: 'Blog', href: '#' },
@@ -85,6 +73,6 @@ export const footerData = {
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    © 2025 ZiaFlow. All rights reserved. <a class="text-blue-600 underline dark:text-muted" href="mailto:info@ziaflow.com">Contact us</a>
+    © 2025 ZiaFlow. All rights reserved. Contact us
   `,
 };

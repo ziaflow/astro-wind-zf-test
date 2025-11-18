@@ -5,19 +5,23 @@ import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact ZiaFlow - Digital Transformation Experts in Phoenix',
+  description: 'Get in touch with ZiaFlow for custom development, automation, and digital marketing solutions. Schedule your free consultation today.',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
-
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText 
+    tagline="Get In Touch" 
+    title="Contact the ZiaFlow Team"
+    subtitle="Ready to transform your business? Schedule a free consultation to discuss your challenges, goals, and how we can help you achieve measurable results."
+  />
 
   <ContactUs
     id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="Start Your Digital Transformation"
+    subtitle="Tell us about your project and we will get back to you within 24 hours. Whether you need custom development, automation, or marketing solutions, our team is ready to help."
     inputs={[
       {
         type: 'text',
@@ -29,40 +33,49 @@ const metadata = {
         name: 'email',
         label: 'Email',
       },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Company (Optional)',
+      },
+      {
+        type: 'text',
+        name: 'phone',
+        label: 'Phone (Optional)',
+      },
     ]}
     textarea={{
-      label: 'Message',
+      label: 'Tell us about your project',
+      placeholder: 'What challenges are you facing? What are your goals? The more details you provide, the better we can help.',
     }}
     disclaimer={{
       label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+        'By submitting this form, you agree to our privacy policy. We will never share your information with third parties.',
     }}
-    description="Our support team typically responds within 24 business hours."
+    description="Our team typically responds within 24 hours, often sooner. For urgent inquiries, please call or email directly."
   />
 
   <!-- Features2 Widget ************** -->
-
   <Features2
-    title="We are here to help!"
+    title="How Can We Help You?"
+    subtitle="Choose the best way to reach us based on your needs."
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
+        title: 'New Project Inquiries',
+        description: 'Looking to start a new project? Schedule a free consultation to discuss your requirements, timeline, and budget. We will provide a detailed proposal tailored to your business needs.',
+        icon: 'tabler:rocket',
       },
       {
-        title: 'Contact sales',
+        title: 'Existing Client Support',
         description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
+          'Current client needing support? We are here to help with ongoing optimization, technical issues, or questions about your solutions. Reach out via email or phone for priority support.',
+        icon: 'tabler:lifebuoy',
       },
       {
-        title: 'Technical support',
+        title: 'Partnership Opportunities',
         description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
+          'Interested in partnering with ZiaFlow? We collaborate with agencies, consultants, and complementary service providers. Let us explore how we can work together.',
+        icon: 'tabler:heart-handshake',
       },
       {
         title: 'Email',
@@ -70,9 +83,38 @@ const metadata = {
         icon: 'tabler:mail',
       },
       {
+        title: 'Phone',
+        description: 'Available for current clients and project inquiries',
+        icon: 'tabler:phone',
+      },
+      {
         title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        description: 'Greater Phoenix Area, Arizona - Serving clients nationwide',
         icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+
+  <!-- Additional Features2 Widget for Services ************** -->
+  <Features2
+    title="What to Expect"
+    subtitle="Our consultation process is straightforward and focused on understanding your needs."
+    columns={3}
+    items={[
+      {
+        title: 'Discovery Call',
+        description: 'We start with a conversation to understand your business, challenges, and goals. No sales pressure - just a genuine discussion about how we can help.',
+        icon: 'tabler:message-circle',
+      },
+      {
+        title: 'Custom Proposal',
+        description: 'Receive a detailed proposal with clear scope, timeline, and transparent pricing. We break down exactly what you will get and what it will cost.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Ongoing Partnership',
+        description: 'After launch, we provide continuous support, optimization, and analytics. We are invested in your long-term success, not just project completion.',
+        icon: 'tabler:users',
       },
     ]}
   />

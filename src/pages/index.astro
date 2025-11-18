@@ -1,692 +1,247 @@
 ---
+import { Fragment } from 'astro/jsx-runtime';
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero2 from '~/components/widgets/Hero2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
-
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'ZiaFlow - Your Partner in Digital Transformation',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
   {/* Hero Widget ******************* */}
-
-<<<<<<< HEAD
-  <Hero2
-=======
   <Hero
+    tagline="Digital Transformation Made Simple"
+    title="Grow Smarter, Not Harder"
+    subtitle="ZiaFlow empowers businesses with custom development, intelligent automation, and results-driven marketing. Transform your operations and accelerate growth with tailored SaaS solutions."
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
+        text: 'Get Started',
+        href: '#services',
       },
-      { text: 'Learn more', href: '#features' },
+      {
+        variant: 'secondary',
+        text: 'View Our Work',
+        href: '#case-studies',
+      },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
-    <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
-    </Fragment>
-
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+      <span class="font-semibold">Custom Web Development</span> · <span class="font-semibold">SEO & PPC</span> · <span class="font-semibold">Workflow Automation</span>
     </Fragment>
   </Hero>
 
-  <!-- Note Widget ******************* -->
+  {/* Note Widget ******************* */}
+  <Note
+    content="Trusted by startups and growing businesses across Phoenix and beyond. ZiaFlow combines technical expertise with deep industry understanding."
+  />
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
-
-  <!-- Features Widget *************** -->
-
+  {/* Features Widget *************** */}
   <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
+    id="services"
+    tagline="Our Services"
+    title="Comprehensive Digital Solutions"
+    subtitle="From custom development to marketing automation, we deliver end-to-end solutions that drive measurable results."
     items={[
       {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
+        title: 'Custom Development',
+        description: 'Tailored web, mobile, and app development solutions built to scale with your business. We create responsive, user-friendly interfaces backed by robust architecture.',
+        icon: 'tabler:code',
       },
       {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
+        title: 'SEO & Local Optimization',
+        description: 'Dominate local search results with expert SEO strategies and Google Local Service Ad optimization. Drive qualified leads directly to your business.',
+        icon: 'tabler:search',
       },
       {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
+        title: 'PPC Advertising',
+        description: 'Strategic paid advertising campaigns across Google, Microsoft, Meta, TikTok, LinkedIn, and Reddit. Maximize ROI with data-driven targeting.',
+        icon: 'tabler:ad',
       },
       {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
+        title: 'Marketing Automation',
+        description: 'Streamline your marketing operations with intelligent automation. Nurture leads, personalize customer journeys, and scale your outreach effortlessly.',
+        icon: 'tabler:mail-forward',
       },
       {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
+        title: 'Workflow Automation',
+        description: 'Eliminate repetitive tasks and optimize business processes. Save countless hours with custom automation that integrates seamlessly with your existing systems.',
+        icon: 'tabler:arrows-shuffle',
       },
       {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
+        title: 'CRM & ERP Solutions',
+        description: 'Centralize customer data and streamline operations with customized CRM and ERP implementations tailored to your business workflows.',
+        icon: 'tabler:database',
       },
     ]}
   />
 
-  <!-- Content Widget **************** -->
-
+  {/* Content Widget **************** */}
   <Content
     isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
+    tagline="Our Approach"
+    title="Technical Expertise Meets Business Strategy"
     items={[
       {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
+        title: 'Industry-Aligned Solutions',
+        description: 'We do not just build technology - we craft solutions aligned with your specific business objectives and industry challenges.',
       },
       {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
+        title: 'Scalable Architecture',
+        description: 'Future-proof infrastructure that grows with your business, from startup to enterprise.',
       },
       {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
+        title: 'Data-Driven Decisions',
+        description: 'Comprehensive analytics and reporting keep you informed and in control of your digital transformation journey.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      alt: 'Business analytics dashboard',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">Building on Modern Foundations</h3>
+      <p>Gain a competitive advantage with cutting-edge technology and industry-leading practices that deliver real business value.</p>
     </Fragment>
   </Content>
 
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
-
+  {/* Steps Widget ****************** */}
   <Steps
-    title="Get your dream website up and running in no time with AstroWind."
+    title="How We Work"
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
+        title: 'Step 1: Discovery & Strategy',
+        description: 'We start by understanding your business goals, challenges, and opportunities. Every engagement begins with strategic planning aligned to your objectives.',
+        icon: 'tabler:target',
       },
       {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
+        title: 'Step 2: Custom Solution Design',
+        description: 'Our team designs tailored solutions leveraging the right technology stack for your specific needs - no cookie-cutter approaches.',
+        icon: 'tabler:tool',
       },
       {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
+        title: 'Step 3: Development & Implementation',
+        description: 'Expert execution with agile methodology. We build, test, and deploy with precision while keeping you informed every step of the way.',
+        icon: 'tabler:rocket',
       },
       {
-        title: 'Ready!',
-        icon: 'tabler:check',
+        title: 'Step 4: Optimize & Scale',
+        description: 'Launch is just the beginning. We provide ongoing optimization, support, and analytics to ensure continuous improvement and growth.',
+        icon: 'tabler:chart-line',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      alt: 'Team collaboration',
     }}
   />
-
-  <!-- Features2 Widget ************** -->
-
+  {/* Features2 Widget ************** */}
   <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
+    title="Why Choose ZiaFlow?"
+    subtitle="We are not just service providers - we are your strategic partners in digital transformation."
+    tagline="The ZiaFlow Difference"
     items={[
       {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
+        title: 'Affordable for Growing Businesses',
+        description: 'Competitive pricing designed for startups and small businesses that need enterprise-quality solutions.',
+        icon: 'tabler:coin',
       },
       {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
+        title: 'Proven Track Record',
+        description: 'Our work speaks for itself. Consistently delivering results that transform operations and drive revenue.',
+        icon: 'tabler:trophy',
       },
       {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
+        title: 'Rapid Implementation',
+        description: 'Efficient processes and expert execution mean faster time-to-value for your investment.',
+        icon: 'tabler:bolt',
       },
       {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
+        title: 'Dedicated Support',
+        description: 'Responsive, knowledgeable support when you need it. We are invested in your long-term success.',
+        icon: 'tabler:headset',
       },
       {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
+        title: 'Custom Tailored',
+        description: 'Every solution is built specifically for your business - no generic templates or one-size-fits-all approaches.',
+        icon: 'tabler:adjustments',
       },
       {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
+        title: 'Transparent Communication',
+        description: 'Clear reporting, honest timelines, and open dialogue throughout every engagement.',
+        icon: 'tabler:messages',
       },
     ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
   />
 
-  <!-- FAQs Widget ******************* -->
+  {/* CallToAction Widget *********** */}
+  <CallToAction
+    title="Ready to Transform Your Business?"
+    subtitle="Join the growing number of businesses that have streamlined their operations and accelerated growth with ZiaFlow's solutions."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule a Consultation',
+        href: '/contact',
+      },
+      {
+        variant: 'secondary',
+        text: 'View Services',
+        href: '#services',
+      },
+    ]}
+  />
 
+  {/* BlogLatestPosts Widget ******** */}
+  <BlogLatestPosts
+    title="Insights & Expertise"
+    information="Explore our latest thoughts on digital transformation, automation, and growth strategies."
+  />
+
+  {/* FAQs Widget ******************* */}
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
+    subtitle="Get answers to common questions about our services, process, and approach."
     tagline="FAQs"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+        title: 'What types of businesses do you work with?',
+        description: 'We specialize in working with startups, small businesses, and growing companies across industries. Our solutions are particularly valuable for businesses looking to scale operations through automation and digital transformation.',
       },
       {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+        title: 'How long does a typical project take?',
+        description: 'Project timelines vary based on scope and complexity. Simple automation projects can be completed in 2-4 weeks, while custom development projects typically range from 8-16 weeks. We provide detailed timelines during the discovery phase.',
       },
       {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
+        title: 'Do you provide ongoing support after launch?',
+        description: 'Absolutely. We offer comprehensive support and maintenance packages to ensure your solutions continue performing optimally. We also provide analytics, reporting, and continuous optimization.',
       },
       {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
+        title: 'What makes ZiaFlow different from other agencies?',
+        description: 'We combine technical expertise with deep business understanding. Rather than just executing tasks, we act as strategic partners who understand your industry challenges and align solutions to your business objectives.',
       },
       {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
+        title: 'Can you integrate with our existing systems?',
+        description: 'Yes! We specialize in creating solutions that work seamlessly with your existing tech stack, whether that is CRMs, ERPs, marketing platforms, or custom systems.',
       },
       {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+        title: 'What is your pricing structure?',
+        description: 'We offer competitive, transparent pricing tailored to your specific needs and budget. After our discovery consultation, we provide detailed proposals with clear scope and investment requirements.',
       },
     ]}
   />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
->>>>>>> parent of 1f48afd (Update homepage with ZiaFlow branding)
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'ZiaFlow Hero Image',
-    }}
-  >
-    <Fragment slot="title">
-       ZiaFlow: <br /> your partner in Digital Transformation <span class="text-accent dark:text-white">SaaS</span> companion<br
-      />
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        your partner in Digital Transformation <span class="font-semibold">ZiaFlow</span>'s SaaS solutions.</span
-      >
-      Seamlessly blend the power of Astro 5.0 and Tailwind CSS to craft websites that resonate with your brand and audience.
-    </Fragment>
-  </Hero2>
-
-  {/* Features Widget *************** */}
-
-  <Features
-    id="features"
-    title="Why choose ZiaFlow?"
-    subtitle="Each of the following features enhances ZiaFlow value proposition."
-    columns={2}
-    items={[
-      {
-        title: 'Integration of Astro 5.0 and Tailwind CSS',
-        description:
-          'Offers a powerful combination that enhances both the development process and the end-user experience. Also, allows to build dynamic and visually stunning websites with optimized performance.',
-        icon: 'tabler:layers-union',
-      },
-      {
-        title: 'Versatile design for startups, small businesses, and more',
-        description: `Easily customize AstroWind to harmonize with the unique branding and identity of your venture. ZiaFlow versatile design adapts to suit your needs.`,
-        icon: 'tabler:artboard',
-      },
-      {
-        title: 'Effortless customization for portfolios and marketing sites',
-        description:
-          'With intuitive customization, easily showcase portfolio pieces, case studies, project highlights, and relevant content. Ideal for creative professionals and businesses looking to highlight their expertise.',
-        icon: 'tabler:writing',
-      },
-      {
-        title: 'Optimized landing pages and engaging blogs',
-        description: `Landing pages are strategically designed to captivate visitors and prompt specific actions. Additionally, the blog creation feature empowers sharing insights, engaging the audience.`,
-        icon: 'tabler:podium',
-      },
-      {
-        title: 'Fast loading times and production-ready code',
-        description: `Using Astro 5.0 ensures fast loading and seamless rendering, enhancing browsing. The code follows best practices, improving user experience, SEO, and reducing bounce rates.`,
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'SEO-optimized structure for enhanced visibility',
-        description: `Follows SEO best practices with clean code, semantic HTML markup, and fast loading, enhancing search engine rankings. ZiaFlow SEO structure ensures visibility to potential customers and clients.`,
-        icon: 'tabler:eyeglass',
-      },
-    ]}
-  />
-
-  {/* Content Widget **************** */}
-
-  <Content
-    title="Use cases"
-    subtitle="Discover how ZiaFlow versatile template serves as the ideal solution for various use cases, providing tailored solutions to drive success."
-    isReversed
-    items={[
-      {
-        title: 'Description:',
-        description:
-          'Are you a startup with big dreams? AstroWind propels your success. Our template forges a seamless online presence, attracting investors and customers from day one. Astro 5.0 and Tailwind CSS ensure striking, responsive sites, leaving lasting impressions. Countless startups leverage AstroWind to kickstart their journey and resonate with audiences.',
-      },
-      {
-        title: 'Benefits:',
-        description: `Allow startups to quickly create professional websites without investing extensive time and resources. <br /> Make a memorable first impression with visually appealing design elements that highlight your startup's unique value proposition. <br /> Ensures your website looks stunning and works well on all devices. <br /> Engage potential investors and customers with engaging content, clear messaging, and intuitive navigation.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1620558138198-cfb9b4f3c294?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1671&q=80',
-      alt: 'Startup Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Startup success stories: <br /><span class="text-2xl">Launching with AstroWind</span>
-      </h3>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  {/* Content Widget **************** */}
-
-  <Content
-    isAfterContent={true}
-    items={[
-      {
-        title: 'Description:',
-        description: `For SaaS businesses, user experience is key. AstroWind enhances showcasing SaaS solutions intuitively. The template's Astro 5.0 and Tailwind CSS integration guarantees user-friendly experience, mirroring your software's efficiency. Customize pages to communicate SaaS value and solutions for your audience.`,
-      },
-      {
-        title: 'Benefits:',
-        description: `Ensuring a cohesive and user-centric design for your SaaS website. <br /> Effectively communicate complex SaaS features through visual aids, animations, and interactive elements. <br /> Prioritize user needs and pain points through well-structured layouts and clear navigation. <br /> Encourage visitors to take action with strategically placed CTAs. <br /> Ensures your SaaS website works seamlessly across all devices.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1531973486364-5fa64260d75b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1658&q=80',
-      alt: 'SaaS Businesses Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        SaaS showcase: <br /><span class="text-2xl">Streamlining user experience</span>
-      </h3>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  {/* Content Widget **************** */}
-
-  <Content
-    isReversed
-    isAfterContent={true}
-    items={[
-      {
-        title: 'Description:',
-        description: `Your portfolio is your masterpiece, and AstroWind is your canvas. Whether you're a designer, photographer, artist, or any other creative professional, AstroWind empowers you to showcase your work with elegance and sophistication. Tailored to highlight your creative projects, ZiaFlow templates offer a visually immersive experience that lets your portfolio shine.`,
-      },
-      {
-        title: 'Benefits:',
-        description: `Serve as a captivating backdrop to showcase your creative work, capturing attention and leaving a lasting impression. <br /> Tailor your portfolio to reflect your unique style and artistic vision. <br /> Prioritizes visuals, allowing you to present your work in high-resolution detail that draws viewers into your creations. <br /> Enables seamless navigation for effortless portfolio exploration.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Portfolio Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Creative portfolios: <br /><span class="text-2xl">Highlighting your work</span>
-      </h3>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  {/* Content Widget **************** */}
-
-  <Content
-    items={[
-      {
-        title: 'Description:',
-        description: `For small businesses, a well-crafted website can be a game-changer. AstroWind empowers small businesses to not only establish a credible online presence but also convert visitors into loyal customers. The template's thoughtful design and optimization features ensure that your website doesn't just attract attention but also guides visitors through a seamless journey, ultimately leading to conversions.`,
-      },
-      {
-        title: 'Benefits:',
-        description: `Present your small business with a professional and polished website that instills confidence and trust among visitors. <br /> Strategically placed CTAs, user-friendly forms, and optimized layouts work together to drive user engagement and conversions. <br /> Ensure a smooth browsing experience, reducing bounce rates and encouraging interaction.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1514621166532-aa7eb1a3a2f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Small Business Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Small business growth: <br /><span class="text-2xl">Converting visitors into customers</span>
-      </h3>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  {/* Pricing Widget ******************* */}
-
-  <Pricing
-    title="Flexible pricing plans"
-    prices={[
-      {
-        title: 'free',
-        subtitle: 'Access to core features and a wide range of templates',
-        price: '0',
-        period: '/ month',
-        callToAction: {
-          target: '_blank',
-          text: 'Get Started for Free',
-          href: '#',
-        },
-      },
-      {
-        title: 'pro',
-        subtitle: 'Premium templates and advanced customization',
-        price: 15,
-        period: '/ Month',
-        callToAction: {
-          target: '_blank',
-          text: 'Upgrade to Pro',
-          href: '#',
-        },
-        hasRibbon: true,
-        ribbonTitle: 'popular',
-      },
-      {
-        title: 'Enterprise',
-        subtitle: 'Tailored solutions for large-scale projects',
-        price: 0,
-        period: '/ Month',
-        callToAction: {
-          target: '_blank',
-          text: 'Unlock Enterprise Features',
-          href: '#',
-        },
-      },
-    ]}
-  />
-
-  {/* FAQs Widget ******************* */}
-
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Is AstroWind compatible with the latest versions of Astro and Tailwind CSS?',
-        description:
-          'Yes, AstroWind is designed to be compatible with the latest versions of both Astro and Tailwind CSS. This ensures that you can harness the full capabilities of these technologies while benefiting from the features offered by AstroWind.',
-        icon: 'tabler:chevrons-right',
-      },
-      {
-        title: 'Can I use AstroWind for both personal and commercial projects?',
-        description: `Certainly! AstroWind is versatile and can be used for a wide range of projects, including both personal and commercial endeavors. Whether you're building a professional portfolio, launching a startup, or creating a marketing website, AstroWind has you covered.`,
-        icon: 'tabler:chevrons-right',
-      },
-      {
-        title: 'What level of coding knowledge is required to use AstroWind?',
-        description:
-          'While some familiarity with HTML, CSS, and web development concepts is helpful, the user-friendly interface and customization options allow those with limited coding experience to create impressive websites. For more advanced users, AstroWind offers extensive customization capabilities.',
-        icon: 'tabler:chevrons-right',
-      },
-      {
-        title: 'Is customer support available for AstroWind users seeking guidance?',
-        description: `Absolutely, our dedicated customer support team is here to assist you with any questions or challenges you may encounter. Feel free to reach out to us through our support channels, and we'll be happy to provide the help you need.`,
-        icon: 'tabler:chevrons-right',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </FAQs>
-
-  {/* Steps2 Widget ****************** */}
-
-  <Steps2
-    title="Reach out to us"
-    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
-    callToAction={{
-      text: 'Contact us',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Email us',
-        description: 'info@ziaflow.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Call us',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Follow us',
-        description: '@example',
-        icon: 'tabler:brand-twitter',
-      },
-    ]}
-  />
-
-  {/* BlogLatestPost Widget **************** */}
-
-  <BlogLatestPosts
-    id="blog"
-    title="Stay informed with ZiaFlow blog"
-    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </BlogLatestPosts>
 </Layout>
