@@ -9,6 +9,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
 
 const metadata = {
   title: 'Phoenix Marketing Agency & Web Development | ZiaFlow',
@@ -48,9 +49,34 @@ const metadata = {
       { title: 'Average Growth', amount: '240%' },
       { title: 'Google Reviews', amount: '4.9★' },
       { title: 'Client Revenue', amount: '$12M+' },
-      { title: 'Certified Partners', amount: 'Microsoft | TikTok' },
+      { title: 'Certified Partner', amount: 'Microsoft',},
     ]}
     tagline="Trusted by Arizona’s Leading Brands"
+  />
+
+  {/* Testimonials Widget *********** */}
+  <Testimonials
+    title="What our clients say"
+    testimonials={[
+      {
+        testimonial:
+          'The service or product I received from ZiaFlow was top-notch. It’s clear they really care about quality and putting their best foot forward. I appreciated the little touches that made the experience feel personal and tailored just for me. It’s not every day you come across a team that’s so dedicated and passionate about what they do.',
+        name: 'S.D.',
+        job: 'Owner',
+      },
+      {
+        testimonial:
+          'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
+        name: 'S.K.',
+        job: 'CFO',
+      },
+    ]}
+    callToAction={{
+      target: '_blank',
+      text: 'Read more testimonials',
+      href: '#',
+      icon: 'tabler:chevron-right',
+    }}
   />
 
   {/* Service Grid */}
@@ -125,7 +151,7 @@ const metadata = {
 
   {/* Testimonials */}
   <Note
-    description={`"Working with ZiaFlow tripled our website inquiries in weeks. Their team delivered on every promise." — Jane D., Scottsdale HVAC ★★★★★`}
+    description={`"Book Now" — Jane D., Scottsdale HVAC ★★★★★`}
   />
 
   {/* Why ZiaFlow / Differentiators */}
