@@ -7,20 +7,24 @@ export const headerData = {
       href: getPermalink('/', 'home'),
     },
     {
-      text: 'About Us',
-      href: getPermalink('/about'),
+      text: 'Services',
+      links: [
+        { text: 'SEO & Local Search', href: '#services' },
+        { text: 'Automation & CRM', href: '#services' },
+        { text: 'Web Development', href: '#services' },
+      ],
     },
     {
-      text: 'Contact Us',
-      href: getPermalink('/contact'),
+      text: 'About Us',
+      href: getPermalink('/about'),
     },
     {
       text: 'Blog',
       href: getBlogPermalink(),
     },
     {
-      text: 'Services',
-      href: getPermalink('/services'),
+      text: 'Contact Us',
+      href: getPermalink('/contact'),
     },
   ],
   actions: [{ text: 'Book Audit', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled', target: '_blank' }],

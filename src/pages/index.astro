@@ -10,6 +10,8 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Brands from '~/components/widgets/Brands.astro';
 
 const metadata = {
   title: 'Phoenix Marketing Agency & Web Development | ZiaFlow',
@@ -22,18 +24,22 @@ const metadata = {
   {/* Hero Section */}
   <Hero
     tagline="Phoenix Marketing Agency & Web Development"
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Team collaboration',
+    }}
     title="Accelerate Your Growth with ZiaFlow"
     subtitle="ROI-driven SEO, automation, PPC, and custom web solutions—trusted by 120+ Arizona businesses."
     actions={[
       {
         variant: 'primary',
         text: 'Get My Free Strategy Session',
-        href: '#contact',
+        href: '#https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
       {
         variant: 'secondary',
-        text: 'See Our Case Studies',
-        href: '#case-studies',
+        text: 'Learn More',
+        href: '#About-Us',
       },
     ]}
   >
@@ -49,26 +55,48 @@ const metadata = {
       { title: 'Average Growth', amount: '240%' },
       { title: 'Google Reviews', amount: '4.9★' },
       { title: 'Client Revenue', amount: '$12M+' },
-      { title: 'Certified Partner', amount: 'Microsoft',},
     ]}
     tagline="Trusted by Arizona’s Leading Brands"
   />
-
+  {/* Trusted Brands */}
+  <Brands
+    title="Trusted by Arizona’s Leading Brands"
+    images={[
+      {
+        src: 'https://learn.microsoft.com/en-us/partner-center/media/mpn-logo-builder/partner-silver.png',
+        alt: 'Microsoft Partner badge',
+      },
+      {
+        src: 'https://amplifymm.com/wp-content/uploads/2021/03/GPartner.png',
+        alt: 'Google Partner badge',
+      },
+      {
+        src: 'https://emplifi.io/wp-content/uploads/2025/01/TikTok_Partnership__Press_Release_625x417_____2.jpg',
+        alt: 'TikTok Partner badge',
+      },
+    ]}
+  />
   {/* Testimonials Widget *********** */}
   <Testimonials
     title="What our clients say"
     testimonials={[
       {
         testimonial:
-          'The service or product I received from ZiaFlow was top-notch. It’s clear they really care about quality and putting their best foot forward. I appreciated the little touches that made the experience feel personal and tailored just for me. It’s not every day you come across a team that’s so dedicated and passionate about what they do.',
-        name: 'S.D.',
-        job: 'Owner',
+          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
+        name: 'Kyle B.',
+        job: 'COO',
       },
       {
         testimonial:
           'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
         name: 'S.K.',
         job: 'CFO',
+      },
+      {
+        testimonial:
+          'I had made a FB post about needing help and this guy in my neighborhood reached out. Come to find out ZiaFlow came through with the clutch performance. They talked me through my issues and reassured me it will all work out. They are true to their word, which speaks volume to me. Thanks, I will be referring you all out.',
+        name: 'Richard J.',
+        job: 'Owner',
       },
     ]}
     callToAction={{
@@ -77,6 +105,42 @@ const metadata = {
       href: '#',
       icon: 'tabler:chevron-right',
     }}
+  />
+<ContactUs
+    id="form"
+    title="Start Your Digital Transformation"
+    subtitle="Tell us about your project and we will get back to you within 24 hours. Whether you need custom development, automation, or marketing solutions, our team is ready to help."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Full Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Company',
+      },
+      {
+        type: 'text',
+        name: 'phone',
+        label: 'Phone',
+      },
+    ]}
+    textarea={{
+      label: 'Tell us about your project',
+      placeholder: 'What challenges are you facing? What are your goals? The more details you provide, the better we can help.',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this form, you agree to our privacy policy. We will never share your information with third parties.',
+    }}
+    description="Our team typically responds within 24 hours, often sooner. For urgent inquiries, please call or email directly."
   />
 
   {/* Service Grid */}
@@ -174,7 +238,7 @@ const metadata = {
     title="Ready to Grow Your Business?"
     subtitle="Book your free strategy session and discover how ZiaFlow delivers better SEO, web development, and automation for Phoenix-area companies."
     actions={[
-      { variant: 'primary', text: 'Request Consultation', href: '#contact' },
+      { variant: 'primary', text: 'Request Consultation', href: '#https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled' },
       { variant: 'secondary', text: 'Explore Services', href: '#services' },
     ]}
   />
