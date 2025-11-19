@@ -18,13 +18,13 @@ export const headerData = {
       text: 'About Us',
       href: getPermalink('/about'),
     },
+        {
+      text: 'Contact Us',
+      href: getPermalink('/contact'),
+    },
     {
       text: 'Blog',
       href: getBlogPermalink(),
-    },
-    {
-      text: 'Contact Us',
-      href: getPermalink('/contact'),
     },
   ],
   actions: [{ text: 'Book Audit', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled', target: '_blank' }],
