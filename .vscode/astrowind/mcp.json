@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-       "astro": {
+    "astro": {
       "command": "npx",
       "args": [
         "astro-mcp"
@@ -17,6 +17,17 @@
       "command": "npx",
       "args": [
         "@playwright/mcp@latest"
+      ]
+    },
+    "azure-ai-foundry": {
+      "command": "uvx",
+      "args": [
+        "--prerelease=allow",
+        "--from",
+        "C:/Users/jerem/Documents/GitHub/astro-wind-zf-test/mcp-foundry",
+        "run-azure-ai-foundry-mcp",
+        "--envFile",
+        "C:/Users/jerem/Documents/GitHub/astro-wind-zf-test/.env"
       ]
     }
   }
