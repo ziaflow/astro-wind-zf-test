@@ -1,9 +1,8 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
 import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
@@ -12,6 +11,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Brands from '~/components/widgets/Brands.astro';
+
 
 const metadata = {
   title: 'Phoenix Marketing Agency & Web Development | ZiaFlow',
@@ -71,47 +71,24 @@ const metadata = {
     ]}
     tagline="Trusted by Arizona’s Leading Brands"
   />
+
+<!-- Brands / Partners -->  
   <Brands
     title="Partnerships & Collaborations"
     subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
     icons={[]}
     images={[
       {
-        src: 'https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_1280.png',
-        alt: 'Paypal',
-      },
-      {
-        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/48/visa-6850402_1280.png',
-        alt: 'Visa',
-      },
-      {
-        src: 'https://cdn.pixabay.com/photo/2013/10/01/10/29/ebay-189064_1280.png',
-        alt: 'Ebay',
-      },
-
-      {
-        src: 'https://cdn.pixabay.com/photo/2015/04/13/17/45/icon-720944_1280.png',
-        alt: 'Youtube',
-      },
-      {
-        src: 'https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80658_1280.png',
+        src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/microsoft_partner.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy9taWNyb3NvZnRfcGFydG5lci5wbmciLCJpYXQiOjE3NjM3MTY0OTgsImV4cCI6MTc5NTI1MjQ5OH0.gI0uL9HziC3C9Wmk4h_y25SGy8haHg1IDTqlhe468oY',
         alt: 'Microsoft',
       },
       {
-        src: 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png',
-        alt: 'Node JS',
-      },
-      {
-        src: 'https://cdn.pixabay.com/photo/2015/10/31/12/54/google-1015751_1280.png',
+        src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/Google_Partner.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy9Hb29nbGVfUGFydG5lci5wbmciLCJpYXQiOjE3NjM3MTY1NTQsImV4cCI6MTc5NTI1MjU1NH0.BnJ8Ly2mR6zrlzHQJK0HkLDRwXx0GV0Jme5cZRZROrU',
         alt: 'Google',
       },
       {
-        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/45/meta-6850393_1280.png',
-        alt: 'Meta',
-      },
-      {
-        src: 'https://cdn.pixabay.com/photo/2013/01/29/22/53/yahoo-76684_1280.png',
-        alt: 'Yahoo',
+        src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/tiktok_partner.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy90aWt0b2tfcGFydG5lci5qcGciLCJpYXQiOjE3NjM3MTY1ODMsImV4cCI6MTc5NTI1MjU4M30.EouHS3SXErg0EJqUFYh2abbFfhYZctL3SFZd2eU82bQ',
+        alt: 'Tiktok',
       },
     ]}
   />
@@ -184,11 +161,12 @@ const metadata = {
   />
 
   {/* Service Grid */}
-  <Features
+  <Features3
     id="services"
     tagline="Expert Digital Marketing & Web Development"
     title="Our Core Services"
     subtitle="Grow faster with SEO, web development, PPC, automation, and e-commerce solutions."
+    columns={2}
     items={[
       {
         title: 'Phoenix SEO Services',
@@ -220,7 +198,47 @@ const metadata = {
         description: 'Streamline your business with tailored automation and SaaS workflows.',
         icon: 'tabler:arrows-shuffle',
       },
+      {
+        title: 'Custom Development',
+        description:
+          'We build responsive, scalable web and mobile applications tailored to your unique business needs. From concept to deployment, we create digital experiences that drive results.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'SEO & PPC Marketing',
+        description:
+          'Our data-driven approach to search engine optimization and paid advertising maximizes your visibility and ROI across Google, Microsoft, Meta, and more.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Workflow Automation',
+        description:
+          'We eliminate repetitive tasks and streamline operations with custom automation solutions that save time, reduce errors, and boost productivity.',
+        icon: 'tabler:robot',
+      },
+      {
+        title: 'CRM & ERP Solutions',
+        description:
+          'Centralize your customer data and optimize business processes with customized CRM and ERP implementations designed for your workflows.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Marketing Automation',
+        description:
+          'Streamline lead nurturing, customer communication, and campaign management with intelligent automation that scales your marketing efforts.',
+        icon: 'tabler:mail-forward',
+      },
+      {
+        title: 'Strategic Consulting',
+        description:
+          'We serve as trusted advisors, helping you navigate digital transformation with strategic guidance aligned to your business goals and industry challenges.',
+        icon: 'tabler:bulb',
+      },
     ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Business analytics',
+    }}
   />
 
   {/* Case Studies Preview */}
@@ -253,21 +271,16 @@ const metadata = {
     </Fragment>
   </Content>
 
-  {/* Testimonials */}
-  <Note
-    description={`"Book Now" — Jane D., Scottsdale HVAC ★★★★★`}
-  />
-
   {/* Why ZiaFlow / Differentiators */}
   <Features2
     title="Why Choose ZiaFlow?"
     subtitle="Local expertise, national results—strategies for e-commerce, home services, and B2B."
     tagline="The ZiaFlow Difference"
     items={[
-      { title: 'Microsoft/TikTok Partner', description: 'Certified, cutting-edge campaigns.' },
+      { title: 'Microsoft/TikTok Partner', description: 'Certified, cutting-edge campaigns.', icon: 'flat-color-icons:document', },
       { title: 'Phoenix-Based Team', description: 'Real local experts serving Arizona.' },
       { title: 'Proven Track Record', description: 'Consistent results that drive business success.' },
-      { title: 'Results-Driven', description: 'ROI-focused strategies, visible outcomes.' },
+      { title: 'Results-Driven', description: 'ROI-focused strategies, visible outcomes.', icon: 'flat-color-icons:voice-presentation',},
       { title: 'Full-Stack Solutions', description: 'From web dev to automation, we cover all bases.' },
       { title: 'Transparent Communication', description: 'Regular reporting and dedicated support.' },
     ]}
@@ -282,6 +295,7 @@ const metadata = {
       { variant: 'secondary', text: 'Explore Services', href: 'services' },
     ]}
   />
+
     {/* FAQs */}
   <FAQs
     title="Frequently Asked Questions"
@@ -315,7 +329,56 @@ const metadata = {
       },
     ]}
   />
-{/* Blog & Insights */}
+
+  <Features3
+    title="Let us know how we can help"
+    subtitle="We’re here to help and answer any question you might have."
+    columns={4}
+    items={[
+      {
+        title: 'Phone',
+        icon: 'tabler:phone',
+        callToAction: {
+          target: '_blank',
+          text: 'Call us',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Email',
+        icon: 'tabler:mail',
+        callToAction: {
+          target: '_blank',
+          text: 'Send an email',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Location',
+        icon: 'tabler:map-pin',
+        callToAction: {
+          target: '_blank',
+          text: 'Get directions',
+          href: '/',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Live Chat',
+        icon: 'tabler:message-circle',
+        callToAction: {
+          target: '_blank',
+          text: 'Start chat',
+          href: '/',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
+
+  {/* Blog & Insights */}
   <BlogLatestPosts
     title="Digital Marketing Insights"
     information="Latest tips on SEO, automation, lead generation, and local business growth in Phoenix."
