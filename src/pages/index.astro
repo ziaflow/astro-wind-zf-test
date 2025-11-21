@@ -21,7 +21,8 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  {/* Hero Section */}
+ <!-- Hero Widget ******************* -->
+
   <Hero
     tagline="Phoenix Marketing Agency & Web Development"
     image={{
@@ -33,13 +34,14 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get My Free Strategy Session',
-        href: '#https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        text: 'Get My Free Strategy Session', 
+        icon: 'tabler:square-rounded-arrow-right',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
       {
         variant: 'secondary',
         text: 'Learn More',
-        href: '#About-Us',
+        href: 'About-Us',
       },
     ]}
   >
@@ -47,6 +49,17 @@ const metadata = {
       <span class="font-semibold">240% Avg. Traffic Growth</span> · <span class="font-semibold">Microsoft & TikTok Partner</span> · <span class="font-semibold">E-commerce + Home Services</span>
     </Fragment>
   </Hero>
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="About us"
+    subtitle="We believe in the magic of turning dreams into stunning realities. Founded by passionate developers with a shared vision, we set out to simplify the website creation process. Our templates bring together the innovation of Astro 5.0 and the versatility of Tailwind CSS, enabling you to express your unique brand identity like never before."
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
 
   {/* Trust & Stats Bar */}
   <Stats
@@ -58,24 +71,51 @@ const metadata = {
     ]}
     tagline="Trusted by Arizona’s Leading Brands"
   />
-  {/* Trusted Brands */}
   <Brands
-    title="Trusted by Arizona’s Leading Brands"
+    title="Partnerships & Collaborations"
+    subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
+    icons={[]}
     images={[
       {
-        src: 'https://learn.microsoft.com/en-us/partner-center/media/mpn-logo-builder/partner-silver.png',
-        alt: 'Microsoft Partner badge',
+        src: 'https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_1280.png',
+        alt: 'Paypal',
       },
       {
-        src: 'https://amplifymm.com/wp-content/uploads/2021/03/GPartner.png',
-        alt: 'Google Partner badge',
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/48/visa-6850402_1280.png',
+        alt: 'Visa',
       },
       {
-        src: 'https://emplifi.io/wp-content/uploads/2025/01/TikTok_Partnership__Press_Release_625x417_____2.jpg',
-        alt: 'TikTok Partner badge',
+        src: 'https://cdn.pixabay.com/photo/2013/10/01/10/29/ebay-189064_1280.png',
+        alt: 'Ebay',
+      },
+
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/13/17/45/icon-720944_1280.png',
+        alt: 'Youtube',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80658_1280.png',
+        alt: 'Microsoft',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png',
+        alt: 'Node JS',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/10/31/12/54/google-1015751_1280.png',
+        alt: 'Google',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/45/meta-6850393_1280.png',
+        alt: 'Meta',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/01/29/22/53/yahoo-76684_1280.png',
+        alt: 'Yahoo',
       },
     ]}
   />
+
   {/* Testimonials Widget *********** */}
   <Testimonials
     title="What our clients say"
@@ -238,8 +278,8 @@ const metadata = {
     title="Ready to Grow Your Business?"
     subtitle="Book your free strategy session and discover how ZiaFlow delivers better SEO, web development, and automation for Phoenix-area companies."
     actions={[
-      { variant: 'primary', text: 'Request Consultation', href: '#https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled' },
-      { variant: 'secondary', text: 'Explore Services', href: '#services' },
+      { variant: 'primary', text: 'Request Consultation', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled' },
+      { variant: 'secondary', text: 'Explore Services', href: 'services' },
     ]}
   />
     {/* FAQs */}

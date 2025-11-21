@@ -27,7 +27,7 @@ export const headerData = {
       href: getBlogPermalink(),
     },
   ],
-  actions: [{ text: 'Book Audit', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled', target: '_blank' }],
+  actions: [{ text: 'Start Now', href: getPermalink('/contact'), target: '_self' }],
 };
 
 export const footerData = {
@@ -73,6 +73,6 @@ export const footerData = {
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    © 2025 ZiaFlow. All rights reserved. Contact us
+    © 2025 ZiaFlow. All rights reserved. <a class="underline" href="${getPermalink('/contact')}">Contact us</a>
   `,
 };
