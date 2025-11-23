@@ -1,11 +1,28 @@
 ---
-import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import type { Form as Props } from '~/types';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const {
+  inputs = [],
+  textarea,
+  disclaimer,
+  button = 'Contact us',
+  description = '',
+  action = 'https://api.web3forms.com/submit',
+  method = 'POST',
+  accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY,
+  redirect,
+  subject = 'New Contact Request',
+  fromName = 'ZiaFlow Website',
+} = Astro.props as Props;
 ---
 
-<form>
+<form action={action} method={method} class="space-y-6">
+  {accessKey && <input type="hidden" name="access_key" value={accessKey} />}
+  {redirect && <input type="hidden" name="redirect" value={redirect} />}
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value={fromName} />
+
   {
     inputs &&
       inputs.map(

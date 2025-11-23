@@ -212,6 +212,12 @@ export interface Form {
   disclaimer?: Disclaimer;
   button?: string;
   description?: string;
+  action?: string;
+  method?: 'POST' | 'GET';
+  accessKey?: string;
+  redirect?: string;
+  subject?: string;
+  fromName?: string;
 }
 
 // WIDGETS
