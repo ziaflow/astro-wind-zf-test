@@ -1,6 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Headline from '~/components/ui/Headline.astro';
-import ItemGrid from '~/components/ui/ItemGrid.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Faqs as Props } from '~/types';
 
@@ -16,18 +16,82 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const iconClosed = Astro.props.iconDown ?? 'tabler:plus';
+const iconOpen = Astro.props.iconUp ?? 'tabler:minus';
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
-  <ItemGrid
-    items={items}
-    columns={columns}
-    defaultIcon="tabler:chevron-right"
-    classes={{
-      container: `${columns === 1 ? 'max-w-4xl' : ''} gap-y-8 md:gap-y-12`,
-      panel: 'max-w-none',
-      icon: 'flex-shrink-0 mt-1 w-6 h-6 text-primary',
-    }}
-  />
+  <div
+    class:list={[
+      'faq-accordion mx-auto space-y-4',
+      columns === 1 ? 'max-w-4xl' : 'max-w-6xl',
+      classes?.accordion ?? '',
+    ]}
+  >
+    {items.map((item, index) => (
+      <details
+        class:list={[
+          'faq-item group rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-slate-900/60 shadow-sm transition-all',
+          classes?.item ?? '',
+        ]}
+        {...(index === 0 ? { open: true } : {})}
+      >
+        <summary class="faq-summary flex cursor-pointer items-center justify-between gap-6 px-6 py-4 text-left">
+          <span class="faq-title text-base font-semibold text-heading">
+            {item.title}
+          </span>
+          <span class="faq-icon inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Icon
+              name={iconClosed}
+              class="faq-icon-state h-5 w-5 transition-opacity duration-200"
+              data-icon-state="closed"
+            />
+            <Icon
+              name={iconOpen}
+              class="faq-icon-state h-5 w-5 opacity-0 transition-opacity duration-200"
+              data-icon-state="open"
+            />
+          </span>
+        </summary>
+        <div class="faq-content px-6 pb-5 text-muted">
+          <p class="leading-relaxed" set:html={item.description}></p>
+        </div>
+      </details>
+    ))}
+  </div>
 </WidgetWrapper>
+
+<style>
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item[open] .faq-icon [data-icon-state='closed'] {
+    opacity: 0;
+  }
+
+  .faq-item[open] .faq-icon [data-icon-state='open'] {
+    opacity: 1;
+  }
+
+  .faq-item:not([open]) .faq-content {
+    display: none;
+  }
+
+  .faq-item[open] .faq-content {
+    animation: faq-slide 0.25s ease;
+  }
+
+  @keyframes faq-slide {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
