@@ -5,6 +5,7 @@
  */
 
 import type { APIRoute } from 'astro';
+import nodemailer from 'nodemailer';
 
 interface AuditBookingPayload {
   form_type: string;
@@ -16,6 +17,16 @@ interface AuditBookingPayload {
   phone: string;
   message?: string;
 }
+
+const transporter = nodemailer.createTransport({
+  host: import.meta.env.SMTP_HOST,
+  port: Number(import.meta.env.SMTP_PORT ?? 465),
+  secure: true,
+  auth: {
+    user: import.meta.env.SMTP_USER,
+    pass: import.meta.env.SMTP_PASS,
+  },
+});
 
 export const POST: APIRoute = async ({ request }) => {
   // Verify POST method
@@ -57,6 +68,13 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('Audit booking submission:', {
       timestamp: new Date().toISOString(),
       ...payload,
+    });
+
+    await transporter.sendMail({
+      from: `"ZiaFlow Website" <${import.meta.env.SMTP_USER}>`,
+      to: import.meta.env.MAIL_TO,
+      subject: `New audit request from ${payload.first_name} ${payload.last_name}`,
+      text: JSON.stringify(payload, null, 2),
     });
 
     // TODO: Send confirmation email to user

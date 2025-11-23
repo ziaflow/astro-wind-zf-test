@@ -35,6 +35,7 @@
     "astro-seo": "^0.8.4",
     "limax": "4.1.0",
     "lodash.merge": "^4.6.2",
+    "nodemailer": "^7.0.10",
     "openai": "^6.9.0",
     "unpic": "^4.1.3"
   },

@@ -53,35 +53,20 @@ const {
               />
             )
           }
-          {
-            actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-                {Array.isArray(actions) ? (
-                  actions.map((action) => (
-                    <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
-                    </div>
-                  ))
-                ) : (
-                  <Fragment set:html={actions} />
-                )}
-              </div>
-            )
-          }
         </div>
         {content && <Fragment set:html={content} />}
       </div>
-      <div
-        class="intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-      >
-        {
-          image && (
+
+      {/* IMAGE PLACEMENT - Between subtitle and buttons */}
+      {
+        image && (
+          <div class="intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade mb-8 md:mb-12">
             <div class="relative m-auto max-w-5xl">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto rounded-md w-full"
+                  class="mx-auto rounded-md w-full shadow-lg"
                   widths={[400, 768, 1024, 2040]}
                   sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
                   loading="eager"
@@ -89,6 +74,25 @@ const {
                   height={576}
                   {...image}
                 />
+              )}
+            </div>
+          </div>
+        )
+      }
+
+      {/* BUTTONS PLACEMENT - After image */}
+      <div class="text-center max-w-5xl mx-auto">
+        {
+          actions && (
+            <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              {Array.isArray(actions) ? (
+                actions.map((action) => (
+                  <div class="flex w-full sm:w-auto">
+                    <Button {...(action || {})} class="w-full sm:mb-0" />
+                  </div>
+                ))
+              ) : (
+                <Fragment set:html={actions} />
               )}
             </div>
           )

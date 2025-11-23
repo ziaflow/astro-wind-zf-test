@@ -11,121 +11,344 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Brands from '~/components/widgets/Brands.astro';
 
-
 const metadata = {
-  title: 'Phoenix Marketing Agency & Web Development | ZiaFlow',
-  description: 'Accelerate growth with SEO, automation, PPC, and custom web development. Based in Phoenix, AZ. Certified Microsoft & TikTok Partner. Get your free strategy session!',
+  title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
+  description: 'Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session.',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
- <!-- Hero Widget ******************* -->
-
+  <!-- HERO -->
   <Hero
-    tagline="Phoenix Marketing Agency & Web Development"
+    tagline="Phoenix Web Development & Digital Marketing"
     image={{
-      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Team collaboration',
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
+      alt: 'Phoenix business team collaboration',
     }}
-    title="Accelerate Your Growth with ZiaFlow"
-    subtitle="ROI-driven SEO, automation, PPC, and custom web solutions—trusted by 120+ Arizona businesses."
+    title="Phoenix Web Development & Digital Marketing That Delivers Results"
+    subtitle="Conversion-first websites, strategic local SEO, PPC, and automation—trusted by Arizona service businesses for measurable growth."
     actions={[
       {
         variant: 'primary',
-        text: 'Get My Free Strategy Session', 
+        text: 'Book Free 30-Min Strategy Session',
         icon: 'tabler:square-rounded-arrow-right',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
       {
         variant: 'secondary',
-        text: 'Learn More',
-        href: 'About-Us',
+        text: 'Get a Free Project Estimate',
+        href: '/contact#estimate',
       },
     ]}
   >
     <Fragment slot="subtitle">
-      <span class="font-semibold">240% Avg. Traffic Growth</span> · <span class="font-semibold">Microsoft & TikTok Partner</span> · <span class="font-semibold">E-commerce + Home Services</span>
+      <span class="font-semibold">150% Avg. Lead Growth</span> · 
+      <span class="font-semibold">50+ Arizona Businesses</span> · 
+      <span class="font-semibold">Microsoft & Google Partner</span>
     </Fragment>
   </Hero>
 
-  <!-- Features2 Widget ************** -->
-
+  <!-- VALUE PROPOSITION -->
   <Features2
-    title="About us"
-    subtitle="Headquartered in Phoenix, Arizona, ZiaFlow brings together designers, developers, engineers, marketers, and automation specialists with one mission: helping service businesses thrive in the digital landscape. We deliver scalable, end-to-end digital solutions from SEO and PPC advertising to custom software development, marketing automation, and cloud services—tailored to the unique challenges of competitive markets. With nationwide reach and local roots, ZiaFlow provides personalized service backed by world-class expertise."
+    title="Your Partner for Digital Growth"
+    subtitle="Since 2021, ZiaFlow has delivered measurable results for 50+ Arizona service businesses—from 150% increases in qualified leads to top-3 local search rankings across Phoenix, Scottsdale, Tempe, and Mesa."
+    tagline="Why Phoenix Businesses Choose ZiaFlow"
+    items={[
+      {
+        title: 'Face-to-Face Consultations',
+        description: 'Meet in person throughout Greater Phoenix—Arcadia, Biltmore, and beyond.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Custom Solutions',
+        description: 'Tailored strategies for your industry, market, and specific growth goals.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Measurable Results',
+        description: 'Transparent reporting with clear ROI on every campaign.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Local Expertise',
+        description: 'Deep understanding of Arizona market dynamics and customer behavior.',
+        icon: 'tabler:map-pin',
+      },
+    ]}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </Features2>
 
-  {/* Trust & Stats Bar */}
+  <!-- TRUST STATS -->
   <Stats
     stats={[
-      { title: 'Businesses helped', amount: '115+' },
-      { title: 'Average Growth', amount: '240%' },
-      { title: 'Google Reviews', amount: '5★' },
-      { title: 'Client Revenue', amount: '$12M+' },
+      { title: 'Arizona Clients', amount: '50+' },
+      { title: 'Avg. Lead Growth', amount: '150%' },
+      { title: 'Google Rating', amount: '5.0★' },
+      { title: 'Years in Phoenix', amount: '4+' },
     ]}
-    tagline="Trusted by Arizona’s Leading Brands"
+    tagline="Trusted by Phoenix-Area Service Businesses"
   />
 
-<!-- Brands / Partners -->  
+  <!-- SERVICES GRID -->
+  <Features3
+    id="services"
+    tagline="Services Built for Business Growth"
+    title="Our Core Services"
+    subtitle="Web development, SEO, PPC, automation, and e-commerce—tailored to local businesses."
+    columns={3}
+    items={[
+      {
+        title: 'Custom Web Development',
+        description: 'Conversion-first sites, booking systems, and custom integrations. Our recent Scottsdale contractor project increased inquiries by 150% in 90 days.',
+        icon: 'tabler:devices-pc',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/web-development',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Phoenix SEO & Local Search',
+        description: 'Local SEO, Google Business optimization, and citation management. Tempe medical client achieved 200% visibility increase.',
+        icon: 'tabler:search',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/seo',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'PPC & Google Ads',
+        description: 'Data-driven campaigns to maximize leads and ROI. Stop wasting budget on unqualified clicks.',
+        icon: 'tabler:ad',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/ppc',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Marketing Automation',
+        description: 'Automate lead routing, reminders, and review requests. Save 10+ hours weekly while growing revenue.',
+        icon: 'tabler:robot',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/automation',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'E-commerce Solutions',
+        description: 'Shopify, WooCommerce and custom platforms for online growth. Optimized for conversion and user experience.',
+        icon: 'tabler:shopping-cart',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/ecommerce',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Conversion Optimization',
+        description: 'A/B testing, funnel optimization, and analytics. Turn more visitors into paying customers.',
+        icon: 'tabler:chart-line',
+        callToAction: {
+          text: 'Learn More',
+          href: '/services/cro',
+          variant: 'link',
+        },
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80',
+      alt: 'Phoenix digital marketing analytics dashboard',
+    }}
+  />
+
+  <!-- CASE STUDIES -->
+  <section class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-20">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Real Results for Arizona Businesses</h2>
+      <p class="mt-4 text-lg text-muted">Documented case studies from Phoenix-area clients</p>
+    </div>
+    
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
+        <h3 class="text-xl font-semibold">Scottsdale Contractor</h3>
+        <p class="mt-3 text-muted">
+          Site redesign + local SEO → <strong>150% increase</strong> in online inquiries in 90 days.
+        </p>
+        <a class="inline-block mt-4 text-primary hover:underline" href="/case-studies/scottsdale-contractor">
+          Read case study →
+        </a>
+      </article>
+
+      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
+        <h3 class="text-xl font-semibold">Tempe Medical Practice</h3>
+        <p class="mt-3 text-muted">
+          Technical SEO + Google Ads → <strong>200% visibility lift</strong> and 80% more appointments.
+        </p>
+        <a class="inline-block mt-4 text-primary hover:underline" href="/case-studies/tempe-medical">
+          Read case study →
+        </a>
+      </article>
+
+      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
+        <h3 class="text-xl font-semibold">Mesa Home Services</h3>
+        <p class="mt-3 text-muted">
+          Hyperlocal social ads + lead optimization → <strong>60% more</strong> qualified leads.
+        </p>
+        <a class="inline-block mt-4 text-primary hover:underline" href="/case-studies/mesa-home-services">
+          Read case study →
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <Testimonials
+    title="Trusted by Arizona Business Owners"
+    tagline="Client Success Stories"
+    testimonials={[
+      {
+        testimonial: 'ZiaFlow transformed our online presence. Their expertise in SEO and web development brought a significant increase in local traffic and customer inquiries. True professionals who deliver results.',
+        name: 'Sarah M.',
+        job: 'Phoenix Home Services Owner',
+      },
+      {
+        testimonial: 'The team developed a custom solution that streamlined our operations and managed a Google Ads campaign that exceeded all our ROI expectations. Exceptional technical capability.',
+        name: 'Michael T.',
+        job: 'Scottsdale Medical Practice',
+      },
+      {
+        testimonial: 'Our social media engagement has never been better. ZiaFlow\'s targeted campaigns helped us connect with our community and grow our brand throughout Phoenix. Highly recommended!',
+        name: 'Jennifer L.',
+        job: 'Mesa Wellness Center',
+      },
+    ]}
+  />
+
+  <!-- WHY ZIAFLOW -->
+  <Features2
+    title="Why ZiaFlow?"
+    subtitle="Local expertise, measurable results, and full-stack execution for service businesses."
+    tagline="The ZiaFlow Difference"
+    items={[
+      {
+        title: 'Local & Accessible',
+        description: 'Face-to-face meetings across Greater Phoenix—Scottsdale, Tempe, Mesa.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Proven Results',
+        description: 'Documented case studies with transparent reporting and clear metrics.',
+        icon: 'tabler:chart-arrows',
+      },
+      {
+        title: 'Full-Stack Team',
+        description: 'Designers, developers, marketers, and automation engineers in-house.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Platform Partners',
+        description: 'Microsoft, Google, TikTok partnerships and certifications.',
+        icon: 'tabler:certificate',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- PARTNERS -->
   <Brands
-    title="Partnerships & Collaborations"
-    subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
+    title="Certified Partnerships"
+    subtitle="Trusted technology partners delivering enterprise-grade solutions"
     icons={[]}
     images={[
       {
         src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/microsoft_partner.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy9taWNyb3NvZnRfcGFydG5lci5wbmciLCJpYXQiOjE3NjM3MTY0OTgsImV4cCI6MTc5NTI1MjQ5OH0.gI0uL9HziC3C9Wmk4h_y25SGy8haHg1IDTqlhe468oY',
-        alt: 'Microsoft',
+        alt: 'Microsoft Partner',
       },
       {
         src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/Google_Partner.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy9Hb29nbGVfUGFydG5lci5wbmciLCJpYXQiOjE3NjM3MTY1NTQsImV4cCI6MTc5NTI1MjU1NH0.BnJ8Ly2mR6zrlzHQJK0HkLDRwXx0GV0Jme5cZRZROrU',
-        alt: 'Google',
+        alt: 'Google Partner',
       },
       {
         src: 'https://ruhnueopjedaywiqhpgi.supabase.co/storage/v1/object/sign/web-img/img/tiktok_partner.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iYWVmOWU2NS02ZmM0LTQ1YzItYTJmMi1kOTk3MWE2ODkxNzUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWItaW1nL2ltZy90aWt0b2tfcGFydG5lci5qcGciLCJpYXQiOjE3NjM3MTY1ODMsImV4cCI6MTc5NTI1MjU4M30.EouHS3SXErg0EJqUFYh2abbFfhYZctL3SFZd2eU82bQ',
-        alt: 'Tiktok',
+        alt: 'TikTok Partner',
       },
     ]}
   />
 
-  {/* Testimonials Widget *********** */}
-  <Testimonials
-    title="What our clients say"
-    testimonials={[
+  <!-- PRIMARY CTA -->
+  <CallToAction
+    title="Ready to Grow Your Business?"
+    subtitle="Book a free strategy session and get a 3-point roadmap for growth."
+    actions={[
       {
-        testimonial:
-          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
-        name: 'Kyle B.',
-        job: 'COO',
+        variant: 'primary',
+        text: 'Book Free Strategy Session',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
       },
       {
-        testimonial:
-          'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
-        name: 'S.K.',
-        job: 'CFO',
-      },
-      {
-        testimonial:
-          'I had made a FB post about needing help and this guy in my neighborhood reached out. Come to find out ZiaFlow came through with the clutch performance. They talked me through my issues and reassured me it will all work out. They are true to their word, which speaks volume to me. Thanks, I will be referring you all out.',
-        name: 'Richard J.',
-        job: 'Owner',
+        variant: 'secondary',
+        text: 'Contact Us',
+        href: '/contact',
       },
     ]}
-    callToAction={{
-      target: '_blank',
-      text: 'Read more testimonials',
-      href: '#',
-      icon: 'tabler:chevron-right',
-    }}
   />
-<ContactUs
+
+  <!-- BLOG -->
+  <BlogLatestPosts
+    title="Digital Marketing Insights"
+    information="Local SEO, automation playbooks, CRO, and case studies for Arizona businesses."
+  />
+
+  <!-- FAQ -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Quick answers about timelines, pricing, and what to expect."
+    tagline="Common Questions"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'What industries do you serve?',
+        description: 'We specialize in service businesses—home services, healthcare, local retail, and professional services across Phoenix, Scottsdale, Tempe, and Mesa.',
+      },
+      {
+        title: 'How long to see SEO results?',
+        description: 'Initial improvements in 60–90 days; significant gains typically 6–12 months. We build sustainable visibility that compounds over time.',
+      },
+      {
+        title: 'Do you offer on-site consultations?',
+        description: 'Yes—we meet clients across Phoenix, Scottsdale, Tempe, Mesa, Arcadia, and Biltmore for face-to-face strategy sessions.',
+      },
+      {
+        title: 'Can you work with my existing website?',
+        description: 'Absolutely—we audit and implement targeted improvements or full redesigns as needed based on your goals and budget.',
+      },
+      {
+        title: 'What makes your approach different?',
+        description: 'We combine local accessibility with enterprise-grade expertise. Personalized service from a team you can meet in person, backed by advanced strategies.',
+      },
+      {
+        title: 'How do you measure success?',
+        description: 'Real business metrics—leads, conversions, revenue impact, and ROI. Transparent reporting shows exactly what\'s working.',
+      },
+    ]}
+  />
+
+  <!-- CONTACT FORM -->
+  <ContactUs
     id="form"
     title="Start Your Digital Transformation"
-    subtitle="Tell us about your project and we will get back to you within 24 hours. Whether you need custom development, automation, or marketing solutions, our team is ready to help."
+    subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
     inputs={[
       {
         type: 'text',
@@ -135,182 +358,66 @@ const metadata = {
       {
         type: 'email',
         name: 'email',
-        label: 'Email',
+        label: 'Email Address',
       },
       {
         type: 'text',
         name: 'company',
-        label: 'Company',
+        label: 'Company Name',
       },
       {
         type: 'text',
         name: 'phone',
-        label: 'Phone',
+        label: 'Phone Number',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_source',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_medium',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_campaign',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'clarity_session_id',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'event_id',
+        label: '',
       },
     ]}
     textarea={{
-      label: 'Tell us about your project',
-      placeholder: 'What challenges are you facing? What are your goals? The more details you provide, the better we can help.',
+      label: 'Tell us about your goals',
+      placeholder: 'What challenges are you facing? What results are you looking for? Share details that help us understand your needs.',
     }}
     disclaimer={{
-      label:
-        'By submitting this form, you agree to our privacy policy. We will never share your information with third parties.',
+      label: 'By submitting this form, you agree to our privacy policy. We never share your information with third parties.',
     }}
-    description="Our team typically responds within 24 hours, often sooner. For urgent inquiries, please call or email directly."
+    description="Phoenix Office: 85023 | Serving Phoenix, Scottsdale, Tempe, Mesa, Arcadia, Biltmore & Greater Arizona. We typically respond within 24 hours."
   />
 
-  {/* Service Grid */}
+  <!-- CONTACT OPTIONS -->
   <Features3
-    id="services"
-    tagline="Expert Digital Marketing & Web Development"
-    title="Our Core Services"
-    subtitle="Grow faster with SEO, web development, PPC, automation, and e-commerce solutions."
-    columns={2}
-    items={[
-      {
-        title: 'Phoenix SEO Services',
-        description: 'Rank #1 on Google, drive more local traffic, and book more jobs.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Custom Web Development',
-        description: 'Conversion-focused websites for mobile and desktop—built for Phoenix and beyond.',
-        icon: 'tabler:devices-pc',
-      },
-      {
-        title: 'PPC Management',
-        description: 'Maximize ROI on Google, Bing, Facebook, and TikTok Ads.',
-        icon: 'tabler:ad',
-      },
-      {
-        title: 'Marketing Automation',
-        description: 'Automate email, CRM, and review requests to save time and grow sales.',
-        icon: 'tabler:mail-forward',
-      },
-      {
-        title: 'E-commerce Solutions',
-        description: 'Shopify, WooCommerce, and custom platforms for serious online growth.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'SaaS & Workflow Automation',
-        description: 'Streamline your business with tailored automation and SaaS workflows.',
-        icon: 'tabler:arrows-shuffle',
-      },
-      {
-        title: 'Custom Development',
-        description:
-          'We build responsive, scalable web and mobile applications tailored to your unique business needs. From concept to deployment, we create digital experiences that drive results.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'SEO & PPC Marketing',
-        description:
-          'Our data-driven approach to search engine optimization and paid advertising maximizes your visibility and ROI across Google, Microsoft, Meta, and more.',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Workflow Automation',
-        description:
-          'We eliminate repetitive tasks and streamline operations with custom automation solutions that save time, reduce errors, and boost productivity.',
-        icon: 'tabler:robot',
-      },
-      {
-        title: 'CRM & ERP Solutions',
-        description:
-          'Centralize your customer data and optimize business processes with customized CRM and ERP implementations designed for your workflows.',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Marketing Automation',
-        description:
-          'Streamline lead nurturing, customer communication, and campaign management with intelligent automation that scales your marketing efforts.',
-        icon: 'tabler:mail-forward',
-      },
-      {
-        title: 'Strategic Consulting',
-        description:
-          'We serve as trusted advisors, helping you navigate digital transformation with strategic guidance aligned to your business goals and industry challenges.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Business analytics',
-    }}
-  />
-
-  {/* Why ZiaFlow / Differentiators */}
-  <Features2
-    title="Why Choose ZiaFlow?"
-    subtitle="Local expertise, national results—strategies for e-commerce, home services, and B2B."
-    tagline="The ZiaFlow Difference"
-    items={[
-      { title: 'Microsoft/TikTok Partner', description: 'Certified, cutting-edge campaigns.', icon: 'flat-color-icons:document', },
-      { title: 'Phoenix-Based Team', description: 'Real local experts serving Arizona.' },
-      { title: 'Proven Track Record', description: 'Consistent results that drive business success.' },
-      { title: 'Results-Driven', description: 'ROI-focused strategies, visible outcomes.', icon: 'flat-color-icons:voice-presentation',},
-      { title: 'Full-Stack Solutions', description: 'From web dev to automation, we cover all bases.' },
-      { title: 'Transparent Communication', description: 'Regular reporting and dedicated support.' },
-    ]}
-  />
-
-  {/* Call-to-Action */}
-  <CallToAction
-    title="Ready to Grow Your Business?"
-    subtitle="Book your free strategy session and discover how ZiaFlow delivers better SEO, web development, and automation for Phoenix-area companies."
-    actions={[
-      { variant: 'primary', text: 'Request Consultation', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled' },
-      { variant: 'secondary', text: 'Explore Services', href: 'services' },
-    ]}
-  />
-
-    {/* FAQs */}
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Everything you need to know before working with ZiaFlow."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'What industries do you specialize in?',
-        description: 'Home services, e-commerce, B2B, professional services, & more—see our case studies for details.',
-      },
-      {
-        title: 'How long until I see results?',
-        description: 'Most clients see measurable growth in 30-90 days, depending on campaign and goals.',
-      },
-      {
-        title: 'Do you help with Google reviews?',
-        description: 'Yes! Our automation campaigns help clients earn 5-star reviews fast.',
-      },
-      {
-        title: 'Is ZiaFlow certified?',
-        description: 'We are certified partners with Microsoft, TikTok, and multiple major platforms.',
-      },
-      {
-        title: 'What makes you the top Phoenix marketing agency?',
-        description: 'Proven outcomes, transparent reporting, and a dedicated, local team.',
-      },
-      {
-        title: 'Do you offer free consultations?',
-        description: 'Absolutely. Every engagement starts with a free strategy session and audit.',
-      },
-    ]}
-  />
-
-  <Features3
-    title="Let us know how we can help"
-    subtitle="We’re here to help and answer any question you might have."
+    title="Contact Options"
+    subtitle="Choose the method that works best for you"
     columns={4}
     items={[
       {
-        title: 'Phone',
+        title: 'Call',
         icon: 'tabler:phone',
         callToAction: {
-          target: '_blank',
-          text: 'Call us',
-          href: '/',
+          text: 'Call (602) 555-0123',
+          href: 'tel:+16025550123',
           variant: 'link',
         },
       },
@@ -318,38 +425,213 @@ const metadata = {
         title: 'Email',
         icon: 'tabler:mail',
         callToAction: {
-          target: '_blank',
-          text: 'Send an email',
-          href: '/',
+          text: 'Email Us',
+          href: 'mailto:hello@ziaflow.com',
           variant: 'link',
         },
       },
       {
-        title: 'Location',
+        title: 'Visit',
         icon: 'tabler:map-pin',
         callToAction: {
-          target: '_blank',
-          text: 'Get directions',
-          href: '/',
+          text: 'Phoenix, AZ 85023',
+          href: 'https://maps.google.com?q=Phoenix+AZ+85023',
           variant: 'link',
         },
       },
       {
-        title: 'Live Chat',
-        icon: 'tabler:message-circle',
+        title: 'Schedule',
+        icon: 'tabler:calendar',
         callToAction: {
-          target: '_blank',
-          text: 'Start chat',
-          href: '/',
+          text: 'Book Meeting',
+          href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
           variant: 'link',
         },
       },
     ]}
   />
 
-  {/* Blog & Insights */}
-  <BlogLatestPosts
-    title="Digital Marketing Insights"
-    information="Latest tips on SEO, automation, lead generation, and local business growth in Phoenix."
-  />
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "ZiaFlow",
+    "description": "Phoenix web development and digital marketing agency specializing in custom websites, SEO, PPC, and automation for Arizona service businesses.",
+    "url": "https://www.ziaflow.com",
+    "telephone": "(602) 555-0123",
+    "email": "hello@ziaflow.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Phoenix",
+      "addressRegion": "AZ",
+      "postalCode": "85023",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "33.4484",
+      "longitude": "-112.0740"
+    },
+    "areaServed": [
+      "Phoenix",
+      "Scottsdale",
+      "Tempe",
+      "Mesa",
+      "Arcadia",
+      "Biltmore"
+    ],
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "50"
+    }
+  })} />
+
+  <!-- Client-side Tracking Script -->
+  <script is:inline>
+    (function () {
+      const w = window;
+
+      function getParam(name) {
+        try {
+          return new URLSearchParams(w.location.search).get(name) || '';
+        } catch (e) {
+          return '';
+        }
+      }
+
+      function setHiddenField(form, name, value) {
+        const input = form.querySelector(`input[name="${name}"]`);
+        if (input) input.value = value;
+      }
+
+      function populateHiddenFields() {
+        const wrapper = document.getElementById('form');
+        if (!wrapper) return;
+        
+        const form = wrapper.querySelector('form') || wrapper;
+        
+        // Populate UTM parameters
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(k => {
+          setHiddenField(form, k, getParam(k));
+        });
+
+        // Populate Clarity session ID
+        if (typeof w.clarity === 'function' && typeof w.clarity.getSessionId === 'function') {
+          try {
+            w.clarity.getSessionId(id => {
+              setHiddenField(form, 'clarity_session_id', id || '');
+            });
+          } catch (err) {
+            console.error('Clarity session ID error:', err);
+          }
+        } else if (Array.isArray(w.dataLayer)) {
+          for (let i = w.dataLayer.length - 1; i >= 0; i--) {
+            const item = w.dataLayer[i];
+            if (item && item.clarity_session_id) {
+              setHiddenField(form, 'clarity_session_id', item.clarity_session_id);
+              break;
+            }
+          }
+        }
+      }
+
+      function attachFormTracking() {
+        const wrapper = document.getElementById('form');
+        if (!wrapper) return;
+        
+        const form = wrapper.querySelector('form') || wrapper;
+        if (!form) return;
+
+        form.addEventListener('submit', function () {
+          try {
+            const eventId = 'ev_' + Date.now();
+            setHiddenField(form, 'event_id', eventId);
+
+            // DataLayer push
+            w.dataLayer = w.dataLayer || [];
+            w.dataLayer.push({
+              event: 'form_submit',
+              form_id: 'homepage_contact',
+              event_id: eventId
+            });
+
+            // Google Analytics
+            if (typeof w.gtag === 'function') {
+              w.gtag('event', 'form_submit', {
+                event_category: 'engagement',
+                event_label: 'homepage_contact',
+                event_id: eventId
+              });
+            }
+          } catch (err) {
+            console.error('Form tracking error:', err);
+          }
+        }, { passive: true });
+      }
+
+      function attachCTAClickTracking() {
+        document.addEventListener('click', function (e) {
+          const el = e.target?.closest ? e.target.closest('a') : null;
+          if (!el || !el.href) return;
+
+          const href = el.getAttribute('href') || '';
+          
+          // Track booking link clicks
+          if (href.indexOf('outlook.office.com') !== -1) {
+            const eventId = 'ev_cta_' + Date.now();
+            w.dataLayer = w.dataLayer || [];
+            w.dataLayer.push({
+              event: 'cta_click',
+              cta: 'book_consult',
+              href: href,
+              event_id: eventId
+            });
+
+            if (typeof w.gtag === 'function') {
+              w.gtag('event', 'click', {
+                event_category: 'CTA',
+                event_label: 'book_consult',
+                event_id: eventId
+              });
+            }
+          }
+
+          // Track contact link clicks
+          if (href.indexOf('/contact') !== -1 || href.indexOf('#estimate') !== -1) {
+            const eventId = 'ev_cta_' + Date.now();
+            w.dataLayer = w.dataLayer || [];
+            w.dataLayer.push({
+              event: 'cta_click',
+              cta: 'contact',
+              href: href,
+              event_id: eventId
+            });
+
+            if (typeof w.gtag === 'function') {
+              w.gtag('event', 'click', {
+                event_category: 'CTA',
+                event_label: 'contact',
+                event_id: eventId
+              });
+            }
+          }
+        }, { passive: true });
+      }
+
+      // Initialize on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          populateHiddenFields();
+          attachFormTracking();
+          attachCTAClickTracking();
+        });
+      } else {
+        populateHiddenFields();
+        attachFormTracking();
+        attachCTAClickTracking();
+      }
+    })();
+  </script>
 </Layout>

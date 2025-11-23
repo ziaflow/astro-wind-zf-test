@@ -4,88 +4,129 @@ import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services - Digital Transformation Solutions | ZiaFlow',
+  title: 'Phoenix Digital Marketing & Web Development Services | ZiaFlow',
+  description: 'Phoenix digital marketing agency - Rank #1 with local SEO, convert with custom websites, automate bookings. 150%+ avg. client growth. Free consultation.',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
   <Hero
-    tagline="Our Services"
-    title="Transform Your Business with Custom Solutions"
-    subtitle="From intelligent automation to strategic marketing and custom development, ZiaFlow delivers comprehensive digital solutions that drive measurable results. We combine technical expertise with deep industry knowledge to create solutions tailored to your unique business needs."
-    actions={[
-      { variant: 'primary', text: 'Schedule Consultation', href: '/contact' },
-      { variant: 'secondary', text: 'View Case Studies', href: '#testimonials' }
-    ]}
+    tagline="Trusted by 120+ Arizona Businesses"
+    title="Phoenix Digital Marketing & Web Development Services"
+    subtitle="Rank higher on Google, convert more visitors, and automate bookings — tailored for Arizona service businesses."
+    content={`
+      <div class="max-w-3xl mx-auto">
+        <p class="text-lg text-muted mb-6 dark:text-slate-300">
+          ZiaFlow helps Phoenix contractors, medical practices, landscapers, and local retailers turn searchers into booked jobs. We combine local-first SEO, conversion-focused web development, and hands-off automation so you get more revenue with less manual work.
+        </p>
+        
+        <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg border-l-4 border-primary">
+          <p class="text-base italic text-gray-700 dark:text-gray-300">
+            "ZiaFlow doubled our booked jobs in 90 days."
+          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            — Mesa Home Services
+          </p>
+        </div>
+        
+        <p class="text-sm text-gray-600 dark:text-gray-400"></p>
+      </div>
+    `}
     image={{
       src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Digital transformation services',
+      alt: 'Phoenix digital marketing and web development services - Trusted by 120+ Arizona businesses',
     }}
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Free 30-Min Strategy Session',
+        icon: 'tabler:calendar',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      },
+      { 
+        variant: 'secondary', 
+        text: 'See Our Services', 
+        href: '#services' 
+      },
+    ]}
+  />
+
+  <!-- Stats Widget ****************** -->
+  <Stats
+    title="Results Our Clients See"
+    stats={[
+      { amount: '150%', title: 'Average increase in local calls within 90 days' },
+      { amount: '60%', title: 'More booked jobs with marketing automation' },
+      { amount: '40%', title: 'Conversion rates with optimized page speed' },
+      { amount: '38%', title: 'Fewer no-shows with SMS reminders' },
+    ]}
   />
 
   <!-- Features2 Widget ************** -->
   <Features2
-    title="Comprehensive Digital Solutions"
-    subtitle="Every service is designed to accelerate growth, streamline operations, and maximize ROI for your business."
+    title="Digital Services Built for Phoenix Service Businesses"
+    subtitle="Every solution is designed to increase bookings, save time, and help you dominate your local market."
     columns={3}
     items={[
       {
-        title: 'Custom Web Development',
+        title: 'Phoenix SEO Services',
         description:
-          'Build responsive, scalable web applications tailored to your business. From e-commerce platforms to SaaS products, we create digital experiences that engage users and drive conversions.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Mobile App Development',
-        description:
-          'Native and cross-platform mobile applications that extend your reach. We build intuitive iOS and Android apps that seamlessly integrate with your existing systems.',
-        icon: 'tabler:device-mobile',
-      },
-      {
-        title: 'SEO & Local Optimization',
-        description:
-          'Dominate local search results and attract qualified leads. Our expert SEO strategies and Google Local Service Ad optimization put your business in front of customers actively searching for your services.',
+          'When Phoenix homeowners search "emergency plumber near me" or "best HVAC repair Scottsdale," is your business on top? We help you rank #1 for high-intent local searches through Google Business Profile optimization, citation cleanup, and review automation.',
         icon: 'tabler:search',
       },
       {
-        title: 'PPC Advertising',
+        title: 'Custom Web Development',
         description:
-          'Data-driven paid advertising campaigns across Google Ads, Microsoft Ads, Meta, TikTok, LinkedIn, and Reddit. Maximize ROI with precise targeting and continuous optimization.',
+          'Your website loads in 5 seconds. Your competitor\'s loads in 1 second. Guess who gets the booking? We build conversion-focused websites that load fast, look professional on mobile, and turn visitors into customers.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'PPC Management',
+        description:
+          'Stop wasting ad spend on clicks that don\'t convert. Our expert PPC management across Google Ads, Meta, Microsoft, LinkedIn, TikTok, and Reddit ensures every dollar contributes to your bottom line with 544% average ROI.',
         icon: 'tabler:ad',
       },
       {
         title: 'Marketing Automation',
         description:
-          'Streamline lead nurturing and customer communication with intelligent automation. Personalize customer journeys at scale while saving countless hours of manual work.',
+          'A lead submits a form at 3 PM. Your team follows up at 9 AM. They\'ve already booked your competitor. Our automation delivers instant SMS + email responses, review requests, and appointment reminders that cut no-shows by 38%.',
         icon: 'tabler:mail-forward',
       },
       {
         title: 'Workflow Automation',
         description:
-          'Eliminate repetitive tasks and optimize business processes. Custom automation solutions that integrate with your existing systems to boost productivity and reduce errors.',
+          'Stop drowning in repetitive tasks. Our workflow automation eliminates manual data entry, automates invoicing, syncs calendars, and routes leads instantly—saving clients 8-15 hours per week on average.',
         icon: 'tabler:robot',
       },
       {
-        title: 'CRM Implementation',
+        title: 'Social Media Marketing',
         description:
-          'Centralize customer data and improve relationships with customized CRM solutions. From Salesforce to HubSpot to custom builds, we tailor systems to match your sales process.',
+          'Your customers are on social media—but are you showing up where they scroll? We manage Facebook, Instagram, LinkedIn, TikTok, and Twitter to build engaged communities and drive local leads.',
+        icon: 'tabler:brand-facebook',
+      },
+      {
+        title: 'CRM Solutions',
+        description:
+          'Your customer data is scattered across spreadsheets and sticky notes. We implement HubSpot, Salesforce, Zoho, and custom CRM systems that centralize operations and provide 360-degree customer views.',
         icon: 'tabler:users',
       },
       {
-        title: 'ERP Solutions',
+        title: 'E-commerce Solutions',
         description:
-          'Streamline operations with enterprise resource planning systems designed for your workflows. Integrate finance, inventory, and operations into one cohesive platform.',
-        icon: 'tabler:database',
+          'Whether launching your first online store or scaling to 7 figures, we build Shopify, WooCommerce, and custom e-commerce platforms optimized for checkout conversion and mobile shopping.',
+        icon: 'tabler:shopping-cart',
       },
       {
-        title: 'Strategic Consulting',
+        title: 'Custom Development',
         description:
-          'Expert guidance on digital transformation, technology selection, and implementation roadmaps. We help you navigate complex decisions with industry-aligned strategies.',
-        icon: 'tabler:bulb',
+          'Need a client portal? Custom booking engine? Internal management tool? When off-the-shelf software falls short, we build responsive, scalable web and mobile applications tailored precisely to your business.',
+        icon: 'tabler:device-mobile',
       },
     ]}
   />
@@ -93,35 +134,76 @@ const metadata = {
   <!-- Content Widget **************** -->
   <Content
     isReversed
+    title="Why Phoenix Service Businesses Choose ZiaFlow"
     items={[
       {
-        title: 'Tailored to Your Business',
+        title: 'We Specialize in Service Businesses',
         description:
-          'No cookie-cutter solutions. Every project is customized to your specific industry, challenges, and objectives. We take time to understand your business before recommending technology.',
-        icon: 'tabler:adjustments',
+          'HVAC contractors, medical practices, landscapers, law firms, and home services. We understand your industry challenges—local competition, lead response time, seasonal demand, and reputation management.',
+        icon: 'tabler:briefcase',
       },
       {
-        title: 'Scalable Architecture',
+        title: 'Measurable Results, Not Vanity Metrics',
         description:
-          'Future-proof solutions built to grow with your business. Whether you are a startup or scaling enterprise, our architecture accommodates increased users, data, and functionality.',
-        icon: 'tabler:trending-up',
+          'We don\'t report on "impressions" or "engagement." We track what matters: booked jobs, cost-per-lead, conversion rates, hours saved, and revenue growth. Our clients see an average 150% increase in local calls.',
+        icon: 'tabler:chart-line',
       },
       {
-        title: 'Seamless Integration',
+        title: 'Technical Depth + Marketing Expertise',
         description:
-          'Work with your existing tech stack. Our solutions integrate smoothly with CRMs, ERPs, marketing platforms, and custom systems you already use.',
-        icon: 'tabler:plug',
+          'Unlike agencies that just run ads or developers who just build sites, we combine custom development, automation engineering, and marketing strategy. One partner for your entire digital ecosystem.',
+        icon: 'tabler:tools',
       },
       {
-        title: 'Ongoing Support',
+        title: 'Fast Implementation, Transparent Process',
         description:
-          'Launch is just the beginning. We provide continuous optimization, analytics, reporting, and responsive support to ensure your solutions deliver lasting value.',
-        icon: 'tabler:lifebuoy',
+          'Small automation projects start within 1-2 weeks. Website builds take 4-12 weeks. We provide monthly reports, quarterly strategy reviews, and live dashboards—you always know where your investment is going.',
+        icon: 'tabler:rocket',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
-      alt: 'Team collaboration',
+      alt: 'Phoenix business team collaboration',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Your Partner, Not Just a Vendor</h3>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+  <Content
+    isAfterContent
+    title="The ZiaFlow Process"
+    items={[
+      {
+        title: '1. Free Consultation & Audit',
+        description:
+          'We audit your digital presence (SEO, website, automation gaps), identify your top 3 growth opportunities, and deliver a 30/60/90 roadmap with ROI projections. No pitch, no pressure.',
+        icon: 'tabler:search',
+      },
+      {
+        title: '2. Strategy & Planning',
+        description:
+          'We map out priorities, timelines, and success metrics. You\'ll know exactly what we\'re building, why it matters, and how we\'ll measure success before any work begins.',
+        icon: 'tabler:clipboard-list',
+      },
+      {
+        title: '3. Implementation',
+        description:
+          'Whether it\'s SEO, web development, or automation, we execute with transparency. You\'re involved at every stage—design reviews, testing, and launch approval. No surprises.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: '4. Optimization & Growth',
+        description:
+          'Launch is just the beginning. We monitor performance, run A/B tests, refine campaigns, and provide monthly reports. Quarterly strategy reviews keep us aligned on what\'s working and what\'s next.',
+        icon: 'tabler:trending-up',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+      alt: 'Business growth strategy',
     }}
   >
     <Fragment slot="content">
@@ -129,76 +211,95 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <!-- Content Widget **************** -->
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Save Time & Resources',
-        description:
-          'Automation eliminates hours of repetitive work. Our clients report saving 10,000+ hours collectively, allowing teams to focus on high-value activities that drive growth.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Increase Revenue',
-        description:
-          'Strategic SEO, PPC, and marketing automation drive qualified leads and conversions. Better systems and processes translate directly to improved bottom-line results.',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Reduce Costs',
-        description:
-          'Streamlined operations and automated workflows reduce labor costs and eliminate errors. Get enterprise capabilities at prices designed for growing businesses.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Rapid Implementation',
-        description:
-          'Efficient processes mean faster time-to-value. Simple automation projects launch in 2-4 weeks, while custom development typically ranges from 8-16 weeks.',
-        icon: 'tabler:rocket',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-      alt: 'Business growth',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Measurable Results</h3>
-    </Fragment>
-  </Content>
-
   <!-- Testimonials Widget *********** -->
   <Testimonials
     id="testimonials"
-    title="What Our Clients Say"
+    title="Trusted by Phoenix Businesses"
+    subtitle="Real results from real clients"
     testimonials={[
       {
-        testimonial: `ZiaFlow has been nothing short of exceptional. Their expertise in automation and marketing has transformed how we operate. Response time is incredible - even early morning or late night questions get answered promptly.`,
+        testimonial: `ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!`,
         name: 'Sarah M.',
-        job: 'Business Owner',
+        job: 'Home Services Business Owner',
         image: {
           src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
           alt: 'Client testimonial',
         },
       },
       {
-        testimonial: `Working with ZiaFlow has been a game changer. They delivered exactly what we needed - custom solutions that actually solve our problems. No black magic BS, just skilled professionals who know what they are doing.`,
+        testimonial: `When it comes to website building and SEO, ZiaFlow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. Very affordable for small businesses that are growing.`,
         name: 'Michael T.',
-        job: 'Operations Director',
+        job: 'Business Consultant',
         image: {
           src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
           alt: 'Client testimonial',
         },
       },
       {
-        testimonial: `The automation solutions ZiaFlow built for us have saved countless hours every week. The ROI was evident within the first month. They truly understand business needs, not just technology.`,
+        testimonial: `ZiaFlow has been an invaluable partner for my business. Their expertise in automation has revolutionized our workflow, saving me countless hours and streamlining my processes. The team took the time to understand my unique needs and developed custom solutions that have significantly improved my efficiency!`,
         name: 'Jennifer L.',
-        job: 'Marketing Manager',
+        job: 'Medical Practice Manager',
         image: {
           src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
           alt: 'Client testimonial',
         },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Everything you need to know about working with ZiaFlow"
+    columns={2}
+    items={[
+      {
+        title: 'What industries do you serve?',
+        description:
+          'We specialize in Phoenix service businesses including contractors (HVAC, plumbing, electrical, landscaping), medical and dental practices, law firms, home services, and local retailers. Our solutions are tailored for service-oriented businesses that depend on local search rankings and lead generation.',
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: 'How long before I see SEO results?',
+        description:
+          'Most clients see initial ranking improvements within 60-90 days—better local pack visibility, indexed pages, and technical fixes. Significant traffic growth and booked jobs typically appear by month 6-12 with consistent work. Local Phoenix SEO often delivers faster results than national campaigns.',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'How do you price projects?',
+        description:
+          'We offer flexible pricing: hourly rates for consulting, fixed-price for defined projects (website builds, automation setup), and monthly retainers for ongoing services (SEO, PPC, marketing automation). During your free consultation, we\'ll discuss budget ranges and recommend the best structure—no pressure, just transparent options.',
+        icon: 'tabler:currency-dollar',
+      },
+      {
+        title: 'Do you integrate with existing tools?',
+        description:
+          'Absolutely. We build integrations using APIs, Zapier, Make, and serverless architectures. We connect CRMs (HubSpot, Salesforce, Zoho), scheduling software (Calendly, Acuity), payment systems (Stripe, Square), and other business tools. We\'ll review your tech stack and recommend the best approach.',
+        icon: 'tabler:plug',
+      },
+      {
+        title: 'What\'s included in the free consultation?',
+        description:
+          'Your free consultation includes a digital presence audit (SEO gaps, website performance, automation opportunities), identification of your top 3 growth opportunities, and a prioritized 30/60/90 roadmap with ROI projections. You\'ll walk away with actionable insights whether you work with us or not.',
+        icon: 'tabler:gift',
+      },
+      {
+        title: 'How do you report results?',
+        description:
+          'We provide monthly performance reports and live dashboards tracking leads generated, conversion rates, local search rankings, PPC ROI, and automation impact (hours saved, no-shows reduced). We also run quarterly strategy reviews to assess what\'s working and plan next steps.',
+        icon: 'tabler:chart-dots',
+      },
+      {
+        title: 'How quickly can you start?',
+        description:
+          'We move fast. Small projects and automation pilots start within 1-2 weeks. Website builds take 4-12 weeks depending on complexity. For ongoing services (SEO, PPC, automation), we can start immediately—expect initial quick wins in 30-60 days and compounding results over 6-12 months.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Do you work with existing teams?',
+        description:
+          'Yes—we collaborate seamlessly with in-house marketing or development teams. We provide strategic guidance, technical implementation, or specialized expertise in areas like local SEO, conversion optimization, or workflow automation. Think of us as an extension of your team.',
+        icon: 'tabler:users',
       },
     ]}
   />
@@ -213,11 +314,11 @@ const metadata = {
       },
       {
         variant: 'secondary',
-        text: 'View Pricing',
-        href: '/pricing',
+        text: 'Call (480) 819-2929',
+        href: 'tel:+148081981929',
       },
     ]}
-    title="Ready to Transform Your Business?"
-    subtitle="Let's discuss your challenges, goals, and how our solutions can drive measurable results for your organization."
+    title="Ready to Stop Losing Revenue to Faster Competitors?"
+    subtitle="You're losing money every time a lead waits hours for a reply, every time a potential customer can't find you on Google, and every time your website loads too slowly. Let's fix that. Book your free 30-minute strategy session and get a digital presence audit, top 3 growth opportunities, and prioritized action plan with ROI projections."
   />
 </Layout>
