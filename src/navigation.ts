@@ -8,11 +8,7 @@ export const headerData = {
     },
     {
       text: 'Services',
-      links: [
-        { text: 'SEO & Local Search', href: '#services' },
-        { text: 'Automation & CRM', href: '#services' },
-        { text: 'Web Development', href: '#services' },
-      ],
+      href: getPermalink('/services'),
     },
     {
       text: 'About Us',
