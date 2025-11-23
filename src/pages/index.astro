@@ -349,6 +349,7 @@ const metadata = {
     id="form"
     title="Start Your Digital Transformation"
     subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
+    accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
     inputs={[
       {
         type: 'text',
@@ -496,7 +497,7 @@ const metadata = {
       function getParam(name) {
         try {
           return new URLSearchParams(w.location.search).get(name) || '';
-        } catch (e) {
+        } catch {
           return '';
         }
       }

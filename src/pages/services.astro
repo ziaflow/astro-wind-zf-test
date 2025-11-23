@@ -1,132 +1,121 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import Stats from '~/components/widgets/Stats.astro';
-import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Phoenix Digital Marketing & Web Development Services | ZiaFlow',
-  description: 'Phoenix digital marketing agency - Rank #1 with local SEO, convert with custom websites, automate bookings. 150%+ avg. client growth. Free consultation.',
+  title: 'Phoenix Home Service Marketing — Google Local Service Ads & GMB | ZiaFlow',
+  description: 'ZiaFlow helps Arizona HVAC, plumbing, electrical and landscaping businesses get 40%+ more qualified leads with Google Local Service Ads, Google Business Profile optimization, review management, and transparent reporting. Book a free strategy call.',
 };
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
   <Hero
-    tagline="Trusted by 120+ Arizona Businesses"
-    title="Phoenix Digital Marketing & Web Development Services"
-    subtitle="Rank higher on Google, convert more visitors, and automate bookings — tailored for Arizona service businesses."
+    tagline="🏆 Arizona Home Service Marketing Experts"
+    title="Phoenix Home Service Marketing — Google Local Service Ads & Google Business Profile"
+    subtitle="Get more qualified local leads with LSAs, optimized Google Business Profiles, review automation, and conversion-focused local marketing."
     content={`
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <p class="text-lg text-muted mb-6 dark:text-slate-300">
-          ZiaFlow helps Phoenix contractors, medical practices, landscapers, and local retailers turn searchers into booked jobs. We combine local-first SEO, conversion-focused web development, and hands-off automation so you get more revenue with less manual work.
+          ZiaFlow helps Arizona HVAC, plumbing, electrical, and landscaping companies convert searchers into booked jobs using Google Local Service Ads (LSAs), Google Business Profile optimization, and reputation systems built for local markets. Book a free strategy call to see a custom 30/60/90 roadmap for your business.
         </p>
         
-        <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg border-l-4 border-primary">
-          <p class="text-base italic text-gray-700 dark:text-gray-300">
-            "ZiaFlow doubled our booked jobs in 90 days."
+        <div class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+          <p class="mb-2">
+            <strong>Clients typically see 40%+ average lead increases</strong> • 500+ businesses served • 98% client satisfaction
           </p>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            — Mesa Home Services
-          </p>
+          <a href="/case-studies" class="text-primary hover:underline font-medium">See case studies →</a>
         </div>
-        
-        <p class="text-sm text-gray-600 dark:text-gray-400"></p>
       </div>
     `}
-    image={{
-      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Phoenix digital marketing and web development services - Trusted by 120+ Arizona businesses',
-    }}
     actions={[
       {
         variant: 'primary',
-        text: 'Book Free 30-Min Strategy Session',
+        text: 'Book Your Free Strategy Call',
+        href: '/contact',
         icon: 'tabler:calendar',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
-      { 
-        variant: 'secondary', 
-        text: 'See Our Services', 
-        href: '#services' 
+      {
+        variant: 'secondary',
+        text: 'Download Free LSA Guide',
+        href: '#lsa-guide',
+        icon: 'tabler:download',
       },
     ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-  <Stats
-    title="Results Our Clients See"
-    stats={[
-      { amount: '150%', title: 'Average increase in local calls within 90 days' },
-      { amount: '60%', title: 'More booked jobs with marketing automation' },
-      { amount: '40%', title: 'Conversion rates with optimized page speed' },
-      { amount: '38%', title: 'Fewer no-shows with SMS reminders' },
-    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Phoenix home service marketing - Google Local Service Ads and GMB optimization',
+    }}
   />
 
   <!-- Features2 Widget ************** -->
   <Features2
-    title="Digital Services Built for Phoenix Service Businesses"
-    subtitle="Every solution is designed to increase bookings, save time, and help you dominate your local market."
+    id="services"
+    title="Our Specialized Services for Home Service Businesses"
+    subtitle="Focused services that drive measurable bookings and reduce wasted ad spend."
     columns={3}
     items={[
       {
-        title: 'Phoenix SEO Services',
-        description:
-          'When Phoenix homeowners search "emergency plumber near me" or "best HVAC repair Scottsdale," is your business on top? We help you rank #1 for high-intent local searches through Google Business Profile optimization, citation cleanup, and review automation.',
-        icon: 'tabler:search',
+        title: 'Google Local Service Ads (LSAs)',
+        description: 'Pay-per-lead campaigns managed for maximum ROI and lead quality.',
+        icon: 'tabler:ad-2',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/local-service-ads',
+        },
       },
       {
-        title: 'Custom Web Development',
-        description:
-          'Your website loads in 5 seconds. Your competitor\'s loads in 1 second. Guess who gets the booking? We build conversion-focused websites that load fast, look professional on mobile, and turn visitors into customers.',
-        icon: 'tabler:code',
+        title: 'Google Business Profile (GMB) Optimization',
+        description: 'Local-first profiles that increase visibility, clicks, and calls.',
+        icon: 'tabler:map-pin',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/gmb-optimization',
+        },
       },
       {
-        title: 'PPC Management',
-        description:
-          'Stop wasting ad spend on clicks that don\'t convert. Our expert PPC management across Google Ads, Meta, Microsoft, LinkedIn, TikTok, and Reddit ensures every dollar contributes to your bottom line with 544% average ROI.',
-        icon: 'tabler:ad',
+        title: 'Review & Reputation Management',
+        description: 'Automated review requests, response workflows, and dispute handling to build trust.',
+        icon: 'tabler:star',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/review-management',
+        },
       },
       {
-        title: 'Marketing Automation',
-        description:
-          'A lead submits a form at 3 PM. Your team follows up at 9 AM. They\'ve already booked your competitor. Our automation delivers instant SMS + email responses, review requests, and appointment reminders that cut no-shows by 38%.',
-        icon: 'tabler:mail-forward',
+        title: 'Performance Tracking & Reporting',
+        description: 'Real-time dashboards, weekly summaries, and transparent KPIs so you know where leads come from.',
+        icon: 'tabler:chart-line',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/performance-tracking',
+        },
       },
       {
-        title: 'Workflow Automation',
-        description:
-          'Stop drowning in repetitive tasks. Our workflow automation eliminates manual data entry, automates invoicing, syncs calendars, and routes leads instantly—saving clients 8-15 hours per week on average.',
+        title: 'Conversion & Booking Optimization',
+        description: 'Faster booking paths, optimized landing pages, and form tracking that turn visits into jobs.',
+        icon: 'tabler:target',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/cro',
+        },
+      },
+      {
+        title: 'Audit & Automation',
+        description: 'Lead routing, reminders, and CRM syncs that save admin hours and improve close rates.',
         icon: 'tabler:robot',
-      },
-      {
-        title: 'Social Media Marketing',
-        description:
-          'Your customers are on social media—but are you showing up where they scroll? We manage Facebook, Instagram, LinkedIn, TikTok, and Twitter to build engaged communities and drive local leads.',
-        icon: 'tabler:brand-facebook',
-      },
-      {
-        title: 'CRM Solutions',
-        description:
-          'Your customer data is scattered across spreadsheets and sticky notes. We implement HubSpot, Salesforce, Zoho, and custom CRM systems that centralize operations and provide 360-degree customer views.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'E-commerce Solutions',
-        description:
-          'Whether launching your first online store or scaling to 7 figures, we build Shopify, WooCommerce, and custom e-commerce platforms optimized for checkout conversion and mobile shopping.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Custom Development',
-        description:
-          'Need a client portal? Custom booking engine? Internal management tool? When off-the-shelf software falls short, we build responsive, scalable web and mobile applications tailored precisely to your business.',
-        icon: 'tabler:device-mobile',
+        callToAction: {
+          text: 'Learn more',
+          href: '/services/automation',
+        },
       },
     ]}
   />
@@ -134,114 +123,219 @@ const metadata = {
   <!-- Content Widget **************** -->
   <Content
     isReversed
-    title="Why Phoenix Service Businesses Choose ZiaFlow"
+    title="Feeling Lost in the Local Search Maze?"
+    subtitle="Common issues we solve for Arizona home service businesses:"
     items={[
       {
-        title: 'We Specialize in Service Businesses',
-        description:
-          'HVAC contractors, medical practices, landscapers, law firms, and home services. We understand your industry challenges—local competition, lead response time, seasonal demand, and reputation management.',
-        icon: 'tabler:briefcase',
+        title: 'Inconsistent Lead Flow',
+        description: 'Feast-or-famine scheduling makes it impossible to plan staffing and growth.',
+        icon: 'tabler:calendar-x',
       },
       {
-        title: 'Measurable Results, Not Vanity Metrics',
-        description:
-          'We don\'t report on "impressions" or "engagement." We track what matters: booked jobs, cost-per-lead, conversion rates, hours saved, and revenue growth. Our clients see an average 150% increase in local calls.',
-        icon: 'tabler:chart-line',
+        title: 'Confusing Ad Spend',
+        description: 'Low conversion rates and high cost-per-lead draining your marketing budget.',
+        icon: 'tabler:coin-off',
       },
       {
-        title: 'Technical Depth + Marketing Expertise',
-        description:
-          'Unlike agencies that just run ads or developers who just build sites, we combine custom development, automation engineering, and marketing strategy. One partner for your entire digital ecosystem.',
-        icon: 'tabler:tools',
+        title: 'Poor GMB & Reviews',
+        description: 'Low review volume and unoptimized profiles reducing trust and visibility.',
+        icon: 'tabler:star-off',
       },
       {
-        title: 'Fast Implementation, Transparent Process',
-        description:
-          'Small automation projects start within 1-2 weeks. Website builds take 4-12 weeks. We provide monthly reports, quarterly strategy reviews, and live dashboards—you always know where your investment is going.',
-        icon: 'tabler:rocket',
+        title: 'Manual Time Waste',
+        description: 'Hours wasted on manual follow-up, scheduling, and billing instead of revenue work.',
+        icon: 'tabler:clock-x',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
-      alt: 'Phoenix business team collaboration',
+      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
+      alt: 'Common challenges for Arizona home service businesses',
     }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Your Partner, Not Just a Vendor</h3>
-    </Fragment>
-  </Content>
+  />
 
   <!-- Content Widget **************** -->
   <Content
     isAfterContent
-    title="The ZiaFlow Process"
+    title="ZiaFlow — Your Local Growth Partner"
+    subtitle="We specialize exclusively in Arizona home service marketing. That means deep local knowledge, seasonal strategy, and playbooks that produce predictable lead volume."
     items={[
       {
-        title: '1. Free Consultation & Audit',
-        description:
-          'We audit your digital presence (SEO, website, automation gaps), identify your top 3 growth opportunities, and deliver a 30/60/90 roadmap with ROI projections. No pitch, no pressure.',
-        icon: 'tabler:search',
+        title: 'Google Local Service Ads Certified Experts',
+        description: 'Official LSA certification and proven campaign management expertise.',
+        icon: 'tabler:certificate',
       },
       {
-        title: '2. Strategy & Planning',
-        description:
-          'We map out priorities, timelines, and success metrics. You\'ll know exactly what we\'re building, why it matters, and how we\'ll measure success before any work begins.',
-        icon: 'tabler:clipboard-list',
+        title: 'Proven Results for Home Services',
+        description: 'Documented success for HVAC, plumbing, electrical, and landscaping businesses.',
+        icon: 'tabler:chart-arrows-vertical',
       },
       {
-        title: '3. Implementation',
-        description:
-          'Whether it\'s SEO, web development, or automation, we execute with transparency. You\'re involved at every stage—design reviews, testing, and launch approval. No surprises.',
-        icon: 'tabler:settings',
+        title: 'Local Market Expertise',
+        description: 'Deep experience across Phoenix, Scottsdale, Tempe, Mesa, and statewide Arizona.',
+        icon: 'tabler:map-2',
       },
       {
-        title: '4. Optimization & Growth',
-        description:
-          'Launch is just the beginning. We monitor performance, run A/B tests, refine campaigns, and provide monthly reports. Quarterly strategy reviews keep us aligned on what\'s working and what\'s next.',
-        icon: 'tabler:trending-up',
+        title: 'Case Studies & Metrics',
+        description: 'Before/after data and documented results you can verify.',
+        icon: 'tabler:file-analytics',
+        callToAction: {
+          text: 'See case studies',
+          href: '/case-studies',
+        },
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-      alt: 'Business growth strategy',
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
+      alt: 'ZiaFlow Arizona home service marketing experts',
     }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">How We Work</h3>
-    </Fragment>
-  </Content>
+  />
+
+  <!-- Steps Widget ****************** -->
+  <Steps
+    title="Our Simple 3-Step Growth Plan"
+    items={[
+      {
+        title: 'Step 1: Discovery',
+        description:
+          'Schedule a free discovery session. We audit your LSA/GMB setup, current campaigns, and lead flows to identify immediate gains.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Step 2: Targeted Roadmap',
+        description:
+          'Receive a customized 30/60/90 roadmap that prioritizes high-impact fixes: LSA setup/optimization, GMB fixes, review automation, and conversion improvements.',
+        icon: 'tabler:map',
+      },
+      {
+        title: 'Step 3: Launch & Optimize',
+        description:
+          'We launch campaigns, automate follow-up, and iteratively optimize using real-world lead data so your cost-per-lead drops and booked jobs rise.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
+      alt: 'ZiaFlow 3-step growth process',
+    }}
+  />
+
+  <!-- Pricing Widget **************** -->
+  <Pricing
+    title="Transparent Pricing to Fit Your Stage"
+    subtitle="Choose a plan to match your goals — every plan includes setup, reporting, and dedicated support."
+    prices={[
+      {
+        title: 'Starter',
+        subtitle: 'Best for testing LSAs and validating market demand',
+        price: 497,
+        period: 'per month',
+        items: [
+          {
+            description: 'LSA setup & basic management',
+          },
+          {
+            description: 'GMB cleanup',
+          },
+          {
+            description: 'Monthly report',
+          },
+          {
+            description: 'Email support',
+          },
+        ],
+        callToAction: {
+          text: 'Get Started',
+          href: '/contact',
+        },
+      },
+      {
+        title: 'Growth',
+        subtitle: 'Best for established businesses scaling leads and territory coverage',
+        price: 997,
+        period: 'per month',
+        hasRibbon: true,
+        ribbonTitle: 'Most Popular',
+        items: [
+          {
+            description: 'Complete LSA management',
+          },
+          {
+            description: 'Full GMB optimization',
+          },
+          {
+            description: 'Review management',
+          },
+          {
+            description: 'Weekly reporting',
+          },
+          {
+            description: 'Dedicated manager',
+          },
+        ],
+        callToAction: {
+          text: 'Get Started',
+          href: '/contact',
+        },
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Best for multi-location or high-volume operations',
+        price: '1,997+',
+        period: 'per month',
+        items: [
+          {
+            description: 'Real-time dashboards',
+          },
+          {
+            description: '24/7 priority support',
+          },
+          {
+            description: 'Unlimited categories',
+          },
+          {
+            description: 'Advanced review & competitor analysis',
+          },
+          {
+            description: 'Senior account lead',
+          },
+        ],
+        callToAction: {
+          text: 'Contact Us',
+          href: '/contact',
+        },
+      },
+    ]}
+  />
 
   <!-- Testimonials Widget *********** -->
   <Testimonials
-    id="testimonials"
-    title="Trusted by Phoenix Businesses"
-    subtitle="Real results from real clients"
+    title="What Our Clients Say"
     testimonials={[
       {
-        testimonial: `ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!`,
-        name: 'Sarah M.',
-        job: 'Home Services Business Owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-          alt: 'Client testimonial',
-        },
-      },
-      {
-        testimonial: `When it comes to website building and SEO, ZiaFlow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. Very affordable for small businesses that are growing.`,
-        name: 'Michael T.',
-        job: 'Business Consultant',
+        testimonial: `ZiaFlow increased our qualified calls by 40% in 90 days and reduced our cost per lead.`,
+        name: 'Jamie R.',
+        job: 'Plumbing Contractor, Scottsdale',
         image: {
           src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-          alt: 'Client testimonial',
+          alt: 'Jamie R testimonial',
         },
       },
       {
-        testimonial: `ZiaFlow has been an invaluable partner for my business. Their expertise in automation has revolutionized our workflow, saving me countless hours and streamlining my processes. The team took the time to understand my unique needs and developed custom solutions that have significantly improved my efficiency!`,
-        name: 'Jennifer L.',
-        job: 'Medical Practice Manager',
+        testimonial: `We now get 3x more calls and pay less per lead after switching to LSAs.`,
+        name: 'Michael T.',
+        job: 'HVAC Company, Phoenix',
+        image: {
+          src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
+          alt: 'Michael T testimonial',
+        },
+      },
+      {
+        testimonial: `Our service areas are fully booked during peak season thanks to targeted LSAs and review automation.`,
+        name: 'Sarah M.',
+        job: 'Landscaping, Tempe',
         image: {
           src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=774&q=80',
-          alt: 'Client testimonial',
+          alt: 'Sarah M testimonial',
         },
       },
     ]}
@@ -250,75 +344,61 @@ const metadata = {
   <!-- FAQs Widget ******************* -->
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Everything you need to know about working with ZiaFlow"
-    columns={2}
+    columns={1}
     items={[
       {
-        title: 'What industries do you serve?',
+        title: 'What are Google Local Service Ads (LSAs)?',
         description:
-          'We specialize in Phoenix service businesses including contractors (HVAC, plumbing, electrical, landscaping), medical and dental practices, law firms, home services, and local retailers. Our solutions are tailored for service-oriented businesses that depend on local search rankings and lead generation.',
-        icon: 'tabler:briefcase',
+          'LSAs are pay-per-lead ads that appear at the top of Google for local service searches. You pay when a customer contacts you through the ad. <a href="#lsa-guide" class="text-primary hover:underline">Download our free guide</a> to learn more.',
+        icon: 'tabler:help',
       },
       {
-        title: 'How long before I see SEO results?',
+        title: 'How soon will I see results?',
         description:
-          'Most clients see initial ranking improvements within 60-90 days—better local pack visibility, indexed pages, and technical fixes. Significant traffic growth and booked jobs typically appear by month 6-12 with consistent work. Local Phoenix SEO often delivers faster results than national campaigns.',
+          'Many clients start receiving qualified leads within 2–4 weeks of launch. Meaningful, sustained improvements typically emerge in 60–90 days as we optimize for quality and volume.',
         icon: 'tabler:clock',
       },
       {
-        title: 'How do you price projects?',
+        title: 'Do you work with businesses outside Arizona?',
         description:
-          'We offer flexible pricing: hourly rates for consulting, fixed-price for defined projects (website builds, automation setup), and monthly retainers for ongoing services (SEO, PPC, marketing automation). During your free consultation, we\'ll discuss budget ranges and recommend the best structure—no pressure, just transparent options.',
-        icon: 'tabler:currency-dollar',
-      },
-      {
-        title: 'Do you integrate with existing tools?',
-        description:
-          'Absolutely. We build integrations using APIs, Zapier, Make, and serverless architectures. We connect CRMs (HubSpot, Salesforce, Zoho), scheduling software (Calendly, Acuity), payment systems (Stripe, Square), and other business tools. We\'ll review your tech stack and recommend the best approach.',
-        icon: 'tabler:plug',
-      },
-      {
-        title: 'What\'s included in the free consultation?',
-        description:
-          'Your free consultation includes a digital presence audit (SEO gaps, website performance, automation opportunities), identification of your top 3 growth opportunities, and a prioritized 30/60/90 roadmap with ROI projections. You\'ll walk away with actionable insights whether you work with us or not.',
-        icon: 'tabler:gift',
-      },
-      {
-        title: 'How do you report results?',
-        description:
-          'We provide monthly performance reports and live dashboards tracking leads generated, conversion rates, local search rankings, PPC ROI, and automation impact (hours saved, no-shows reduced). We also run quarterly strategy reviews to assess what\'s working and plan next steps.',
-        icon: 'tabler:chart-dots',
-      },
-      {
-        title: 'How quickly can you start?',
-        description:
-          'We move fast. Small projects and automation pilots start within 1-2 weeks. Website builds take 4-12 weeks depending on complexity. For ongoing services (SEO, PPC, automation), we can start immediately—expect initial quick wins in 30-60 days and compounding results over 6-12 months.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Do you work with existing teams?',
-        description:
-          'Yes—we collaborate seamlessly with in-house marketing or development teams. We provide strategic guidance, technical implementation, or specialized expertise in areas like local SEO, conversion optimization, or workflow automation. Think of us as an extension of your team.',
-        icon: 'tabler:users',
+          'Our primary expertise is Arizona markets, but we do take select clients nationwide. <a href="/contact" class="text-primary hover:underline">Contact us</a> to discuss your market and goals.',
+        icon: 'tabler:map-pin',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
 
   <!-- CallToAction Widget *********** -->
   <CallToAction
+    title="Ready to Grow Your Home Service Business?"
+    subtitle="Stop losing leads to competitors. Let's build a local lead machine for your service area—predictable, scalable, and measurable."
     actions={[
       {
         variant: 'primary',
-        text: 'Schedule Free Consultation',
+        text: 'Book Your Free Strategy Call',
         href: '/contact',
+        icon: 'tabler:calendar',
       },
       {
         variant: 'secondary',
-        text: 'Call (480) 819-2929',
-        href: 'tel:+148081981929',
+        text: 'Download Free LSA Guide',
+        href: '#lsa-guide',
+        icon: 'tabler:download',
       },
     ]}
-    title="Ready to Stop Losing Revenue to Faster Competitors?"
-    subtitle="You're losing money every time a lead waits hours for a reply, every time a potential customer can't find you on Google, and every time your website loads too slowly. Let's fix that. Book your free 30-minute strategy session and get a digital presence audit, top 3 growth opportunities, and prioritized action plan with ROI projections."
-  />
+  >
+    <Fragment slot="subtitle">
+      <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mb-2">
+          <strong>Phone:</strong> <a href="tel:+16025550123" class="text-primary hover:underline">(602) 555-0123</a> •
+          <strong>Email:</strong> <a href="mailto:hello@ziaflow.com" class="text-primary hover:underline">hello@ziaflow.com</a>
+        </p>
+        <p>Serving Phoenix, Scottsdale, Tempe, Mesa and statewide Arizona</p>
+      </div>
+    </Fragment>
+  </CallToAction>
 </Layout>
+<SpeedInsights url="https://www.ziaflow.com/services" />
