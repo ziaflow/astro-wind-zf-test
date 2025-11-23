@@ -14,14 +14,19 @@ const {
   redirect,
   subject = 'New Contact Request',
   fromName = 'ZiaFlow Website',
+  formId = 'web3forms-contact',
+  resultId = 'web3forms-result',
+  successMessage = 'Thanks! We received your message.',
+  errorMessage = 'Something went wrong. Please try again.',
 } = Astro.props as Props;
 ---
 
-<form action={action} method={method} class="space-y-6">
+<form action={action} method={method} id={formId} class="space-y-6">
   <input type="hidden" name="access_key" value={accessKey} />
   {redirect && <input type="hidden" name="redirect" value={redirect} />}
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="from_name" value={fromName} />
+  <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1" />
 
   {
     inputs &&
@@ -102,4 +107,71 @@ const {
       </div>
     )
   }
+
+  <p id={resultId} class="text-base text-center text-gray-500"></p>
 </form>
+
+<script
+  is:inline
+  data-form-id={formId}
+  data-result-id={resultId}
+  data-action-url={action}
+  data-success-message={successMessage}
+  data-error-message={errorMessage}
+>
+  const scriptEl = document.currentScript;
+  const {
+    formId: datasetFormId,
+    resultId: datasetResultId,
+    actionUrl,
+    successMessage,
+    errorMessage,
+  } = scriptEl?.dataset ?? {};
+
+  if (!datasetFormId || !datasetResultId || !actionUrl) {
+    console.warn('Web3Forms script missing required dataset attributes');
+  } else {
+    const form = document.getElementById(datasetFormId);
+    const resultEl = document.getElementById(datasetResultId);
+
+    if (form && resultEl) {
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        resultEl.textContent = 'Please wait...';
+        resultEl.classList.remove('text-green-500', 'text-red-500');
+
+        const formData = new FormData(form);
+        const payload = JSON.stringify(Object.fromEntries(formData.entries()));
+
+        try {
+          const response = await fetch(actionUrl, {
+            method: form.method,
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: payload,
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            resultEl.textContent = data.message || successMessage || 'Thank you!';
+            resultEl.classList.add('text-green-500');
+            form.reset();
+          } else {
+            resultEl.textContent = data.message || errorMessage || 'Submission failed.';
+            resultEl.classList.add('text-red-500');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          resultEl.textContent = errorMessage || 'Something went wrong.';
+          resultEl.classList.add('text-red-500');
+        }
+
+        setTimeout(() => {
+          resultEl.textContent = '';
+        }, 5000);
+      });
+    }
+  }
+</script>

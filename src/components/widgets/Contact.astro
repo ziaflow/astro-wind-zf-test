@@ -11,15 +11,18 @@ const {
   inputs,
   textarea,
   disclaimer,
-  requiredFields,
   button,
   description,
+  accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY,
+  redirect,
+  subject = 'New Contact Request',
+  fromName = 'ZiaFlow Website',
 
   id,
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -34,10 +37,10 @@ const {
           disclaimer={disclaimer}
           button={button}
           description={description}
-          accessKey={Astro.props.accessKey}
-          redirect={Astro.props.redirect}
-          subject={Astro.props.subject}
-          fromName={Astro.props.fromName}
+          accessKey={accessKey}
+          redirect={redirect}
+          subject={subject}
+          fromName={fromName}
         />
       </div>
     )

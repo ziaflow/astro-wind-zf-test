@@ -218,6 +218,10 @@ export interface Form {
   redirect?: string;
   subject?: string;
   fromName?: string;
+  formId?: string;
+  resultId?: string;
+  successMessage?: string;
+  errorMessage?: string;
 }
 
 // WIDGETS
