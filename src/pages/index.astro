@@ -16,6 +16,16 @@ const metadata = {
   description:
     'Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session.',
   ignoreTitleTemplate: true,
+  openGraph: {
+    images: [
+      {
+        url: '~/assets/images/default.png',
+        width: 1200,
+        height: 628,
+        alt: 'ZiaFlow Digital Growth Partner',
+      },
+    ],
+  },
 };
 ---
 
@@ -25,33 +35,28 @@ const metadata = {
     tagline="Phoenix Web Development & Digital Marketing"
     image={{
       src: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMDczMTJ8MHwxfHNlYXJjaHwxfHxwcm9ncmFtbWluZyUyMGNvZGUlMjBzY3JlZW58ZW58MHwwfHx8MTc2MzkyMjMwM3ww&ixlib=rb-4.1.0&q=85',
-      alt: 'Phoenix business team collaboration',
+      alt: 'ZiaFlow Digital Growth Partner',
     }}
     title="Phoenix Web Development & Digital Marketing That Delivers Results"
     subtitle="Conversion-first websites, strategic local SEO, PPC, and automation—trusted by Arizona service businesses for measurable growth."
     actions={[
       {
         variant: 'primary',
-        text: 'Book Free 30-Min Strategy Session',
+        text: 'Book Free Strategy Session',
         icon: 'tabler:square-rounded-arrow-right',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
       {
         variant: 'secondary',
-        text: 'Get a Free Project Estimate',
-        href: '/contact#estimate',
+        text: 'View Case Studies',
+        href: '#case-studies',
       },
     ]}
   >
     <Fragment slot="subtitle">
-      <div
-        class="flex flex-col sm:flex-row gap-4 justify-center mt-6 text-sm font-medium text-muted dark:text-slate-400"
-      >
-        <span class="flex items-center"><span class="mr-2 text-primary">✓</span> 150% Avg. Lead Growth</span>
-        <span class="hidden sm:inline">·</span>
-        <span class="flex items-center"><span class="mr-2 text-primary">✓</span> 50+ Arizona Businesses</span>
-        <span class="hidden sm:inline">·</span>
-        <span class="flex items-center"><span class="mr-2 text-primary">✓</span> Microsoft & Google Partner</span>
+      <div class="mt-6 text-xl text-muted dark:text-slate-300">
+        We move beyond simply driving traffic; we generate qualified leads that convert into loyal customers, delivering
+        measurable results that fuel your growth.
       </div>
     </Fragment>
   </Hero>
@@ -124,9 +129,9 @@ const metadata = {
     tagline="Why Phoenix Businesses Choose ZiaFlow"
     items={[
       {
-        title: 'Face-to-Face Consultations',
-        description: 'Meet in person throughout Greater Phoenix—Arcadia, Biltmore, and beyond.',
-        icon: 'tabler:users',
+        title: 'ROI-Focused Campaigns',
+        description: 'Every strategy we implement is designed to maximize your return on investment.',
+        icon: 'tabler:chart-arrows',
       },
       {
         title: 'Custom Solutions',
@@ -142,6 +147,11 @@ const metadata = {
         title: 'Local Expertise',
         description: 'Deep understanding of Arizona market dynamics and customer behavior.',
         icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Transparent Performance Tracking',
+        description: 'Our custom dashboards provide a clear view of how your investment is performing.',
+        icon: 'tabler:eye',
       },
     ]}
   >
@@ -164,72 +174,96 @@ const metadata = {
   <!-- SERVICES GRID -->
   <Features3
     id="services"
-    tagline="Services Built for Business Growth"
-    title="Our Core Services"
-    subtitle="Web development, SEO, PPC, automation, and e-commerce—tailored to local businesses."
+    tagline="Our Expertise"
+    title="Comprehensive Digital Solutions"
+    subtitle="We combine strategic lead generation, advanced AI automation, and bespoke software to deliver tangible outcomes."
     columns={3}
     items={[
       {
-        title: 'Custom Web Development',
+        title: 'SEO Services',
         description:
-          'Conversion-first sites, booking systems, and custom integrations. Our recent Scottsdale contractor project increased inquiries by 150% in 90 days.',
-        icon: 'tabler:devices-pc',
-        callToAction: {
-          text: 'Learn More',
-          href: '/services/web-development',
-          variant: 'link',
-        },
-      },
-      {
-        title: 'Phoenix SEO & Local Search',
-        description:
-          'Local SEO, Google Business optimization, and citation management. Tempe medical client achieved 200% visibility increase.',
+          'Are competitors outranking you on Google? Our local SEO strategies elevate home service businesses and medical practices. We helped Phoenix-based plumbers achieve a 300% increase in calls.',
         icon: 'tabler:search',
         callToAction: {
-          text: 'Learn More',
+          text: 'Get a free SEO audit',
           href: '/services/seo',
           variant: 'link',
         },
       },
       {
-        title: 'PPC & Google Ads',
-        description: 'Data-driven campaigns to maximize leads and ROI. Stop wasting budget on unqualified clicks.',
+        title: 'AI Automation & Machine Learning',
+        description:
+          'Stop losing leads because of slow follow-up. Our AI automation builds intelligent systems that nurture prospects 24/7. We leverage RPA and generative AI to streamline operations.',
+        icon: 'tabler:robot',
+        callToAction: {
+          text: 'Request a consultation',
+          href: '/services/automation',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Custom Software Development',
+        description:
+          'We build custom software that scales with you. Whether you need a CRM for home services, a patient portal, or an ecommerce platform, we create software that works for you.',
+        icon: 'tabler:code',
+        callToAction: {
+          text: 'Schedule consultation',
+          href: '/services/software',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'PPC Management & Google Ads',
+        description:
+          'Ensure every dollar of your ad spend generates qualified leads. Our PPC management focuses on high-intent keywords to connect you with ready-to-convert customers.',
         icon: 'tabler:ad',
         callToAction: {
-          text: 'Learn More',
+          text: "Let's talk",
           href: '/services/ppc',
           variant: 'link',
         },
       },
       {
-        title: 'Marketing Automation',
+        title: 'Web Development Services',
         description:
-          'Automate lead routing, reminders, and review requests. Save 10+ hours weekly while growing revenue.',
-        icon: 'tabler:robot',
+          'We create responsive, conversion-optimized websites that turn visitors into customers. Optimized for local rankings and building trust.',
+        icon: 'tabler:device-laptop',
         callToAction: {
-          text: 'Learn More',
-          href: '/services/automation',
+          text: 'Get performance review',
+          href: '/services/web-development',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Social Media Marketing',
+        description:
+          'Effective social media requires a strategy. We utilize strategic content and targeted ad campaigns to showcase your expertise and build trust.',
+        icon: 'tabler:brand-facebook',
+        callToAction: {
+          text: 'See success stories',
+          href: '/services/social-media',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Cloud Solutions',
+        description:
+          'Secure, scalable cloud infrastructure for your growing business. We specialize in Azure and AWS migrations, ensuring your data is safe and accessible.',
+        icon: 'tabler:cloud',
+        callToAction: {
+          text: 'Learn about Cloud',
+          href: '/services/cloud',
           variant: 'link',
         },
       },
       {
         title: 'E-commerce Solutions',
         description:
-          'Shopify, WooCommerce and custom platforms for online growth. Optimized for conversion and user experience.',
+          'Turn your website into a 24/7 sales machine. We build high-converting online stores on Shopify and WooCommerce tailored to your brand.',
         icon: 'tabler:shopping-cart',
         callToAction: {
-          text: 'Learn More',
+          text: 'Start selling online',
           href: '/services/ecommerce',
-          variant: 'link',
-        },
-      },
-      {
-        title: 'Conversion Optimization',
-        description: 'A/B testing, funnel optimization, and analytics. Turn more visitors into paying customers.',
-        icon: 'tabler:chart-line',
-        callToAction: {
-          text: 'Learn More',
-          href: '/services/cro',
           variant: 'link',
         },
       },
@@ -283,35 +317,40 @@ const metadata = {
     testimonials={[
       {
         testimonial:
-          'ZiaFlow transformed our online presence. Their expertise in SEO and web development brought a significant increase in local traffic and customer inquiries. True professionals who deliver results.',
-        name: 'Sarah M.',
-        job: 'Phoenix Home Services Owner',
+          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
+        name: 'J. M.',
+        job: 'Investor',
       },
       {
         testimonial:
-          'The team developed a custom solution that streamlined our operations and managed a Google Ads campaign that exceeded all our ROI expectations. Exceptional technical capability.',
-        name: 'Michael T.',
-        job: 'Scottsdale Medical Practice',
+          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
+        name: 'K. B.',
+        job: 'COO',
       },
       {
         testimonial:
-          "Our social media engagement has never been better. ZiaFlow's targeted campaigns helped us connect with our community and grow our brand throughout Phoenix. Highly recommended!",
-        name: 'Jennifer L.',
-        job: 'Mesa Wellness Center',
+          'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
+        name: 'S. K.',
+        job: 'Comptroller',
       },
     ]}
   />
 
   <!-- WHY ZIAFLOW -->
   <Features2
-    title="Why ZiaFlow?"
+    title="The ZiaFlow Growth Engine"
     subtitle="Local expertise, measurable results, and full-stack execution for service businesses."
     tagline="The ZiaFlow Difference"
     items={[
       {
-        title: 'Local & Accessible',
-        description: 'Face-to-face meetings across Greater Phoenix—Scottsdale, Tempe, Mesa.',
-        icon: 'tabler:map-pin',
+        title: 'Instant Traffic. Lasting Authority.',
+        description: "That's the PPC + SEO Advantage. We dominate search results to get you seen immediately.",
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Speed + Stability = Results.',
+        description: 'We build systems that deliver quick wins while establishing long-term market dominance.',
+        icon: 'tabler:activity',
       },
       {
         title: 'Proven Results',
@@ -322,6 +361,11 @@ const metadata = {
         title: 'Full-Stack Team',
         description: 'Designers, developers, marketers, and automation engineers in-house.',
         icon: 'tabler:users',
+      },
+      {
+        title: 'AI-Powered Efficiency',
+        description: 'Leveraging cutting-edge automation to nurture leads and streamline your operations 24/7.',
+        icon: 'tabler:cpu',
       },
       {
         title: 'Platform Partners',
@@ -359,7 +403,7 @@ const metadata = {
   <!-- PRIMARY CTA -->
   <CallToAction
     title="Ready to Grow Your Business?"
-    subtitle="Book a free strategy session and get a 3-point roadmap for growth."
+    subtitle="Stop guessing and start seeing real results. Whether you are a home service company seeking consistent growth, a medical practice aiming for more quality patients, or an ecommerce business ready to scale, ZiaFlow has the expertise to help you succeed."
     actions={[
       {
         variant: 'primary',
@@ -369,11 +413,41 @@ const metadata = {
       },
       {
         variant: 'secondary',
-        text: 'Contact Us',
-        href: '/contact',
+        text: 'Email Us',
+        href: 'mailto:info@ziaflow.com',
       },
     ]}
-  />
+  >
+    <Fragment slot="content">
+      <div class="mt-8 text-left max-w-3xl mx-auto bg-white/10 dark:bg-slate-900/50 p-6 rounded-lg backdrop-blur-sm">
+        <h3 class="text-xl font-bold mb-4 text-center">Here’s what to expect:</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start">
+            <span class="mr-2 text-primary font-bold">1.</span>
+            <span
+              ><strong>Free Strategy Session:</strong> We analyze your current marketing efforts and identify key growth
+              opportunities.</span
+            >
+          </li>
+          <li class="flex items-start">
+            <span class="mr-2 text-primary font-bold">2.</span>
+            <span
+              ><strong>Custom Action Plan:</strong> You receive a tailored plan detailing how we will generate measurable
+              results for your business.</span
+            >
+          </li>
+          <li class="flex items-start">
+            <span class="mr-2 text-primary font-bold">3.</span>
+            <span
+              ><strong>Achieve Your Goals:</strong> Watch your business grow with more calls, a fuller schedule, and increased
+              sales.</span
+            >
+          </li>
+        </ul>
+        <p class="mt-6 text-center font-semibold">Don't let your competitors win the customers you deserve.</p>
+      </div>
+    </Fragment>
+  </CallToAction>
 
   <!-- BLOG -->
   <BlogLatestPosts
@@ -384,39 +458,34 @@ const metadata = {
   <!-- FAQ -->
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Quick answers about timelines, pricing, and what to expect."
-    tagline="Common Questions"
+    subtitle="Answers to common questions about our services and process."
+    tagline="FAQ"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'What industries do you serve?',
+        title: 'What makes ZiaFlow different from other agencies?',
         description:
-          'We specialize in service businesses—home services, healthcare, local retail, and professional services across Phoenix, Scottsdale, Tempe, and Mesa.',
-      },
-      {
-        title: 'How long to see SEO results?',
-        description:
-          'Initial improvements in 60–90 days; significant gains typically 6–12 months. We build sustainable visibility that compounds over time.',
-      },
-      {
-        title: 'Do you offer on-site consultations?',
-        description:
-          'Yes—we meet clients across Phoenix, Scottsdale, Tempe, Mesa, Arcadia, and Biltmore for face-to-face strategy sessions.',
-      },
-      {
-        title: 'Can you work with my existing website?',
-        description:
-          'Absolutely—we audit and implement targeted improvements or full redesigns as needed based on your goals and budget.',
-      },
-      {
-        title: 'What makes your approach different?',
-        description:
-          'We combine local accessibility with enterprise-grade expertise. Personalized service from a team you can meet in person, backed by advanced strategies.',
+          "We specialize in the home services, medical, and ecommerce sectors, understanding their unique challenges. Our in-house team includes software developers and AI experts, allowing us to build custom solutions that other agencies can't.",
       },
       {
         title: 'How do you measure success?',
         description:
-          "Real business metrics—leads, conversions, revenue impact, and ROI. Transparent reporting shows exactly what's working.",
+          'We focus on what matters: leads and revenue. Our transparent dashboards track calls, appointments, and sales, providing clear insight into your ROI.',
+      },
+      {
+        title: 'Do you work with businesses outside of Arizona?',
+        description:
+          'Yes. While we proudly serve businesses in Phoenix, Scottsdale, Tucson, and Glendale, we also partner with companies nationwide to provide digital marketing, custom software, and cloud solutions.',
+      },
+      {
+        title: 'How quickly will I see results?',
+        description:
+          'PPC campaigns can generate leads within days, while SEO typically shows significant improvement in 3-6 months. We provide realistic timelines for all projects upfront.',
+      },
+      {
+        title: 'What is included in your marketing automation services?',
+        description:
+          'Our AI-powered automation can handle lead nurturing, appointment scheduling, customer follow-ups, review requests, and service inquiries. We customize every system to fit your specific business processes.',
       },
     ]}
   />
@@ -425,17 +494,8 @@ const metadata = {
   <Features3
     title="Contact Options"
     subtitle="Choose the method that works best for you"
-    columns={4}
+    columns={3}
     items={[
-      {
-        title: 'Call',
-        icon: 'tabler:phone',
-        callToAction: {
-          text: 'Call (480) 819-29292',
-          href: 'tel:+148081929292',
-          variant: 'link',
-        },
-      },
       {
         title: 'Email',
         icon: 'tabler:mail',
