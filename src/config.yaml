@@ -66,11 +66,11 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: 'G-XXXXXXXXXX' # or "G-XXXXXXXXXX"
+      id: 'G-HE4BRSW364' # or "G-XXXXXXXXXX"
     googleTagManager:
       id: 'GTM-5Q2JZPVG' # Google Tag Manager container ID
     clarity:
-      id: 'abcd1234' # Microsoft Clarity project id, e.g. "abcd1234"
+      id: 'rc0l0o7tmd' # Microsoft Clarity project id, e.g. "abcd1234"
 
 ui:
   theme: 'light:only' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
