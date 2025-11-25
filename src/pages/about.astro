@@ -22,11 +22,16 @@ const metadata = {
   >
     <Fragment slot="title">
       Empowering businesses through <br />
-      <span class="text-accent dark:text-white">Digital Transformation</span>
+      <span class="text-accent dark:text-white highlight">Digital Transformation</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Based in the Greater Phoenix Area, our mission is to unlock potential and foster growth for small to medium-sized businesses through innovative solutions. We combine technical expertise with a deep understanding of our clients' industries, creating solutions that are not only technologically advanced but also aligned with their business objectives.
+      <div class="max-w-3xl mx-auto text-xl text-muted mb-6 dark:text-slate-300">
+        Based in the Greater Phoenix Area, our mission is to unlock potential and foster growth for small to
+        medium-sized businesses through innovative solutions. We combine technical expertise with a deep understanding
+        of our clients' industries, creating solutions that are not only technologically advanced but also aligned with
+        their business objectives.
+      </div>
     </Fragment>
   </Hero>
 
@@ -135,7 +140,8 @@ const metadata = {
     items={[
       {
         title: 'Results That Speak',
-        description: 'Our work transforms operations, saves countless hours, and drives measurable business growth. We do not just build - we deliver outcomes.',
+        description:
+          'Our work transforms operations, saves countless hours, and drives measurable business growth. We do not just build - we deliver outcomes.',
         icon: 'tabler:trophy',
       },
       {
@@ -161,12 +167,14 @@ const metadata = {
     items={[
       {
         title: 'Phoenix, Arizona',
-        description: 'Headquartered in the Greater Phoenix Area, serving local businesses with personalized service and deep community connections.',
+        description:
+          'Headquartered in the Greater Phoenix Area, serving local businesses with personalized service and deep community connections.',
         icon: 'tabler:map-pin',
       },
       {
         title: 'Nationwide Reach',
-        description: 'While based in Phoenix, we serve clients across the United States with remote collaboration and proven digital delivery processes.',
+        description:
+          'While based in Phoenix, we serve clients across the United States with remote collaboration and proven digital delivery processes.',
         icon: 'tabler:world',
       },
     ]}
@@ -191,5 +199,31 @@ const metadata = {
         icon: 'tabler:lifebuoy',
       },
     ]}
+  />
+  <!-- JSON-LD Schema -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'ZiaFlow',
+      url: 'https://www.ziaflow.com',
+      logo: 'https://www.ziaflow.com/assets/images/logo.png',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '(480) 819-29292',
+        contactType: 'customer service',
+        areaServed: 'US',
+        availableLanguage: 'en',
+      },
+      sameAs: ['https://www.linkedin.com/company/ziaflow', 'https://www.facebook.com/ziaflow'],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Phoenix',
+        addressRegion: 'AZ',
+        postalCode: '85023',
+        addressCountry: 'US',
+      },
+    })}
   />
 </Layout>

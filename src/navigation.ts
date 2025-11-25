@@ -14,7 +14,7 @@ export const headerData = {
       text: 'About Us',
       href: getPermalink('/about'),
     },
-        {
+    {
       text: 'Contact Us',
       href: getPermalink('/contact'),
     },
@@ -23,7 +23,6 @@ export const headerData = {
       href: getBlogPermalink(),
     },
   ],
-  actions: [{ text: 'Start Now', href: getPermalink('/contact'), target: '_self' }],
 };
 
 export const footerData = {
@@ -54,7 +53,7 @@ export const footerData = {
         { text: 'About', href: '#' },
         { text: 'Blog', href: '#' },
         { text: 'Careers', href: '#' },
-        ],
+      ],
     },
   ],
   secondaryLinks: [

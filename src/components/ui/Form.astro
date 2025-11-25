@@ -2,13 +2,16 @@
 import Button from '~/components/ui/Button.astro';
 import type { Form as Props } from '~/types';
 
+const emailBackend = import.meta.env.EMAIL_BACKEND || 'web3forms';
+const useNodemailer = emailBackend === 'nodemailer';
+
 const {
   inputs = [],
   textarea,
   disclaimer,
   button = 'Contact us',
   description = '',
-  action = 'https://api.web3forms.com/submit',
+  action = useNodemailer ? '/api/contact' : 'https://api.web3forms.com/submit',
   method = 'POST',
   accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY,
   redirect,
@@ -22,10 +25,10 @@ const {
 ---
 
 <form action={action} method={method} id={formId} class="space-y-6">
-  <input type="hidden" name="access_key" value={accessKey} />
-  {redirect && <input type="hidden" name="redirect" value={redirect} />}
-  <input type="hidden" name="subject" value={subject} />
-  <input type="hidden" name="from_name" value={fromName} />
+  {!useNodemailer && <input type="hidden" name="access_key" value={accessKey} />}
+  {!useNodemailer && redirect && <input type="hidden" name="redirect" value={redirect} />}
+  {!useNodemailer && <input type="hidden" name="subject" value={subject} />}
+  {!useNodemailer && <input type="hidden" name="from_name" value={fromName} />}
   <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1" />
 
   {

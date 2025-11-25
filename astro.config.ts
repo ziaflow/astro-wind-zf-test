@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
+import robotsTxt from 'astro-robots-txt';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
@@ -22,6 +23,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
+  site: 'https://www.ziaflow.com',
   output: 'static',
 
   integrations: [
@@ -29,6 +31,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap(),
+    robotsTxt(),
     mdx(),
     icon({
       include: {

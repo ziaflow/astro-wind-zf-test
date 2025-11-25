@@ -22,3 +22,10 @@ pnpm-debug.log*
 pnpm-lock.yaml
 
 .astro
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

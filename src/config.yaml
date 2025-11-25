@@ -11,7 +11,7 @@ metadata:
   title:
     default: ZiaFlow — Your Partner in Digital Transformation
     template: '%s — ZiaFlow'
-  description: "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Rank higher, convert better."
+  description: 'AI-driven SEO & conversion optimization for B2B SaaS and agencies. Rank higher, convert better.'
   robots:
     index: true
     follow: true
@@ -66,11 +66,11 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: 'G-XXXXXXXXXX' # or "G-XXXXXXXXXX"
     googleTagManager:
       id: 'GTM-5Q2JZPVG' # Google Tag Manager container ID
     clarity:
-      id: null # Microsoft Clarity project id, e.g. "abcd1234"
+      id: 'abcd1234' # Microsoft Clarity project id, e.g. "abcd1234"
 
 ui:
   theme: 'light:only' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
