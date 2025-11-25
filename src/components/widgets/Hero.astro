@@ -57,10 +57,29 @@ const {
         {content && <Fragment set:html={content} />}
       </div>
 
-      {/* IMAGE PLACEMENT - Between subtitle and buttons */}
+      {/* BUTTONS PLACEMENT - Above image */}
+      <div class="text-center max-w-5xl mx-auto mb-8 md:mb-12">
+        {
+          actions && (
+            <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              {Array.isArray(actions) ? (
+                actions.map((action) => (
+                  <div class="flex w-full sm:w-auto">
+                    <Button {...(action || {})} class="w-full sm:mb-0" />
+                  </div>
+                ))
+              ) : (
+                <Fragment set:html={actions} />
+              )}
+            </div>
+          )
+        }
+      </div>
+
+      {/* IMAGE PLACEMENT - Below buttons */}
       {
         image && (
-          <div class="intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade mb-8 md:mb-12">
+          <div class="intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
             <div class="relative m-auto max-w-5xl">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
@@ -79,25 +98,6 @@ const {
           </div>
         )
       }
-
-      {/* BUTTONS PLACEMENT - After image */}
-      <div class="text-center max-w-5xl mx-auto">
-        {
-          actions && (
-            <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              {Array.isArray(actions) ? (
-                actions.map((action) => (
-                  <div class="flex w-full sm:w-auto">
-                    <Button {...(action || {})} class="w-full sm:mb-0" />
-                  </div>
-                ))
-              ) : (
-                <Fragment set:html={actions} />
-              )}
-            </div>
-          )
-        }
-      </div>
     </div>
   </div>
 </section>

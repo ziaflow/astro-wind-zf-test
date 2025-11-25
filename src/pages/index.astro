@@ -56,6 +56,67 @@ const metadata = {
     </Fragment>
   </Hero>
 
+  <!-- CONTACT FORM -->
+  <ContactUs
+    id="form"
+    title="Start Your Digital Transformation"
+    subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
+    accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
+    button="Get Free Strategy Session"
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Full Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email Address',
+      },
+      {
+        type: 'text',
+        name: 'phone',
+        label: 'Phone Number',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_source',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_medium',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'utm_campaign',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'clarity_session_id',
+        label: '',
+      },
+      {
+        type: 'hidden',
+        name: 'event_id',
+        label: '',
+      },
+    ]}
+    textarea={{
+      label: 'Tell us about your goals',
+      placeholder:
+        'What challenges are you facing? What results are you looking for? Share details that help us understand your needs.',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this form, you agree to our privacy policy. We never share your information with third parties.',
+    }}
+    description="🔒 100% Privacy Guaranteed. Trusted by 50+ AZ Businesses. We typically respond within 24 hours."
+  />
+
   <!-- VALUE PROPOSITION -->
   <Features2
     title="Your Partner for Digital Growth"
@@ -358,71 +419,6 @@ const metadata = {
           "Real business metrics—leads, conversions, revenue impact, and ROI. Transparent reporting shows exactly what's working.",
       },
     ]}
-  />
-
-  <!-- CONTACT FORM -->
-  <ContactUs
-    id="form"
-    title="Start Your Digital Transformation"
-    subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
-    accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Full Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email Address',
-      },
-      {
-        type: 'text',
-        name: 'company',
-        label: 'Company Name',
-      },
-      {
-        type: 'text',
-        name: 'phone',
-        label: 'Phone Number',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_source',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_medium',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_campaign',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'clarity_session_id',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'event_id',
-        label: '',
-      },
-    ]}
-    textarea={{
-      label: 'Tell us about your goals',
-      placeholder:
-        'What challenges are you facing? What results are you looking for? Share details that help us understand your needs.',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this form, you agree to our privacy policy. We never share your information with third parties.',
-    }}
-    description="Phoenix Office: 85023 | Serving Phoenix, Scottsdale, Tempe, Mesa, Arcadia, Biltmore & Greater Arizona. We typically respond within 24 hours."
   />
 
   <!-- CONTACT OPTIONS -->
