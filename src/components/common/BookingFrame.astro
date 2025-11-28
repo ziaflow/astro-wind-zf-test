@@ -1,0 +1,117 @@
+---
+const bookingUrl = 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled';
+const iframeId = `booking-iframe-${Math.random().toString(36).slice(2, 9)}`;
+const fallbackId = `booking-fallback-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="booking-frame" role="region" aria-label="Book with ZiaFlow">
+  <iframe
+    id={iframeId}
+    src={bookingUrl}
+    title="Book a consultation"
+    loading="lazy"
+    scrolling="yes"
+    referrerpolicy="no-referrer"
+    allowfullscreen
+  />
+
+  <div id={fallbackId} class="booking-fallback booking-fallback--hidden">
+    <p>If the calendar fails to load, open the booking page in a new tab.</p>
+    <a class="booking-fallback__button" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+      Open Booking Portal
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const iframe = document.getElementById('${iframeId}');
+    const fallback = document.getElementById('${fallbackId}');
+    if (!iframe || !fallback) return;
+
+    const hideFallback = () => fallback.classList.add('booking-fallback--hidden');
+    const showFallback = () => fallback.classList.remove('booking-fallback--hidden');
+
+    iframe.addEventListener(
+      'load',
+      () => {
+        iframe.dataset.loaded = 'true';
+        hideFallback();
+      },
+      { once: true }
+    );
+
+    iframe.addEventListener('error', showFallback, { once: true });
+
+    setTimeout(() => {
+      if (!iframe.dataset.loaded) {
+        showFallback();
+      }
+    }, 4500);
+  })();
+</script>
+
+<style>
+  .booking-frame {
+    width: 100%;
+    max-width: 100%;
+    min-height: 720px;
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.2);
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .booking-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .booking-fallback {
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(226 232 240);
+    background: linear-gradient(135deg, rgba(162, 42, 54, 0.08), rgba(63, 155, 147, 0.08));
+    text-align: center;
+    display: block;
+  }
+
+  .booking-fallback p {
+    margin-bottom: 0.75rem;
+    color: #374151;
+    font-weight: 500;
+  }
+
+  .booking-fallback__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(120deg, #a22a36, #000000, #3f9b93);
+    background-size: 200% 200%;
+    transition: background-position 0.4s ease, transform 0.2s ease;
+  }
+
+  .booking-fallback__button:hover {
+    background-position: 100% 0;
+    transform: translateY(-1px);
+  }
+
+  .booking-fallback--hidden {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .booking-frame {
+      min-height: 560px;
+      border-radius: 1rem;
+    }
+  }
+</style>

@@ -10,6 +10,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Brands from '~/components/widgets/Brands.astro';
+import BookingFrame from '~/components/common/BookingFrame.astro';
 
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
@@ -32,7 +33,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- HERO -->
   <Hero
-    tagline="Phoenix Web Development & Digital Marketing"
+    tagline={`<span class="text-black dark:text-white">Phoenix Web Development & Digital Marketing</span>`}
     image={{
       src: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMDczMTJ8MHwxfHNlYXJjaHwxfHxwcm9ncmFtbWluZyUyMGNvZGUlMjBzY3JlZW58ZW58MHwwfHx8MTc2MzkyMjMwM3ww&ixlib=rb-4.1.0&q=85',
       alt: 'ZiaFlow Digital Growth Partner',
@@ -48,8 +49,8 @@ const metadata = {
       },
       {
         variant: 'secondary',
-        text: 'View Case Studies',
-        href: '#case-studies',
+        text: 'Contact Us',
+        href: '/contact',
       },
     ]}
   >
@@ -61,66 +62,80 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- CONTACT FORM -->
-  <ContactUs
-    id="form"
-    title="Start Your Digital Transformation"
-    subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
-    accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
-    button="Get Free Strategy Session"
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Full Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email Address',
-      },
-      {
-        type: 'text',
-        name: 'phone',
-        label: 'Phone Number',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_source',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_medium',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'utm_campaign',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'clarity_session_id',
-        label: '',
-      },
-      {
-        type: 'hidden',
-        name: 'event_id',
-        label: '',
-      },
-    ]}
-    textarea={{
-      label: 'Tell us about your goals',
-      placeholder:
-        'What challenges are you facing? What results are you looking for? Share details that help us understand your needs.',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this form, you agree to our privacy policy. We never share your information with third parties.',
-    }}
-    description="🔒 100% Privacy Guaranteed. Trusted by 50+ AZ Businesses. We typically respond within 24 hours."
-  />
+  <!-- CONTACT + BOOKING -->
+  <section class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <ContactUs
+          id="form"
+          title="Start Your Digital Transformation"
+          subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
+          button="Contact ZiaFlow"
+          inputs={[
+            {
+              type: 'text',
+              name: 'name',
+              label: 'Full Name',
+            },
+            {
+              type: 'email',
+              name: 'email',
+              label: 'Email Address',
+            },
+            {
+              type: 'text',
+              name: 'phone',
+              label: 'Phone Number',
+            },
+            {
+              type: 'hidden',
+              name: 'utm_source',
+              label: '',
+            },
+            {
+              type: 'hidden',
+              name: 'utm_medium',
+              label: '',
+            },
+            {
+              type: 'hidden',
+              name: 'utm_campaign',
+              label: '',
+            },
+            {
+              type: 'hidden',
+              name: 'clarity_session_id',
+              label: '',
+            },
+            {
+              type: 'hidden',
+              name: 'event_id',
+              label: '',
+            },
+          ]}
+          textarea={{
+            label: 'Tell us about your goals',
+            placeholder:
+              'What challenges are you facing? What results are you looking for? Share details that help us understand your needs.',
+          }}
+          disclaimer={{
+            label:
+              'By submitting this form, you agree to our privacy policy. We never share your information with third parties.',
+          }}
+          description="🔒 100% Privacy Guaranteed. Trusted by 50+ AZ Businesses. We typically respond within 24 hours."
+        />
+      </div>
+      <div class="rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur dark:bg-slate-900/80 dark:border-slate-800">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-secondary mb-4">Book Instantly</p>
+        <h3 class="text-3xl font-bold font-heading mb-3">Meet with ZiaFlow</h3>
+        <p class="text-muted text-base mb-6">
+          Prefer to lock in a time right away? Use the embedded Microsoft Bookings calendar. If it doesn’t load, the
+          fallback link will open a new tab.
+        </p>
+        <BookingFrame />
+      </div>
+    </div>
+  </section>
 
   <!-- VALUE PROPOSITION -->
   <Features2
@@ -156,7 +171,7 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-gray-100 dark:bg-slate-900"></div>
     </Fragment>
   </Features2>
 

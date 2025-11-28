@@ -4,7 +4,6 @@ import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -217,94 +216,6 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
       alt: 'ZiaFlow 3-step growth process',
     }}
-  />
-
-  <!-- Pricing Widget **************** -->
-  <Pricing
-    title="Transparent Pricing to Fit Your Stage"
-    subtitle="Choose a plan to match your goals — every plan includes setup, reporting, and dedicated support."
-    prices={[
-      {
-        title: 'Starter',
-        subtitle: 'Best for testing LSAs and validating market demand',
-        price: 497,
-        period: 'per month',
-        items: [
-          {
-            description: 'LSA setup & basic management',
-          },
-          {
-            description: 'GMB cleanup',
-          },
-          {
-            description: 'Monthly report',
-          },
-          {
-            description: 'Email support',
-          },
-        ],
-        callToAction: {
-          text: 'Get Started',
-          href: '/contact',
-        },
-      },
-      {
-        title: 'Growth',
-        subtitle: 'Best for established businesses scaling leads and territory coverage',
-        price: 997,
-        period: 'per month',
-        hasRibbon: true,
-        ribbonTitle: 'Most Popular',
-        items: [
-          {
-            description: 'Complete LSA management',
-          },
-          {
-            description: 'Full GMB optimization',
-          },
-          {
-            description: 'Review management',
-          },
-          {
-            description: 'Weekly reporting',
-          },
-          {
-            description: 'Dedicated manager',
-          },
-        ],
-        callToAction: {
-          text: 'Get Started',
-          href: '/contact',
-        },
-      },
-      {
-        title: 'Enterprise',
-        subtitle: 'Best for multi-location or high-volume operations',
-        price: '1,997+',
-        period: 'per month',
-        items: [
-          {
-            description: 'Real-time dashboards',
-          },
-          {
-            description: '24/7 priority support',
-          },
-          {
-            description: 'Unlimited categories',
-          },
-          {
-            description: 'Advanced review & competitor analysis',
-          },
-          {
-            description: 'Senior account lead',
-          },
-        ],
-        callToAction: {
-          text: 'Contact Us',
-          href: '/contact',
-        },
-      },
-    ]}
   />
 
   <!-- Testimonials Widget *********** -->

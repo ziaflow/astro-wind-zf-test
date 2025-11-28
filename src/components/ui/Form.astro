@@ -13,19 +13,28 @@ const {
   description = '',
   action = useNodemailer ? '/api/contact' : 'https://api.web3forms.com/submit',
   method = 'POST',
-  accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY,
+  accessKey,
   redirect,
   subject = 'New Contact Request',
   fromName = 'ZiaFlow Website',
-  formId = 'web3forms-contact',
-  resultId = 'web3forms-result',
+  formId,
+  resultId,
   successMessage = 'Thanks! We received your message.',
   errorMessage = 'Something went wrong. Please try again.',
 } = Astro.props as Props;
+
+const resolvedAccessKey = accessKey || import.meta.env.WEB3FORMS_ACCESS_KEY || '';
+const idSuffix = typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2, 10);
+const resolvedFormId = formId || `web3forms-form-${idSuffix}`;
+const resolvedResultId = resultId || `${resolvedFormId}-result`;
+
+if (!useNodemailer && !resolvedAccessKey) {
+  console.warn('WEB3FORMS_ACCESS_KEY is not set. Web3Forms submissions will fail until it is configured.');
+}
 ---
 
-<form action={action} method={method} id={formId} class="space-y-6">
-  {!useNodemailer && <input type="hidden" name="access_key" value={accessKey} />}
+<form action={action} method={method} id={resolvedFormId} class="space-y-6">
+  {!useNodemailer && <input type="hidden" name="access_key" value={resolvedAccessKey} />}
   {!useNodemailer && redirect && <input type="hidden" name="redirect" value={redirect} />}
   {!useNodemailer && <input type="hidden" name="subject" value={subject} />}
   {!useNodemailer && <input type="hidden" name="from_name" value={fromName} />}
@@ -111,13 +120,13 @@ const {
     )
   }
 
-  <p id={resultId} class="text-base text-center text-gray-500"></p>
+  <p id={resolvedResultId} class="text-base text-center text-gray-500"></p>
 </form>
 
 <script
   is:inline
-  data-form-id={formId}
-  data-result-id={resultId}
+  data-form-id={resolvedFormId}
+  data-result-id={resolvedResultId}
   data-action-url={action}
   data-success-message={successMessage}
   data-error-message={errorMessage}

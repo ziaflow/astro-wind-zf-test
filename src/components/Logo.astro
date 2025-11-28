@@ -2,8 +2,16 @@
 import { SITE } from 'astrowind:config';
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-   {SITE?.name}
+<span class="flex items-center gap-2">
+  <img
+    src="/favicon-32x32.png"
+    alt="ZiaFlow favicon"
+    width="24"
+    height="24"
+    class="rounded-full shadow-sm"
+    loading="lazy"
+  />
+  <span class="self-center text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+    {SITE?.name}
+  </span>
 </span>

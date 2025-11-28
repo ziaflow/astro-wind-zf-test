@@ -12,6 +12,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import BookingFrame from '~/components/common/BookingFrame.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -34,7 +35,7 @@ const { language, textDirection } = I18N;
     <SiteVerification />
     <Analytics />
 
-    <slot />
+    <slot name="head" />
 
     <BasicScripts />
     <SpeedInsights />
@@ -46,4 +47,18 @@ const { language, textDirection } = I18N;
       }
     </style>
   </head>
+  <body>
+    <slot />
+
+    <section class="px-4 py-16 mx-auto max-w-6xl sm:px-6 lg:px-8">
+      <div class="mb-10 text-center max-w-4xl mx-auto">
+        <p class="text-base text-secondary font-bold tracking-wide uppercase">Book Without Leaving</p>
+        <h2 class="text-3xl md:text-4xl font-bold font-heading mb-4">Schedule Your Strategy Session</h2>
+        <p class="text-muted text-lg">
+          Use the embedded calendar to reserve time with the ZiaFlow team directly from any page.
+        </p>
+      </div>
+      <BookingFrame />
+    </section>
+  </body>
 </html>

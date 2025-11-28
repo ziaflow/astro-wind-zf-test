@@ -161,6 +161,20 @@ All commands are run from the root of the project, from a terminal:
 
 ### Configuration
 
+#### Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values that apply to your deployment:
+
+```bash
+cp .env.example .env
+```
+
+- `EMAIL_BACKEND` — `web3forms` (default, no server required) or `nodemailer` (use your own SMTP).
+- `WEB3FORMS_ACCESS_KEY` — required when using Web3Forms. Get one at [web3forms.com](https://web3forms.com).
+- `SMTP_*` variables — required only when `EMAIL_BACKEND=nodemailer`.
+
+> **Important:** Without a valid `WEB3FORMS_ACCESS_KEY`, contact forms will fail in production. Never commit your real key; store it in environment variables or your hosting provider's secret manager.
+
 Basic configuration file: `./src/config.yaml`
 
 ```yaml

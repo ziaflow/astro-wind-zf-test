@@ -1,4 +1,13 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { fetchPosts } from '~/utils/blog';
+
+const latestBlogPosts = await fetchPosts();
+const blogLinks = latestBlogPosts.slice(0, 5).map(({ title, permalink }) => ({
+  text: title,
+  href: getPermalink(permalink, 'post'),
+}));
+
+const fallbackBlogLinks = [{ text: 'All Posts', href: getBlogPermalink() }];
 
 export const headerData = {
   links: [
@@ -39,20 +48,14 @@ export const footerData = {
     },
     {
       title: 'Blog',
-      links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
-      ],
+      links: blogLinks.length ? blogLinks : fallbackBlogLinks,
     },
     {
-      title: 'ZiaFlow',
+      title: 'ziaflow',
       links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
+        { text: 'ziaflow', href: getPermalink('/', 'home') },
+        { text: 'about', href: getPermalink('/about') },
+        { text: 'contact us', href: getPermalink('/contact') },
       ],
     },
   ],
@@ -67,7 +70,12 @@ export const footerData = {
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/ZiaFlowAZ/' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
+  address: {
+    street: 'Phoenix, AZ 85302',
+  },
+  founded: 2022,
+  logo: 'https://media.licdn.com/dms/image/v2/D4D3DAQGG3SQA1b-qsw/image-scale_127_750/image-scale_127_750/0/1704918615213/ziaflow_cover?e=1764907200&v=beta&t=kioeCXPAz00Lf_P4O-fWQIW6KpdIWXsdEdT7a_gWxEU',
   footNote: `
-    © 2025 ZiaFlow. All rights reserved. <a class="underline" href="${getPermalink('/contact')}">Contact us</a>
+    © 2025 ZiaFlow · Founded 2022 · Phoenix, AZ 85302 · <a class="underline" href="${getPermalink('/contact')}">Contact us</a>
   `,
 };

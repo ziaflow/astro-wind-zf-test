@@ -144,8 +144,8 @@ If you have any questions about these Terms and Conditions, You can contact us:
 
 - **By email**: [info@ziaflow.com](mailto:info@ziaflow.com)
 - **By visiting our website**: [https://ziaflow.com](https://ziaflow.com)
-- **By phone**: Schedule a consultation through our website
-- **By mail**: ZiaFlow, LLC, 3218 E Bell Road, Suite 2038, Phoenix, Arizona 85032
+
+##
 
 ---
 
