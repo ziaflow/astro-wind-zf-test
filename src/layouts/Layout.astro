@@ -13,6 +13,8 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import BookingFrame from '~/components/common/BookingFrame.astro';
+import Seo from '~/components/Seo.astro';
+import site from '~/data/site';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -32,6 +34,7 @@ const { language, textDirection } = I18N;
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
+    <Seo site={site} title={metadata.title} description={metadata.description} url={metadata.openGraph?.url || metadata.canonical} />
     <SiteVerification />
     <Analytics />
 

@@ -1,0 +1,106 @@
+---
+const {
+  siteUrl,
+  title: defaultTitle,
+  description: defaultDescription,
+  logo,
+  ogImage,
+  twitterHandle,
+  social = {}
+} = Astro.props.site || {};
+
+const title = Astro.props.title || defaultTitle;
+const description = Astro.props.description || defaultDescription;
+const pageUrl = Astro.props.url || siteUrl;
+
+const sameAs = [social.linkedin, social.facebook, social.twitter].filter(Boolean);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": defaultTitle ? defaultTitle.split('|')[0].trim() : "ZiaFlow",
+      "url": siteUrl,
+      "logo": logo,
+      "sameAs": sameAs
+    },
+    {
+      "@type": "WebSite",
+      "url": siteUrl,
+      "name": defaultTitle ? defaultTitle.split('|')[0].trim() : "ZiaFlow",
+      "description": defaultDescription,
+      "publisher": {
+        "@type": "Organization",
+        "name": defaultTitle ? defaultTitle.split('|')[0].trim() : "ZiaFlow",
+        "logo": {
+          "@type": "ImageObject",
+          "url": logo
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/?s={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Web Development & Digital Marketing",
+      "provider": {
+        "@type": "Organization",
+        "name": defaultTitle ? defaultTitle.split('|')[0].trim() : "ZiaFlow",
+        "url": siteUrl
+      },
+      "areaServed": ["US"],
+      "description": "Web development, SEO, PPC and marketing automation for Arizona service businesses focused on measurable lead growth.",
+      "url": `${siteUrl}/services/web-development`
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does a web development project take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typical projects take 6–12 weeks depending on scope. We provide a project timeline during the discovery phase."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with local Phoenix businesses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — we specialize in Phoenix/home-service businesses and provide local SEO and web development services."
+          }
+        }
+      ]
+    }
+  ]
+};
+
+let jsonLdString = JSON.stringify(jsonLd);
+jsonLdString = jsonLdString.replace(/<\/script>/gi, '<\\/script>');
+---
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={defaultTitle ? defaultTitle.split('|')[0].trim() : 'ZiaFlow'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta
+  property="og:image:alt"
+  content={defaultTitle
+    ? `${defaultTitle.split('|')[0].trim()} — Phoenix Web Development & Digital Marketing`
+    : 'ZiaFlow — Phoenix Web Development & Digital Marketing'}
+/>
+<meta property="og:url" content={pageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+{twitterHandle ? <meta name="twitter:site" content={twitterHandle} /> : null}
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString }} />
