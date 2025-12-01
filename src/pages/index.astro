@@ -10,7 +10,6 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Brands from '~/components/widgets/Brands.astro';
-import BookingFrame from '~/components/common/BookingFrame.astro';
 
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
@@ -50,7 +49,7 @@ const metadata = {
       alt: 'ZiaFlow Digital Growth Partner',
     }}
     title="Phoenix Web Development & Digital Marketing That Delivers Results"
-    subtitle="Conversion-first websites, strategic local SEO, PPC, and automation—trusted by Arizona service businesses for measurable growth."
+    subtitle="Conversion-first websites, strategic local SEO, PPC, and automation - trusted by Arizona service businesses for measurable growth."
     actions={[
       {
         variant: 'primary',
@@ -62,6 +61,7 @@ const metadata = {
         variant: 'secondary',
         text: 'Contact Us',
         href: '/contact',
+        class: 'text-lg px-8 py-4 min-h-[56px] w-full sm:w-auto',
       },
     ]}
   >
@@ -74,9 +74,9 @@ const metadata = {
   </Hero>
 
   <!-- CONTACT + BOOKING -->
-  <section class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="grid gap-6 lg:grid-cols-2">
-      <div class="flex">
+  <section class="px-4 py-16 mx-auto max-w-5xl sm:px-6 lg:px-8">
+    <div class="grid gap-6 place-items-center">
+      <div class="flex w-full max-w-3xl">
         <ContactUs
           id="form"
           title="Start Your Digital Transformation"
@@ -136,22 +136,13 @@ const metadata = {
           description="🔒 100% Privacy Guaranteed. Trusted by 50+ AZ Businesses. We typically respond within 24 hours."
         />
       </div>
-      <div class="flex rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur dark:bg-slate-900/80 dark:border-slate-800">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-secondary mb-4">Book Instantly</p>
-        <h3 class="text-3xl font-bold font-heading mb-3">Meet with ZiaFlow</h3>
-        <p class="text-muted text-base mb-6">
-          Prefer to lock in a time right away? Use the embedded Microsoft Bookings calendar. If it doesn’t load, the
-          fallback link will open a new tab.
-        </p>
-        <BookingFrame />
-      </div>
     </div>
   </section>
 
   <!-- VALUE PROPOSITION -->
   <Features2
     title="Your Partner for Digital Growth"
-    subtitle="Since 2021, ZiaFlow has delivered measurable results for 50+ Arizona service businesses—from 150% increases in qualified leads to top-3 local search rankings across Phoenix, Scottsdale, Tempe, and Mesa."
+    subtitle="Since 2021, ZiaFlow has delivered measurable results for 50+ Arizona service businesses - from 150% increases in qualified leads to top-3 local search rankings across Phoenix, Scottsdale, Tempe, and Mesa."
     tagline="Why Phoenix Businesses Choose ZiaFlow"
     items={[
       {
@@ -518,7 +509,7 @@ const metadata = {
 
   <!-- CONTACT OPTIONS -->
   <Features3
-    title="Contact Options"
+    title="Contact ZiaFlow"
     subtitle="Choose the method that works best for you"
     columns={3}
     items={[

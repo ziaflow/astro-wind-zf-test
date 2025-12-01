@@ -1,0 +1,25 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import BookingFrame from '~/components/common/BookingFrame.astro';
+
+const metadata = {
+  title: 'Book a Strategy Session | ZiaFlow',
+  description:
+    'Schedule a free strategy session with ZiaFlow. Access the Microsoft Bookings calendar to reserve your spot in seconds.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 mx-auto max-w-5xl sm:px-6 lg:px-8">
+    <div class="mb-10 text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-secondary mb-4">Book Instantly</p>
+      <h1 class="text-4xl font-bold font-heading mb-4">Schedule Your Call with ZiaFlow</h1>
+      <p class="text-lg text-muted">
+        Use the embedded Microsoft Bookings calendar below to find a time that works best for you. If the calendar
+        doesn&rsquo;t load, use the fallback link provided beneath the embed.
+      </p>
+    </div>
+
+    <BookingFrame />
+  </section>
+</Layout>
