@@ -1,9 +1,15 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 import { fetchPosts } from '~/utils/blog';
 
+const truncateWords = (text: string, limit = 8) => {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= limit) return text;
+  return `${words.slice(0, limit).join(' ')}…`;
+};
+
 const latestBlogPosts = await fetchPosts();
 const blogLinks = latestBlogPosts.slice(0, 5).map(({ title, permalink }) => ({
-  text: title,
+  text: truncateWords(title),
   href: getPermalink(permalink, 'post'),
 }));
 
