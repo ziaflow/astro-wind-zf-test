@@ -1,0 +1,33 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Form Test',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 mx-auto max-w-4xl lg:py-20">
+    <div class="mb-10 md:mx-auto sm:text-center md:mb-12 max-w-3xl">
+      <h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">Form Test</h2>
+      <p class="max-w-3xl mx-auto sm:text-center text-xl text-muted dark:text-slate-400">
+        Testing the Microsoft Form embed.
+      </p>
+    </div>
+
+    <div class="w-full flex justify-center items-center bg-gray-50 dark:bg-slate-900 rounded-lg p-4">
+      <iframe
+        src="https://forms.office.com/r/yMwSnLg71p?embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        class="w-full max-w-2xl h-[80vh] md:h-[600px] border-none"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen
+      >
+      </iframe>
+    </div>
+  </section>
+</Layout>
