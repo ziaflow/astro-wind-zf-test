@@ -1,0 +1,62 @@
+
+> @onwidget/astrowind@1.0.0-beta.52 check
+> npm run check:astro && npm run check:eslint && npm run check:prettier
+
+
+> @onwidget/astrowind@1.0.0-beta.52 check:astro
+> astro check
+
+[2m18:12:44[22m [34m[astrowind][39m Astrowind `./src/config.yaml` has been loaded.
+[2m18:12:44[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m18:12:45[22m [34m[content][39m Syncing content
+[2m18:12:45[22m [34m[content][39m Content config changed
+[2m18:12:45[22m [34m[content][39m Clearing content store
+[2m18:12:45[22m [34m[content][39m Synced content
+[2m18:12:45[22m [34m[types][39m Generated [2m1.16s[22m
+[2m18:12:45[22m [34m[check][39m Getting diagnostics for Astro files in C:\Users\jerem\astro-wind-zf-test...
+[96msrc/components/Seo.astro[0m:[93m107[0m:[93m9[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m107[0m <script type="application/ld+json" set:html={jsonLdString} />
+[7m   [0m [93m        ~~~~[0m
+
+[96msrc/components/common/BookingFrame.astro[0m:[93m13[0m:[93m5[0m - [93mwarning[0m[90m ts(6385): [0m'scrolling' is deprecated.
+
+[7m13[0m     scrolling="yes"
+[7m  [0m [93m    ~~~~~~~~~[0m
+
+[96msrc/pages/about.astro[0m:[93m205[0m:[93m5[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m205[0m     type="application/ld+json"
+[7m   [0m [93m    ~~~~[0m
+
+Result (97 files): 
+- 0 errors
+- 0 warnings
+- 3 hints
+
+
+> @onwidget/astrowind@1.0.0-beta.52 check:eslint
+> eslint .
+
+
+> @onwidget/astrowind@1.0.0-beta.52 check:prettier
+> prettier --check .
+
+Checking formatting...
+[error] src/components/common/Analytics.astro: SyntaxError: Unexpected token, expected "}" (5:43)
+[error]   3 |     <>
+[error]   4 |       <script is:inline define:vars={{ gtmId }}>
+[error] > 5 |         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+[error]     |                                           ^
+[error]   6 |         new Date().getTime(),event:'gtm.js'});const f=d.getElementsByTagName(s)[0],
+[error]   7 |         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+[error]   8 |         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+Error occurred when checking code style in the above file.

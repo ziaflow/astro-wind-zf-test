@@ -1,4 +1,3 @@
-
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
@@ -60,10 +59,10 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     console.error('Contact Form Error:', error);
     return new Response(
-      JSON.stringify({ 
-        message: 'Failed to send message', 
-        error: error instanceof Error ? error.message : 'Unknown error' 
-      }), 
+      JSON.stringify({
+        message: 'Failed to send message',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      }),
       { status: 500 }
     );
   }

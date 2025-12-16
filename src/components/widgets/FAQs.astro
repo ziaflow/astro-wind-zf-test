@@ -30,36 +30,36 @@ const iconOpen = Astro.props.iconUp ?? 'tabler:minus';
       classes?.accordion ?? '',
     ]}
   >
-    {items.map((item, index) => (
-      <details
-        class:list={[
-          'faq-item group rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-slate-900/60 shadow-sm transition-all',
-          classes?.item ?? '',
-        ]}
-        {...(index === 0 ? { open: true } : {})}
-      >
-        <summary class="faq-summary flex cursor-pointer items-center justify-between gap-6 px-6 py-4 text-left">
-          <span class="faq-title text-base font-semibold text-heading">
-            {item.title}
-          </span>
-          <span class="faq-icon inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Icon
-              name={iconClosed}
-              class="faq-icon-state h-5 w-5 transition-opacity duration-200"
-              data-icon-state="closed"
-            />
-            <Icon
-              name={iconOpen}
-              class="faq-icon-state h-5 w-5 opacity-0 transition-opacity duration-200"
-              data-icon-state="open"
-            />
-          </span>
-        </summary>
-        <div class="faq-content px-6 pb-5 text-muted">
-          <p class="leading-relaxed" set:html={item.description}></p>
-        </div>
-      </details>
-    ))}
+    {
+      items.map((item, index) => (
+        <details
+          class:list={[
+            'faq-item group rounded-2xl border border-gray-200/80 dark:border-gray-800 bg-white dark:bg-slate-900/60 shadow-sm transition-all',
+            classes?.item ?? '',
+          ]}
+          {...(index === 0 ? { open: true } : {})}
+        >
+          <summary class="faq-summary flex cursor-pointer items-center justify-between gap-6 px-6 py-4 text-left">
+            <span class="faq-title text-base font-semibold text-heading">{item.title}</span>
+            <span class="faq-icon inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Icon
+                name={iconClosed}
+                class="faq-icon-state h-5 w-5 transition-opacity duration-200"
+                data-icon-state="closed"
+              />
+              <Icon
+                name={iconOpen}
+                class="faq-icon-state h-5 w-5 opacity-0 transition-opacity duration-200"
+                data-icon-state="open"
+              />
+            </span>
+          </summary>
+          <div class="faq-content px-6 pb-5 text-muted">
+            <p class="leading-relaxed" set:html={item.description} />
+          </div>
+        </details>
+      ))
+    }
   </div>
 </WidgetWrapper>
 

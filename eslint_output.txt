@@ -1,0 +1,30 @@
+
+> @onwidget/astrowind@1.0.0-beta.52 check:eslint
+> eslint .
+
+
+C:\Users\jerem\astro-wind-zf-test\src\components\ExperimentController.astro
+  2:7  error  'experiments' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\jerem\astro-wind-zf-test\src\components\widgets\Chatbot.astro
+   7:11  error  An empty interface declaration allows any non-nullish value, including literals like `0` and `""`.
+- If that's what you want, disable this lint rule with an inline comment or configure the 'allowInterfaces' rule option.
+- If you want a type meaning "any object", you probably want `object` instead.
+- If you want a type meaning "any value", you probably want `unknown` instead  @typescript-eslint/no-empty-object-type
+   7:11  error  'Props' is defined but never used                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  92:9   error  'webChatInstance' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+
+C:\Users\jerem\astro-wind-zf-test\src\pages\landing\.lead-generation.astro
+  9:11  error  'FormData' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\jerem\astro-wind-zf-test\src\utils\analytics-loader.ts
+  14:17  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  16:16  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  18:33  error  Use the rest parameters instead of 'arguments'  prefer-rest-params
+  30:17  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  30:48  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  32:16  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  67:14  error  Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+
+Γ£û 12 problems (12 errors, 0 warnings)
+

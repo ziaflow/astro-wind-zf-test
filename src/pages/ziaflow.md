@@ -1,4 +1,3 @@
-
 <img align="right" src="YOUR_ZIAFLOW_LOGO_URL" alt="ZiaFlow" style="max-width: 100%; height: 23vh;">
 
 <h3 align="left">
@@ -21,9 +20,15 @@
 <br clear="left"/>
 
 ## Let's Transform Your Business Together
+
 ### Visit Our Website
+
 [![ziaflow.com](https://img.shields.io/badge/ziaflow.com%20-000000?style=for-the-badge&logoColor=white)](https://ziaflow.com/)
+
 ### Connect on LinkedIn
+
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/ziaflow)
+
 ### Email Us
+
 [![Email](https://img.shields.io/badge/info@ziaflow.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:info@ziaflow.com)

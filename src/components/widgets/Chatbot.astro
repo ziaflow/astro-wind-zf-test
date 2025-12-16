@@ -3,11 +3,6 @@
  * Chatbot Widget - Custom Microsoft Web Chat
  * Adapted from Microsoft Copilot Studio custom website sample
  */
-
-interface Props {
-  // Keeping interface for compatibility, though styles are largely hardcoded in this version
-  // layout adjustments can be made in the <style> block
-}
 ---
 
 <!-- Load Web Chat SDK -->
@@ -89,7 +84,7 @@ interface Props {
 <script is:inline>
   // Wait for the Web Chat script to load if it hasn't already
   window.addEventListener('load', () => {
-    let webChatInstance = null;
+    // let webChatInstance = null;
     let directLineUrl = null;
 
     // TODO: Replace with your token endpoint from Copilot Studio -> Channels -> Custom website
@@ -269,7 +264,7 @@ interface Props {
           token: conversationInfo.token,
         });
         const webchatElement = document.getElementById('webchat');
-        webChatInstance = window.WebChat.renderWebChat(
+        window.WebChat.renderWebChat(
           {
             directLine: newDirectLine,
             styleOptions,
@@ -303,7 +298,7 @@ interface Props {
           domain: `${directLineUrl}v3/directline`,
           token: conversationInfo.token,
         });
-        webChatInstance = window.WebChat.renderWebChat(
+        window.WebChat.renderWebChat(
           {
             directLine,
             styleOptions,

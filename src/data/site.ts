@@ -9,8 +9,8 @@ const site = {
   social: {
     linkedin: 'https://www.linkedin.com/company/ziaflow',
     facebook: 'https://www.facebook.com/your-page',
-    twitter: 'https://twitter.com/your-handle'
-  }
+    twitter: 'https://twitter.com/your-handle',
+  },
 };
 
 export default site;

@@ -10,32 +10,27 @@ const platforms = [
   {
     name: 'ChatGPT',
     href: `https://chat.openai.com/?q=${encodedQuery}`,
-    logo:
-      'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-chat-gpt.webp',
+    logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-chat-gpt.webp',
   },
   {
     name: 'Gemini',
     href: `https://www.google.com/search?udm=50&q=${encodedQuery}`,
-    logo:
-      'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-gemini.webp',
+    logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-gemini.webp',
   },
   {
     name: 'Perplexity',
     href: `https://www.perplexity.ai/search/new?q=${encodedQuery}`,
-    logo:
-      'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-perplexity.webp',
+    logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-perplexity.webp',
   },
   {
     name: 'Claude',
     href: `https://claude.ai/new?q=${encodedQuery}`,
-    logo:
-      'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-claude.webp',
+    logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-claude.webp',
   },
   {
     name: 'Grok',
     href: `https://x.com/i/grok?text=${encodedQuery}`,
-    logo:
-      'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-grok.webp',
+    logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-grok.webp',
   },
 ];
 
@@ -46,10 +41,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 
 <div
   id={rootId}
-  class:list={[
-    'ai-summary-root',
-    isInline ? 'ai-summary-inline' : 'ai-summary-float',
-  ]}
+  class:list={['ai-summary-root', isInline ? 'ai-summary-inline' : 'ai-summary-float']}
   data-ai-summary-root
 >
   <button
@@ -59,9 +51,16 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
     type="button"
   >
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path
+        d="M12 2L2 7L12 12L22 7L12 2Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ></path>
+      <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ></path>
     </svg>
     <span>Ask AI</span>
   </button>
@@ -74,18 +73,14 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
       <button class="ai-summary-close" aria-label="Close">&times;</button>
     </div>
     <div class="ai-summary-menu-links">
-      {platforms.map(({ name, href, logo }) => (
-        <a
-          class="ai-summary-menu-link"
-          href={href}
-          target="_blank"
-          rel="noopener"
-          data-ai-platform={name}
-        >
-          <img src={logo} alt={name} width="32" height="32" loading="lazy" />
-          <span>{name}</span>
-        </a>
-      ))}
+      {
+        platforms.map(({ name, href, logo }) => (
+          <a class="ai-summary-menu-link" href={href} target="_blank" rel="noopener" data-ai-platform={name}>
+            <img src={logo} alt={name} width="32" height="32" loading="lazy" />
+            <span>{name}</span>
+          </a>
+        ))
+      }
     </div>
   </div>
 </div>
@@ -266,7 +261,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const roots = document.querySelectorAll('[data-ai-summary-root]');
-    roots.forEach(root => {
+    roots.forEach((root) => {
       const toggle = root.querySelector('[data-ai-toggle]');
       const menu = root.querySelector('[data-ai-menu]');
       const closeBtn = root.querySelector('.ai-summary-close');
@@ -276,23 +271,23 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 
       const closeMenu = () => menu.classList.remove('active');
 
-      toggle.addEventListener('click', event => {
+      toggle.addEventListener('click', (event) => {
         event.stopPropagation();
         menu.classList.toggle('active');
       });
 
-      closeBtn?.addEventListener('click', event => {
+      closeBtn?.addEventListener('click', (event) => {
         event.stopPropagation();
         closeMenu();
       });
 
-      document.addEventListener('click', event => {
+      document.addEventListener('click', (event) => {
         if (!root.contains(event.target)) {
           closeMenu();
         }
       });
 
-      links.forEach(link => {
+      links.forEach((link) => {
         link.addEventListener('click', () => {
           const platform = link.getAttribute('data-ai-platform');
           if (typeof window !== 'undefined' && typeof window.gtag === 'function') {

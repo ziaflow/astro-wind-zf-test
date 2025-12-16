@@ -12,8 +12,7 @@ const fallbackId = `booking-fallback-${Math.random().toString(36).slice(2, 9)}`;
     loading="lazy"
     scrolling="yes"
     referrerpolicy="no-referrer"
-    allowfullscreen
-  />
+    allowfullscreen></iframe>
 
   <div id={fallbackId} class="booking-fallback booking-fallback--hidden">
     <p>If the calendar fails to load, open the booking page in a new tab.</p>
@@ -96,7 +95,9 @@ const fallbackId = `booking-fallback-${Math.random().toString(36).slice(2, 9)}`;
     color: #ffffff;
     background: linear-gradient(120deg, #a22a36, #000000, #3f9b93);
     background-size: 200% 200%;
-    transition: background-position 0.4s ease, transform 0.2s ease;
+    transition:
+      background-position 0.4s ease,
+      transform 0.2s ease;
   }
 
   .booking-fallback__button:hover {
