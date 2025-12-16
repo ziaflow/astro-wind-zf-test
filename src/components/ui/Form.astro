@@ -2,7 +2,7 @@
 import Button from '~/components/ui/Button.astro';
 import type { Form as Props } from '~/types';
 
-const emailBackend = import.meta.env.EMAIL_BACKEND || 'web3forms';
+const emailBackend = import.meta.env.EMAIL_BACKEND || (import.meta.env.SMTP_HOST ? 'nodemailer' : 'web3forms');
 const useNodemailer = emailBackend === 'nodemailer';
 
 const {
@@ -24,7 +24,10 @@ const {
 } = Astro.props as Props;
 
 const resolvedAccessKey = accessKey || import.meta.env.WEB3FORMS_ACCESS_KEY || '';
-const idSuffix = typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2, 10);
+const idSuffix =
+  typeof crypto !== 'undefined' && 'randomUUID' in crypto
+    ? crypto.randomUUID()
+    : Math.random().toString(36).slice(2, 10);
 const resolvedFormId = formId || `web3forms-form-${idSuffix}`;
 const resolvedResultId = resultId || `${resolvedFormId}-result`;
 
