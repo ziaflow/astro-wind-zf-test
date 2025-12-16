@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
+import { supabase } from '~/lib/supabase';
 
 export const POST: APIRoute = async ({ request }) => {
   if (request.method !== 'POST') {
@@ -13,6 +14,26 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate required fields
     if (!email) {
       return new Response(JSON.stringify({ message: 'Email is required' }), { status: 400 });
+    }
+
+    // Save to Supabase if configured
+    if (supabase) {
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name,
+            email,
+            phone,
+            message,
+            metadata: otherData,
+          },
+        ]);
+
+      if (dbError) {
+        console.error('Supabase DB Error:', dbError);
+        // We don't stop execution here so email can still attempt to send
+      }
     }
 
     const transporter = nodemailer.createTransport({
