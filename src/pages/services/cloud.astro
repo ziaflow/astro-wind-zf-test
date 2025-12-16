@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Cloud Solutions & Hosting | ZiaFlow',
   description: 'Secure, scalable cloud environments on Azure and AWS.',
 };
+
+const serviceData = {
+  name: 'Cloud Solutions & Hosting',
+  description:
+    'Secure, scalable cloud environments on Azure and AWS. Architecting the digital foundation that ensures your business stays online.',
+  url: 'https://ziaflow.com/services/cloud',
+  image: 'https://ziaflow.com/assets/images/cloud-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Cloud Solutions"
     title="Enterprise-Grade Infrastructure"

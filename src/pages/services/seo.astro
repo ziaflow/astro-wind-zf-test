@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'SEO Services - Phoenix & Arizona | ZiaFlow',
   description: 'Technical SEO and content strategies that build lasting market authority.',
 };
+
+const serviceData = {
+  name: 'SEO Services',
+  description:
+    'Technical SEO and content strategies that build lasting market authority. We position your business to dominate search results for high-intent queries.',
+  url: 'https://ziaflow.com/services/seo',
+  image: 'https://ziaflow.com/assets/images/seo-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="SEO Services"
     title="Lasting Market Authority"

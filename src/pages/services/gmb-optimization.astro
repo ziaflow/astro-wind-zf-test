@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Google Business Profile (GMB) Optimization | ZiaFlow',
   description: 'Optimize your Google Business Profile to capture local search traffic.',
 };
+
+const serviceData = {
+  name: 'Google Business Profile Optimization',
+  description:
+    'Optimize your Google Business Profile to capture local search traffic. We turn your profile into a conversion point, not just a directory listing.',
+  url: 'https://ziaflow.com/services/gmb-optimization',
+  image: 'https://ziaflow.com/assets/images/gmb-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="GMB Optimization"
     title="Your Local Storefront"

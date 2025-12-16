@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Web Development Services | ZiaFlow',
   description: 'Conversion-first websites built for speed and performance.',
 };
+
+const serviceData = {
+  name: 'Web Development Services',
+  description:
+    'Conversion-first websites built for speed and performance. We conduct forensic audits of user behavior to design interfaces that convert.',
+  url: 'https://ziaflow.com/services/web-development',
+  image: 'https://ziaflow.com/assets/images/web-dev-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Web Development"
     title="Engineered for Conversion"

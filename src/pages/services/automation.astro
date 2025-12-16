@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Automation & AI Services | ZiaFlow',
   description: 'Deploy intelligent AI agents and workflow automation to nurture leads 24/7.',
 };
+
+const serviceData = {
+  name: 'Marketing Automation & AI',
+  description:
+    'Deploy intelligent AI agents and workflow automation to nurture leads 24/7. Replace manual chaos with engineered efficiency.',
+  url: 'https://ziaflow.com/services/automation',
+  image: 'https://ziaflow.com/assets/images/automation-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Automation & AI"
     title="The Automation Layer"

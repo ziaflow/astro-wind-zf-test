@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Ecommerce Solutions | ZiaFlow',
   description: 'Custom Shopify and WooCommerce solutions that turn your website into a revenue engine.',
 };
+
+const serviceData = {
+  name: 'Ecommerce Solutions',
+  description:
+    'Custom Shopify and WooCommerce solutions tailored to your operational needs. Turning websites into measurable cash flow assets.',
+  url: 'https://ziaflow.com/services/ecommerce',
+  image: 'https://ziaflow.com/assets/images/ecommerce-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Ecommerce Solutions"
     title="24/7 Revenue Infrastructure"

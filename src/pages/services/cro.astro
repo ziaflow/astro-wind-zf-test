@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Conversion Rate Optimization (CRO) | ZiaFlow',
   description: 'Turn more visitors into customers with data-driven CRO strategies.',
 };
+
+const serviceData = {
+  name: 'Conversion Rate Optimization',
+  description:
+    'Turn more visitors into customers with data-driven CRO strategies. We squeeze more revenue out of your existing traffic.',
+  url: 'https://ziaflow.com/services/cro',
+  image: 'https://ziaflow.com/assets/images/cro-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Conversion Rate Optimization"
     title="Diagnose → Fix → Convert"

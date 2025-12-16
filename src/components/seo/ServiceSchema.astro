@@ -1,0 +1,73 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+const { name, description, url, image } = Astro.props;
+
+// Automate: Ensure Image URL is absolute for Schema compliance
+const siteUrl = 'https://ziaflow.com';
+const absoluteImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Stability: Hardcoded Organization Data with Trust Signals
+const organization = {
+  '@type': 'ProfessionalService',
+  name: 'ZiaFlow',
+  url: siteUrl,
+  logo: `${siteUrl}/assets/images/logo.png`,
+  telephone: '+1-480-819-2929',
+  email: 'info@ziaflow.com',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Phoenix',
+    addressRegion: 'AZ',
+    postalCode: '85302',
+    addressCountry: 'US',
+  },
+  // Social Proof: Leveraging your 5.0 rating from 50+ clients
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '50',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+
+// Speed: Dynamic Service Data mapped to specific intent
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: name,
+  provider: organization,
+  areaServed: [
+    { '@type': 'City', name: 'Phoenix' },
+    { '@type': 'City', name: 'Scottsdale' },
+    { '@type': 'City', name: 'Mesa' },
+    { '@type': 'City', name: 'Tempe' },
+    { '@type': 'City', name: 'Glendale' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Digital Growth Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: name,
+          description: description,
+          url: url,
+          image: absoluteImageUrl,
+        },
+      },
+    ],
+  },
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

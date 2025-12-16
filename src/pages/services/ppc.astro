@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'PPC Management & Google Ads | ZiaFlow',
   description: 'High-ROI pay-per-click management for Google and Microsoft Ads.',
 };
+
+const serviceData = {
+  name: 'PPC Management',
+  description:
+    'High-ROI pay-per-click management for Google and Microsoft Ads. Targeting high-intent keywords to capture customers exactly when they are ready to buy.',
+  url: 'https://ziaflow.com/services/ppc',
+  image: 'https://ziaflow.com/assets/images/ppc-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="PPC Management"
     title="Instant Speed & Cash Flow"

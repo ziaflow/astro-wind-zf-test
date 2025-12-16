@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Custom Software Development | ZiaFlow',
   description: 'Bespoke operational tools and custom software for scaling businesses.',
 };
+
+const serviceData = {
+  name: 'Custom Software Development',
+  description:
+    'Bespoke operational tools and custom software for scaling businesses. We build proprietary assets that streamline operations.',
+  url: 'https://ziaflow.com/services/software',
+  image: 'https://ziaflow.com/assets/images/software-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Custom Software"
     title="Bespoke Operational Tools"

@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Review Management & Reputation | ZiaFlow',
   description: 'Automated review requests and reputation management for service businesses.',
 };
+
+const serviceData = {
+  name: 'Review Management & Reputation',
+  description:
+    'Automated review requests and reputation management for service businesses. We help you build a firewall of positive sentiment.',
+  url: 'https://ziaflow.com/services/review-management',
+  image: 'https://ziaflow.com/assets/images/review-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Review Management"
     title="Automated Social Proof"

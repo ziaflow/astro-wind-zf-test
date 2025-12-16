@@ -3,14 +3,25 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
   title: 'Google Local Service Ads (LSA) | ZiaFlow',
   description: 'Dominate the top of Google Search with Google Guaranteed badges.',
 };
+
+const serviceData = {
+  name: 'Google Local Service Ads (LSA)',
+  description:
+    'Dominate the top of Google Search with Google Guaranteed badges. We handle the complex verification and screening process to get you qualified.',
+  url: 'https://ziaflow.com/services/local-service-ads',
+  image: 'https://ziaflow.com/assets/images/lsa-hero.jpg',
+};
 ---
 
 <Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
   <Hero
     tagline="Local Service Ads"
     title="Verified Trust at the Top"
