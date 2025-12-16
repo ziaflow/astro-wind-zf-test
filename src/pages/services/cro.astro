@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Conversion Rate Optimization (CRO) | ZiaFlow',
+  description: 'Turn more visitors into customers with data-driven CRO strategies.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Conversion Rate Optimization"
+    title="Diagnose → Fix → Convert"
+    subtitle="Traffic is wasted if it doesn't convert. We use a scientific approach to analyze user behavior, identifying exactly where prospects drop off. By engineering fixes—whether it's form placement, page speed, or trust signals—we squeeze more revenue out of your existing traffic, lowering your customer acquisition cost."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Maximize Every Click"
+    items={[
+      {
+        title: 'Behavior Analysis',
+        description: 'Understand how users interact with your site using heatmaps and recordings.',
+        icon: 'tabler:analyze',
+      },
+      {
+        title: 'A/B Testing',
+        description: 'Test headlines, offers, and layouts to find what works best.',
+        icon: 'tabler:flask',
+      },
+      {
+        title: 'UX Improvements',
+        description: 'Remove friction points that stop users from converting.',
+        icon: 'tabler:user-check',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Stop wasting traffic."
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

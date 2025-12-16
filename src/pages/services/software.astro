@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Custom Software Development | ZiaFlow',
+  description: 'Bespoke operational tools and custom software for scaling businesses.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Custom Software"
+    title="Bespoke Operational Tools"
+    subtitle="When off-the-shelf software limits your growth, we build the solution. From custom CRMs for home service businesses to secure patient portals, our in-house engineering team develops software that fits your specific workflows. We build proprietary assets that streamline operations and increase the valuation of your company."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Tailored Solutions"
+    items={[
+      {
+        title: 'Efficiency First',
+        description: 'Software built around your workflows, not the other way around.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Scalable Architecture',
+        description: 'Built to grow with your business, supporting thousands of users.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Proprietary IP',
+        description: 'Own your technology and increase your business valuation.',
+        icon: 'tabler:copyright',
+      },
+    ]}
+  />
+
+  <CallToAction title="Build what you need." actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]} />
+</Layout>

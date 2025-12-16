@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'PPC Management & Google Ads | ZiaFlow',
+  description: 'High-ROI pay-per-click management for Google and Microsoft Ads.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="PPC Management"
+    title="Instant Speed & Cash Flow"
+    subtitle="When you need immediate leads, our PPC campaigns turn on the faucet. We manage Google and Microsoft Ads with a strict focus on ROI, targeting high-intent keywords to capture customers exactly when they are ready to buy. We balance this 'Speed' with the 'Stability' of SEO to ensure you aren't solely reliant on ad spend forever."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="ROI Obsessed"
+    items={[
+      {
+        title: 'High Intent Targeting',
+        description: 'We bid on keywords that convert, not just bring traffic.',
+        icon: 'tabler:target-arrow',
+      },
+      {
+        title: 'Data-Driven Optimization',
+        description: 'Continuous A/B testing to lower customer acquisition costs.',
+        icon: 'tabler:chart-arrows',
+      },
+      {
+        title: 'Transparent Reporting',
+        description: 'Clear dashboards showing exactly where your budget goes.',
+        icon: 'tabler:report-analytics',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Start getting leads today."
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Ecommerce Solutions | ZiaFlow',
+  description: 'Custom Shopify and WooCommerce solutions that turn your website into a revenue engine.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Ecommerce Solutions"
+    title="24/7 Revenue Infrastructure"
+    subtitle="Your online store shouldn’t just list products; it should be a high-conversion sales engine. We build custom Shopify and WooCommerce solutions tailored to your operational needs. By integrating your inventory, CRM, and marketing data, we create a seamless path from 'browse' to 'buy,' turning your website into a measurable cash flow asset."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="What We Deliver"
+    items={[
+      {
+        title: 'Custom Development',
+        description: 'Tailored Shopify and WooCommerce stores that fit your brand.',
+        icon: 'tabler:shopping-cart',
+      },
+      {
+        title: 'System Integration',
+        description: 'Connect inventory, CRM, and marketing tools for seamless operations.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Conversion Optimization',
+        description: 'Designed to maximize sales with intuitive user journeys.',
+        icon: 'tabler:arrow-up-right',
+      },
+    ]}
+  />
+
+  <CallToAction title="Ready to sell more?" actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]} />
+</Layout>

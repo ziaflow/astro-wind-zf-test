@@ -45,11 +45,11 @@ export const footerData = {
     {
       title: 'Services',
       links: [
-        { text: 'SEO Audits', href: '#' },
-        { text: 'Content Strategy', href: '#' },
-        { text: 'Conversion Optimization', href: '#' },
-        { text: 'Technical SEO', href: '#' },
-        { text: 'Growth Strategy', href: '#' },
+        { text: 'Automation', href: getPermalink('/services/automation') },
+        { text: 'SEO', href: getPermalink('/services/seo') },
+        { text: 'PPC Management', href: getPermalink('/services/ppc') },
+        { text: 'Web Development', href: getPermalink('/services/web-development') },
+        { text: 'Ecommerce', href: getPermalink('/services/ecommerce') },
       ],
     },
     {

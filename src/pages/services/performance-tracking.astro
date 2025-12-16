@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Performance Tracking & Analytics | ZiaFlow',
+  description: 'Forensic data tracking and custom dashboards for real-time ROI measurement.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Performance Tracking"
+    title="Data-Driven Transparency"
+    subtitle="We believe in forensic data, not guesses. We implement custom dashboards that track the metrics that actually matter to your bottom line: calls booked, forms filled, and revenue generated. We provide total transparency so you can see exactly how your digital infrastructure is performing in real-time."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Metrics That Matter"
+    items={[
+      {
+        title: 'Real-Time Dashboards',
+        description: 'See your campaign performance as it happens.',
+        icon: 'tabler:dashboard',
+      },
+      {
+        title: 'Conversion Tracking',
+        description: 'Know exactly which leads turned into paying customers.',
+        icon: 'tabler:chart-sankey',
+      },
+      {
+        title: 'Revenue Attribution',
+        description: 'Connect marketing spend directly to revenue generated.',
+        icon: 'tabler:coin',
+      },
+    ]}
+  />
+
+  <CallToAction title="See your true ROI." actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]} />
+</Layout>

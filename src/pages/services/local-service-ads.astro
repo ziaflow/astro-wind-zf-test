@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Google Local Service Ads (LSA) | ZiaFlow',
+  description: 'Dominate the top of Google Search with Google Guaranteed badges.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Local Service Ads"
+    title="Verified Trust at the Top"
+    subtitle="Dominate the absolute top of Google Search with Google Guaranteed badges. We handle the complex verification and screening process to get you qualified. LSA connects you directly with local customers via pay-per-lead phone calls, ensuring you only pay for genuine opportunities, not just clicks."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Why LSAs?"
+    items={[
+      {
+        title: 'Top of Page Visibility',
+        description: 'Appear above traditional paid search ads and organic listings.',
+        icon: 'tabler:arrow-bar-to-up',
+      },
+      {
+        title: 'Google Guaranteed',
+        description: 'Build instant trust with the green checkmark badge.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Pay Per Lead',
+        description: 'Only pay for valid calls from potential customers.',
+        icon: 'tabler:currency-dollar',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Get Google Guaranteed."
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

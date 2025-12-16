@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Review Management & Reputation | ZiaFlow',
+  description: 'Automated review requests and reputation management for service businesses.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Review Management"
+    title="Automated Social Proof"
+    subtitle="Reputation is a currency. We implement automated workflows that request reviews via SMS and email immediately after service completion, drastically increasing your review volume. We help you build a firewall of positive sentiment that improves your local SEO and provides the social proof necessary to close new leads."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Build Trust on Autopilot"
+    items={[
+      {
+        title: 'Automated Requests',
+        description: 'Send review requests via SMS/Email instantly after a job.',
+        icon: 'tabler:send',
+      },
+      {
+        title: 'Review Monitoring',
+        description: 'Get notified of new reviews so you can respond quickly.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Sentiment Analysis',
+        description: 'Understand customer feedback at a glance.',
+        icon: 'tabler:mood-smile',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Get more 5-star reviews."
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'SEO Services - Phoenix & Arizona | ZiaFlow',
+  description: 'Technical SEO and content strategies that build lasting market authority.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="SEO Services"
+    title="Lasting Market Authority"
+    subtitle="SEO is your long-term stability play. We treat your search rankings as digital real estate that appreciates over time. Through technical forensic audits, local content strategies, and authority building, we position your business to dominate search results for high-intent queries. We focus on the keywords that drive revenue, not just traffic."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Our SEO Strategy"
+    items={[
+      {
+        title: 'Technical Audits',
+        description: 'Forensic analysis of your site’s health and indexing.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Content Strategy',
+        description: "Creating content that answers your customers' questions.",
+        icon: 'tabler:writing',
+      },
+      {
+        title: 'Authority Building',
+        description: 'Earning high-quality backlinks to boost your domain trust.',
+        icon: 'tabler:link',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Ready to rank higher?"
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

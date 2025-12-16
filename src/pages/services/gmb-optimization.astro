@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Google Business Profile (GMB) Optimization | ZiaFlow',
+  description: 'Optimize your Google Business Profile to capture local search traffic.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="GMB Optimization"
+    title="Your Local Storefront"
+    subtitle="For local service businesses, the Map Pack is the new homepage. We fully optimize your Google Business Profile—from accurate categorizations to geo-tagged visual assets—to ensure you appear prominently when neighbors are searching for your services. We turn your profile into a conversion point, not just a directory listing."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Map Pack Dominance"
+    items={[
+      {
+        title: 'Complete Profile Optimization',
+        description: 'Ensure every field is filled accurately for maximum visibility.',
+        icon: 'tabler:file-check',
+      },
+      {
+        title: 'Local SEO Strategy',
+        description: 'Target local keywords to appear in relevant searches.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Visual Assets',
+        description: 'Geo-tagged photos and videos to showcase your work.',
+        icon: 'tabler:photo',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Claim your local presence."
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

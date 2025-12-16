@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Automation & AI Services | ZiaFlow',
+  description: 'Deploy intelligent AI agents and workflow automation to nurture leads 24/7.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Automation & AI"
+    title="The Automation Layer"
+    subtitle="Stop losing revenue to slow response times. We deploy intelligent AI agents and workflow automation to nurture leads 24/7, ensuring no opportunity slips through the cracks. From instant SMS booking confirmations to backend CRM routing, we replace manual chaos with engineered efficiency. This isn't just about saving time; it's about building an intake system that scales without adding headcount."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Key Benefits"
+    items={[
+      {
+        title: '24/7 Lead Nurturing',
+        description: 'Never miss a lead with always-on AI agents that respond instantly.',
+        icon: 'tabler:clock-24',
+      },
+      {
+        title: 'Workflow Automation',
+        description: 'Streamline your operations by automating repetitive tasks and data entry.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'CRM Integration',
+        description: 'Seamlessly sync data between your marketing channels and CRM.',
+        icon: 'tabler:database-import',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Ready to automate your growth?"
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>

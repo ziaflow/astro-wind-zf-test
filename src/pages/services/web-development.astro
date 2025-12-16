@@ -1,0 +1,46 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Web Development Services | ZiaFlow',
+  description: 'Conversion-first websites built for speed and performance.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Web Development"
+    title="Engineered for Conversion"
+    subtitle="We reject the idea of 'brochure' websites. Our development team builds conversion-first digital assets using modern frameworks like Astro for lightning-fast load speeds. We conduct forensic audits of user behavior to design interfaces that guide visitors effortlessly toward booking an appointment or making a purchase. This is the core of your digital real estate."
+    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
+  />
+
+  <Features
+    title="Why Choose Us?"
+    items={[
+      {
+        title: 'Lightning Fast',
+        description: 'Built with modern frameworks like Astro for instant load times.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Conversion Focused',
+        description: 'Designed to turn visitors into leads and customers.',
+        icon: 'tabler:target',
+      },
+      {
+        title: 'Responsive Design',
+        description: 'Looks and works perfectly on every device.',
+        icon: 'tabler:device-mobile',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Ready for a better website?"
+    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
+  />
+</Layout>
