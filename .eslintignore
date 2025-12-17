@@ -1,11 +1,6 @@
 # Ignore build outputs
 dist/
 .astro/
-.sanity/
-
-# Ignore the Sanity Studio build specifically
+node_modules/
 studio-gemini-blog/dist/
 studio-gemini-blog/.sanity/
-
-# Ignore third-party or generated scripts
-node_modules/
