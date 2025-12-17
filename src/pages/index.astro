@@ -10,6 +10,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Brands from '~/components/widgets/Brands.astro';
+import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
@@ -46,6 +47,8 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <LocalBusinessSchema />
+
   <!-- HERO -->
   <Hero
     tagline={`<span class="text-black dark:text-white">Phoenix Web Development & Digital Marketing</span>`}

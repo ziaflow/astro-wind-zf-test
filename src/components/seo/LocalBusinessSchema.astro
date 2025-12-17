@@ -1,0 +1,92 @@
+---
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'ZiaFlow Digital Marketing & Web Development',
+  image: 'https://ziaflow.com/logo.png',
+  url: 'https://ziaflow.com',
+  telephone: '+1-480-819-2929',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '5422 W Freeway Ln',
+    addressLocality: 'Glendale',
+    addressRegion: 'AZ',
+    postalCode: '85302',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '33.5386',
+    longitude: '-112.1859',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/ziaflow',
+    'https://www.facebook.com/ZiaFlowAZ',
+    'https://www.instagram.com/ziaflowaz',
+  ],
+  priceRange: '$$',
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Phoenix',
+      containedIn: 'Arizona',
+    },
+    {
+      '@type': 'City',
+      name: 'Scottsdale',
+      containedIn: 'Arizona',
+    },
+    {
+      '@type': 'City',
+      name: 'Tempe',
+      containedIn: 'Arizona',
+    },
+    {
+      '@type': 'City',
+      name: 'Mesa',
+      containedIn: 'Arizona',
+    },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Digital Marketing Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Phoenix Web Development',
+          description: 'Custom web development for Arizona businesses using Astro, React, and modern frameworks.',
+          url: 'https://ziaflow.com/services/web-development',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Search Engine Optimization (SEO)',
+          description: 'Local SEO and organic search optimization for Phoenix businesses.',
+          url: 'https://ziaflow.com/services/seo',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Marketing Automation',
+          description: 'Workflow automation and CRM integration for Arizona medical practices and service businesses.',
+          url: 'https://ziaflow.com/services/automation',
+        },
+      },
+    ],
+  },
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
