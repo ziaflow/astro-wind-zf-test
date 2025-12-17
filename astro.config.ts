@@ -10,6 +10,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
+import prefetch from '@astrojs/prefetch';
 import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
@@ -23,14 +24,19 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  site: 'https://www.ziaflow.com',
+  site: 'https://ziaflow.com',
   output: 'static',
 
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/admin') && !page.includes('/staging'),
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
     robotsTxt(),
     mdx(),
     icon({
@@ -48,6 +54,11 @@ export default defineConfig({
           'database',
         ],
       },
+    }),
+
+    // UX: Prefetches links on hover for "instant" page loads
+    prefetch({
+        prefetchAll: true, 
     }),
 
     ...whenExternalScripts(() =>
@@ -74,8 +85,13 @@ export default defineConfig({
     }),
   ],
 
+  // REDIRECTS: Managing Link Equity (301s)
+  redirects: {
+    '/old-service-page': '/services/web-development',
+  },
+
   image: {
-    domains: ['cdn.pixabay.com'],
+    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],
   },
 
   markdown: {
