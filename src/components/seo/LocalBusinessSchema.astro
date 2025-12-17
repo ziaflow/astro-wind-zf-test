@@ -1,73 +1,38 @@
 ---
 const schema = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['ProfessionalService', 'AdvertisingAgency', 'SoftwareCompany', 'ComputerService'],
-      '@id': 'https://ziaflow.com/#organization',
-      name: 'ZiaFlow Phoenix Web Development & Digital Marketing Agency',
-      url: 'https://ziaflow.com/',
-      logo: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/ziaflow_chip_blue.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL3ppYWZsb3dfY2hpcF9ibHVlLnBuZyIsImlhdCI6MTc2NTk1MzE4NSwiZXhwIjoxODkyMDk3MTg1fQ.o89O7epzXcp0ji-a81MFQJZJimZEqr6cc_N8NkGMZZ0',
-      email: 'info@ziaflow.com',
-      telephone: '+1-480-819-2929',
-      priceRange: '$$',
-      currenciesAccepted: 'USD',
-      paymentAccepted: 'Cash, Credit Card, Check',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '2822 E Greenway Rd Suite 10 B',
-        addressLocality: 'Phoenix',
-        addressRegion: 'AZ',
-        postalCode: '85032',
-        addressCountry: 'US',
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: 33.6262,
-        longitude: -112.0205,
-      },
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '09:00',
-          closes: '17:00',
-        },
-      ],
-      sameAs: [
-        'https://www.linkedin.com/company/ziaflow/',
-        'https://www.facebook.com/ZiaFlowAZ/',
-        'https://www.instagram.com/ziaflowaz/',
-      ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: '24',
-        bestRating: '5',
-      },
-    },
-    {
-      '@type': 'Service',
-      name: 'Custom Web Development & SEO',
-      provider: { '@id': 'https://ziaflow.com/#organization' },
-      description:
-        'ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
-      areaServed: {
-        '@type': 'City',
-        name: 'Phoenix',
-      },
-      offers: {
-        '@type': 'Offer',
-        name: 'Free Consultation',
-        itemOffered: {
-          '@type': 'Service',
-          name: '30-Minute Strategy Session',
-        },
-        price: '0',
-        priceCurrency: 'USD',
-        url: 'https://ziaflow.com/contact',
-      },
-    },
+  '@type': 'ProfessionalService',
+  name: 'Custom Web Development & SEO',
+  description:
+    'ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
+  image: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/ziaflow_chip_blue.png',
+  '@id': 'https://ziaflow.com/#organization',
+  url: 'https://ziaflow.com/',
+  telephone: '+1-480-819-2929',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '2822 E Greenway Rd Suite 10 B',
+    addressLocality: 'Phoenix',
+    addressRegion: 'AZ',
+    postalCode: '85032',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 33.6262,
+    longitude: -112.0205,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/ziaflow/',
+    'https://www.facebook.com/ZiaFlowAZ/',
+    'https://www.instagram.com/ziaflowaz/',
   ],
 };
 ---
