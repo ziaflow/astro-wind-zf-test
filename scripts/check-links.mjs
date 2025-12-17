@@ -16,18 +16,20 @@ async function checkLinks() {
       'https://maps.google.com',
       'https://ziaflow.com', // Skip self-referential absolute links during build check
       'https://ruhnueopjedaywiqhpgi.supabase.co', // Skip signed URLs that might timeout or fail auth
-      'https://gmldsdtmahtgrbwwowtn.supabase.co'
+      'https://gmldsdtmahtgrbwwowtn.supabase.co',
     ],
     markdown: true, // check markdown files if present (optional)
   });
 
-  const brokenLinks = result.links.filter(link => link.state === 'BROKEN');
+  const brokenLinks = result.links.filter((link) => link.state === 'BROKEN');
 
   if (brokenLinks.length > 0) {
     const fs = await import('fs');
-    const logContent = brokenLinks.map(link => `- ${link.url} (Status: ${link.status}) on page ${link.parent}`).join('\n');
+    const logContent = brokenLinks
+      .map((link) => `- ${link.url} (Status: ${link.status}) on page ${link.parent}`)
+      .join('\n');
     fs.writeFileSync('broken-links.log', logContent);
-    
+
     console.error(`❌ Found ${brokenLinks.length} broken links. See broken-links.log for details.`);
     process.exit(1);
   } else {

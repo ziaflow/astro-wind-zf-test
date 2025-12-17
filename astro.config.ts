@@ -58,7 +58,7 @@ export default defineConfig({
 
     // UX: Prefetches links on hover for "instant" page loads
     prefetch({
-        prefetchAll: true, 
+      prefetchAll: true,
     }),
 
     ...whenExternalScripts(() =>
