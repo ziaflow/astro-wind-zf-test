@@ -26,13 +26,15 @@ export const seoDashboardType = defineType({
       title: 'AI Content Opportunities',
       type: 'array',
       description: 'New high-potential keyword ideas identified by the AI Agent for the content team.',
-      of: [{
-        type: 'object',
-        fields: [
-          defineField({ name: 'keyword', title: 'Keyword Phrase', type: 'string' }),
-          defineField({ name: 'priority', title: 'Priority Score (1-10)', type: 'number' }),
-        ],
-      }],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'keyword', title: 'Keyword Phrase', type: 'string' }),
+            defineField({ name: 'priority', title: 'Priority Score (1-10)', type: 'number' }),
+          ],
+        },
+      ],
     }),
   ],
 });

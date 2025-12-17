@@ -1,11 +1,11 @@
-import { defineField, defineType } from 'sanity';
+import {defineField, defineType} from 'sanity'
 
 export const seoDashboardType = defineType({
   name: 'seoDashboard',
   title: 'SEO Automation Dashboard',
   type: 'document',
   // 💡 __experimental_actions limits it to a single, un-deletable document
-  __experimental_actions: ['update', 'publish'], 
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'status',
@@ -25,14 +25,17 @@ export const seoDashboardType = defineType({
       name: 'keywordGaps',
       title: 'AI Content Opportunities',
       type: 'array',
-      description: 'New high-potential keyword ideas identified by the AI Agent for the content team.',
-      of: [{
-        type: 'object',
-        fields: [
-          defineField({ name: 'keyword', title: 'Keyword Phrase', type: 'string' }),
-          defineField({ name: 'priority', title: 'Priority Score (1-10)', type: 'number' }),
-        ],
-      }],
+      description:
+        'New high-potential keyword ideas identified by the AI Agent for the content team.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({name: 'keyword', title: 'Keyword Phrase', type: 'string'}),
+            defineField({name: 'priority', title: 'Priority Score (1-10)', type: 'number'}),
+          ],
+        },
+      ],
     }),
   ],
-});
+})

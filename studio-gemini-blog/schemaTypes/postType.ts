@@ -29,13 +29,13 @@ export const postType = defineType({
       name: 'mainImage', // Renamed from 'image' to 'mainImage' for clarity
       title: 'Main Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
     }),
     defineField({
       name: 'authors',
       title: 'Authors',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'author' } }], // References the 'author' schema
+      of: [{type: 'reference', to: {type: 'author'}}], // References the 'author' schema
     }),
     defineField({
       name: 'category',

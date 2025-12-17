@@ -18,17 +18,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Save to Supabase if configured
     if (supabase) {
-      const { error: dbError } = await supabase
-        .from('contact_submissions')
-        .insert([
-          {
-            name,
-            email,
-            phone,
-            message,
-            metadata: otherData,
-          },
-        ]);
+      const { error: dbError } = await supabase.from('contact_submissions').insert([
+        {
+          name,
+          email,
+          phone,
+          message,
+          metadata: otherData,
+        },
+      ]);
 
       if (dbError) {
         console.error('Supabase DB Error:', dbError);

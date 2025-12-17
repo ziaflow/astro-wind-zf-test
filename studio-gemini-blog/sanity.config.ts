@@ -14,17 +14,17 @@ const deskStructure = (S) =>
         .id('seoDashboardItem')
         .child(
           S.document()
-            .schemaType('seoDashboard') 
+            .schemaType('seoDashboard')
             .documentId('globalSeoDashboard') // The fixed ID the AI Agent will target
-            .title('SEO Automation Dashboard')
+            .title('SEO Automation Dashboard'),
         ),
-      
+
       S.divider(), // Visual separator between dashboard and content
-      
+
       // 2. Standard Content Lists (Posts, Authors, etc.)
       ...S.documentTypeListItems().filter(
         // Exclude the 'seoDashboard' type from the standard list view
-        (listItem) => !['seoDashboard'].includes(listItem.getId())
+        (listItem) => !['seoDashboard'].includes(listItem.getId()),
       ),
     ])
 
