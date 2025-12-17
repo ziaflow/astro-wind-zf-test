@@ -1,5 +1,4 @@
 import { LinkChecker } from 'linkinator';
-import path from 'path';
 
 async function checkLinks() {
   const checker = new LinkChecker();
@@ -14,7 +13,10 @@ async function checkLinks() {
       'https://www.facebook.com/ZiaFlowAZ',
       'https://www.instagram.com/ziaflowaz',
       'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      'https://maps.google.com'
+      'https://maps.google.com',
+      'https://ziaflow.com', // Skip self-referential absolute links during build check
+      'https://ruhnueopjedaywiqhpgi.supabase.co', // Skip signed URLs that might timeout or fail auth
+      'https://gmldsdtmahtgrbwwowtn.supabase.co'
     ],
     markdown: true, // check markdown files if present (optional)
   });
@@ -22,10 +24,11 @@ async function checkLinks() {
   const brokenLinks = result.links.filter(link => link.state === 'BROKEN');
 
   if (brokenLinks.length > 0) {
-    console.error(`❌ Found ${brokenLinks.length} broken links:`);
-    brokenLinks.forEach(link => {
-      console.error(`- ${link.url} (Status: ${link.status}) on page ${link.parent}`);
-    });
+    const fs = await import('fs');
+    const logContent = brokenLinks.map(link => `- ${link.url} (Status: ${link.status}) on page ${link.parent}`).join('\n');
+    fs.writeFileSync('broken-links.log', logContent);
+    
+    console.error(`❌ Found ${brokenLinks.length} broken links. See broken-links.log for details.`);
     process.exit(1);
   } else {
     console.log('✅ No broken links found!');
