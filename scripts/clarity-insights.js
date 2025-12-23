@@ -63,32 +63,32 @@ const sendEmail = async (content) => {
 
 const fetchInsights = async () => {
   console.log('Fetching Clarity Insights...');
-  const url = 'https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1&dimension1=URL&dimension2=Source';
-  
+  const url =
+    'https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=1&dimension1=URL&dimension2=Source';
+
   try {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${CLARITY_TOKEN}`
-      }
+        Authorization: `Bearer ${CLARITY_TOKEN}`,
+      },
     });
 
     if (!response.ok) {
       if (response.status === 401) {
-         console.error('Error: Unauthorized. Check your CLARITY_API_TOKEN.');
+        console.error('Error: Unauthorized. Check your CLARITY_API_TOKEN.');
       }
       throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
     }
 
     const data = await response.json();
     console.log('Successfully retrieved data.');
-    
+
     const summary = `Clarity Insights Data (Last 24h):\n${JSON.stringify(data, null, 2)}`;
     console.log(summary);
-    
+
     await sendEmail(summary);
-    
   } catch (error) {
     console.error('Failed to fetch Clarity insights:', error);
     process.exit(1);

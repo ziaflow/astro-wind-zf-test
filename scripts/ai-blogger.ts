@@ -1,4 +1,3 @@
-
 import { createClient } from '@sanity/client';
 import OpenAI from 'openai';
 import slugify from 'slugify';
@@ -38,9 +37,7 @@ async function runAgent() {
   console.log('🤖 AI Blogger Agent Starting...');
 
   // 1. Fetch Dashboard State
-  const dashboard = await sanity.fetch(
-    `*[_type == "seoDashboard" && _id == "globalSeoDashboard"][0]`
-  );
+  const dashboard = await sanity.fetch(`*[_type == "seoDashboard" && _id == "globalSeoDashboard"][0]`);
 
   if (!dashboard) {
     console.error('❌ SEO Dashboard not found. Please create a document with ID "globalSeoDashboard" in Sanity.');
@@ -50,26 +47,31 @@ async function runAgent() {
   // 2. Check Schedule
   const { postingSchedule, nextScheduledPost, topicsQueue, keywordGaps } = dashboard;
   const now = new Date();
-  
-  console.log(`📅 Schedule: ${postingSchedule}, Next Post: ${nextScheduledPost || 'Not set'}, Time: ${now.toISOString()}`);
+
+  console.log(
+    `📅 Schedule: ${postingSchedule}, Next Post: ${nextScheduledPost || 'Not set'}, Time: ${now.toISOString()}`
+  );
 
   // If manual, we only run if explicitly triggered? For now, let's assume this script IS the trigger.
   // But if scheduled "daily", we check if we passed the time.
   // For simplicity MVP: If there is a topic in the queue, we write it!
-  // The schedule check would be handled by the GitHub Action frequency in a real strict setup, 
+  // The schedule check would be handled by the GitHub Action frequency in a real strict setup,
   // or we verify here. Let's just process the queue if items exist.
 
   let topic = '';
-  
+
   // Priority 1: Manual Topics Queue
   if (topicsQueue && topicsQueue.length > 0) {
     topic = topicsQueue[0];
     console.log(`🎯 Found topic in queue: "${topic}"`);
-  } 
+  }
   // Priority 2: AI Keyword Gaps
   else if (keywordGaps && keywordGaps.length > 0) {
     // Pick the highest priority
-    interface KeywordGap { keyword: string; priority?: number }
+    interface KeywordGap {
+      keyword: string;
+      priority?: number;
+    }
     const gap = keywordGaps.sort((a: KeywordGap, b: KeywordGap) => (b.priority || 0) - (a.priority || 0))[0];
     topic = gap.keyword;
     console.log(`🎯 Found keyword gap: "${topic}"`);
@@ -80,12 +82,12 @@ async function runAgent() {
 
   // 3. Generate Content
   console.log(`✍️ Generating content for: ${topic}...`);
-  
+
   const completion = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
+    model: 'gpt-4-turbo-preview',
     messages: [
       {
-        role: "system",
+        role: 'system',
         content: `You are an expert SEO content writer for ZiaFlow, a digital marketing agency.
         Generate a comprehensive blog post in JSON format with the following fields:
         - title: Catchy, SEO-optimized title (string)
@@ -93,29 +95,29 @@ async function runAgent() {
         - body: The full article content in Markdown format. Use H2 (##) and H3 (###) headers. (string)
         - category: A relevant category (e.g., SEO, Marketing, Automation) (string)
         
-        The tone should be professional, authoritative, yet accessible. Focus on actionable insights.`
+        The tone should be professional, authoritative, yet accessible. Focus on actionable insights.`,
       },
       {
-        role: "user",
-        content: `Write a blog post about: "${topic}"`
-      }
+        role: 'user',
+        content: `Write a blog post about: "${topic}"`,
+      },
     ],
-    response_format: { type: "json_object" }
+    response_format: { type: 'json_object' },
   });
 
   const responseContent = completion.choices[0].message.content;
   if (!responseContent) {
-      throw new Error("Failed to get response from OpenAI");
+    throw new Error('Failed to get response from OpenAI');
   }
-  
+
   const generatedPost = JSON.parse(responseContent);
 
   // 4. Transform Markdown to Portable Text (Simplified for MVP)
-  // For a robust solution we'd use a markdown-to-portable-text parser. 
+  // For a robust solution we'd use a markdown-to-portable-text parser.
   // For now, we will just create a single block with the raw markdown if we don't have a parser,
-  // BUT Sanity expects Portable Text blocks. 
+  // BUT Sanity expects Portable Text blocks.
   // We will split by paragraphs to make it roughly compatible or use a simple block structure.
-  
+
   // BETTER APPROACH: Just assume the user has a way to render markdown or we treat it as basic blocks.
   // Let's create simple blocks.
   const blocks = generatedPost.body.split('\n\n').map((para: string) => ({
@@ -123,12 +125,12 @@ async function runAgent() {
     _key: Math.random().toString(36).substring(7),
     children: [{ _type: 'span', text: para }],
     markDefs: [],
-    style: 'normal'
+    style: 'normal',
   }));
 
   // 5. Publish to Sanity
   const slug = slugify(generatedPost.title, { lower: true, strict: true });
-  
+
   const doc = {
     _type: 'post',
     title: generatedPost.title,
@@ -147,29 +149,29 @@ async function runAgent() {
   // Remove the used topic
   // Update last run time
   const mutations = [];
-  
+
   if (topicsQueue && topicsQueue.length > 0 && topicsQueue[0] === topic) {
-     // Remove first element
-     // Sanity array removal can be tricky with unset by index, easiest is to filter
-     const newQueue = topicsQueue.slice(1);
-     mutations.push({ patch: { id: 'globalSeoDashboard', set: { topicsQueue: newQueue } } });
-  } 
-  
+    // Remove first element
+    // Sanity array removal can be tricky with unset by index, easiest is to filter
+    const newQueue = topicsQueue.slice(1);
+    mutations.push({ patch: { id: 'globalSeoDashboard', set: { topicsQueue: newQueue } } });
+  }
+
   // If we used a keyword gap, we might want to remove it too, but let's stick to queue for now logic.
 
   mutations.push({
-      patch: {
-          id: 'globalSeoDashboard',
-          set: {
-              lastRunTimestamp: new Date().toISOString(),
-              status: 'READY'
-          }
-      }
+    patch: {
+      id: 'globalSeoDashboard',
+      set: {
+        lastRunTimestamp: new Date().toISOString(),
+        status: 'READY',
+      },
+    },
   });
-  
+
   // Execute patches
   for (const mut of mutations) {
-      await sanity.transaction().patch(mut.patch.id, mut.patch).commit();
+    await sanity.transaction().patch(mut.patch.id, mut.patch).commit();
   }
 
   console.log('🏁 Dashboard updated.');

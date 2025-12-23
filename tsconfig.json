@@ -10,7 +10,6 @@
       "~/*": ["src/*"]
     },
     "types": ["@sanity/astro/module"]
-
   },
   "include": [".astro/types.d.ts", "src/**/*", "types.d.ts"],
   "exclude": [
