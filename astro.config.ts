@@ -13,6 +13,7 @@ import compress from 'astro-compress';
 import prefetch from '@astrojs/prefetch';
 import type { AstroIntegration } from 'astro';
 
+import sanity from "@sanity/astro";
 import astrowind from './vendor/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
@@ -82,6 +83,11 @@ export default defineConfig({
 
     astrowind({
       config: './src/config.yaml',
+    }),
+    sanity({
+      projectId: "92p0tpps",
+      dataset: "production",
+      useCdn: false,
     }),
   ],
 

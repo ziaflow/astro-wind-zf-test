@@ -1,0 +1,62 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { sanityClient } from 'sanity:client';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { PortableText } from 'astro-portabletext';
+
+export async function getStaticPaths() {
+  const SLUGS_QUERY = `*[_type == "post" && defined(slug.current)]{
+    "params": {"slug": slug.current}
+  }`;
+  return await sanityClient.fetch(SLUGS_QUERY);
+}
+
+const { slug } = Astro.params;
+
+const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
+const post = await sanityClient.fetch(POST_QUERY, { slug });
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset ? createImageUrlBuilder({ projectId, dataset }).image(source) : null;
+
+const postImageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1200).height(675).url() : null;
+
+const metadata = {
+  title: post.title,
+  description: post.seoDescription,
+};
+---
+
+<Layout metadata={metadata}>
+  <main class="container mx-auto px-6 py-12 max-w-3xl">
+    <a href="/posts" class="inline-block mb-6 text-primary hover:underline">&larr; Back to posts</a>
+
+    <article>
+      {
+        postImageUrl && (
+          <img
+            src={postImageUrl}
+            alt={post.title}
+            class="w-full aspect-video object-cover rounded-xl mb-8 shadow-md"
+            width="1200"
+            height="675"
+          />
+        )
+      }
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
+      <p class="text-gray-500 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+        Published on {new Date(post.publishedAt).toLocaleDateString()}
+      </p>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        {Array.isArray(post.body) && <PortableText value={post.body} />}
+      </div>
+    </article>
+  </main>
+</Layout>
