@@ -3,8 +3,26 @@
 import { ANALYTICS } from 'astrowind:config';
 
 const gtmId = ANALYTICS?.vendors?.googleTagManager?.id;
+const gaId = ANALYTICS?.vendors?.googleAnalytics?.id;
 const clarityId = ANALYTICS?.vendors?.clarity?.id;
 ---
+
+<script is:inline define:vars={{ gaId }}>
+  if (gaId) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', gaId);
+  }
+</script>
+
+<script is:inline>
+  window.clarity = window.clarity || function(...args) { (window.clarity.q = window.clarity.q || []).push(args) };
+</script>
 
 <>
   {
@@ -21,6 +39,14 @@ const clarityId = ANALYTICS?.vendors?.clarity?.id;
         })(window,document,'script','dataLayer',gtmId);
       `}
         />
+        <script is:inline define:vars={{ gaId }}>
+          if (gaId) {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+            document.head.appendChild(script);
+          }
+        </script>
       </>
     )
   }
@@ -31,10 +57,43 @@ const clarityId = ANALYTICS?.vendors?.clarity?.id;
         <div id="clarity-setup" data-id={clarityId} class="hidden"></div>
         <script>
           import Clarity from '@microsoft/clarity';
+          
+          declare global {
+            interface Window {
+              clarity: (...args: unknown[]) => void;
+            }
+          }
+
           const element = document.getElementById('clarity-setup');
           if (element) {
             const id = element.dataset.id;
-            if (id) Clarity.init(id);
+            if (id) {
+              Clarity.init(id);
+
+              // Tracking Scroll Depth
+              let maxScroll = 0;
+              window.addEventListener('scroll', () => {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
+                  maxScroll = scrollPercent;
+                  if (window.clarity) {
+                    window.clarity("set", "scroll_depth", maxScroll.toString());
+                    if (maxScroll >= 75) window.clarity("upgrade", "high scroll depth");
+                  }
+                }
+              }, { passive: true });
+
+              // Track Dead Clicks (Simplified)
+              document.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                if (!target.closest('a') && !target.closest('button') && !target.closest('input')) {
+                  // If it looks like it might be interactive (has title or specific classes) but isn't
+                  if (target.innerText?.length < 50 && (target.classList.contains('icon') || target.title)) {
+                     if (window.clarity) window.clarity("event", "potential_dead_click");
+                  }
+                }
+              }, { passive: true });
+            }
           }
         </script>
       </>

@@ -1,5 +1,5 @@
 import { getImage } from 'astro:assets';
-import { transformUrl, parseUrl } from 'unpic';
+import { parseUrl } from 'unpic';
 
 import type { ImageMetadata } from 'astro';
 import type { HTMLAttributes } from 'astro/types';
@@ -225,13 +225,22 @@ export const astroAssetsOptimizer: ImagesOptimizer = async (
 
   return Promise.all(
     breakpoints.map(async (w: number) => {
-      const result = await getImage({ src: image, width: w, inferSize: true, ...(format ? { format: format } : {}) });
+      try {
+        const result = await getImage({ src: image, width: w, inferSize: true, ...(format ? { format: format } : {}) });
 
-      return {
-        src: result?.src,
-        width: result?.attributes?.width ?? w,
-        height: result?.attributes?.height,
-      };
+        return {
+          src: result?.src,
+          width: result?.attributes?.width ?? w,
+          height: result?.attributes?.height,
+        };
+      } catch (e) {
+        console.warn(`Failed to optimize image: ${image}. Error: ${e.message}`);
+        return {
+          src: typeof image === 'string' ? image : (image as ImageMetadata).src,
+          width: w,
+          height: _height ? Math.round(_height * (w / (_width || 1))) : undefined,
+        };
+      }
     })
   );
 };
@@ -241,34 +250,17 @@ export const isUnpicCompatible = (image: string) => {
 };
 
 /* ** */
-export const unpicOptimizer: ImagesOptimizer = async (image, breakpoints, width, height, format = undefined) => {
+export const unpicOptimizer: ImagesOptimizer = async (image, breakpoints) => {
   if (!image || typeof image !== 'string') {
     return [];
   }
 
-  const urlParsed = parseUrl(image);
-  if (!urlParsed) {
-    return [];
-  }
-
-  return Promise.all(
-    breakpoints.map(async (w: number) => {
-      const _height = width && height ? computeHeight(w, width / height) : height;
-      const url =
-        transformUrl({
-          url: image,
-          width: w,
-          height: _height,
-          cdn: urlParsed.cdn,
-          ...(format ? { format: format } : {}),
-        }) || image;
-      return {
-        src: String(url),
-        width: w,
-        height: _height,
-      };
-    })
-  );
+  return breakpoints.map((w: number) => {
+    return {
+      src: image,
+      width: w,
+    };
+  });
 };
 
 /* ** */
@@ -318,10 +310,9 @@ export async function getImagesOptimized(
     }
   } else if (width && height) {
     aspectRatio = width / height;
-  } else if (layout !== 'fullWidth') {
-    // Fullwidth images don't need dimensions
-    console.error('Either aspectRatio or both width and height must be set');
-    console.error('Image', image);
+  } else if (layout !== 'fullWidth' && typeof image === 'string' && !image.includes('svg')) {
+    // Only warn for non-SVG remote images where dimensions are truly missing
+    console.warn(`[Image Optimization] Missing dimensions for remote image: ${image}. Falling back to original.`);
   }
 
   let breakpoints = getBreakpoints({ width: width, breakpoints: widths, layout: layout });

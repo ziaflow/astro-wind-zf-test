@@ -19,24 +19,39 @@ export const headerData = {
   links: [
     {
       text: 'Home',
-      href: getPermalink('/', 'home'),
+      href: getPermalink('/'),
     },
     {
       text: 'Services',
-      href: getPermalink('/services'),
-    },
-    {
-      text: 'About Us',
-      href: getPermalink('/about'),
-    },
-    {
-      text: 'Contact Us',
-      href: getPermalink('/contact'),
+      links: [
+        { text: 'SEO Services', href: getPermalink('/services/seo') },
+        { text: 'AI Automation', href: getPermalink('/services/automation') },
+        { text: 'PPC Management', href: getPermalink('/services/ppc') },
+        { text: 'Web Development', href: getPermalink('/services/web-development') },
+        { text: 'Ecommerce Solutions', href: getPermalink('/services/ecommerce') },
+        { text: 'Cloud Solutions', href: getPermalink('/services/cloud') },
+        { text: 'Software Development', href: getPermalink('/services/software') },
+        { text: 'Social Media Marketing', href: getPermalink('/services/social-media') },
+      ],
     },
     {
       text: 'Blog',
-      href: getBlogPermalink(),
+      links: [
+        { text: 'All Articles', href: getBlogPermalink() },
+        ...blogLinks,
+      ],
     },
+    {
+      text: 'About',
+      href: getPermalink('/about'),
+    },
+    {
+      text: 'Contact',
+      href: getPermalink('/contact'),
+    },
+  ],
+  actions: [
+    { text: 'Get Free Strategy', href: getPermalink('/contact'), variant: 'primary' as const },
   ],
 };
 

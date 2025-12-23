@@ -28,8 +28,16 @@ const {
         images.map(
           (image) =>
             image.src && (
-              <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md dark:bg-gray-200">
-                <Image src={image.src} alt={image.alt || ''} class="max-h-12" width={120} height={48} layout="fixed" />
+              <div class="flex justify-center col-span-1 my-2 lg:my-0 py-2 px-4 transition-all duration-300 transform hover:scale-105">
+                <Image
+                  src={image.src}
+                  alt={image.alt || ''}
+                  class="max-h-14 w-auto object-contain"
+                  width={200}
+                  height={100}
+                  aspectRatio={2}
+                  layout="constrained"
+                />
               </div>
             )
         )
