@@ -50,6 +50,8 @@ async function runAgent() {
   // 2. Check Schedule
   const { postingSchedule, nextScheduledPost, topicsQueue, keywordGaps } = dashboard;
   const now = new Date();
+  
+  console.log(`📅 Schedule: ${postingSchedule}, Next Post: ${nextScheduledPost || 'Not set'}, Time: ${now.toISOString()}`);
 
   // If manual, we only run if explicitly triggered? For now, let's assume this script IS the trigger.
   // But if scheduled "daily", we check if we passed the time.
@@ -67,7 +69,8 @@ async function runAgent() {
   // Priority 2: AI Keyword Gaps
   else if (keywordGaps && keywordGaps.length > 0) {
     // Pick the highest priority
-    const gap = keywordGaps.sort((a: any, b: any) => (b.priority || 0) - (a.priority || 0))[0];
+    interface KeywordGap { keyword: string; priority?: number }
+    const gap = keywordGaps.sort((a: KeywordGap, b: KeywordGap) => (b.priority || 0) - (a.priority || 0))[0];
     topic = gap.keyword;
     console.log(`🎯 Found keyword gap: "${topic}"`);
   } else {
