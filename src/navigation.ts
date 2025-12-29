@@ -51,7 +51,7 @@ export const headerData = {
     },
   ],
   actions: [
-    { text: 'Get Free Strategy', href: getPermalink('/contact'), variant: 'primary' as const },
+    { text: 'Book Consultation', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled', variant: 'primary' as const },
   ],
 };
 
