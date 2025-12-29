@@ -36,10 +36,7 @@ export const headerData = {
     },
     {
       text: 'Blog',
-      links: [
-        { text: 'All Articles', href: getBlogPermalink() },
-        ...blogLinks,
-      ],
+      links: [{ text: 'All Articles', href: getBlogPermalink() }, ...blogLinks],
     },
     {
       text: 'About',
@@ -51,7 +48,11 @@ export const headerData = {
     },
   ],
   actions: [
-    { text: 'Book Consultation', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled', variant: 'primary' as const },
+    {
+      text: 'Book Consultation',
+      href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      variant: 'primary' as const,
+    },
   ],
 };
 

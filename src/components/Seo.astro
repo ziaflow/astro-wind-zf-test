@@ -104,4 +104,4 @@ jsonLdString = jsonLdString.replace(/<\/script>/gi, '<\\/script>');
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 
-<script type="application/ld+json" set:html={jsonLdString} />
+<script is:inline type="application/ld+json" set:html={jsonLdString} />

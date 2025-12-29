@@ -1,6 +1,0 @@
-# Ignore build outputs
-dist/
-.astro/
-node_modules/
-studio-gemini-blog/dist/
-studio-gemini-blog/.sanity/
