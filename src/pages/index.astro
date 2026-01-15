@@ -8,9 +8,10 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Brands from '~/components/widgets/Brands.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
+
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Content from '~/components/widgets/Content.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
 const metadata = {
@@ -23,9 +24,9 @@ const metadata = {
     siteName: 'ZiaFlow',
     type: 'website',
     locale: 'en',
-    title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
+    title: 'ZiaFlow | Custom Software & AI Automation Agents',
     description:
-      'Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth.',
+      'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. ZiaFlow engineers custom growth solutions for Arizona businesses.',
     images: [
       {
         url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
@@ -52,7 +53,7 @@ const metadata = {
       },
       {
         name: 'twitter:title',
-        content: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
+        content: 'ZiaFlow | Custom Software & AI Automation Agents',
       },
       {
         name: 'twitter:image',
@@ -68,18 +69,18 @@ const metadata = {
   <LocalBusinessSchema />
 
   <Hero
-    tagline={`<span class="text-primary font-bold tracking-wide uppercase">Phoenix Web Development & Digital Marketing</span>`}
-    title="Phoenix Web Development & Digital Marketing That Delivers Results"
-    subtitle="Conversion-first websites, strategic local SEO, PPC, and automation - trusted by Arizona service businesses for measurable growth."
+    tagline={`<span class="text-primary font-bold tracking-wide uppercase">Engineering the Future</span>`}
+    title="Custom Software & AI Solutions That Power Growth"
+    subtitle="Deploy autonomous AI agents, HIPAA-compliant voice assistants, and enterprise-grade web applications. We build the technology that scales your business."
     actions={[
       {
         variant: 'primary',
-        text: 'Get My Free Strategy Session',
+        text: 'Get Automation Strategy',
         href: '#form',
-        icon: 'tabler:arrow-down',
+        icon: 'tabler:robot',
       },
       {
-        text: 'Book a Call',
+        text: 'Book Tech Consult',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         target: '_blank',
         class:
@@ -95,197 +96,138 @@ const metadata = {
 
     <Fragment slot="title">
       <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tighter mb-4 font-heading text-black pb-1">
-        Phoenix Web Development & <span class="digital-gradient-text">Digital Marketing</span> That Delivers Results
+        Custom Software & <span class="digital-gradient-text">AI Solutions</span> That Power Growth
       </h1>
     </Fragment>
     <Fragment slot="subtitle">
       <p class="text-xl text-gray-900 mb-6 font-medium">
-        Conversion-first websites, strategic local SEO, PPC, and automation - trusted by Arizona service businesses for
-        measurable growth.
+        Engineering the Future. Deploy autonomous AI agents and build custom web applications.
       </p>
     </Fragment>
   </Hero>
 
   <Brands
-    title="Certified Partnerships"
-    subtitle="Trusted technology partners delivering enterprise-grade solutions"
+    title="Tech Stack & Partners"
+    subtitle="Built on enterprise-grade infrastructure"
     icons={[]}
     images={[
       {
-        src: 'https://images.squarespace-cdn.com/content/v1/5c546b414d620755a6d3f27b/1550066115984-L8I6I6Y6O3I6Y6I6Y6I6/microsoft-advertising-partner-badge.png',
-        alt: 'Microsoft Advertising Partner',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+        alt: 'AWS',
       },
       {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Google_Partner_Badge.png',
-        alt: 'Google Partner',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+        alt: 'Azure',
       },
       {
-        src: 'https://www.vectorlogo.zone/logos/tiktok/tiktok-ar21.svg',
-        alt: 'TikTok Marketing Partner',
+        src: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
+        alt: 'OpenAI',
       },
     ]}
   />
 
-  <section class="px-4 py-16 mx-auto max-w-5xl sm:px-6 lg:px-8">
-    <div class="grid gap-6 place-items-center">
-      <div class="flex w-full max-w-3xl">
-        <ContactUs
-          id="form"
-          accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
-          title="Start Your Digital Transformation"
-          subtitle="Partner with the Phoenix digital marketing agency trusted by 50+ local businesses. Get a custom strategy for your business goals."
-          button="Contact ZiaFlow"
-          inputs={[
-            {
-              type: 'text',
-              name: 'name',
-              label: 'Full Name',
-            },
-            {
-              type: 'email',
-              name: 'email',
-              label: 'Email Address',
-            },
-            {
-              type: 'text',
-              name: 'phone',
-              label: 'Phone Number',
-            },
-            { type: 'hidden', name: 'utm_source', label: '' },
-            { type: 'hidden', name: 'utm_medium', label: '' },
-            { type: 'hidden', name: 'utm_campaign', label: '' },
-            { type: 'hidden', name: 'clarity_session_id', label: '' },
-            { type: 'hidden', name: 'event_id', label: '' },
-          ]}
-          textarea={{
-            label: 'Tell us about your goals',
-            placeholder: 'What challenges are you facing? What results are you looking for?',
-          }}
-          description="🔒 100% Privacy Guaranteed. Trusted by 50+ AZ Businesses. We typically respond within 24 hours."
-        />
-      </div>
-    </div>
-  </section>
+  <Content
+    isReversed
+    title="AI Voice Automation"
+    subtitle="Reduce reception workload with AI that answers phones, books appointments, and syncs records."
+    items={[
+      {
+        title: '24/7 Availability',
+        description: 'Never miss a patient call. Our AI handles intake, scheduling, and FAQs around the clock.',
+      },
+      {
+        title: 'HIPAA Compliant',
+        description: 'Secure, private, and fully compliant voice infrastructure for medical and dental practices.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AI Voice Automation',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Automate Your <span class="text-primary">Front Desk</span>
+      </h3>
+    </Fragment>
+  </Content>
 
   <WidgetWrapper containerClass="max-w-7xl mx-auto" isDark={false}>
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
       <div class="md:w-1/2">
-        <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">HIGHEST LEVEL OF SERVICE</p>
+        <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">ENGINEERING-GRADE SOLUTIONS</p>
         <h2 class="text-4xl md:text-5xl font-heading font-bold text-heading leading-tight">
-          We provide our best <br />
-          <span class="text-primary">digital services</span>
+          We provide enterprise <br />
+          <span class="text-primary">tech solutions</span>
         </h2>
       </div>
       <div class="md:w-5/12 text-muted text-lg">
         <p class="mb-4">
-          ZiaFlow provides a wide range of digital growth services, from custom web design to AI automation. We use only
-          advanced strategies to keep your business growing.
+          ZiaFlow delivers custom software, secure cloud infrastructure, and autonomous AI agents. We engineer systems
+          that solve complex business problems.
         </p>
-        <p>Our team of experts focuses on helping you achieve optimal ROI and efficiency.</p>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 items-start mt-16">
       <div class="group px-6 text-center lg:text-left">
         <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:device-laptop" class="w-10 h-10" />
+          <Icon name="tabler:code" class="w-10 h-10" />
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Web <br /> Design</h3>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Custom App <br /> Development</h3>
         <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Conversion-first websites tailored for Arizona businesses that turn visitors into loyal customers.
+          Bespoke web and mobile applications built for performance, scalability, and specific business logic.
         </p>
-        <a
-          href="/services/web-development"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Discover More</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
       </div>
 
       <div class="group px-6 text-center lg:text-left">
         <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:filter" class="w-10 h-10" />
+          <Icon name="tabler:microphone" class="w-10 h-10" />
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Lead Gen <br /> Funnels</h3>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">HIPAA-Compliant <br /> Voice AI</h3>
         <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          High-performance funnels that capture, nurture, and convert local leads at scale.
+          Secure AI voice agents for patient intake, appointment scheduling, and customer service.
         </p>
-        <a
-          href="/services/web-development"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Discover More</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
+      </div>
+
+      <div class="group px-6 text-center lg:text-left">
+        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+          <Icon name="tabler:chart-dots" class="w-10 h-10" />
+        </div>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">AI Marketing <br /> Intelligence</h3>
+        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+          Real-time dashboards and predictive analytics to optimize ad spend and ROI.
+        </p>
       </div>
 
       <div class="group px-6 text-center lg:text-left">
         <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
           <Icon name="tabler:robot" class="w-10 h-10" />
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">AI <br /> Automation</h3>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Workflow <br /> Automation</h3>
         <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Streamline operations and follow up 24/7 with bespoke AI-driven automation systems.
+          End-to-end business process automation to eliminate manual tasks and reduce overhead.
         </p>
-        <a
-          href="/services/automation"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Discover More</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:chart-bar" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Strategic <br /> SEO</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Dominate local search results in Phoenix and outrank competitors with data-backed SEO strategies.
-        </p>
-        <a
-          href="/services/seo"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Discover More</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:ad" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">PPC <br /> Management</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Ensure every dollar of your ad spend generates qualified leads. Our PPC focuses on high-intent keywords.
-        </p>
-        <a
-          href="/services/ppc"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Let's talk</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
       </div>
 
       <div class="group px-6 text-center lg:text-left">
         <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
           <Icon name="tabler:cloud" class="w-10 h-10" />
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Cloud <br /> Solutions</h3>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Cloud <br /> Infrastructure</h3>
         <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Secure, scalable cloud infrastructure for your growing business. We specialize in Azure and AWS migrations.
+          Secure, scalable Azure and AWS architectures designed for high availability.
         </p>
-        <a
-          href="/services/cloud"
-          class="inline-flex items-center font-medium text-primary hover:text-blue-800 transition-colors group"
-        >
-          <span class="mr-2">Learn about Cloud</span>
-          <Icon name="tabler:arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-        </a>
+      </div>
+
+      <div class="group px-6 text-center lg:text-left">
+        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+          <Icon name="tabler:lock" class="w-10 h-10" />
+        </div>
+        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">API Integration <br /> & Security</h3>
+        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+          Seamlessly connect disparate systems with secure, high-performance API integrations.
+        </p>
       </div>
     </div>
   </WidgetWrapper>
@@ -300,46 +242,36 @@ const metadata = {
     tagline="Trusted by Phoenix-Area Service Businesses"
   />
 
-  <section class="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-20">
-    <div class="mb-8 text-center">
-      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Real Results for Arizona Businesses</h2>
-      <p class="mt-4 text-lg text-muted">Documented case studies from Phoenix-area clients</p>
-    </div>
-
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
-        <h3 class="text-xl font-semibold">Scottsdale Contractor</h3>
-        <p class="mt-3 text-muted">
-          Site redesign + local SEO → <strong>150% increase</strong> in online inquiries in 90 days.
-        </p>
-      </article>
-
-      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
-        <h3 class="text-xl font-semibold">Tempe Medical Practice</h3>
-        <p class="mt-3 text-muted">
-          Technical SEO + Google Ads → <strong>200% visibility lift</strong> and 80% more appointments.
-        </p>
-      </article>
-
-      <article class="p-6 bg-white rounded-lg shadow-md dark:bg-slate-900">
-        <h3 class="text-xl font-semibold">Mesa Home Services</h3>
-        <p class="mt-3 text-muted">
-          Hyperlocal social ads + lead optimization → <strong>60% more</strong> qualified leads.
-        </p>
-      </article>
-    </div>
-  </section>
+  <Content
+    title="Data-Driven Content Strategy"
+    subtitle="Proprietary AI that analyzes competitor data to write grounded, SEO-optimized content."
+    items={[
+      {
+        title: 'Competitor Analysis',
+        description:
+          'Our AI scans the top-ranking competitors in your niche to identify content gaps and opportunities.',
+      },
+      {
+        title: 'Optimized Workflow',
+        description: 'Generate high-quality, undetectable AI content that ranks on Google and engages real humans.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Data Driven Dashboard',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        <span class="text-primary">Intelligence</span> Dashboard
+      </h3>
+    </Fragment>
+  </Content>
 
   <Testimonials
-    title="Trusted by Arizona Business Owners"
-    tagline="Client Success Stories"
+    title="Trusted by Tech Leaders"
+    tagline="Success Stories"
     testimonials={[
-      {
-        testimonial:
-          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
-        name: 'J. M.',
-        job: 'Investor',
-      },
       {
         testimonial:
           'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
@@ -348,27 +280,27 @@ const metadata = {
       },
       {
         testimonial:
-          'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
-        name: 'S. K.',
-        job: 'Comptroller',
+          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
+        name: 'J. M.',
+        job: 'Investor',
       },
     ]}
   />
 
   <CallToAction
-    title="Ready to turn your website into a lead engine?"
-    subtitle="Book a free, no-pressure strategy call and leave with a clear 90-day growth roadmap."
+    title="Ready to engineer your growth?"
+    subtitle="Book a transparent technical consultation. No sales pressure, just a roadmap to automation."
     actions={[
       {
         variant: 'primary',
-        text: 'Book a Call',
+        text: 'Book Tech Consult',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
       {
         variant: 'secondary',
-        text: 'Request Proposal',
-        href: '#form',
+        text: 'Contact Us',
+        href: 'mailto:info@ziaflow.com',
       },
     ]}
   />
