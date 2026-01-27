@@ -1,0 +1,8 @@
+{
+  "name": "my-project",
+  "dependencies": {
+    "tessl/npm-playwright": {
+      "version": "1.55.0"
+    }
+  }
+}
