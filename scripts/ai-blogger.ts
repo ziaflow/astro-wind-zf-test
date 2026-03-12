@@ -1,4 +1,4 @@
- // tempimport { createClient } from '@sanity/client';
+import { createClient } from '@sanity/client';
 import OpenAI from 'openai';
 import slugify from 'slugify';
 import dotenv from 'dotenv';
@@ -10,7 +10,6 @@ dotenv.config();
 const SANITY_PROJECT_ID = '92p0tpps';
 const SANITY_DATASET = 'production';
 const SANITY_API_VERSION = '2023-05-03';
-// NOTE: SANITY_API_TOKEN must be a "Editor" or "Admin" token from Sanity Management
 const SANITY_TOKEN = process.env.SANITY_API_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -24,7 +23,7 @@ const sanity = createClient({
   projectId: SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
   token: SANITY_TOKEN,
-  useCdn: false, // We need fresh data for the agent
+  useCdn: false,
   apiVersion: SANITY_API_VERSION,
 });
 
@@ -36,8 +35,7 @@ const openai = new OpenAI({
 });
 
 // --- Main Agent Logic ---
-async function runAgent() {
-  console.log('🤖 AI Blogger Agent Starting...');
+async function runAgent() {  console.log('🤖 AI Blogger Agent Starting...');
 
   // 1. Fetch Dashboard State
   const dashboard = await sanity.fetch(`*[_type == "seoDashboard" && _id == "globalSeoDashboard"][0]`);
