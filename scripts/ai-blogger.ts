@@ -1,4 +1,4 @@
-import { createClient } from '@sanity/client';
+ // tempimport { createClient } from '@sanity/client';
 import OpenAI from 'openai';
 import slugify from 'slugify';
 import dotenv from 'dotenv';
@@ -29,8 +29,11 @@ const sanity = createClient({
 });
 
 const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
   baseURL: process.env.OPENAI_API_BASE,
+  defaultQuery: { 'api-version': '2024-08-01-preview' },
   defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
+});
 });
 // --- Main Agent Logic ---
 async function runAgent() {
@@ -84,7 +87,7 @@ async function runAgent() {
   console.log(`✍️ Generating content for: ${topic}...`);
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
+    model: 'gpt-5.2',
     messages: [
       {
         role: 'system',
