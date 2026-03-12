@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: '92p0tpps',
     dataset: 'production',
   },
+  studioHost: 'ziaflow',
 })
