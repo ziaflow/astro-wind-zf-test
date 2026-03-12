@@ -26,14 +26,12 @@ const sanity = createClient({
   useCdn: false,
   apiVersion: SANITY_API_VERSION,
 });
-
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   baseURL: process.env.OPENAI_API_BASE,
-  defaultQuery: { 'api-version': '2024-08-01-preview' },
+  defaultQuery: { 'api-version': '2024-05-01-preview' }, // Updated to match your screen
   defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
 });
-
 // --- Main Agent Logic ---
 async function runAgent() {  console.log('🤖 AI Blogger Agent Starting...');
 
