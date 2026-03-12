@@ -34,7 +34,6 @@ const openai = new OpenAI({
   defaultQuery: { 'api-version': '2024-08-01-preview' },
   defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
 });
-});
 // --- Main Agent Logic ---
 async function runAgent() {
   console.log('🤖 AI Blogger Agent Starting...');
