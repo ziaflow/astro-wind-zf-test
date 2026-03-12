@@ -29,9 +29,9 @@ const sanity = createClient({
 });
 
 const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY,
+  baseURL: process.env.OPENAI_API_BASE,
+  defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
 });
-
 // --- Main Agent Logic ---
 async function runAgent() {
   console.log('🤖 AI Blogger Agent Starting...');
