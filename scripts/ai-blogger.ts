@@ -33,6 +33,25 @@ const openai = new OpenAI({
   defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
 });
 // --- Main Agent Logic ---
+async function notifyIndexNow(url: string) {
+  const payload = {
+    host: 'ziaflow.com',
+    key: process.env.INDEXNOW_KEY, // Your generated key
+    keyLocation: `https://ziaflow.com/${process.env.INDEXNOW_KEY}.txt`,
+    urlList: [url]
+  };
+
+  try {
+    const response = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify(payload),
+    });
+    if (response.ok) console.log(`🚀 IndexNow notified for: ${url}`);
+  } catch (err) {
+    console.error('❌ IndexNow notification failed:', err);
+  }
+}
 async function runAgent() {  console.log('🤖 AI Blogger Agent Starting...');
 
   // 1. Fetch Dashboard State
@@ -143,6 +162,10 @@ async function runAgent() {  console.log('🤖 AI Blogger Agent Starting...');
 
   const createdPost = await sanity.create(doc);
   console.log(`✅ Post published: ${createdPost.title} (${createdPost._id})`);
+
+  // Notify IndexNow
+  const postUrl = `https://ziaflow.com/blog/${slug}`;
+  await notifyIndexNow(postUrl);
 
   // 6. Update Dashboard
   // Remove the used topic
