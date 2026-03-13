@@ -7,7 +7,7 @@ import path from 'path';
  */
 
 const SITE_URL = 'https://ziaflow.com';
-const API_KEY = 'bb34618aadae4522828704bfbb8a62aa';
+const API_KEY = process.env.INDEXNOW_KEY;
 const DIST_DIR = 'dist';
 
 async function submitToIndexNow() {
