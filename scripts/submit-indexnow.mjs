@@ -16,8 +16,10 @@ async function submitToIndexNow() {
 
     // 1. Find all sitemap files in the dist directory
     const files = fs.readdirSync(DIST_DIR);
-    const sitemapFiles = files.filter(f => f.startsWith('sitemap-') && f.endsWith('.xml') && f !== 'sitemap-index.xml');
-    
+    const sitemapFiles = files.filter(
+      (f) => f.startsWith('sitemap-') && f.endsWith('.xml') && f !== 'sitemap-index.xml'
+    );
+
     let allUrls = [];
 
     for (const file of sitemapFiles) {

@@ -38,7 +38,7 @@ async function notifyIndexNow(url: string) {
     host: 'ziaflow.com',
     key: process.env.INDEXNOW_KEY, // Your generated key
     keyLocation: `https://ziaflow.com/${process.env.INDEXNOW_KEY}.txt`,
-    urlList: [url]
+    urlList: [url],
   };
 
   try {
@@ -52,7 +52,8 @@ async function notifyIndexNow(url: string) {
     console.error('❌ IndexNow notification failed:', err);
   }
 }
-async function runAgent() {  console.log('🤖 AI Blogger Agent Starting...');
+async function runAgent() {
+  console.log('🤖 AI Blogger Agent Starting...');
 
   // 1. Fetch Dashboard State
   const dashboard = await sanity.fetch(`*[_type == "seoDashboard" && _id == "globalSeoDashboard"][0]`);

@@ -13,14 +13,23 @@ This document provides a set of instructions for Gemini agents (such as the one 
 ## Onboarding and Setup
 
 1.  **List Projects:**
+
 - Use the `list_projects` tool to identify the available Sanity projects.
+
 2.  **Select a Project:**
+
 - If multiple projects are available, ask the user to specify which one to work with.
+
 3.  **List Datasets:**
+
 - Use the `list_datasets` tool to see the datasets within the selected project.
+
 4.  **Select a Dataset:**
+
 - Ask the user to choose a dataset (e.g., `production` or `staging`).
+
 5.  **Inspect Schema:**
+
 - Use the `get_schema` tool to retrieve the content schema for the selected dataset.
 
 ## Common Tasks
@@ -36,9 +45,9 @@ This document provides a set of instructions for Gemini agents (such as the one 
 
 - **SEO Audit:**
 - The agent can be prompted to perform an SEO audit on a set of documents. This involves:
-    - Querying for documents of a specific type (e.g., `post`).
-    - Checking for the presence and length of `seo.title` and `seo.description`.
-    - Analyzing the content for keyword density and readability.
+  - Querying for documents of a specific type (e.g., `post`).
+  - Checking for the presence and length of `seo.title` and `seo.description`.
+  - Analyzing the content for keyword density and readability.
 - **AEO (Answer Engine Optimization):**
 - For AEO, the agent can help structure content to answer specific questions. This is particularly useful for "People Also Ask" sections on Google.
 
