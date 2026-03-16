@@ -1,0 +1,122 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import { sanityClient } from 'sanity:client';
+import type { SanityDocument } from '@sanity/client';
+
+const PARTNERS_QUERY = `*[
+  _type == "partnershipPage"
+  && defined(slug.current)
+]|order(publishedAt desc){_id, title, slug, partnerType, tagline, summary, logo, publishedAt}`;
+
+const partners = await sanityClient.fetch<SanityDocument[]>(PARTNERS_QUERY);
+
+const partnerTypeLabels: Record<string, string> = {
+  agency: 'Agency Partner',
+  technology: 'Technology Partner',
+  referral: 'Referral Partner',
+  strategic: 'Strategic Alliance',
+};
+
+const metadata = {
+  title: 'Partnership Opportunities | ZiaFlow',
+  description:
+    'Explore ZiaFlow partnership programs for agencies, consultants, and technology providers. Grow together with a trusted Phoenix digital transformation partner.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Partner with ZiaFlow"
+    title="Build Something Great Together"
+    subtitle="We collaborate with agencies, consultants, and technology providers who share our commitment to delivering measurable results for their clients."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Apply to Partner',
+        href: '/contact',
+        icon: 'tabler:heart-handshake',
+      },
+    ]}
+  />
+
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    {
+      partners.length === 0 ? (
+        <div class="text-center py-16">
+          <p class="text-xl text-gray-500 dark:text-gray-400 mb-6">
+            Partnership programs launching soon. Reach out to learn more.
+          </p>
+          <a
+            href="/contact"
+            class="inline-block bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            Contact Us
+          </a>
+        </div>
+      ) : (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {partners.map((partner) => (
+            <a href={`/partners/${partner.slug.current}`} class="block group">
+              <article class="bg-white dark:bg-slate-900 shadow-lg rounded-xl overflow-hidden transition hover:shadow-xl border border-gray-100 dark:border-slate-800 h-full flex flex-col">
+                <div class="p-6 flex flex-col flex-1">
+                  {partner.partnerType && (
+                    <span class="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 rounded-full px-3 py-1 mb-3 w-fit">
+                      {partnerTypeLabels[partner.partnerType] ?? partner.partnerType}
+                    </span>
+                  )}
+                  <h2 class="text-xl font-bold mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
+                    {partner.title}
+                  </h2>
+                  {partner.tagline && (
+                    <p class="text-gray-600 dark:text-gray-300 font-medium text-sm mb-3">{partner.tagline}</p>
+                  )}
+                  {partner.summary && (
+                    <p class="text-gray-500 dark:text-gray-400 text-sm flex-1 line-clamp-3">{partner.summary}</p>
+                  )}
+                  <p class="mt-4 text-primary font-semibold text-sm group-hover:underline">Learn more →</p>
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="bg-gray-50 dark:bg-slate-800/50 py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4 dark:text-white">Why Partner with ZiaFlow?</h2>
+      <p class="text-gray-600 dark:text-gray-300 text-lg mb-10">
+        Our partner program is built around mutual growth, shared values, and delivering exceptional outcomes for the
+        businesses we serve together.
+      </p>
+      <div class="grid md:grid-cols-3 gap-8 text-left">
+        {
+          [
+            {
+              title: 'Revenue Share',
+              description:
+                'Earn competitive referral commissions for every client you send our way. We reward long-term relationships.',
+            },
+            {
+              title: 'Co-Marketing',
+              description:
+                'Joint case studies, co-branded content, and shared thought leadership to amplify both our reach.',
+            },
+            {
+              title: 'Dedicated Support',
+              description:
+                'A dedicated partner manager to support you, your clients, and every project we tackle together.',
+            },
+          ].map((item) => (
+            <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-slate-700">
+              <h3 class="font-bold text-lg mb-2 dark:text-white">{item.title}</h3>
+              <p class="text-gray-500 dark:text-gray-400 text-sm">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
