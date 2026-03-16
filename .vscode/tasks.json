@@ -1,12 +1,21 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "astro",
-      "problemMatcher": [],
-      "label": "npm: astro",
-      "detail": "astro"
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "astro",
+			"problemMatcher": [],
+			"label": "npm: astro",
+			"detail": "astro"
+		},
+		{
+			"label": "Start Astro dev server",
+			"type": "shell",
+			"command": "npm run dev",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
 }

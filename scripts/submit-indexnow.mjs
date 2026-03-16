@@ -14,6 +14,11 @@ async function submitToIndexNow() {
   try {
     console.log('🚀 Starting IndexNow submission...');
 
+    if (!API_KEY) {
+      console.warn('⚠️ INDEXNOW_KEY environment variable is not set. Skipping IndexNow submission.');
+      return;
+    }
+
     // 1. Find all sitemap files in the dist directory
     const files = fs.readdirSync(DIST_DIR);
     const sitemapFiles = files.filter(
