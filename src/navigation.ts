@@ -39,6 +39,10 @@ export const headerData = {
       links: [{ text: 'All Articles', href: getBlogPermalink() }, ...blogLinks],
     },
     {
+      text: 'Partnerships',
+      href: getPermalink('/partnerships'),
+    },
+    {
       text: 'About',
       href: getPermalink('/about'),
     },
@@ -76,6 +80,7 @@ export const footerData = {
       title: 'ZiaFlow',
       links: [
         { text: 'ZiaFlow', href: getPermalink('/', 'home') },
+        { text: 'Partnerships', href: getPermalink('/partnerships') },
         { text: 'About', href: getPermalink('/about') },
         { text: 'Contact ZiaFlow', href: getPermalink('/contact') },
       ],
