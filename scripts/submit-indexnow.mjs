@@ -6,13 +6,21 @@ import path from 'path';
  * This runs after the build process completes.
  */
 
+// Your main site URL (not the key file)
 const SITE_URL = 'https://ziaflow.com';
+
+// The key ID (filename without .txt), from env
 const API_KEY = process.env.INDEXNOW_KEY;
 const DIST_DIR = 'dist';
 
 async function submitToIndexNow() {
   try {
     console.log('🚀 Starting IndexNow submission...');
+
+    if (!API_KEY) {
+      console.error('❌ INDEXNOW_KEY env var is missing. Skipping IndexNow submission.');
+      return;
+    }
 
     // 1. Find all sitemap files in the dist directory
     const files = fs.readdirSync(DIST_DIR);
@@ -40,11 +48,13 @@ async function submitToIndexNow() {
     const uniqueUrls = [...new Set(allUrls)];
     console.log(`Found ${uniqueUrls.length} unique URLs to submit.`);
 
+    const siteHost = new URL(SITE_URL).host;
+
     // 2. Prepare payload
     const payload = {
-      host: new URL(SITE_URL).host,
+      host: siteHost,
       key: API_KEY,
-      keyLocation: `${SITE_URL}/${API_KEY}.txt`,
+      keyLocation: `${SITE_URL.replace(/\/$/, '')}/${API_KEY}.txt`,
       urlList: uniqueUrls,
     };
 
@@ -61,9 +71,11 @@ async function submitToIndexNow() {
       console.log('✅ IndexNow submission successful!');
     } else {
       const errorText = await response.text();
-      console.error(`❌ IndexNow submission failed with status ${response.status}: ${response.statusText}`);
+      console.error(
+        `❌ IndexNow submission failed with status ${response.status}: ${response.statusText}`
+      );
       console.error('Response:', errorText);
-      // We don't exit with 1 here to avoid breaking the build if the IndexNow API is down
+      // Don't fail the build on IndexNow errors
     }
   } catch (error) {
     console.error('❌ Error during IndexNow submission:', error);
