@@ -1,0 +1,100 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import { sanityClient } from 'sanity:client';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url';
+
+const PARTNERS_QUERY = `*[_type == "partnershipPage" && publishedAt <= now()] | order(publishedAt desc) {
+  title,
+  slug,
+  partnerType,
+  heroSubtitle,
+  seoDescription,
+  partnerLogo
+}`;
+const partners = await sanityClient.fetch(PARTNERS_QUERY);
+
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset ? createImageUrlBuilder({ projectId, dataset }).image(source) : null;
+
+const metadata = {
+  title: 'Partnership Program | ZiaFlow',
+  description:
+    'Explore ZiaFlow partnership opportunities — technology, agency, and integration partners driving digital growth together.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Partnerships"
+    title="Grow Together with ZiaFlow"
+    subtitle="We partner with technology leaders, agencies, and integrators who share our commitment to helping businesses thrive online."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Become a Partner',
+        href: '/contact',
+        icon: 'tabler:handshake',
+      },
+    ]}
+  />
+
+  <section class="container mx-auto px-6 py-16">
+    {
+      partners.length === 0 ? (
+        <p class="text-center text-muted text-lg">
+          No partnership pages published yet. Check back soon!
+        </p>
+      ) : (
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {partners.map((partner) => {
+            const logoUrl = partner.partnerLogo
+              ? urlFor(partner.partnerLogo)?.width(320).height(160).url()
+              : null;
+            return (
+              <a
+                href={`/partners/${partner.slug.current}`}
+                class="group flex flex-col rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              >
+                {logoUrl ? (
+                  <img
+                    src={logoUrl}
+                    alt={`${partner.title} logo`}
+                    class="w-full h-40 object-contain bg-white dark:bg-gray-900 p-6"
+                    width="320"
+                    height="160"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-40 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+                    <span class="text-4xl font-bold text-primary">{partner.title.charAt(0)}</span>
+                  </div>
+                )}
+                <div class="p-6 flex flex-col gap-2 flex-1">
+                  {partner.partnerType && (
+                    <span class="text-xs font-semibold uppercase tracking-wider text-primary">
+                      {partner.partnerType}
+                    </span>
+                  )}
+                  <h2 class="text-xl font-bold group-hover:text-primary transition-colors">
+                    {partner.title}
+                  </h2>
+                  {(partner.seoDescription || partner.heroSubtitle) && (
+                    <p class="text-muted text-sm line-clamp-3">
+                      {partner.seoDescription ?? partner.heroSubtitle}
+                    </p>
+                  )}
+                  <span class="mt-auto pt-4 text-primary text-sm font-medium group-hover:underline">
+                    Learn more →
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      )
+    }
+  </section>
+</Layout>
