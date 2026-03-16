@@ -1,18 +1,73 @@
 {
-  "css.customData": ["./vscode.tailwind.json"],
-  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
-  "files.associations": {
-    "*.mdx": "markdown"
+  "dev.containers.executeInWSL": true,
+  "windowsAiStudio.registerAsLanguageModelProvider": false,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "~/.aitk/instructions/": true
   },
-  "prettier.documentSelectors": ["**/*.astro"],
-  "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
+  "github.copilot.chat.azureModels": {
+    "ziaflow-gpt52-chat": {
+      "name": "ZiaFlow – gpt-5.2-chat",
+      "url": "https://03coding-agent-test-resource.openai.azure.com/openai/deployments/gpt-5.2-chat/chat/completions?api-version=2025-01-01-preview",
+      "toolCalling": true,
+      "vision": false,
+      "thinking": true,
+      "maxInputTokens": 128000,
+      "maxOutputTokens": 4096
+    }
   },
-  "yaml.schemas": {
-    "./.vscode/astrowind/config-schema.json": "/src/config.yaml"
+  "git.autofetch": true,
+  "pgsql.serverGroups": [
+    {
+      "name": "Servers",
+      "id": "99186C40-8492-4FEA-9824-491EB73EB22B",
+      "isDefault": true
+    }
+  ],
+  "pgsql.connections": [
+    {
+      "id": "E0454BCE-2E82-495C-B4C7-AF5BCBFC6373",
+      "groupId": "99186C40-8492-4FEA-9824-491EB73EB22B",
+      "authenticationType": "SqlLogin",
+      "connectTimeout": 15,
+      "applicationName": "vscode-pgsql",
+      "clientEncoding": "utf8",
+      "sslmode": "require",
+      "savePassword": true,
+      "server": "post-analytics-db-prod.postgres.database.azure.com",
+      "database": "postgres",
+      "user": "jeremy",
+      "port": "5432",
+      "password": "",
+      "sshPassword": "",
+      "displayName": "post-analytics-db-prod.postgres.database.azure.com, postgres (undefined)",
+      "expiresOn": 0,
+      "emptyPasswordInput": false,
+      "profileName": "post-analytics-db-prod.postgres.database.azure.com, postgres (jeremy)"
+    }
+  ],
+  "geminicodeassist.project": "astrowebsite-a9a91",
+  "geminicodeassist.inlineSuggestions.enableAuto": true,
+  "diffEditor.codeLens": true,
+  "@azure.argTenant": "",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
   },
-  "eslint.useFlatConfig": true,
-  "chatgpt.openOnStartup": true,
-  "chatgpt.runCodexInWindowsSubsystemForLinux": true,
-  "geminicodeassist.project": "astrowebsite-a9a91"
+  "chat.customAgentInSubagent.enabled": true,
+  "chat.useAgentSkills": true,
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "ms-settings"
+  ],
+  "chat.tips.enabled": false,
+  "chat.checkpoints.showFileChanges": true,
+  "chat.allowAnonymousAccess": true
 }
