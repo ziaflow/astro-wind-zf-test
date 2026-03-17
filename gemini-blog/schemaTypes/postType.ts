@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import {defineField, defineType} from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -7,33 +7,35 @@ export const postType = defineType({
   fields: [
     defineField({
       name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
+      title: 'Slug',
       type: 'slug',
-      options: { source: 'title' },
+      options: {source: 'title'},
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'publishedAt',
+      title: 'Published at',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Main Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
     }),
-    // 💡 Add Author reference for agency credit
     defineField({
       name: 'authors',
       title: 'Authors',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'author' } }], // References the 'author' schema
+      of: [{type: 'reference', to: {type: 'author'}}],
     }),
     defineField({
       name: 'category',
@@ -43,17 +45,17 @@ export const postType = defineType({
     }),
     defineField({
       name: 'body',
+      title: 'Body Content',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{type: 'block'}],
     }),
-    // 💡 CRITICAL: Add SEO Meta Description field
     defineField({
       name: 'seoDescription',
-      title: 'SEO Description (Meta Tag)',
+      title: 'SEO Meta Description (Excerpt)',
       type: 'text',
-      description: 'A brief summary for search engine results. Max 160 characters.',
+      description: 'A brief summary for search engine results. Matches your MDX excerpt.',
       rows: 3,
-      validation: (Rule) => Rule.max(160).warning('Keep under 160 characters'),
+      validation: (rule) => rule.max(160).warning('Keep under 160 characters'),
     }),
   ],
-});
+})

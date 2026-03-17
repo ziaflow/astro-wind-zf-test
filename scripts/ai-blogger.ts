@@ -29,7 +29,7 @@ const sanity = createClient({
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   baseURL: process.env.OPENAI_API_BASE,
-  defaultQuery: { 'api-version': '2024-05-01-preview' }, // Updated to match your screen
+  defaultQuery: { 'api-version': '2025-01-01-preview' },
   defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
 });
 // --- Main Agent Logic ---
@@ -194,7 +194,7 @@ async function runAgent() {
 
   // Execute patches
   for (const mut of mutations) {
-    await sanity.transaction().patch(mut.patch.id, mut.patch).commit();
+    await sanity.transaction().patch(mut.patch.id, { set: mut.patch.set }).commit();
   }
 
   console.log('🏁 Dashboard updated.');
