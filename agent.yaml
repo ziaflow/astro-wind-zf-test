@@ -1,0 +1,5 @@
+name: astro-wind-zf-test
+dockerfile_path: Dockerfile
+resources:
+  cpu: '1.0'
+  memory: 2.0Gi
