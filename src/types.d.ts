@@ -291,3 +291,26 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface PartnerStat {
+  amount?: string;
+  label?: string;
+}
+
+export interface Partner {
+  partnerName?: string;
+  slug?: string;
+  logo?: Image;
+  industry?: string;
+  partnerSince?: string;
+  websiteUrl?: string;
+  tagline?: string;
+  description?: string;
+  featured?: boolean;
+  stats?: Array<PartnerStat>;
+}
+
+export interface PartnerSpotlight extends Omit<Headline, 'classes'>, Widget {
+  partners?: Array<Partner>;
+  callToAction?: CallToAction;
+}

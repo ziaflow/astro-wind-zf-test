@@ -1,0 +1,144 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import PartnerSpotlight from '~/components/widgets/PartnerSpotlight.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Partner Spotlight | ZiaFlow',
+  description:
+    'Meet the trusted technology and service partners that help ZiaFlow deliver exceptional results for Arizona businesses.',
+};
+---
+
+<Layout metadata={metadata}>
+  <PartnerSpotlight
+    id="partner-spotlight"
+    tagline="Our Network"
+    title="Partner Spotlight"
+    subtitle="We collaborate with best-in-class technology platforms and service providers so our clients get maximum value from every engagement."
+    partners={[
+      {
+        partnerName: 'Amazon Web Services',
+        industry: 'Cloud Infrastructure',
+        tagline: 'The backbone of scalable, secure deployments',
+        description:
+          'AWS powers the cloud infrastructure behind our client applications — from serverless APIs to production-grade Kubernetes clusters.',
+        websiteUrl: 'https://aws.amazon.com',
+        featured: true,
+        logo: {
+          src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+          alt: 'Amazon Web Services',
+        },
+        stats: [
+          { amount: '99.99%', label: 'Uptime SLA' },
+          { amount: '200+', label: 'Services' },
+          { amount: 'Global', label: 'Reach' },
+        ],
+      },
+      {
+        partnerName: 'Microsoft Azure',
+        industry: 'Cloud & AI Platform',
+        tagline: 'Enterprise AI with HIPAA-ready infrastructure',
+        description:
+          'Azure provides the HIPAA-eligible, FedRAMP-authorized cloud services we rely on for healthcare and government clients.',
+        websiteUrl: 'https://azure.microsoft.com',
+        logo: {
+          src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+          alt: 'Microsoft Azure',
+        },
+        stats: [
+          { amount: 'HIPAA', label: 'Compliant' },
+          { amount: '60+', label: 'Regions' },
+        ],
+      },
+      {
+        partnerName: 'OpenAI',
+        industry: 'Artificial Intelligence',
+        tagline: 'GPT-powered automation & content intelligence',
+        description:
+          'We integrate OpenAI models into client workflows — from autonomous content agents to intelligent customer service bots.',
+        websiteUrl: 'https://openai.com',
+        logo: {
+          src: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg',
+          alt: 'OpenAI',
+        },
+        stats: [
+          { amount: 'GPT-4o', label: 'Latest Model' },
+          { amount: '150%', label: 'Avg. Lead Growth' },
+        ],
+      },
+      {
+        partnerName: 'Sanity',
+        industry: 'Content Management',
+        tagline: 'Structured content for the modern web',
+        description:
+          'Sanity is the headless CMS behind our content-driven sites, enabling editors to manage pages, posts, and partner spotlights with ease.',
+        websiteUrl: 'https://www.sanity.io',
+        logo: {
+          src: 'https://www.vectorlogo.zone/logos/sanity/sanity-icon.svg',
+          alt: 'Sanity',
+        },
+        stats: [
+          { amount: 'Real-time', label: 'Preview' },
+          { amount: 'GROQ', label: 'Query Language' },
+        ],
+      },
+      {
+        partnerName: 'Netlify',
+        industry: 'Deployment & CDN',
+        tagline: 'Instant global deployments from git',
+        description:
+          'Netlify powers continuous deployment pipelines, edge functions, and preview environments for our static and hybrid sites.',
+        websiteUrl: 'https://www.netlify.com',
+        logo: {
+          src: 'https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg',
+          alt: 'Netlify',
+        },
+        stats: [
+          { amount: '<1s', label: 'Cold Start' },
+          { amount: 'Edge', label: 'Functions' },
+        ],
+      },
+      {
+        partnerName: 'Astro',
+        industry: 'Web Framework',
+        tagline: 'Ship less JavaScript, deliver more performance',
+        description:
+          'Astro is the framework powering this very site — offering island architecture that delivers blazing-fast page loads and perfect Core Web Vitals.',
+        websiteUrl: 'https://astro.build',
+        logo: {
+          src: 'https://www.vectorlogo.zone/logos/astrojs/astrojs-icon.svg',
+          alt: 'Astro',
+        },
+        stats: [
+          { amount: '100', label: 'Lighthouse Score' },
+          { amount: '0 JS', label: 'Default Bundle' },
+        ],
+      },
+    ]}
+    callToAction={{
+      variant: 'primary',
+      text: 'Become a Partner',
+      href: '/contact',
+      icon: 'tabler:handshake',
+    }}
+  />
+
+  <CallToAction
+    title="Ready to grow together?"
+    subtitle="Join our partner network and co-create solutions that drive real business results."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Apply to Partner',
+        href: '/contact',
+        icon: 'tabler:send',
+      },
+      {
+        variant: 'secondary',
+        text: 'Learn More',
+        href: '/about',
+      },
+    ]}
+  />
+</Layout>
