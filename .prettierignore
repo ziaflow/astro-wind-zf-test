@@ -3,3 +3,5 @@ node_modules
 .github
 .changeset
 src/components/common/Analytics.astro
+studio-gemini-blog/.sanity
+.vscode/tasks.json
