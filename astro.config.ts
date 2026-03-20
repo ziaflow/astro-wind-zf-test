@@ -97,7 +97,19 @@ export default defineConfig({
   },
 
   image: {
-    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],
+    domains: [
+      'cdn.pixabay.com',
+      'gmldsdtmahtgrbwwowtn.supabase.co',
+      'upload.wikimedia.org' // Allow AWS, Azure, OpenAI SVGs
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/wikipedia/commons/**',
+      },
+    ],
+    allowSVG: true,
   },
 
   markdown: {

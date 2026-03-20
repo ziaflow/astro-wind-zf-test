@@ -6,15 +6,15 @@ No 'leads' table was found in the Supabase schema for this project. Instead, the
 
 ## Table Structure
 
-| Field      | Type      | Description                       |
-|------------|-----------|-----------------------------------|
-| id         | uuid      | Unique identifier                  |
-| created_at | timestamp | Submission date/time               |
-| name       | text      | Name of the contact                |
-| email      | text      | Email address                      |
-| phone      | text      | Phone number                       |
-| message    | text      | Message content                    |
-| metadata   | jsonb     | Additional data (optional)         |
+| Field      | Type      | Description                |
+| ---------- | --------- | -------------------------- |
+| id         | uuid      | Unique identifier          |
+| created_at | timestamp | Submission date/time       |
+| name       | text      | Name of the contact        |
+| email      | text      | Email address              |
+| phone      | text      | Phone number               |
+| message    | text      | Message content            |
+| metadata   | jsonb     | Additional data (optional) |
 
 ## Key Insights & Trends
 
@@ -30,12 +30,12 @@ No 'leads' table was found in the Supabase schema for this project. Instead, the
 
 ## Example Table Structure
 
-| Name      | Email             | Phone      | Date Submitted       | Message Preview         |
-|-----------|-------------------|------------|----------------------|------------------------|
-| John Doe  | john@example.com  | 555-1234   | 2024-06-07 10:15:00  | "Interested in demo..."|
+| Name     | Email            | Phone    | Date Submitted      | Message Preview         |
+| -------- | ---------------- | -------- | ------------------- | ----------------------- |
+| John Doe | john@example.com | 555-1234 | 2024-06-07 10:15:00 | "Interested in demo..." |
 
-*No real data available for charting.*
+_No real data available for charting._
 
 ---
 
-*This report is based on the schema and code in the repository. For live insights, connect to the production Supabase instance and analyze real submissions.*
+_This report is based on the schema and code in the repository. For live insights, connect to the production Supabase instance and analyze real submissions._
