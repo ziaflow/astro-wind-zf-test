@@ -1,0 +1,182 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Partnerships — ZiaFlow',
+  description:
+    'Explore ZiaFlow strategic partnerships that extend our capabilities and bring more value to clients across web development, marketing automation, and cloud infrastructure.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero
+    tagline="Strategic Partnerships"
+    image={{
+      src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Business partnership handshake',
+    }}
+  >
+    <Fragment slot="title">
+      Growing Together Through <br />
+      <span class="digital-gradient-text">Strategic Alliances</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <div class="max-w-3xl mx-auto text-xl text-muted mb-6 dark:text-slate-300">
+        ZiaFlow collaborates with best-in-class technology providers and agencies to deliver comprehensive digital
+        solutions. Our partner ecosystem ensures clients receive end-to-end value—from infrastructure and automation to
+        design and growth strategy.
+      </div>
+    </Fragment>
+  </Hero>
+
+  <!-- Partner Benefits ************** -->
+  <Features2
+    title="Why Partner With ZiaFlow"
+    subtitle="We co-create success with partners who share our commitment to client outcomes."
+    tagline="Partnership Benefits"
+    columns={3}
+    items={[
+      {
+        title: 'Co-Marketing Opportunities',
+        description:
+          'Gain exposure through joint case studies, co-branded content, and shared campaigns that amplify both brands to our combined audiences.',
+        icon: 'tabler:speakerphone',
+      },
+      {
+        title: 'Revenue Sharing',
+        description:
+          'Structured referral and reseller programs with transparent commission tiers that reward partners for driving qualified business.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Technical Collaboration',
+        description:
+          'Access dedicated ZiaFlow engineering resources for integrations, white-label builds, and joint solution development.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Client Success Support',
+        description:
+          'Shared onboarding playbooks, account management resources, and escalation paths to ensure every mutual client succeeds.',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Priority Access',
+        description:
+          'Partners receive early access to new ZiaFlow products, beta features, and emerging AI automation capabilities before general release.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Certified Partner Badge',
+        description:
+          'Earn a ZiaFlow Certified Partner designation backed by training, quality standards, and public directory listing.',
+        icon: 'tabler:badge',
+      },
+    ]}
+  />
+
+  <!-- Partner Tiers ***************** -->
+  <Steps2
+    title="Partnership Tiers"
+    subtitle="A structured program designed to grow alongside your business."
+    items={[
+      {
+        title: 'Referral Partner',
+        description:
+          'Ideal for consultants, freelancers, and agencies who want to refer clients to ZiaFlow and earn a commission without managing delivery. No minimum commitment required.',
+        icon: 'tabler:user-plus',
+      },
+      {
+        title: 'Silver Partner',
+        description:
+          'For agencies that regularly co-deliver projects with ZiaFlow. Includes co-marketing support, joint proposals, and dedicated account management.',
+        icon: 'tabler:medal',
+      },
+      {
+        title: 'Gold Partner',
+        description:
+          'Deep-integration partners who build products or workflows on top of ZiaFlow infrastructure. Includes revenue sharing, co-development resources, and strategic planning sessions.',
+        icon: 'tabler:trophy',
+      },
+    ]}
+  />
+
+  <!-- Technology Partners ************ -->
+  <Features2
+    title="Technology Partners"
+    tagline="Our Ecosystem"
+    subtitle="ZiaFlow integrates with the tools your team already uses—and helps you get more from every platform."
+    columns={2}
+    items={[
+      {
+        title: 'Microsoft Azure',
+        description:
+          'Cloud infrastructure, Azure Communication Services for automated email and SMS, and AI Foundry integrations for enterprise-grade automation.',
+        icon: 'tabler:brand-azure',
+      },
+      {
+        title: 'Supabase',
+        description:
+          'Open-source backend powering real-time databases, edge functions, and auth—the backbone of ZiaFlow's client data layer.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Sanity',
+        description:
+          'Headless CMS enabling structured content management across all ZiaFlow web properties and client portals.',
+        icon: 'tabler:layout-grid',
+      },
+      {
+        title: 'Vercel',
+        description:
+          'Global deployment platform for all Astro and Next.js properties, enabling instant previews and edge-optimized performance.',
+        icon: 'tabler:brand-vercel',
+      },
+    ]}
+  />
+
+  <!-- CTA *************************** -->
+  <CallToAction
+    title="Ready to Build Something Together?"
+    subtitle="Whether you are a technology vendor, agency, or consultant, let's explore how a ZiaFlow partnership can unlock new value for your clients and grow your business."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Apply to Partner',
+        href: '/contact?subject=Partnership+Inquiry',
+        icon: 'tabler:handshake',
+      },
+      {
+        variant: 'secondary',
+        text: 'Schedule a Call',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  />
+
+  <!-- JSON-LD Schema -->
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'ZiaFlow Partnerships',
+      url: 'https://www.ziaflow.com/partnerships',
+      description:
+        'Learn about ZiaFlow strategic technology and agency partnerships that extend digital transformation capabilities for clients.',
+      publisher: {
+        '@type': 'Organization',
+        name: 'ZiaFlow',
+        url: 'https://www.ziaflow.com',
+      },
+    })}
+  />
+</Layout>
