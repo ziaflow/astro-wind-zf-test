@@ -1,9 +1,9 @@
-import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
+import { fetchPosts } from '~/utils/blog';
+import { getPermalink } from '~/utils/permalinks';
 
 export const GET: APIRoute = async () => {
-  // 1. Fetch your collections (adjust names to match your schema)
-  const posts = await getCollection('post', ({ data }) => !data.draft);
+  const posts = await fetchPosts();
 
   // Note: Services are currently hardcoded as there is no 'services' collection yet.
   const services = [
@@ -64,7 +64,7 @@ export const GET: APIRoute = async () => {
 ${services.map((s) => `- [${s.data.title}](https://ziaflow.com/services/${s.slug}): ${s.data.description}`).join('\n')}
 
 ## Expertise & Guides (Topic Clusters)
-${posts.map((p) => `- [${p.data.title}](https://ziaflow.com/blog/${p.id}): ${p.data.excerpt || p.data.title}`).join('\n')}
+${posts.map((p) => `- [${p.title}](https://ziaflow.com${getPermalink(p.permalink, 'post')}): ${p.excerpt || p.title}`).join('\n')}
 
 ## Contact & Location
 - Address: 2822 E Greenway Rd Suite 10 B, Phoenix, AZ 85032

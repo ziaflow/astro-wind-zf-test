@@ -25,6 +25,8 @@ pnpm-debug.log*
 .env
 .env.production
 .env.local
+src/data/post-generated/*
+!src/data/post-generated/.gitkeep
 
 # macOS-specific files
 .DS_Store

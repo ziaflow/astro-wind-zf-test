@@ -40,8 +40,14 @@ if (!props.decoding) {
 const _image = await findImage(props.src);
 
 let image: ImageType | undefined = undefined;
+const isRemoteSvg = typeof _image === 'string' && /^https?:\/\/.+\.svg(?:\?.*)?$/i.test(_image);
 
-if (
+if (isRemoteSvg) {
+  image = {
+    src: _image,
+    attributes: props,
+  };
+} else if (
   typeof _image === 'string' &&
   (_image.startsWith('http://') || _image.startsWith('https://')) &&
   isUnpicCompatible(_image)

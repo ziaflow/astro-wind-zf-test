@@ -100,7 +100,7 @@ export default defineConfig({
     domains: [
       'cdn.pixabay.com',
       'gmldsdtmahtgrbwwowtn.supabase.co',
-      'upload.wikimedia.org' // Allow AWS, Azure, OpenAI SVGs
+      'upload.wikimedia.org', // Allow AWS, Azure, OpenAI SVGs
     ],
     remotePatterns: [
       {

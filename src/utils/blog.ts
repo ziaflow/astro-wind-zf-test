@@ -57,7 +57,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     metadata = {},
   } = data;
 
-  const slug = cleanSlug(id); // cleanSlug(rawSlug.split('/').pop());
+  const slug = cleanSlug(id);
   const publishDate = new Date(rawPublishDate);
   const updateDate = rawUpdateDate ? new Date(rawUpdateDate) : undefined;
 
@@ -75,27 +75,19 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
   return {
     id: id,
-    slug: slug,
+    slug,
     permalink: await generatePermalink({ id, slug, publishDate, category: category?.slug }),
-
-    publishDate: publishDate,
-    updateDate: updateDate,
-
-    title: title,
-    excerpt: excerpt,
-    image: image,
-
-    category: category,
-    tags: tags,
-    author: author,
-
-    draft: draft,
-
+    publishDate,
+    updateDate,
+    title,
+    excerpt,
+    image,
+    category,
+    tags,
+    author,
+    draft,
     metadata,
-
-    Content: Content,
-    // or 'content' in case you consume from API
-
+    Content,
     readingTime: remarkPluginFrontmatter?.readingTime,
   };
 };
