@@ -1,6 +1,9 @@
+// Analytics Loader: Loads Clarity and GA4 using env-based IDs
+// TODO: Set PUBLIC_CLARITY_PROJECT_ID and PUBLIC_GA_MEASUREMENT_ID in your .env file
 interface LoaderOptions {
   gtmId?: string;
   clarityId?: string;
+  gaMeasurementId?: string;
 }
 
 type LoadTrigger = 'idle' | 'interaction';
