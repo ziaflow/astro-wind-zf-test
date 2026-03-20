@@ -1,0 +1,95 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { sanityClient } from 'sanity:client';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url';
+import { PortableText } from 'astro-portabletext';
+
+export async function getStaticPaths() {
+  const SLUGS_QUERY = `*[_type == "partnershipPage" && defined(slug.current) && publishedAt <= now()]{
+    "params": {"slug": slug.current}
+  }`;
+  return await sanityClient.fetch(SLUGS_QUERY);
+}
+
+const { slug } = Astro.params;
+
+const PAGE_QUERY = `*[_type == "partnershipPage" && slug.current == $slug && publishedAt <= now()][0]`;
+const page = await sanityClient.fetch(PAGE_QUERY, { slug });
+
+if (!page) {
+  return Astro.redirect('/404');
+}
+
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset ? createImageUrlBuilder({ projectId, dataset }).image(source) : null;
+
+const logoUrl = page.partnerLogo ? urlFor(page.partnerLogo)?.width(400).height(200).url() : null;
+
+const metadata = {
+  title: `${page.title} Partnership | ZiaFlow`,
+  description: page.seoDescription,
+};
+
+const benefitItems = (page.benefits ?? []).map((b) => ({
+  title: b.title ?? '',
+  description: b.description ?? '',
+  icon: b.icon ? `tabler:${b.icon}` : 'tabler:star',
+}));
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline={page.partnerType ?? 'Partnership'}
+    title={page.heroHeadline ?? page.title}
+    subtitle={page.heroSubtitle ?? ''}
+    actions={
+      page.ctaUrl
+        ? [{ variant: 'primary', text: page.ctaText ?? 'Become a Partner', href: page.ctaUrl }]
+        : []
+    }
+    image={
+      logoUrl
+        ? { src: logoUrl, alt: `${page.title} logo`, loading: 'eager', fetchpriority: 'high' }
+        : undefined
+    }
+  />
+
+  {
+    benefitItems.length > 0 && (
+      <Features
+        title="Partnership Benefits"
+        items={benefitItems}
+      />
+    )
+  }
+
+  {
+    Array.isArray(page.body) && page.body.length > 0 && (
+      <section class="container mx-auto px-6 py-12 max-w-3xl">
+        <div class="prose prose-lg dark:prose-invert max-w-none">
+          <PortableText value={page.body} />
+        </div>
+      </section>
+    )
+  }
+
+  {
+    page.ctaUrl && (
+      <CallToAction
+        title={`Ready to partner with ZiaFlow?`}
+        actions={[
+          {
+            variant: 'primary',
+            text: page.ctaText ?? 'Become a Partner',
+            href: page.ctaUrl,
+          },
+        ]}
+      />
+    )
+  }
+</Layout>
