@@ -50,7 +50,8 @@ export const seoDashboardType = defineType({
       name: 'keywordGaps',
       title: 'AI Content Opportunities',
       type: 'array',
-      description: 'New high-potential keyword ideas identified by the AI Agent for the content team.',
+      description:
+        'New high-potential keyword ideas identified by the AI Agent for the content team.',
       of: [
         {
           type: 'object',

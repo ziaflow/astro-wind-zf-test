@@ -3,3 +3,6 @@ node_modules
 .github
 .changeset
 src/components/common/Analytics.astro
+.vscode
+studio-gemini-blog/.sanity
+gemini-blog/.sanity
