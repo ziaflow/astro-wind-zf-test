@@ -1,0 +1,119 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { sanityClient } from 'sanity:client';
+import { createImageUrlBuilder } from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url';
+import { PortableText } from 'astro-portabletext';
+
+export async function getStaticPaths() {
+  const SLUGS_QUERY = `*[_type == "partnershipPage" && defined(slug.current)]{
+    "params": {"slug": slug.current}
+  }`;
+  return await sanityClient.fetch(SLUGS_QUERY);
+}
+
+const { slug } = Astro.params;
+
+const PARTNER_QUERY = `*[_type == "partnershipPage" && slug.current == $slug][0]`;
+const partner = await sanityClient.fetch(PARTNER_QUERY, { slug });
+
+if (!partner) {
+  return Astro.redirect('/404');
+}
+
+const { projectId, dataset } = sanityClient.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset ? createImageUrlBuilder({ projectId, dataset }).image(source) : null;
+
+const logoUrl = partner.logo ? urlFor(partner.logo)?.width(400).height(200).fit('max').url() : null;
+
+const partnerTypeLabels: Record<string, string> = {
+  agency: 'Agency Partner',
+  technology: 'Technology Partner',
+  referral: 'Referral Partner',
+  strategic: 'Strategic Alliance',
+};
+
+const metadata = {
+  title: partner.seo?.metaTitle ?? `${partner.title} | ZiaFlow Partners`,
+  description: partner.seo?.metaDescription ?? partner.summary ?? '',
+};
+---
+
+<Layout metadata={metadata}>
+  <main class="max-w-4xl mx-auto px-6 py-16">
+    <a href="/partners" class="inline-block mb-8 text-primary hover:underline text-sm">&larr; All Partners</a>
+
+    <article>
+      {
+        logoUrl && (
+          <div class="mb-8">
+            <img
+              src={logoUrl}
+              alt={`${partner.title} logo`}
+              class="h-20 object-contain"
+              width="400"
+              height="200"
+              loading="lazy"
+            />
+          </div>
+        )
+      }
+
+      {
+        partner.partnerType && (
+          <span class="inline-block text-xs font-semibold uppercase tracking-wide text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">
+            {partnerTypeLabels[partner.partnerType] ?? partner.partnerType}
+          </span>
+        )
+      }
+
+      <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight dark:text-white">{partner.title}</h1>
+
+      {partner.tagline && <p class="text-xl text-gray-600 dark:text-gray-300 mb-6 font-medium">{partner.tagline}</p>}
+
+      {partner.summary && <p class="text-gray-500 dark:text-gray-400 text-lg mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">{partner.summary}</p>}
+
+      {
+        Array.isArray(partner.body) && partner.body.length > 0 && (
+          <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+            <PortableText value={partner.body} />
+          </div>
+        )
+      }
+
+      {
+        Array.isArray(partner.benefits) && partner.benefits.length > 0 && (
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 dark:text-white">Partnership Benefits</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              {partner.benefits.map((benefit: { title: string; description: string }) => (
+                <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-100 dark:border-slate-700">
+                  {benefit.title && <h3 class="font-bold text-lg mb-2 dark:text-white">{benefit.title}</h3>}
+                  {benefit.description && <p class="text-gray-600 dark:text-gray-400 text-sm">{benefit.description}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        (partner.ctaLabel || partner.ctaUrl) && (
+          <div class="text-center mt-12 p-8 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20">
+            <h2 class="text-2xl font-bold mb-3 dark:text-white">Ready to Partner?</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+              Join us and let&apos;s build something great together for your clients.
+            </p>
+            <a
+              href={partner.ctaUrl ?? '/contact'}
+              class="inline-block bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              {partner.ctaLabel ?? 'Become a Partner'}
+            </a>
+          </div>
+        )
+      }
+    </article>
+  </main>
+</Layout>
