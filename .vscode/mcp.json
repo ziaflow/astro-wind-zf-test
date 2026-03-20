@@ -1,0 +1,16 @@
+{
+  // MCP server configuration for Copilot Agent Mode
+  "servers": [
+    {
+      "name": "Microsoft Clarity MCP Server",
+      "description": "Query Clarity analytics via the official MCP server.",
+      "module": "@microsoft/clarity-mcp-server",
+      "args": {
+        // Do NOT hardcode secrets. Use env variable or VS Code input variable pattern.
+        "apiToken": "${env:CLARITY_API_TOKEN}"
+      },
+      "port": 3939,
+      "enabled": true
+    }
+  ]
+}
