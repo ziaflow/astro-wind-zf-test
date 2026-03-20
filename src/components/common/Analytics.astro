@@ -1,10 +1,9 @@
 ---
 // prettier-ignore
-import { ANALYTICS } from 'astrowind:config';
-
-const gtmId = ANALYTICS?.vendors?.googleTagManager?.id;
-const gaId = ANALYTICS?.vendors?.googleAnalytics?.id;
-const clarityId = ANALYTICS?.vendors?.clarity?.id;
+// Analytics IDs are now sourced from Astro.env for security and flexibility
+// TODO: Set CLARITY_PROJECT_ID and GA_MEASUREMENT_ID in your .env file
+const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID;
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <script is:inline define:vars={{ gaId }}>
