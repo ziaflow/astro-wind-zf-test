@@ -38,6 +38,14 @@ export const postType = defineType({
       of: [{type: 'reference', to: {type: 'author'}}], // References the 'author' schema
     }),
     defineField({
+      name: 'sourceTopic',
+      title: 'Source Topic',
+      type: 'reference',
+      to: [{type: 'contentTopic'}],
+      readOnly: true,
+      description: 'Tracks the editorial topic this post was generated from.',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -57,6 +65,14 @@ export const postType = defineType({
       description: 'A brief summary for search engine results. Matches your MDX excerpt.',
       rows: 3,
       validation: (Rule) => Rule.max(160).warning('Keep under 160 characters'),
+    }),
+    defineField({
+      name: 'automationNotes',
+      title: 'Automation Notes',
+      type: 'text',
+      rows: 3,
+      readOnly: true,
+      description: 'Metadata written by the AI drafting workflow.',
     }),
   ],
 })

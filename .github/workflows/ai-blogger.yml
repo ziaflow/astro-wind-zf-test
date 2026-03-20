@@ -13,8 +13,12 @@ jobs:
     env:
       SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
       SANITY_PROJECT_ID: "92p0tpps"
+      SANITY_DATASET: "production"
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+      OPENAI_MODEL: "gpt-5.2"
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+      VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
       
     steps:
       - name: Checkout Code
@@ -30,4 +34,4 @@ jobs:
         run: npm ci
 
       - name: Run AI Agent
-        run: npx tsx scripts/ai-blogger.ts
+        run: npm run agent:blog
