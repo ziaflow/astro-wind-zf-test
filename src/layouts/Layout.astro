@@ -34,12 +34,7 @@ const { language, textDirection } = I18N;
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
-    <Seo
-      site={site}
-      title={metadata.title}
-      description={metadata.description}
-      url={metadata.openGraph?.url || metadata.canonical}
-    />
+    <Seo site={site} />
     <SiteVerification />
     <Analytics />
 

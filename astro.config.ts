@@ -33,10 +33,23 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap({
-      filter: (page) => !page.includes('/admin') && !page.includes('/staging'),
+      filter: (page) => {
+        const url = new URL(page);
+        const pathname = url.pathname;
+        const keep =
+          !pathname.startsWith('/admin') &&
+          !pathname.startsWith('/staging') &&
+          !pathname.startsWith('/form-test') &&
+          pathname !== '/ziaflow' &&
+          pathname !== '/ziaflow/' &&
+          !pathname.startsWith('/tag/') &&
+          !pathname.startsWith('/homes/') &&
+          !pathname.startsWith('/landing/') &&
+          !pathname.startsWith('/posts');
+        return keep;
+      },
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
     }),
     robotsTxt(),
     mdx(),
@@ -94,10 +107,11 @@ export default defineConfig({
   // REDIRECTS: Managing Link Equity (301s)
   redirects: {
     '/old-service-page': '/services/web-development',
+    '/ziaflow': '/about',
   },
 
   image: {
-    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],
+    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co', 'upload.wikimedia.org'],
   },
 
   markdown: {

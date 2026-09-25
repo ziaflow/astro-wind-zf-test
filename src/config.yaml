@@ -11,7 +11,7 @@ metadata:
   title:
     default: ZiaFlow — Your Partner in Digital Transformation
     template: '%s — ZiaFlow'
-  description: 'AI-driven SEO & conversion optimization for B2B SaaS and agencies. Rank higher, convert better.'
+  description: 'ZiaFlow builds conversion-focused websites and connected digital systems for Arizona service businesses, healthcare practices, and growing organizations.'
   robots:
     index: true
     follow: true

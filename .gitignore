@@ -7,19 +7,9 @@ node_modules/
 
 # logs
 npm-debug.log*
-# build output
-dist/
-.output/
-
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
 
 # environment variables
 .env
@@ -39,3 +29,15 @@ pnpm-lock.yaml
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Diagnostic output files — generate via CI artifacts, not version control
+astro_check_output.txt
+check_output.txt
+eslint_output.txt
+error-log.txt
+final_check.txt
+final_check_v2.txt
+broken-links.log
+broken-links-old.log
+astro-wind-zf-test/
+

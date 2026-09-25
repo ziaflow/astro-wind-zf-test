@@ -6,6 +6,10 @@ on:
     - cron: '0 9 * * *'
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
+concurrency:
+  group: ai-blogger
+  cancel-in-progress: false
+
 jobs:
   agent-blog:
     runs-on: ubuntu-latest
@@ -23,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install Dependencies
