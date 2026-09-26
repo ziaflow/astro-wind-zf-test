@@ -18,7 +18,10 @@ function keyFileIsValid(key) {
     return false;
   }
   // The key file must be UTF-8 and contain exactly the key.
-  const contents = fs.readFileSync(keyFile, 'utf-8').replace(/^\uFEFF/, '').trim();
+  const contents = fs
+    .readFileSync(keyFile, 'utf-8')
+    .replace(/^\uFEFF/, '')
+    .trim();
   if (contents !== key) {
     console.error(`❌ ${keyFile} does not contain the key. IndexNow would respond 403 Forbidden.`);
     return false;
