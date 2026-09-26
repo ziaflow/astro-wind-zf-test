@@ -30,9 +30,7 @@ async function checkLinks() {
       .join('\n');
     fs.writeFileSync('broken-links.log', logContent);
 
-    console.error(
-      `❌ Found ${brokenLinks.length} broken links. Check broken-links.log for details.`
-    );
+    console.error(`❌ Found ${brokenLinks.length} broken links. Check broken-links.log for details.`);
     process.exit(1);
   } else {
     console.log('✅ No broken links found!');
@@ -40,4 +38,3 @@ async function checkLinks() {
 }
 
 checkLinks();
-
