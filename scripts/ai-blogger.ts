@@ -2,6 +2,7 @@ import { createClient } from '@sanity/client';
 import OpenAI from 'openai';
 import slugify from 'slugify';
 import dotenv from 'dotenv';
+import { submitUrls } from './indexnow.mjs';
 
 // Load environment variables via dotenv if running locally
 dotenv.config();
@@ -34,23 +35,12 @@ const openai = new OpenAI({
 });
 // --- Main Agent Logic ---
 async function notifyIndexNow(url: string) {
-  const payload = {
-    host: 'ziaflow.com',
-    key: process.env.INDEXNOW_KEY, // Your generated key
-    keyLocation: `https://ziaflow.com/${process.env.INDEXNOW_KEY}.txt`,
-    urlList: [url],
-  };
-
-  try {
-    const response = await fetch('https://api.indexnow.org/indexnow', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify(payload),
-    });
-    if (response.ok) console.log(`🚀 IndexNow notified for: ${url}`);
-  } catch (err) {
-    console.error('❌ IndexNow notification failed:', err);
-  }
+  const ok = await submitUrls({
+    siteUrl: 'https://ziaflow.com',
+    key: process.env.INDEXNOW_KEY?.trim(),
+    urls: [url],
+  });
+  if (ok) console.log(`🚀 IndexNow notified for: ${url}`);
 }
 async function runAgent() {
   console.log('🤖 AI Blogger Agent Starting...');

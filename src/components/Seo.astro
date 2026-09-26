@@ -9,13 +9,7 @@
  * OG and Twitter meta tags are handled by Metadata.astro — they are NOT
  * duplicated here.
  */
-const {
-  siteUrl,
-  title: defaultTitle,
-  description: defaultDescription,
-  logo,
-  social = {},
-} = Astro.props.site || {};
+const { siteUrl, description: defaultDescription, logo, social = {} } = Astro.props.site || {};
 
 const sameAs = [social.linkedin, social.facebook, social.instagram].filter(Boolean);
 

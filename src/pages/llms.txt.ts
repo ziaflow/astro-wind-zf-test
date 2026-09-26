@@ -1,13 +1,13 @@
-import { getCollection } from 'astro:content';
+import { fetchPosts } from '~/utils/blog';
 import type { APIRoute } from 'astro';
 import { getPermalink } from '~/utils/permalinks';
 
 export const GET: APIRoute = async () => {
   // Fetch published posts, deduplicate by title
-  const allPosts = await getCollection('post', ({ data }) => !data.draft);
+  const allPosts = await fetchPosts();
   const seenTitles = new Set<string>();
   const posts = allPosts.filter((p) => {
-    const normalized = p.data.title.toLowerCase().trim();
+    const normalized = p.title.toLowerCase().trim();
     if (seenTitles.has(normalized)) return false;
     seenTitles.add(normalized);
     return true;
@@ -17,16 +17,44 @@ export const GET: APIRoute = async () => {
   const services = [
     { title: 'Web Development', slug: 'web-development', description: 'Responsive, conversion-optimized websites.' },
     { title: 'SEO Services', slug: 'seo', description: 'Local SEO strategies to elevate rankings.' },
-    { title: 'PPC Management', slug: 'ppc', description: 'High-intent keyword campaigns for ready-to-convert customers.' },
-    { title: 'Automation & AI', slug: 'automation', description: 'Deploy intelligent AI agents and workflow automation.' },
-    { title: 'Custom Software', slug: 'software', description: 'Tailored software solutions for unique business needs.' },
+    {
+      title: 'PPC Management',
+      slug: 'ppc',
+      description: 'High-intent keyword campaigns for ready-to-convert customers.',
+    },
+    {
+      title: 'Automation & AI',
+      slug: 'automation',
+      description: 'Deploy intelligent AI agents and workflow automation.',
+    },
+    {
+      title: 'Custom Software',
+      slug: 'software',
+      description: 'Tailored software solutions for unique business needs.',
+    },
     { title: 'Cloud Solutions', slug: 'cloud', description: 'Secure, scalable cloud infrastructure (Azure/AWS).' },
-    { title: 'Ecommerce Solutions', slug: 'ecommerce', description: 'High-converting online stores on Shopify and WooCommerce.' },
-    { title: 'Social Media Marketing', slug: 'social-media', description: 'Strategic content and targeted ad campaigns.' },
+    {
+      title: 'Ecommerce Solutions',
+      slug: 'ecommerce',
+      description: 'High-converting online stores on Shopify and WooCommerce.',
+    },
+    {
+      title: 'Social Media Marketing',
+      slug: 'social-media',
+      description: 'Strategic content and targeted ad campaigns.',
+    },
     { title: 'Local Service Ads', slug: 'local-service-ads', description: 'Google Local Service Ads management.' },
     { title: 'GMB Optimization', slug: 'gmb-optimization', description: 'Google Business Profile optimization.' },
-    { title: 'Performance Tracking', slug: 'performance-tracking', description: 'Transparent reporting and dashboards.' },
-    { title: 'Review Management', slug: 'review-management', description: 'Automated review generation and management.' },
+    {
+      title: 'Performance Tracking',
+      slug: 'performance-tracking',
+      description: 'Transparent reporting and dashboards.',
+    },
+    {
+      title: 'Review Management',
+      slug: 'review-management',
+      description: 'Automated review generation and management.',
+    },
     { title: 'CRO', slug: 'cro', description: 'Conversion Rate Optimization.' },
   ];
 
@@ -64,7 +92,7 @@ ${services.map((s) => `- [${s.title}](${siteUrl}/services/${s.slug}): ${s.descri
 - What does a typical engagement include? Discovery, strategy, design, development, launch, and ongoing optimization with transparent reporting.
 
 ## Content
-${posts.map((p) => `- [${p.data.title}](${siteUrl}${getPermalink(p.data.permalink || p.slug || p.id, 'post')}): ${p.data.excerpt || p.data.title}`).join('\n')}
+${posts.map((p) => `- [${p.title}](${siteUrl}${getPermalink(p.permalink, 'post')}): ${p.excerpt || p.title}`).join('\n')}
 
 ## Pages
 - [Homepage](${siteUrl}/): Overview, services, and consultation booking.
