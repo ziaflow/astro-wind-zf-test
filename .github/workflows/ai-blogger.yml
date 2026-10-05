@@ -19,6 +19,7 @@ jobs:
       SANITY_PROJECT_ID: "92p0tpps"
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
       
     steps:
       - name: Checkout Code
