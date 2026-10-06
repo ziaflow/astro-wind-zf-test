@@ -1,7 +1,10 @@
 dist
 node_modules
 .github
+.agent
+.agents
 .changeset
+src/data/post-generated
 src/components/common/Analytics.astro
 studio-gemini-blog/.sanity
 .vscode/tasks.json
