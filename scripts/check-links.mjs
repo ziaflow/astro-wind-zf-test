@@ -1,12 +1,14 @@
+import fs from 'fs';
 import { LinkChecker } from 'linkinator';
 
 async function checkLinks() {
   const checker = new LinkChecker();
+  const targetDir = fs.existsSync('dist/client') ? 'dist/client' : 'dist';
 
-  console.log('🔍 Scanning for broken links in ./dist...');
+  console.log(`🔍 Scanning for broken links in ./${targetDir}...`);
 
   const result = await checker.check({
-    path: 'dist', // Scan the build output directory
+    path: targetDir, // Scan the build output directory
     recurse: true, // Scan subdirectories
     linksToSkip: [
       'https://www.linkedin.com/company/ziaflow', // External links that often 999/429 deny bots

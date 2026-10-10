@@ -9,7 +9,7 @@ import { isValidKey, submitUrls } from './indexnow.mjs';
 
 const SITE_URL = 'https://ziaflow.com';
 const API_KEY = process.env.INDEXNOW_KEY?.trim();
-const DIST_DIR = 'dist';
+const DIST_DIR = fs.existsSync('dist/client') ? 'dist/client' : 'dist';
 
 function keyFileIsValid(key) {
   const keyFile = path.join(DIST_DIR, `${key}.txt`);
