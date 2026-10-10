@@ -1,11 +1,16 @@
 /**
- * API Route: POST /_api/forms/audit
+ * API Route: POST /api/forms/audit
  * Handles audit booking form submissions
  * Sends confirmation email and fires conversion event
+ *
+ * Moved from src/pages/_api/ — Astro never routes `_`-prefixed paths, so the old URL always 404'd.
  */
 
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
+
+// Serverless function on Vercel (site output remains static).
+export const prerender = false;
 
 interface AuditBookingPayload {
   form_type: string;
@@ -57,12 +62,9 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // TODO: Implement email sending (SendGrid, Mailgun, AWS SES, or similar)
-    // For now, log the submission and return success
-    console.log('Audit booking submission:', {
-      timestamp: new Date().toISOString(),
-      ...payload,
-    });
+    // TODO: Migrate this form onto ContactIntakeForm + FORM_DEFINITIONS so it is persisted
+    // (Supabase/Sheet) before notification. Log metadata only — never personal data.
+    console.log(JSON.stringify({ scope: 'forms', event: 'audit_booking_received', at: new Date().toISOString() }));
 
     await transporter.sendMail({
       from: `"ZiaFlow Website" <${import.meta.env.SMTP_USER}>`,

@@ -1,0 +1,91 @@
+---
+/**
+ * No-JavaScript fallback target for <ContactIntakeForm>.
+ * On-demand (serverless) page: receives the native HTML POST, runs the exact same pipeline as the
+ * `submitInquiry` Astro Action, and renders the outcome inside the normal site layout.
+ * CSRF: protected by `security.checkOrigin: true` (form content-types from other origins are rejected).
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import { processSubmission, requestMeta, type SubmissionResult } from '~/lib/forms/submit';
+import { FORM_DEFINITIONS } from '~/lib/forms/definitions';
+
+export const prerender = false;
+
+if (Astro.request.method !== 'POST') {
+  return Astro.redirect('/contact', 303);
+}
+
+let result: SubmissionResult;
+let backPath = '/contact';
+
+try {
+  const formData = await Astro.request.formData();
+  const pagePath = formData.get('page_path');
+  if (typeof pagePath === 'string' && pagePath.startsWith('/') && !pagePath.startsWith('//')) backPath = pagePath;
+  result = await processSubmission(formData, requestMeta(Astro.request, Astro.clientAddress));
+} catch {
+  result = { ok: false, status: 400, code: 'invalid', message: 'We could not read that submission. Please try again.' };
+}
+
+Astro.response.status = result.ok ? 200 : result.status;
+if (!result.ok && result.retryAfterSeconds) {
+  Astro.response.headers.set('Retry-After', String(result.retryAfterSeconds));
+}
+Astro.response.headers.set('Cache-Control', 'no-store');
+
+const fieldErrors = !result.ok && result.fieldErrors ? Object.entries(result.fieldErrors) : [];
+const labelFor = (name: string) => {
+  for (const def of Object.values(FORM_DEFINITIONS)) {
+    const field = def.fields.find((f) => f.name === name);
+    if (field) return field.label;
+  }
+  return name;
+};
+
+const metadata = {
+  title: result.ok ? 'Message received — ZiaFlow' : 'Please check your submission — ZiaFlow',
+  robots: { index: false, follow: false },
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-2xl px-4 py-20 sm:px-6">
+    <div
+      class="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-slate-800 dark:bg-slate-900/80"
+    >
+      {
+        result.ok ? (
+          <>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Thank you!</h1>
+            <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">{result.message}</p>
+            <a href={backPath} class="btn-primary mt-8 inline-flex">
+              Back to site
+            </a>
+          </>
+        ) : (
+          <>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Please check your submission</h1>
+            <p class="mt-4 text-lg text-slate-600 dark:text-slate-300" role="alert">
+              {result.message}
+            </p>
+            {fieldErrors.length > 0 && (
+              <ul class="mt-4 list-disc space-y-1 pl-6 text-red-700 dark:text-red-400">
+                {fieldErrors.map(([name, message]) => (
+                  <li>
+                    <strong>{labelFor(name)}:</strong> {message}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p class="mt-6 text-sm text-slate-500">
+              Use your browser's Back button to return to the form with your answers intact.
+            </p>
+            <a href={backPath} class="btn mt-6 inline-flex">
+              Return to the form
+            </a>
+          </>
+        )
+      }
+    </div>
+  </section>
+</Layout>

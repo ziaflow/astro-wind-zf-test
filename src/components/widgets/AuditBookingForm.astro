@@ -23,7 +23,7 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
     <form
       id="audit-booking-form"
       method="POST"
-      action="/_api/forms/audit"
+      action="/api/forms/audit"
       class="space-y-4"
       data-ga-event="form_submission"
       data-ga-label="audit_booking"
@@ -158,18 +158,16 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       const data = Object.fromEntries(formData);
 
       try {
-        // Push to dataLayer for GTM tracking
+        // Push to dataLayer for GTM tracking (no personal data)
         if (window.dataLayer) {
           window.dataLayer.push({
             event: 'form_submission',
             form_name: 'audit_booking',
-            email: data.email,
-            company: data.company_name,
           });
         }
 
         // Submit form to serverless handler
-        const response = await fetch('/_api/forms/audit', {
+        const response = await fetch('/api/forms/audit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
