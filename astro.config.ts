@@ -1,7 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
+import vercel from '@astrojs/vercel';
 
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
@@ -26,7 +27,25 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   site: 'https://ziaflow.com',
+  // Pages stay prerendered; routes that export `prerender = false` (form endpoints, Astro Actions)
+  // are deployed as Vercel serverless functions.
   output: 'static',
+  adapter: vercel(),
+
+  // CSRF protection for on-demand routes. NEVER set this to false — fix local test origins instead
+  // (use the same host the dev server prints, e.g. http://localhost:4321, not 127.0.0.1).
+  security: {
+    checkOrigin: true,
+  },
+
+  // Server-only secrets, read at runtime. Never prefix these with PUBLIC_.
+  // Optional so static builds succeed; the form pipeline returns 500 until both are set in Vercel.
+  env: {
+    schema: {
+      GOOGLE_SCRIPT_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
+      GOOGLE_SCRIPT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true, min: 16 }),
+    },
+  },
 
   integrations: [
     tailwind({
@@ -40,6 +59,7 @@ export default defineConfig({
           !pathname.startsWith('/admin') &&
           !pathname.startsWith('/staging') &&
           !pathname.startsWith('/form-test') &&
+          !pathname.startsWith('/forms/') &&
           pathname !== '/ziaflow' &&
           pathname !== '/ziaflow/' &&
           !pathname.startsWith('/tag/') &&
