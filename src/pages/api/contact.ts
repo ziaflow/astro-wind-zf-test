@@ -63,11 +63,10 @@ export const POST: APIRoute = async ({ request }) => {
     if (supabase) {
       const { error: dbError } = await supabase.from('contact_submissions').insert([
         {
-          name,
-          email,
-          phone,
-          message,
+          form_id: 'legacy-contact-api',
+          payload: { name, email, phone, message },
           metadata: otherData,
+          status: 'processed',
         },
       ]);
 

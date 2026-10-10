@@ -51,50 +51,59 @@ function errorCode(err: unknown): string {
 
 let supabaseClient: SupabaseClient | null | undefined;
 
+function parseIp(ip: string | undefined): string | null {
+  if (!ip || ip === 'unknown') return null;
+  return /^([0-9]{1,3}\.){3}[0-9]{1,3}$|^[a-fA-F0-9:]+$/.test(ip) ? ip : null;
+}
+
 function getSupabase(): SupabaseClient | null {
   if (supabaseClient !== undefined) return supabaseClient;
   const url = getSecret('SUPABASE_URL');
-  const key = getSecret('SUPABASE_KEY');
+  const key = getSecret('SUPABASE_SERVICE_ROLE_KEY') || getSecret('SUPABASE_KEY');
   supabaseClient = url && key ? createClient(url, key, { auth: { persistSession: false } }) : null;
   return supabaseClient;
 }
 
 type PersistOutcome = 'saved' | 'duplicate' | 'skipped' | 'failed';
 
-async function saveToSupabase(sub: ValidatedSubmission, receivedAt: string): Promise<PersistOutcome> {
+async function saveToSupabase(
+  sub: ValidatedSubmission,
+  receivedAt: string,
+  meta: RequestMeta
+): Promise<PersistOutcome> {
   const supabase = getSupabase();
   if (!supabase) return 'skipped';
 
   try {
-    // Best-effort dedupe; requires SELECT permission. If RLS blocks it we still insert.
+    // Database-level idempotency on PK `id` (client-generated UUID)
     const { data: existing, error: lookupError } = await supabase
       .from('contact_submissions')
       .select('id')
-      .eq('metadata->>submission_id', sub.submissionId)
+      .eq('id', sub.submissionId)
       .limit(1);
     if (!lookupError && existing && existing.length > 0) return 'duplicate';
 
-    const { name, email, phone, message, ...rest } = sub.values;
     const { error } = await supabase.from('contact_submissions').insert([
       {
-        name,
-        email,
-        phone,
-        message,
+        id: sub.submissionId,
+        form_id: sub.formId,
+        payload: sub.values,
         metadata: {
-          submission_id: sub.submissionId,
-          form_id: sub.formId,
-          form_type: sub.definition.formType,
-          received_at: receivedAt,
+          utm: sub.attribution,
           page_path: sub.pagePath,
           attachment_name: sub.attachment?.name ?? null,
           client_timed: sub.clientTimed,
-          ...rest,
-          ...sub.attribution,
+          processed_at_edge: receivedAt,
         },
+        ip_address: parseIp(meta.clientIp),
+        user_agent: meta.userAgent || null,
+        status: 'pending',
       },
     ]);
+
     if (error) {
+      // Postgres error 23505 = unique_violation on PK `id`
+      if (error.code === '23505') return 'duplicate';
       log('error', 'supabase_insert_failed', { submissionId: sub.submissionId, code: errorCode(error) });
       return 'failed';
     }
@@ -102,6 +111,27 @@ async function saveToSupabase(sub: ValidatedSubmission, receivedAt: string): Pro
   } catch (err) {
     log('error', 'supabase_exception', { submissionId: sub.submissionId, code: errorCode(err) });
     return 'failed';
+  }
+}
+
+async function updateSupabaseStatus(
+  submissionId: string,
+  status: 'processed' | 'failed',
+  errorLog?: string
+): Promise<void> {
+  const supabase = getSupabase();
+  if (!supabase) return;
+
+  try {
+    await supabase
+      .from('contact_submissions')
+      .update({
+        status,
+        error_log: errorLog ?? null,
+      })
+      .eq('id', submissionId);
+  } catch {
+    // Non-blocking status update
   }
 }
 
@@ -314,8 +344,16 @@ export async function processSubmission(formData: FormData, meta: RequestMeta): 
   const receivedAt = new Date().toISOString();
 
   // Persist BEFORE notifying. Database first (durable record), then the review sheet.
-  const dbOutcome = await saveToSupabase(sub, receivedAt);
+  const dbOutcome = await saveToSupabase(sub, receivedAt, meta);
   const sheetOutcome = await saveToSheet(sub, receivedAt, dbOutcome);
+
+  if (dbOutcome === 'saved') {
+    if (sheetOutcome === 'saved' || sheetOutcome === 'duplicate') {
+      await updateSupabaseStatus(sub.submissionId, 'processed');
+    } else {
+      await updateSupabaseStatus(sub.submissionId, 'failed', 'Downstream Google Sheet sync failed');
+    }
+  }
 
   const persisted = ['saved', 'duplicate'].includes(dbOutcome) || ['saved', 'duplicate'].includes(sheetOutcome);
   if (!persisted) {
