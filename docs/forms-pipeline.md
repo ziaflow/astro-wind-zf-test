@@ -32,14 +32,14 @@
 
 ## Configuration
 
-| Variable                                                                   | Where                       | Notes                                                                                                     |
-| -------------------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `GOOGLE_SCRIPT_URL`                                                        | Vercel Production + Preview | Apps Script `/exec` URL. **Required** — submissions 500 without it                                        |
-| `GOOGLE_SCRIPT_SECRET`                                                     | Vercel Production + Preview | Same value as Script Property `SHARED_SECRET` (≥ 32 random chars)                                         |
-| `SUPABASE_URL`                                                             | Vercel Production + Preview | Supabase project URL                                                                                      |
-| `SUPABASE_SERVICE_ROLE_KEY`                                                | Vercel Production + Preview | Recommended server-only key (bypasses RLS to write fallback submissions)                                  |
-| `SUPABASE_KEY`                                                             | Vercel                      | Fallback key if `SUPABASE_SERVICE_ROLE_KEY` is not provided                                               |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `SMTP_TO` | Vercel                      | Optional; internal notification                                                                           |
+| Variable                                                                   | Where                       | Notes                                                                    |
+| -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------ |
+| `GOOGLE_SCRIPT_URL`                                                        | Vercel Production + Preview | Apps Script `/exec` URL. **Required** — submissions 500 without it       |
+| `GOOGLE_SCRIPT_SECRET`                                                     | Vercel Production + Preview | Same value as Script Property `SHARED_SECRET` (≥ 32 random chars)        |
+| `SUPABASE_URL`                                                             | Vercel Production + Preview | Supabase project URL                                                     |
+| `SUPABASE_SERVICE_ROLE_KEY`                                                | Vercel Production + Preview | Recommended server-only key (bypasses RLS to write fallback submissions) |
+| `SUPABASE_KEY`                                                             | Vercel                      | Fallback key if `SUPABASE_SERVICE_ROLE_KEY` is not provided              |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `SMTP_TO` | Vercel                      | Optional; internal notification                                          |
 
 Never prefix any of these with `PUBLIC_`.
 

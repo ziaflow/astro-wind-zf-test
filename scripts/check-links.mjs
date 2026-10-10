@@ -19,6 +19,14 @@ async function checkLinks() {
       'https://ziaflow.com', // Skip self-referential absolute links during build check
       'https://ruhnueopjedaywiqhpgi.supabase.co', // Skip signed URLs that might timeout or fail auth
       'https://gmldsdtmahtgrbwwowtn.supabase.co',
+      // Dynamic on-demand routes (prerender = false) and Astro Actions that do not create static HTML files:
+      '/forms/submit',
+      '/api/forms/audit',
+      '/api/contact',
+      /\/forms\/submit/,
+      /\/api\/forms\/audit/,
+      /\/api\/contact/,
+      /\/_actions/,
     ],
     markdown: true, // check markdown files if present (optional)
   });
@@ -32,9 +40,7 @@ async function checkLinks() {
       .join('\n');
     fs.writeFileSync('broken-links.log', logContent);
 
-    console.error(
-      `❌ Found ${brokenLinks.length} broken links. Check broken-links.log for details.`
-    );
+    console.error(`❌ Found ${brokenLinks.length} broken links. Check broken-links.log for details.`);
     process.exit(1);
   } else {
     console.log('✅ No broken links found!');
@@ -42,4 +48,3 @@ async function checkLinks() {
 }
 
 checkLinks();
-
