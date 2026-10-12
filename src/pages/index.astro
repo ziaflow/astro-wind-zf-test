@@ -11,6 +11,8 @@ import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import ContactIntakeForm from '~/components/forms/ContactIntakeForm.astro';
 import Content from '~/components/widgets/Content.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
@@ -287,10 +289,27 @@ const metadata = {
       {
         variant: 'secondary',
         text: 'Contact Us',
-        href: 'mailto:info@ziaflow.com',
+        href: '#form',
       },
     ]}
   />
+
+  <WidgetWrapper id="form" containerClass="max-w-7xl mx-auto">
+    <Headline
+      tagline="Get In Touch"
+      title="Start Your Digital Transformation"
+      subtitle="Tell us about your project, challenges, and automation needs. Our Phoenix team will get back to you within one business day."
+    />
+    <div
+      class="mx-auto w-full max-w-3xl rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8 dark:border-slate-800 dark:bg-slate-900/80"
+    >
+      <ContactIntakeForm id="home-contact" formId="home-page" pageName="Home" />
+      <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
+        By submitting this form, you agree to our <a href="/privacy" class="underline">privacy policy</a>. We will never
+        share your information with third parties.
+      </p>
+    </div>
+  </WidgetWrapper>
 
   <FAQs
     title="Frequently Asked Questions"

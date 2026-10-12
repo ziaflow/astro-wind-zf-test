@@ -4,8 +4,9 @@
  * DEPLOY
  *  1. Open the target Google Sheet → Extensions → Apps Script → paste this file as Code.gs.
  *  2. Project Settings → Script Properties → add SHARED_SECRET (long random string, ≥ 32 chars).
+ *     Optional: NOTIFICATION_EMAIL (email where notifications are sent; defaults to script owner's email).
  *     Optional: ATTACHMENTS_FOLDER_ID (Drive folder ID); otherwise a folder is created on setup().
- *  3. Run setup() once from the editor and approve the Sheets/Drive permissions.
+ *  3. Run setup() once from the editor and approve the Sheets/Drive/Gmail permissions.
  *  4. Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone → copy the /exec URL.
  *  5. In Vercel (Production + Preview) set GOOGLE_SCRIPT_URL=<exec URL> and GOOGLE_SCRIPT_SECRET=<same secret>.
  *  After editing this script: Deploy → Manage deployments → edit → Version: New version (URL stays the same).
@@ -42,7 +43,9 @@ function setup() {
   }
   getAttachmentsFolder_();
   SpreadsheetApp.getActiveSpreadsheet().getName();
-  Logger.log('Setup complete. Now Deploy → Web app (Execute as: Me, Access: Anyone).');
+  MailApp.getRemainingDailyQuota();
+  Logger.log('Setup complete. Email quota remaining: ' + MailApp.getRemainingDailyQuota());
+  Logger.log('Now Deploy → Web app (Execute as: Me, Access: Anyone).');
 }
 
 function doGet() {
@@ -126,6 +129,9 @@ function doPost(e) {
       var lastRow = sheet.getLastRow();
       sheet.getRange(lastRow, headers.indexOf(ATTACHMENT_HEADER) + 1).setFormula(attachmentFormula);
     }
+
+    // Send email notification to site owner with replyTo set to the lead's email
+    sendNotificationEmail_(tab, values, headers, submissionId, attachmentFormula);
 
     cache.put(cacheKey, '1', 21600);
     return json_({ ok: true, duplicate: false });
@@ -247,4 +253,56 @@ function saveAttachment_(attachment, submissionId) {
 
   var label = safeName.replace(/"/g, '""');
   return '=HYPERLINK("' + file.getUrl() + '","' + label + '")';
+}
+
+/** Send notification email via Gmail/MailApp with reply-to set to the lead's email. */
+function sendNotificationEmail_(tab, values, headers, submissionId, attachmentFormula) {
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var recipient = props.getProperty('NOTIFICATION_EMAIL') || Session.getEffectiveUser().getEmail();
+    if (!recipient) {
+      Logger.log('No recipient email configured for notifications.');
+      return;
+    }
+
+    var leadName = values['Full Name'] || values['Name'] || 'New Lead';
+    var leadEmail = values['Email'] || '';
+    var inquiryType = values['Inquiry Type'] || 'Inquiry';
+    var page = values['Page'] || tab;
+
+    var subject = '[ZiaFlow Lead] New ' + inquiryType + ' from ' + page + ' (' + leadName + ')';
+
+    var bodyLines = [
+      'New lead submission received from ZiaFlow website:',
+      '--------------------------------------------------',
+      'Page: ' + page,
+      'Sheet Tab: ' + tab,
+    ];
+
+    headers.forEach(function (h) {
+      if (h !== ID_HEADER && h !== ATTACHMENT_HEADER && h !== 'Page' && values[h] !== undefined && values[h] !== '') {
+        bodyLines.push(h + ': ' + values[h]);
+      }
+    });
+
+    if (attachmentFormula) {
+      bodyLines.push('Attachment: File uploaded to Drive (see Google Sheet)');
+    }
+
+    bodyLines.push('--------------------------------------------------');
+    bodyLines.push('Submission ID: ' + submissionId);
+    bodyLines.push('Logged At: ' + new Date().toISOString());
+
+    var mailOptions = {
+      name: 'ZiaFlow Website Lead',
+      body: bodyLines.join('\n'),
+    };
+    if (leadEmail && leadEmail.indexOf('@') !== -1) {
+      mailOptions.replyTo = leadEmail;
+    }
+
+    MailApp.sendEmail(recipient, subject, bodyLines.join('\n'), mailOptions);
+  } catch (err) {
+    console.error('Failed to send notification email: ' + (err && err.message));
+  }
 }
