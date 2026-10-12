@@ -16,13 +16,16 @@ export interface Props {
   id: string;
   formId: FormId;
   submitLabel?: string;
+  pageName?: string;
   class?: string;
 }
 
-const { id, formId, submitLabel, class: className = '' } = Astro.props;
+const { id, formId, submitLabel, pageName, class: className = '' } = Astro.props;
 const definition = FORM_DEFINITIONS[formId];
 if (!definition) throw new Error(`ContactIntakeForm: unknown formId "${formId}"`);
 if (!id) throw new Error('ContactIntakeForm: an `id` prop is required and must be unique per page.');
+
+const defaultPageName = pageName || (Astro.url.pathname === '/' ? 'Home' : Astro.url.pathname.replace(/^\/|\/$/g, ''));
 
 const hasFile = definition.fields.some((f) => f.type === 'file');
 const fid = (name: string) => `${id}-${name}`;
@@ -47,6 +50,7 @@ const inputClass =
     <input type="hidden" name="form_type" value={definition.formType} />
     <input type="hidden" name="submission_id" value="" data-zf-submission-id />
     <input type="hidden" name="form_started_at" value="" data-zf-started-at />
+    <input type="hidden" name="page_name" value={defaultPageName} data-zf-page-name />
     <input type="hidden" name="page_path" value={Astro.url.pathname} data-zf-page-path />
     {ATTRIBUTION_FIELDS.map((key) => <input type="hidden" name={key} value="" data-zf-attribution={key} />)}
 
@@ -216,6 +220,13 @@ const inputClass =
       this.q<HTMLInputElement>('[data-zf-started-at]').value = String(Date.now());
       this.q<HTMLInputElement>('[data-zf-submission-id]').value = newSubmissionId();
       this.q<HTMLInputElement>('[data-zf-page-path]').value = window.location.pathname;
+      const pageNameInput = this.querySelector<HTMLInputElement>('[data-zf-page-name]');
+      if (pageNameInput && (!pageNameInput.value || pageNameInput.value === 'Home')) {
+        pageNameInput.value =
+          window.location.pathname === '/'
+            ? 'Home'
+            : pageNameInput.value || window.location.pathname.replace(/^\/|\/$/g, '');
+      }
 
       const attribution = readAttribution();
       this.querySelectorAll<HTMLInputElement>('[data-zf-attribution]').forEach((input) => {

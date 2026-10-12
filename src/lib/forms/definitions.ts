@@ -106,6 +106,13 @@ const ATTACHMENT_FIELD: FieldDefinition = {
 };
 
 export const FORM_DEFINITIONS = {
+  'home-page': {
+    formType: 'contact',
+    sheetTab: 'Home Page',
+    fields: [...CORE_FIELDS, ATTACHMENT_FIELD],
+    submitLabel: 'Send message',
+    successMessage: 'Thanks! We received your message and will reply within one business day.',
+  },
   'contact-page': {
     formType: 'contact',
     sheetTab: 'Contact Page',

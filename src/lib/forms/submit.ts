@@ -91,6 +91,7 @@ async function saveToSupabase(
         metadata: {
           utm: sub.attribution,
           page_path: sub.pagePath,
+          page_name: sub.pageName,
           attachment_name: sub.attachment?.name ?? null,
           client_timed: sub.clientTimed,
           processed_at_edge: receivedAt,
@@ -157,7 +158,7 @@ function buildSheetColumns(sub: ValidatedSubmission, receivedAt: string, supabas
     { header: 'Form ID', value: sub.formId },
     { header: 'Form Type', value: sub.definition.formType },
     ...fieldColumns,
-    { header: 'Page', value: sub.pagePath },
+    { header: 'Page', value: `${sub.pageName} (${sub.pagePath})` },
     { header: 'UTM Source', value: sub.attribution.utm_source ?? '' },
     { header: 'UTM Medium', value: sub.attribution.utm_medium ?? '' },
     { header: 'UTM Campaign', value: sub.attribution.utm_campaign ?? '' },
@@ -259,8 +260,9 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
       from: getSecret('SMTP_FROM') || user,
       to: getSecret('SMTP_TO') || getSecret('MAIL_TO') || 'info@ziaflow.com',
       replyTo: sub.values.email,
-      subject: `[ZiaFlow] ${inquiry} — ${sub.definition.sheetTab}`,
+      subject: `[ZiaFlow Lead] ${inquiry} from ${sub.pageName} — ${sub.definition.sheetTab}`,
       text: [
+        `Page: ${sub.pageName} (${sub.pagePath})`,
         ...rows.map((r) => `${r.label}: ${r.value}`),
         sub.attachment ? `Attachment: ${sub.attachment.name} (see Google Sheet / Drive)` : '',
         '',
@@ -269,6 +271,7 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
       ].join('\n'),
       html: `
         <h3>New ${escapeHtml(inquiry)} (${escapeHtml(sub.definition.sheetTab)})</h3>
+        <p><strong>Submitted on Page:</strong> ${escapeHtml(sub.pageName)} (<code>${escapeHtml(sub.pagePath)}</code>)</p>
         <table cellpadding="4">${rows
           .map(
             (r) =>

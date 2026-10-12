@@ -46,8 +46,10 @@ Never prefix any of these with `PUBLIC_`.
 ### Apps Script deployment
 
 1. Google Sheet → Extensions → Apps Script → paste `google-apps-script/Code.gs`.
-2. Project Settings → Script Properties → `SHARED_SECRET`.
-3. Run `setup()` once; approve permissions.
+2. Project Settings → Script Properties:
+   - `SHARED_SECRET` (required: long random string, ≥ 32 chars).
+   - `NOTIFICATION_EMAIL` (optional: destination email for new lead alerts; defaults to the Google account owning the sheet).
+3. Run `setup()` once; approve Google Sheets, Drive, and Gmail permissions.
 4. Deploy → Web app → Execute as **Me** → Access **Anyone** → copy the `/exec` URL.
 5. Add `GOOGLE_SCRIPT_URL` / `GOOGLE_SCRIPT_SECRET` to Vercel (Production + Preview), then redeploy.
 

@@ -39,6 +39,7 @@ export interface ValidatedSubmission {
   attachment: AttachmentPayload | null;
   attribution: Record<string, string>;
   pagePath: string;
+  pageName: string;
   /** False when the client never ran JS (no start timestamp) — recorded for review, not rejected. */
   clientTimed: boolean;
 }
@@ -146,13 +147,19 @@ export function validateSubmission(formData: FormData, now = Date.now()): Valida
     if (v) attribution[key] = v;
   }
   const pagePathRaw = str(formData, 'page_path');
-  const pagePath = pagePathRaw.startsWith('/') ? pagePathRaw.slice(0, 300) : '';
+  const pagePath = pagePathRaw.startsWith('/')
+    ? pagePathRaw.slice(0, 300)
+    : pagePathRaw
+      ? `/${pagePathRaw.slice(0, 299)}`
+      : '/';
+  const pageNameRaw = str(formData, 'page_name');
+  const pageName = pageNameRaw ? pageNameRaw.slice(0, 100) : pagePath === '/' ? 'Home' : pagePath.replace(/^\//, '');
 
   const clientId = str(formData, 'submission_id');
   const submissionId = UUID_RE.test(clientId) ? clientId.toLowerCase() : crypto.randomUUID();
 
   return {
     ok: true,
-    data: { formId, definition, submissionId, values, attachment, attribution, pagePath, clientTimed },
+    data: { formId, definition, submissionId, values, attachment, attribution, pagePath, pageName, clientTimed },
   };
 }
