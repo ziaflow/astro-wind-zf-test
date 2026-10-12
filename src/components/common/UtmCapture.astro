@@ -1,0 +1,28 @@
+---
+/**
+ * Captures marketing attribution (utm_source, utm_medium, utm_campaign, gclid) from the landing URL
+ * into sessionStorage so forms on later pages in the same session can attach it.
+ * Stores attribution only — never personal data.
+ */
+---
+
+<script is:inline>
+  (function () {
+    try {
+      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
+      const params = new URLSearchParams(window.location.search);
+      const found = {};
+      let any = false;
+      keys.forEach((k) => {
+        const v = params.get(k);
+        if (v) {
+          found[k] = v.slice(0, 200);
+          any = true;
+        }
+      });
+      if (any) sessionStorage.setItem('zf_attribution', JSON.stringify(found));
+    } catch {
+      /* storage disabled — attribution is best-effort */
+    }
+  })();
+</script>

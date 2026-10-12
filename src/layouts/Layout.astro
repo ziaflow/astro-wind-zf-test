@@ -13,6 +13,7 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import AnalyticsBody from '~/components/common/AnalyticsBody.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import UtmCapture from '~/components/common/UtmCapture.astro';
 import Seo from '~/components/Seo.astro';
 import site from '~/data/site';
 
@@ -41,6 +42,7 @@ const { language, textDirection } = I18N;
     <slot name="head" />
 
     <BasicScripts />
+    <UtmCapture />
     <SpeedInsights />
     <VercelAnalytics />
 

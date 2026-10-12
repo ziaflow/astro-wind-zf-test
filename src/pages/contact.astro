@@ -1,7 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import ContactIntakeForm from '~/components/forms/ContactIntakeForm.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
@@ -19,44 +21,21 @@ const metadata = {
     subtitle="Ready to transform your business? Schedule a free consultation to discuss your challenges, goals, and how we can help you achieve measurable results."
   />
 
-  <ContactUs
-    id="form"
-    accessKey="45824078-d31c-4031-9b48-404ac962a7a6"
-    title="Start Your Digital Transformation"
-    subtitle="Tell us about your project and we will get back to you within 24 hours. Whether you need custom development, automation, or marketing solutions, our team is ready to help."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Full Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-      {
-        type: 'text',
-        name: 'company',
-        label: 'Company',
-      },
-      {
-        type: 'text',
-        name: 'phone',
-        label: 'Phone',
-      },
-    ]}
-    textarea={{
-      label: 'Tell us about your project',
-      placeholder:
-        'What challenges are you facing? What are your goals? The more details you provide, the better we can help.',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this form, you agree to our privacy policy. We will never share your information with third parties.',
-    }}
-    description="Our team typically responds within 24 hours, often sooner. For urgent inquiries, please call or email directly."
-  />
+  <WidgetWrapper id="form" containerClass="max-w-7xl mx-auto">
+    <Headline
+      title="Start Your Digital Transformation"
+      subtitle="Tell us about your project and we will get back to you within 24 hours. Whether you need custom development, automation, or marketing solutions, our team is ready to help."
+    />
+    <div
+      class="mx-auto w-full max-w-3xl rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8 dark:border-slate-800 dark:bg-slate-900/80"
+    >
+      <ContactIntakeForm id="contact-main" formId="contact-page" />
+      <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
+        By submitting this form, you agree to our <a href="/privacy" class="underline">privacy policy</a>. We will never
+        share your information with third parties. Our team typically responds within 24 hours, often sooner.
+      </p>
+    </div>
+  </WidgetWrapper>
 
   <!-- Features2 Widget ************** -->
   <Features2

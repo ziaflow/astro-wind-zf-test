@@ -5,3 +5,9 @@ node_modules
 src/components/common/Analytics.astro
 studio-gemini-blog/.sanity
 .vscode/tasks.json
+.agent/
+.agents/
+.tessl/
+broken-links.log
+astro-wind-zf-test/
+.vercel/

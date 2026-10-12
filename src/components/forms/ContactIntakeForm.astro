@@ -1,0 +1,347 @@
+---
+/**
+ * ContactIntakeForm — reusable, schema-driven lead form.
+ *
+ * Usage: <ContactIntakeForm id="contact-main" formId="contact-page" />
+ *
+ * - `id` must be unique per page instance (scopes all element IDs).
+ * - `formId` must be a key of FORM_DEFINITIONS (server allowlist).
+ * - Works without JavaScript: native POST to /forms/submit (on-demand page).
+ * - With JavaScript: <ziaflow-contact-form> intercepts submit and calls the `submitInquiry` Astro Action.
+ *   All DOM queries are scoped to the custom element instance, so multiple forms can share a page.
+ */
+import { FORM_DEFINITIONS, HONEYPOT_FIELD, ATTRIBUTION_FIELDS, type FormId } from '~/lib/forms/definitions';
+
+export interface Props {
+  id: string;
+  formId: FormId;
+  submitLabel?: string;
+  class?: string;
+}
+
+const { id, formId, submitLabel, class: className = '' } = Astro.props;
+const definition = FORM_DEFINITIONS[formId];
+if (!definition) throw new Error(`ContactIntakeForm: unknown formId "${formId}"`);
+if (!id) throw new Error('ContactIntakeForm: an `id` prop is required and must be unique per page.');
+
+const hasFile = definition.fields.some((f) => f.type === 'file');
+const fid = (name: string) => `${id}-${name}`;
+
+const inputClass =
+  'block w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm transition ' +
+  'placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary ' +
+  'aria-[invalid=true]:border-red-500 ' +
+  'dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder:text-slate-500';
+---
+
+<ziaflow-contact-form class:list={['block', className]} data-form-id={formId}>
+  <form
+    id={id}
+    method="POST"
+    action="/forms/submit"
+    enctype={hasFile ? 'multipart/form-data' : 'application/x-www-form-urlencoded'}
+    class="grid grid-cols-1 gap-5 sm:grid-cols-2"
+    data-zf-form
+  >
+    <input type="hidden" name="form_id" value={formId} />
+    <input type="hidden" name="form_type" value={definition.formType} />
+    <input type="hidden" name="submission_id" value="" data-zf-submission-id />
+    <input type="hidden" name="form_started_at" value="" data-zf-started-at />
+    <input type="hidden" name="page_path" value={Astro.url.pathname} data-zf-page-path />
+    {ATTRIBUTION_FIELDS.map((key) => <input type="hidden" name={key} value="" data-zf-attribution={key} />)}
+
+    <!-- Honeypot: hidden from humans and assistive tech; must stay empty. -->
+    <div class="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+      <label for={fid(HONEYPOT_FIELD)}>Leave this field empty</label>
+      <input type="text" id={fid(HONEYPOT_FIELD)} name={HONEYPOT_FIELD} tabindex="-1" autocomplete="off" value="" />
+    </div>
+
+    {
+      definition.fields.map((field) => {
+        const fieldId = fid(field.name);
+        const errorId = `${fieldId}-error`;
+        const colSpan = field.half ? 'sm:col-span-1' : 'sm:col-span-2';
+        return (
+          <div class={colSpan} data-zf-field={field.name}>
+            <label for={fieldId} class="mb-1.5 block text-sm font-medium text-slate-800 dark:text-slate-200">
+              {field.label}
+              {field.required ? (
+                <span class="text-red-600 dark:text-red-400" aria-hidden="true">
+                  {' '}
+                  *
+                </span>
+              ) : (
+                <span class="font-normal text-slate-500"> (optional)</span>
+              )}
+            </label>
+
+            {field.type === 'textarea' ? (
+              <textarea
+                id={fieldId}
+                name={field.name}
+                rows={5}
+                required={field.required}
+                maxlength={field.maxLength}
+                placeholder={field.placeholder}
+                aria-describedby={errorId}
+                class={`${inputClass} resize-y`}
+              />
+            ) : field.type === 'select' ? (
+              <select
+                id={fieldId}
+                name={field.name}
+                required={field.required}
+                aria-describedby={errorId}
+                class={inputClass}
+              >
+                <option value="" disabled selected>
+                  Select one…
+                </option>
+                {field.options?.map((o) => (
+                  <option value={o.value}>{o.label}</option>
+                ))}
+              </select>
+            ) : field.type === 'file' ? (
+              <>
+                <input
+                  type="file"
+                  id={fieldId}
+                  name={field.name}
+                  accept={field.accept}
+                  required={field.required}
+                  aria-describedby={`${errorId} ${fieldId}-hint`}
+                  data-max-bytes={field.maxBytes}
+                  class="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:font-medium file:text-primary hover:file:bg-slate-200 dark:text-slate-300 dark:file:bg-slate-800"
+                />
+                <p id={`${fieldId}-hint`} class="mt-1 text-xs text-slate-500">
+                  PDF, image, text or Word document, up to {Math.floor((field.maxBytes ?? 0) / 1024 / 1024)} MB.
+                </p>
+              </>
+            ) : (
+              <input
+                type={field.type}
+                id={fieldId}
+                name={field.name}
+                required={field.required}
+                maxlength={field.maxLength}
+                placeholder={field.placeholder}
+                autocomplete={field.autocomplete}
+                aria-describedby={errorId}
+                class={inputClass}
+              />
+            )}
+
+            <p id={errorId} class="mt-1 hidden text-sm text-red-600 dark:text-red-400" data-zf-error />
+          </div>
+        );
+      })
+    }
+
+    <div class="sm:col-span-2">
+      <button
+        type="submit"
+        class="btn-primary inline-flex w-full items-center justify-center gap-2 sm:w-auto disabled:cursor-wait disabled:opacity-70"
+        data-zf-submit
+      >
+        <svg class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true" data-zf-spinner>
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+          <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+        </svg>
+        <span data-zf-submit-label>{submitLabel ?? definition.submitLabel}</span>
+      </button>
+    </div>
+
+    <div
+      class="sm:col-span-2 hidden rounded-xl border px-4 py-3 text-sm focus:outline-none"
+      role="status"
+      aria-live="polite"
+      tabindex="-1"
+      data-zf-status
+    >
+    </div>
+  </form>
+</ziaflow-contact-form>
+
+<script>
+  import { actions, isInputError } from 'astro:actions';
+
+  const ATTRIBUTION_KEY = 'zf_attribution';
+  const ATTRIBUTION_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
+
+  type Status = 'success' | 'error';
+
+  function newSubmissionId(): string {
+    if (typeof window !== 'undefined' && window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    const b =
+      typeof window !== 'undefined' && window.crypto
+        ? window.crypto.getRandomValues(new Uint8Array(16))
+        : new Uint8Array(16);
+    if (typeof window === 'undefined' || !window.crypto) {
+      for (let i = 0; i < 16; i++) b[i] = Math.floor(Math.random() * 256);
+    }
+    b[6] = (b[6] & 0x0f) | 0x40;
+    b[8] = (b[8] & 0x3f) | 0x80;
+    const h = Array.from(b, (x: number) => x.toString(16).padStart(2, '0')).join('');
+    return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
+  }
+
+  function readAttribution(): Record<string, string> {
+    let stored: Record<string, string> = {};
+    try {
+      stored = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || '{}');
+    } catch {
+      /* storage unavailable */
+    }
+    // Also honour params on the current URL (in case the global capture script hasn't run).
+    const params = new URLSearchParams(window.location.search);
+    for (const key of ATTRIBUTION_FIELDS) {
+      const v = params.get(key);
+      if (v) stored[key] = v;
+    }
+    return stored;
+  }
+
+  class ZiaflowContactForm extends HTMLElement {
+    private form!: HTMLFormElement;
+    private busy = false;
+
+    connectedCallback() {
+      const form = this.querySelector<HTMLFormElement>('form[data-zf-form]');
+      if (!form || form.dataset.zfReady) return;
+      this.form = form;
+      form.dataset.zfReady = 'true';
+
+      this.q<HTMLInputElement>('[data-zf-started-at]').value = String(Date.now());
+      this.q<HTMLInputElement>('[data-zf-submission-id]').value = newSubmissionId();
+      this.q<HTMLInputElement>('[data-zf-page-path]').value = window.location.pathname;
+
+      const attribution = readAttribution();
+      this.querySelectorAll<HTMLInputElement>('[data-zf-attribution]').forEach((input) => {
+        input.value = attribution[input.dataset.zfAttribution || ''] || '';
+      });
+
+      form.addEventListener('submit', (e) => this.onSubmit(e));
+      form.addEventListener('input', (e) => this.clearFieldError(e.target as HTMLElement));
+    }
+
+    private q<T extends Element>(selector: string): T {
+      return this.querySelector(selector) as T;
+    }
+
+    private setBusy(busy: boolean) {
+      this.busy = busy;
+      const button = this.q<HTMLButtonElement>('[data-zf-submit]');
+      button.disabled = busy;
+      this.q<SVGElement>('[data-zf-spinner]').classList.toggle('hidden', !busy);
+      this.form.setAttribute('aria-busy', String(busy));
+    }
+
+    private showStatus(kind: Status, message: string) {
+      const el = this.q<HTMLElement>('[data-zf-status]');
+      el.textContent = message;
+      el.classList.remove(
+        'hidden',
+        'border-green-300',
+        'bg-green-50',
+        'text-green-800',
+        'border-red-300',
+        'bg-red-50',
+        'text-red-800'
+      );
+      el.classList.add(
+        ...(kind === 'success'
+          ? ['border-green-300', 'bg-green-50', 'text-green-800']
+          : ['border-red-300', 'bg-red-50', 'text-red-800'])
+      );
+      el.focus?.();
+    }
+
+    private clearFieldError(target: HTMLElement | null) {
+      const wrapper = target?.closest<HTMLElement>('[data-zf-field]');
+      if (!wrapper) return;
+      wrapper.querySelector('[aria-invalid]')?.removeAttribute('aria-invalid');
+      const err = wrapper.querySelector<HTMLElement>('[data-zf-error]');
+      if (err) {
+        err.textContent = '';
+        err.classList.add('hidden');
+      }
+    }
+
+    private showFieldErrors(errors: Record<string, string>) {
+      let first: HTMLElement | null = null;
+      for (const [name, message] of Object.entries(errors)) {
+        const wrapper = this.querySelector<HTMLElement>(`[data-zf-field="${CSS.escape(name)}"]`);
+        if (!wrapper) continue;
+        const control = wrapper.querySelector<HTMLElement>('input, select, textarea');
+        control?.setAttribute('aria-invalid', 'true');
+        const err = wrapper.querySelector<HTMLElement>('[data-zf-error]');
+        if (err) {
+          err.textContent = message;
+          err.classList.remove('hidden');
+        }
+        first ??= control;
+      }
+      first?.focus();
+    }
+
+    private checkFileSize(): boolean {
+      const input = this.querySelector<HTMLInputElement>('input[type="file"][data-max-bytes]');
+      const file = input?.files?.[0];
+      const max = Number(input?.dataset.maxBytes || 0);
+      if (input && file && max && file.size > max) {
+        this.showFieldErrors({ [input.name]: `File must be ${Math.floor(max / 1024 / 1024)} MB or smaller.` });
+        return false;
+      }
+      return true;
+    }
+
+    private async onSubmit(event: SubmitEvent) {
+      event.preventDefault();
+      if (this.busy) return;
+      if (!this.form.reportValidity() || !this.checkFileSize()) return;
+
+      this.setBusy(true);
+      try {
+        // The submission_id is reused on retry so the server/sheet can de-duplicate.
+        const { data, error } = await actions.submitInquiry(new FormData(this.form));
+
+        if (error) {
+          if (isInputError(error)) {
+            const fieldErrors = Object.fromEntries(
+              Object.entries(error.fields).map(([k, v]) => [k, (v ?? []).join(' ')])
+            );
+            this.showFieldErrors(fieldErrors);
+          }
+          this.showStatus('error', error.message || 'Something went wrong. Please try again.');
+          return;
+        }
+
+        if (data && 'fieldErrors' in data && data.fieldErrors) {
+          this.showFieldErrors(data.fieldErrors);
+          this.showStatus('error', data.message);
+          return;
+        }
+
+        this.showStatus('success', data?.message ?? 'Thanks! We received your message.');
+        const inquiryType = (this.form.elements.namedItem('inquiry_type') as HTMLSelectElement | null)?.value;
+        // Analytics: no personal data (no name/email/phone/company/message).
+        const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+        w.dataLayer?.push({ event: 'generate_lead', form_id: this.dataset.formId, inquiry_type: inquiryType });
+
+        this.form.reset();
+        this.q<HTMLInputElement>('[data-zf-submission-id]').value = newSubmissionId();
+        this.q<HTMLInputElement>('[data-zf-started-at]').value = String(Date.now());
+      } catch {
+        this.showStatus('error', 'Network error — please check your connection and try again.');
+      } finally {
+        this.setBusy(false);
+      }
+    }
+  }
+
+  if (!customElements.get('ziaflow-contact-form')) {
+    customElements.define('ziaflow-contact-form', ZiaflowContactForm);
+  }
+</script>
