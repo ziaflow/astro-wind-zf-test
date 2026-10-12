@@ -4,7 +4,7 @@
  * DEPLOY
  *  1. Open the target Google Sheet → Extensions → Apps Script → paste this file as Code.gs.
  *  2. Project Settings → Script Properties → add SHARED_SECRET (long random string, ≥ 32 chars).
- *     Optional: NOTIFICATION_EMAIL (email where notifications are sent; defaults to script owner's email).
+ *     Optional: NOTIFICATION_EMAIL (email where notifications are sent; defaults to info@ziaflow.com).
  *     Optional: ATTACHMENTS_FOLDER_ID (Drive folder ID); otherwise a folder is created on setup().
  *  3. Run setup() once from the editor and approve the Sheets/Drive/Gmail permissions.
  *  4. Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone → copy the /exec URL.
@@ -43,8 +43,12 @@ function setup() {
   }
   getAttachmentsFolder_();
   SpreadsheetApp.getActiveSpreadsheet().getName();
+  if (!props.getProperty('NOTIFICATION_EMAIL')) {
+    props.setProperty('NOTIFICATION_EMAIL', 'info@ziaflow.com');
+  }
   MailApp.getRemainingDailyQuota();
   Logger.log('Setup complete. Email quota remaining: ' + MailApp.getRemainingDailyQuota());
+  Logger.log('Notifications will be sent to: ' + (props.getProperty('NOTIFICATION_EMAIL') || 'info@ziaflow.com'));
   Logger.log('Now Deploy → Web app (Execute as: Me, Access: Anyone).');
 }
 
@@ -259,11 +263,7 @@ function saveAttachment_(attachment, submissionId) {
 function sendNotificationEmail_(tab, values, headers, submissionId, attachmentFormula) {
   try {
     var props = PropertiesService.getScriptProperties();
-    var recipient = props.getProperty('NOTIFICATION_EMAIL') || Session.getEffectiveUser().getEmail();
-    if (!recipient) {
-      Logger.log('No recipient email configured for notifications.');
-      return;
-    }
+    var recipient = props.getProperty('NOTIFICATION_EMAIL') || 'info@ziaflow.com';
 
     var leadName = values['Full Name'] || values['Name'] || 'New Lead';
     var leadEmail = values['Email'] || '';
@@ -299,6 +299,17 @@ function sendNotificationEmail_(tab, values, headers, submissionId, attachmentFo
     };
     if (leadEmail && leadEmail.indexOf('@') !== -1) {
       mailOptions.replyTo = leadEmail;
+    }
+    try {
+      var aliases = GmailApp.getAliases();
+      for (var i = 0; i < aliases.length; i++) {
+        if (aliases[i].toLowerCase() === 'info@ziaflow.com') {
+          mailOptions.from = aliases[i];
+          break;
+        }
+      }
+    } catch (aliasErr) {
+      /* ignore if alias lookup not supported */
     }
 
     MailApp.sendEmail(recipient, subject, bodyLines.join('\n'), mailOptions);
