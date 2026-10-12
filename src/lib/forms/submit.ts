@@ -257,7 +257,7 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
 
   try {
     await transporter.sendMail({
-      from: getSecret('SMTP_FROM') || user,
+      from: getSecret('SMTP_FROM') || 'info@ziaflow.com',
       to: getSecret('SMTP_TO') || getSecret('MAIL_TO') || 'info@ziaflow.com',
       replyTo: sub.values.email,
       subject: `[ZiaFlow Lead] ${inquiry} from ${sub.pageName} — ${sub.definition.sheetTab}`,

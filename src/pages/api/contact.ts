@@ -93,7 +93,7 @@ export const POST: APIRoute = async ({ request }) => {
     const safeMessage = escapeHtml(message || '').replace(/\n/g, '<br/>');
 
     await transporter.sendMail({
-      from: import.meta.env.SMTP_FROM || import.meta.env.SMTP_USER || 'no-reply@ziaflow.com',
+      from: import.meta.env.SMTP_FROM || 'info@ziaflow.com',
       to: import.meta.env.SMTP_TO || 'info@ziaflow.com',
       replyTo: email,
       subject: `Contact Form Submission from ${safeName || safeEmail}`,

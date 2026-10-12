@@ -49,7 +49,7 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
-SMTP_FROM=noreply@ziaflow.com
+SMTP_FROM=info@ziaflow.com
 SMTP_TO=info@ziaflow.com
 ```
 
