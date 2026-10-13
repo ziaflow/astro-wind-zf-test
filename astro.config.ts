@@ -146,7 +146,7 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ['@supabase/supabase-js'],
+      noExternal: ['@supabase/supabase-js', /^@supabase\//],
     },
   },
 });
