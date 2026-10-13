@@ -98,6 +98,6 @@ export const footerData = {
   founded: 2022,
   logo: 'https://media.licdn.com/dms/image/v2/D4D3DAQGG3SQA1b-qsw/image-scale_127_750/image-scale_127_750/0/1704918615213/ziaflow_cover?e=1764907200&v=beta&t=kioeCXPAz00Lf_P4O-fWQIW6KpdIWXsdEdT7a_gWxEU',
   footNote: `
-    © 2025 ZiaFlow · Founded 2022 · Phoenix, AZ 85302 · <a class="underline" href="${getPermalink('/contact')}">Contact ZiaFlow</a>
+    © 2025 ZiaFlow · Founded 2022 · Phoenix, AZ 85302 · <a class="underline" href="mailto:info@ziaflow.com">info@ziaflow.com</a> · <a class="underline" href="${getPermalink('/contact')}">Contact ZiaFlow</a>
   `,
 };

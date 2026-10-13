@@ -22,8 +22,7 @@
     "indexnow": "node scripts/submit-indexnow.mjs",
     "fix": "npm run fix:eslint && npm run fix:prettier",
     "fix:eslint": "eslint --fix .",
-    "fix:prettier": "prettier -w .",
-    "agent:blog": "npx tsx scripts/ai-blogger.ts"
+    "fix:prettier": "prettier -w ."
   },
   "dependencies": {
     "@astrojs/prefetch": "^0.4.1",
