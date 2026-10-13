@@ -163,8 +163,9 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : String(error);
     console.error('Contact Form Endpoint Error:', error);
-    return new Response(JSON.stringify({ ok: false, error: 'server_error' }), {
+    return new Response(JSON.stringify({ ok: false, error: 'server_error', details: errorMsg }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
