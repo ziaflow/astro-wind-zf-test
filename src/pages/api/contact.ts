@@ -15,6 +15,13 @@ interface ContactPayload {
   page_submitted_from?: string;
 }
 
+export const GET: APIRoute = async () => {
+  return new Response(JSON.stringify({ ok: true, status: 'healthy', timestamp: new Date().toISOString() }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     let data: ContactPayload = {};
