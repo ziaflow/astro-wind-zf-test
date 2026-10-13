@@ -43,7 +43,7 @@ export default defineConfig({
   env: {
     schema: {
       GOOGLE_SCRIPT_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
-      GOOGLE_SCRIPT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true, min: 16 }),
+      GOOGLE_SCRIPT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
 
