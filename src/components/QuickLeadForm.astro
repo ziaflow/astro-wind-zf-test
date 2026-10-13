@@ -94,15 +94,19 @@
       });
       const result = await res.json();
       if (res.ok && result.ok) {
-        // Fire Google Analytics Conversion Event
-        const win = window as any;
-        if (typeof win !== 'undefined' && typeof win.gtag === 'function') {
-          win.gtag('event', 'form_submission', {
-            event_category: 'Lead',
-            event_label: data.service_needed || 'Quick Form',
-            transport_type: 'beacon',
+        // Fire GTM & GA4 Events
+        import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent }) => {
+          trackFormSubmission({
+            form_id: 'quick-lead-form',
+            form_name: 'quick_lead',
+            service_needed: (data.service_needed as string) || 'Quick Form',
           });
-        }
+          trackEmailSent({
+            email_type: 'lead_notification',
+            status: 'sent',
+            form_name: 'quick_lead',
+          });
+        });
 
         statusEl.textContent = 'Success! We have received your inquiry and will reply shortly.';
         statusEl.className =

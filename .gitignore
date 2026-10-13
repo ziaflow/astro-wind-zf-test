@@ -43,3 +43,5 @@ broken-links-old.log
 astro-wind-zf-test/
 astro-gemini-blog/
 
+.vercel
+.env*

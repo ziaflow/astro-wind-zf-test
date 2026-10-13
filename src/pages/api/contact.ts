@@ -3,6 +3,7 @@ import { supabase } from '~/lib/supabase';
 import { resend } from '~/lib/resend';
 import nodemailer from 'nodemailer';
 import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
+import { logCommunication } from '~/lib/communications';
 
 export const prerender = false;
 
@@ -67,6 +68,20 @@ export const POST: APIRoute = async ({ request }) => {
         console.error('Supabase Client Error:', dbEx);
       }
     }
+
+    // Log inbound form message to unified communications log
+    await logCommunication({
+      channel: 'form',
+      direction: 'inbound',
+      status: 'received',
+      subject: form_type === 'contact_us' ? 'Contact Us Inquiry' : 'Quick Lead Submission',
+      sender: `${name} <${email}>`,
+      recipient: 'ZiaFlow',
+      content: comments || `Service needed: ${service_needed || 'Not specified'}`,
+      pagePath: page_submitted_from || '/contact',
+      formId: form_type || 'contact-form',
+      metadata: { phone, company_name, service_needed },
+    });
 
     // 2.5 Forward to Google Apps Script / Google Sheets
     const gasUrl = import.meta.env.GOOGLE_SCRIPT_URL || process.env.GOOGLE_SCRIPT_URL;
@@ -162,6 +177,19 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         emailSentViaResend = true;
+
+        // Log outbound email alert to communications log
+        await logCommunication({
+          channel: 'email',
+          direction: 'outbound',
+          status: 'sent',
+          subject: subjectTitle,
+          sender: 'onboarding@resend.dev',
+          recipient: toEmail,
+          pagePath: page_submitted_from || '/contact',
+          formId: form_type || 'contact-form',
+          metadata: { provider: 'resend', customerReceiptSent: Boolean(email && email.includes('@')) },
+        });
       } catch (resendErr) {
         console.error('Resend API Email Error:', resendErr);
       }

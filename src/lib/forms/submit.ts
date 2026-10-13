@@ -16,6 +16,7 @@ import { resend } from '~/lib/resend';
 import { INQUIRY_TYPE_LABELS, type InquiryType } from './definitions';
 import { checkRateLimit } from './rate-limit';
 import { validateSubmission, type ValidatedSubmission } from './validation';
+import { logCommunication } from '~/lib/communications';
 
 export interface RequestMeta {
   clientIp: string;
@@ -124,6 +125,20 @@ async function saveToSupabase(
       log('error', 'supabase_insert_failed', { submissionId: sub.submissionId, code: errorCode(error) });
       return 'failed';
     }
+
+    await logCommunication({
+      channel: 'form',
+      direction: 'inbound',
+      status: 'received',
+      subject: `Form Submission: ${sub.formId}`,
+      sender: `${sub.values.name || 'Anonymous'} <${sub.values.email || 'no-email'}>`,
+      recipient: 'ZiaFlow',
+      content: sub.values.message || 'Intake form submitted',
+      pagePath: sub.pagePath,
+      formId: sub.formId,
+      metadata: { submissionId: sub.submissionId, utm: sub.attribution },
+    });
+
     return 'saved';
   } catch (err) {
     log('error', 'supabase_exception', { submissionId: sub.submissionId, code: errorCode(err) });
@@ -245,7 +260,6 @@ function escapeHtml(s: string): string {
 }
 
 async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise<void> {
-  const resendApiKey = getSecret('RESEND_API_KEY');
   const toEmail = getSecret('SMTP_TO') || getSecret('MAIL_TO') || 'info@ziaflow.com';
   const rows = sub.definition.fields
     .filter((f) => f.type !== 'file')
@@ -297,9 +311,24 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
         }
       }
 
+      await logCommunication({
+        channel: 'email',
+        direction: 'outbound',
+        status: 'sent',
+        subject,
+        sender: 'onboarding@resend.dev',
+        recipient: toEmail,
+        pagePath: sub.pagePath,
+        formId: sub.formId,
+        metadata: { submissionId: sub.submissionId, provider: 'resend' },
+      });
+
       return;
     } catch (resendErr) {
-      log('warn', 'resend_notify_failed_fallback_to_smtp', { submissionId: sub.submissionId, code: errorCode(resendErr) });
+      log('warn', 'resend_notify_failed_fallback_to_smtp', {
+        submissionId: sub.submissionId,
+        code: errorCode(resendErr),
+      });
     }
   }
 

@@ -98,3 +98,98 @@ CREATE POLICY "Deny public insertion access"
   FOR INSERT 
   TO public 
   WITH CHECK (false);
+
+-- ==============================================================================
+-- 4. Central Communications & Activity Log Table
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.communications_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  channel VARCHAR(30) NOT NULL, -- 'form', 'email', 'chat', 'booking', 'system'
+  direction VARCHAR(10) NOT NULL, -- 'inbound', 'outbound'
+  status VARCHAR(20) NOT NULL DEFAULT 'received', -- 'received', 'sent', 'delivered', 'failed'
+  subject TEXT,
+  sender TEXT,
+  recipient TEXT,
+  content TEXT,
+  page_path TEXT,
+  form_id VARCHAR(50),
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_communications_log_created_at 
+  ON public.communications_log (created_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_communications_log_channel 
+  ON public.communications_log (channel);
+
+CREATE INDEX IF NOT EXISTS idx_communications_log_page_path 
+  ON public.communications_log (page_path);
+
+ALTER TABLE public.communications_log ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Deny public select communications_log" ON public.communications_log;
+CREATE POLICY "Deny public select communications_log" 
+  ON public.communications_log 
+  FOR SELECT 
+  TO public 
+  USING (false);
+
+-- ==============================================================================
+-- 5. Central Blog & Omni-Channel Social Hub
+-- ==============================================================================
+
+-- Core content posts & blog drafts
+CREATE TABLE IF NOT EXISTS public.content_posts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  slug TEXT,
+  body_markdown TEXT,
+  status VARCHAR(20) NOT NULL DEFAULT 'draft', -- 'draft', 'scheduled', 'published'
+  category VARCHAR(50),
+  target_audience TEXT,
+  tags TEXT[] DEFAULT '{}',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_content_posts_status ON public.content_posts (status);
+CREATE INDEX IF NOT EXISTS idx_content_posts_created_at ON public.content_posts (created_at DESC);
+
+-- Channel variations & social distributions
+CREATE TABLE IF NOT EXISTS public.channel_distributions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  post_id UUID REFERENCES public.content_posts(id) ON DELETE CASCADE,
+  platform VARCHAR(30) NOT NULL, -- 'blog', 'linkedin', 'twitter', 'facebook', 'instagram'
+  content_variant TEXT NOT NULL,
+  media_urls JSONB DEFAULT '[]'::jsonb,
+  external_post_id TEXT,
+  status VARCHAR(20) NOT NULL DEFAULT 'draft', -- 'draft', 'queued', 'published', 'failed'
+  scheduled_at TIMESTAMP WITH TIME ZONE,
+  published_at TIMESTAMP WITH TIME ZONE,
+  -- Tracked performance KPIs
+  impressions INT DEFAULT 0,
+  clicks INT DEFAULT 0,
+  engagements INT DEFAULT 0,
+  conversions INT DEFAULT 0,
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_channel_distributions_post_id ON public.channel_distributions (post_id);
+CREATE INDEX IF NOT EXISTS idx_channel_distributions_platform ON public.channel_distributions (platform);
+CREATE INDEX IF NOT EXISTS idx_channel_distributions_status ON public.channel_distributions (status);
+
+ALTER TABLE public.content_posts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.channel_distributions ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Deny public select content_posts" ON public.content_posts;
+CREATE POLICY "Deny public select content_posts" 
+  ON public.content_posts FOR SELECT TO public USING (false);
+
+DROP POLICY IF EXISTS "Deny public select channel_distributions" ON public.channel_distributions;
+CREATE POLICY "Deny public select channel_distributions" 
+  ON public.channel_distributions FOR SELECT TO public USING (false);
+
+

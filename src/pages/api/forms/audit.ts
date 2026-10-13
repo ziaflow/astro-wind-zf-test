@@ -8,6 +8,7 @@
 
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
+import { logCommunication } from '~/lib/communications';
 
 // Serverless function on Vercel (site output remains static).
 export const prerender = false;
@@ -72,6 +73,32 @@ export const POST: APIRoute = async ({ request }) => {
       replyTo: payload.email || 'info@ziaflow.com',
       subject: `New audit request from ${payload.first_name} ${payload.last_name}`,
       text: JSON.stringify(payload, null, 2),
+    });
+
+    // Central Communications Logging
+    await logCommunication({
+      channel: 'booking',
+      direction: 'inbound',
+      status: 'received',
+      subject: `Audit Request: ${payload.company_name}`,
+      sender: `${payload.first_name} ${payload.last_name} <${payload.email}>`,
+      recipient: 'ZiaFlow',
+      content: payload.message || 'Audit booking request',
+      pagePath: '/audit',
+      formId: 'audit-booking-form',
+      metadata: { phone: payload.phone, company_name: payload.company_name },
+    });
+
+    await logCommunication({
+      channel: 'email',
+      direction: 'outbound',
+      status: 'sent',
+      subject: `New audit request from ${payload.first_name} ${payload.last_name}`,
+      sender: import.meta.env.SMTP_USER,
+      recipient: import.meta.env.MAIL_TO,
+      pagePath: '/audit',
+      formId: 'audit-booking-form',
+      metadata: { provider: 'smtp', type: 'lead_alert' },
     });
 
     // TODO: Send confirmation email to user

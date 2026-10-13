@@ -172,6 +172,20 @@ if (!useNodemailer && !resolvedAccessKey) {
           if (response.ok) {
             resultEl.textContent = data.message || successMessage || 'Thank you!';
             resultEl.classList.add('text-green-500');
+
+            // Fire GTM & GA4 conversion events
+            import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent }) => {
+              trackFormSubmission({
+                form_id: datasetFormId,
+                form_name: datasetFormId,
+              });
+              trackEmailSent({
+                email_type: 'lead_notification',
+                status: 'sent',
+                form_name: datasetFormId,
+              });
+            });
+
             form.reset();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';

@@ -1,0 +1,210 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { supabase } from '~/lib/supabase';
+
+export const prerender = false;
+
+interface CommItem {
+  id: string;
+  created_at: string;
+  channel: string;
+  direction: string;
+  status: string;
+  subject?: string;
+  sender?: string;
+  recipient?: string;
+  content?: string;
+  page_path?: string;
+  form_id?: string;
+  metadata?: Record<string, unknown>;
+}
+
+let items: CommItem[] = [];
+let totalCount = 0;
+let formSubmissionsCount = 0;
+let emailsSentCount = 0;
+let dbError: string | null = null;
+
+if (supabase) {
+  try {
+    const { data, error } = await supabase
+      .from('communications_log')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(100);
+
+    if (error) {
+      dbError = error.message;
+    } else if (data) {
+      items = data;
+      totalCount = items.length;
+      formSubmissionsCount = items.filter((i) => i.channel === 'form' || i.channel === 'booking').length;
+      emailsSentCount = items.filter((i) => i.channel === 'email' && i.status === 'sent').length;
+    }
+  } catch (e) {
+    dbError = e instanceof Error ? e.message : String(e);
+  }
+} else {
+  dbError = 'Supabase client is not configured or offline.';
+}
+
+const metadata = {
+  title: 'Communications Hub — ZiaFlow',
+  robots: { index: false, follow: false },
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Communications & Activity Hub
+        </h1>
+        <p class="mt-2 text-base text-slate-600 dark:text-slate-400">
+          Central stream tracking messages, form submissions, emails, and audit bookings across all ZiaFlow pages.
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <a
+          href="/api/communications"
+          target="_blank"
+          class="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+        >
+          JSON API &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="mb-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div
+        class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+      >
+        <div class="text-xs font-medium uppercase tracking-wider text-slate-500">Total Activity</div>
+        <div class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">{totalCount}</div>
+      </div>
+      <div
+        class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+      >
+        <div class="text-xs font-medium uppercase tracking-wider text-blue-500">Form Submissions & Bookings</div>
+        <div class="mt-2 text-3xl font-bold text-blue-600 dark:text-blue-400">{formSubmissionsCount}</div>
+      </div>
+      <div
+        class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+      >
+        <div class="text-xs font-medium uppercase tracking-wider text-emerald-500">Emails & Notifications Sent</div>
+        <div class="mt-2 text-3xl font-bold text-emerald-600 dark:text-emerald-400">{emailsSentCount}</div>
+      </div>
+    </div>
+
+    {
+      dbError && (
+        <div class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
+          <strong>Notice:</strong> {dbError}
+          <p class="mt-1 text-xs opacity-80">
+            Make sure to run the migration for the <code>communications_log</code> table in Supabase.
+          </p>
+        </div>
+      )
+    }
+
+    <!-- Feed Table -->
+    <div
+      class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow dark:border-slate-800 dark:bg-slate-900"
+    >
+      <div class="border-b border-slate-200 px-6 py-4 dark:border-slate-800">
+        <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Recent Stream</h2>
+      </div>
+
+      {
+        items.length === 0 ? (
+          <div class="p-12 text-center text-slate-500 dark:text-slate-400">
+            No communication events recorded yet. Once forms are submitted or emails are triggered, they will appear
+            here in real time.
+          </div>
+        ) : (
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-sm dark:divide-slate-800">
+              <thead class="bg-slate-50 text-xs font-medium uppercase text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">
+                    Timestamp
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Channel
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Subject / Type
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Sender & Recipient
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Page
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                {items.map((item) => (
+                  <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                    <td class="whitespace-nowrap px-6 py-4 text-xs text-slate-500">
+                      {new Date(item.created_at).toLocaleString()}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                      <span
+                        class:list={[
+                          'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize',
+                          item.channel === 'form' && 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+                          item.channel === 'email' &&
+                            'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
+                          item.channel === 'booking' &&
+                            'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+                        ]}
+                      >
+                        {item.channel} ({item.direction})
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">
+                      {item.subject || '—'}
+                      {item.content && (
+                        <p class="mt-1 max-w-xs truncate text-xs text-slate-500 dark:text-slate-400">{item.content}</p>
+                      )}
+                    </td>
+                    <td class="px-6 py-4 text-xs text-slate-600 dark:text-slate-300">
+                      <div>
+                        <span class="font-semibold text-slate-400">From:</span> {item.sender || 'Unknown'}
+                      </div>
+                      <div class="mt-0.5">
+                        <span class="font-semibold text-slate-400">To:</span> {item.recipient || 'ZiaFlow'}
+                      </div>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-xs font-mono text-slate-500">
+                      {item.page_path || '/'}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                      <span
+                        class:list={[
+                          'inline-flex items-center rounded-md px-2 py-1 text-xs font-medium uppercase',
+                          item.status === 'received' && 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+                          item.status === 'sent' &&
+                            'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
+                          item.status === 'failed' && 'bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300',
+                        ]}
+                      >
+                        {item.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Layout>

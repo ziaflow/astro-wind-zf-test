@@ -158,14 +158,6 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       const data = Object.fromEntries(formData);
 
       try {
-        // Push to dataLayer for GTM tracking (no personal data)
-        if (window.dataLayer) {
-          window.dataLayer.push({
-            event: 'form_submission',
-            form_name: 'audit_booking',
-          });
-        }
-
         // Submit form to serverless handler
         const response = await fetch('/api/forms/audit', {
           method: 'POST',
@@ -174,10 +166,21 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
         });
 
         if (response.ok) {
+          // Push to dataLayer & GA4
+          const { trackFormSubmission, trackEmailSent } = await import('~/utils/analytics');
+          trackFormSubmission({
+            form_id: 'audit-booking-form',
+            form_name: 'audit_booking',
+          });
+          trackEmailSent({
+            email_type: 'audit_booking',
+            status: 'sent',
+            form_name: 'audit_booking',
+          });
+
           // Show success message
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
-
           // Optional: Redirect after 2 seconds or perform other actions
           // window.location.href = '/thank-you';
         } else {
