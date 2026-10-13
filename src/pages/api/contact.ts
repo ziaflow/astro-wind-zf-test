@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
+import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
 
 export const prerender = false;
 
@@ -117,51 +118,87 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // 3. Configure Outlook / SMTP Transporter
-    const smtpUser = import.meta.env.SMTP_USER || process.env.SMTP_USER;
-    const smtpPass = import.meta.env.SMTP_PASS || process.env.SMTP_PASS;
-    if (smtpUser && smtpPass) {
+    // 3. Email Notification via Resend (Primary) or SMTP (Fallback)
+    const resendApiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
+    const toEmail = import.meta.env.SMTP_TO || process.env.SMTP_TO || 'info@ziaflow.com';
+    const fallbackFromEmail = import.meta.env.SMTP_FROM || process.env.SMTP_FROM || 'info@ziaflow.com';
+    const subjectPrefix = form_type === 'contact_us' ? 'Detailed Inquiry (Contact Us)' : 'Quick Lead';
+    const subjectTitle = `${subjectPrefix}: ${company_name ? company_name + ' (' + name + ')' : name}`;
+
+    const leadData = {
+      form_type,
+      name: name || 'Valued Contact',
+      email: email || '',
+      phone: phone || '',
+      company_name: company_name || '',
+      service_needed: service_needed || '',
+      page_submitted_from: page_submitted_from || '/contact',
+      comments: comments || '',
+    };
+
+    let emailSentViaResend = false;
+
+    if (resendApiKey) {
       try {
-        const transporter = nodemailer.createTransport({
-          host: import.meta.env.SMTP_HOST || process.env.SMTP_HOST || 'smtp-mail.outlook.com',
-          port: Number(import.meta.env.SMTP_PORT || process.env.SMTP_PORT || 587),
-          secure: (import.meta.env.SMTP_SECURE || process.env.SMTP_SECURE) === 'true',
-          auth: {
-            user: smtpUser,
-            pass: smtpPass,
-          },
-        });
+        const { Resend } = await import('resend');
+        const resend = new Resend(resendApiKey);
 
-        // 4. Send Rich Notification to Team
-        const subjectPrefix = form_type === 'contact_us' ? 'Detailed Inquiry (Contact Us)' : 'Quick Lead';
-        const fromEmail = import.meta.env.SMTP_FROM || process.env.SMTP_FROM || 'info@ziaflow.com';
-        const toEmail = import.meta.env.SMTP_TO || process.env.SMTP_TO || 'info@ziaflow.com';
-
-        await transporter.sendMail({
-          from: `"ZiaFlow System" <${fromEmail}>`,
+        // Send team lead alert
+        await resend.emails.send({
+          from: 'ZiaFlow Leads <onboarding@resend.dev>',
           to: toEmail,
-          replyTo: email,
-          subject: `${subjectPrefix}: ${company_name ? company_name + ' (' + name + ')' : name}`,
-          text:
-            `New submission from page: ${page_submitted_from}\n\n` +
-            `• Form Type: ${form_type}\n` +
-            `• Name: ${name}\n` +
-            `• Email: ${email}\n` +
-            `• Phone: ${phone || 'Not provided'}\n` +
-            `• Company: ${company_name || 'Not provided'}\n` +
-            `• Service Needed: ${service_needed || 'N/A (Quick Form)'}\n` +
-            `• Comments: ${comments || 'None'}\n`,
+          replyTo: email || undefined,
+          subject: subjectTitle,
+          html: getLeadNotificationHtml(leadData),
         });
 
-        // 5. Send Confirmation Receipt to User
-        await transporter.sendMail({
-          from: `"ZiaFlow" <${fromEmail}>`,
-          to: email,
-          subject: 'We have received your project details — ZiaFlow',
-          text: `Hi ${name},\n\nThank you for reaching out to ZiaFlow. We have successfully received your details and our technical team will review them shortly.\n\nBest regards,\nThe ZiaFlow Team`,
-        });
-      } catch (smtpErr) {
-        console.error('SMTP Email Error:', smtpErr);
+        // Send user confirmation receipt if valid email
+        if (email && email.includes('@')) {
+          await resend.emails.send({
+            from: 'ZiaFlow <onboarding@resend.dev>',
+            to: email,
+            subject: 'We have received your project details — ZiaFlow',
+            html: getCustomerReceiptHtml(leadData),
+          });
+        }
+        emailSentViaResend = true;
+      } catch (resendErr) {
+        console.error('Resend API Email Error:', resendErr);
+      }
+    }
+
+    // Fallback to SMTP if Resend is not configured or failed
+    if (!emailSentViaResend) {
+      const smtpUser = import.meta.env.SMTP_USER || process.env.SMTP_USER;
+      const smtpPass = import.meta.env.SMTP_PASS || process.env.SMTP_PASS;
+      if (smtpUser && smtpPass) {
+        try {
+          const transporter = nodemailer.createTransport({
+            host: import.meta.env.SMTP_HOST || process.env.SMTP_HOST || 'smtp-mail.outlook.com',
+            port: Number(import.meta.env.SMTP_PORT || process.env.SMTP_PORT || 587),
+            secure: (import.meta.env.SMTP_SECURE || process.env.SMTP_SECURE) === 'true',
+            auth: { user: smtpUser, pass: smtpPass },
+          });
+
+          await transporter.sendMail({
+            from: `"ZiaFlow System" <${fallbackFromEmail}>`,
+            to: toEmail,
+            replyTo: email,
+            subject: subjectTitle,
+            html: getLeadNotificationHtml(leadData),
+          });
+
+          if (email && email.includes('@')) {
+            await transporter.sendMail({
+              from: `"ZiaFlow" <${fallbackFromEmail}>`,
+              to: email,
+              subject: 'We have received your project details — ZiaFlow',
+              html: getCustomerReceiptHtml(leadData),
+            });
+          }
+        } catch (smtpErr) {
+          console.error('SMTP Email Error:', smtpErr);
+        }
       }
     }
 

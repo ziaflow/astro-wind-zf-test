@@ -244,6 +244,47 @@ function escapeHtml(s: string): string {
 }
 
 async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise<void> {
+  const resendApiKey = getSecret('RESEND_API_KEY');
+  const toEmail = getSecret('SMTP_TO') || getSecret('MAIL_TO') || 'info@ziaflow.com';
+  const rows = sub.definition.fields
+    .filter((f) => f.type !== 'file')
+    .map((f) => {
+      const raw = sub.values[f.name] ?? '';
+      const value = f.name === 'inquiry_type' ? (INQUIRY_TYPE_LABELS[raw as InquiryType] ?? raw) : raw;
+      return { label: f.label, value };
+    });
+
+  const inquiry = INQUIRY_TYPE_LABELS[sub.values.inquiry_type as InquiryType] ?? 'Inquiry';
+  const subject = `[ZiaFlow Lead] ${inquiry} from ${sub.pageName} — ${sub.definition.sheetTab}`;
+  const htmlContent = `
+    <h3>New ${escapeHtml(inquiry)} (${escapeHtml(sub.definition.sheetTab)})</h3>
+    <p><strong>Submitted on Page:</strong> ${escapeHtml(sub.pageName)} (<code>${escapeHtml(sub.pagePath)}</code>)</p>
+    <table cellpadding="4" style="border-collapse: collapse; font-family: sans-serif; font-size: 14px;">${rows
+      .map(
+        (r) =>
+          `<tr><th align="left" valign="top" style="padding: 6px 12px 6px 0; color: #475569;">${escapeHtml(r.label)}</th><td style="padding: 6px 0; font-weight: 500;">${escapeHtml(r.value).replace(/\n/g, '<br/>')}</td></tr>`
+      )
+      .join('')}</table>
+    ${sub.attachment ? `<p>Attachment: ${escapeHtml(sub.attachment.name)}</p>` : ''}
+    <p style="margin-top: 16px; color: #94a3b8; font-size: 12px;">Submission ID: ${escapeHtml(sub.submissionId)} · ${escapeHtml(receivedAt)}</p>`;
+
+  if (resendApiKey) {
+    try {
+      const { Resend } = await import('resend');
+      const resend = new Resend(resendApiKey);
+      await resend.emails.send({
+        from: 'ZiaFlow Leads <onboarding@resend.dev>',
+        to: toEmail,
+        replyTo: sub.values.email || undefined,
+        subject,
+        html: htmlContent,
+      });
+      return;
+    } catch (resendErr) {
+      log('warn', 'resend_notify_failed_fallback_to_smtp', { submissionId: sub.submissionId, code: errorCode(resendErr) });
+    }
+  }
+
   const host = getSecret('SMTP_HOST');
   const user = getSecret('SMTP_USER');
   const pass = getSecret('SMTP_PASS');
@@ -260,41 +301,21 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
     auth: { user, pass },
   });
 
-  const rows = sub.definition.fields
-    .filter((f) => f.type !== 'file')
-    .map((f) => {
-      const raw = sub.values[f.name] ?? '';
-      const value = f.name === 'inquiry_type' ? (INQUIRY_TYPE_LABELS[raw as InquiryType] ?? raw) : raw;
-      return { label: f.label, value };
-    });
-
-  const inquiry = INQUIRY_TYPE_LABELS[sub.values.inquiry_type as InquiryType] ?? 'Inquiry';
-
   try {
     await transporter.sendMail({
       from: getSecret('SMTP_FROM') || 'info@ziaflow.com',
-      to: getSecret('SMTP_TO') || getSecret('MAIL_TO') || 'info@ziaflow.com',
+      to: toEmail,
       replyTo: sub.values.email,
-      subject: `[ZiaFlow Lead] ${inquiry} from ${sub.pageName} — ${sub.definition.sheetTab}`,
+      subject,
       text: [
         `Page: ${sub.pageName} (${sub.pagePath})`,
         ...rows.map((r) => `${r.label}: ${r.value}`),
-        sub.attachment ? `Attachment: ${sub.attachment.name} (see Google Sheet / Drive)` : '',
+        sub.attachment ? `Attachment: ${sub.attachment.name}` : '',
         '',
         `Submission ID: ${sub.submissionId}`,
         `Received: ${receivedAt}`,
       ].join('\n'),
-      html: `
-        <h3>New ${escapeHtml(inquiry)} (${escapeHtml(sub.definition.sheetTab)})</h3>
-        <p><strong>Submitted on Page:</strong> ${escapeHtml(sub.pageName)} (<code>${escapeHtml(sub.pagePath)}</code>)</p>
-        <table cellpadding="4">${rows
-          .map(
-            (r) =>
-              `<tr><th align="left" valign="top">${escapeHtml(r.label)}</th><td>${escapeHtml(r.value).replace(/\n/g, '<br/>')}</td></tr>`
-          )
-          .join('')}</table>
-        ${sub.attachment ? `<p>Attachment: ${escapeHtml(sub.attachment.name)} (linked in the Google Sheet)</p>` : ''}
-        <p><small>Submission ID: ${escapeHtml(sub.submissionId)} · ${escapeHtml(receivedAt)}</small></p>`,
+      html: htmlContent,
     });
   } catch (err) {
     // The lead is already persisted — a failed email must not fail the submission.
