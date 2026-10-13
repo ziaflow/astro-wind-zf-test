@@ -11,6 +11,7 @@
 import { GOOGLE_SCRIPT_SECRET, GOOGLE_SCRIPT_URL, getSecret } from 'astro:env/server';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
+import { resend } from '~/lib/resend';
 
 import { INQUIRY_TYPE_LABELS, type InquiryType } from './definitions';
 import { checkRateLimit } from './rate-limit';
@@ -268,10 +269,8 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
     ${sub.attachment ? `<p>Attachment: ${escapeHtml(sub.attachment.name)}</p>` : ''}
     <p style="margin-top: 16px; color: #94a3b8; font-size: 12px;">Submission ID: ${escapeHtml(sub.submissionId)} · ${escapeHtml(receivedAt)}</p>`;
 
-  if (resendApiKey) {
+  if (resend) {
     try {
-      const { Resend } = await import('resend');
-      const resend = new Resend(resendApiKey);
       await resend.emails.send({
         from: 'ZiaFlow Leads <onboarding@resend.dev>',
         to: toEmail,
@@ -279,6 +278,25 @@ async function notifyTeam(sub: ValidatedSubmission, receivedAt: string): Promise
         subject,
         html: htmlContent,
       });
+
+      // Trigger Resend Automations Event
+      if (sub.values.email) {
+        try {
+          await resend.events.send({
+            event: 'form.submitted',
+            email: sub.values.email,
+            payload: {
+              name: sub.values.name || sub.values.first_name || '',
+              company: sub.values.company || sub.values.company_name || '',
+              service: inquiry,
+              page: sub.pagePath,
+            },
+          });
+        } catch (eventErr) {
+          log('warn', 'resend_event_failed', { submissionId: sub.submissionId, code: errorCode(eventErr) });
+        }
+      }
+
       return;
     } catch (resendErr) {
       log('warn', 'resend_notify_failed_fallback_to_smtp', { submissionId: sub.submissionId, code: errorCode(resendErr) });
