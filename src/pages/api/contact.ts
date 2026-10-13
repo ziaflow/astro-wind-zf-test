@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '~/lib/supabase';
+import { resend } from '~/lib/resend';
 import nodemailer from 'nodemailer';
 import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
 
@@ -43,29 +44,9 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ ok: false, error: 'bad_request' }), { status: 400 });
     }
 
-    // 1. Initialize Supabase Client
-    const supabaseUrl =
-      import.meta.env.SUPABASE_URL ||
-      process.env.SUPABASE_URL ||
-      import.meta.env.NEXT_PUBLIC_SUPABASE_URL ||
-      process.env.NEXT_PUBLIC_SUPABASE_URL;
-
-    const supabaseKey =
-      import.meta.env.SUPABASE_SERVICE_ROLE_KEY ||
-      process.env.SUPABASE_SERVICE_ROLE_KEY ||
-      import.meta.env.SUPABASE_SECRET_KEY ||
-      process.env.SUPABASE_SECRET_KEY ||
-      import.meta.env.SUPABASE_KEY ||
-      process.env.SUPABASE_KEY ||
-      import.meta.env.SUPABASE_ANON_KEY ||
-      process.env.SUPABASE_ANON_KEY ||
-      import.meta.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-    if (supabaseUrl && supabaseKey) {
+    // 1. Persist record into Supabase leads table
+    if (supabase) {
       try {
-        const supabase = createClient(supabaseUrl, supabaseKey);
-        // 2. Insert record into Supabase leads table
         const { error: dbError } = await supabase.from('leads').insert([
           {
             name,
@@ -119,8 +100,12 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 3. Email Notification via Resend (Primary) or SMTP (Fallback)
-    const resendApiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
-    const toEmail = import.meta.env.SMTP_TO || process.env.SMTP_TO || 'info@ziaflow.com';
+    const toEmail =
+      import.meta.env.CONTACT_NOTIFICATION_EMAIL ||
+      process.env.CONTACT_NOTIFICATION_EMAIL ||
+      import.meta.env.SMTP_TO ||
+      process.env.SMTP_TO ||
+      'info@ziaflow.com';
     const fallbackFromEmail = import.meta.env.SMTP_FROM || process.env.SMTP_FROM || 'info@ziaflow.com';
     const subjectPrefix = form_type === 'contact_us' ? 'Detailed Inquiry (Contact Us)' : 'Quick Lead';
     const subjectTitle = `${subjectPrefix}: ${company_name ? company_name + ' (' + name + ')' : name}`;
@@ -138,11 +123,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     let emailSentViaResend = false;
 
-    if (resendApiKey) {
+    if (resend) {
       try {
-        const { Resend } = await import('resend');
-        const resend = new Resend(resendApiKey);
-
         // Send team lead alert
         await resend.emails.send({
           from: 'ZiaFlow Leads <onboarding@resend.dev>',
@@ -162,6 +144,23 @@ export const POST: APIRoute = async ({ request }) => {
             html: getCustomerReceiptHtml(leadData),
           });
         }
+
+        // Trigger Resend Automations Event
+        try {
+          await resend.events.send({
+            event: 'form.submitted',
+            email: email,
+            payload: {
+              name,
+              company: company_name || '',
+              service: service_needed || 'General Inquiry',
+              page: page_submitted_from || '/contact',
+            },
+          });
+        } catch (eventErr) {
+          console.warn('Resend event trigger non-blocking error:', eventErr);
+        }
+
         emailSentViaResend = true;
       } catch (resendErr) {
         console.error('Resend API Email Error:', resendErr);

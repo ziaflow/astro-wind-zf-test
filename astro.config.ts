@@ -39,9 +39,13 @@ export default defineConfig({
   },
 
   // Server-only secrets, read at runtime. Never prefix these with PUBLIC_.
-  // Optional so static builds succeed; the form pipeline returns 500 until both are set in Vercel.
+  // Optional so static builds succeed; runtime will validate or fallback gracefully.
   env: {
     schema: {
+      SUPABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
+      SUPABASE_SERVICE_ROLE_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CONTACT_NOTIFICATION_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
       GOOGLE_SCRIPT_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
       GOOGLE_SCRIPT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
