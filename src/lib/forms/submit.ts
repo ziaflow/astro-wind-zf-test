@@ -66,10 +66,12 @@ function getSupabase(): SupabaseClient | null {
 
   const key =
     getSecret('SUPABASE_SERVICE_ROLE_KEY') ||
+    getSecret('SUPABASE_SECRET_KEY') ||
     getSecret('SUPABASE_KEY') ||
     getSecret('SUPABASE_ANON_KEY') ||
     getSecret('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') ||
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_SECRET_KEY ||
     process.env.SUPABASE_KEY ||
     process.env.SUPABASE_ANON_KEY;
 
