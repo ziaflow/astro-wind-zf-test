@@ -58,8 +58,21 @@ function parseIp(ip: string | undefined): string | null {
 
 function getSupabase(): SupabaseClient | null {
   if (supabaseClient !== undefined) return supabaseClient;
-  const url = getSecret('SUPABASE_URL');
-  const key = getSecret('SUPABASE_SERVICE_ROLE_KEY') || getSecret('SUPABASE_KEY');
+  const url =
+    getSecret('SUPABASE_URL') ||
+    getSecret('NEXT_PUBLIC_SUPABASE_URL') ||
+    process.env.SUPABASE_URL ||
+    process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  const key =
+    getSecret('SUPABASE_SERVICE_ROLE_KEY') ||
+    getSecret('SUPABASE_KEY') ||
+    getSecret('SUPABASE_ANON_KEY') ||
+    getSecret('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY') ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_KEY ||
+    process.env.SUPABASE_ANON_KEY;
+
   supabaseClient = url && key ? createClient(url, key, { auth: { persistSession: false } }) : null;
   return supabaseClient;
 }
