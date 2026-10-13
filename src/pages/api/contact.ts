@@ -60,7 +60,6 @@ export const POST: APIRoute = async ({ request }) => {
         // 2. Insert record into Supabase leads table
         const { error: dbError } = await supabase.from('leads').insert([
           {
-            form_type: form_type || 'quick',
             name,
             email,
             phone: phone || null,

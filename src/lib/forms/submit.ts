@@ -110,9 +110,9 @@ async function saveToSupabase(
           attachment_name: sub.attachment?.name ?? null,
           client_timed: sub.clientTimed,
           processed_at_edge: receivedAt,
+          ip_address: parseIp(meta.clientIp),
+          user_agent: meta.userAgent || null,
         },
-        ip_address: parseIp(meta.clientIp),
-        user_agent: meta.userAgent || null,
         status: 'pending',
       },
     ]);
