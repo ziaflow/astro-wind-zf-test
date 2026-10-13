@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import ContactIntakeForm from '~/components/forms/ContactIntakeForm.astro';
+import ContactUsForm from '~/components/ContactUsForm.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
@@ -29,7 +29,7 @@ const metadata = {
     <div
       class="mx-auto w-full max-w-3xl rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8 dark:border-slate-800 dark:bg-slate-900/80"
     >
-      <ContactIntakeForm id="contact-main" formId="contact-page" pageName="Contact" />
+      <ContactUsForm />
       <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
         By submitting this form, you agree to our <a href="/privacy" class="underline">privacy policy</a>. We will never
         share your information with third parties. Our team typically responds within 24 hours, often sooner.
