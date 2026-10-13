@@ -69,6 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
     await transporter.sendMail({
       from: `"ZiaFlow Website" <${import.meta.env.SMTP_USER}>`,
       to: import.meta.env.MAIL_TO,
+      replyTo: payload.email || 'info@ziaflow.com',
       subject: `New audit request from ${payload.first_name} ${payload.last_name}`,
       text: JSON.stringify(payload, null, 2),
     });

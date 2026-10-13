@@ -157,6 +157,7 @@ export const POST: APIRoute = async ({ request }) => {
           await resend.emails.send({
             from: 'ZiaFlow <onboarding@resend.dev>',
             to: email,
+            replyTo: 'info@ziaflow.com',
             subject: 'We have received your project details — ZiaFlow',
             html: getCustomerReceiptHtml(leadData),
           });
@@ -183,7 +184,7 @@ export const POST: APIRoute = async ({ request }) => {
           await transporter.sendMail({
             from: `"ZiaFlow System" <${fallbackFromEmail}>`,
             to: toEmail,
-            replyTo: email,
+            replyTo: email || 'info@ziaflow.com',
             subject: subjectTitle,
             html: getLeadNotificationHtml(leadData),
           });
@@ -192,6 +193,7 @@ export const POST: APIRoute = async ({ request }) => {
             await transporter.sendMail({
               from: `"ZiaFlow" <${fallbackFromEmail}>`,
               to: email,
+              replyTo: 'info@ziaflow.com',
               subject: 'We have received your project details — ZiaFlow',
               html: getCustomerReceiptHtml(leadData),
             });
