@@ -111,6 +111,16 @@
       });
       const result = await res.json();
       if (res.ok && result.ok) {
+        // Fire Google Analytics Conversion Event
+        const win = window as any;
+        if (typeof win !== 'undefined' && typeof win.gtag === 'function') {
+          win.gtag('event', 'form_submission', {
+            event_category: 'Lead',
+            event_label: data.service_needed || 'Contact Us Form',
+            transport_type: 'beacon',
+          });
+        }
+
         statusEl.textContent =
           'Thank you! Your project details have been logged and our team will be in touch shortly.';
         statusEl.className =

@@ -94,6 +94,16 @@
       });
       const result = await res.json();
       if (res.ok && result.ok) {
+        // Fire Google Analytics Conversion Event
+        const win = window as any;
+        if (typeof win !== 'undefined' && typeof win.gtag === 'function') {
+          win.gtag('event', 'form_submission', {
+            event_category: 'Lead',
+            event_label: data.service_needed || 'Quick Form',
+            transport_type: 'beacon',
+          });
+        }
+
         statusEl.textContent = 'Success! We have received your inquiry and will reply shortly.';
         statusEl.className =
           'block rounded-xl border border-green-300 bg-green-50 p-3 text-center text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300';
