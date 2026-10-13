@@ -4,13 +4,24 @@ import nodemailer from 'nodemailer';
 
 export const prerender = false;
 
+interface ContactPayload {
+  form_type?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  company_name?: string;
+  service_needed?: string;
+  comments?: string;
+  page_submitted_from?: string;
+}
+
 export const POST: APIRoute = async ({ request }) => {
   try {
-    let data: Record<string, any> = {};
+    let data: ContactPayload = {};
     const rawBody = await request.text();
     if (rawBody) {
       try {
-        data = JSON.parse(rawBody);
+        data = JSON.parse(rawBody) as ContactPayload;
       } catch {
         return new Response(JSON.stringify({ ok: false, error: 'invalid_json' }), {
           status: 400,
@@ -20,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
     const { form_type, name, email, phone, company_name, service_needed, comments, page_submitted_from } = data;
 
-    if (!name || !email) {
+    if (!name || !email || typeof name !== 'string' || typeof email !== 'string') {
       return new Response(JSON.stringify({ ok: false, error: 'bad_request' }), { status: 400 });
     }
 
