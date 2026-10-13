@@ -2,9 +2,22 @@ import type { APIRoute } from 'astro';
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const data = await request.json();
+    let data: Record<string, any> = {};
+    const rawBody = await request.text();
+    if (rawBody) {
+      try {
+        data = JSON.parse(rawBody);
+      } catch {
+        return new Response(JSON.stringify({ ok: false, error: 'invalid_json' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
     const { form_type, name, email, phone, company_name, service_needed, comments, page_submitted_from } = data;
 
     if (!name || !email) {
