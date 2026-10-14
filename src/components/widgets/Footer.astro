@@ -12,6 +12,7 @@ interface Link {
 
 interface Links {
   title?: string;
+  href?: string;
   links: Array<Link>;
 }
 
@@ -52,9 +53,20 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         </div>
       </div>
       {
-        links.map(({ title, links }) => (
+        links.map(({ title, href, links }) => (
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
+            <div class="dark:text-gray-300 font-semibold mb-2">
+              {href ? (
+                <a
+                  href={href}
+                  class="hover:text-primary dark:hover:text-primary hover:underline transition duration-150 ease-in-out"
+                >
+                  {title}
+                </a>
+              ) : (
+                title
+              )}
+            </div>
             {links && Array.isArray(links) && links.length > 0 && (
               <ul class="text-sm">
                 {links.map(({ text, href, ariaLabel }) => (

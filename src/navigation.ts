@@ -60,6 +60,7 @@ export const footerData = {
   links: [
     {
       title: 'Services',
+      href: getPermalink('/services'),
       links: [
         { text: 'Automation', href: getPermalink('/services/automation') },
         { text: 'SEO', href: getPermalink('/services/seo') },
@@ -70,12 +71,17 @@ export const footerData = {
     },
     {
       title: 'Blog',
-      links: blogLinks.length ? blogLinks : fallbackBlogLinks,
+      href: getBlogPermalink(),
+      links: [
+        { text: 'View All Articles →', href: getBlogPermalink() },
+        ...(blogLinks.length ? blogLinks : fallbackBlogLinks),
+      ],
     },
     {
       title: 'ZiaFlow',
+      href: getPermalink('/', 'home'),
       links: [
-        { text: 'ZiaFlow', href: getPermalink('/', 'home') },
+        { text: 'Home', href: getPermalink('/', 'home') },
         { text: 'About', href: getPermalink('/about') },
         { text: 'Contact ZiaFlow', href: getPermalink('/contact') },
       ],
