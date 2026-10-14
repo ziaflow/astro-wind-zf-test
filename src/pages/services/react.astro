@@ -1,0 +1,141 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import QuickLeadForm from '~/components/QuickLeadForm.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+
+const metadata = {
+  title: 'React & Next.js Web Application Engineering | ZiaFlow',
+  description:
+    'Custom React, Next.js, and TypeScript application development. High-performance interactive portals, client dashboards, and cloud integrations.',
+};
+
+const serviceData = {
+  name: 'React Web Application Development',
+  description:
+    'Modern React and Next.js frontends engineered with TypeScript, clean state management, and real-time backend API integration.',
+  url: 'https://ziaflow.com/services/react',
+  image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1200&auto=format&fit=crop',
+};
+---
+
+<Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
+  <Hero
+    tagline="React & Next.js Engineering"
+    title="Custom React & Next.js Applications Engineered for Performance"
+    subtitle="When standard brochure websites aren’t enough. We engineer full-featured web applications, client dashboards, booking engines, and internal operations tools using modern React, Next.js, and TypeScript."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Request Application Scoping',
+        href: '#inquiry-form',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        variant: 'secondary',
+        text: 'Schedule Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  />
+
+  <Features
+    tagline="Technical Strengths"
+    title="Why Businesses Build Their Core Products with Our React Team"
+    subtitle="Scalable frontend architectures that grow seamlessly with your user base."
+    items={[
+      {
+        title: 'Modern Next.js Architecture',
+        description:
+          'Harness server-side rendering (SSR), static site generation (SSG), and React Server Components for maximum speed and SEO efficiency.',
+        icon: 'tabler:brand-nextjs',
+      },
+      {
+        title: 'Strict TypeScript Type Safety',
+        description:
+          'Eliminate runtime exceptions and accelerate developer iteration with end-to-end typed schemas from database to UI.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Interactive Dashboards & Portals',
+        description:
+          'Bespoke client portals, quote estimators, and reporting dashboards with real-time WebSocket and Supabase sync.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Reusable Design Systems',
+        description:
+          'Modular component libraries built with Tailwind CSS, Shadcn UI, and Radix primitives for consistent branding across products.',
+        icon: 'tabler:puzzle',
+      },
+    ]}
+  />
+
+  <Steps
+    tagline="Development Process"
+    title="Our Agile Application Engineering Cycle"
+    items={[
+      {
+        title: '1. Architecture & Schema Design',
+        description:
+          'We model your data structures, user roles, API routes, and third-party webhooks before writing a single line of frontend code.',
+        icon: 'tabler:database',
+      },
+      {
+        title: '2. Rapid Interactive Prototyping',
+        description:
+          'We build working UI screens and components, validating the user journey and interaction states with your stakeholders.',
+        icon: 'tabler:device-laptop',
+      },
+      {
+        title: '3. API & Cloud Integration',
+        description:
+          'Secure authentication (Supabase Auth/Clerk), role-based permissions, and background jobs connected via serverless edge functions.',
+        icon: 'tabler:cloud-computing',
+      },
+      {
+        title: '4. Testing, CI/CD & Deployment',
+        description:
+          'Automated TypeScript checks, linting, and continuous integration pipelines deploying to high-availability global edge infrastructure.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  />
+
+  <FAQs
+    tagline="Frequently Asked Questions"
+    title="Common React & Next.js Questions"
+    classes={{ container: 'max-w-4xl' }}
+    items={[
+      {
+        title: 'When should we choose React/Next.js over Astro?',
+        description:
+          'Astro is ideal for marketing websites, landing pages, and content blogs where content is mostly static and speed is king. React/Next.js is the better choice for software applications requiring authenticated user sessions, complex state machines, real-time collaboration, or multi-tenant customer dashboards.',
+      },
+      {
+        title: 'Can you integrate React components inside an Astro site?',
+        description:
+          'Absolutely! Astro has native first-class support for React islands (`client:load`, `client:visible`). We frequently build Astro marketing sites that feature rich interactive React components where interactivity is needed.',
+      },
+    ]}
+  />
+
+  <WidgetWrapper id="inquiry-form" containerClass="max-w-5xl mx-auto">
+    <Headline
+      tagline="Build Your Application"
+      title="Ready to Build Your Custom React Solution?"
+      subtitle="Describe your software requirement or app idea. We will help scope the architecture and development roadmap."
+    />
+    <div class="mx-auto w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900/90 sm:p-10">
+      <QuickLeadForm />
+    </div>
+  </WidgetWrapper>
+</Layout>

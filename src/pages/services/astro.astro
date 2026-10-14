@@ -1,0 +1,146 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import QuickLeadForm from '~/components/QuickLeadForm.astro';
+import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+
+const metadata = {
+  title: 'Astro Web Development & Migration | ZiaFlow',
+  description:
+    'High-velocity websites built with Astro. Zero client-side JavaScript by default, island architecture, sub-second Core Web Vitals, and direct CRM integrations.',
+};
+
+const serviceData = {
+  name: 'Astro Web Development',
+  description:
+    'Ultra-fast content-driven websites and web apps engineered with the Astro framework and modern Islands Architecture.',
+  url: 'https://ziaflow.com/services/astro',
+  image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop',
+};
+---
+
+<Layout metadata={metadata}>
+  <ServiceSchema {...serviceData} />
+
+  <Hero
+    tagline="Astro Framework Engineering"
+    title="High-Velocity Websites Built with Astro & Islands Architecture"
+    subtitle="Astro ships zero JavaScript to the client by default. We build content-rich websites and web apps that achieve perfect 100/100 Core Web Vitals scores, instant page transitions, and effortless CRM connectivity."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Request Architecture Audit',
+        href: '#inquiry-form',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        variant: 'secondary',
+        text: 'Schedule Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  />
+
+  <Features
+    tagline="Technical Advantages"
+    title="Why Modern Brands Choose Astro Over Heavy Legacy CMS"
+    subtitle="Traditional CMS stacks send megabytes of runtime script for static text. Astro reverses that penalty."
+    items={[
+      {
+        title: 'Zero JS Runtime by Default',
+        description:
+          'HTML is compiled upfront at the edge. Browsers render pages immediately without hydration pauses or thread-blocking JavaScript.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Islands Architecture',
+        description:
+          'Interactive components (calculators, contact forms, search bars) hydrate in isolation only when visible, leaving the rest of the page static and fast.',
+        icon: 'tabler:box-model',
+      },
+      {
+        title: 'Multi-Framework Support',
+        description:
+          'Seamlessly integrate React, Vue, Svelte, or Solid components within the same Astro project without framework lock-in.',
+        icon: 'tabler:brand-react',
+      },
+      {
+        title: 'Headless CMS Integration',
+        description:
+          'Pull structured editorial content cleanly from Sanity, Contentful, or Git markdown while keeping production output completely static.',
+        icon: 'tabler:database',
+      },
+    ]}
+  />
+
+  <Steps
+    tagline="Migration Process"
+    title="Our 4-Step Astro Migration Blueprint"
+    items={[
+      {
+        title: '1. Forensic Performance Audit',
+        description:
+          'We evaluate your current mobile load times, plugin dependencies, and database query bottlenecks to calculate Core Web Vitals uplift.',
+        icon: 'tabler:search',
+      },
+      {
+        title: '2. Component & Design Modernization',
+        description:
+          'We rebuild your templates using Tailwind CSS and lightweight Astro components, preserving your brand identity while eliminating bloat.',
+        icon: 'tabler:layout-dashboard',
+      },
+      {
+        title: '3. Form & Intake Pipelines',
+        description:
+          'We wire form submissions directly into Supabase, HubSpot, or Customer.io with server-side validation and automated notifications.',
+        icon: 'tabler:send',
+      },
+      {
+        title: '4. Zero-Downtime Global Edge Deployment',
+        description:
+          'Your new Astro site is deployed to high-performance edge networks (Cloudflare/Vercel) with 301 redirect mapping to protect your SEO rankings.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  />
+
+  <FAQs
+    tagline="Common Questions"
+    title="Frequently Asked Questions About Astro"
+    classes={{ container: 'max-w-4xl' }}
+    items={[
+      {
+        title: 'How does Astro compare to Next.js or WordPress?',
+        description:
+          'WordPress is weighed down by database queries and plugins. Next.js ships heavy React runtimes across every page. Astro renders pure static HTML by default and only loads JavaScript for isolated components that genuinely require interactivity.',
+      },
+      {
+        title: 'Can non-technical team members still edit content?',
+        description:
+          'Yes. We connect Astro to headless visual editors like Sanity Studio or Decap CMS so your marketing team can publish and edit posts without touching code.',
+      },
+      {
+        title: 'Will our SEO rankings improve after switching to Astro?',
+        description:
+          'Yes. Astro websites routinely achieve 95-100 scores in Google PageSpeed Insights, directly improving search crawlability, mobile indexing, and lower bounce rates.',
+      },
+    ]}
+  />
+
+  <WidgetWrapper id="inquiry-form" containerClass="max-w-5xl mx-auto">
+    <Headline
+      tagline="Get Started"
+      title="Ready to Build or Migrate to Astro?"
+      subtitle="Tell us about your project or current website. We will review your architecture and outline a practical migration timeline."
+    />
+    <div class="mx-auto w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900/90 sm:p-10">
+      <QuickLeadForm />
+    </div>
+  </WidgetWrapper>
+</Layout>
