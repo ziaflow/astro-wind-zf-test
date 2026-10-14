@@ -51,18 +51,30 @@ Deployed at: `https://ziaflow.sanity.studio/`
 
 - **Run the Sanity Content & SEO Agent:**
   ```powershell
-  # 1. Sync topics queue and keyword gaps to Studio Dashboard
+  # 1. Review all posts across local files and Sanity, auditing quality and daily 3-post rate limit
+  npm run sanity:review
+
+  # 2. Sync topics queue and keyword gaps to Studio Dashboard
   npm run sanity:sync
 
-  # 2. Automatically generate next high-citation draft post directly in Sanity Studio
+  # 3. Automatically generate next high-citation draft post directly in Sanity Studio
   npm run sanity:draft
 
-  # 3. Draft all queued high-priority topics
+  # 4. Draft all queued high-priority topics
   npm run sanity:draft-all
 
-  # 4. View latest drafts and published posts in Sanity
+  # 5. Safely publish next post (strictly blocked if >=3 posts published today)
+  npm run sanity:publish-safe
+
+  # 6. View latest drafts and published posts in Sanity
   npm run sanity:list
   ```
+
+### Anti-Spam Rate Limiting Guardrail
+To safeguard ZiaFlow's search reputation and prevent algorithmic spam penalization from Google and Bing:
+- **Daily Cap:** Maximum **3 blog posts per 24-hour cycle** (across both Sanity and local Markdown/MDX).
+- **Auto-Draft Demotion:** If 3 posts have already been published on the current date, any newly triggered post creation or publication automatically reverts to `draft` status.
+- **Auditing:** `npm run sanity:review` scans word count, meta descriptions, and cliché AI phrasing before syndication.
 
 ---
 
