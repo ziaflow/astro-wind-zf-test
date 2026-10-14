@@ -18,6 +18,10 @@
         "SANITY_DATASET": "production",
         "SANITY_API_TOKEN": "${env:SANITY_API_TOKEN}"
       }
+    },
+    "customer-io": {
+      "type": "http",
+      "url": "https://mcp.customer.io/mcp"
     }
   }
 }

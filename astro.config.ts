@@ -135,7 +135,7 @@ export default defineConfig({
   },
 
   image: {
-    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co', 'upload.wikimedia.org'],
+    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co', 'upload.wikimedia.org', 'cdn.sanity.io'],
   },
 
   markdown: {

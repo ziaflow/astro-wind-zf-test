@@ -4,10 +4,7 @@ import Hero from '~/components/widgets/Hero.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
@@ -17,18 +14,18 @@ import Content from '~/components/widgets/Content.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
 const metadata = {
-  title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
+  title: 'Phoenix Web Development & Business Automation | ZiaFlow',
   description:
-    'Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth.',
+    'ZiaFlow helps Arizona service businesses build better websites, connect their tools, and simplify client intake. From a website refresh to custom internal applications.',
   ignoreTitleTemplate: true,
   openGraph: {
     url: 'https://ziaflow.com/',
     siteName: 'ZiaFlow',
     type: 'website',
     locale: 'en',
-    title: 'ZiaFlow | Custom Software & AI Automation Agents',
+    title: 'Phoenix Web Development & Business Automation | ZiaFlow',
     description:
-      'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. ZiaFlow engineers custom growth solutions for Arizona businesses.',
+      'ZiaFlow helps Arizona service businesses build websites, custom tools, CRM integrations, and workflow automation. Discuss your next project.',
     images: [
       {
         url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
@@ -55,7 +52,7 @@ const metadata = {
       },
       {
         name: 'twitter:title',
-        content: 'ZiaFlow | Custom Software & AI Automation Agents',
+        content: 'Phoenix Web Development & Business Automation | ZiaFlow',
       },
       {
         name: 'twitter:image',
@@ -71,22 +68,19 @@ const metadata = {
   <LocalBusinessSchema />
 
   <Hero
-    tagline={`<span class="text-primary font-bold tracking-wide uppercase">Engineering the Future</span>`}
-    title="Custom Software & AI Solutions That Power Growth"
-    subtitle="Deploy autonomous AI agents, HIPAA-compliant voice assistants, and enterprise-grade web applications. We build the technology that scales your business."
+    tagline={`<span class="text-primary font-bold tracking-wide uppercase text-sm">Web Development & Business Automation · Arizona</span>`}
     actions={[
       {
         variant: 'primary',
-        text: 'Get Automation Strategy',
+        text: 'Discuss Your Project',
         href: '#form',
-        icon: 'tabler:robot',
+        icon: 'tabler:arrow-right',
       },
       {
-        text: 'Book Tech Consult',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        target: '_blank',
+        text: 'Explore Automation',
+        href: '/services/automation',
         class:
-          'bg-white text-black border-2 border-gray-200 hover:border-primary hover:text-primary hover:scale-105 transition-all shadow-md font-bold px-10',
+          'bg-white text-black border-2 border-gray-200 hover:border-primary hover:text-primary transition-all shadow-md font-bold px-8',
       },
     ]}
   >
@@ -98,151 +92,152 @@ const metadata = {
 
     <Fragment slot="title">
       <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tighter mb-4 font-heading text-black pb-1">
-        Custom Software & <span class="digital-gradient-text">AI Solutions</span> That Power Growth
+        Websites and business automation that <span class="digital-gradient-text">work together</span>.
       </h1>
     </Fragment>
     <Fragment slot="subtitle">
-      <p class="text-xl text-gray-900 mb-6 font-medium">
-        Engineering the Future. Deploy autonomous AI agents and build custom web applications.
+      <p class="text-xl text-gray-800 mb-4 font-medium leading-relaxed max-w-3xl mx-auto">
+        ZiaFlow helps Arizona service businesses build better websites, connect their tools, and simplify client intake. From a website refresh to a custom internal application, we turn disconnected processes into practical systems—with AI where it makes sense.
+      </p>
+      <p class="text-sm font-semibold text-gray-500 tracking-wide uppercase">
+        Web development · CRM integrations · Workflow automation · Technical SEO
       </p>
     </Fragment>
   </Hero>
 
-  <Brands
-    title="Tech Stack & Partners"
-    subtitle="Built on enterprise-grade infrastructure"
-    icons={['tabler:brand-aws', 'tabler:brand-azure', 'tabler:brand-openai']}
-    images={[]}
-  />
-
-  <Content
-    isReversed
-    title="AI Voice Automation"
-    subtitle="Reduce reception workload with AI that answers phones, books appointments, and syncs records."
-    items={[
-      {
-        title: '24/7 Availability',
-        description: 'Never miss a patient call. Our AI handles intake, scheduling, and FAQs around the clock.',
-      },
-      {
-        title: 'HIPAA Compliant',
-        description: 'Secure, private, and fully compliant voice infrastructure for medical and dental practices.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'AI Voice Automation',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Automate Your <span class="text-primary">Front Desk</span>
-      </h3>
-    </Fragment>
-  </Content>
-
-  <WidgetWrapper containerClass="max-w-7xl mx-auto" isDark={false}>
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
-      <div class="md:w-1/2">
-        <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">ENGINEERING-GRADE SOLUTIONS</p>
-        <h2 class="text-4xl md:text-5xl font-heading font-bold text-heading leading-tight">
-          We provide enterprise <br />
-          <span class="text-primary">tech solutions</span>
-        </h2>
-      </div>
-      <div class="md:w-5/12 text-muted text-lg">
-        <p class="mb-4">
-          ZiaFlow delivers custom software, secure cloud infrastructure, and autonomous AI agents. We engineer systems
-          that solve complex business problems.
-        </p>
-      </div>
+  <!-- 2. Three Core Buyer-Oriented Service Paths -->
+  <WidgetWrapper containerClass="max-w-7xl mx-auto py-12 md:py-16" isDark={false}>
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">Build The Right System</p>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading">
+        Three Practical Ways We Help Your Business Operate Better
+      </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 items-start mt-16">
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:code" class="w-10 h-10" />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      <!-- Path 1: Websites & Custom Tools -->
+      <div class="flex flex-col justify-between p-8 rounded-2xl border border-gray-200 hover:border-primary/50 shadow-sm hover:shadow-md transition-all bg-white dark:bg-slate-900 dark:border-slate-800">
+        <div>
+          <div class="inline-block p-3 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+            <Icon name="tabler:browser" class="w-8 h-8" />
+          </div>
+          <h3 class="text-2xl font-bold mb-3 leading-snug">Websites & Custom Tools</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-6">
+            Build a website that explains your services clearly—or an internal application that fits how your business operates. Connect the two when your workflow needs more than a standard brochure site.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Custom App <br /> Development</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Bespoke web and mobile applications built for performance, scalability, and specific business logic.
-        </p>
+        <div class="pt-4 border-t border-gray-100 dark:border-slate-800 flex flex-col gap-2">
+          <a href="/services/web-development" class="text-primary font-bold inline-flex items-center hover:underline">
+            Web Development Details <Icon name="tabler:arrow-narrow-right" class="w-5 h-5 ml-1" />
+          </a>
+          <a href="/services/software" class="text-sm text-gray-500 hover:text-primary">
+            Custom Software & Internal Tools →
+          </a>
+        </div>
       </div>
 
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:microphone" class="w-10 h-10" />
+      <!-- Path 2: Lead & Workflow Automation -->
+      <div class="flex flex-col justify-between p-8 rounded-2xl border-2 border-primary/30 hover:border-primary shadow-md hover:shadow-lg transition-all bg-white dark:bg-slate-900 dark:border-primary/40 relative">
+        <div class="absolute -top-3 right-6 bg-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+          Core Focus
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">HIPAA-Compliant <br /> Voice AI</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Secure AI voice agents for patient intake, appointment scheduling, and customer service.
-        </p>
+        <div>
+          <div class="inline-block p-3 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+            <Icon name="tabler:settings-automation" class="w-8 h-8" />
+          </div>
+          <h3 class="text-2xl font-bold mb-3 leading-snug">Lead & Workflow Automation</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-6">
+            Connect website inquiries, CRM records, scheduling, and follow-up. Reduce repetitive handoffs while keeping ownership, exceptions, and human review visible.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-gray-100 dark:border-slate-800">
+          <a href="/services/automation" class="text-primary font-bold inline-flex items-center hover:underline">
+            Explore Automation Systems <Icon name="tabler:arrow-narrow-right" class="w-5 h-5 ml-1" />
+          </a>
+        </div>
       </div>
 
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:chart-dots" class="w-10 h-10" />
+      <!-- Path 3: SEO & Website Improvement -->
+      <div class="flex flex-col justify-between p-8 rounded-2xl border border-gray-200 hover:border-primary/50 shadow-sm hover:shadow-md transition-all bg-white dark:bg-slate-900 dark:border-slate-800">
+        <div>
+          <div class="inline-block p-3 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+            <Icon name="tabler:chart-arrows-vertical" class="w-8 h-8" />
+          </div>
+          <h3 class="text-2xl font-bold mb-3 leading-snug">SEO & Website Improvement</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-6">
+            Identify technical search issues, improve important service pages, and measure how visitors move toward an inquiry. Prioritize useful changes over publishing more content for its own sake.
+          </p>
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">AI Marketing <br /> Intelligence</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Real-time dashboards and predictive analytics to optimize ad spend and ROI.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:robot" class="w-10 h-10" />
+        <div class="pt-4 border-t border-gray-100 dark:border-slate-800 flex flex-col gap-2">
+          <a href="/services/seo" class="text-primary font-bold inline-flex items-center hover:underline">
+            Technical SEO Details <Icon name="tabler:arrow-narrow-right" class="w-5 h-5 ml-1" />
+          </a>
+          <a href="/services/cro" class="text-sm text-gray-500 hover:text-primary">
+            Conversion Optimization (CRO) →
+          </a>
         </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Workflow <br /> Automation</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          End-to-end business process automation to eliminate manual tasks and reduce overhead.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:cloud" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Cloud <br /> Infrastructure</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Secure, scalable Azure and AWS architectures designed for high availability.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:lock" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">API Integration <br /> & Security</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Seamlessly connect disparate systems with secure, high-performance API integrations.
-        </p>
       </div>
     </div>
   </WidgetWrapper>
 
-  <Stats
-    stats={[
-      { title: 'Arizona Clients', amount: '50+' },
-      { title: 'Avg. Lead Growth', amount: '150%' },
-      { title: 'Google Rating', amount: '5.0★' },
-      { title: 'Years in Phoenix', amount: '4+' },
-    ]}
-    tagline="Trusted by Phoenix-Area Service Businesses"
-  />
+  <!-- 3. Workflow Connectivity Section: "A better website is only the beginning" -->
+  <WidgetWrapper containerClass="max-w-7xl mx-auto py-12 md:py-16 bg-slate-50 dark:bg-slate-900/50 rounded-3xl my-8 px-6 md:px-12" isDark={false}>
+    <div class="max-w-3xl mx-auto text-center mb-10">
+      <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">Connected Operations</p>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold text-heading mb-4">
+        A better website is only the beginning.
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        What happens after someone submits a form matters just as much as the page that brought them there. We help connect the customer-facing experience to the systems behind it.
+      </p>
+    </div>
+
+    <!-- Process Diagram Flow -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 my-8">
+      <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Step 1</div>
+        <div class="font-bold text-gray-900 dark:text-white mb-1">Website Inquiry</div>
+        <p class="text-xs text-gray-500">Qualified submission captured via fast Astro web form</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Step 2</div>
+        <div class="font-bold text-gray-900 dark:text-white mb-1">Validated Data</div>
+        <p class="text-xs text-gray-500">Validation & anti-spam checks via edge functions</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Step 3</div>
+        <div class="font-bold text-gray-900 dark:text-white mb-1">CRM Record</div>
+        <p class="text-xs text-gray-500">Instant sync to Supabase or HubSpot database</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Step 4</div>
+        <div class="font-bold text-gray-900 dark:text-white mb-1">Assigned Follow-Up</div>
+        <p class="text-xs text-gray-500">Staff alerts dispatched with inquiry context</p>
+      </div>
+      <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 text-center shadow-sm">
+        <div class="text-xs font-bold text-primary uppercase tracking-wider mb-1">Step 5</div>
+        <div class="font-bold text-gray-900 dark:text-white mb-1">Booking Confirmed</div>
+        <p class="text-xs text-gray-500">Calendar synced; human scoping call prepared</p>
+      </div>
+    </div>
+
+    <div class="text-center max-w-2xl mx-auto mt-6 text-sm text-gray-500 italic">
+      Example operational workflow. Every system needs clear ownership, sensible permissions, and a plan for exceptions—not just an automation that works once.
+    </div>
+  </WidgetWrapper>
 
   <Content
-    title="Data-Driven Content Strategy"
-    subtitle="Proprietary AI that analyzes competitor data to write grounded, SEO-optimized content."
+    title="Evidence-Backed Content Strategy"
+    subtitle="Search intelligence that analyzes search intent, real citations, and competitor gaps to build authoritative, useful content."
     items={[
       {
-        title: 'Competitor Analysis',
+        title: 'Search Intent & Gap Analysis',
         description:
-          'Our AI scans the top-ranking competitors in your niche to identify content gaps and opportunities.',
+          'We evaluate top-performing search queries and user intent to identify exact content opportunities that answer customer questions.',
       },
       {
-        title: 'Optimized Workflow',
-        description: 'Generate high-quality, undetectable AI content that ranks on Google and engages real humans.',
+        title: 'Expert-Reviewed Content',
+        description: 'Publish original, research-backed articles and actionable guides designed to satisfy Google helpful content standards and convert buyers.',
       },
     ]}
     image={{
@@ -257,39 +252,21 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <Testimonials
-    title="Trusted by Tech Leaders"
-    tagline="Success Stories"
-    testimonials={[
-      {
-        testimonial:
-          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
-        name: 'K. B.',
-        job: 'COO',
-      },
-      {
-        testimonial:
-          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
-        name: 'J. M.',
-        job: 'Investor',
-      },
-    ]}
-  />
-
   <CallToAction
-    title="Ready to engineer your growth?"
-    subtitle="Book a transparent technical consultation. No sales pressure, just a roadmap to automation."
+    title="Ready to connect your website and workflows?"
+    subtitle="Discuss your website, internal tool, or automation challenge. We’ll review the request and discuss a practical next step."
     actions={[
       {
         variant: 'primary',
-        text: 'Book Tech Consult',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
+        text: 'Discuss Your Project',
+        href: '#form',
+        icon: 'tabler:arrow-right',
       },
       {
         variant: 'secondary',
-        text: 'Contact Us',
-        href: '#form',
+        text: 'Schedule Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
       },
     ]}
   />
@@ -297,19 +274,24 @@ const metadata = {
   <WidgetWrapper id="form" containerClass="max-w-7xl mx-auto">
     <Headline
       tagline="Get In Touch"
-      title="Start Your Digital Transformation"
-      subtitle="Tell us about your project, challenges, and automation needs. Our Phoenix team will get back to you within one business day."
+      title="Tell Us What Needs to Work Better"
+      subtitle="Describe your website, internal tool, or automation challenge. We’ll review your request and discuss practical next steps."
     />
     <div
       class="mx-auto w-full max-w-3xl rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8 dark:border-slate-800 dark:bg-slate-900/80"
     >
       <QuickLeadForm />
       <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
-        By submitting this form, you agree to our <a href="/privacy" class="underline">privacy policy</a>. We will never
-        share your information with third parties.
+        We use your information to respond to your inquiry. See our <a href="/privacy" class="underline">Privacy Policy</a> for details.
       </p>
     </div>
   </WidgetWrapper>
+
+  <!-- Practical Guides for Better Websites and Workflows -->
+  <BlogLatestPosts
+    title="Practical Guides for Better Websites and Workflows"
+    information="Explore lead routing, appointment reminders, CRM integration, and the checks that keep automated workflows reliable."
+  />
 
   <FAQs
     title="Frequently Asked Questions"
@@ -380,10 +362,7 @@ const metadata = {
     ]}
   />
 
-  <BlogLatestPosts
-    title="Digital Marketing Insights"
-    information="Local SEO, automation playbooks, CRO, and case studies for Arizona businesses."
-  />
+
 
   <script is:inline>
     (function () {
@@ -458,6 +437,15 @@ const metadata = {
                   event_category: 'engagement',
                   event_label: 'homepage_contact',
                   event_id: eventId,
+                });
+              }
+
+              // Customer.io CDP Event
+              if (typeof w.cioanalytics === 'object' && typeof w.cioanalytics.track === 'function') {
+                w.cioanalytics.track('form_submitted', {
+                  form_id: 'homepage_contact',
+                  event_id: eventId,
+                  path: w.location.pathname,
                 });
               }
             } catch (err) {

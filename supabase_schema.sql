@@ -192,4 +192,188 @@ DROP POLICY IF EXISTS "Deny public select channel_distributions" ON public.chann
 CREATE POLICY "Deny public select channel_distributions" 
   ON public.channel_distributions FOR SELECT TO public USING (false);
 
+-- ==============================================================================
+-- 6. Autonomous Search, Analytics, & UX Feedback Intelligence Engine
+-- ==============================================================================
+
+-- 6.1 Google Search Console Query & Position Trajectory
+CREATE TABLE IF NOT EXISTS public.gsc_search_queries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  query TEXT NOT NULL,
+  impressions INT NOT NULL DEFAULT 0,
+  clicks INT NOT NULL DEFAULT 0,
+  position NUMERIC(5, 2) NOT NULL,
+  ctr NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  date_recorded DATE NOT NULL DEFAULT CURRENT_DATE,
+  opportunity_priority INT NOT NULL DEFAULT 5, -- 1-10 striking distance score
+  target_cluster TEXT,                         -- e.g. 'Marketing Automation', 'Phoenix CRO'
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT uq_gsc_query_date UNIQUE (query, date_recorded)
+);
+
+CREATE INDEX IF NOT EXISTS idx_gsc_query ON public.gsc_search_queries (query);
+CREATE INDEX IF NOT EXISTS idx_gsc_date ON public.gsc_search_queries (date_recorded DESC);
+CREATE INDEX IF NOT EXISTS idx_gsc_priority ON public.gsc_search_queries (opportunity_priority DESC);
+
+-- 6.2 Google Analytics 4 Page Engagement & Conversions
+CREATE TABLE IF NOT EXISTS public.ga4_page_metrics (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_path TEXT NOT NULL,
+  sessions INT NOT NULL DEFAULT 0,
+  active_users INT NOT NULL DEFAULT 0,
+  bounce_rate NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  avg_engagement_seconds INT NOT NULL DEFAULT 0,
+  conversions INT NOT NULL DEFAULT 0,
+  date_recorded DATE NOT NULL DEFAULT CURRENT_DATE,
+  needs_cro_audit BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT uq_ga4_page_date UNIQUE (page_path, date_recorded)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ga4_path ON public.ga4_page_metrics (page_path);
+CREATE INDEX IF NOT EXISTS idx_ga4_date ON public.ga4_page_metrics (date_recorded DESC);
+CREATE INDEX IF NOT EXISTS idx_ga4_audit ON public.ga4_page_metrics (needs_cro_audit) WHERE needs_cro_audit = true;
+
+-- 6.3 Microsoft Clarity UX Friction & User Behavior Telemetry
+CREATE TABLE IF NOT EXISTS public.clarity_ux_metrics (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_url TEXT NOT NULL,
+  total_sessions INT NOT NULL DEFAULT 0,
+  rage_click_count INT NOT NULL DEFAULT 0,
+  dead_click_count INT NOT NULL DEFAULT 0,
+  excessive_scroll_count INT NOT NULL DEFAULT 0,
+  quick_back_count INT NOT NULL DEFAULT 0,
+  scroll_depth_percent NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  date_recorded DATE NOT NULL DEFAULT CURRENT_DATE,
+  ux_friction_score INT NOT NULL DEFAULT 0, -- 0-100 rating
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT uq_clarity_page_date UNIQUE (page_url, date_recorded)
+);
+
+CREATE INDEX IF NOT EXISTS idx_clarity_url ON public.clarity_ux_metrics (page_url);
+CREATE INDEX IF NOT EXISTS idx_clarity_date ON public.clarity_ux_metrics (date_recorded DESC);
+CREATE INDEX IF NOT EXISTS idx_clarity_friction ON public.clarity_ux_metrics (ux_friction_score DESC);
+
+-- 6.4 Autonomous Agent Sync & Execution Heartbeat Log
+CREATE TABLE IF NOT EXISTS public.seo_agent_sync_logs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  source VARCHAR(50) NOT NULL, -- 'GSC', 'GA4', 'CLARITY', 'ALL'
+  status VARCHAR(20) NOT NULL DEFAULT 'success', -- 'success', 'warning', 'failed'
+  records_ingested INT NOT NULL DEFAULT 0,
+  opportunity_count INT NOT NULL DEFAULT 0,
+  message TEXT,
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  executed_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_sync_logs_source ON public.seo_agent_sync_logs (source);
+CREATE INDEX IF NOT EXISTS idx_sync_logs_date ON public.seo_agent_sync_logs (executed_at DESC);
+
+-- Row Level Security (Service Role authenticated access for AI agents)
+ALTER TABLE public.gsc_search_queries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.ga4_page_metrics ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.clarity_ux_metrics ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.seo_agent_sync_logs ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Service role full access on gsc_search_queries" 
+  ON public.gsc_search_queries FOR ALL TO service_role USING (true);
+
+CREATE POLICY "Service role full access on ga4_page_metrics" 
+  ON public.ga4_page_metrics FOR ALL TO service_role USING (true);
+
+CREATE POLICY "Service role full access on clarity_ux_metrics" 
+  ON public.clarity_ux_metrics FOR ALL TO service_role USING (true);
+
+CREATE POLICY "Service role full access on seo_agent_sync_logs" 
+  ON public.seo_agent_sync_logs FOR ALL TO service_role USING (true);
+
+-- ==============================================================================
+-- 7. Unified Multi-Database & Cross-Platform Executive Overview Model
+-- ==============================================================================
+
+-- 7.1 Dedicated Leads & Contact Identity Table (Normalized with Page Context)
+CREATE TABLE IF NOT EXISTS public.lead_contacts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT NOT NULL,
+  full_name TEXT,
+  phone TEXT,
+  company_name TEXT,
+  first_seen_page_path TEXT NOT NULL,
+  last_seen_page_path TEXT NOT NULL,
+  initial_referral_source TEXT,
+  utm_source TEXT,
+  utm_medium TEXT,
+  utm_campaign TEXT,
+  total_inquiries INT NOT NULL DEFAULT 1,
+  lifecycle_stage VARCHAR(30) NOT NULL DEFAULT 'lead', -- 'lead', 'qualified', 'customer', 'unresponsive'
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT uq_lead_email UNIQUE (email)
+);
+
+CREATE INDEX IF NOT EXISTS idx_leads_email ON public.lead_contacts (email);
+CREATE INDEX IF NOT EXISTS idx_leads_created ON public.lead_contacts (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_leads_lifecycle ON public.lead_contacts (lifecycle_stage);
+CREATE INDEX IF NOT EXISTS idx_leads_first_page ON public.lead_contacts (first_seen_page_path);
+
+ALTER TABLE public.lead_contacts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Service role full access on lead_contacts" 
+  ON public.lead_contacts FOR ALL TO service_role USING (true);
+
+-- 7.2 Central Cross-Platform Performance Rollup (The Executive "Single Pane of Glass")
+CREATE TABLE IF NOT EXISTS public.daily_cross_platform_overview (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  date_recorded DATE NOT NULL DEFAULT CURRENT_DATE,
+
+  -- Organic Search Visibility (Google Search Console)
+  gsc_total_impressions INT NOT NULL DEFAULT 0,
+  gsc_total_clicks INT NOT NULL DEFAULT 0,
+  gsc_avg_position NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  gsc_top_query TEXT,
+
+  -- Traffic & Engagement (Google Analytics 4)
+  ga4_total_sessions INT NOT NULL DEFAULT 0,
+  ga4_active_users INT NOT NULL DEFAULT 0,
+  ga4_avg_bounce_rate NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  ga4_top_landing_page TEXT,
+
+  -- UX Friction & Behavior (Microsoft Clarity)
+  clarity_total_sessions INT NOT NULL DEFAULT 0,
+  clarity_total_rage_clicks INT NOT NULL DEFAULT 0,
+  clarity_total_dead_clicks INT NOT NULL DEFAULT 0,
+  clarity_avg_ux_friction_score INT NOT NULL DEFAULT 0,
+
+  -- Inbound Conversions & Pipeline (Lead Capture)
+  form_submissions_count INT NOT NULL DEFAULT 0,
+  new_unique_leads_count INT NOT NULL DEFAULT 0,
+  consultation_bookings_count INT NOT NULL DEFAULT 0,
+
+  -- Overall Website Health Score (Composite 0-100 index evaluated by Agent)
+  website_health_score INT NOT NULL DEFAULT 85,
+  agent_strategic_summary TEXT,
+
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  CONSTRAINT uq_platform_overview_date UNIQUE (date_recorded)
+);
+
+CREATE INDEX IF NOT EXISTS idx_overview_date ON public.daily_cross_platform_overview (date_recorded DESC);
+
+ALTER TABLE public.daily_cross_platform_overview ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Service role full access on daily_cross_platform_overview" 
+  ON public.daily_cross_platform_overview FOR ALL TO service_role USING (true);
+
+-- 7.3 Instant Real-Time Cross-Platform Executive View
+CREATE OR REPLACE VIEW public.v_cross_platform_dashboard_snapshot AS
+SELECT
+  CURRENT_DATE AS snapshot_date,
+  (SELECT COUNT(*) FROM public.lead_contacts) AS total_leads,
+  (SELECT COUNT(*) FROM public.contact_submissions WHERE created_at >= CURRENT_DATE - INTERVAL '30 days') AS submissions_last_30d,
+  (SELECT COALESCE(SUM(impressions), 0) FROM public.gsc_search_queries WHERE date_recorded = CURRENT_DATE) AS gsc_impressions_today,
+  (SELECT COALESCE(SUM(clicks), 0) FROM public.gsc_search_queries WHERE date_recorded = CURRENT_DATE) AS gsc_clicks_today,
+  (SELECT COALESCE(SUM(sessions), 0) FROM public.ga4_page_metrics WHERE date_recorded = CURRENT_DATE) AS ga4_sessions_today,
+  (SELECT COALESCE(AVG(bounce_rate), 0) FROM public.ga4_page_metrics WHERE date_recorded = CURRENT_DATE) AS ga4_avg_bounce_today,
+  (SELECT COALESCE(SUM(rage_click_count), 0) FROM public.clarity_ux_metrics WHERE date_recorded = CURRENT_DATE) AS clarity_rage_clicks_today,
+  (SELECT COALESCE(AVG(ux_friction_score), 0) FROM public.clarity_ux_metrics WHERE date_recorded = CURRENT_DATE) AS clarity_friction_score_today;
+
 

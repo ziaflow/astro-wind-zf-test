@@ -6,14 +6,14 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
-  title: 'Automation & AI Services | ZiaFlow',
-  description: 'Deploy intelligent AI agents and workflow automation to nurture leads 24/7.',
+  title: 'Marketing Automation Phoenix & Arizona SMBs | ZiaFlow',
+  description: 'Connect website inquiries, CRM records, scheduling, and follow-up. Reduce repetitive handoffs with reliable workflow automation for Arizona service businesses.',
 };
 
 const serviceData = {
-  name: 'Marketing Automation & AI',
+  name: 'Lead & Marketing Automation for Arizona SMBs',
   description:
-    'Deploy intelligent AI agents and workflow automation to nurture leads 24/7. Replace manual chaos with engineered efficiency.',
+    'Connect website inquiries, CRM records, scheduling, and follow-up. Practical automation systems engineered for Arizona service businesses.',
   url: 'https://ziaflow.com/services/automation',
   image: 'https://ziaflow.com/assets/images/automation-hero.jpg',
 };
@@ -23,13 +23,13 @@ const serviceData = {
   <ServiceSchema {...serviceData} />
 
   <Hero
-    tagline="Automation & AI"
-    title="The Automation Layer"
-    subtitle="Stop losing revenue to slow response times. We deploy intelligent AI agents and workflow automation to nurture leads 24/7, ensuring no opportunity slips through the cracks. From instant SMS booking confirmations to backend CRM routing, we replace manual chaos with engineered efficiency. This isn't just about saving time; it's about building an intake system that scales without adding headcount."
+    tagline="Lead & Workflow Automation · Arizona"
+    title="Marketing Automation for Phoenix Service Businesses"
+    subtitle="Stop losing qualified inquiries to slow manual triage. We connect your website forms directly to your CRM, team notifications, and calendar scheduling—turning fragmented inquiries into dependable intake workflows."
     actions={[
       {
         variant: 'primary',
-        text: 'Book Consultation',
+        text: 'Discuss Your Automation Project',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
@@ -37,22 +37,27 @@ const serviceData = {
   />
 
   <Features
-    title="Key Benefits"
+    title="Core Intake & Workflow Touchpoints"
     items={[
       {
-        title: '24/7 Lead Nurturing',
-        description: 'Never miss a lead with always-on AI agents that respond instantly.',
-        icon: 'tabler:clock-24',
+        title: 'Instant Lead Notification & Intake',
+        description: 'Immediately route web inquiries via transactional notifications to staff while acknowledging customer inquiries.',
+        icon: 'tabler:bell-ringing',
       },
       {
-        title: 'Workflow Automation',
-        description: 'Streamline your operations by automating repetitive tasks and data entry.',
-        icon: 'tabler:settings-automation',
-      },
-      {
-        title: 'CRM Integration',
-        description: 'Seamlessly sync data between your marketing channels and CRM.',
+        title: 'CRM & Pipeline Synchronization',
+        description: 'Automatically populate customer records into Supabase, HubSpot, or custom CRMs with zero manual copy-pasting.',
         icon: 'tabler:database-import',
+      },
+      {
+        title: 'Automated Calendar Scheduling',
+        description: 'Route qualified prospects straight into Microsoft Bookings or Outlook calendars with pre-qualification answers attached.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: 'Human Review & Exception Handling',
+        description: 'Automation handles notifications and routing, while custom quotes and high-touch scoping remain strictly human-led.',
+        icon: 'tabler:user-check',
       },
     ]}
   />

@@ -49,9 +49,19 @@ Deployed at: `https://ziaflow.sanity.studio/`
   npx sanity deploy
   ```
 
-- **Sync topics queue to the Studio Dashboard:**
+- **Run the Sanity Content & SEO Agent:**
   ```powershell
-  node scripts/sanity-content-agent.mjs
+  # 1. Sync topics queue and keyword gaps to Studio Dashboard
+  npm run sanity:sync
+
+  # 2. Automatically generate next high-citation draft post directly in Sanity Studio
+  npm run sanity:draft
+
+  # 3. Draft all queued high-priority topics
+  npm run sanity:draft-all
+
+  # 4. View latest drafts and published posts in Sanity
+  npm run sanity:list
   ```
 
 ---
@@ -64,3 +74,31 @@ The Sanity Studio includes a singleton document:
 * **Fields:** `status`, `lastRunTimestamp`, `postingSchedule`, `topicsQueue`, `keywordGaps`.
 
 Always keep this singleton updated whenever new keyword clusters or AI search opportunities are analyzed.
+
+---
+
+## 4. Live Unified Blog Pipeline (Sanity + Astro)
+
+Published posts in Sanity Studio (`_type == "post" && !(_id in path("drafts.**")) && publishedAt <= now()`) are automatically queried and unified directly into the main Astro blog architecture via [src/utils/blog.ts](file:///c:/Users/jerem/astro-wind-zf-test/src/utils/blog.ts).
+
+- **Route:** `/[...blog]` (e.g., `https://ziaflow.com/<slug>`)
+- **Rendering:** [src/pages/[...blog]/index.astro](file:///c:/Users/jerem/astro-wind-zf-test/src/pages/[...blog]/index.astro) dynamically renders Portable Text blocks via `astro-portabletext`.
+- **Image Optimization:** Uses Sanity CDN (`cdn.sanity.io`) configured in `astro.config.ts`.
+- **Deduplication:** If a slug collision exists between a local file in `src/data/post/` and Sanity, the local file takes precedence.
+
+---
+
+## 5. Automated Search & Analytics Intelligence (Supabase + GitHub Actions)
+
+Real-time search queries and UX telemetry are stored in Supabase PostgreSQL:
+- **`gsc_search_queries`**: Historical Search Console query rankings, impressions, and striking-distance priority scores (1-10).
+- **`ga4_page_metrics`**: Landing page sessions, bounce rates, and conversion counts.
+- **`clarity_ux_metrics`**: Rage clicks, dead clicks, and UX friction scores from Microsoft Clarity.
+- **`seo_agent_sync_logs`**: Sync status and opportunity counts.
+
+### Scheduled Updates
+- **GitHub Action Workflow:** [.github/workflows/scheduled-seo-sync.yml](file:///c:/Users/jerem/astro-wind-zf-test/.github/workflows/scheduled-seo-sync.yml) runs every 12 hours (`0 0,12 * * *`).
+- **Manual Trigger:**
+  ```powershell
+  npm run supabase:sync-seo
+  ```

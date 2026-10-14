@@ -39,6 +39,7 @@ export interface Post {
   /**  */
   Content?: AstroComponentFactory;
   content?: string;
+  sanityBody?: unknown[];
 
   /**  */
   readingTime?: number;
