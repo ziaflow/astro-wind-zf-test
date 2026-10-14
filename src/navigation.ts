@@ -52,6 +52,7 @@ export const headerData = {
       text: 'Book Consultation',
       href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       variant: 'primary' as const,
+      class: 'bg-white text-[#a22a36] hover:bg-slate-100 hover:text-[#7c1e29] border-white font-bold shadow-md',
     },
   ],
 };

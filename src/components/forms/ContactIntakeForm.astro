@@ -167,8 +167,6 @@ const inputClass =
 </ziaflow-contact-form>
 
 <script>
-  import { actions, isInputError } from 'astro:actions';
-
   const ATTRIBUTION_KEY = 'zf_attribution';
   const ATTRIBUTION_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
 
@@ -316,26 +314,21 @@ const inputClass =
       this.setBusy(true);
       try {
         // The submission_id is reused on retry so the server/sheet can de-duplicate.
-        const { data, error } = await actions.submitInquiry(new FormData(this.form));
+        const res = await fetch('/api/forms/inquiry', {
+          method: 'POST',
+          body: new FormData(this.form),
+        });
+        const data = await res.json();
 
-        if (error) {
-          if (isInputError(error)) {
-            const fieldErrors = Object.fromEntries(
-              Object.entries(error.fields).map(([k, v]) => [k, (v ?? []).join(' ')])
-            );
-            this.showFieldErrors(fieldErrors);
+        if (!res.ok || !data.ok) {
+          if (data && data.fieldErrors) {
+            this.showFieldErrors(data.fieldErrors);
           }
-          this.showStatus('error', error.message || 'Something went wrong. Please try again.');
+          this.showStatus('error', data?.message || 'Something went wrong. Please try again.');
           return;
         }
 
-        if (data && 'fieldErrors' in data && data.fieldErrors) {
-          this.showFieldErrors(data.fieldErrors);
-          this.showStatus('error', data.message);
-          return;
-        }
-
-        this.showStatus('success', data?.message ?? 'Thanks! We received your message.');
+        this.showStatus('success', data.message ?? 'Thanks! We received your message.');
         const inquiryType = (this.form.elements.namedItem('inquiry_type') as HTMLSelectElement | null)?.value;
         // Analytics: no personal data (no name/email/phone/company/message).
         const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
