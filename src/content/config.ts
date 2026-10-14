@@ -65,6 +65,31 @@ const postCollection = defineCollection({
   }),
 });
 
+const caseStudyCollection = defineCollection({
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/case-studies' }),
+  schema: z.object({
+    slug: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    organisation: z.string(),
+    industry: z.string().optional(),
+    role: z.string().optional(),
+    duration: z.string().optional(),
+    metrics: z.string().optional(),
+    tools: z.array(z.string()).default([]),
+    publishedAt: z.string().or(z.date()),
+    image: z.string().optional(),
+    heroImage: z.string().optional(),
+    logo: z.string().optional(),
+    featured: z.boolean().default(false),
+    order: z.number().default(99),
+    metadata: metadataDefinition(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  'case-studies': caseStudyCollection,
 };
+
+

@@ -3,7 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
@@ -12,6 +11,8 @@ import Headline from '~/components/ui/Headline.astro';
 import QuickLeadForm from '~/components/QuickLeadForm.astro';
 import HeroQuickForm from '~/components/HeroQuickForm.astro';
 import Content from '~/components/widgets/Content.astro';
+import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
+import FeaturedArticles from '~/components/widgets/FeaturedArticles.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
 const metadata = {
@@ -290,11 +291,21 @@ const metadata = {
     </div>
   </WidgetWrapper>
 
-  <!-- Practical Guides for Better Websites and Workflows -->
-  <BlogLatestPosts
-    title="Practical Guides for Better Websites and Workflows"
-    information="Explore lead routing, appointment reminders, CRM integration, and the checks that keep automated workflows reliable."
+  <!-- Zolt-inspired Project Showcase -->
+  <ProjectShowcase
+    title="Proof in Production: Real Systems, Real Outcomes"
+    subtitle="Explore how Arizona businesses replaced operational friction and missed inquiries with fast Astro web apps, edge validations, and automated dispatch."
+    tagline="Case Studies"
   />
+
+  <!-- Practical Guides for Better Websites and Workflows (Ink-inspired Layout) -->
+  <FeaturedArticles
+    title="Engineering Insights & Automation Playbooks"
+    subtitle="Explore lead routing, conversion checklists, CRM synchronization, and the checks that keep automated operations reliable."
+    tagline="ZiaFlow Insights"
+    count={3}
+  />
+
 
   <FAQs
     title="Frequently Asked Questions"

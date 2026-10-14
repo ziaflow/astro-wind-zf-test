@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  limit?: number;
+}
+
+const {
+  id = 'case-studies',
+  isDark = false,
+  title = 'Proof in Production: Real Systems, Real Outcomes',
+  subtitle = 'Explore how Arizona service businesses replaced operational friction and missed inquiries with resilient Astro web apps, edge validations, and automated dispatch.',
+  tagline = 'Case Studies & Proof',
+  limit = 2,
+} = Astro.props;
+
+const allCaseStudies = await getCollection('case-studies');
+const sortedStudies = allCaseStudies
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .slice(0, limit);
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass="max-w-7xl mx-auto">
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
+    {
+      sortedStudies.map((study) => (
+        <article class="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/90">
+          {/* Visual Cover Header */}
+          {study.data.image && (
+            <div class="relative h-60 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <img
+                src={study.data.image}
+                alt={study.data.title}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+                <span class="inline-flex items-center rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-sm backdrop-blur">
+                  {study.data.industry || 'Client Solution'}
+                </span>
+                {study.data.metrics && (
+                  <span class="inline-flex items-center rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-bold text-white shadow-sm backdrop-blur">
+                    <Icon name="tabler:trending-up" class="mr-1 h-3.5 w-3.5" />
+                    {study.data.metrics}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Card Content */}
+          <div class="flex flex-1 flex-col justify-between p-6 sm:p-8">
+            <div>
+              <div class="mb-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                <span class="font-medium text-slate-900 dark:text-slate-200">{study.data.organisation}</span>
+                {study.data.duration && <span>{study.data.duration} Implementation</span>}
+              </div>
+
+              <h3 class="mb-3 text-xl font-bold font-heading text-slate-900 transition-colors group-hover:text-primary sm:text-2xl dark:text-white">
+                <a href={`/case-studies/${study.id}`} class="focus:outline-none">
+                  <span class="absolute inset-0" aria-hidden="true" />
+                  {study.data.title}
+                </a>
+              </h3>
+
+              <p class="mb-6 line-clamp-3 text-sm text-slate-600 sm:text-base dark:text-slate-300">
+                {study.data.description}
+              </p>
+            </div>
+
+            {/* Tech Badges & Interactive Link Footer */}
+            <div class="border-t border-slate-100 pt-4 dark:border-slate-800/80">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap gap-1.5">
+                  {study.data.tools.slice(0, 3).map((tool) => (
+                    <span class="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+
+                <span class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-0.5 transition-transform">
+                  Read Case Study
+                  <Icon name="tabler:arrow-right" class="ml-1.5 h-4 w-4" />
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mt-8 text-center">
+    <Button
+      variant="secondary"
+      href="/contact"
+      text="Request an Architecture Diagnostic"
+      icon="tabler:shield-check"
+      class="font-semibold shadow-sm"
+    />
+  </div>
+</WidgetWrapper>

@@ -73,4 +73,4 @@ analytics:
       id: 'rc0l0o7tmd' # Microsoft Clarity project id, e.g. "abcd1234"
 
 ui:
-  theme: 'light:only' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'dark' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

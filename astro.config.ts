@@ -156,15 +156,7 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: [
-        '@supabase/supabase-js',
-        '@supabase/postgrest-js',
-        '@supabase/gotrue-js',
-        '@supabase/realtime-js',
-        '@supabase/functions-js',
-        '@supabase/storage-js',
-        '@supabase/auth-js',
-      ],
+      external: ['@supabase/supabase-js', '@supabase/postgrest-js'],
     },
   },
 });

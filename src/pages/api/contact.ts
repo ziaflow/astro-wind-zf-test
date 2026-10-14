@@ -100,15 +100,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 1.5 Customer.io Behavioral Event & Lead Profile Upsert
     try {
-      const customerId = insertedLeadId ? `lead_${insertedLeadId}` : email;
+      // Stable identity: lowercase email ensures repeat inquiries don't create disconnected profiles
+      const customerId = email.toLowerCase().trim();
       await identifyUser(customerId, {
-        email,
-        created_at: Math.floor(Date.now() / 1000),
+        email: customerId,
+        lead_id: insertedLeadId || undefined,
+        updated_at: Math.floor(Date.now() / 1000),
         company_name: company_name || undefined,
         phone: phone || undefined,
         service_needed: service_needed || undefined,
         lead_tier: 'tier_1_diagnostic',
         pipeline_status: 'inbox',
+
         utm_source: utm_source || undefined,
         utm_medium: utm_medium || undefined,
         utm_campaign: utm_campaign || undefined,
