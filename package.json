@@ -18,6 +18,7 @@
     "sanity:typegen": "cd studio-gemini-blog && npm run typegen",
     "supabase:sync-seo": "node tools/agents/sync-seo-to-supabase.mjs",
     "supabase:sync-clarity": "node tools/agents/sync-clarity-to-supabase.mjs",
+    "supabase:sync-google": "node tools/agents/sync-google-analytics-to-supabase.mjs",
     "build": "astro build",
     "postbuild": "npm run indexnow",
     "preview": "astro preview",
