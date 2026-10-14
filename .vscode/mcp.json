@@ -1,16 +1,48 @@
 {
-  // MCP server configuration for Copilot Agent Mode
   "servers": [
     {
+      "name": "Sanity Studio & Content Lake",
+      "command": "npx",
+      "args": ["-y", "@sanity/mcp-server@latest"],
+      "env": {
+        "SANITY_PROJECT_ID": "92p0tpps",
+        "SANITY_DATASET": "production",
+        "SANITY_API_TOKEN": "${env:SANITY_API_TOKEN}"
+      }
+    },
+    {
+      "name": "Customer.io",
+      "url": "https://mcp.customer.io/mcp"
+    },
+    {
       "name": "Microsoft Clarity MCP Server",
-      "description": "Query Clarity analytics via the official MCP server.",
-      "module": "@microsoft/clarity-mcp-server",
-      "args": {
-        // Do NOT hardcode secrets. Use env variable or VS Code input variable pattern.
-        "apiToken": "${env:CLARITY_API_TOKEN}"
-      },
-      "port": 3939,
-      "enabled": true
+      "command": "npx",
+      "args": ["-y", "@microsoft/clarity-mcp-server@latest"],
+      "env": {
+        "CLARITY_API_TOKEN": "${env:CLARITY_API_TOKEN}"
+      }
+    },
+    {
+      "name": "Supabase",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref",
+        "ruhnueopjedaywiqhpgi"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}"
+      }
+    },
+    {
+      "name": "Astro Docs",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.docs.astro.build/mcp"]
+    },
+    {
+      "name": "Vercel",
+      "url": "https://mcp.vercel.com"
     }
   ]
 }

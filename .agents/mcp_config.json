@@ -1,7 +1,6 @@
 {
   "mcpServers": {
     "sanity": {
-      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@sanity/mcp-server@latest"],
       "env": {
@@ -11,8 +10,33 @@
       }
     },
     "customer-io": {
-      "type": "http",
-      "url": "https://mcp.customer.io/mcp"
+      "serverUrl": "https://mcp.customer.io/mcp"
+    },
+    "clarity": {
+      "command": "npx",
+      "args": ["-y", "@microsoft/clarity-mcp-server@latest"],
+      "env": {
+        "CLARITY_API_TOKEN": "${env:CLARITY_API_TOKEN}"
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref",
+        "ruhnueopjedaywiqhpgi"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}"
+      }
+    },
+    "astro-docs": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.docs.astro.build/mcp"]
+    },
+    "vercel": {
+      "serverUrl": "https://mcp.vercel.com"
     }
   }
 }
