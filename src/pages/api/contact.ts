@@ -4,6 +4,7 @@ import { resend } from '~/lib/resend';
 import nodemailer from 'nodemailer';
 import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
 import { logCommunication } from '~/lib/communications';
+import { identifyUser, trackEvent } from '~/lib/customerio';
 
 export const prerender = false;
 
@@ -46,27 +47,57 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 1. Persist record into Supabase leads table
+    let insertedLeadId: string | number | null = null;
     if (supabase) {
       try {
-        const { error: dbError } = await supabase.from('leads').insert([
-          {
-            name,
-            email,
-            phone: phone || null,
-            company_name: company_name || null,
-            service_needed: service_needed || null,
-            comments: comments || null,
-            page_submitted_from: page_submitted_from || 'Unknown',
-            status: 'new',
-          },
-        ]);
+        const { data: dbData, error: dbError } = await supabase
+          .from('leads')
+          .insert([
+            {
+              name,
+              email,
+              phone: phone || null,
+              company_name: company_name || null,
+              service_needed: service_needed || null,
+              comments: comments || null,
+              page_submitted_from: page_submitted_from || 'Unknown',
+              status: 'new',
+            },
+          ])
+          .select('id')
+          .single();
 
         if (dbError) {
           console.error('Supabase Insert Error:', dbError);
+        } else if (dbData?.id) {
+          insertedLeadId = dbData.id;
         }
       } catch (dbEx) {
         console.error('Supabase Client Error:', dbEx);
       }
+    }
+
+    // 1.5 Customer.io Behavioral Event & Lead Profile Upsert
+    try {
+      const customerId = insertedLeadId ? `lead_${insertedLeadId}` : email;
+      await identifyUser(customerId, {
+        email,
+        created_at: Math.floor(Date.now() / 1000),
+        company_name: company_name || undefined,
+        phone: phone || undefined,
+        service_needed: service_needed || undefined,
+        lead_tier: 'tier_1_diagnostic',
+        pipeline_status: 'inbox',
+      });
+
+      await trackEvent(customerId, 'lead_intake_submitted', {
+        form_type: form_type || 'contact_form',
+        company_name: company_name || '',
+        service_needed: service_needed || '',
+        page_submitted_from: page_submitted_from || '/contact',
+      });
+    } catch (cioErr) {
+      console.warn('Customer.io server event non-blocking error:', cioErr);
     }
 
     // Log inbound form message to unified communications log
