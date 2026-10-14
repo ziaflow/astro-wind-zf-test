@@ -1,4 +1,20 @@
-# 🚀 AstroWind
+# ZiaFlow Production Web Platform
+
+> **Internal Repository Note:** This repository (`astro-wind-zf-test`) is the authoritative production codebase for **[ZiaFlow](https://ziaflow.com)** (Arizona technology, web engineering, automation, and search intelligence).  
+> Built on **Astro 5.16 + Tailwind CSS**, integrated with **Sanity Studio** (`/studio-gemini-blog`), **Supabase Postgres**, and **Customer.io**.
+
+---
+
+### Key Paths & Architecture
+- **Frontend / Public Site:** `src/pages/`
+- **Sanity Headless CMS:** `studio-gemini-blog/`
+- **Autonomous Agents & Background Jobs:** `tools/agents/`
+- **Database Migrations:** `tools/agents/migrations/`
+- **Architecture Documentation:** `docs/architecture/`
+
+---
+
+# 🚀 AstroWind Engine
 
 <img src="https://raw.githubusercontent.com/arthelokyo/.github/main/resources/astrowind/lighthouse-score.png" align="right"
      alt="AstroWind Lighthouse Score" width="100" height="358">

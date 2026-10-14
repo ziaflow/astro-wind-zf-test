@@ -5,6 +5,12 @@
 <form id="quick-lead-form" class="space-y-4">
   <input type="hidden" name="form_type" value="quick" />
   <input type="hidden" name="page_submitted_from" value={Astro.url.pathname} />
+  <input type="hidden" name="utm_source" id="ql-utm-source" value="" />
+  <input type="hidden" name="utm_medium" id="ql-utm-medium" value="" />
+  <input type="hidden" name="utm_campaign" id="ql-utm-campaign" value="" />
+  <input type="hidden" name="utm_term" id="ql-utm-term" value="" />
+  <input type="hidden" name="utm_content" id="ql-utm-content" value="" />
+  <input type="hidden" name="referrer" id="ql-referrer" value="" />
 
   <div>
     <label class="block text-sm font-medium text-slate-800 dark:text-slate-200">Name *</label>
@@ -70,13 +76,30 @@
 </form>
 
 <script>
-  const form = document.getElementById('quick-lead-form') as HTMLFormElement;
-  const statusEl = document.getElementById('quick-status') as HTMLElement;
-  const btn = document.getElementById('quick-submit-btn') as HTMLButtonElement;
+  function initQuickLeadForm() {
+    const form = document.getElementById('quick-lead-form') as HTMLFormElement;
+    const statusEl = document.getElementById('quick-status') as HTMLElement;
+    const btn = document.getElementById('quick-submit-btn') as HTMLButtonElement;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (btn.disabled) return;
+    if (!form || form.dataset.initialized === 'true') return;
+    form.dataset.initialized = 'true';
+
+    // Populate UTMs & Referrer dynamically
+    const params = new URLSearchParams(window.location.search);
+    const setField = (id: string, val: string) => {
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      if (el) el.value = val;
+    };
+    setField('ql-utm-source', params.get('utm_source') || '');
+    setField('ql-utm-medium', params.get('utm_medium') || '');
+    setField('ql-utm-campaign', params.get('utm_campaign') || '');
+    setField('ql-utm-term', params.get('utm_term') || '');
+    setField('ql-utm-content', params.get('utm_content') || '');
+    setField('ql-referrer', document.referrer || '');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
     btn.disabled = true;
     const originalText = btn.textContent;
     btn.textContent = 'Sending...';
@@ -148,4 +171,8 @@
       btn.textContent = originalText;
     }
   });
+}
+
+document.addEventListener('astro:page-load', initQuickLeadForm);
+initQuickLeadForm();
 </script>

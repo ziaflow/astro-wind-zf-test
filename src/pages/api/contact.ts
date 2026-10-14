@@ -17,6 +17,12 @@ interface ContactPayload {
   service_needed?: string;
   comments?: string;
   page_submitted_from?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  referrer?: string;
 }
 
 export const GET: APIRoute = async () => {
@@ -40,7 +46,22 @@ export const POST: APIRoute = async ({ request }) => {
         });
       }
     }
-    const { form_type, name, email, phone, company_name, service_needed, comments, page_submitted_from } = data;
+    const {
+      form_type,
+      name,
+      email,
+      phone,
+      company_name,
+      service_needed,
+      comments,
+      page_submitted_from,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_term,
+      utm_content,
+      referrer,
+    } = data;
 
     if (!name || !email || typeof name !== 'string' || typeof email !== 'string') {
       return new Response(JSON.stringify({ ok: false, error: 'bad_request' }), { status: 400 });
@@ -88,8 +109,29 @@ export const POST: APIRoute = async ({ request }) => {
         service_needed: service_needed || undefined,
         lead_tier: 'tier_1_diagnostic',
         pipeline_status: 'inbox',
+        utm_source: utm_source || undefined,
+        utm_medium: utm_medium || undefined,
+        utm_campaign: utm_campaign || undefined,
+        utm_term: utm_term || undefined,
+        utm_content: utm_content || undefined,
+        landing_page: page_submitted_from || '/contact',
+        referrer: referrer || undefined,
       });
 
+      // Emits 'contact_form_submitted' to match Customer.io draft automation trigger
+      await trackEvent(customerId, 'contact_form_submitted', {
+        form_type: form_type || 'contact_form',
+        company_name: company_name || '',
+        service_needed: service_needed || '',
+        page_submitted_from: page_submitted_from || '/contact',
+        utm_source: utm_source || '',
+        utm_medium: utm_medium || '',
+        utm_campaign: utm_campaign || '',
+        utm_term: utm_term || '',
+        utm_content: utm_content || '',
+      });
+
+      // Secondary event for legacy compatibility
       await trackEvent(customerId, 'lead_intake_submitted', {
         form_type: form_type || 'contact_form',
         company_name: company_name || '',
@@ -111,7 +153,7 @@ export const POST: APIRoute = async ({ request }) => {
       content: comments || `Service needed: ${service_needed || 'Not specified'}`,
       pagePath: page_submitted_from || '/contact',
       formId: form_type || 'contact-form',
-      metadata: { phone, company_name, service_needed },
+      metadata: { phone, company_name, service_needed, utm_source, utm_campaign, utm_term, utm_content },
     });
 
     // 2.5 Forward to Google Apps Script / Google Sheets

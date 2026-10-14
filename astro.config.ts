@@ -32,6 +32,12 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
 
+  // Native Astro 5 prefetching for instant page transitions on hover
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+
   // CSRF protection for on-demand routes. NEVER set this to false — fix local test origins instead
   // (use the same host the dev server prints, e.g. http://localhost:4321, not 127.0.0.1).
   security: {

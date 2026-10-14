@@ -10,6 +10,7 @@ import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import QuickLeadForm from '~/components/QuickLeadForm.astro';
+import HeroQuickForm from '~/components/HeroQuickForm.astro';
 import Content from '~/components/widgets/Content.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
@@ -28,9 +29,9 @@ const metadata = {
       'ZiaFlow helps Arizona service businesses build websites, custom tools, CRM integrations, and workflow automation. Discuss your next project.',
     images: [
       {
-        url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
+        url: 'https://ziaflow.com/logo.png',
         width: 1200,
-        height: 628,
+        height: 630,
         alt: 'ZiaFlow Digital Growth Partner',
       },
     ],
@@ -39,8 +40,7 @@ const metadata = {
     meta: [
       {
         property: 'og:logo',
-        content:
-          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/ziaflow_chip_blue.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL3ppYWZsb3dfY2hpcF9ibHVlLnBuZyIsImlhdCI6MTc2NTk1MzE4NSwiZXhwIjoxODkyMDk3MTg1fQ.o89O7epzXcp0ji-a81MFQJZJimZEqr6cc_N8NkGMZZ0',
+        content: 'https://ziaflow.com/logo.png',
       },
       {
         name: 'twitter:card',
@@ -56,8 +56,7 @@ const metadata = {
       },
       {
         name: 'twitter:image',
-        content:
-          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
+        content: 'https://ziaflow.com/logo.png',
       },
     ],
   },
@@ -102,6 +101,10 @@ const metadata = {
       <p class="text-sm font-semibold text-gray-500 tracking-wide uppercase">
         Web development · CRM integrations · Workflow automation · Technical SEO
       </p>
+    </Fragment>
+
+    <Fragment slot="content">
+      <HeroQuickForm />
     </Fragment>
   </Hero>
 

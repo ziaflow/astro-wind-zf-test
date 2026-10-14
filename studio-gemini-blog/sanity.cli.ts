@@ -9,4 +9,10 @@ export default defineCliConfig({
   deployment: {
     appId: 'k3vbc5h27hp0eyvrnuv70kod',
   },
+  typegen: {
+    path: ['../src/utils/**/*.{ts,js}', '../src/lib/**/*.{ts,js}', './schemaTypes/**/*.{ts,tsx}'],
+    schema: './schema.json',
+    generates: './sanity.types.ts',
+  },
 })
+

@@ -57,6 +57,12 @@ export const postType = defineType({
       description: 'A brief summary for search engine results. Matches your MDX excerpt.',
       rows: 3,
       validation: (Rule) => Rule.max(160).warning('Keep under 160 characters'),
+      options: {
+        ai: {
+          prompt:
+            'Generate a compelling, high-converting SEO meta description under 155 characters summarizing the article title and body content. Include an actionable takeaway.',
+        },
+      },
     }),
     // 🛡️ EDITORIAL WORKFLOW & GOVERNANCE FIELDS
     defineField({
@@ -81,6 +87,12 @@ export const postType = defineType({
       type: 'text',
       description: 'Automated fact-checking notes, claim verification results, and recommended tweaks.',
       rows: 4,
+      options: {
+        ai: {
+          prompt:
+            'Review the post body against Ziaflow editorial standards. Summarize key strengths, verify technical accuracy, and suggest improvements.',
+        },
+      },
     }),
     defineField({
       name: 'targetKeywords',
