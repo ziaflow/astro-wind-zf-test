@@ -71,3 +71,46 @@ export function trackEmailSent(params: EmailSentEventParams): void {
     ...params,
   });
 }
+
+export interface CustomerIoIdentifyParams {
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  service_interest?: string;
+  intake_source?: string;
+  [key: string]: unknown;
+}
+
+/**
+ * Identifies the person in Customer.io CDP and sets lead attributes
+ */
+export function identifyCustomerIo(params: CustomerIoIdentifyParams): void {
+  if (typeof window === 'undefined') return;
+  const w = window as any;
+  if (w.cioanalytics && typeof w.cioanalytics.identify === 'function') {
+    const { email, ...attributes } = params;
+    if (email) {
+      w.cioanalytics.identify(email, {
+        email,
+        ...attributes,
+      });
+    }
+  }
+}
+
+/**
+ * Dispatches contact_form_submitted event to Customer.io CDP with event payload
+ */
+export function trackCustomerIoEvent(eventName: string, eventData: Record<string, unknown> = {}): void {
+  if (typeof window === 'undefined') return;
+  const w = window as any;
+  if (w.cioanalytics && typeof w.cioanalytics.track === 'function') {
+    w.cioanalytics.track(eventName, {
+      ...eventData,
+      page_url: window.location.href,
+      page_path: window.location.pathname,
+    });
+  }
+}
+

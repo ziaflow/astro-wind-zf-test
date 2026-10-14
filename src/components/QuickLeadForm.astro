@@ -94,8 +94,8 @@
       });
       const result = await res.json();
       if (res.ok && result.ok) {
-        // Fire GTM & GA4 Events
-        import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent }) => {
+        // Fire GTM, GA4, and Customer.io Events
+        import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
           trackFormSubmission({
             form_id: 'quick-lead-form',
             form_name: 'quick_lead',
@@ -105,6 +105,30 @@
             email_type: 'lead_notification',
             status: 'sent',
             form_name: 'quick_lead',
+          });
+
+          // Customer.io: 1. Identify person by email
+          const rawName = ((data.name as string) || '').trim();
+          const nameParts = rawName.split(/\s+/);
+          const firstName = nameParts[0] || '';
+          const lastName = nameParts.slice(1).join(' ') || '';
+          const userEmail = ((data.email as string) || '').trim();
+
+          identifyCustomerIo({
+            email: userEmail,
+            first_name: firstName,
+            last_name: lastName,
+            phone: (data.phone as string) || '',
+            service_interest: (data.service_needed as string) || 'General Inquiry',
+            intake_source: 'contact_form',
+          });
+
+          // Customer.io: 2. Track contact_form_submitted event with message and page URL
+          trackCustomerIoEvent('contact_form_submitted', {
+            message: (data.comments as string) || '',
+            company_name: (data.company_name as string) || '',
+            form_id: 'quick-lead-form',
+            intake_source: 'contact_form',
           });
         });
 

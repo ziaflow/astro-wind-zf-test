@@ -38,6 +38,7 @@
     "@astrojs/vercel": "^8.2.11",
     "@astrolib/analytics": "^0.6.1",
     "@astrolib/seo": "^1.0.0-beta.8",
+    "@customerio/cdp-analytics-browser": "^0.6.0",
     "@fontsource-variable/inter": "^5.2.6",
     "@microsoft/clarity": "^1.0.2",
     "@sanity/astro": "^3.2.11",
