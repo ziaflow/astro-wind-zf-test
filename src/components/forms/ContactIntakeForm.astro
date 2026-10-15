@@ -330,9 +330,43 @@ const inputClass =
 
         this.showStatus('success', data.message ?? 'Thanks! We received your message.');
         const inquiryType = (this.form.elements.namedItem('inquiry_type') as HTMLSelectElement | null)?.value;
-        // Analytics: no personal data (no name/email/phone/company/message).
+        const nameVal = (this.form.elements.namedItem('name') as HTMLInputElement | null)?.value || '';
+        const emailVal = (this.form.elements.namedItem('email') as HTMLInputElement | null)?.value || '';
+        const phoneVal = (this.form.elements.namedItem('phone') as HTMLInputElement | null)?.value || '';
+        const companyVal = (this.form.elements.namedItem('company_name') as HTMLInputElement | null)?.value || '';
+        const commentsVal = (this.form.elements.namedItem('comments') as HTMLTextAreaElement | null)?.value || '';
+
+        // Analytics: push to dataLayer
         const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
         w.dataLayer?.push({ event: 'generate_lead', form_id: this.dataset.formId, inquiry_type: inquiryType });
+
+        // Customer.io: Identify and track contact_form_submitted
+        if (emailVal) {
+          import('~/utils/analytics').then(({ identifyCustomerIo, trackCustomerIoEvent }) => {
+            const rawName = nameVal.trim();
+            const nameParts = rawName.split(/\s+/);
+            const firstName = nameParts[0] || '';
+            const lastName = nameParts.slice(1).join(' ') || '';
+
+            identifyCustomerIo({
+              email: emailVal.trim(),
+              first_name: firstName,
+              last_name: lastName,
+              phone: phoneVal,
+              company_name: companyVal,
+              service_interest: inquiryType || 'Inquiry',
+              intake_source: 'contact_intake_form',
+            });
+
+            trackCustomerIoEvent('contact_form_submitted', {
+              form_id: this.dataset.formId || 'contact_intake_form',
+              inquiry_type: inquiryType || '',
+              company_name: companyVal,
+              message: commentsVal,
+              intake_source: 'contact_intake_form',
+            });
+          });
+        }
 
         this.form.reset();
         this.q<HTMLInputElement>('[data-zf-submission-id]').value = newSubmissionId();

@@ -166,8 +166,8 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
         });
 
         if (response.ok) {
-          // Push to dataLayer & GA4
-          const { trackFormSubmission, trackEmailSent } = await import('~/utils/analytics');
+          // Push to dataLayer, GA4 & Customer.io
+          const { trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent } = await import('~/utils/analytics');
           trackFormSubmission({
             form_id: 'audit-booking-form',
             form_name: 'audit_booking',
@@ -178,11 +178,29 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
             form_name: 'audit_booking',
           });
 
+          // Customer.io: Identify and track audit request
+          const userEmail = ((data.email as string) || '').trim();
+          identifyCustomerIo({
+            email: userEmail,
+            first_name: (data.first_name as string) || '',
+            last_name: (data.last_name as string) || '',
+            phone: (data.phone as string) || '',
+            company_name: (data.company_name as string) || '',
+            service_interest: 'Growth Audit',
+            intake_source: 'audit_booking_form',
+          });
+
+          trackCustomerIoEvent('contact_form_submitted', {
+            form_id: 'audit-booking-form',
+            form_type: 'audit_booking',
+            company_name: (data.company_name as string) || '',
+            message: (data.message as string) || '',
+            intake_source: 'audit_booking_form',
+          });
+
           // Show success message
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
-          // Optional: Redirect after 2 seconds or perform other actions
-          // window.location.href = '/thank-you';
         } else {
           alert('Something went wrong. Please try again.');
         }

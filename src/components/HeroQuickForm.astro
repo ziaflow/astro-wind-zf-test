@@ -128,6 +128,43 @@
         if (res.ok && result.ok) {
           statusEl.textContent = '✅ Inbound request received! We will follow up shortly.';
           statusEl.className = 'block rounded-xl border border-green-300 bg-green-50 p-2.5 text-center text-xs font-semibold text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300';
+          
+          // Customer.io and Analytics integration
+          import('~/utils/analytics').then(({ identifyCustomerIo, trackCustomerIoEvent, trackFormSubmission, trackEmailSent }) => {
+            const rawName = ((data.name as string) || '').trim();
+            const nameParts = rawName.split(/\s+/);
+            const firstName = nameParts[0] || '';
+            const lastName = nameParts.slice(1).join(' ') || '';
+            const userEmail = ((data.email as string) || '').trim();
+
+            identifyCustomerIo({
+              email: userEmail,
+              first_name: firstName,
+              last_name: lastName,
+              service_interest: (data.service_needed as string) || 'Hero Quick Inquiry',
+              intake_source: 'hero_quick_form',
+            });
+
+            trackCustomerIoEvent('contact_form_submitted', {
+              service_needed: (data.service_needed as string) || '',
+              form_id: 'hero-quick-form',
+              form_type: 'hero_quick',
+              intake_source: 'hero_quick_form',
+            });
+
+            trackFormSubmission({
+              form_id: 'hero-quick-form',
+              form_name: 'hero_quick',
+              service_needed: (data.service_needed as string) || '',
+            });
+
+            trackEmailSent({
+              email_type: 'lead_notification',
+              status: 'sent',
+              form_name: 'hero_quick',
+            });
+          });
+
           form.reset();
         } else {
           throw new Error(result.error || 'Submission failed');
