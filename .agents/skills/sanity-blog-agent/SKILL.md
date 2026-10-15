@@ -70,11 +70,15 @@ Deployed at: `https://ziaflow.sanity.studio/`
   npm run sanity:list
   ```
 
-### Anti-Spam Rate Limiting Guardrail
-To safeguard ZiaFlow's search reputation and prevent algorithmic spam penalization from Google and Bing:
-- **Daily Cap:** Maximum **3 blog posts per 24-hour cycle** (across both Sanity and local Markdown/MDX).
-- **Auto-Draft Demotion:** If 3 posts have already been published on the current date, any newly triggered post creation or publication automatically reverts to `draft` status.
-- **Auditing:** `npm run sanity:review` scans word count, meta descriptions, and cliché AI phrasing before syndication.
+### Quality Gateway & Anti-Spam Guardrails
+To safeguard ZiaFlow's search reputation, ensure authentic human oversight, and strictly comply with Google's Scaled Content Abuse policies:
+- **Weekly Volume Cap:** Maximum **3 blog posts per rolling 7-day window** (across both Sanity and local Markdown/MDX).
+- **Mandatory Quality Gateway Validation:** Before running `npm run sanity:publish-safe`, every article MUST pass three checks:
+  1. **Named Human Reviewer:** Must specify a verified human reviewer/author (e.g. `Jeremy (ZiaFlow Engineering Lead)`). Anonymous or AI attributions trigger auto-demotion.
+  2. **Original Proof Asset:** Must contain at least one verifiable, original asset (`client_data`, `screenshot`, `benchmark_data`, `code_sample`, or `custom_diagram`). Merely crediting external sources is insufficient.
+  3. **Fact-Check Verification:** All statistical claims (e.g. CPC ranges, conversion multipliers) must be explicitly cited and dated.
+- **Auto-Draft Demotion:** Any article failing the Quality Gateway or exceeding the 3-post weekly volume cap is safely demoted to `draft` status to prevent manual search action.
+- **Quality Audit:** `npm run sanity:review` audits all local and Sanity posts against the Quality Gateway rules.
 
 ---
 
