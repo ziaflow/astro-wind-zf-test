@@ -650,6 +650,33 @@ export async function listPosts() {
   return posts;
 }
 
+/**
+ * Converts published posts in Sanity into drafts so they can be reviewed and edited in Sanity Studio
+ */
+export async function demotePublishedToDrafts() {
+  if (!client) {
+    throw new Error('SANITY_API_TOKEN is required.');
+  }
+
+  const query = '*[_type == "post" && !(_id in path("drafts.**"))]{ _id, title, "slug": slug.current }';
+  const publishedPosts = await client.fetch(query);
+  console.log(`\n🔄 Converting ${publishedPosts.length} published Sanity posts into drafts...`);
+
+  for (const post of publishedPosts) {
+    const draftId = `drafts.${post._id}`;
+    console.log(`   Staging as draft: ${post.title} (ID: ${post._id} -> ${draftId})`);
+    const doc = await client.getDocument(post._id);
+    if (doc) {
+      const draftDoc = { ...doc, _id: draftId };
+      await client.createOrReplace(draftDoc);
+      await client.delete(post._id);
+      console.log(`   ✅ Successfully converted ${post.title} to draft!`);
+    }
+  }
+
+  console.log('\n✨ All target Sanity posts are now in DRAFT status for review and image enrichment.');
+}
+
 // CLI handler
 async function main() {
   const arg = process.argv[2] || '--review';
@@ -668,6 +695,8 @@ async function main() {
     for (let i = 0; i < HIGH_PRIORITY_TOPICS.length; i++) {
       await draftPost(i, 'draft');
     }
+  } else if (arg === '--demote-to-drafts') {
+    await demotePublishedToDrafts();
   } else if (arg === '--list') {
     await listPosts();
   } else {
@@ -676,12 +705,13 @@ Usage:
   node tools/agents/sanity-content-agent.mjs [command]
 
 Commands:
-  --review        Review all posts (local & Sanity) against the Quality Gateway (default)
-  --sync          Sync high priority topic queue to Sanity SEO Dashboard
-  --draft-next    Generate a structured draft post for topic #1 in Sanity
-  --publish-safe  Execute Quality Gateway (Human Reviewer, Original Assets, Fact-Check) & Publish
-  --draft-all     Draft all queued topics into Sanity Studio
-  --list          List recent posts (drafts and published) from Sanity
+  --review            Review all posts (local & Sanity) against the Quality Gateway (default)
+  --sync              Sync high priority topic queue to Sanity SEO Dashboard
+  --draft-next        Generate a structured draft post for topic #1 in Sanity
+  --publish-safe      Execute Quality Gateway (Human Reviewer, Original Assets, Fact-Check) & Publish
+  --draft-all         Draft all queued topics into Sanity Studio
+  --demote-to-drafts  Move all published Sanity posts to drafts for review/image addition
+  --list              List recent posts (drafts and published) from Sanity
 `);
   }
 }

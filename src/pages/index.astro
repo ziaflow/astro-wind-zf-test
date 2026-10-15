@@ -9,7 +9,6 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import QuickLeadForm from '~/components/QuickLeadForm.astro';
 import HeroQuickForm from '~/components/HeroQuickForm.astro';
 import Content from '~/components/widgets/Content.astro';
 import { Icon } from 'astro-icon/components'; // Added for the custom section icons
@@ -72,7 +71,7 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Discuss Your Project',
-        href: '#form',
+        href: '#hero-quick-form',
         icon: 'tabler:arrow-right',
       },
       {
@@ -262,7 +261,7 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Discuss Your Project',
-        href: '#form',
+        href: '#hero-quick-form',
         icon: 'tabler:arrow-right',
       },
       {
@@ -273,22 +272,6 @@ const metadata = {
       },
     ]}
   />
-
-  <WidgetWrapper id="form" containerClass="max-w-7xl mx-auto">
-    <Headline
-      tagline="Get In Touch"
-      title="Tell Us What Needs to Work Better"
-      subtitle="Describe your website, internal tool, or automation challenge. We’ll review your request and discuss practical next steps."
-    />
-    <div
-      class="mx-auto w-full max-w-3xl rounded-3xl border border-white/40 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8 dark:border-slate-800 dark:bg-slate-900/80"
-    >
-      <QuickLeadForm />
-      <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
-        We use your information to respond to your inquiry. See our <a href="/privacy" class="underline">Privacy Policy</a> for details.
-      </p>
-    </div>
-  </WidgetWrapper>
 
   <!-- Practical Guides for Better Websites and Workflows -->
   <BlogLatestPosts
@@ -389,10 +372,8 @@ const metadata = {
       }
 
       function populateHiddenFields() {
-        const wrapper = document.getElementById('form');
-        if (!wrapper) return;
-
-        const form = wrapper.querySelector('form') || wrapper;
+        const form = document.getElementById('hero-quick-form');
+        if (!form) return;
 
         // Populate UTM parameters
         ['utm_source', 'utm_medium', 'utm_campaign'].forEach((k) => {
@@ -419,10 +400,7 @@ const metadata = {
       }
 
       function attachFormTracking() {
-        const wrapper = document.getElementById('form');
-        if (!wrapper) return;
-
-        const form = wrapper.querySelector('form') || wrapper;
+        const form = document.getElementById('hero-quick-form');
         if (!form) return;
         form.addEventListener(
           'submit',
