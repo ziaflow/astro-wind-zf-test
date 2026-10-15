@@ -1,4 +1,5 @@
 ---
+draft: true
 publishDate: 2026-03-15T00:00:00Z
 title: 'Implementing Tabler Icons: Frameworks, HTML, and Inline SVGs'
 excerpt: Learn the most efficient ways to integrate Tabler Icons into your website or web application, comparing tree-shaken component libraries, CDN webfonts, and zero-runtime inline SVGs.
