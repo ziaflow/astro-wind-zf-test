@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
+import KairoHero from '~/components/widgets/KairoHero.astro';
+import ZoltServiceMatrix from '~/components/widgets/ZoltServiceMatrix.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
@@ -10,9 +11,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Content from '~/components/widgets/Content.astro';
-import { Icon } from 'astro-icon/components'; // Added for the custom section icons
 
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
@@ -68,43 +67,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <LocalBusinessSchema />
 
-  <Hero
-    tagline={`<span class="text-primary font-bold tracking-wide uppercase">Engineering the Future</span>`}
-    title="Custom Software & AI Solutions That Power Growth"
-    subtitle="Deploy autonomous AI agents, HIPAA-compliant voice assistants, and enterprise-grade web applications. We build the technology that scales your business."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get Automation Strategy',
-        href: '#form',
-        icon: 'tabler:robot',
-      },
-      {
-        text: 'Book Tech Consult',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        target: '_blank',
-        class:
-          'bg-white text-black border-2 border-gray-200 hover:border-primary hover:text-primary hover:scale-105 transition-all shadow-md font-bold px-10',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 w-full h-full z-0 bg-white">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white"></div>
-      </div>
-    </Fragment>
-
-    <Fragment slot="title">
-      <h1 class="text-5xl md:text-6xl font-bold leading-tight tracking-tighter mb-4 font-heading text-black pb-1">
-        Custom Software & <span class="digital-gradient-text">AI Solutions</span> That Power Growth
-      </h1>
-    </Fragment>
-    <Fragment slot="subtitle">
-      <p class="text-xl text-gray-900 mb-6 font-medium">
-        Engineering the Future. Deploy autonomous AI agents and build custom web applications.
-      </p>
-    </Fragment>
-  </Hero>
+  <KairoHero />
 
   <Brands
     title="Tech Stack & Partners"
@@ -152,85 +115,7 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <WidgetWrapper containerClass="max-w-7xl mx-auto" isDark={false}>
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
-      <div class="md:w-1/2">
-        <p class="text-primary font-bold text-sm tracking-widest uppercase mb-2">ENGINEERING-GRADE SOLUTIONS</p>
-        <h2 class="text-4xl md:text-5xl font-heading font-bold text-heading leading-tight">
-          We provide enterprise <br />
-          <span class="text-primary">tech solutions</span>
-        </h2>
-      </div>
-      <div class="md:w-5/12 text-muted text-lg">
-        <p class="mb-4">
-          ZiaFlow delivers custom software, secure cloud infrastructure, and autonomous AI agents. We engineer systems
-          that solve complex business problems.
-        </p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8 items-start mt-16">
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:code" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Custom App <br /> Development</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Bespoke web and mobile applications built for performance, scalability, and specific business logic.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:microphone" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">HIPAA-Compliant <br /> Voice AI</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Secure AI voice agents for patient intake, appointment scheduling, and customer service.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:chart-dots" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">AI Marketing <br /> Intelligence</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Real-time dashboards and predictive analytics to optimize ad spend and ROI.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:robot" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Workflow <br /> Automation</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          End-to-end business process automation to eliminate manual tasks and reduce overhead.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:cloud" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">Cloud <br /> Infrastructure</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Secure, scalable Azure and AWS architectures designed for high availability.
-        </p>
-      </div>
-
-      <div class="group px-6 text-center lg:text-left">
-        <div class="inline-block p-3 rounded bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-          <Icon name="tabler:lock" class="w-10 h-10" />
-        </div>
-        <h3 class="text-xl font-bold mb-2 leading-tight uppercase">API Integration <br /> & Security</h3>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-          Seamlessly connect disparate systems with secure, high-performance API integrations.
-        </p>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <ZoltServiceMatrix />
 
   <Stats
     stats={[
