@@ -3,7 +3,7 @@ publishDate: 2024-10-14T00:00:00Z
 title: 'Reduce Bounce Rate with AI: A How-To Guide to Engage Visitors Instantly'
 excerpt: 'Stop focusing on passive fixes. Learn the Diagnose → Fix → Automate framework to turn high bounce rates into high engagement using AI agents.'
 image: '~/assets/images/blog/robot-analytics.jpg'
-category: 'Strategy'
+category: 'AI Automation'
 tags:
   - bounce rate
   - ai

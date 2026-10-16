@@ -25,38 +25,30 @@ const { post, url } = Astro.props;
         ? 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
         : 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'}
     >
-      <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
-        <p>
-          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
+      <div class="flex flex-wrap items-center gap-2 max-w-3xl mx-auto mt-0 mb-4 px-4 sm:px-6">
+        {
+          post.category && (
+            <a
+              class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-colors duration-200"
+              href={getPermalink(post.category.slug, 'category')}
+            >
+              {post.category.title}
+            </a>
+          )
+        }
+        <div class="flex items-center text-sm text-muted dark:text-slate-400 gap-1.5">
+          <Icon name="tabler:calendar" class="w-4 h-4 inline-block -mt-0.5" />
+          <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
           {
             post.author && (
               <>
-                {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
+                <span>·</span>
+                <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5" />
+                <span>{post.author}</span>
               </>
             )
           }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
-            )
-          }
-          {
-            post.readingTime && (
-              <>
-                &nbsp;· <span>{post.readingTime}</span> min read
-              </>
-            )
-          }
-        </p>
+        </div>
       </div>
 
       <h1

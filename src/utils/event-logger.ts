@@ -6,7 +6,7 @@
 
 const endpoint = import.meta.env.PUBLIC_EVENT_LOG_ENDPOINT || '/api/events';
 
-export async function logEvent(event: string, data: Record<string, any> = {}) {
+export async function logEvent(event: string, data: Record<string, unknown> = {}) {
   if (typeof window === 'undefined') return; // Only run in browser
   try {
     await fetch(endpoint, {
@@ -14,8 +14,7 @@ export async function logEvent(event: string, data: Record<string, any> = {}) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ event, ...data, ts: new Date().toISOString() })
     });
-  } catch (err) {
+  } catch {
     // Optionally log error to console or monitoring
-    // console.error('Event log failed', err);
   }
 }

@@ -8,8 +8,8 @@ const site = {
   twitterHandle: '@ziaflow',
   social: {
     linkedin: 'https://www.linkedin.com/company/ziaflow',
-    facebook: 'https://www.facebook.com/your-page',
-    twitter: 'https://twitter.com/your-handle',
+    facebook: 'https://www.facebook.com/ZiaFlowAZ/',
+    twitter: 'https://twitter.com/ziaflow',
   },
 };
 
