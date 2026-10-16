@@ -172,6 +172,37 @@ if (!useNodemailer && !resolvedAccessKey) {
           if (response.ok) {
             resultEl.textContent = data.message || successMessage || 'Thank you!';
             resultEl.classList.add('text-green-500');
+
+            // Customer.io Lead Identification & Trigger Event
+            try {
+              const parsedEntries = Object.fromEntries(formData.entries());
+              const userEmail = parsedEntries.email;
+              const userName = parsedEntries.name || '';
+              const [firstName, ...restName] = String(userName).split(' ');
+              const lastName = restName.join(' ');
+
+              if (window._cio && userEmail) {
+                window._cio.identify({
+                  id: userEmail,
+                  email: userEmail,
+                  first_name: firstName || undefined,
+                  last_name: lastName || undefined,
+                  phone: parsedEntries.phone || undefined,
+                  service_interest: parsedEntries.service_interest || undefined,
+                  created_at: Math.floor(Date.now() / 1000),
+                });
+
+                window._cio.track('contact_form_submitted', {
+                  message: parsedEntries.message || '',
+                  page_url: window.location.href,
+                  service_interest: parsedEntries.service_interest || '',
+                  phone: parsedEntries.phone || '',
+                });
+              }
+            } catch (cioErr) {
+              console.warn('Customer.io client dispatch note:', cioErr);
+            }
+
             form.reset();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';

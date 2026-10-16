@@ -29,21 +29,33 @@ const metadata = {
         type: 'text',
         name: 'name',
         label: 'Full Name',
+        placeholder: 'John Doe',
+        required: true,
       },
       {
         type: 'email',
         name: 'email',
-        label: 'Email',
-      },
-      {
-        type: 'text',
-        name: 'company',
-        label: 'Company',
+        label: 'Work Email',
+        placeholder: 'john@company.com',
+        required: true,
       },
       {
         type: 'text',
         name: 'phone',
-        label: 'Phone',
+        label: 'Phone Number',
+        placeholder: '(602) 555-0199',
+      },
+      {
+        type: 'text',
+        name: 'service_interest',
+        label: 'Service Interest (Web Development, Automation, Local SEO, PPC)',
+        placeholder: 'e.g. Business Automation or Web Development',
+      },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Company Name',
+        placeholder: 'Your Business or Brand',
       },
     ]}
     textarea={{

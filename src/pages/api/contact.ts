@@ -29,12 +29,14 @@ export const POST: APIRoute = async ({ request }) => {
     const message = typeof data.message === 'string' ? data.message : '';
     const phone = typeof data.phone === 'string' ? data.phone : undefined;
     const company = typeof data.company === 'string' ? data.company : undefined;
+    const serviceInterest = typeof data.service_interest === 'string' ? data.service_interest : (typeof data.service_needed === 'string' ? data.service_needed : undefined);
     const otherData = { ...data };
     delete otherData.name;
     delete otherData.email;
     delete otherData.message;
     delete otherData.phone;
     delete otherData.company;
+    delete otherData.service_interest;
 
     // Validate required fields
     if (!email) {
@@ -51,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
             email,
             phone: phone || null,
             company_name: company || otherData.company_name || null,
-            service_needed: otherData.service_needed || 'Contact Inquiry',
+            service_needed: serviceInterest || otherData.service_needed || 'Contact Inquiry',
             comments: message || null,
             page_submitted_from: otherData.page || '/contact',
             status: 'new',
