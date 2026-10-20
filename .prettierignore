@@ -11,3 +11,7 @@ studio-gemini-blog/.sanity
 broken-links.log
 astro-wind-zf-test/
 .vercel/
+.astro/
+.ziaflow-ops/
+outputs/
+src/data/post-generated/

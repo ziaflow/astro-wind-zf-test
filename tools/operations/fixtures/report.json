@@ -1,0 +1,10 @@
+{
+  "clientId": "ziaflow",
+  "periodStart": "2026-10-12",
+  "periodEnd": "2026-10-18",
+  "metrics": [],
+  "clientFacts": [],
+  "internalNotes": "Synthetic template only. No live provider data has been reconciled. All missing metrics must remain not connected.",
+  "effort": { "administrativeHours": null, "deliveryHours": null, "reviewHours": null },
+  "exceptions": ["Provider access, partner entitlements, live intake and client pilot remain unverified."]
+}

@@ -21,9 +21,7 @@ export interface CustomerIoEventPayload {
 }
 
 const siteId =
-  import.meta.env.CUSTOMERIO_SITE_ID ||
-  process.env.CUSTOMERIO_SITE_ID ||
-  process.env.PUBLIC_CUSTOMERIO_SITE_ID;
+  import.meta.env.CUSTOMERIO_SITE_ID || process.env.CUSTOMERIO_SITE_ID || process.env.PUBLIC_CUSTOMERIO_SITE_ID;
 
 const apiKey =
   import.meta.env.CUSTOMERIO_API_KEY ||
@@ -31,13 +29,10 @@ const apiKey =
   import.meta.env.CUSTOMERIO_TRACK_KEY ||
   process.env.CUSTOMERIO_TRACK_KEY;
 
-const region =
-  import.meta.env.CUSTOMERIO_REGION || process.env.CUSTOMERIO_REGION || 'us';
+const region = import.meta.env.CUSTOMERIO_REGION || process.env.CUSTOMERIO_REGION || 'us';
 
 const getBaseUrl = () => {
-  return region === 'eu'
-    ? 'https://track-eu.customer.io/api/v1'
-    : 'https://track.customer.io/api/v1';
+  return region === 'eu' ? 'https://track-eu.customer.io/api/v1' : 'https://track.customer.io/api/v1';
 };
 
 const getAuthHeader = () => {

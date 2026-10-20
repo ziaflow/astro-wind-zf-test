@@ -134,7 +134,7 @@ export async function syncClarityToSupabase(days = 1) {
     const recordsToUpsert = Array.from(pageMap.values());
 
     console.log(`📊 Upserting ${recordsToUpsert.length} unique record(s) into metrics_clarity_daily...`);
-    const { data: upserted, error } = await supabase
+    const { error } = await supabase
       .from('metrics_clarity_daily')
       .upsert(recordsToUpsert, { onConflict: 'date,page_path' })
       .select();

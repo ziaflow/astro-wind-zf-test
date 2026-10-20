@@ -167,7 +167,8 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
 
         if (response.ok) {
           // Push to dataLayer, GA4 & Customer.io
-          const { trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent } = await import('~/utils/analytics');
+          const { trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent } =
+            await import('~/utils/analytics');
           trackFormSubmission({
             form_id: 'audit-booking-form',
             form_name: 'audit_booking',
@@ -179,13 +180,13 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
           });
 
           // Customer.io: Identify and track audit request
-          const userEmail = ((data.email as string) || '').trim();
+          const userEmail = (data.email || '').trim();
           identifyCustomerIo({
             email: userEmail,
-            first_name: (data.first_name as string) || '',
-            last_name: (data.last_name as string) || '',
-            phone: (data.phone as string) || '',
-            company_name: (data.company_name as string) || '',
+            first_name: data.first_name || '',
+            last_name: data.last_name || '',
+            phone: data.phone || '',
+            company_name: data.company_name || '',
             service_interest: 'Growth Audit',
             intake_source: 'audit_booking_form',
           });
@@ -193,8 +194,8 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
           trackCustomerIoEvent('contact_form_submitted', {
             form_id: 'audit-booking-form',
             form_type: 'audit_booking',
-            company_name: (data.company_name as string) || '',
-            message: (data.message as string) || '',
+            company_name: data.company_name || '',
+            message: data.message || '',
             intake_source: 'audit_booking_form',
           });
 

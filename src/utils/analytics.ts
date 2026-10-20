@@ -5,6 +5,10 @@ declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
     gtag?: (...args: unknown[]) => void;
+    cioanalytics?: {
+      identify?: (id: string, attributes: Record<string, unknown>) => void;
+      track?: (event: string, attributes: Record<string, unknown>) => void;
+    };
   }
 }
 
@@ -87,7 +91,7 @@ export interface CustomerIoIdentifyParams {
  */
 export function identifyCustomerIo(params: CustomerIoIdentifyParams): void {
   if (typeof window === 'undefined') return;
-  const w = window as any;
+  const w = window;
   if (w.cioanalytics && typeof w.cioanalytics.identify === 'function') {
     const { email, ...attributes } = params;
     if (email) {
@@ -104,7 +108,7 @@ export function identifyCustomerIo(params: CustomerIoIdentifyParams): void {
  */
 export function trackCustomerIoEvent(eventName: string, eventData: Record<string, unknown> = {}): void {
   if (typeof window === 'undefined') return;
-  const w = window as any;
+  const w = window;
   if (w.cioanalytics && typeof w.cioanalytics.track === 'function') {
     w.cioanalytics.track(eventName, {
       ...eventData,
@@ -113,4 +117,3 @@ export function trackCustomerIoEvent(eventName: string, eventData: Record<string
     });
   }
 }
-

@@ -72,7 +72,12 @@ export async function syncGscToSupabase(queriesData = []) {
   }
 
   console.log(`✅ Synced ${data?.length || rows.length} GSC queries into Supabase table: gsc_search_queries`);
-  await logSyncHeartbeat('GSC', 'success', data?.length || rows.length, rows.filter((r) => r.opportunity_priority >= 7).length);
+  await logSyncHeartbeat(
+    'GSC',
+    'success',
+    data?.length || rows.length,
+    rows.filter((r) => r.opportunity_priority >= 7).length
+  );
   return { count: data?.length || rows.length };
 }
 
@@ -149,7 +154,7 @@ export async function logSyncHeartbeat(source, status, recordsIngested, opportun
         metadata: { timestamp: new Date().toISOString() },
       },
     ]);
-  } catch (e) {
+  } catch {
     // Non-blocking log
   }
 }
@@ -176,13 +181,25 @@ export async function getStrikingDistanceOpportunities(limit = 10) {
 // Sample GSC dataset from your latest 3-month performance export
 export const LATEST_GSC_DATASET = [
   { query: 'marketing automation phoenix', impressions: 62, clicks: 0, position: 11.5, ctr: 0 },
-  { query: 'i run a small business in phoenix and need a website and internal tool built with ai', impressions: 22, clicks: 0, position: 2.4, ctr: 0 },
+  {
+    query: 'i run a small business in phoenix and need a website and internal tool built with ai',
+    impressions: 22,
+    clicks: 0,
+    position: 2.4,
+    ctr: 0,
+  },
   { query: 'marketing automation for smbs arizona', impressions: 12, clicks: 0, position: 8.4, ctr: 0 },
   { query: 'marketing automation tucson', impressions: 11, clicks: 0, position: 21.9, ctr: 0 },
   { query: 'generate leads in arizona', impressions: 11, clicks: 0, position: 63.8, ctr: 0 },
   { query: 'seo workflow tool', impressions: 9, clicks: 0, position: 1.0, ctr: 0 },
   { query: 'crm automation for small business arizona', impressions: 9, clicks: 0, position: 17.1, ctr: 0 },
-  { query: 'reduce bounce rates with better product recommendations', impressions: 8, clicks: 0, position: 75.5, ctr: 0 },
+  {
+    query: 'reduce bounce rates with better product recommendations',
+    impressions: 8,
+    clicks: 0,
+    position: 75.5,
+    ctr: 0,
+  },
   { query: 'top phoenix cro agencies', impressions: 7, clicks: 0, position: 55.1, ctr: 0 },
   { query: 'business automation for local service pros', impressions: 7, clicks: 0, position: 62.0, ctr: 0 },
   { query: 'how to reduce bounce rate using ai?', impressions: 5, clicks: 0, position: 6.4, ctr: 0 },
@@ -234,10 +251,7 @@ export async function compileDailyExecutiveOverview() {
     const gscAvgPosition = gscImpressions > 0 ? Number((weightedPositionSum / gscImpressions).toFixed(1)) : 0;
 
     // 3. Clarity UX Totals
-    const { data: clarityRows } = await supabase
-      .from('clarity_ux_metrics')
-      .select('*')
-      .eq('date_recorded', today);
+    const { data: clarityRows } = await supabase.from('clarity_ux_metrics').select('*').eq('date_recorded', today);
 
     let claritySessions = 0;
     let clarityRageClicks = 0;
@@ -254,10 +268,7 @@ export async function compileDailyExecutiveOverview() {
     }
 
     // 4. GA4 Traffic Totals (from table or fallback defaults)
-    const { data: ga4Rows } = await supabase
-      .from('ga4_page_metrics')
-      .select('*')
-      .eq('date_recorded', today);
+    const { data: ga4Rows } = await supabase.from('ga4_page_metrics').select('*').eq('date_recorded', today);
 
     let ga4Sessions = 0;
     let ga4BounceRate = 45.0;
@@ -265,9 +276,7 @@ export async function compileDailyExecutiveOverview() {
 
     if (ga4Rows && ga4Rows.length > 0) {
       ga4Sessions = ga4Rows.reduce((acc, r) => acc + (r.sessions || 0), 0);
-      ga4BounceRate = Number(
-        (ga4Rows.reduce((acc, r) => acc + (r.bounce_rate || 0), 0) / ga4Rows.length).toFixed(1)
-      );
+      ga4BounceRate = Number((ga4Rows.reduce((acc, r) => acc + (r.bounce_rate || 0), 0) / ga4Rows.length).toFixed(1));
       topPage = ga4Rows[0]?.page_path || '/';
     }
 
@@ -330,4 +339,3 @@ async function main() {
 if (process.argv[1]?.endsWith('sync-seo-to-supabase.mjs')) {
   main().catch(console.error);
 }
-

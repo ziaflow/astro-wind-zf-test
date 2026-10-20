@@ -15,4 +15,3 @@ export default defineCliConfig({
     generates: './sanity.types.ts',
   },
 })
-

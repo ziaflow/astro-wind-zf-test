@@ -174,35 +174,37 @@ if (!useNodemailer && !resolvedAccessKey) {
             resultEl.classList.add('text-green-500');
 
             // Fire GTM, GA4 & Customer.io conversion events
-            import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
-              trackFormSubmission({
-                form_id: datasetFormId,
-                form_name: datasetFormId,
-              });
-              trackEmailSent({
-                email_type: 'lead_notification',
-                status: 'sent',
-                form_name: datasetFormId,
-              });
-
-              const emailVal = (formData.get('email') as string) || '';
-              const nameVal = (formData.get('name') as string) || '';
-              if (emailVal) {
-                const nameParts = nameVal.trim().split(/\s+/);
-                identifyCustomerIo({
-                  email: emailVal.trim(),
-                  first_name: nameParts[0] || '',
-                  last_name: nameParts.slice(1).join(' ') || '',
-                  phone: (formData.get('phone') as string) || '',
-                  intake_source: datasetFormId,
-                });
-                trackCustomerIoEvent('contact_form_submitted', {
+            import('~/utils/analytics').then(
+              ({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
+                trackFormSubmission({
                   form_id: datasetFormId,
-                  message: (formData.get('message') as string) || (formData.get('comments') as string) || '',
-                  intake_source: datasetFormId,
+                  form_name: datasetFormId,
                 });
+                trackEmailSent({
+                  email_type: 'lead_notification',
+                  status: 'sent',
+                  form_name: datasetFormId,
+                });
+
+                const emailVal = formData.get('email') || '';
+                const nameVal = formData.get('name') || '';
+                if (emailVal) {
+                  const nameParts = nameVal.trim().split(/\s+/);
+                  identifyCustomerIo({
+                    email: emailVal.trim(),
+                    first_name: nameParts[0] || '',
+                    last_name: nameParts.slice(1).join(' ') || '',
+                    phone: formData.get('phone') || '',
+                    intake_source: datasetFormId,
+                  });
+                  trackCustomerIoEvent('contact_form_submitted', {
+                    form_id: datasetFormId,
+                    message: formData.get('message') || formData.get('comments') || '',
+                    intake_source: datasetFormId,
+                  });
+                }
               }
-            });
+            );
 
             form.reset();
           } else {

@@ -21,12 +21,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     });
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    return new Response(
-      JSON.stringify({ ok: false, status: 500, code: 'persist_failed', message: errorMsg }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return new Response(JSON.stringify({ ok: false, status: 500, code: 'persist_failed', message: errorMsg }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 };

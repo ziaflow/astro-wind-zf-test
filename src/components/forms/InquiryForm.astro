@@ -1,0 +1,198 @@
+---
+interface Props {
+  id: string;
+  formType: string;
+  compact?: boolean;
+}
+const { id, formType, compact = false } = Astro.props;
+const fieldClass =
+  'mt-1 block w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-base text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary dark:border-slate-600 dark:bg-slate-800 dark:text-white';
+---
+
+<ziaflow-inquiry>
+  <form id={id} class="space-y-4" action="/api/contact" method="post">
+    <input type="hidden" name="form_type" value={formType} />
+    <input type="hidden" name="page_submitted_from" value={Astro.url.pathname} />
+    <div class="hidden" aria-hidden="true">
+      <label for={`${id}-website`}>Leave this field empty</label>
+      <input id={`${id}-website`} name="website" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for={`${id}-name`} class="text-sm font-medium">Your name (required)</label>
+        <input id={`${id}-name`} name="name" autocomplete="name" required maxlength="120" class={fieldClass} />
+      </div>
+      <div>
+        <label for={`${id}-email`} class="text-sm font-medium">Email (required)</label>
+        <input
+          id={`${id}-email`}
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+          class={fieldClass}
+        />
+      </div>
+    </div>
+    <div>
+      <label for={`${id}-service`} class="text-sm font-medium">What do you need help with? (required)</label>
+      <select id={`${id}-service`} name="service_needed" required class={fieldClass}>
+        <option value="" disabled selected>Choose an option</option>
+        <option>Website design & conversion improvements</option>
+        <option>Lead follow-up & CRM automation</option>
+        <option>AI voice & appointment workflows</option>
+        <option>Search visibility & technical SEO</option>
+        <option>Custom software & integrations</option>
+        <option>Not sure yet — help me decide</option>
+      </select>
+    </div>
+    {
+      !compact && (
+        <div>
+          <label for={`${id}-phone`} class="text-sm font-medium">
+            Phone (optional)
+          </label>
+          <input
+            id={`${id}-phone`}
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            maxlength="40"
+            aria-describedby={`${id}-phone-help`}
+            class={fieldClass}
+          />
+          <p id={`${id}-phone-help`} class="mt-1 text-sm text-slate-500">
+            Add this if you would prefer a call about your inquiry.
+          </p>
+        </div>
+      )
+    }
+    {
+      !compact && (
+        <div>
+          <label for={`${id}-comments`} class="text-sm font-medium">
+            A little context (optional)
+          </label>
+          <textarea
+            id={`${id}-comments`}
+            name="comments"
+            rows="3"
+            maxlength="4000"
+            aria-describedby={`${id}-comments-help`}
+            placeholder="What is getting in the way? You can include your website address."
+            class={fieldClass}
+          />
+          <p id={`${id}-comments-help`} class="mt-1 text-sm text-slate-500">
+            Please leave out patient information and other sensitive details.
+          </p>
+        </div>
+      )
+    }
+    <button
+      type="submit"
+      disabled
+      class="w-full rounded-xl bg-primary px-6 py-3 font-bold text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-wait disabled:opacity-60"
+    >
+      Request a consultation
+    </button>
+    <p data-status role="status" aria-live="polite" tabindex="-1" class="hidden rounded-xl border p-3 text-sm"></p>
+    <div data-recovery class="hidden text-sm">
+      Your details are still here. Try again or <a href="mailto:info@ziaflow.com" class="font-semibold underline"
+        >email info@ziaflow.com</a
+      >.
+    </div>
+    <div data-success class="hidden text-sm">
+      Prefer to choose a time now? <a href="/booking" class="font-semibold underline">Book your consultation</a>.
+    </div>
+    <p class="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+      We’ll use these details to respond to your inquiry. See our <a href="/privacy" class="underline">privacy policy</a
+      >.
+    </p>
+    <noscript
+      ><p>
+        Please <a href="mailto:info@ziaflow.com" class="underline">email info@ziaflow.com</a> to discuss your project.
+      </p></noscript
+    >
+  </form>
+</ziaflow-inquiry>
+
+<script>
+  import { trackEvent } from '~/utils/analytics';
+
+  class ZiaflowInquiry extends HTMLElement {
+    connectedCallback() {
+      const form = this.querySelector('form')!;
+      if (form.dataset.initialized) return;
+      form.dataset.initialized = 'true';
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      const status = this.querySelector<HTMLElement>('[data-status]')!;
+      const recovery = this.querySelector<HTMLElement>('[data-recovery]')!;
+      const success = this.querySelector<HTMLElement>('[data-success]')!;
+      const record = (event: string) => {
+        try {
+          trackEvent(event, { form_id: form.id });
+        } catch {
+          /* best effort */
+        }
+      };
+      let started = false;
+      form.addEventListener('input', () => {
+        if (!started) {
+          started = true;
+          record('form_start');
+        }
+      });
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (button.disabled || !form.reportValidity()) return;
+        button.disabled = true;
+        button.textContent = 'Sending your request…';
+        form.setAttribute('aria-busy', 'true');
+        status.classList.add('hidden');
+        recovery.classList.add('hidden');
+        success.classList.add('hidden');
+        const payload = Object.fromEntries(new FormData(form).entries());
+        const params = new URLSearchParams(location.search);
+        let attribution: Record<string, string> = {};
+        try {
+          attribution = JSON.parse(sessionStorage.getItem('zf_attribution') || '{}') || {};
+        } catch {
+          /* storage unavailable */
+        }
+        for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
+          payload[key] = (params.get(key) || attribution[key] || '').slice(0, 200);
+        }
+        payload.referrer = document.referrer;
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const result = await response.json();
+          if (!response.ok || !result.ok) throw new Error('Inquiry not accepted');
+          status.textContent =
+            'Thank you — we received your inquiry. We’ll follow up by email to discuss your next step.';
+          success.classList.remove('hidden');
+          record('form_submit_success');
+          form.reset();
+          started = false;
+        } catch {
+          status.textContent = 'We couldn’t confirm your request. Please try again or email us.';
+          recovery.classList.remove('hidden');
+          record('form_submit_error');
+        } finally {
+          status.classList.remove('hidden');
+          status.focus();
+          button.disabled = false;
+          button.textContent = 'Request a consultation';
+          form.removeAttribute('aria-busy');
+        }
+      });
+      // Enable only after the submit handler is ready, avoiding a native JSON navigation.
+      button.disabled = false;
+    }
+  }
+  if (!customElements.get('ziaflow-inquiry')) customElements.define('ziaflow-inquiry', ZiaflowInquiry);
+</script>

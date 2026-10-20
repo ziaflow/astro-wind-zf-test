@@ -35,10 +35,7 @@ const metadata = {
   <section class="py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl px-4 sm:px-6">
     {/* Breadcrumb / Back Link */}
     <div class="mb-8">
-      <a
-        href="/"
-        class="inline-flex items-center text-sm font-medium text-muted hover:text-primary transition-colors"
-      >
+      <a href="/" class="inline-flex items-center text-sm font-medium text-muted hover:text-primary transition-colors">
         <Icon name="tabler:chevron-left" class="mr-1 h-4 w-4" />
         Back to Home
       </a>
@@ -47,20 +44,26 @@ const metadata = {
     {/* Header & Meta Pill Bar */}
     <header class="mb-10">
       <div class="mb-4 flex flex-wrap items-center gap-2">
-        {data.industry && (
-          <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary dark:bg-primary/20">
-            {data.industry}
-          </span>
-        )}
-        {data.metrics && (
-          <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
-            <Icon name="tabler:trending-up" class="mr-1 inline-block h-3.5 w-3.5" />
-            {data.metrics}
-          </span>
-        )}
+        {
+          data.industry && (
+            <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary dark:bg-primary/20">
+              {data.industry}
+            </span>
+          )
+        }
+        {
+          data.metrics && (
+            <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+              <Icon name="tabler:trending-up" class="mr-1 inline-block h-3.5 w-3.5" />
+              {data.metrics}
+            </span>
+          )
+        }
       </div>
 
-      <h1 class="text-3xl font-extrabold tracking-tight font-heading text-slate-900 sm:text-4xl lg:text-5xl dark:text-white mb-4">
+      <h1
+        class="text-3xl font-extrabold tracking-tight font-heading text-slate-900 sm:text-4xl lg:text-5xl dark:text-white mb-4"
+      >
         {data.title}
       </h1>
 
@@ -69,7 +72,9 @@ const metadata = {
       </p>
 
       {/* Meta Specifications Box */}
-      <div class="grid grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:grid-cols-4 dark:border-slate-800 dark:bg-slate-800/50">
+      <div
+        class="grid grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:grid-cols-4 dark:border-slate-800 dark:bg-slate-800/50"
+      >
         <div>
           <span class="block text-xs uppercase tracking-wider text-muted">Client</span>
           <span class="text-sm font-semibold text-slate-900 dark:text-white">{data.organisation}</span>
@@ -92,23 +97,25 @@ const metadata = {
     </header>
 
     {/* Featured Cover Image */}
-    {data.heroImage && (
-      <div class="mb-12 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800">
-        <img
-          src={data.heroImage}
-          alt={data.title}
-          class="w-full h-auto max-h-[460px] object-cover"
-        />
-      </div>
-    )}
+    {
+      data.heroImage && (
+        <div class="mb-12 overflow-hidden rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800">
+          <img src={data.heroImage} alt={data.title} class="w-full h-auto max-h-[460px] object-cover" />
+        </div>
+      )
+    }
 
     {/* MDX Content Body */}
-    <article class="prose prose-lg dark:prose-invert max-w-none mb-16 prose-headings:font-heading prose-headings:font-bold prose-a:text-primary">
+    <article
+      class="prose prose-lg dark:prose-invert max-w-none mb-16 prose-headings:font-heading prose-headings:font-bold prose-a:text-primary"
+    >
       <Content />
     </article>
 
     {/* Embedded Conversion Form for Inbound Scoping */}
-    <div class="my-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900 sm:p-10">
+    <div
+      class="my-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900 sm:p-10"
+    >
       <div class="mb-6 text-center">
         <span class="text-xs font-bold uppercase tracking-wider text-primary">Need Similar Results?</span>
         <h2 class="mt-1 text-2xl font-bold font-heading text-slate-900 dark:text-white sm:text-3xl">

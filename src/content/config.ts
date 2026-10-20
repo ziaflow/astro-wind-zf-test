@@ -91,5 +91,3 @@ export const collections = {
   post: postCollection,
   'case-studies': caseStudyCollection,
 };
-
-

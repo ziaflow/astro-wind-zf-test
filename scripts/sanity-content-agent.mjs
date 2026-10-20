@@ -12,26 +12,26 @@ export const HIGH_PRIORITY_TOPICS = [
       'marketing automation phoenix',
       'marketing automation for smbs arizona',
       'crm automation for small business arizona',
-      'marketing automation agency phoenix'
+      'marketing automation agency phoenix',
     ],
     rationale: 'Top commercial GSC opportunity: 62 impressions at avg position 11.5 across Valley service intent.',
     sections: [
       {
         heading: 'Why Arizona SMBs Outgrow Manual Lead Management',
         content:
-          'Service providers and contractors throughout Phoenix, Scottsdale, and Tucson frequently experience inquiry delays due to manual triage. Research demonstrates responding to an inbound inquiry promptly significantly improves consultation booking rates.\n\nYet many local businesses still rely on unlinked contact forms and manual spreadsheet entries that introduce human error and response friction.'
+          'Service providers and contractors throughout Phoenix, Scottsdale, and Tucson frequently experience inquiry delays due to manual triage. Research demonstrates responding to an inbound inquiry promptly significantly improves consultation booking rates.\n\nYet many local businesses still rely on unlinked contact forms and manual spreadsheet entries that introduce human error and response friction.',
       },
       {
         heading: 'The 3 Practical Intake Automation Touchpoints',
         content:
-          'An effective automation pipeline connects three distinct touchpoints:\n\n1. **Instant Multi-Channel Intake:** Form submissions trigger immediate transactional confirmations via Resend and notification alerts to assigned staff.\n2. **Calendar & Consultation Sync:** Inquiries automatically route into Microsoft Bookings or Outlook schedules with pre-qualification questions answered.\n3. **CRM Sync & Follow-Up Cadence:** New leads are recorded into Supabase/HubSpot with follow-up sequences tailored to their requested service category.'
+          'An effective automation pipeline connects three distinct touchpoints:\n\n1. **Instant Multi-Channel Intake:** Form submissions trigger immediate transactional confirmations via Resend and notification alerts to assigned staff.\n2. **Calendar & Consultation Sync:** Inquiries automatically route into Microsoft Bookings or Outlook schedules with pre-qualification questions answered.\n3. **CRM Sync & Follow-Up Cadence:** New leads are recorded into Supabase/HubSpot with follow-up sequences tailored to their requested service category.',
       },
       {
         heading: 'Implementation Boundaries & Human Review',
         content:
-          'Automation should handle intake routing and immediate acknowledgments, while high-value scoping calls and custom quotes remain strictly human-led.'
-      }
-    ]
+          'Automation should handle intake routing and immediate acknowledgments, while high-value scoping calls and custom quotes remain strictly human-led.',
+      },
+    ],
   },
   {
     topic: 'Phoenix Conversion Rate Optimization: Finding and Fixing Website Conversion Friction',
@@ -40,26 +40,26 @@ export const HIGH_PRIORITY_TOPICS = [
       'top phoenix cro agencies',
       'phoenix conversion rate optimization agency',
       'phoenix conversion rate optimization services',
-      'website conversion checklist'
+      'website conversion checklist',
     ],
     rationale: 'Active GSC cluster with 18+ combined impressions across high-commercial intent Phoenix CRO searches.',
     sections: [
       {
         heading: 'Traffic vs. Conversion: Overcoming Website Friction',
         content:
-          'Many businesses in the Phoenix metro area invest in paid search or local SEO, driving qualified visitors to their websites—only to see high bounce rates and low inquiry completion.\n\nConversion Rate Optimization (CRO) focuses on eliminating UX friction, clarifying value propositions, and optimizing mobile tap targets to help visitors take action.'
+          'Many businesses in the Phoenix metro area invest in paid search or local SEO, driving qualified visitors to their websites—only to see high bounce rates and low inquiry completion.\n\nConversion Rate Optimization (CRO) focuses on eliminating UX friction, clarifying value propositions, and optimizing mobile tap targets to help visitors take action.',
       },
       {
         heading: 'Actionable CRO Checklist for Local Websites',
         content:
-          'Key adjustments that consistently improve on-page conversion include:\n\n- Above-the-fold value propositions with visible contact numbers and direct booking links.\n- Sticky mobile call/schedule buttons that follow scroll progression without obscuring content.\n- Behavioral heatmapping and session recordings using Microsoft Clarity to identify rage clicks and abandoned form fields.\n- Replacing lengthy generic forms with two-step interactive qualifiers.'
+          'Key adjustments that consistently improve on-page conversion include:\n\n- Above-the-fold value propositions with visible contact numbers and direct booking links.\n- Sticky mobile call/schedule buttons that follow scroll progression without obscuring content.\n- Behavioral heatmapping and session recordings using Microsoft Clarity to identify rage clicks and abandoned form fields.\n- Replacing lengthy generic forms with two-step interactive qualifiers.',
       },
       {
         heading: 'Trust Signals and Local Evidence',
         content:
-          'Integrating verified Arizona customer reviews, localized project galleries, and clear response-time commitments directly next to conversion forms reduces hesitation and clarifies service scope.'
-      }
-    ]
+          'Integrating verified Arizona customer reviews, localized project galleries, and clear response-time commitments directly next to conversion forms reduces hesitation and clarifies service scope.',
+      },
+    ],
   },
   {
     topic: 'Custom Web Applications for Arizona SMBs: When AI Features Make Sense',
@@ -67,26 +67,26 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'phoenix ai web agency',
       'custom web application expert in phoenix',
-      'fast ai-native builds for small businesses'
+      'fast ai-native builds for small businesses',
     ],
     rationale: 'Specific high-intent conversational query in GSC (22 impressions, position 2.4).',
     sections: [
       {
         heading: 'The Valley SMB Technology Dilemma',
         content:
-          'Growing healthcare practices, regional logistics hubs, and specialized contractors in the Phoenix and Scottsdale business corridors often face a common crossroads: off-the-shelf SaaS tools lack custom operational logic, while legacy monolithic platforms are slow, brittle, and difficult to maintain.'
+          'Growing healthcare practices, regional logistics hubs, and specialized contractors in the Phoenix and Scottsdale business corridors often face a common crossroads: off-the-shelf SaaS tools lack custom operational logic, while legacy monolithic platforms are slow, brittle, and difficult to maintain.',
       },
       {
         heading: 'When AI Capabilities Provide Real Value vs. Novelty',
         content:
-          'Not every small business needs artificial intelligence. However, embedded AI workflows deliver measurable value when applied to:\n\n- Automated document intake and classification (e.g. PDFs, permits, patient forms).\n- Natural language search over extensive internal technical knowledge bases.\n- Context-preserving customer intake assistants linked directly to operational databases.'
+          'Not every small business needs artificial intelligence. However, embedded AI workflows deliver measurable value when applied to:\n\n- Automated document intake and classification (e.g. PDFs, permits, patient forms).\n- Natural language search over extensive internal technical knowledge bases.\n- Context-preserving customer intake assistants linked directly to operational databases.',
       },
       {
         heading: 'Static-First Architecture and Operational Reliability',
         content:
-          'Modern web engineering built on Astro 5, edge deployment (Vercel), and Supabase provides sub-second performance, top security compliance, and zero vulnerability overhead compared to legacy CMS architectures.'
-      }
-    ]
+          'Modern web engineering built on Astro 5, edge deployment (Vercel), and Supabase provides sub-second performance, top security compliance, and zero vulnerability overhead compared to legacy CMS architectures.',
+      },
+    ],
   },
   {
     topic: 'AI Website Assistants: How to Evaluate Context, Usability, and Lead Quality',
@@ -94,26 +94,26 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'intelligent website assistant reduce visitor bounce',
       'ai bounce rate reduction',
-      'context retention chatbot'
+      'context retention chatbot',
     ],
     rationale: 'Evaluation framework for conversational agents and user experience.',
     sections: [
       {
         heading: 'Evaluating Website Concierge Layers',
         content:
-          'Traditional static menus and search bars often require visitors to hunt across multiple pages to answer specific operational questions. Contextual website assistants can help visitors quickly locate relevant case studies, service specifications, and pricing qualifiers.'
+          'Traditional static menus and search bars often require visitors to hunt across multiple pages to answer specific operational questions. Contextual website assistants can help visitors quickly locate relevant case studies, service specifications, and pricing qualifiers.',
       },
       {
         heading: 'Stateless Chatbots vs. Session Context Retention',
         content:
-          'Stateless pop-up widgets reset every time a visitor navigates between pages, causing visitor frustration. In contrast, modern assistants maintain session memory so when a prospect moves from an overview page to a service tier, the assistant preserves context and offers relevant next steps.'
+          'Stateless pop-up widgets reset every time a visitor navigates between pages, causing visitor frustration. In contrast, modern assistants maintain session memory so when a prospect moves from an overview page to a service tier, the assistant preserves context and offers relevant next steps.',
       },
       {
         heading: 'Evaluation Criteria Before Production Deployment',
         content:
-          'Before deploying any AI assistant, verify:\n\n1. **Hallucination boundaries:** Strict retrieval-augmented grounding on approved documentation only.\n2. **Escalation paths:** Seamless fallback to direct consultation scheduling when confidence thresholds are unmet.\n3. **Privacy and compliance:** Ensuring no sensitive personal data is stored without explicit consent.'
-      }
-    ]
+          'Before deploying any AI assistant, verify:\n\n1. **Hallucination boundaries:** Strict retrieval-augmented grounding on approved documentation only.\n2. **Escalation paths:** Seamless fallback to direct consultation scheduling when confidence thresholds are unmet.\n3. **Privacy and compliance:** Ensuring no sensitive personal data is stored without explicit consent.',
+      },
+    ],
   },
   {
     topic: 'Microsoft Advertising for B2B Businesses: A Practical Evaluation Framework',
@@ -121,22 +121,22 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'Microsoft Ads app advertising evaluation',
       'Microsoft Ads for Apple Business',
-      'bing ads 2026 strategy'
+      'bing ads 2026 strategy',
     ],
     rationale: 'Framework for evaluating B2B paid search channels beyond single-engine allocation.',
     sections: [
       {
         heading: 'Evaluating the B2B Paid Search Mix',
         content:
-          'While Google Ads typically represents the largest share of search volume, Microsoft Advertising provides distinct demographic attributes in B2B markets due to enterprise Windows installations and default Edge usage in corporate environments.'
+          'While Google Ads typically represents the largest share of search volume, Microsoft Advertising provides distinct demographic attributes in B2B markets due to enterprise Windows installations and default Edge usage in corporate environments.',
       },
       {
         heading: 'Key Comparison Metrics to Measure',
         content:
-          'When evaluating Microsoft Ads against existing paid search allocations, track:\n\n- Cost-Per-Acquisition (CPA) on high-intent decision-maker search queries.\n- Engagement time and bounce rates from desktop vs. mobile corporate traffic.\n- Session friction and intent quality through native Microsoft Clarity integration.'
-      }
-    ]
-  }
+          'When evaluating Microsoft Ads against existing paid search allocations, track:\n\n- Cost-Per-Acquisition (CPA) on high-intent decision-maker search queries.\n- Engagement time and bounce rates from desktop vs. mobile corporate traffic.\n- Session friction and intent quality through native Microsoft Clarity integration.',
+      },
+    ],
+  },
 ];
 
 const projectId = '92p0tpps';
@@ -180,7 +180,10 @@ export function buildPortableText(sections, excerpt) {
     });
 
     // Content paragraphs
-    const paragraphs = sec.content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+    const paragraphs = sec.content
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .filter(Boolean);
     for (const para of paragraphs) {
       if (para.startsWith('- ') || para.startsWith('1. ') || para.startsWith('2. ') || para.startsWith('3. ')) {
         const listItems = para.split('\n').filter(Boolean);
@@ -270,13 +273,15 @@ export async function draftPost(topicIndex = 0, status = 'draft') {
   const documentId = status === 'draft' ? `drafts.${slugText}` : slugText;
 
   // Safeguard: Check if published document or active draft already exists
-  const existing = await client.fetch(
-    `*[_id == $docId || _id == $slugText][0]{_id, title}`,
-    { docId: documentId, slugText }
-  );
+  const existing = await client.fetch(`*[_id == $docId || _id == $slugText][0]{_id, title}`, {
+    docId: documentId,
+    slugText,
+  });
 
   if (existing) {
-    console.log(`ℹ️ Document already exists (ID: ${existing._id}). Skipping to preserve human edits and prevent silent overwrite.`);
+    console.log(
+      `ℹ️ Document already exists (ID: ${existing._id}). Skipping to preserve human edits and prevent silent overwrite.`
+    );
     return existing;
   }
 

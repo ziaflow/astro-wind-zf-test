@@ -85,7 +85,8 @@ export const postType = defineType({
       name: 'editorNotes',
       title: 'Editor Agent Critique & Verification Notes',
       type: 'text',
-      description: 'Automated fact-checking notes, claim verification results, and recommended tweaks.',
+      description:
+        'Automated fact-checking notes, claim verification results, and recommended tweaks.',
       rows: 4,
       options: {
         ai: {

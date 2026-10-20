@@ -17,7 +17,8 @@ export const companyProfileType = defineType({
       name: 'tagline',
       title: 'Positioning Tagline',
       type: 'string',
-      description: 'Grounded commercial positioning, e.g. "Conversion-Focused Web Engineering & Automation Systems for Arizona Service Businesses"',
+      description:
+        'Grounded commercial positioning, e.g. "Conversion-Focused Web Engineering & Automation Systems for Arizona Service Businesses"',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -31,7 +32,8 @@ export const companyProfileType = defineType({
       name: 'consultationBookingUrl',
       title: 'Consultation Booking URL',
       type: 'url',
-      initialValue: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      initialValue:
+        'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
     }),
     defineField({
       name: 'locationPolicy',
@@ -42,7 +44,8 @@ export const companyProfileType = defineType({
           name: 'displayPhysicalAddress',
           title: 'Display Physical Address Publicly',
           type: 'boolean',
-          description: 'If false, public pages show service areas instead of physical office address.',
+          description:
+            'If false, public pages show service areas instead of physical office address.',
           initialValue: false,
         }),
         defineField({
@@ -50,7 +53,16 @@ export const companyProfileType = defineType({
           title: 'Primary Service Areas',
           type: 'array',
           of: [{type: 'string'}],
-          initialValue: ['Phoenix', 'Scottsdale', 'Paradise Valley', 'Tempe', 'Mesa', 'Chandler', 'Gilbert', 'Tucson'],
+          initialValue: [
+            'Phoenix',
+            'Scottsdale',
+            'Paradise Valley',
+            'Tempe',
+            'Mesa',
+            'Chandler',
+            'Gilbert',
+            'Tucson',
+          ],
         }),
         defineField({
           name: 'state',
@@ -97,7 +109,8 @@ export const companyProfileType = defineType({
           type: 'boolean',
           initialValue: false,
           readOnly: true,
-          description: 'Strict policy: Proposals and NDA documents cannot be ingested or published as case studies.',
+          description:
+            'Strict policy: Proposals and NDA documents cannot be ingested or published as case studies.',
         }),
         defineField({
           name: 'lastAuditDate',

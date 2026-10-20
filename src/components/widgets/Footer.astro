@@ -24,7 +24,7 @@ export interface Props {
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Astro.props;
 ---
 
 <footer class="relative bg-[#1b5e57] text-white border-t border-[#2d7e75] not-prose">
@@ -35,7 +35,9 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl text-white hover:text-teal-200 transition" href={getHomePermalink()}>{SITE?.name}</a>
+          <a class="inline-block font-bold text-xl text-white hover:text-teal-200 transition" href={getHomePermalink()}
+            >{SITE?.name}</a
+          >
         </div>
         <div class="text-sm text-teal-100/80 flex gap-1">
           {

@@ -26,4 +26,4 @@ function scanDir(dir) {
 
 scanDir(pagesDir);
 console.log('Total dead/broken hash links found:', badLinks.length);
-badLinks.forEach(b => console.log(`${b.file} -> ${b.link}`));
+badLinks.forEach((b) => console.log(`${b.file} -> ${b.link}`));

@@ -45,3 +45,6 @@ astro-gemini-blog/
 
 .vercel
 .env*
+
+# Private pilot state, backups, drafts, and report exports (may contain client data).
+/.ziaflow-ops/

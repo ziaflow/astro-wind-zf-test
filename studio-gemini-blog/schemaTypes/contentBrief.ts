@@ -36,7 +36,8 @@ export const contentBriefType = defineType({
       title: 'Concrete Original Contribution',
       type: 'text',
       rows: 3,
-      description: 'Specific code snippets, workflow diagrams, or tested implementation examples (no generic fluff).',
+      description:
+        'Specific code snippets, workflow diagrams, or tested implementation examples (no generic fluff).',
     }),
     defineField({
       name: 'editorialStatus',

@@ -100,79 +100,81 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (btn.disabled) return;
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-    statusEl.classList.add('hidden');
-    statusEl.className = 'hidden rounded-xl border p-3 text-center text-sm font-medium';
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      statusEl.classList.add('hidden');
+      statusEl.className = 'hidden rounded-xl border p-3 text-center text-sm font-medium';
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (res.ok && result.ok) {
-        // Fire GTM, GA4, and Customer.io Events
-        import('~/utils/analytics').then(({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
-          trackFormSubmission({
-            form_id: 'quick-lead-form',
-            form_name: 'quick_lead',
-            service_needed: (data.service_needed as string) || 'Quick Form',
-          });
-          trackEmailSent({
-            email_type: 'lead_notification',
-            status: 'sent',
-            form_name: 'quick_lead',
-          });
-
-          // Customer.io: 1. Identify person by email
-          const rawName = ((data.name as string) || '').trim();
-          const nameParts = rawName.split(/\s+/);
-          const firstName = nameParts[0] || '';
-          const lastName = nameParts.slice(1).join(' ') || '';
-          const userEmail = ((data.email as string) || '').trim();
-
-          identifyCustomerIo({
-            email: userEmail,
-            first_name: firstName,
-            last_name: lastName,
-            phone: (data.phone as string) || '',
-            service_interest: (data.service_needed as string) || 'General Inquiry',
-            intake_source: 'contact_form',
-          });
-
-          // Customer.io: 2. Track contact_form_submitted event with message and page URL
-          trackCustomerIoEvent('contact_form_submitted', {
-            message: (data.comments as string) || '',
-            company_name: (data.company_name as string) || '',
-            form_id: 'quick-lead-form',
-            intake_source: 'contact_form',
-          });
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
         });
+        const result = await res.json();
+        if (res.ok && result.ok) {
+          // Fire GTM, GA4, and Customer.io Events
+          import('~/utils/analytics').then(
+            ({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
+              trackFormSubmission({
+                form_id: 'quick-lead-form',
+                form_name: 'quick_lead',
+                service_needed: (data.service_needed as string) || 'Quick Form',
+              });
+              trackEmailSent({
+                email_type: 'lead_notification',
+                status: 'sent',
+                form_name: 'quick_lead',
+              });
 
-        statusEl.textContent = 'Success! We have received your inquiry and will reply shortly.';
+              // Customer.io: 1. Identify person by email
+              const rawName = ((data.name as string) || '').trim();
+              const nameParts = rawName.split(/\s+/);
+              const firstName = nameParts[0] || '';
+              const lastName = nameParts.slice(1).join(' ') || '';
+              const userEmail = ((data.email as string) || '').trim();
+
+              identifyCustomerIo({
+                email: userEmail,
+                first_name: firstName,
+                last_name: lastName,
+                phone: (data.phone as string) || '',
+                service_interest: (data.service_needed as string) || 'General Inquiry',
+                intake_source: 'contact_form',
+              });
+
+              // Customer.io: 2. Track contact_form_submitted event with message and page URL
+              trackCustomerIoEvent('contact_form_submitted', {
+                message: (data.comments as string) || '',
+                company_name: (data.company_name as string) || '',
+                form_id: 'quick-lead-form',
+                intake_source: 'contact_form',
+              });
+            }
+          );
+
+          statusEl.textContent = 'Success! We have received your inquiry and will reply shortly.';
+          statusEl.className =
+            'block rounded-xl border border-green-300 bg-green-50 p-3 text-center text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300';
+          form.reset();
+        } else {
+          throw new Error(result.error || 'Server rejected submission');
+        }
+      } catch {
+        statusEl.textContent = 'Submission failed. Please email info@ziaflow.com directly.';
         statusEl.className =
-          'block rounded-xl border border-green-300 bg-green-50 p-3 text-center text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300';
-        form.reset();
-      } else {
-        throw new Error(result.error || 'Server rejected submission');
+          'block rounded-xl border border-red-300 bg-red-50 p-3 text-center text-sm font-medium text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-300';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
       }
-    } catch {
-      statusEl.textContent = 'Submission failed. Please email info@ziaflow.com directly.';
-      statusEl.className =
-        'block rounded-xl border border-red-300 bg-red-50 p-3 text-center text-sm font-medium text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-300';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = originalText;
-    }
-  });
-}
+    });
+  }
 
-document.addEventListener('astro:page-load', initQuickLeadForm);
-initQuickLeadForm();
+  document.addEventListener('astro:page-load', initQuickLeadForm);
+  initQuickLeadForm();
 </script>

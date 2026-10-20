@@ -14,7 +14,10 @@ async function main() {
   const query = `*[_type == "post"]{ _id, title, "slug": slug.current }`;
   const posts = await client.fetch(query);
   console.log('Total posts in Sanity:', posts.length);
-  const webDevPosts = posts.filter(p => (p.slug && p.slug.includes('web-development-in-2026')) || (p.title && p.title.includes('Web Development in 2026')));
+  const webDevPosts = posts.filter(
+    (p) =>
+      (p.slug && p.slug.includes('web-development-in-2026')) || (p.title && p.title.includes('Web Development in 2026'))
+  );
   console.log('Found web-development duplicate posts:', webDevPosts.length);
   for (const p of webDevPosts) {
     console.log(`Deleting ${p._id}: ${p.slug || p.title}`);

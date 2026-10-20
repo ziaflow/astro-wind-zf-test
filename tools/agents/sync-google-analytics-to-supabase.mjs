@@ -21,44 +21,47 @@ export async function syncGscMetrics(queriesData = []) {
   const today = new Date().toISOString().split('T')[0];
 
   // If no external feed passed, check if google credentials exist or seed authentic keyword monitoring
-  const rows = queriesData.length > 0 ? queriesData : [
-    {
-      date: today,
-      page_path: '/',
-      query: 'web development phoenix',
-      clicks: 12,
-      impressions: 240,
-      ctr: 0.05,
-      position: 4.2,
-    },
-    {
-      date: today,
-      page_path: '/services/automation',
-      query: 'business automation arizona',
-      clicks: 8,
-      impressions: 165,
-      ctr: 0.0485,
-      position: 3.8,
-    },
-    {
-      date: today,
-      page_path: '/services/local-service-ads',
-      query: 'google local service ads contractor phoenix',
-      clicks: 15,
-      impressions: 190,
-      ctr: 0.0789,
-      position: 2.1,
-    },
-    {
-      date: today,
-      page_path: '/services/astro',
-      query: 'astro web development agency',
-      clicks: 6,
-      impressions: 95,
-      ctr: 0.0631,
-      position: 5.4,
-    },
-  ];
+  const rows =
+    queriesData.length > 0
+      ? queriesData
+      : [
+          {
+            date: today,
+            page_path: '/',
+            query: 'web development phoenix',
+            clicks: 12,
+            impressions: 240,
+            ctr: 0.05,
+            position: 4.2,
+          },
+          {
+            date: today,
+            page_path: '/services/automation',
+            query: 'business automation arizona',
+            clicks: 8,
+            impressions: 165,
+            ctr: 0.0485,
+            position: 3.8,
+          },
+          {
+            date: today,
+            page_path: '/services/local-service-ads',
+            query: 'google local service ads contractor phoenix',
+            clicks: 15,
+            impressions: 190,
+            ctr: 0.0789,
+            position: 2.1,
+          },
+          {
+            date: today,
+            page_path: '/services/astro',
+            query: 'astro web development agency',
+            clicks: 6,
+            impressions: 95,
+            ctr: 0.0631,
+            position: 5.4,
+          },
+        ];
 
   console.log(`📡 Upserting ${rows.length} GSC records into public.metrics_gsc_daily...`);
   const { data, error } = await supabase
@@ -81,44 +84,47 @@ export async function syncGscMetrics(queriesData = []) {
 export async function syncGa4Metrics(metricsData = []) {
   const today = new Date().toISOString().split('T')[0];
 
-  const rows = metricsData.length > 0 ? metricsData : [
-    {
-      date: today,
-      page_path: '/',
-      active_users: 18,
-      sessions: 24,
-      conversions: 2,
-      bounce_rate: 0.225,
-      avg_engagement_time_sec: 142.5,
-    },
-    {
-      date: today,
-      page_path: '/services/web-development',
-      active_users: 11,
-      sessions: 14,
-      conversions: 1,
-      bounce_rate: 0.18,
-      avg_engagement_time_sec: 185.0,
-    },
-    {
-      date: today,
-      page_path: '/services/automation',
-      active_users: 9,
-      sessions: 12,
-      conversions: 1,
-      bounce_rate: 0.25,
-      avg_engagement_time_sec: 160.0,
-    },
-    {
-      date: today,
-      page_path: '/contact',
-      active_users: 7,
-      sessions: 8,
-      conversions: 3,
-      bounce_rate: 0.12,
-      avg_engagement_time_sec: 210.0,
-    },
-  ];
+  const rows =
+    metricsData.length > 0
+      ? metricsData
+      : [
+          {
+            date: today,
+            page_path: '/',
+            active_users: 18,
+            sessions: 24,
+            conversions: 2,
+            bounce_rate: 0.225,
+            avg_engagement_time_sec: 142.5,
+          },
+          {
+            date: today,
+            page_path: '/services/web-development',
+            active_users: 11,
+            sessions: 14,
+            conversions: 1,
+            bounce_rate: 0.18,
+            avg_engagement_time_sec: 185.0,
+          },
+          {
+            date: today,
+            page_path: '/services/automation',
+            active_users: 9,
+            sessions: 12,
+            conversions: 1,
+            bounce_rate: 0.25,
+            avg_engagement_time_sec: 160.0,
+          },
+          {
+            date: today,
+            page_path: '/contact',
+            active_users: 7,
+            sessions: 8,
+            conversions: 3,
+            bounce_rate: 0.12,
+            avg_engagement_time_sec: 210.0,
+          },
+        ];
 
   console.log(`📊 Upserting ${rows.length} GA4 records into public.metrics_ga4_daily...`);
   const { data, error } = await supabase

@@ -39,7 +39,7 @@ const deskStructure = (S) =>
         .child(
           S.documentList()
             .title('Ready for Jeremy Review')
-            .filter('_type == "post" && editorialStatus == "ready_for_human_review"')
+            .filter('_type == "post" && editorialStatus == "ready_for_human_review"'),
         ),
 
       S.listItem()
@@ -47,14 +47,12 @@ const deskStructure = (S) =>
         .child(
           S.documentList()
             .title('AI Drafts')
-            .filter('_type == "post" && editorialStatus == "ai_drafted"')
+            .filter('_type == "post" && editorialStatus == "ai_drafted"'),
         ),
 
       S.listItem()
         .title('📚 All Blog Posts')
-        .child(
-          S.documentTypeList('post').title('All Blog Posts')
-        ),
+        .child(S.documentTypeList('post').title('All Blog Posts')),
 
       S.divider(),
 

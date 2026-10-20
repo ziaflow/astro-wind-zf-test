@@ -9,6 +9,7 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 import { logCommunication } from '~/lib/communications';
+import { checkRateLimit } from '~/lib/forms/rate-limit';
 
 // Serverless function on Vercel (site output remains static).
 export const prerender = false;
@@ -34,7 +35,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  const rate = checkRateLimit(clientAddress || 'unknown');
+  if (!rate.allowed) {
+    return Response.json(
+      { error: 'Too many submissions. Please wait a minute and try again.' },
+      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } }
+    );
+  }
   // Verify POST method
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {

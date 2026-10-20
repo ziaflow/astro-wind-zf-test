@@ -30,14 +30,11 @@ interface SupabaseCdcPayload {
 export const POST: APIRoute = async ({ request }) => {
   try {
     const rawBody = await request.text();
-    const webhookSecret =
-      process.env.SUPABASE_WEBHOOK_SECRET || import.meta.env.SUPABASE_WEBHOOK_SECRET;
+    const webhookSecret = process.env.SUPABASE_WEBHOOK_SECRET || import.meta.env.SUPABASE_WEBHOOK_SECRET;
 
     // Optional HMAC signature verification if secret is provided
     if (webhookSecret) {
-      const signature =
-        request.headers.get('x-supabase-signature') ||
-        request.headers.get('x-webhook-signature');
+      const signature = request.headers.get('x-supabase-signature') || request.headers.get('x-webhook-signature');
 
       if (!signature) {
         return new Response(JSON.stringify({ ok: false, error: 'missing_signature' }), {
@@ -71,13 +68,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Process lead insertions
     if (record && (type === 'INSERT' || !type)) {
-      const leadId = record.id ? `lead_${record.id}` : (record.email || 'unknown');
+      const leadId = record.id ? `lead_${record.id}` : record.email || 'unknown';
       const email = record.email;
 
       if (email) {
         await identifyUser(leadId, {
           email,
-          created_at: record.created_at ? Math.floor(new Date(record.created_at).getTime() / 1000) : Math.floor(Date.now() / 1000),
+          created_at: record.created_at
+            ? Math.floor(new Date(record.created_at).getTime() / 1000)
+            : Math.floor(Date.now() / 1000),
           company_name: record.company_name || undefined,
           phone: record.phone || undefined,
           service_needed: record.service_needed || undefined,

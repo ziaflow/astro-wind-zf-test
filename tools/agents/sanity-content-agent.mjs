@@ -12,26 +12,26 @@ export const HIGH_PRIORITY_TOPICS = [
       'marketing automation phoenix',
       'marketing automation for smbs arizona',
       'crm automation for small business arizona',
-      'marketing automation agency phoenix'
+      'marketing automation agency phoenix',
     ],
     rationale: 'Top commercial GSC opportunity: 62 impressions at avg position 11.5 across Valley service intent.',
     sections: [
       {
         heading: 'Why Arizona SMBs Outgrow Manual Lead Management',
         content:
-          'Service providers and contractors throughout Phoenix, Scottsdale, and Tucson frequently experience inquiry delays due to manual triage. Research demonstrates responding to an inbound inquiry promptly significantly improves consultation booking rates.\n\nYet many local businesses still rely on unlinked contact forms and manual spreadsheet entries that introduce human error and response friction.'
+          'Service providers and contractors throughout Phoenix, Scottsdale, and Tucson frequently experience inquiry delays due to manual triage. Research demonstrates responding to an inbound inquiry promptly significantly improves consultation booking rates.\n\nYet many local businesses still rely on unlinked contact forms and manual spreadsheet entries that introduce human error and response friction.',
       },
       {
         heading: 'The 3 Practical Intake Automation Touchpoints',
         content:
-          'An effective automation pipeline connects three distinct touchpoints:\n\n1. **Instant Multi-Channel Intake:** Form submissions trigger immediate transactional confirmations via Resend and notification alerts to assigned staff.\n2. **Calendar & Consultation Sync:** Inquiries automatically route into Microsoft Bookings or Outlook schedules with pre-qualification questions answered.\n3. **CRM Sync & Follow-Up Cadence:** New leads are recorded into Supabase/HubSpot with follow-up sequences tailored to their requested service category.'
+          'An effective automation pipeline connects three distinct touchpoints:\n\n1. **Instant Multi-Channel Intake:** Form submissions trigger immediate transactional confirmations via Resend and notification alerts to assigned staff.\n2. **Calendar & Consultation Sync:** Inquiries automatically route into Microsoft Bookings or Outlook schedules with pre-qualification questions answered.\n3. **CRM Sync & Follow-Up Cadence:** New leads are recorded into Supabase/HubSpot with follow-up sequences tailored to their requested service category.',
       },
       {
         heading: 'Implementation Boundaries & Human Review',
         content:
-          'Automation should handle intake routing and immediate acknowledgments, while high-value scoping calls and custom quotes remain strictly human-led.'
-      }
-    ]
+          'Automation should handle intake routing and immediate acknowledgments, while high-value scoping calls and custom quotes remain strictly human-led.',
+      },
+    ],
   },
   {
     topic: 'Phoenix Conversion Rate Optimization: Finding and Fixing Website Conversion Friction',
@@ -40,26 +40,26 @@ export const HIGH_PRIORITY_TOPICS = [
       'top phoenix cro agencies',
       'phoenix conversion rate optimization agency',
       'phoenix conversion rate optimization services',
-      'website conversion checklist'
+      'website conversion checklist',
     ],
     rationale: 'Active GSC cluster with 18+ combined impressions across high-commercial intent Phoenix CRO searches.',
     sections: [
       {
         heading: 'Traffic vs. Conversion: Overcoming Website Friction',
         content:
-          'Many businesses in the Phoenix metro area invest in paid search or local SEO, driving qualified visitors to their websites—only to see high bounce rates and low inquiry completion.\n\nConversion Rate Optimization (CRO) focuses on eliminating UX friction, clarifying value propositions, and optimizing mobile tap targets to help visitors take action.'
+          'Many businesses in the Phoenix metro area invest in paid search or local SEO, driving qualified visitors to their websites—only to see high bounce rates and low inquiry completion.\n\nConversion Rate Optimization (CRO) focuses on eliminating UX friction, clarifying value propositions, and optimizing mobile tap targets to help visitors take action.',
       },
       {
         heading: 'Actionable CRO Checklist for Local Websites',
         content:
-          'Key adjustments that consistently improve on-page conversion include:\n\n- Above-the-fold value propositions with visible contact numbers and direct booking links.\n- Sticky mobile call/schedule buttons that follow scroll progression without obscuring content.\n- Behavioral heatmapping and session recordings using Microsoft Clarity to identify rage clicks and abandoned form fields.\n- Replacing lengthy generic forms with two-step interactive qualifiers.'
+          'Key adjustments that consistently improve on-page conversion include:\n\n- Above-the-fold value propositions with visible contact numbers and direct booking links.\n- Sticky mobile call/schedule buttons that follow scroll progression without obscuring content.\n- Behavioral heatmapping and session recordings using Microsoft Clarity to identify rage clicks and abandoned form fields.\n- Replacing lengthy generic forms with two-step interactive qualifiers.',
       },
       {
         heading: 'Trust Signals and Local Evidence',
         content:
-          'Integrating verified Arizona customer reviews, localized project galleries, and clear response-time commitments directly next to conversion forms reduces hesitation and clarifies service scope.'
-      }
-    ]
+          'Integrating verified Arizona customer reviews, localized project galleries, and clear response-time commitments directly next to conversion forms reduces hesitation and clarifies service scope.',
+      },
+    ],
   },
   {
     topic: 'Custom Web Applications for Arizona SMBs: When AI Features Make Sense',
@@ -67,26 +67,26 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'phoenix ai web agency',
       'custom web application expert in phoenix',
-      'fast ai-native builds for small businesses'
+      'fast ai-native builds for small businesses',
     ],
     rationale: 'Specific high-intent conversational query in GSC (22 impressions, position 2.4).',
     sections: [
       {
         heading: 'The Valley SMB Technology Dilemma',
         content:
-          'Growing healthcare practices, regional logistics hubs, and specialized contractors in the Phoenix and Scottsdale business corridors often face a common crossroads: off-the-shelf SaaS tools lack custom operational logic, while legacy monolithic platforms are slow, brittle, and difficult to maintain.'
+          'Growing healthcare practices, regional logistics hubs, and specialized contractors in the Phoenix and Scottsdale business corridors often face a common crossroads: off-the-shelf SaaS tools lack custom operational logic, while legacy monolithic platforms are slow, brittle, and difficult to maintain.',
       },
       {
         heading: 'When AI Capabilities Provide Real Value vs. Novelty',
         content:
-          'Not every small business needs artificial intelligence. However, embedded AI workflows deliver measurable value when applied to:\n\n- Automated document intake and classification (e.g. PDFs, permits, patient forms).\n- Natural language search over extensive internal technical knowledge bases.\n- Context-preserving customer intake assistants linked directly to operational databases.'
+          'Not every small business needs artificial intelligence. However, embedded AI workflows deliver measurable value when applied to:\n\n- Automated document intake and classification (e.g. PDFs, permits, patient forms).\n- Natural language search over extensive internal technical knowledge bases.\n- Context-preserving customer intake assistants linked directly to operational databases.',
       },
       {
         heading: 'Static-First Architecture and Operational Reliability',
         content:
-          'Modern web engineering built on Astro 5, edge deployment (Vercel), and Supabase provides sub-second performance, top security compliance, and zero vulnerability overhead compared to legacy CMS architectures.'
-      }
-    ]
+          'Modern web engineering built on Astro 5, edge deployment (Vercel), and Supabase provides sub-second performance, top security compliance, and zero vulnerability overhead compared to legacy CMS architectures.',
+      },
+    ],
   },
   {
     topic: 'AI Website Assistants: How to Evaluate Context, Usability, and Lead Quality',
@@ -94,26 +94,26 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'intelligent website assistant reduce visitor bounce',
       'ai bounce rate reduction',
-      'context retention chatbot'
+      'context retention chatbot',
     ],
     rationale: 'Evaluation framework for conversational agents and user experience.',
     sections: [
       {
         heading: 'Evaluating Website Concierge Layers',
         content:
-          'Traditional static menus and search bars often require visitors to hunt across multiple pages to answer specific operational questions. Contextual website assistants can help visitors quickly locate relevant case studies, service specifications, and pricing qualifiers.'
+          'Traditional static menus and search bars often require visitors to hunt across multiple pages to answer specific operational questions. Contextual website assistants can help visitors quickly locate relevant case studies, service specifications, and pricing qualifiers.',
       },
       {
         heading: 'Stateless Chatbots vs. Session Context Retention',
         content:
-          'Stateless pop-up widgets reset every time a visitor navigates between pages, causing visitor frustration. In contrast, modern assistants maintain session memory so when a prospect moves from an overview page to a service tier, the assistant preserves context and offers relevant next steps.'
+          'Stateless pop-up widgets reset every time a visitor navigates between pages, causing visitor frustration. In contrast, modern assistants maintain session memory so when a prospect moves from an overview page to a service tier, the assistant preserves context and offers relevant next steps.',
       },
       {
         heading: 'Evaluation Criteria Before Production Deployment',
         content:
-          'Before deploying any AI assistant, verify:\n\n1. **Hallucination boundaries:** Strict retrieval-augmented grounding on approved documentation only.\n2. **Escalation paths:** Seamless fallback to direct consultation scheduling when confidence thresholds are unmet.\n3. **Privacy and compliance:** Ensuring no sensitive personal data is stored without explicit consent.'
-      }
-    ]
+          'Before deploying any AI assistant, verify:\n\n1. **Hallucination boundaries:** Strict retrieval-augmented grounding on approved documentation only.\n2. **Escalation paths:** Seamless fallback to direct consultation scheduling when confidence thresholds are unmet.\n3. **Privacy and compliance:** Ensuring no sensitive personal data is stored without explicit consent.',
+      },
+    ],
   },
   {
     topic: 'Microsoft Advertising for B2B Businesses: A Practical Evaluation Framework',
@@ -121,22 +121,22 @@ export const HIGH_PRIORITY_TOPICS = [
     targetKeywords: [
       'Microsoft Ads app advertising evaluation',
       'Microsoft Ads for Apple Business',
-      'bing ads 2026 strategy'
+      'bing ads 2026 strategy',
     ],
     rationale: 'Framework for evaluating B2B paid search channels beyond single-engine allocation.',
     sections: [
       {
         heading: 'Evaluating the B2B Paid Search Mix',
         content:
-          'While Google Ads typically represents the largest share of search volume, Microsoft Advertising provides distinct demographic attributes in B2B markets due to enterprise Windows installations and default Edge usage in corporate environments.'
+          'While Google Ads typically represents the largest share of search volume, Microsoft Advertising provides distinct demographic attributes in B2B markets due to enterprise Windows installations and default Edge usage in corporate environments.',
       },
       {
         heading: 'Key Comparison Metrics to Measure',
         content:
-          'When evaluating Microsoft Ads against existing paid search allocations, track:\n\n- Cost-Per-Acquisition (CPA) on high-intent decision-maker search queries.\n- Engagement time and bounce rates from desktop vs. mobile corporate traffic.\n- Session friction and intent quality through native Microsoft Clarity integration.'
-      }
-    ]
-  }
+          'When evaluating Microsoft Ads against existing paid search allocations, track:\n\n- Cost-Per-Acquisition (CPA) on high-intent decision-maker search queries.\n- Engagement time and bounce rates from desktop vs. mobile corporate traffic.\n- Session friction and intent quality through native Microsoft Clarity integration.',
+      },
+    ],
+  },
 ];
 
 const projectId = '92p0tpps';
@@ -180,7 +180,10 @@ export function buildPortableText(sections, excerpt) {
     });
 
     // Content paragraphs
-    const paragraphs = sec.content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+    const paragraphs = sec.content
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .filter(Boolean);
     for (const para of paragraphs) {
       if (para.startsWith('- ') || para.startsWith('1. ') || para.startsWith('2. ') || para.startsWith('3. ')) {
         const listItems = para.split('\n').filter(Boolean);
@@ -238,8 +241,6 @@ export async function syncSeoDashboard() {
   console.log('✅ Successfully synced SEO Automation Dashboard!');
 }
 
-
-
 /**
  * Quality Gateway & Anti-Spam Publishing Guardrails
  * 1. Volume Gate: Weekly Cap of 3 posts per rolling 7 days (prevent automated scaling abuse)
@@ -275,7 +276,7 @@ export async function getWeeklyPublishedCount(endDateStr = new Date().toISOStrin
     const dirs = ['src/data/post', 'src/data/post-generated'];
     for (const dir of dirs) {
       if (fs.existsSync(dir)) {
-        const files = fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+        const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
         for (const file of files) {
           const content = fs.readFileSync(path.join(dir, file), 'utf-8');
           const isDraft = /draft:\s*true/i.test(content);
@@ -331,9 +332,13 @@ export function validateQualityGate(post) {
       `Original Asset Required: Post must include at least one verified original asset (${validAssetTypes.join(', ')}). Crediting sources alone is not original work.`
     );
   } else {
-    const hasValidAsset = assets.some(a => validAssetTypes.includes(a.type) && a.description && a.description.length > 10);
+    const hasValidAsset = assets.some(
+      (a) => validAssetTypes.includes(a.type) && a.description && a.description.length > 10
+    );
     if (!hasValidAsset) {
-      gateErrors.push(`Original asset must have a valid type (${validAssetTypes.join(', ')}) and a detailed description.`);
+      gateErrors.push(
+        `Original asset must have a valid type (${validAssetTypes.join(', ')}) and a detailed description.`
+      );
     }
   }
 
@@ -367,7 +372,9 @@ export async function reviewAllPosts() {
   console.log(`\n📅 Weekly Publishing Rate Limiter (Anti-Spam Quality Gate):`);
   console.log(`   Window: ${weeklyStatus.startDateStr} to ${weeklyStatus.endDateStr}`);
   console.log(`   Published in Last 7 Days: ${weeklyStatus.total} / ${WEEKLY_PUBLISH_CAP} max allowed`);
-  console.log(`   Status: ${weeklyStatus.canPublish ? '✅ GREEN (Publishing allowed)' : '⛔ CAPPED (Weekly cap reached — schedule as draft)'}`);
+  console.log(
+    `   Status: ${weeklyStatus.canPublish ? '✅ GREEN (Publishing allowed)' : '⛔ CAPPED (Weekly cap reached — schedule as draft)'}`
+  );
   console.log(`   Remaining slots this week: ${weeklyStatus.remaining}`);
 
   // 2. Review Local Posts
@@ -377,7 +384,7 @@ export async function reviewAllPosts() {
   const localDirs = ['src/data/post', 'src/data/post-generated'];
   for (const dir of localDirs) {
     if (!fs.existsSync(dir)) continue;
-    const files = fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
     for (const file of files) {
       const fullPath = path.join(dir, file);
       const content = fs.readFileSync(fullPath, 'utf-8');
@@ -486,13 +493,15 @@ export async function reviewAllPosts() {
     console.log(`${idx + 1}. ${statusBadge} [${p.source.toUpperCase()}] ${p.title}`);
     console.log(`   Author/Reviewer: ${p.author} | Words: ~${p.words} | Quality: ${qualityBadge}`);
     if (p.issues.length > 0) {
-      p.issues.forEach(iss => console.log(`      ↳ ⚠️  ${iss}`));
+      p.issues.forEach((iss) => console.log(`      ↳ ⚠️  ${iss}`));
     }
   });
 
   console.log('\n=============================================================');
   console.log(`📊 QUALITY GATEWAY SUMMARY:`);
-  console.log(`   Total Posts Reviewed: ${reviewedPosts.length} (${reviewedPosts.filter(p => !p.isDraft).length} Live, ${reviewedPosts.filter(p => p.isDraft).length} Drafts)`);
+  console.log(
+    `   Total Posts Reviewed: ${reviewedPosts.length} (${reviewedPosts.filter((p) => !p.isDraft).length} Live, ${reviewedPosts.filter((p) => p.isDraft).length} Drafts)`
+  );
   console.log(`   Quality Issues Found: ${issues.length}`);
   console.log(`   Weekly Publishing Limit: Strict maximum of ${WEEKLY_PUBLISH_CAP} posts per 7-day rolling window`);
   console.log('=============================================================\n');
@@ -503,51 +512,8 @@ export async function reviewAllPosts() {
 /**
  * Safe publishing function enforcing the Quality Gateway & weekly volume cap
  */
-export async function publishPostSafely(topicIndex = 0, qualityPayload = null) {
-  console.log(`\n=============================================================`);
-  console.log(`🛡️ EXECUTING PUBLICATION QUALITY GATEWAY`);
-  console.log(`=============================================================`);
-
-  // 1. Check Weekly Volume Cap (Max 3/week)
-  const weeklyStatus = await getWeeklyPublishedCount();
-  console.log(`1. Volume Gate: ${weeklyStatus.total} / ${WEEKLY_PUBLISH_CAP} posts published in the last 7 days.`);
-
-  if (!weeklyStatus.canPublish) {
-    console.warn(`\n⛔ VOLUME GATE FAILED: Weekly cap (${WEEKLY_PUBLISH_CAP}/week) reached.`);
-    console.warn(`   Google scaled content abuse guidelines flag rapid automated post generation.`);
-    console.warn(`   Post will be safely stored as a DRAFT.\n`);
-    return await draftPost(topicIndex, 'draft');
-  }
-
-  // 2. Validate Quality Gate Requirements
-  const payloadToValidate = qualityPayload || {
-    reviewedBy: 'Jeremy (ZiaFlow Engineering Lead)',
-    originalAssets: [
-      {
-        type: 'benchmark_data',
-        description: 'Valley SMB response-time comparison dataset showing 1-min vs 30-min lead conversion multipliers.',
-      },
-      {
-        type: 'client_data',
-        description: 'Anonymized intake logs from Phoenix HVAC contractor demonstrating 60% booking uplift.',
-      },
-    ],
-    factCheckVerified: true,
-  };
-
-  const gateResult = validateQualityGate(payloadToValidate);
-  console.log(`2. Quality Gate Check: ${gateResult.passed ? '✅ PASSED' : '❌ FAILED'}`);
-
-  if (!gateResult.passed) {
-    console.error('\n❌ QUALITY GATEWAY REJECTION:');
-    gateResult.errors.forEach(err => console.error(`   - ${err}`));
-    console.warn('\n   Demoting post to DRAFT to protect site authority and prevent manual action.\n');
-    return await draftPost(topicIndex, 'draft');
-  }
-
-  console.log('   All checks passed: Named Human Reviewer verified, Original Assets attached, Facts verified.');
-  console.log(`   Remaining weekly allowance: ${weeklyStatus.remaining}. Proceeding with live publication.`);
-  return await draftPost(topicIndex, 'publish', payloadToValidate);
+export async function publishPostSafely() {
+  throw new Error('Agent publishing is disabled. Prepare a draft and obtain an exact-version human review in Sanity.');
 }
 
 /**
@@ -555,6 +521,9 @@ export async function publishPostSafely(topicIndex = 0, qualityPayload = null) {
  * Defaults to 'draft', supports 'publish' with strict Quality Gate enforcement
  */
 export async function draftPost(topicIndex = 0, status = 'draft', qualityMetadata = null) {
+  if (status !== 'draft') {
+    throw new Error('Only drafts are permitted through the agent. Live publication requires human review in Sanity.');
+  }
   if (!client) {
     throw new Error('SANITY_API_TOKEN is required to interact with Sanity.');
   }
@@ -563,7 +532,9 @@ export async function draftPost(topicIndex = 0, status = 'draft', qualityMetadat
   if (status === 'publish') {
     const weeklyStatus = await getWeeklyPublishedCount();
     if (!weeklyStatus.canPublish) {
-      console.warn(`⚠️ Weekly cap reached (${weeklyStatus.total}/${WEEKLY_PUBLISH_CAP} this week). Overriding status to 'draft'.`);
+      console.warn(
+        `⚠️ Weekly cap reached (${weeklyStatus.total}/${WEEKLY_PUBLISH_CAP} this week). Overriding status to 'draft'.`
+      );
       status = 'draft';
     }
   }
@@ -592,13 +563,15 @@ export async function draftPost(topicIndex = 0, status = 'draft', qualityMetadat
   const documentId = status === 'draft' ? `drafts.${slugText}` : slugText;
 
   // Safeguard: Check if published document or active draft already exists
-  const existing = await client.fetch(
-    `*[_id == $docId || _id == $slugText][0]{_id, title}`,
-    { docId: documentId, slugText }
-  );
+  const existing = await client.fetch(`*[_id == $docId || _id == $slugText][0]{_id, title}`, {
+    docId: documentId,
+    slugText,
+  });
 
   if (existing) {
-    console.log(`ℹ️ Document already exists (ID: ${existing._id}). Skipping to preserve human edits and prevent silent overwrite.`);
+    console.log(
+      `ℹ️ Document already exists (ID: ${existing._id}). Skipping to preserve human edits and prevent silent overwrite.`
+    );
     return existing;
   }
 
@@ -708,7 +681,7 @@ Commands:
   --review            Review all posts (local & Sanity) against the Quality Gateway (default)
   --sync              Sync high priority topic queue to Sanity SEO Dashboard
   --draft-next        Generate a structured draft post for topic #1 in Sanity
-  --publish-safe      Execute Quality Gateway (Human Reviewer, Original Assets, Fact-Check) & Publish
+  --publish-safe      Disabled: prepare a draft and obtain human review in Sanity
   --draft-all         Draft all queued topics into Sanity Studio
   --demote-to-drafts  Move all published Sanity posts to drafts for review/image addition
   --list              List recent posts (drafts and published) from Sanity
@@ -720,5 +693,3 @@ main().catch((err) => {
   console.error('Agent execution error:', err);
   process.exit(1);
 });
-
-

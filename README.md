@@ -6,14 +6,14 @@ Production codebase for **[ZiaFlow](https://ziaflow.com)**, an Arizona-based tec
 
 ## Stack
 
-| Layer | Technology |
-| :-- | :-- |
-| Framework | Astro 5 (`@astrojs/vercel` serverless adapter) |
-| Styling | Tailwind CSS |
-| Headless CMS | Sanity Studio (`studio-gemini-blog/`) |
-| Database | Supabase Postgres |
-| Marketing & Analytics | Customer.io CDP, Microsoft Clarity, IndexNow |
-| Hosting | Vercel (Production deployment on `main`) |
+| Layer                 | Technology                                     |
+| :-------------------- | :--------------------------------------------- |
+| Framework             | Astro 5 (`@astrojs/vercel` serverless adapter) |
+| Styling               | Tailwind CSS                                   |
+| Headless CMS          | Sanity Studio (`studio-gemini-blog/`)          |
+| Database              | Supabase Postgres                              |
+| Marketing & Analytics | Customer.io CDP, Microsoft Clarity, IndexNow   |
+| Hosting               | Vercel (Production deployment on `main`)       |
 
 The site started from the open-source [AstroWind](https://github.com/arthelokyo/astrowind) template (MIT). It has since been customized heavily.
 
@@ -41,6 +41,7 @@ The site started from the open-source [AstroWind](https://github.com/arthelokyo/
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (`^18.17.1 || ^20.3.0 || >= 21.0.0`)
 - npm
 - Access to the Sanity project (`92p0tpps`), Supabase project, and Customer.io workspace
@@ -57,40 +58,41 @@ npm run dev            # http://localhost:4321
 
 ### Commands
 
-| Command | Action |
-| :-- | :-- |
-| `npm run dev` | Start local Astro dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run check` | Run all checks (`check:astro`, `check:eslint`, `check:prettier`) |
-| `npm run check:astro` | Type-check Astro templates and component props |
-| `npm run fix` | Auto-format and lint fix (`fix:eslint`, `fix:prettier`) |
-| `npm run sanity` | Start local Sanity Studio dev server (`localhost:3333`) |
-| `npm run sanity:sync` | Sync and syndicate published posts from Sanity |
-| `npm run supabase:sync-seo` | Run the SEO search intelligence synchronization job |
-| `npm run indexnow` | Submit updated sitemaps to Bing and search engines via IndexNow |
+| Command                     | Action                                                           |
+| :-------------------------- | :--------------------------------------------------------------- |
+| `npm run dev`               | Start local Astro dev server at `localhost:4321`                 |
+| `npm run build`             | Build production site to `./dist/`                               |
+| `npm run preview`           | Preview production build locally                                 |
+| `npm run check`             | Run all checks (`check:astro`, `check:eslint`, `check:prettier`) |
+| `npm run check:astro`       | Type-check Astro templates and component props                   |
+| `npm run fix`               | Auto-format and lint fix (`fix:eslint`, `fix:prettier`)          |
+| `npm run sanity`            | Start local Sanity Studio dev server (`localhost:3333`)          |
+| `npm run sanity:sync`       | Sync and syndicate published posts from Sanity                   |
+| `npm run supabase:sync-seo` | Run the SEO search intelligence synchronization job              |
+| `npm run indexnow`          | Submit updated sitemaps to Bing and search engines via IndexNow  |
 
 ## Environment Variables
 
 Copy `.env.example` to `.env`. Never commit real keys. Store production secrets in Vercel project environment variables.
 
-| Variable | Purpose |
-| :-- | :-- |
-| `EMAIL_BACKEND` | `web3forms` (default) or `nodemailer` |
-| `WEB3FORMS_ACCESS_KEY` | Required if using Web3Forms |
-| `SMTP_*` | Host, port, user, pass (required if `EMAIL_BACKEND=nodemailer`) |
-| `SANITY_PROJECT_ID` | Sanity CMS Project ID (`92p0tpps`) |
-| `SANITY_DATASET` | Sanity dataset (e.g., `production`) |
-| `SANITY_API_TOKEN` | Sanity write/management token for content agents |
-| `SUPABASE_URL` | Supabase Postgres URL endpoint |
-| `SUPABASE_KEY` / `SUPABASE_ANON_KEY` | Client-accessible Supabase anonymous key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server-only private key for backend lead insertion |
-| `INDEXNOW_KEY` | Search engine ping key for instantaneous search indexing |
-| `CLARITY_API_TOKEN` | Microsoft Clarity analytics extraction token |
+| Variable                             | Purpose                                                         |
+| :----------------------------------- | :-------------------------------------------------------------- |
+| `EMAIL_BACKEND`                      | `web3forms` (default) or `nodemailer`                           |
+| `WEB3FORMS_ACCESS_KEY`               | Required if using Web3Forms                                     |
+| `SMTP_*`                             | Host, port, user, pass (required if `EMAIL_BACKEND=nodemailer`) |
+| `SANITY_PROJECT_ID`                  | Sanity CMS Project ID (`92p0tpps`)                              |
+| `SANITY_DATASET`                     | Sanity dataset (e.g., `production`)                             |
+| `SANITY_API_TOKEN`                   | Sanity write/management token for content agents                |
+| `SUPABASE_URL`                       | Supabase Postgres URL endpoint                                  |
+| `SUPABASE_KEY` / `SUPABASE_ANON_KEY` | Client-accessible Supabase anonymous key                        |
+| `SUPABASE_SERVICE_ROLE_KEY`          | Server-only private key for backend lead insertion              |
+| `INDEXNOW_KEY`                       | Search engine ping key for instantaneous search indexing        |
+| `CLARITY_API_TOKEN`                  | Microsoft Clarity analytics extraction token                    |
 
 ## Subsystems
 
 ### Sanity Studio (`studio-gemini-blog/`)
+
 Blog articles, structured content, and author metadata are managed here and queried dynamically by the Astro site via `@sanity/astro` and `@sanity/client`.
 
 ```bash
@@ -101,13 +103,16 @@ npm run deploy     # Deploy changes to Sanity hosted studio
 ```
 
 ### Agents and Background Jobs (`tools/agents/`)
+
 Autonomous agents, data pipelines, and scheduled sync jobs. Database schema definitions live in `tools/agents/migrations/`:
+
 - `01_lead_to_delivery_schema.sql`: Lead ingestion, CRM status tracking, and notification logs.
 - `02_analytics_warehouse_schema.sql`: Clarity sessions, SEO keyword positions, and traffic warehouse.
 
 Apply migrations in order against Supabase before deploying code that depends on them.
 
 ### Architecture Docs
+
 See [`docs/architecture/`](./docs/architecture/) for lead ingestion pipelines, Customer.io integration, and edge routing specifications.
 
 ## Configuration

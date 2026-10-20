@@ -1,0 +1,17 @@
+{
+  "issueRef": "local:supervised-delivery-foundation-2026-10-19",
+  "owner": "codex",
+  "outcome": "Make agent delivery evidence reproducible before human review.",
+  "scope": "Local handoff generation, workspace fingerprints, regression checks and GitHub CI coverage. Existing website changes are included in the workspace fingerprint but are not attributed to this task.",
+  "preview": "CLI handoff only. Website browser preview and live intake verification remain pending.",
+  "acceptanceCriteria": [
+    "Reject incomplete briefs and workspace changes during checks.",
+    "Record real check exit codes against a specific workspace fingerprint.",
+    "Run operations, contact endpoint and delivery regression tests in GitHub CI."
+  ],
+  "limitations": [
+    "Local files are editable by the OS account; this is evidence for review, not authenticated approval.",
+    "No live Supabase, Linear, Superhuman Docs or production integration is verified.",
+    "Production gates, browser QA and release approval remain pending."
+  ]
+}

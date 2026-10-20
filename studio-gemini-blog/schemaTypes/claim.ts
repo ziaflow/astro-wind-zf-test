@@ -33,7 +33,8 @@ export const claimType = defineType({
       title: 'Supporting Evidence / Source Documentation',
       type: 'text',
       rows: 3,
-      description: 'Link or citation of actual data (e.g., GSC metrics, benchmark report, client analytics).',
+      description:
+        'Link or citation of actual data (e.g., GSC metrics, benchmark report, client analytics).',
     }),
     defineField({
       name: 'approvedWording',

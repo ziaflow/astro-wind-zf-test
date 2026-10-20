@@ -26,7 +26,8 @@ async function populateEvidenceAndKeywords() {
         _key: 'srv-web',
         title: 'Websites & Web Development',
         canonicalPath: '/services/web-development',
-        summary: 'Astro 5 and modern web applications built for fast loading, clean structure, and reliable client intake.',
+        summary:
+          'Astro 5 and modern web applications built for fast loading, clean structure, and reliable client intake.',
       },
       {
         _key: 'srv-soft',
@@ -58,7 +59,8 @@ async function populateEvidenceAndKeywords() {
     _type: 'topicCluster',
     title: 'Lead & Marketing Automation for Service Businesses',
     slug: { _type: 'slug', current: 'automation' },
-    buyerProblem: 'Manual lead triage, delayed response times to inquiries, and siloed spreadsheets cause dropped leads.',
+    buyerProblem:
+      'Manual lead triage, delayed response times to inquiries, and siloed spreadsheets cause dropped leads.',
     commercialAnchor: {
       anchorText: 'Phoenix marketing automation services',
       url: 'https://ziaflow.com/services/automation',
@@ -135,7 +137,8 @@ async function populateEvidenceAndKeywords() {
     {
       _id: 'kw-small-business-phoenix-website-internal-tool',
       _type: 'keywordOpportunity',
-      query: 'i run a small business in phoenix and need a website and internal tool built with ai. what local development companies in the phoenix area specialize in fast ai-native builds for small businesses?',
+      query:
+        'i run a small business in phoenix and need a website and internal tool built with ai. what local development companies in the phoenix area specialize in fast ai-native builds for small businesses?',
       sourcePlatform: 'gsc',
       landingPage: 'https://ziaflow.com/services/software',
       impressions: 22,

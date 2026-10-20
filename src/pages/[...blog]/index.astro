@@ -13,6 +13,7 @@ import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
 import RelatedPosts from '~/components/blog/RelatedPosts.astro';
 import { PortableText } from 'astro-portabletext';
+import type { TypedObject } from 'astro-portabletext/types';
 
 export const prerender = true;
 
@@ -52,7 +53,7 @@ const metadata = merge(
       post.Content ? (
         <post.Content />
       ) : post.sanityBody && Array.isArray(post.sanityBody) ? (
-        <PortableText value={post.sanityBody as any} />
+        <PortableText value={post.sanityBody as TypedObject[]} />
       ) : (
         <Fragment set:html={post.content || ''} />
       )

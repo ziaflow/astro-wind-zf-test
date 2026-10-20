@@ -5,10 +5,12 @@ import nodemailer from 'nodemailer';
 import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
 import { logCommunication } from '~/lib/communications';
 import { identifyUser, trackEvent } from '~/lib/customerio';
+import { checkRateLimit } from '~/lib/forms/rate-limit';
 
 export const prerender = false;
 
 interface ContactPayload {
+  website?: string;
   form_type?: string;
   name?: string;
   email?: string;
@@ -32,13 +34,22 @@ export const GET: APIRoute = async () => {
   });
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  const rate = checkRateLimit(clientAddress || 'unknown');
+  if (!rate.allowed) {
+    return Response.json(
+      { ok: false, error: 'rate_limited' },
+      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } }
+    );
+  }
   try {
     let data: ContactPayload = {};
     const rawBody = await request.text();
     if (rawBody) {
       try {
-        data = JSON.parse(rawBody) as ContactPayload;
+        const parsed = JSON.parse(rawBody);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('Invalid payload');
+        data = parsed as ContactPayload;
       } catch {
         return new Response(JSON.stringify({ ok: false, error: 'invalid_json' }), {
           status: 400,
@@ -46,6 +57,33 @@ export const POST: APIRoute = async ({ request }) => {
         });
       }
     }
+    // Reject malformed fields before invoking any lead or messaging provider.
+    const limits: Record<string, number> = {
+      name: 120,
+      email: 254,
+      phone: 40,
+      company_name: 200,
+      service_needed: 200,
+      comments: 4000,
+      form_type: 80,
+      page_submitted_from: 500,
+      referrer: 2000,
+      website: 500,
+      utm_source: 200,
+      utm_medium: 200,
+      utm_campaign: 200,
+      utm_term: 200,
+      utm_content: 200,
+    };
+    for (const [key, limit] of Object.entries(limits)) {
+      const value = data[key as keyof ContactPayload];
+      if (value !== undefined && (typeof value !== 'string' || value.length > limit)) {
+        return Response.json({ ok: false, error: 'invalid_fields' }, { status: 400 });
+      }
+    }
+    if (data.website?.trim()) return Response.json({ ok: false, error: 'invalid_request' }, { status: 400 });
+    data.name = data.name?.trim();
+    data.email = data.email?.trim().toLowerCase();
     const {
       form_type,
       name,
@@ -63,7 +101,7 @@ export const POST: APIRoute = async ({ request }) => {
       referrer,
     } = data;
 
-    if (!name || !email || typeof name !== 'string' || typeof email !== 'string') {
+    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return new Response(JSON.stringify({ ok: false, error: 'bad_request' }), { status: 400 });
     }
 
@@ -162,9 +200,10 @@ export const POST: APIRoute = async ({ request }) => {
     // 2.5 Forward to Google Apps Script / Google Sheets
     const gasUrl = import.meta.env.GOOGLE_SCRIPT_URL || process.env.GOOGLE_SCRIPT_URL;
     const gasSecret = import.meta.env.GOOGLE_SCRIPT_SECRET || process.env.GOOGLE_SCRIPT_SECRET;
+    let sheetSaved = false;
     if (gasUrl && gasSecret) {
       try {
-        await fetch(gasUrl, {
+        const sheetResponse = await fetch(gasUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -184,7 +223,11 @@ export const POST: APIRoute = async ({ request }) => {
               { header: 'Page', value: page_submitted_from || '/' },
             ],
           }),
+          signal: AbortSignal.timeout(20_000),
         });
+        const sheetResult = await sheetResponse.json().catch(() => null);
+        sheetSaved = sheetResponse.ok && sheetResult?.ok === true;
+        if (!sheetSaved) console.warn('Google Apps Script rejected the submission');
       } catch (gasErr) {
         console.error('Google Apps Script forward error:', gasErr);
       }
@@ -213,17 +256,20 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     let emailSentViaResend = false;
+    let emailSentViaSmtp = false;
 
     if (resend) {
       try {
         // Send team lead alert
-        await resend.emails.send({
+        const notification = await resend.emails.send({
           from: 'ZiaFlow Leads <onboarding@resend.dev>',
           to: toEmail,
           replyTo: email || undefined,
           subject: subjectTitle,
           html: getLeadNotificationHtml(leadData),
         });
+        if (notification.error || !notification.data?.id) throw new Error('Lead notification was not accepted');
+        emailSentViaResend = true;
 
         // Send user confirmation receipt if valid email
         if (email && email.includes('@')) {
@@ -251,8 +297,6 @@ export const POST: APIRoute = async ({ request }) => {
         } catch (eventErr) {
           console.warn('Resend event trigger non-blocking error:', eventErr);
         }
-
-        emailSentViaResend = true;
 
         // Log outbound email alert to communications log
         await logCommunication({
@@ -284,13 +328,14 @@ export const POST: APIRoute = async ({ request }) => {
             auth: { user: smtpUser, pass: smtpPass },
           });
 
-          await transporter.sendMail({
+          const notification = await transporter.sendMail({
             from: `"ZiaFlow System" <${fallbackFromEmail}>`,
             to: toEmail,
             replyTo: email || 'info@ziaflow.com',
             subject: subjectTitle,
             html: getLeadNotificationHtml(leadData),
           });
+          emailSentViaSmtp = Array.isArray(notification.accepted) && notification.accepted.length > 0;
 
           if (email && email.includes('@')) {
             await transporter.sendMail({
@@ -307,14 +352,17 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
+    // A receipt failure must not reject an inquiry already saved or sent to the team.
+    if (!insertedLeadId && !sheetSaved && !emailSentViaResend && !emailSentViaSmtp) {
+      return Response.json({ ok: false, error: 'intake_unavailable' }, { status: 503 });
+    }
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : String(error);
     console.error('Contact Form Endpoint Error:', error);
-    return new Response(JSON.stringify({ ok: false, error: 'server_error', details: errorMsg }), {
+    return new Response(JSON.stringify({ ok: false, error: 'server_error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

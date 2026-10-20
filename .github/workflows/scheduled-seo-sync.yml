@@ -8,6 +8,9 @@ on:
 
 jobs:
   sync-seo-intelligence:
+    # Explicit opt-in only after Project 1 acceptance and Jeremy's runtime review.
+    # Emergency stop: set this repository variable to false and cancel active runs.
+    if: ${{ vars.ZIAFLOW_AUTOMATION_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

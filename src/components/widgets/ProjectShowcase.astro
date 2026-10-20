@@ -24,9 +24,7 @@ const {
 } = Astro.props;
 
 const allCaseStudies = await getCollection('case-studies');
-const sortedStudies = allCaseStudies
-  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
-  .slice(0, limit);
+const sortedStudies = allCaseStudies.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)).slice(0, limit);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass="max-w-7xl mx-auto">

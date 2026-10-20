@@ -11,7 +11,7 @@ tags:
   - ui-design
 ---
 
-Icon libraries are fundamental to modern web design, but choosing the wrong implementation strategy can unnecessarily inflate bundle sizes or slow down page rendering. 
+Icon libraries are fundamental to modern web design, but choosing the wrong implementation strategy can unnecessarily inflate bundle sizes or slow down page rendering.
 
 Depending on your tech stack and performance goals, here is how to select and integrate **Tabler Icons** effectively.
 
@@ -47,6 +47,7 @@ export default function ActionToolbar() {
 ```
 
 ### Why It Works Well
+
 These official packages support **tree-shaking**. Only the exact icons imported into your components are bundled into the final build, keeping additional bundle weight down to just a few kilobytes.
 
 ---
@@ -60,10 +61,7 @@ For static sites or projects without a JavaScript bundler, loading the icon webf
 Place this stylesheet link inside your document `<head>`:
 
 ```html
-<link 
-  rel="stylesheet" 
-  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 ```
 
 ### Usage in Markup
@@ -71,11 +69,11 @@ Place this stylesheet link inside your document `<head>`:
 Render icons using standard HTML elements with the designated classes:
 
 ```html
-<i class="ti ti-heart"></i>
-<i class="ti ti-brand-github"></i>
+<i class="ti ti-heart"></i> <i class="ti ti-brand-github"></i>
 ```
 
 ### Why It Works Well
+
 This provides a single-line, zero-configuration setup that works anywhere without build tooling or package management.
 
 ---
@@ -87,24 +85,25 @@ For performance-critical marketing pages and static-first architectures like Ast
 ### Usage Example
 
 ```html
-<svg 
-  xmlns="http://www.w3.org/2000/svg" 
-  width="24" 
-  height="24" 
-  viewBox="0 0 24 24" 
-  fill="none" 
-  stroke="currentColor" 
-  stroke-width="2" 
-  stroke-linecap="round" 
-  stroke-linejoin="round" 
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
   class="icon icon-tabler icons-tabler-outline icon-tabler-heart"
 >
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
   <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
 </svg>
 ```
 
 ### Why It Works Well
+
 - **Zero extra HTTP requests:** Renders immediately during initial HTML parsing with zero layout shift (CLS).
 - **Direct styling control:** Control dimensions, stroke weight, stroke color (`currentColor`), and fill directly via CSS or utility classes without relying on font loading states.
 - **Cache friendly:** SVGs compile into the static page output and require zero client-side JavaScript execution.

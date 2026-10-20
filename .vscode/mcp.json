@@ -25,12 +25,7 @@
     {
       "name": "Supabase",
       "command": "npx",
-      "args": [
-        "-y",
-        "@supabase/mcp-server-supabase@latest",
-        "--project-ref",
-        "ruhnueopjedaywiqhpgi"
-      ],
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--project-ref", "ruhnueopjedaywiqhpgi"],
       "env": {
         "SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}"
       }

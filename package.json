@@ -8,6 +8,11 @@
     "node": "^18.17.1 || ^20.3.0 || >= 21.0.0"
   },
   "scripts": {
+    "delivery:check": "node tools/operations/delivery.mjs",
+    "test:workflows": "node --test tests/operations.test.mjs tests/contact-endpoint.test.mjs tests/audit-endpoint.test.mjs tests/delivery.test.mjs",
+    "ops": "node tools/operations/cli.mjs",
+    "ops:prepare": "node tools/operations/prepare-roadmap.mjs",
+    "test:ops": "node --test tests/operations.test.mjs",
     "dev": "astro dev",
     "start": "astro dev",
     "sanity": "cd studio-gemini-blog && npm run dev",

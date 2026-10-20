@@ -65,6 +65,9 @@ export default [
       'studio-gemini-blog/.sanity',
       'astro-wind-zf-test',
       '.vercel',
+      '.ziaflow-ops',
+      'outputs',
+      'studio-gemini-blog/sanity.types.ts',
     ],
   },
 ];
