@@ -11,7 +11,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 const metadata = {
   title: 'Phoenix Home Service Marketing | ZiaFlow',
   description:
-    'Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona HVAC, plumbing, electrical, and landscaping companies.',
+    'Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call (602) 834-4239 to grow your booked leads.',
 };
 ---
 
@@ -31,22 +31,30 @@ const metadata = {
           <p class="mb-2">
             <strong>Clients typically see 40%+ average lead increases</strong> • 500+ businesses served • 98% client satisfaction
           </p>
-          <a href="/services/cro" class="text-primary hover:underline font-medium">See case studies →</a>
+          <a href="#" class="text-primary hover:underline font-medium">See case studies →</a>
         </div>
       </div>
     `}
     actions={[
       {
         variant: 'primary',
+        text: '📞 Call Now: (602) 834-4239',
+        href: 'tel:+16028344239',
+        classes: {
+          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+        },
+      },
+      {
+        variant: 'secondary',
         text: 'Book Consultation',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
       {
         variant: 'secondary',
-        text: 'View LSA Blueprint',
-        href: '/services/local-service-ads',
-        icon: 'tabler:arrow-right',
+        text: 'Download Free LSA Guide',
+        href: '#lsa-guide',
+        icon: 'tabler:download',
       },
     ]}
     image={{
@@ -179,7 +187,7 @@ const metadata = {
         icon: 'tabler:file-analytics',
         callToAction: {
           text: 'See case studies',
-          href: '/services/cro',
+          href: '#',
         },
       },
     ]}
@@ -252,7 +260,7 @@ const metadata = {
       {
         title: 'What are Google Local Service Ads (LSAs)?',
         description:
-          'LSAs are pay-per-lead ads that appear at the top of Google for local service searches. You pay when a customer contacts you through the ad. <a href="/services/local-service-ads" class="text-primary hover:underline">View our LSA Blueprint</a> to learn more.',
+          'LSAs are pay-per-lead ads that appear at the top of Google for local service searches. You pay when a customer contacts you through the ad. <a href="#lsa-guide" class="text-primary hover:underline">Download our free guide</a> to learn more.',
         icon: 'tabler:help',
       },
       {
@@ -266,12 +274,6 @@ const metadata = {
         description:
           'Our primary expertise is Arizona markets, but we do take select clients nationwide. <a href="/contact" class="text-primary hover:underline">Contact us</a> to discuss your market and goals.',
         icon: 'tabler:map-pin',
-      },
-      {
-        title: 'What contracts or commitments do you require?',
-        description:
-          'We work on transparent month-to-month agreements without locking you into rigid annual commitments. You stay because we deliver measurable ROI.',
-        icon: 'tabler:shield-check',
       },
     ]}
   >
@@ -287,15 +289,23 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
+        text: '📞 Call Now: (602) 834-4239',
+        href: 'tel:+16028344239',
+        classes: {
+          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+        },
+      },
+      {
+        variant: 'secondary',
         text: 'Book Consultation',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
       {
         variant: 'secondary',
-        text: 'View LSA Blueprint',
-        href: '/services/local-service-ads',
-        icon: 'tabler:arrow-right',
+        text: 'Download Free LSA Guide',
+        href: '#lsa-guide',
+        icon: 'tabler:download',
       },
     ]}
   >
@@ -303,7 +313,7 @@ const metadata = {
       <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
         <p class="mb-2">
           <strong>Phone:</strong>
-          <a href="tel:+148081929292" class="text-primary hover:underline">(480) 819-29292</a> •
+          <a href="tel:+16028344239" class="text-primary hover:underline font-bold">📞 (602) 834-4239</a> •
           <strong>Email:</strong>
           <a href="mailto:info@ziaflow.com" class="text-primary hover:underline">Email Us</a>
         </p>

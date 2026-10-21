@@ -41,9 +41,19 @@ const {
     />
     {
       actions && (
-        <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 mt-6">
+        <div class="max-w-xs sm:max-w-xl m-auto flex flex-wrap flex-col sm:flex-row sm:justify-center items-center gap-4 mt-6">
+          <div class="flex w-full sm:w-auto">
+            <a
+              href="tel:+16028344239"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base shadow-lg shadow-emerald-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+              aria-label="Call (602) 834-4239"
+            >
+              <span>📞</span>
+              <span>Call (602) 834-4239</span>
+            </a>
+          </div>
           {Array.isArray(actions) ? (
-            actions.map((action) => (
+            actions.filter((a) => a?.href !== 'tel:+16028344239').map((action) => (
               <div class="flex w-full sm:w-auto">
                 <Button {...(action || {})} class="w-full sm:mb-0" />
               </div>

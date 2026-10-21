@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import Button from '~/components/ui/Button.astro';
+import AskAIButton from '~/components/common/AIFloatingMenu.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
@@ -47,15 +48,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full bg-[#1b5e57] text-white border-b border-[#2d7e75] shadow-md transition-[opacity] ease-in-out',
+    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="absolute inset-0 bg-[#1b5e57]"></div>
+  <div class="absolute inset-0"></div>
   <div
     class:list={[
-      'relative text-white py-3 px-3 md:px-6 mx-auto w-full',
+      'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
       {
         'md:flex md:justify-between': position !== 'center',
       },
@@ -67,21 +68,32 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       },
     ]}
   >
-    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
+    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between items-center']}>
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center gap-2 md:hidden">
+        <a
+          href="tel:+16028344239"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs tracking-wide shadow-md transition-all hover:scale-105 active:scale-95"
+          aria-label="Call (602) 834-4239"
+        >
+          <span class="text-sm">📞</span>
+          <span>Call Now</span>
+        </a>
         <ToggleMenu />
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-white overflow-y-auto overflow-x-hidden md:overflow-visible md:justify-self-center bg-[#1b5e57] md:bg-transparent"
+      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-visible md:justify-self-center"
       aria-label="Main navigation"
     >
       <ul
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center items-center"
       >
+        <li class="flex items-center">
+          <AskAIButton variant="inline" />
+        </li>
         {
           links.map(({ text, href, links }) => (
             <li class={links?.length ? 'dropdown' : ''}>
@@ -89,18 +101,18 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 <>
                   <button
                     type="button"
-                    class="text-white hover:text-white/80 px-4 py-3 flex items-center whitespace-nowrap font-medium"
+                    class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
                   >
                     {text}{' '}
                     <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
                   </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium bg-[#144742] md:bg-[#144742]/95 md:min-w-[220px] drop-shadow-xl border border-[#2d7e75]">
+                  <ul class="dropdown-menu md:backdrop-blur-xl dark:md:bg-[#070b19]/95 rounded-xl md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/95 md:min-w-[220px] shadow-xl border border-slate-200/70 dark:border-slate-800/80 py-1 transition-all">
                     {links.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
                           class:list={[
-                            'first:rounded-t last:rounded-b text-white hover:bg-[#1b5e57] py-2 px-5 block whitespace-no-wrap transition',
-                            { 'aw-link-active font-bold text-teal-200': href2 === currentPath },
+                            'hover:bg-slate-100/80 hover:text-primary dark:hover:text-white dark:hover:bg-slate-800/80 py-2.5 px-5 block whitespace-no-wrap transition-colors duration-150',
+                            { 'aw-link-active font-semibold text-primary': href2 === currentPath },
                           ]}
                           href={href2}
                         >
@@ -113,8 +125,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    'text-white hover:text-white/80 px-4 py-3 flex items-center whitespace-nowrap font-medium',
-                    { 'aw-link-active font-bold text-teal-200': href === currentPath },
+                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
+                    { 'aw-link-active': href === currentPath },
                   ]}
                   href={href}
                 >
@@ -124,6 +136,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             </li>
           ))
         }
+        <li class="md:hidden mt-4 w-full px-4">
+          <a
+            href="tel:+16028344239"
+            class="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base shadow-lg transition-all"
+            aria-label="Call (602) 834-4239"
+          >
+            <span>📞</span>
+            <span>Call (602) 834-4239</span>
+          </a>
+        </li>
       </ul>
     </nav>
     <div
@@ -146,9 +168,17 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
+        <a
+          href="tel:+16028344239"
+          class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md hover:shadow-emerald-500/30 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+          aria-label="Call (602) 834-4239"
+        >
+          <span>📞</span>
+          <span>(602) 834-4239</span>
+        </a>
         {
           actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4 flex items-center">
+            <span class="ml-2 rtl:ml-0 rtl:mr-2 flex items-center">
               {actions.map((btnProps) => (
                 <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
               ))}

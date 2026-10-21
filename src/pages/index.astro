@@ -14,7 +14,7 @@ import { Icon } from 'astro-icon/components'; // Added for the custom section ic
 const metadata = {
   title: 'Phoenix Web Development & Business Automation | ZiaFlow',
   description:
-    'ZiaFlow helps Arizona service businesses build better websites, connect their tools, and simplify client intake. From a website refresh to custom internal applications.',
+    'ZiaFlow helps Arizona service businesses build better websites, connect their tools, and simplify client intake. Call (602) 834-4239 or schedule a consultation.',
   ignoreTitleTemplate: true,
   openGraph: {
     url: 'https://ziaflow.com/',
@@ -23,7 +23,7 @@ const metadata = {
     locale: 'en',
     title: 'Phoenix Web Development & Business Automation | ZiaFlow',
     description:
-      'ZiaFlow helps Arizona service businesses build websites, custom tools, CRM integrations, and workflow automation. Discuss your next project.',
+      'ZiaFlow helps Arizona service businesses build websites, custom tools, CRM integrations, and workflow automation. Call (602) 834-4239 to discuss your next project.',
     images: [
       {
         url: 'https://ziaflow.com/logo.png',
@@ -325,8 +325,17 @@ const metadata = {
   <Features3
     title="Contact ZiaFlow"
     subtitle="Choose the method that works best for you"
-    columns={3}
+    columns={4}
     items={[
+      {
+        title: 'Call Us Now',
+        icon: 'tabler:phone-call',
+        callToAction: {
+          text: '📞 (602) 834-4239',
+          href: 'tel:+16028344239',
+          variant: 'link',
+        },
+      },
       {
         title: 'Email',
         icon: 'tabler:mail',
