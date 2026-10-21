@@ -49,9 +49,10 @@ export const headerData = {
   ],
   actions: [
     {
-      text: 'Book Consultation',
-      href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      text: 'Call Now: (602) 834-4239',
+      href: 'tel:+16028344239',
       variant: 'primary' as const,
+      icon: 'tabler:phone',
     },
   ],
 };
