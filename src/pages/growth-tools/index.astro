@@ -1,0 +1,15 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import {tools} from '~/lib/growth-tools/engine.mjs';
+---
+<PageLayout metadata={{title:'Business tools | ZiaFlow',description:'Plan your next website and identify gaps in follow-up, software, local visibility, and conversion.'}}>
+<section class="mx-auto max-w-6xl px-6 py-16">
+<p class="text-sm font-bold uppercase tracking-widest text-primary">ZiaFlow / Business tools</p>
+<h1 class="my-6 text-4xl font-bold md:text-6xl">Find your next useful improvement.</h1>
+<p class="mb-12 max-w-2xl text-xl">Five focused tools. Clear assumptions, practical next steps, and results you can keep without entering an email.</p>
+<div class="grid gap-6 md:grid-cols-2">
+{tools.map((tool,i)=><a href={'/growth-tools/'+tool.slug+'/'} class="rounded-2xl border border-slate-400 p-8 transition hover:border-primary focus:outline focus:outline-2 focus:outline-primary">
+<p class="text-sm font-bold text-primary">0{i+1} / {tool.service}</p><h2 class="my-4 text-2xl font-bold">{tool.title}</h2><p class="mb-6">{tool.intro}</p><span class="font-bold">Start this tool →</span></a>)}
+</div><p class="mt-10 text-sm">Estimates are illustrative. Assessments use your answers and do not independently verify technical performance, search rankings, or sales outcomes.</p>
+</section>
+</PageLayout>
