@@ -68,11 +68,19 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       },
     ]}
   >
-    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
+    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between items-center']}>
       <a class="flex items-center" href={getHomePermalink()}>
         <Logo />
       </a>
-      <div class="flex items-center md:hidden">
+      <div class="flex items-center gap-2 md:hidden">
+        <a
+          href="tel:+16028344239"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs tracking-wide shadow-md transition-all hover:scale-105 active:scale-95"
+          aria-label="Call (602) 834-4239"
+        >
+          <span class="text-sm">📞</span>
+          <span>Call Now</span>
+        </a>
         <ToggleMenu />
       </div>
     </div>
@@ -128,6 +136,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             </li>
           ))
         }
+        <li class="md:hidden mt-4 w-full px-4">
+          <a
+            href="tel:+16028344239"
+            class="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base shadow-lg transition-all"
+            aria-label="Call (602) 834-4239"
+          >
+            <span>📞</span>
+            <span>Call (602) 834-4239</span>
+          </a>
+        </li>
       </ul>
     </nav>
     <div
@@ -150,9 +168,17 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
+        <a
+          href="tel:+16028344239"
+          class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md hover:shadow-emerald-500/30 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+          aria-label="Call (602) 834-4239"
+        >
+          <span>📞</span>
+          <span>(602) 834-4239</span>
+        </a>
         {
           actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4 flex items-center">
+            <span class="ml-2 rtl:ml-0 rtl:mr-2 flex items-center">
               {actions.map((btnProps) => (
                 <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
               ))}

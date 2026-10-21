@@ -16,7 +16,19 @@ const metadata = {
   <HeroText
     tagline="Get In Touch"
     title="Contact the ZiaFlow Team"
-    subtitle="Ready to transform your business? Schedule a free consultation to discuss your challenges, goals, and how we can help you achieve measurable results."
+    subtitle="Ready to transform your business? Call us directly for immediate assistance or send us your project details below."
+    callToAction={{
+      variant: 'primary',
+      text: '📞 Call Now: (602) 834-4239',
+      href: 'tel:+16028344239',
+      classes: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+    }}
+    callToAction2={{
+      variant: 'secondary',
+      text: 'Book Consultation',
+      href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      icon: 'tabler:calendar',
+    }}
   />
 
   <ContactUs
@@ -100,8 +112,14 @@ const metadata = {
       },
       {
         title: 'Phone',
-        description: 'Available for current clients and project inquiries',
-        icon: 'tabler:phone',
+        description: 'Direct line for new inquiries and support: (602) 834-4239',
+        icon: 'tabler:phone-call',
+        callToAction: {
+          text: '📞 Call (602) 834-4239',
+          href: 'tel:+16028344239',
+          variant: 'primary',
+          class: 'inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md transition-all',
+        },
       },
       {
         title: 'Location',

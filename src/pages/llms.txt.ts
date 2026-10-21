@@ -68,7 +68,7 @@ ${posts.map((p) => `- [${p.data.title}](https://ziaflow.com/blog/${p.id}): ${p.d
 
 ## Contact & Location
 - Address: 2822 E Greenway Rd Suite 10 B, Phoenix, AZ 85032
-- Phone: +1-480-819-2929
+- Phone: +1-602-834-4239
 - Email: info@ziaflow.com
   `.trim();
 

@@ -174,8 +174,16 @@ const metadata = {
 
   <CallToAction
     title="Ready to engineer your growth?"
-    subtitle="Book a transparent technical consultation. No sales pressure, just a roadmap to automation."
+    subtitle="Book a transparent technical consultation or call us immediately. No sales pressure, just a roadmap to automation."
     actions={[
+      {
+        variant: 'primary',
+        text: '📞 Call Now: (602) 834-4239',
+        href: 'tel:+16028344239',
+        classes: {
+          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+        },
+      },
       {
         variant: 'primary',
         text: 'Book Tech Consult',
@@ -227,8 +235,17 @@ const metadata = {
   <Features3
     title="Contact ZiaFlow"
     subtitle="Choose the method that works best for you"
-    columns={3}
+    columns={4}
     items={[
+      {
+        title: 'Call Us Now',
+        icon: 'tabler:phone-call',
+        callToAction: {
+          text: '📞 (602) 834-4239',
+          href: 'tel:+16028344239',
+          variant: 'link',
+        },
+      },
       {
         title: 'Email',
         icon: 'tabler:mail',
@@ -371,6 +388,25 @@ const metadata = {
                 w.gtag('event', 'click', {
                   event_category: 'CTA',
                   event_label: 'book_consult',
+                  event_id: eventId,
+                });
+              }
+            }
+
+            // Track phone call link clicks
+            if (href.indexOf('tel:') !== -1) {
+              const eventId = 'ev_call_' + Date.now();
+              w.dataLayer = w.dataLayer || [];
+              w.dataLayer.push({
+                event: 'cta_click',
+                cta: 'call_now',
+                href: href,
+                event_id: eventId,
+              });
+              if (typeof w.gtag === 'function') {
+                w.gtag('event', 'click', {
+                  event_category: 'CTA',
+                  event_label: 'call_now',
                   event_id: eventId,
                 });
               }
