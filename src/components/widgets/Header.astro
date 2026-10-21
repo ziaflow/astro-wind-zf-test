@@ -168,17 +168,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
-        <a
-          href="tel:+16028344239"
-          class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md hover:shadow-emerald-500/30 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
-          aria-label="Call (602) 834-4239"
-        >
-          <span>📞</span>
-          <span>(602) 834-4239</span>
-        </a>
         {
           actions?.length ? (
-            <span class="ml-2 rtl:ml-0 rtl:mr-2 flex items-center">
+            <span class="ml-4 rtl:ml-0 rtl:mr-4 flex items-center">
               {actions.map((btnProps) => (
                 <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
               ))}
