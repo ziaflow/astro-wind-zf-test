@@ -5,7 +5,10 @@ import { checkRateLimit } from '~/lib/growth-tools/rate-limit';
 import { getTool, assess, estimate, stackSummary, VERSION } from '~/lib/growth-tools/engine.mjs';
 
 export const prerender = false;
-const json = (body: unknown, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
+const json = (body: unknown, status = 200) => {
+  if (status >= 400) console.warn(JSON.stringify({ scope: 'growth_intake', status, error: (body as { error?: string }).error }));
+  return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
+};
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   // Do not reuse /api/contact: that endpoint can send emails and campaign events.
   const origin = request.headers.get('origin');
@@ -144,7 +147,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     });
     // Only a newly persisted request may send a receipt. Replays never resend.
     if (error?.code === '23505') return json({ ok: true, status: 'pending_internal_review', duplicate: true });
-    if (error) return json({ ok: false, error: 'intake_unavailable' }, 503);
+    if (error) {
+      console.warn(JSON.stringify({ scope: 'growth_intake', event: 'database_rejected', code: error.code }));
+      return json({ ok: false, error: 'intake_unavailable' }, 503);
+    }
     const formId = 'growth_tool:' + tool.slug;
     const pagePath = '/growth-tools/' + tool.slug;
     const { error: logError } = await supabase.from('communications_log').upsert(
