@@ -177,21 +177,12 @@ async function upsertToSupabase(rows) {
 async function main() {
   console.log('Fetching Microsoft Clarity insights...');
   
-  // 1-day (trailing 24h: 2026-10-15 / 2026-10-16)
+  // 1-day (trailing 24h)
   const data1 = await fetchClarity(1);
   const metrics1 = extractMetrics(data1);
 
-  // 3-day (trailing 72h window)
-  const data3 = await fetchClarity(3);
-  const metrics3 = extractMetrics(data3);
-
-  // Compute 2026-10-16 date string (local/UTC)
+  // Compute date string (local/UTC)
   const today = new Date().toISOString().split('T')[0];
-  
-  // Compute previous date (2026-10-15) by diffing cumulative 3-day and 1-day
-  const dPrev = new Date();
-  dPrev.setDate(dPrev.getDate() - 1);
-  const yesterday = dPrev.toISOString().split('T')[0];
 
   const rowsToUpsert = [
     {

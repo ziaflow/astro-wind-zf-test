@@ -8,6 +8,7 @@ interface Link {
   href?: string;
   ariaLabel?: string;
   icon?: string;
+  svg?: string;
 }
 
 interface Links {
@@ -35,6 +36,16 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
           <a class="inline-block font-bold text-xl text-white hover:text-primary transition" href={getHomePermalink()}>{SITE?.name}</a>
+        </div>
+        <div class="mb-3">
+          <a
+            href="tel:+16028344239"
+            class="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition"
+            aria-label="Call (602) 834-4239"
+          >
+            <span>📞</span>
+            <span>(602) 834-4239</span>
+          </a>
         </div>
         <div class="text-sm text-slate-400 flex gap-1">
           {
@@ -78,14 +89,17 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
       {
         socialLinks?.length ? (
           <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+            {socialLinks.map(({ ariaLabel, href, text, icon, svg }) => (
               <li>
                 <a
                   class="text-slate-400 hover:text-white hover:bg-slate-800/80 focus:outline-none focus:ring-4 focus:ring-slate-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
                   aria-label={ariaLabel}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {icon && <Icon name={icon} class="w-5 h-5" />}
+                  {svg && <Fragment set:html={svg} />}
                   <Fragment set:html={text} />
                 </a>
               </li>

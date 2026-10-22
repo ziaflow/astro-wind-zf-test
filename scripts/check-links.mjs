@@ -6,12 +6,14 @@ async function checkLinks() {
   console.log('🔍 Scanning for broken links in ./dist...');
 
   const result = await checker.check({
-    path: 'dist', // Scan the build output directory
+    path: 'dist/client/index.html', // Scan the build output directory starting at client index
     recurse: true, // Scan subdirectories
     linksToSkip: [
       'https://www.linkedin.com/company/ziaflow', // External links that often 999/429 deny bots
       'https://www.facebook.com/ZiaFlowAZ',
       'https://www.instagram.com/ziaflowaz',
+      'https://www.yelp.com',
+      'https://superhuman.com',
       'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       'https://maps.google.com',
       'https://ziaflow.com', // Skip self-referential absolute links during build check

@@ -47,7 +47,6 @@ export async function runAutonomousDiagnostics() {
 
   for (const row of rows) {
     const page = row.page_path;
-    const signal = row.agent_health_signal || '';
 
     // Check 1: User Friction (Dead / Rage clicks from Clarity)
     const deadClicks = row.clarity_dead_clicks || 0;
