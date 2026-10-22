@@ -114,7 +114,329 @@ export const tools = [
         2,
         1,
         'Create a tool inventory before purchasing or removing software.',
-        'Compare c…2749 tokens truncated…te,
+        'Compare card statements and account owners.',
+      ],
+      [
+        'source',
+        'Core customer data has one agreed source of truth',
+        3,
+        2,
+        'Choose the authoritative system and define sync direction.',
+        'Trace one customer across your CRM, billing, and email tools.',
+      ],
+      [
+        'duplicates',
+        'Duplicate capabilities are reviewed before renewals',
+        2,
+        1,
+        'Review overlapping functions and usage before cancellation.',
+        'Compare enabled features, actual usage, and contract terms.',
+      ],
+      [
+        'handoffs',
+        'Important handoffs avoid manual copy and paste',
+        3,
+        2,
+        'Map a single high-volume handoff for a small integration pilot.',
+        'Follow an inquiry from intake to invoice and count re-entry.',
+      ],
+      [
+        'monitoring',
+        'Failed integrations alert an accountable person',
+        3,
+        2,
+        'Add failure alerts, retries, and a manual recovery procedure.',
+        'Trigger a safe test failure and confirm the alert.',
+      ],
+      [
+        'identity',
+        'Staff use individual accounts and appropriate permissions',
+        3,
+        2,
+        'Remove shared logins and review access during offboarding.',
+        'Inspect account roles and your offboarding checklist.',
+      ],
+      [
+        'export',
+        'Critical data can be exported and restored',
+        3,
+        2,
+        'Test exports and document a recovery procedure.',
+        'Restore a small sample into a safe test location.',
+      ],
+      [
+        'costs',
+        'Automation decisions include maintenance and exception handling',
+        2,
+        2,
+        'Include software, support, and human review in the business case.',
+        'Compare estimated effort with the last three months of incidents.',
+      ],
+    ],
+  },
+  {
+    slug: 'local-visibility-check',
+    title: 'Local visibility check',
+    service: 'Local SEO',
+    intro: 'Review the business information and local proof customers rely on.',
+    cta: 'Request a local visibility review',
+    kind: 'local',
+    questions: [
+      [
+        'profile',
+        'You manage a verified Google Business Profile, if eligible',
+        3,
+        2,
+        'Confirm eligibility and ownership; do not create an ineligible location.',
+        'Open Google Business Profile and inspect verification status.',
+      ],
+      [
+        'category',
+        'Your primary category describes the core business accurately',
+        3,
+        1,
+        'Review your primary category against the actual core service.',
+        'Compare the profile category with your main offering.',
+      ],
+      [
+        'details',
+        'Name, contact details, hours, and website are accurate',
+        3,
+        1,
+        'Correct public details and special hours.',
+        'Compare your website, Google profile, and major directories.',
+      ],
+      [
+        'servicearea',
+        'Address visibility or service area matches how you operate',
+        2,
+        1,
+        'Review location and service-area settings for accuracy.',
+        'Do not publish a home address solely to pass a checklist.',
+      ],
+      [
+        'reviews',
+        'You request honest reviews without incentives or review gating',
+        3,
+        2,
+        'Create a consistent, neutral review request process.',
+        'Check the language and who receives review requests.',
+      ],
+      [
+        'responses',
+        'Recent reviews receive useful, professional responses',
+        2,
+        1,
+        'Assign review monitoring and response ownership.',
+        'Read your most recent reviews and replies.',
+      ],
+      [
+        'pages',
+        'Your site explains genuine services and locations served',
+        2,
+        2,
+        'Improve useful service and location information without doorway pages.',
+        'Look for accurate examples, coverage, and contact information.',
+      ],
+      [
+        'tracking',
+        'Calls, directions, and website inquiries are measured',
+        2,
+        2,
+        'Set up reliable local conversion measurement.',
+        'Check Business Profile performance and inquiry source records.',
+      ],
+    ],
+  },
+  {
+    slug: 'website-conversion-checklist',
+    title: 'Website conversion checklist',
+    service: 'Conversion and UX improvements',
+    intro: "Review the path from a visitor's first impression to a useful inquiry.",
+    cta: 'Request a conversion review',
+    kind: 'assessment',
+    questions: [
+      [
+        'message',
+        'The first screen explains who you help and the outcome',
+        3,
+        1,
+        'Rewrite the opening message around audience, service, and benefit.',
+        'Ask someone unfamiliar with the business to describe it.',
+      ],
+      [
+        'action',
+        'Each key page has a clear primary next step',
+        3,
+        1,
+        'Give each page one clear primary call to action.',
+        'Inspect your main service page on a phone.',
+      ],
+      [
+        'proof',
+        'Claims have relevant, permissioned customer proof',
+        3,
+        2,
+        'Add specific examples, approved testimonials, or case studies.',
+        'Match each major claim to evidence you can substantiate.',
+      ],
+      [
+        'forms',
+        'Forms ask only for information needed at this stage',
+        3,
+        1,
+        'Remove unnecessary required fields and explain what happens next.',
+        'Complete your form using a phone.',
+      ],
+      [
+        'errors',
+        'Fields have visible labels and helpful error messages',
+        3,
+        2,
+        'Add visible labels, keyboard access, and actionable errors.',
+        'Try keyboard-only completion and invalid inputs.',
+      ],
+      [
+        'delivery',
+        'Test submissions reach the intended person reliably',
+        3,
+        2,
+        'Verify database persistence and notification delivery.',
+        'Submit a marked test inquiry and follow it end to end.',
+      ],
+      [
+        'mobile',
+        'Text, navigation, and buttons work comfortably on mobile',
+        2,
+        2,
+        'Fix the most disruptive mobile interaction first.',
+        'Check a narrow screen, zoom, menus, and tap targets.',
+      ],
+      [
+        'speed',
+        'You assess loading and interaction using measured data',
+        2,
+        2,
+        'Review real-user performance and prioritize the largest bottleneck.',
+        'Use Search Console or PageSpeed Insights; do not infer speed from appearance.',
+      ],
+      [
+        'expectations',
+        'Visitors understand scope, pricing approach, and response expectations',
+        2,
+        1,
+        'Explain the buying process and what happens after inquiry.',
+        'Read the service and contact pages as a new prospect.',
+      ],
+      [
+        'funnel',
+        'You track starts, submissions, qualified inquiries, and meetings',
+        2,
+        2,
+        'Measure the complete inquiry funnel before claiming conversion gains.',
+        'Compare form events with actual received inquiries.',
+      ],
+    ],
+  },
+];
+export function getTool(slug) {
+  return tools.find((t) => t.slug === slug);
+}
+export function assess(slug, answers = {}) {
+  const tool = getTool(slug);
+  if (!tool || tool.kind === 'estimate') throw new Error('Invalid assessment');
+  let earned = 0,
+    possible = 0,
+    answered = 0,
+    assessed = 0;
+  const gaps = [],
+    unknown = [];
+  for (const [id, label, weight, effort, fix, evidence] of tool.questions) {
+    const value = answers[id];
+    if (value === undefined || value === '') {
+      unknown.push({ id, label, evidence });
+      continue;
+    }
+    if (!['yes', 'partly', 'no', 'unknown', 'na'].includes(value)) throw new Error('Invalid answer');
+    answered++;
+    if (value === 'unknown') {
+      unknown.push({ id, label, evidence });
+      continue;
+    }
+    if (value === 'na') continue;
+    assessed++;
+    const fraction = value === 'yes' ? 1 : value === 'partly' ? 0.5 : 0;
+    earned += weight * fraction;
+    possible += weight;
+    if (fraction < 1) gaps.push({ id, label, fix, evidence, priority: (weight * (1 - fraction)) / effort });
+  }
+  gaps.sort((a, b) => b.priority - a.priority);
+  return {
+    version: VERSION,
+    tool: slug,
+    evidenceStatus: 'self_reported',
+    score: possible ? Math.round((100 * earned) / possible) : null,
+    answered,
+    total: tool.questions.length,
+    assessed,
+    coverage: Math.round((100 * assessed) / tool.questions.length),
+    complete: answered === tool.questions.length,
+    priorities: gaps.slice(0, 3),
+    unknown,
+  };
+}
+export const estimateDefaults = {
+  pages: 5,
+  integrations: 0,
+  languages: 1,
+  content: 'ready',
+  commerce: false,
+  migration: false,
+  rate: 100,
+};
+export function estimate(input) {
+  const x = { ...estimateDefaults, ...input };
+  for (const [key, min, max] of [
+    ['pages', 1, 100],
+    ['integrations', 0, 20],
+    ['languages', 1, 10],
+    ['rate', 25, 300],
+  ]) {
+    if (typeof x[key] !== 'number' || !Number.isFinite(x[key]) || x[key] < min || x[key] > max)
+      throw new Error('Invalid ' + key);
+    if (key !== 'rate' && !Number.isInteger(x[key])) throw new Error('Use whole numbers for ' + key);
+  }
+  if (
+    !['ready', 'editing', 'writing'].includes(x.content) ||
+    typeof x.commerce !== 'boolean' ||
+    typeof x.migration !== 'boolean'
+  )
+    throw new Error('Invalid options');
+  const breakdown = [
+    { label: 'Discovery, information architecture, and project coordination', hours: 16 },
+    { label: 'Design system and responsive foundations', hours: 20 },
+    { label: 'Page implementation', hours: x.pages * 4 },
+    { label: 'Integration configuration', hours: x.integrations * 10 },
+    { label: 'Additional language implementation', hours: (x.languages - 1) * x.pages * 1.5 },
+    { label: 'Content support', hours: x.pages * { ready: 0, editing: 1.5, writing: 3 }[x.content] },
+    { label: 'Commerce setup allowance', hours: x.commerce ? 24 : 0 },
+    { label: 'Migration and redirect allowance', hours: x.migration ? 12 : 0 },
+  ];
+  const base = breakdown.reduce((n, r) => n + r.hours, 0);
+  breakdown.push({ label: 'Quality assurance and launch', hours: Math.ceil(base * 0.2) });
+  const hours = breakdown.reduce((n, r) => n + r.hours, 0);
+  const low = Math.round(hours * x.rate),
+    high = Math.round(low * 1.35);
+  return {
+    version: VERSION,
+    tool: 'website-project-estimator',
+    currency: 'USD',
+    hours,
+    low,
+    high,
+    weeksLow: Math.ceil(hours / 25),
+    weeksHigh: Math.ceil(hours / 20) + 2,
+    rate: x.rate,
     breakdown,
     exclusions: [
       'Hosting, subscriptions, taxes, advertising, legal review, custom applications, and ongoing maintenance.',
