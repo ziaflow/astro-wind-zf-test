@@ -1,4 +1,4 @@
-import type { QueryParams } from 'sanity';
+export type QueryParams = Record<string, string | number | boolean | string[] | number[]>;
 import { sanityClient } from 'sanity:client';
 
 const visualEditingEnabled = import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
