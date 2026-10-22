@@ -8,7 +8,6 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
-import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -26,22 +25,9 @@ const metadata = {
     title: 'ZiaFlow | Custom Software & AI Automation Agents',
     description:
       'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. Call (602) 834-4239 to engineer your growth solutions with ZiaFlow.',
-    images: [
-      {
-        url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
-        width: 1200,
-        height: 628,
-        alt: 'ZiaFlow Digital Growth Partner',
-      },
-    ],
   },
   extend: {
     meta: [
-      {
-        property: 'og:logo',
-        content:
-          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/ziaflow_chip_blue.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL3ppYWZsb3dfY2hpcF9ibHVlLnBuZyIsImlhdCI6MTc2NTk1MzE4NSwiZXhwIjoxODkyMDk3MTg1fQ.o89O7epzXcp0ji-a81MFQJZJimZEqr6cc_N8NkGMZZ0',
-      },
       {
         name: 'twitter:card',
         content: 'summary_large_image',
@@ -54,11 +40,6 @@ const metadata = {
         name: 'twitter:title',
         content: 'ZiaFlow | Custom Software & AI Automation Agents',
       },
-      {
-        name: 'twitter:image',
-        content:
-          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
-      },
     ],
   },
 };
@@ -68,52 +49,6 @@ const metadata = {
   <LocalBusinessSchema />
 
   <StructuralGridHero />
-
-  <Brands
-    title="Tech Stack & Partners"
-    subtitle="Built on enterprise-grade infrastructure"
-    icons={[]}
-    images={[
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
-        alt: 'AWS',
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
-        alt: 'Azure',
-      },
-      {
-        src: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
-        alt: 'OpenAI',
-      },
-    ]}
-  />
-
-  <Content
-    isReversed
-    title="AI Voice Automation"
-    subtitle="Reduce reception workload with AI that answers phones, books appointments, and syncs records."
-    items={[
-      {
-        title: '24/7 Availability',
-        description: 'Never miss a patient call. Our AI handles intake, scheduling, and FAQs around the clock.',
-      },
-      {
-        title: 'HIPAA Compliant',
-        description: 'Secure, private, and fully compliant voice infrastructure for medical and dental practices.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'AI Voice Automation',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Automate Your <span class="text-primary">Front Desk</span>
-      </h3>
-    </Fragment>
-  </Content>
 
   <ZoltServiceMatrix />
 
