@@ -2,7 +2,6 @@
 import Layout from '~/layouts/Layout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Footer from '~/components/widgets/Footer.astro';
-import AskAIButton from '~/components/common/AIFloatingMenu.astro';
 import ConversionActions from '~/components/common/ConversionActions.astro';
 
 import { headerData, footerData } from '~/navigation';
@@ -26,6 +25,5 @@ const { metadata } = Astro.props;
   <slot name="footer">
     <Footer {...footerData} />
   </slot>
-  <AskAIButton variant="float" />
   <ConversionActions />
 </Layout>
