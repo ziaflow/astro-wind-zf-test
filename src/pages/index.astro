@@ -1,5 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import Header from '~/components/widgets/Header.astro';
+import { headerData } from '~/navigation';
 import StructuralGridHero from '~/components/widgets/StructuralGridHero.astro';
 import ZoltServiceMatrix from '~/components/widgets/ZoltServiceMatrix.astro';
 import Features3 from '~/components/widgets/Features3.astro';
@@ -46,6 +48,8 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <Header slot="header" {...headerData} isSticky isDark />
+  <div id="ziaflow-home" class="dark">
   <LocalBusinessSchema />
 
   <StructuralGridHero />
@@ -384,4 +388,74 @@ const metadata = {
       }
     })();
   </script>
+  </div>
 </Layout>
+
+<style is:global>
+  body:has(#ziaflow-home),
+  body:has(#ziaflow-home) .dark {
+    --aw-color-bg-page: #1a1a1a;
+    --aw-color-bg-page-dark: #1a1a1a;
+    --aw-color-text-heading: #ffffff;
+    --aw-color-text-default: #ededed;
+    --aw-color-text-muted: #c4c4c4;
+    --aw-color-accent: #d76a76;
+    background-color: #1a1a1a;
+    color: #ededed;
+    color-scheme: dark;
+  }
+
+  #ziaflow-home,
+  #ziaflow-home > section,
+  body:has(#ziaflow-home) header,
+  body:has(#ziaflow-home) footer {
+    background: #1a1a1a;
+    color: #ededed;
+  }
+
+  body:has(#ziaflow-home) footer > [aria-hidden='true'] {
+    background: #1a1a1a;
+  }
+
+  #ziaflow-home :is(.bg-white, .bg-default, .bg-page) {
+    background-color: #1a1a1a;
+  }
+
+  #ziaflow-home div[class*='rounded'][class*='shadow'],
+  #ziaflow-home div[class*='rounded'][class*='border'] {
+    background: #242424;
+    border-color: #484848;
+  }
+
+  #ziaflow-home :is(h1, h2, h3, h4) {
+    color: #ffffff;
+  }
+
+  #ziaflow-home :is(.text-muted, .text-slate-400, .text-gray-400) {
+    color: #c4c4c4;
+  }
+
+  body:has(#ziaflow-home) :is(a, button)[class*='bg-emerald'],
+  #ziaflow-home :is(a, button)[class*='bg-[#3F9B93]'] {
+    background: #a22a36;
+    border-color: #a22a36;
+    color: #ffffff;
+    box-shadow: none;
+  }
+
+  #ziaflow-home [class*='text-[#3f9b93]'],
+  #ziaflow-home [class*='text-[#3F9B93]'],
+  body:has(#ziaflow-home) footer a[class*='text-emerald'] {
+    color: #ee9ca5;
+  }
+
+  #ziaflow-home .digital-gradient-text {
+    background-image: linear-gradient(90deg, #ffffff, #ee9ca5);
+  }
+
+  body:has(#ziaflow-home) :is(a, button):focus-visible {
+    outline: 2px solid #ee9ca5;
+    outline-offset: 4px;
+  }
+</style>
+
