@@ -12,7 +12,15 @@ const json = (body: unknown, status = 200) => {
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   // Do not reuse /api/contact: that endpoint can send emails and campaign events.
   const origin = request.headers.get('origin');
-  if (!origin || origin !== new URL(request.url).origin) return json({ ok: false, error: 'origin' }, 403);
+  const allowedOrigins = new Set([new URL(request.url).origin]);
+  // Vercel may normalize the request URL behind its proxy. Trust only this deployment's
+  // platform-provided hosts, never an arbitrary forwarded host supplied by a visitor.
+  if (process.env.VERCEL === '1') {
+    for (const host of [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]) {
+      if (host && /^[a-z0-9.-]+$/i.test(host)) allowedOrigins.add('https://' + host);
+    }
+  }
+  if (!origin || !allowedOrigins.has(origin)) return json({ ok: false, error: 'origin' }, 403);
   if (!request.headers.get('content-type')?.startsWith('application/json'))
     return json({ ok: false, error: 'content_type' }, 415);
   if (Number(request.headers.get('content-length') || 0) > 32768) return json({ ok: false, error: 'too_large' }, 413);
