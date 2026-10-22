@@ -64,27 +64,26 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
   }
   <div class="mt-2">
     <header>
-      <div class="mb-1">
-        <span class="text-sm">
-          <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+      <div class="mb-2 flex flex-wrap items-center gap-2">
+        {
+          post.category && (
+            <a
+              class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white transition-colors duration-200"
+              href={getPermalink(post.category.slug, 'category')}
+            >
+              {post.category.title}
+            </a>
+          )
+        }
+        <span class="text-xs text-muted dark:text-slate-400 flex items-center gap-1">
+          <Icon name="tabler:calendar" class="w-3.5 h-3.5 inline-block -mt-0.5" />
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {
             post.author && (
               <>
-                {' '}
-                · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+                <span>·</span>
+                <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5" />
                 <span>{post.author.replaceAll('-', ' ')}</span>
-              </>
-            )
-          }
-          {
-            post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
               </>
             )
           }

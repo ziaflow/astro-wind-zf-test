@@ -15,46 +15,43 @@ export const keywordOpportunityType = defineType({
       name: 'sourcePlatform',
       title: 'Source Platform',
       type: 'string',
+      initialValue: 'gsc',
       options: {
         list: [
           {title: 'Google Search Console', value: 'gsc'},
-          {title: 'Bing / Copilot AI Citations', value: 'bing_copilot'},
-          {title: 'Google Analytics 4', value: 'ga4'},
+          {title: 'Google Sheets Export', value: 'sheets'},
+          {title: 'Supabase Data Pipeline', value: 'supabase'},
           {title: 'Manual Research', value: 'manual'},
         ],
       },
-      initialValue: 'gsc',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'landingPage',
-      title: 'Current Ranking URL / Landing Page',
+      title: 'Ranking Landing Page / URL',
       type: 'url',
-      description: 'The specific URL on ziaflow.com currently receiving these impressions.',
     }),
     defineField({
       name: 'impressions',
-      title: 'Reported Impressions',
+      title: 'Impressions',
       type: 'number',
       initialValue: 0,
     }),
     defineField({
       name: 'clicks',
-      title: 'Reported Clicks',
+      title: 'Clicks',
       type: 'number',
       initialValue: 0,
     }),
     defineField({
       name: 'averagePosition',
-      title: 'Search Console Average Position',
+      title: 'Average Position',
       type: 'number',
-      description: 'Average position across impressions (not a fixed rank).',
     }),
     defineField({
       name: 'ctr',
       title: 'Click-Through Rate (%)',
       type: 'number',
-      initialValue: 0,
+      description: 'CTR as a percentage (e.g. 5.2 for 5.2%)',
     }),
     defineField({
       name: 'reportDateRange',
@@ -63,23 +60,35 @@ export const keywordOpportunityType = defineType({
       description: 'e.g., 2026-07-12 to 2026-10-11',
     }),
     defineField({
-      name: 'targetCluster',
-      title: 'Assigned Topic Cluster',
-      type: 'reference',
-      to: [{type: 'topicCluster'}],
-    }),
-    defineField({
       name: 'recommendedAction',
       title: 'Recommended Action',
       type: 'string',
       options: {
         list: [
-          {title: 'Optimize Existing Service Page', value: 'optimize_service'},
-          {title: 'Publish Supporting Guide', value: 'supporting_guide'},
-          {title: 'Investigate Intent (Hold)', value: 'hold_investigate'},
+          {title: 'Optimize Existing Service Page', value: 'optimize_existing'},
+          {title: 'Publish Supporting Guide / Blog Post', value: 'publish_guide'},
+          {title: 'Investigate Search Intent', value: 'hold_investigate'},
+          {title: 'Target in PPC / Local Service Ads', value: 'target_ads'},
         ],
       },
-      initialValue: 'hold_investigate',
+      initialValue: 'publish_guide',
     }),
   ],
+  preview: {
+    select: {
+      title: 'query',
+      impressions: 'impressions',
+      clicks: 'clicks',
+      position: 'averagePosition',
+      action: 'recommendedAction',
+    },
+    prepare({title, impressions, clicks, position, action}) {
+      const pos = position ? `Pos: ${Number(position).toFixed(1)}` : ''
+      const stats = `Clicks: ${clicks || 0} | Imp: ${impressions || 0} | ${pos}`
+      return {
+        title,
+        subtitle: `${action ? `[${action}] ` : ''}${stats}`,
+      }
+    },
+  },
 })

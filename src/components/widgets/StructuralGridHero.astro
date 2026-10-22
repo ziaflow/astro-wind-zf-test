@@ -1,0 +1,162 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import techImage from '~/assets/images/ai-tech-network.jpg';
+
+export interface Props {
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  subtitle = 'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and enterprise-grade web applications. We build the technology that scales Arizona businesses.',
+} = Astro.props;
+---
+
+<div class="relative bg-[#1A1A1A] text-white overflow-hidden py-4 sm:py-8">
+  <!-- Outer Structural Grid Wrapper -->
+  <div class="relative border-2 border-[#A22A36] rounded-xl mx-3 sm:mx-6 md:mx-8 lg:mx-12 p-6 sm:p-10 md:p-12 lg:p-16 overflow-hidden shadow-2xl">
+    
+    <!-- Architectural Grid Lines -->
+    <div class="hidden md:block absolute top-0 bottom-0 left-[6%] w-[2px] bg-[#A22A36]/40 pointer-events-none" aria-hidden="true"></div>
+    <div class="hidden md:block absolute top-0 bottom-0 right-[6%] w-[2px] bg-[#A22A36]/40 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-[80px] left-0 right-0 h-[2px] bg-[#A22A36]/30 pointer-events-none" aria-hidden="true"></div>
+
+    <!-- Background Subtle Ambient Glow -->
+    <div class="pointer-events-none absolute -top-24 right-1/4 w-[480px] h-[360px] bg-[#3F9B93]/15 blur-[120px] rounded-full -z-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute bottom-10 left-10 w-[360px] h-[280px] bg-[#A22A36]/15 blur-[100px] rounded-full -z-0" aria-hidden="true"></div>
+
+    <!-- Content Layer -->
+    <div class="relative z-10">
+      
+      <!-- Top Brand Sub-Bar -->
+      <div class="flex items-center justify-between pb-6 mb-8 border-b border-[#A22A36]/30">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center bg-[#A22A36] text-white px-2.5 py-1 rounded-md text-xs font-bold tracking-widest uppercase shadow-sm">
+            ZF
+          </span>
+          <span class="text-xl font-bold tracking-wider text-white">ZIAFLOW<span class="text-xs text-gray-400 font-normal">.co</span></span>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3F9B93] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#3F9B93]"></span>
+          </span>
+          <span class="text-xs uppercase tracking-widest text-[#3F9B93] font-semibold">Systems Operational</span>
+        </div>
+      </div>
+
+      <!-- Main 2-Column Hero Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left md:pl-6 border-l-0 md:border-l-2 border-transparent md:border-[#A22A36]/40 py-2">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6 text-white font-heading">
+            Engineering the Future |<br />
+            <span class="text-white">Custom Software & AI Solutions</span><br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-[#3F9B93]">That Power Growth</span>
+          </h1>
+
+          <p class="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-xl leading-relaxed">
+            {subtitle}
+          </p>
+
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3.5 w-full sm:w-auto">
+            <a
+              href="tel:+16028344239"
+              class="inline-flex justify-center items-center px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base transition-all duration-200 shadow-[0_0_25px_rgba(16,185,129,0.45)] hover:scale-[1.03] active:scale-95 cursor-pointer"
+              aria-label="Call (602) 834-4239"
+            >
+              <span class="mr-2 text-lg">📞</span>
+              <span>(602) 834-4239</span>
+            </a>
+
+            <a
+              href="https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex justify-center items-center px-7 py-3.5 rounded-full border border-[#A22A36] bg-transparent text-white font-medium hover:bg-[#7C1E29] hover:border-[#7C1E29] transition-all duration-200 shadow-md hover:scale-[1.02] cursor-pointer"
+            >
+              <Icon name="tabler:calendar" class="w-5 h-5 mr-2 inline-block" />
+              <span>Book Tech Consult</span>
+            </a>
+
+            <a
+              href="#form"
+              class="inline-flex justify-center items-center px-7 py-3.5 rounded-full bg-[#3F9B93] text-white font-medium hover:opacity-90 transition-all duration-200 shadow-[0_0_20px_rgba(63,155,147,0.35)] hover:scale-[1.02] cursor-pointer"
+            >
+              <Icon name="tabler:robot" class="w-5 h-5 mr-2 inline-block" />
+              <span>Automate Front Desk</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Content: Generated 3D Isometric Tech Asset -->
+        <div class="lg:col-span-5 relative flex justify-center items-center mt-6 lg:mt-0">
+          <div class="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden border border-[#A22A36]/30 bg-[#1A1A1A]/80 shadow-2xl p-2 group hover:border-[#3F9B93]/50 transition-colors duration-300">
+            <div class="absolute inset-0 bg-[#3F9B93]/10 blur-[80px] rounded-full pointer-events-none"></div>
+            <Image
+              src={techImage}
+              alt="ZiaFlow AI & Custom Software Architecture"
+              class="relative z-10 w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Lower Highlight Cards (Trusted Leaders & Success Story) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-12 pt-8 border-t border-[#A22A36]/30">
+        
+        <!-- Trusted Card -->
+        <div class="border-2 border-[#A22A36] bg-[#1f1f1f] rounded-3xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#3F9B93]/80 transition-colors">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#A22A36]/10 rounded-bl-[100px] pointer-events-none"></div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 uppercase tracking-wider text-white">
+            Trusted by Tech Leaders
+          </h3>
+          <p class="text-gray-300 leading-relaxed mb-6">
+            Trusted at global enterprises, healthcare tech firms, and fast-growing Arizona startups to deploy mission-critical solutions.
+          </p>
+          <a href="/services/software" class="text-[#3F9B93] font-semibold hover:underline inline-flex items-center text-sm sm:text-base">
+            <span>View our solutions</span>
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+
+        <!-- Success Story Card -->
+        <div class="border-2 border-[#A22A36] bg-[#1f1f1f] rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+          <div class="absolute bottom-0 right-0 w-32 h-32 bg-[#3F9B93]/10 rounded-tl-[100px] pointer-events-none"></div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-4 uppercase tracking-wider text-white">
+            Success Story
+          </h3>
+
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full mr-4 border border-[#A22A36] bg-slate-800 flex items-center justify-center font-bold text-white text-sm">
+              KB
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-sm sm:text-base">K. B.</h4>
+              <p class="text-xs sm:text-sm text-gray-400">COO, Healthcare Partners</p>
+            </div>
+          </div>
+
+          <p class="text-gray-300 italic mb-6 text-sm sm:text-base">
+            "Case Study: Secure automated patient intake by 40%, 150% Lead Growth verified on modern web workflows."
+          </p>
+
+          <a
+            href="/services/automation"
+            class="block w-full text-center py-2.5 border border-[#A22A36] text-[#3F9B93] rounded-full hover:bg-[#A22A36]/20 transition-colors font-medium text-sm sm:text-base"
+          >
+            Read Case Study
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

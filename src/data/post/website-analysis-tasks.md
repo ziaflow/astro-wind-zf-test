@@ -3,7 +3,7 @@ publishDate: 2025-11-25T00:00:00Z
 title: 'How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors'
 excerpt: 'A practical guide on how to find pricing sections, extract icons, and generate color schemes from images using browser developer tools and online resources.'
 image: '~/assets/images/blog/website-analysis-tasks.png'
-category: 'Tutorial'
+category: 'Conversion Optimization'
 tags:
   - website analysis
   - pricing

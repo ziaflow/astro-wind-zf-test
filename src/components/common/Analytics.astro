@@ -1,11 +1,11 @@
 ---
-// prettier-ignore
 import { ANALYTICS } from 'astrowind:config';
 
-// Analytics IDs sourced from Astro.env with fallback to config.yaml
+// prettier-ignore
+// Analytics IDs are sourced from env or astrowind config
 const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID || ANALYTICS?.vendors?.clarity?.id;
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || ANALYTICS?.vendors?.googleAnalytics?.id;
-const gtmId = import.meta.env.PUBLIC_GTM_ID || ANALYTICS?.vendors?.googleTagManager?.id;
+const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.googleTagManager?.id;
 ---
 
 <script is:inline define:vars={{ gaId }}>
@@ -100,14 +100,4 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID || ANALYTICS?.vendors?.googleTagMana
       </>
     )
   }
-
-  <!-- Customer.io Web Analytics (CDP Snippet) -->
-  <script is:inline>
-    /* Vendor bootstrap is kept verbatim; its queue uses var and arguments. */
-    /* eslint-disable no-var, prefer-rest-params, @typescript-eslint/no-unused-expressions */
-    !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
-      analytics.load("8a4aa793f9846f20ff1e");
-      analytics.page();
-    }}();
-  </script>
 </>

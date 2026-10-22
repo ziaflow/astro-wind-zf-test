@@ -1,370 +1,139 @@
 import type { APIRoute } from 'astro';
-import { supabase } from '~/lib/supabase';
-import { resend } from '~/lib/resend';
 import nodemailer from 'nodemailer';
-import { getLeadNotificationHtml, getCustomerReceiptHtml } from '~/lib/forms/emailTemplates';
-import { logCommunication } from '~/lib/communications';
-import { identifyUser, trackEvent } from '~/lib/customerio';
-import { checkRateLimit } from '~/lib/forms/rate-limit';
+import { supabase } from '~/lib/supabase';
 
 export const prerender = false;
 
-interface ContactPayload {
-  website?: string;
-  form_type?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
-  company_name?: string;
-  service_needed?: string;
-  comments?: string;
-  page_submitted_from?: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_term?: string;
-  utm_content?: string;
-  referrer?: string;
-}
-
-export const GET: APIRoute = async () => {
-  return new Response(JSON.stringify({ ok: true, status: 'healthy', timestamp: new Date().toISOString() }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
-
-export const POST: APIRoute = async ({ request, clientAddress }) => {
-  const rate = checkRateLimit(clientAddress || 'unknown');
-  if (!rate.allowed) {
-    return Response.json(
-      { ok: false, error: 'rate_limited' },
-      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } }
-    );
+export const POST: APIRoute = async ({ request }) => {
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ message: 'Method not allowed' }), { status: 405 });
   }
+
   try {
-    let data: ContactPayload = {};
-    const rawBody = await request.text();
-    if (rawBody) {
-      try {
-        const parsed = JSON.parse(rawBody);
-        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('Invalid payload');
-        data = parsed as ContactPayload;
-      } catch {
-        return new Response(JSON.stringify({ ok: false, error: 'invalid_json' }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-    }
-    // Reject malformed fields before invoking any lead or messaging provider.
-    const limits: Record<string, number> = {
-      name: 120,
-      email: 254,
-      phone: 40,
-      company_name: 200,
-      service_needed: 200,
-      comments: 4000,
-      form_type: 80,
-      page_submitted_from: 500,
-      referrer: 2000,
-      website: 500,
-      utm_source: 200,
-      utm_medium: 200,
-      utm_campaign: 200,
-      utm_term: 200,
-      utm_content: 200,
-    };
-    for (const [key, limit] of Object.entries(limits)) {
-      const value = data[key as keyof ContactPayload];
-      if (value !== undefined && (typeof value !== 'string' || value.length > limit)) {
-        return Response.json({ ok: false, error: 'invalid_fields' }, { status: 400 });
-      }
-    }
-    if (data.website?.trim()) return Response.json({ ok: false, error: 'invalid_request' }, { status: 400 });
-    data.name = data.name?.trim();
-    data.email = data.email?.trim().toLowerCase();
-    const {
-      form_type,
-      name,
-      email,
-      phone,
-      company_name,
-      service_needed,
-      comments,
-      page_submitted_from,
-      utm_source,
-      utm_medium,
-      utm_campaign,
-      utm_term,
-      utm_content,
-      referrer,
-    } = data;
+    let data: Record<string, unknown> = {};
+    const contentType = request.headers.get('content-type') || '';
 
-    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ ok: false, error: 'bad_request' }), { status: 400 });
+    if (contentType.includes('application/json')) {
+      const text = await request.text();
+      data = text ? JSON.parse(text) : {};
+    } else if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
+      const formData = await request.formData();
+      data = Object.fromEntries(formData.entries());
+    } else {
+      const text = await request.text();
+      data = text ? JSON.parse(text) : {};
     }
 
-    // 1. Persist record into Supabase leads table
-    let insertedLeadId: string | number | null = null;
+    const name = typeof data.name === 'string' ? data.name : undefined;
+    const email = typeof data.email === 'string' ? data.email : '';
+    const message = typeof data.message === 'string' ? data.message : '';
+    const phone = typeof data.phone === 'string' ? data.phone : undefined;
+    const company = typeof data.company === 'string' ? data.company : undefined;
+    const serviceInterest = typeof data.service_interest === 'string' ? data.service_interest : (typeof data.service_needed === 'string' ? data.service_needed : undefined);
+    const otherData = { ...data };
+    delete otherData.name;
+    delete otherData.email;
+    delete otherData.message;
+    delete otherData.phone;
+    delete otherData.company;
+    delete otherData.service_interest;
+
+    // Validate required fields
+    if (!email) {
+      return new Response(JSON.stringify({ message: 'Email is required' }), { status: 400 });
+    }
+
+    // Save to Supabase leads and contact_submissions if configured
     if (supabase) {
+      // 1. Write to leads table
       try {
-        const { data: dbData, error: dbError } = await supabase
-          .from('leads')
-          .insert([
-            {
-              name,
-              email,
-              phone: phone || null,
-              company_name: company_name || null,
-              service_needed: service_needed || null,
-              comments: comments || null,
-              page_submitted_from: page_submitted_from || 'Unknown',
-              status: 'new',
-            },
-          ])
-          .select('id')
-          .single();
-
-        if (dbError) {
-          console.error('Supabase Insert Error:', dbError);
-        } else if (dbData?.id) {
-          insertedLeadId = dbData.id;
-        }
-      } catch (dbEx) {
-        console.error('Supabase Client Error:', dbEx);
+        await supabase.from('leads').insert([
+          {
+            name: name || null,
+            email,
+            phone: phone || null,
+            company_name: company || otherData.company_name || null,
+            service_needed: serviceInterest || otherData.service_needed || 'Contact Inquiry',
+            comments: message || null,
+            page_submitted_from: otherData.page || '/contact',
+            status: 'new',
+            score: 10,
+          },
+        ]);
+      } catch (leadErr) {
+        console.warn('Supabase leads insert note:', leadErr);
       }
-    }
 
-    // 1.5 Customer.io Behavioral Event & Lead Profile Upsert
-    try {
-      // Stable identity: lowercase email ensures repeat inquiries don't create disconnected profiles
-      const customerId = email.toLowerCase().trim();
-      await identifyUser(customerId, {
-        email: customerId,
-        lead_id: insertedLeadId || undefined,
-        updated_at: Math.floor(Date.now() / 1000),
-        company_name: company_name || undefined,
-        phone: phone || undefined,
-        service_needed: service_needed || undefined,
-        lead_tier: 'tier_1_diagnostic',
-        pipeline_status: 'inbox',
-
-        utm_source: utm_source || undefined,
-        utm_medium: utm_medium || undefined,
-        utm_campaign: utm_campaign || undefined,
-        utm_term: utm_term || undefined,
-        utm_content: utm_content || undefined,
-        landing_page: page_submitted_from || '/contact',
-        referrer: referrer || undefined,
-      });
-
-      // Emits 'contact_form_submitted' to match Customer.io draft automation trigger
-      await trackEvent(customerId, 'contact_form_submitted', {
-        form_type: form_type || 'contact_form',
-        company_name: company_name || '',
-        service_needed: service_needed || '',
-        page_submitted_from: page_submitted_from || '/contact',
-        utm_source: utm_source || '',
-        utm_medium: utm_medium || '',
-        utm_campaign: utm_campaign || '',
-        utm_term: utm_term || '',
-        utm_content: utm_content || '',
-      });
-
-      // Secondary event for legacy compatibility
-      await trackEvent(customerId, 'lead_intake_submitted', {
-        form_type: form_type || 'contact_form',
-        company_name: company_name || '',
-        service_needed: service_needed || '',
-        page_submitted_from: page_submitted_from || '/contact',
-      });
-    } catch (cioErr) {
-      console.warn('Customer.io server event non-blocking error:', cioErr);
-    }
-
-    // Log inbound form message to unified communications log
-    await logCommunication({
-      channel: 'form',
-      direction: 'inbound',
-      status: 'received',
-      subject: form_type === 'contact_us' ? 'Contact Us Inquiry' : 'Quick Lead Submission',
-      sender: `${name} <${email}>`,
-      recipient: 'ZiaFlow',
-      content: comments || `Service needed: ${service_needed || 'Not specified'}`,
-      pagePath: page_submitted_from || '/contact',
-      formId: form_type || 'contact-form',
-      metadata: { phone, company_name, service_needed, utm_source, utm_campaign, utm_term, utm_content },
-    });
-
-    // 2.5 Forward to Google Apps Script / Google Sheets
-    const gasUrl = import.meta.env.GOOGLE_SCRIPT_URL || process.env.GOOGLE_SCRIPT_URL;
-    const gasSecret = import.meta.env.GOOGLE_SCRIPT_SECRET || process.env.GOOGLE_SCRIPT_SECRET;
-    let sheetSaved = false;
-    if (gasUrl && gasSecret) {
+      // 2. Write to contact_submissions table
       try {
-        const sheetResponse = await fetch(gasUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            secret: gasSecret,
-            submissionId: crypto.randomUUID(),
-            tab: form_type === 'contact_us' ? 'Contact Page' : 'Home Page',
-            columns: [
-              { header: 'Full Name', value: name },
-              { header: 'Email', value: email },
-              { header: 'Phone', value: phone || '' },
-              { header: 'Company', value: company_name || '' },
-              {
-                header: 'Inquiry Type',
-                value: service_needed || (form_type === 'contact_us' ? 'Detailed Inquiry' : 'Quick Lead'),
-              },
-              { header: 'Message', value: comments || '' },
-              { header: 'Page', value: page_submitted_from || '/' },
-            ],
-          }),
-          signal: AbortSignal.timeout(20_000),
-        });
-        const sheetResult = await sheetResponse.json().catch(() => null);
-        sheetSaved = sheetResponse.ok && sheetResult?.ok === true;
-        if (!sheetSaved) console.warn('Google Apps Script rejected the submission');
-      } catch (gasErr) {
-        console.error('Google Apps Script forward error:', gasErr);
+        await supabase.from('contact_submissions').insert([
+          {
+            form_id: 'contact-form',
+            payload: { name, email, phone, company, message },
+            metadata: otherData,
+            status: 'new',
+          },
+        ]);
+      } catch (subErr) {
+        console.warn('Supabase contact_submissions insert note:', subErr);
       }
     }
 
-    // 3. Email Notification via Resend (Primary) or SMTP (Fallback)
-    const toEmail =
-      import.meta.env.CONTACT_NOTIFICATION_EMAIL ||
-      process.env.CONTACT_NOTIFICATION_EMAIL ||
-      import.meta.env.SMTP_TO ||
-      process.env.SMTP_TO ||
-      'info@ziaflow.com';
-    const fallbackFromEmail = import.meta.env.SMTP_FROM || process.env.SMTP_FROM || 'info@ziaflow.com';
-    const subjectPrefix = form_type === 'contact_us' ? 'Detailed Inquiry (Contact Us)' : 'Quick Lead';
-    const subjectTitle = `${subjectPrefix}: ${company_name ? company_name + ' (' + name + ')' : name}`;
-
-    const leadData = {
-      form_type,
-      name: name || 'Valued Contact',
-      email: email || '',
-      phone: phone || '',
-      company_name: company_name || '',
-      service_needed: service_needed || '',
-      page_submitted_from: page_submitted_from || '/contact',
-      comments: comments || '',
-    };
-
-    let emailSentViaResend = false;
-    let emailSentViaSmtp = false;
-
-    if (resend) {
+    if (import.meta.env.SMTP_HOST && import.meta.env.SMTP_USER) {
       try {
-        // Send team lead alert
-        const notification = await resend.emails.send({
-          from: 'ZiaFlow Leads <onboarding@resend.dev>',
-          to: toEmail,
-          replyTo: email || undefined,
-          subject: subjectTitle,
-          html: getLeadNotificationHtml(leadData),
+        const transporter = nodemailer.createTransport({
+          host: import.meta.env.SMTP_HOST,
+          port: Number(import.meta.env.SMTP_PORT || 587),
+          secure: import.meta.env.SMTP_SECURE === 'true',
+          auth: {
+            user: import.meta.env.SMTP_USER,
+            pass: import.meta.env.SMTP_PASS,
+          },
         });
-        if (notification.error || !notification.data?.id) throw new Error('Lead notification was not accepted');
-        emailSentViaResend = true;
 
-        // Send user confirmation receipt if valid email
-        if (email && email.includes('@')) {
-          await resend.emails.send({
-            from: 'ZiaFlow <onboarding@resend.dev>',
-            to: email,
-            replyTo: 'info@ziaflow.com',
-            subject: 'We have received your project details — ZiaFlow',
-            html: getCustomerReceiptHtml(leadData),
-          });
-        }
-
-        // Trigger Resend Automations Event
-        try {
-          await resend.events.send({
-            event: 'form.submitted',
-            email: email,
-            payload: {
-              name,
-              company: company_name || '',
-              service: service_needed || 'General Inquiry',
-              page: page_submitted_from || '/contact',
-            },
-          });
-        } catch (eventErr) {
-          console.warn('Resend event trigger non-blocking error:', eventErr);
-        }
-
-        // Log outbound email alert to communications log
-        await logCommunication({
-          channel: 'email',
-          direction: 'outbound',
-          status: 'sent',
-          subject: subjectTitle,
-          sender: 'onboarding@resend.dev',
-          recipient: toEmail,
-          pagePath: page_submitted_from || '/contact',
-          formId: form_type || 'contact-form',
-          metadata: { provider: 'resend', customerReceiptSent: Boolean(email && email.includes('@')) },
+        await transporter.sendMail({
+          from: import.meta.env.SMTP_FROM || import.meta.env.SMTP_USER || 'no-reply@ziaflow.com',
+          to: import.meta.env.SMTP_TO || 'info@ziaflow.com',
+          replyTo: email,
+          subject: `Contact Form Submission from ${name || email}`,
+          text: `
+            Name: ${name}
+            Email: ${email}
+            Phone: ${phone || 'N/A'}
+            
+            Message:
+            ${message}
+            
+            --
+            Additional Info:
+            ${JSON.stringify(otherData, null, 2)}
+          `,
+          html: `
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
+            <br/>
+            <p><strong>Message:</strong></p>
+            <p>${(message || '').replace(/\n/g, '<br/>')}</p>
+            <hr/>
+            <p><small>Additional Info:<br/>${JSON.stringify(otherData, null, 2)}</small></p>
+          `,
         });
-      } catch (resendErr) {
-        console.error('Resend API Email Error:', resendErr);
+      } catch (mailErr) {
+        console.warn('SMTP Notification note (lead saved to database):', mailErr);
       }
     }
 
-    // Fallback to SMTP if Resend is not configured or failed
-    if (!emailSentViaResend) {
-      const smtpUser = import.meta.env.SMTP_USER || process.env.SMTP_USER;
-      const smtpPass = import.meta.env.SMTP_PASS || process.env.SMTP_PASS;
-      if (smtpUser && smtpPass) {
-        try {
-          const transporter = nodemailer.createTransport({
-            host: import.meta.env.SMTP_HOST || process.env.SMTP_HOST || 'smtp-mail.outlook.com',
-            port: Number(import.meta.env.SMTP_PORT || process.env.SMTP_PORT || 587),
-            secure: (import.meta.env.SMTP_SECURE || process.env.SMTP_SECURE) === 'true',
-            auth: { user: smtpUser, pass: smtpPass },
-          });
-
-          const notification = await transporter.sendMail({
-            from: `"ZiaFlow System" <${fallbackFromEmail}>`,
-            to: toEmail,
-            replyTo: email || 'info@ziaflow.com',
-            subject: subjectTitle,
-            html: getLeadNotificationHtml(leadData),
-          });
-          emailSentViaSmtp = Array.isArray(notification.accepted) && notification.accepted.length > 0;
-
-          if (email && email.includes('@')) {
-            await transporter.sendMail({
-              from: `"ZiaFlow" <${fallbackFromEmail}>`,
-              to: email,
-              replyTo: 'info@ziaflow.com',
-              subject: 'We have received your project details — ZiaFlow',
-              html: getCustomerReceiptHtml(leadData),
-            });
-          }
-        } catch (smtpErr) {
-          console.error('SMTP Email Error:', smtpErr);
-        }
-      }
-    }
-
-    // A receipt failure must not reject an inquiry already saved or sent to the team.
-    if (!insertedLeadId && !sheetSaved && !emailSentViaResend && !emailSentViaSmtp) {
-      return Response.json({ ok: false, error: 'intake_unavailable' }, { status: 503 });
-    }
-    return new Response(JSON.stringify({ ok: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(JSON.stringify({ message: 'Message sent successfully' }), { status: 200 });
   } catch (error) {
-    console.error('Contact Form Endpoint Error:', error);
-    return new Response(JSON.stringify({ ok: false, error: 'server_error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error('Contact Form Error:', error);
+    return new Response(
+      JSON.stringify({
+        message: 'Failed to send message',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      }),
+      { status: 500 }
+    );
   }
 };

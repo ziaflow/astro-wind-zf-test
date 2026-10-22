@@ -9,12 +9,12 @@ const encodedQuery = encodeURIComponent(query);
 const platforms = [
   {
     name: 'ChatGPT',
-    href: `https://chat.openai.com/?q=${encodedQuery}`,
+    href: `https://chatgpt.com/?q=${encodedQuery}`,
     logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-chat-gpt.webp',
   },
   {
     name: 'Gemini',
-    href: `https://www.google.com/search?udm=50&q=${encodedQuery}`,
+    href: `https://gemini.google.com/app?prompt=${encodedQuery}`,
     logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-gemini.webp',
   },
   {
@@ -270,9 +270,12 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initAISummaryMenus() {
     const roots = document.querySelectorAll('[data-ai-summary-root]');
     roots.forEach((root) => {
+      if (root.dataset.aiInitialized === 'true') return;
+      root.dataset.aiInitialized = 'true';
+
       const toggle = root.querySelector('[data-ai-toggle]');
       const menu = root.querySelector('[data-ai-menu]');
       const closeBtn = root.querySelector('.ai-summary-close');
@@ -312,5 +315,12 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
         });
       });
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAISummaryMenus);
+  } else {
+    initAISummaryMenus();
+  }
+  document.addEventListener('astro:after-swap', initAISummaryMenus);
 </script>

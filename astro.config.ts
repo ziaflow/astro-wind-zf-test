@@ -1,8 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { defineConfig, envField } from 'astro/config';
-import vercel from '@astrojs/vercel';
+import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
@@ -17,6 +16,7 @@ import type { AstroIntegration } from 'astro';
 import sanity from '@sanity/astro';
 import astrowind from './vendor/integration';
 
+import node from '@astrojs/node';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -27,34 +27,12 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   site: 'https://ziaflow.com',
-  // Pages stay prerendered; routes that export `prerender = false` (form endpoints, Astro Actions)
-  // are deployed as Vercel serverless functions.
   output: 'static',
-  adapter: vercel(),
-
-  // Native Astro 5 prefetching for instant page transitions on hover
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover',
-  },
-
-  // CSRF protection for on-demand routes. NEVER set this to false — fix local test origins instead
-  // (use the same host the dev server prints, e.g. http://localhost:4321, not 127.0.0.1).
-  security: {
-    checkOrigin: true,
-  },
-
-  // Server-only secrets, read at runtime. Never prefix these with PUBLIC_.
-  // Optional so static builds succeed; runtime will validate or fallback gracefully.
-  env: {
-    schema: {
-      SUPABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
-      SUPABASE_SERVICE_ROLE_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
-      RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
-      CONTACT_NOTIFICATION_EMAIL: envField.string({ context: 'server', access: 'secret', optional: true }),
-      GOOGLE_SCRIPT_URL: envField.string({ context: 'server', access: 'secret', optional: true, url: true }),
-      GOOGLE_SCRIPT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
-    },
+  adapter: node({
+    mode: 'standalone',
+  }),
+  experimental: {
+    parallelPrerender: true,
   },
 
   integrations: [
@@ -62,24 +40,10 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap({
-      filter: (page) => {
-        const url = new URL(page);
-        const pathname = url.pathname;
-        const keep =
-          !pathname.startsWith('/admin') &&
-          !pathname.startsWith('/staging') &&
-          !pathname.startsWith('/form-test') &&
-          !pathname.startsWith('/forms/') &&
-          pathname !== '/ziaflow' &&
-          pathname !== '/ziaflow/' &&
-          !pathname.startsWith('/tag/') &&
-          !pathname.startsWith('/homes/') &&
-          !pathname.startsWith('/landing/') &&
-          !pathname.startsWith('/posts');
-        return keep;
-      },
+      filter: (page) => !page.includes('/admin') && !page.includes('/staging'),
       changefreq: 'weekly',
       priority: 0.7,
+      lastmod: new Date(),
     }),
     robotsTxt(),
     mdx(),
@@ -137,11 +101,10 @@ export default defineConfig({
   // REDIRECTS: Managing Link Equity (301s)
   redirects: {
     '/old-service-page': '/services/web-development',
-    '/ziaflow': '/about',
   },
 
   image: {
-    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co', 'upload.wikimedia.org', 'cdn.sanity.io'],
+    domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],
   },
 
   markdown: {
@@ -154,9 +117,6 @@ export default defineConfig({
       alias: {
         '~': path.resolve(__dirname, './src'),
       },
-    },
-    ssr: {
-      external: ['@supabase/supabase-js', '@supabase/postgrest-js'],
     },
   },
 });

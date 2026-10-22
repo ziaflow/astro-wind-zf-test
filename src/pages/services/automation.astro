@@ -6,15 +6,15 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 
 const metadata = {
-  title: 'Marketing Automation Phoenix & Arizona SMBs | ZiaFlow',
+  title: 'Business Automation Arizona | AI Agents & Workflow Systems — ZiaFlow',
   description:
-    'Connect website inquiries, CRM records, scheduling, and follow-up. Reduce repetitive handoffs with reliable workflow automation for Arizona service businesses.',
+    'Scale client intake, CRM workflows, and 24/7 lead qualification for Arizona service businesses. Eliminate manual bottlenecks. Book your free automation audit.',
 };
 
 const serviceData = {
-  name: 'Lead & Marketing Automation for Arizona SMBs',
+  name: 'Marketing Automation & AI',
   description:
-    'Connect website inquiries, CRM records, scheduling, and follow-up. Practical automation systems engineered for Arizona service businesses.',
+    'Deploy intelligent AI agents and workflow automation to nurture leads 24/7. Replace manual chaos with engineered efficiency.',
   url: 'https://ziaflow.com/services/automation',
   image: 'https://ziaflow.com/assets/images/automation-hero.jpg',
 };
@@ -24,13 +24,13 @@ const serviceData = {
   <ServiceSchema {...serviceData} />
 
   <Hero
-    tagline="Lead & Workflow Automation · Arizona"
-    title="Marketing Automation for Phoenix Service Businesses"
-    subtitle="Stop losing qualified inquiries to slow manual triage. We connect your website forms directly to your CRM, team notifications, and calendar scheduling—turning fragmented inquiries into dependable intake workflows."
+    tagline="Automation & AI"
+    title="The Automation Layer"
+    subtitle="Stop losing revenue to slow response times. We deploy intelligent AI agents and workflow automation to nurture leads 24/7, ensuring no opportunity slips through the cracks. From instant SMS booking confirmations to backend CRM routing, we replace manual chaos with engineered efficiency. This isn't just about saving time; it's about building an intake system that scales without adding headcount."
     actions={[
       {
         variant: 'primary',
-        text: 'Discuss Your Automation Project',
+        text: 'Book Consultation',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
@@ -38,31 +38,32 @@ const serviceData = {
   />
 
   <Features
-    title="Core Intake & Workflow Touchpoints"
+    title="Key Benefits"
     items={[
       {
-        title: 'Instant Lead Notification & Intake',
-        description:
-          'Immediately route web inquiries via transactional notifications to staff while acknowledging customer inquiries.',
-        icon: 'tabler:bell-ringing',
+        title: '24/7 Lead Nurturing',
+        description: 'Never miss a lead with always-on AI agents that respond instantly.',
+        icon: 'tabler:clock-24',
       },
       {
-        title: 'CRM & Pipeline Synchronization',
-        description:
-          'Automatically populate customer records into Supabase, HubSpot, or custom CRMs with zero manual copy-pasting.',
+        title: 'Workflow Automation',
+        description: 'Streamline your operations by automating repetitive tasks and data entry.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'CRM Integration',
+        description: 'Seamlessly sync data between your marketing channels and CRM.',
         icon: 'tabler:database-import',
       },
       {
-        title: 'Automated Calendar Scheduling',
+        title: 'Executive Productivity & Email Systems',
         description:
-          'Route qualified prospects straight into Microsoft Bookings or Outlook calendars with pre-qualification answers attached.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: 'Human Review & Exception Handling',
-        description:
-          'Automation handles notifications and routing, while custom quotes and high-touch scoping remain strictly human-led.',
-        icon: 'tabler:user-check',
+          'As a Superhuman Go Partner, we deploy ultra-fast AI email workflows and executive intake automation for high-growth teams.',
+        icon: 'tabler:mail-fast',
+        callToAction: {
+          text: 'Superhuman Partner Directory',
+          href: 'https://superhuman.com/find-a-partner/partner/ziaflow',
+        },
       },
     ]}
   />

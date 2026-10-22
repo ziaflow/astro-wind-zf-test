@@ -100,134 +100,13 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   };
 };
 
-interface SanityPostItem {
-  _id: string;
-  title: string;
-  slug?: { current: string } | string;
-  publishedAt?: string;
-  _updatedAt?: string;
-  seoDescription?: string;
-  category?: string;
-  authorName?: string;
-  mainImageUrl?: string;
-  body?: unknown[];
-}
-
-const estimateReadingTime = (body: unknown[] = []): number => {
-  if (!Array.isArray(body)) return 3;
-  let wordCount = 0;
-  for (const block of body) {
-    if (typeof block === 'object' && block !== null && 'children' in block) {
-      const children = (block as { children?: Array<{ text?: string }> }).children;
-      if (Array.isArray(children)) {
-        for (const child of children) {
-          if (child?.text) {
-            wordCount += child.text.trim().split(/\s+/).filter(Boolean).length;
-          }
-        }
-      }
-    }
-  }
-  return Math.max(1, Math.ceil(wordCount / 200));
-};
-
-const getNormalizedSanityPost = async (sp: SanityPostItem): Promise<Post> => {
-  const rawSlug = typeof sp.slug === 'string' ? sp.slug : sp.slug?.current || sp._id;
-  const slug = cleanSlug(rawSlug);
-  const publishDate = sp.publishedAt ? new Date(sp.publishedAt) : new Date();
-  const updateDate = sp._updatedAt ? new Date(sp._updatedAt) : undefined;
-  const categoryTitle = sp.category || 'Insights';
-
-  const category = {
-    slug: cleanSlug(categoryTitle),
-    title: categoryTitle,
-  };
-
-  const permalink = await generatePermalink({
-    id: sp._id,
-    slug,
-    publishDate,
-    category: category.slug,
-  });
-
-  return {
-    id: sp._id,
-    slug,
-    permalink,
-    publishDate,
-    updateDate,
-    title: sp.title,
-    excerpt: sp.seoDescription || '',
-    image: sp.mainImageUrl || undefined,
-    category,
-    tags: [{ slug: cleanSlug(categoryTitle), title: categoryTitle }],
-    author: sp.authorName || 'ZiaFlow Team',
-    draft: false,
-    metadata: {
-      title: sp.title,
-      description: sp.seoDescription || '',
-    },
-    sanityBody: sp.body,
-    readingTime: estimateReadingTime(sp.body),
-  };
-};
-
-const loadSanityPosts = async (): Promise<Array<Post>> => {
-  try {
-    const { sanityClient } = await import('sanity:client');
-    const SANITY_POSTS_QUERY = `*[
-      _type == "post"
-      && defined(slug.current)
-      && !(_id in path("drafts.**"))
-      && publishedAt <= now()
-    ]|order(publishedAt desc){
-      _id,
-      title,
-      slug,
-      publishedAt,
-      _updatedAt,
-      seoDescription,
-      category,
-      "authorName": authors[0]->name,
-      "mainImageUrl": mainImage.asset->url,
-      body
-    }`;
-
-    const sanityRawPosts = await sanityClient.fetch<SanityPostItem[]>(SANITY_POSTS_QUERY);
-    if (!Array.isArray(sanityRawPosts)) return [];
-
-    const normalized = await Promise.all(sanityRawPosts.map(getNormalizedSanityPost));
-    return normalized;
-  } catch (err) {
-    console.warn('[Sanity Blog Sync] Could not fetch posts from Sanity client:', err);
-    return [];
-  }
-};
-
 const load = async function (): Promise<Array<Post>> {
-  const [localPostsEntries, sanityPosts] = await Promise.all([
-    getCollection('post').catch(() => [] as CollectionEntry<'post'>[]),
-    loadSanityPosts(),
-  ]);
+  const posts = await getCollection('post');
+  const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
 
-  const normalizedLocalPosts = await Promise.all(
-    (localPostsEntries as CollectionEntry<'post'>[]).map(async (post) => await getNormalizedPost(post))
-  );
-
-  const localActive = normalizedLocalPosts.filter((post) => !post.draft);
-
-  // Combine and deduplicate by slug (local Markdown takes precedence if slug collision)
-  const seenSlugs = new Set(localActive.map((p) => p.slug));
-  const combined = [...localActive];
-
-  for (const sPost of sanityPosts) {
-    if (!seenSlugs.has(sPost.slug)) {
-      seenSlugs.add(sPost.slug);
-      combined.push(sPost);
-    }
-  }
-
-  const results = combined.sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf());
+  const results = (await Promise.all(normalizedPosts))
+    .sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())
+    .filter((post) => !post.draft);
 
   return results;
 };

@@ -12,7 +12,7 @@ export async function logEvent(event: string, data: Record<string, unknown> = {}
     await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event, ...data, ts: new Date().toISOString() }),
+      body: JSON.stringify({ event, ...data, ts: new Date().toISOString() })
     });
   } catch {
     // Optionally log error to console or monitoring

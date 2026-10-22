@@ -12,8 +12,6 @@ import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
 import RelatedPosts from '~/components/blog/RelatedPosts.astro';
-import { PortableText } from 'astro-portabletext';
-import type { TypedObject } from 'astro-portabletext/types';
 
 export const prerender = true;
 
@@ -49,15 +47,7 @@ const metadata = merge(
 
 <Layout metadata={metadata}>
   <SinglePost post={{ ...post, image: image }} url={url}>
-    {
-      post.Content ? (
-        <post.Content />
-      ) : post.sanityBody && Array.isArray(post.sanityBody) ? (
-        <PortableText value={post.sanityBody as TypedObject[]} />
-      ) : (
-        <Fragment set:html={post.content || ''} />
-      )
-    }
+    {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
   </SinglePost>
   <ToBlogLink />
   <RelatedPosts post={post} />
