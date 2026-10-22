@@ -21,27 +21,26 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const CLARITY_TOKEN = process.env.CLARITY_API_TOKEN;
-const SUPABASE_URL = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
-
-if (!CLARITY_TOKEN) {
-  console.error('❌ Error: CLARITY_API_TOKEN not found in environment.');
-  process.exit(1);
-}
-
-if (!SUPABASE_URL || !SUPABASE_KEY) {
-  console.error('❌ Error: SUPABASE_URL or SUPABASE_KEY missing.');
-  process.exit(1);
-}
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
 /**
  * Fetch and extract metrics from Microsoft Clarity Export API
  * and sync directly to Supabase public.metrics_clarity_daily
  */
 export async function syncClarityToSupabase(days = 1) {
+  // Resolve credentials when called; importing an Astro route must never exit Node.
+  const token = process.env.CLARITY_API_TOKEN;
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
+  if (!token || !supabaseUrl || !supabaseKey) {
+    return {
+      success: false,
+      code: 'SYNC_NOT_CONFIGURED',
+      error: 'Clarity export or Supabase server credentials are missing.',
+    };
+  }
+  if (![1, 2, 3].includes(days)) {
+    return { success: false, code: 'INVALID_WINDOW', error: 'Clarity export supports 1, 2, or 3 days.' };
+  }
+  const supabase = createClient(supabaseUrl, supabaseKey, { auth: { persistSession: false } });
   console.log(`🔄 Fetching real-time insights from Microsoft Clarity (last ${days} day(s))...`);
   const url = `https://www.clarity.ms/export-data/api/v1/project-live-insights?numOfDays=${days}`;
 
@@ -50,7 +49,7 @@ export async function syncClarityToSupabase(days = 1) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${CLARITY_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
