@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
-import { supabase } from '~/lib/supabase';
 
 export const prerender = false;
 
@@ -51,43 +50,57 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ message: 'Email is required' }), { status: 400 });
     }
 
-    // Save to Supabase leads and contact_submissions if configured
-    if (supabase) {
-      // 1. Write to leads table
-      try {
-        await supabase.from('leads').insert([
-          {
-            name: name || null,
-            email,
-            phone: phone || null,
-            company_name: company || otherData.company_name || null,
-            service_needed: serviceInterest || otherData.service_needed || 'Contact Inquiry',
-            comments: message || null,
-            page_submitted_from: otherData.page || '/contact',
-            status: 'new',
-            score: 10,
-          },
-        ]);
-      } catch (leadErr) {
-        console.warn('Supabase leads insert note:', leadErr);
-      }
-
-      // 2. Write to contact_submissions table
-      try {
-        await supabase.from('contact_submissions').insert([
-          {
-            form_id: 'contact-form',
-            payload: { name, email, phone, company, message },
-            metadata: otherData,
-            status: 'new',
-          },
-        ]);
-      } catch (subErr) {
-        console.warn('Supabase contact_submissions insert note:', subErr);
-      }
+    const supabaseUrl = process.env.SUPABASE_URL || import.meta.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!supabaseUrl || !supabaseKey) {
+      return Response.json({ message: 'Contact intake is temporarily unavailable. Please call us.' }, { status: 503 });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 || message.length > 10000) {
+      return Response.json({ message: 'Please check your email and message.' }, { status: 400 });
+    }
+    const submittedId = data.submission_id;
+    const submissionId =
+      typeof submittedId === 'string' &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(submittedId)
+        ? submittedId
+        : crypto.randomUUID();
+    let sourcePage = '/contact';
+    try {
+      const sourceUrl = new URL(String(data.page_url || data.page || '/contact'), 'https://ziaflow.com');
+      if (['ziaflow.com', 'www.ziaflow.com'].includes(sourceUrl.hostname)) sourcePage = sourceUrl.pathname;
+    } catch {
+      // Keep the known contact route when an invalid source is supplied.
+    }
+    const isTest = Boolean(name?.startsWith('ZIAFLOW QA')) || process.env.VERCEL_ENV === 'preview';
+    const saved = await fetch(supabaseUrl.replace(/\/$/, '') + '/rest/v1/rpc/record_website_contact', {
+      method: 'POST',
+      headers: {
+        apikey: supabaseKey,
+        Authorization: 'Bearer ' + supabaseKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        p_id: submissionId,
+        p_payload: { name, email, phone, company, message, service_interest: serviceInterest },
+        p_metadata: {
+          source_page: sourcePage,
+          is_test: isTest,
+          utm_source: typeof data.utm_source === 'string' ? data.utm_source.slice(0, 200) : null,
+          utm_medium: typeof data.utm_medium === 'string' ? data.utm_medium.slice(0, 200) : null,
+          utm_campaign: typeof data.utm_campaign === 'string' ? data.utm_campaign.slice(0, 200) : null,
+        },
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!saved.ok) {
+      console.error('Contact persistence failed', { status: saved.status });
+      return Response.json(
+        { message: 'We could not save your inquiry. Please try again or call us.' },
+        { status: 502 }
+      );
     }
 
-    if (import.meta.env.SMTP_HOST && import.meta.env.SMTP_USER) {
+    if (!isTest && import.meta.env.SMTP_HOST && import.meta.env.SMTP_USER) {
       try {
         const transporter = nodemailer.createTransport({
           host: import.meta.env.SMTP_HOST,
@@ -133,7 +146,9 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    return new Response(JSON.stringify({ message: 'Message sent successfully' }), { status: 200 });
+    return new Response(JSON.stringify({ message: 'Message sent successfully', submission_id: submissionId }), {
+      status: 200,
+    });
   } catch (error) {
     console.error('Contact Form Error:', error);
     return new Response(
