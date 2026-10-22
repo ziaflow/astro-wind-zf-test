@@ -27,15 +27,23 @@ export interface Props {
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-slate-800 bg-[#070b19] text-slate-300 not-prose']}>
-  <div class="absolute inset-0 bg-gradient-to-b from-[#070b19] via-[#090e21] to-[#04060d] pointer-events-none" aria-hidden="true"></div>
+<footer
+  class:list={[{ dark: theme === 'dark' }, 'relative border-t border-slate-800 bg-[#070b19] text-slate-300 not-prose']}
+>
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-[#070b19] via-[#090e21] to-[#04060d] pointer-events-none"
+    aria-hidden="true"
+  >
+  </div>
   <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl text-white hover:text-primary transition" href={getHomePermalink()}>{SITE?.name}</a>
+          <a class="inline-block font-bold text-xl text-white hover:text-primary transition" href={getHomePermalink()}
+            >{SITE?.name}</a
+          >
         </div>
         <div class="mb-3">
           <a

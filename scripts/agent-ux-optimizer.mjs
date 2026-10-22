@@ -12,7 +12,11 @@ if (fs.existsSync(envPath)) {
     const parts = line.split('=');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      const val = parts.slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+      const val = parts
+        .slice(1)
+        .join('=')
+        .trim()
+        .replace(/^["']|["']$/g, '');
       if (key && !key.startsWith('#')) {
         env[key] = val;
       }
@@ -57,7 +61,8 @@ export async function runAutonomousDiagnostics() {
         severity: rageClicks > 0 ? 'HIGH' : 'MEDIUM',
         page,
         details: `${deadClicks} dead click(s), ${rageClicks} rage click(s) detected via Microsoft Clarity.`,
-        recommendation: 'Inspect CTA button dimensions, hover feedback, and link href targets in corresponding Astro component.'
+        recommendation:
+          'Inspect CTA button dimensions, hover feedback, and link href targets in corresponding Astro component.',
       });
     }
 
@@ -65,26 +70,27 @@ export async function runAutonomousDiagnostics() {
     const impressions = row.google_impressions || 0;
     const clicks = row.google_clicks || 0;
     const position = parseFloat(row.avg_google_position || '0');
-    if (impressions >= 150 && (clicks / impressions) < 0.08 && position <= 10) {
+    if (impressions >= 150 && clicks / impressions < 0.08 && position <= 10) {
       issues.push({
         type: 'SEO_CTR_OPPORTUNITY',
         severity: 'MEDIUM',
         page,
         details: `Ranking at position ${position.toFixed(1)} with ${impressions} impressions but low CTR (${((clicks / impressions) * 100).toFixed(2)}%).`,
-        recommendation: 'Optimize meta title and meta description in frontmatter to improve click-through intent.'
+        recommendation: 'Optimize meta title and meta description in frontmatter to improve click-through intent.',
       });
     }
 
     // Check 3: High Bounce / Low Engagement (GA4)
     const bounceRate = parseFloat(row.bounce_rate || '0');
     const avgTime = parseFloat(row.avg_engagement_time_sec || '0');
-    if (bounceRate > 0.30 && avgTime < 60) {
+    if (bounceRate > 0.3 && avgTime < 60) {
       issues.push({
         type: 'ENGAGEMENT_DROP',
         severity: 'HIGH',
         page,
         details: `High bounce rate (${(bounceRate * 100).toFixed(1)}%) and low dwell time (${avgTime.toFixed(0)}s).`,
-        recommendation: 'Enhance above-the-fold hero copy, add social proof badges, or introduce an interactive lead widget.'
+        recommendation:
+          'Enhance above-the-fold hero copy, add social proof badges, or introduce an interactive lead widget.',
       });
     }
   }
@@ -99,7 +105,7 @@ async function main() {
 }
 
 if (process.argv[1] && process.argv[1].endsWith('agent-ux-optimizer.mjs')) {
-  main().catch(err => {
+  main().catch((err) => {
     console.error('Diagnostic error:', err);
     process.exit(1);
   });

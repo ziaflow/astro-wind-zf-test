@@ -50,9 +50,10 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: typeof window !== 'undefined' && window.location.origin.includes('localhost')
-          ? 'http://localhost:4321'
-          : 'https://ziaflow.com',
+        origin:
+          typeof window !== 'undefined' && window.location.origin.includes('localhost')
+            ? 'http://localhost:4321'
+            : 'https://ziaflow.com',
         previewMode: {
           enable: '/api/preview',
         },
