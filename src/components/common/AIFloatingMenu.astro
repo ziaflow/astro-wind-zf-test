@@ -9,12 +9,12 @@ const encodedQuery = encodeURIComponent(query);
 const platforms = [
   {
     name: 'ChatGPT',
-    href: `https://chat.openai.com/?q=${encodedQuery}`,
+    href: `https://chatgpt.com/?q=${encodedQuery}`,
     logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-chat-gpt.webp',
   },
   {
     name: 'Gemini',
-    href: `https://www.google.com/search?udm=50&q=${encodedQuery}`,
+    href: `https://gemini.google.com/app`,
     logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-gemini.webp',
   },
   {
@@ -29,7 +29,7 @@ const platforms = [
   },
   {
     name: 'Grok',
-    href: `https://x.com/i/grok?text=${encodedQuery}`,
+    href: `https://grok.com/`,
     logo: 'https://www.singlegrain.com/wp-content/themes/singlegrain/assets/dist/images/redesign2024/ai-logos/small-grok.webp',
   },
 ];
@@ -49,6 +49,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
     data-ai-toggle
     aria-label="Ask AI about ZiaFlow"
     type="button"
+    aria-expanded="false"
   >
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -71,6 +72,12 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
         Ask AI about ZiaFlow
       </span>
       <button class="ai-summary-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="ai-prompt-help">
+      <p>If the question is not prefilled, copy it and paste it into your AI app.</p>
+      <button type="button" data-copy-ai-prompt data-prompt={query}>Copy question</button>
+      <p data-copy-status role="status" aria-live="polite"></p>
+      <textarea data-ai-prompt-text readonly aria-label="Question to ask AI" hidden>{query}</textarea>
     </div>
     <div class="ai-summary-menu-links">
       {
@@ -229,6 +236,21 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
     color: #111827;
   }
 
+  .ai-prompt-help {
+    padding: 12px 16px 0;
+    color: #374151;
+    font-size: 12px;
+  }
+  .ai-prompt-help button {
+    color: #a22a36;
+    text-decoration: underline;
+    padding: 6px 0;
+    cursor: pointer;
+  }
+  .ai-prompt-help textarea {
+    width: 100%;
+    color: #111827;
+  }
   .ai-summary-menu-links {
     padding: 12px;
   }
@@ -280,11 +302,35 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 
       if (!toggle || !menu) return;
 
-      const closeMenu = () => menu.classList.remove('active');
+      const closeMenu = () => {
+        menu.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+      root.querySelector('[data-copy-ai-prompt]')?.addEventListener('click', async (event) => {
+        const button = event.currentTarget;
+        const status = root.querySelector('[data-copy-status]');
+        try {
+          await navigator.clipboard.writeText(button.dataset.prompt);
+          status.textContent = 'Question copied. Open your AI app and paste it.';
+        } catch {
+          const text = root.querySelector('[data-ai-prompt-text]');
+          text.hidden = false;
+          text.focus();
+          text.select();
+          status.textContent = 'Select and copy the question below.';
+        }
+      });
+      root.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeMenu();
+          toggle.focus();
+        }
+      });
 
       toggle.addEventListener('click', (event) => {
         event.stopPropagation();
         menu.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', String(menu.classList.contains('active')));
       });
 
       closeBtn?.addEventListener('click', (event) => {
