@@ -27,25 +27,25 @@ export interface Props {
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Astro.props;
 ---
 
-<footer class="relative bg-[#1b5e57] text-white border-t border-[#2d7e75] not-prose">
-  <div class="absolute inset-0 bg-[#1b5e57] pointer-events-none" aria-hidden="true"></div>
+<footer class="relative bg-[#171717] text-white border-t border-[#404040] not-prose">
+  <div class="absolute inset-0 bg-[#171717] pointer-events-none" aria-hidden="true"></div>
   <div
     class="relative max-w-7xl mx-auto px-4 sm:px-6 text-white intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl text-white hover:text-teal-200 transition" href={getHomePermalink()}
+          <a class="inline-block font-bold text-xl text-white hover:text-red-200 transition" href={getHomePermalink()}
             >{SITE?.name}</a
           >
         </div>
-        <div class="text-sm text-teal-100/80 flex gap-1">
+        <div class="text-sm text-gray-200/80 flex gap-1">
           {
             secondaryLinks.map(({ text, href }, index) => (
               <>
                 {index !== 0 ? ' · ' : ''}
                 <a
-                  class="text-teal-100/80 hover:text-white hover:underline transition duration-150 ease-in-out"
+                  class="text-gray-200/80 hover:text-white hover:underline transition duration-150 ease-in-out"
                   href={href}
                   set:html={text}
                 />
@@ -61,7 +61,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
               {href ? (
                 <a
                   href={href}
-                  class="text-white hover:text-teal-200 hover:underline transition duration-150 ease-in-out"
+                  class="text-white hover:text-red-200 hover:underline transition duration-150 ease-in-out"
                 >
                   {title}
                 </a>
@@ -74,7 +74,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
                 {links.map(({ text, href, ariaLabel }) => (
                   <li class="mb-2">
                     <a
-                      class="text-teal-100/80 hover:text-white hover:underline transition duration-150 ease-in-out"
+                      class="text-gray-200/80 hover:text-white hover:underline transition duration-150 ease-in-out"
                       href={href}
                       aria-label={ariaLabel}
                     >
@@ -88,14 +88,14 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
         ))
       }
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-[#2d7e75]/50">
+    <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-[#404040]/50">
       {
         socialLinks?.length ? (
           <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
             {socialLinks.map(({ ariaLabel, href, text, icon }) => (
               <li>
                 <a
-                  class="text-teal-100 hover:text-white hover:bg-[#144742] focus:outline-none focus:ring-4 focus:ring-teal-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
+                  class="text-gray-200 hover:text-white hover:bg-[#262626] focus:outline-none focus:ring-4 focus:ring-red-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
                   aria-label={ariaLabel}
                   href={href}
                 >
@@ -110,7 +110,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
         )
       }
 
-      <div class="text-sm mr-4 text-teal-100/90">
+      <div class="text-sm mr-4 text-gray-200/90">
         <Fragment set:html={footNote} />
       </div>
     </div>
