@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '~/lib/supabase';
 import { sendReviewWelcome } from '~/lib/growth-tools/welcome.mjs';
-import { checkRateLimit } from '~/lib/forms/rate-limit';
+import { checkRateLimit } from '~/lib/growth-tools/rate-limit';
 import { getTool, assess, estimate, stackSummary, VERSION } from '~/lib/growth-tools/engine.mjs';
 
 export const prerender = false;
