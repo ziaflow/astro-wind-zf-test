@@ -2,16 +2,13 @@
 import Button from '~/components/ui/Button.astro';
 import type { Form as Props } from '~/types';
 
-const emailBackend = import.meta.env.EMAIL_BACKEND || (import.meta.env.SMTP_HOST ? 'nodemailer' : 'web3forms');
-const useNodemailer = emailBackend === 'nodemailer';
-
 const {
   inputs = [],
   textarea,
   disclaimer,
   button = 'Contact us',
   description = '',
-  action = useNodemailer ? '/api/contact' : 'https://api.web3forms.com/submit',
+  action = '/api/contact',
   method = 'POST',
   accessKey,
   redirect,
@@ -23,6 +20,7 @@ const {
   errorMessage = 'Something went wrong. Please try again.',
 } = Astro.props as Props;
 
+const usesWeb3Forms = action.startsWith('https://api.web3forms.com/');
 const resolvedAccessKey = accessKey || import.meta.env.WEB3FORMS_ACCESS_KEY || '';
 const idSuffix =
   typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -31,16 +29,16 @@ const idSuffix =
 const resolvedFormId = formId || `web3forms-form-${idSuffix}`;
 const resolvedResultId = resultId || `${resolvedFormId}-result`;
 
-if (!useNodemailer && !resolvedAccessKey) {
+if (usesWeb3Forms && !resolvedAccessKey) {
   console.warn('WEB3FORMS_ACCESS_KEY is not set. Web3Forms submissions will fail until it is configured.');
 }
 ---
 
 <form action={action} method={method} id={resolvedFormId} class="space-y-6">
-  {!useNodemailer && <input type="hidden" name="access_key" value={resolvedAccessKey} />}
-  {!useNodemailer && redirect && <input type="hidden" name="redirect" value={redirect} />}
-  {!useNodemailer && <input type="hidden" name="subject" value={subject} />}
-  {!useNodemailer && <input type="hidden" name="from_name" value={fromName} />}
+  {usesWeb3Forms && <input type="hidden" name="access_key" value={resolvedAccessKey} />}
+  {usesWeb3Forms && redirect && <input type="hidden" name="redirect" value={redirect} />}
+  {usesWeb3Forms && <input type="hidden" name="subject" value={subject} />}
+  {usesWeb3Forms && <input type="hidden" name="from_name" value={fromName} />}
   <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1" />
 
   {
@@ -150,12 +148,24 @@ if (!useNodemailer && !resolvedAccessKey) {
     const resultEl = document.getElementById(datasetResultId);
 
     if (form && resultEl) {
+      let submissionId = crypto.randomUUID();
+      let submitting = false;
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (submitting) return;
+        submitting = true;
         resultEl.textContent = 'Please wait...';
         resultEl.classList.remove('text-green-500', 'text-red-500');
 
         const formData = new FormData(form);
+        if (actionUrl === '/api/contact') {
+          formData.set('submission_id', submissionId);
+          formData.set('page_url', window.location.href);
+          const params = new URLSearchParams(window.location.search);
+          ['utm_source', 'utm_medium', 'utm_campaign'].forEach((key) => {
+            formData.set(key, params.get(key) || '');
+          });
+        }
         const payload = JSON.stringify(Object.fromEntries(formData.entries()));
 
         try {
@@ -181,7 +191,7 @@ if (!useNodemailer && !resolvedAccessKey) {
               const [firstName, ...restName] = String(userName).split(' ');
               const lastName = restName.join(' ');
 
-              if (window._cio && userEmail) {
+              if (window._cio && userEmail && !String(userName).startsWith('ZIAFLOW QA')) {
                 window._cio.identify({
                   id: userEmail,
                   email: userEmail,
@@ -204,6 +214,7 @@ if (!useNodemailer && !resolvedAccessKey) {
             }
 
             form.reset();
+            submissionId = crypto.randomUUID();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';
             resultEl.classList.add('text-red-500');
@@ -214,6 +225,7 @@ if (!useNodemailer && !resolvedAccessKey) {
           resultEl.classList.add('text-red-500');
         }
 
+        submitting = false;
         setTimeout(() => {
           resultEl.textContent = '';
         }, 5000);
