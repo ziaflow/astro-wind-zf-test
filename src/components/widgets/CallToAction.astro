@@ -53,11 +53,13 @@ const {
             </a>
           </div>
           {Array.isArray(actions) ? (
-            actions.filter((a) => a?.href !== 'tel:+16028344239').map((action) => (
-              <div class="flex w-full sm:w-auto">
-                <Button {...(action || {})} class="w-full sm:mb-0" />
-              </div>
-            ))
+            actions
+              .filter((a) => a?.href !== 'tel:+16028344239')
+              .map((action) => (
+                <div class="flex w-full sm:w-auto">
+                  <Button {...(action || {})} class="w-full sm:mb-0" />
+                </div>
+              ))
           ) : (
             <Fragment set:html={actions} />
           )}

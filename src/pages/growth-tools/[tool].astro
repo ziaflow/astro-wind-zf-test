@@ -1,10 +1,13 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
 import GrowthTool from '~/components/growth-tools/GrowthTool.astro';
-import {tools} from '~/lib/growth-tools/engine.mjs';
-export function getStaticPaths(){return tools.map(tool=>({params:{tool:tool.slug},props:{tool}}));}
-const {tool}=Astro.props;
+import { tools } from '~/lib/growth-tools/engine.mjs';
+export function getStaticPaths() {
+  return tools.map((tool) => ({ params: { tool: tool.slug }, props: { tool } }));
+}
+const { tool } = Astro.props;
 ---
-<PageLayout metadata={{title:tool.title+' | ZiaFlow',description:tool.intro}}>
+
+<PageLayout metadata={{ title: tool.title + ' | ZiaFlow', description: tool.intro }}>
   <GrowthTool slug={tool.slug} />
 </PageLayout>
