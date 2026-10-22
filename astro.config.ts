@@ -156,7 +156,8 @@ export default defineConfig({
       },
     },
     ssr: {
-      external: ['@supabase/supabase-js', '@supabase/postgrest-js'],
+      // Bundle Supabase's ESM packages so the deployed Node function does not load them as CommonJS.
+      noExternal: [/^@supabase\//],
     },
   },
 });
