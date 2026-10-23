@@ -12,7 +12,11 @@ if (fs.existsSync(envPath)) {
     const parts = line.split('=');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      const val = parts.slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+      const val = parts
+        .slice(1)
+        .join('=')
+        .trim()
+        .replace(/^["']|["']$/g, '');
       if (key && !key.startsWith('#')) {
         env[key] = val;
       }
@@ -60,7 +64,11 @@ export async function pushKeywordOpportunitiesToSanity(opportunities) {
       landingPage: item.landingPage || `https://ziaflow.com${item.page_path || ''}`,
       impressions: Number(item.impressions) || 0,
       clicks: Number(item.clicks) || 0,
-      averagePosition: item.averagePosition ? Number(item.averagePosition) : (item.position ? Number(item.position) : null),
+      averagePosition: item.averagePosition
+        ? Number(item.averagePosition)
+        : item.position
+          ? Number(item.position)
+          : null,
       ctr: item.ctr !== undefined ? Number(item.ctr) : null,
       reportDateRange: item.reportDateRange || dateStart,
       recommendedAction: item.recommendedAction || 'publish_guide',
@@ -86,7 +94,7 @@ export async function pushKeywordOpportunitiesToSanity(opportunities) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${SANITY_API_TOKEN}`,
+      Authorization: `Bearer ${SANITY_API_TOKEN}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ mutations }),
@@ -112,8 +120,8 @@ export async function syncGscFromSupabaseToSanity(options = { minImpressions: 50
   const url = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/metrics_gsc_daily?impressions=gte.${options.minImpressions}&order=impressions.desc&limit=${options.limit}`;
   const res = await fetch(url, {
     headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
     },
   });
 
@@ -176,7 +184,8 @@ async function run() {
       {
         query: 'marketing automation for contractor arizona',
         sourcePlatform: 'gsc',
-        landingPage: 'https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
+        landingPage:
+          'https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
         impressions: 640,
         clicks: 29,
         averagePosition: 3.1,

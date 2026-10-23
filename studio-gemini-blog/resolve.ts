@@ -1,5 +1,5 @@
-import { defineLocations } from 'sanity/presentation';
-import type { PresentationPluginOptions } from 'sanity/presentation';
+import {defineLocations} from 'sanity/presentation'
+import type {PresentationPluginOptions} from 'sanity/presentation'
 
 export const resolve: PresentationPluginOptions['resolve'] = {
   locations: {
@@ -22,4 +22,4 @@ export const resolve: PresentationPluginOptions['resolve'] = {
       }),
     }),
   },
-};
+}

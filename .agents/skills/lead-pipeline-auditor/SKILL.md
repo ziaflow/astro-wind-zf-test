@@ -16,9 +16,9 @@ Use this workflow to test and verify that form submissions on ZiaFlow properly g
 2. **Supabase Record Verification:**
    - Query `public.leads` for the submitted email:
      ```sql
-     SELECT id, name, email, phone, service_needed, status, score, created_at 
-     FROM public.leads 
-     WHERE email = 'test-lead@ziaflow.com' 
+     SELECT id, name, email, phone, service_needed, status, score, created_at
+     FROM public.leads
+     WHERE email = 'test-lead@ziaflow.com'
      ORDER BY created_at DESC LIMIT 1;
      ```
    - Confirm status is set to `'new'` and initial score is recorded.

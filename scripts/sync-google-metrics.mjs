@@ -12,7 +12,11 @@ if (fs.existsSync(envPath)) {
     const parts = line.split('=');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      const val = parts.slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+      const val = parts
+        .slice(1)
+        .join('=')
+        .trim()
+        .replace(/^["']|["']$/g, '');
       if (key && !key.startsWith('#')) {
         env[key] = val;
       }
@@ -37,12 +41,12 @@ export async function upsertToSupabase(tableName, onConflict, rows) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'resolution=merge-duplicates,return=representation'
+      Prefer: 'resolution=merge-duplicates,return=representation',
     },
-    body: JSON.stringify(rows)
+    body: JSON.stringify(rows),
   });
 
   if (!res.ok) {
@@ -60,9 +64,9 @@ export async function readSupabaseTable(tableName, queryParams = 'order=date.des
   const url = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/${tableName}?${queryParams}`;
   const res = await fetch(url, {
     headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`
-    }
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+    },
   });
 
   if (!res.ok) {
@@ -111,7 +115,7 @@ async function run() {
       sessions: 19,
       conversions: 1,
       bounce_rate: 0.21,
-      avg_engagement_time_sec: 148.0
+      avg_engagement_time_sec: 148.0,
     },
     {
       date: today,
@@ -120,7 +124,7 @@ async function run() {
       sessions: 8,
       conversions: 1,
       bounce_rate: 0.15,
-      avg_engagement_time_sec: 210.0
+      avg_engagement_time_sec: 210.0,
     },
     {
       date: today,
@@ -129,7 +133,7 @@ async function run() {
       sessions: 5,
       conversions: 0,
       bounce_rate: 0.28,
-      avg_engagement_time_sec: 125.0
+      avg_engagement_time_sec: 125.0,
     },
     {
       date: today,
@@ -138,8 +142,8 @@ async function run() {
       sessions: 4,
       conversions: 0,
       bounce_rate: 0.25,
-      avg_engagement_time_sec: 110.0
-    }
+      avg_engagement_time_sec: 110.0,
+    },
   ];
 
   const sampleGSC = [
@@ -150,7 +154,7 @@ async function run() {
       clicks: 14,
       impressions: 260,
       ctr: 0.0538,
-      position: 3.9
+      position: 3.9,
     },
     {
       date: today,
@@ -159,7 +163,7 @@ async function run() {
       clicks: 9,
       impressions: 175,
       ctr: 0.0514,
-      position: 4.1
+      position: 4.1,
     },
     {
       date: today,
@@ -168,7 +172,7 @@ async function run() {
       clicks: 11,
       impressions: 190,
       ctr: 0.0579,
-      position: 3.4
+      position: 3.4,
     },
     {
       date: today,
@@ -176,9 +180,9 @@ async function run() {
       query: 'google local service ads contractor phoenix',
       clicks: 16,
       impressions: 205,
-      ctr: 0.0780,
-      position: 2.0
-    }
+      ctr: 0.078,
+      position: 2.0,
+    },
   ];
 
   console.log(`\n--- Upserting updated telemetry for ${today} ---`);
@@ -190,7 +194,7 @@ async function run() {
 }
 
 if (process.argv[1] && process.argv[1].endsWith('sync-google-metrics.mjs')) {
-  run().catch(err => {
+  run().catch((err) => {
     console.error('Error in sync-google-metrics:', err);
     process.exit(1);
   });

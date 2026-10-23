@@ -12,7 +12,11 @@ if (fs.existsSync(envPath)) {
     const parts = line.split('=');
     if (parts.length >= 2) {
       const key = parts[0].trim();
-      const val = parts.slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+      const val = parts
+        .slice(1)
+        .join('=')
+        .trim()
+        .replace(/^["']|["']$/g, '');
       if (key && !key.startsWith('#')) {
         env[key] = val;
       }
@@ -39,8 +43,8 @@ async function fetchClarity(numOfDays) {
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${CLARITY_TOKEN}`
-    }
+      Authorization: `Bearer ${CLARITY_TOKEN}`,
+    },
   });
 
   if (!res.ok) {
@@ -61,11 +65,11 @@ function parseUrlPath(rawUrl) {
 }
 
 function extractMetrics(data) {
-  const traffic = data.find(m => m.metricName === 'Traffic');
-  const rage = data.find(m => m.metricName === 'RageClickCount');
-  const dead = data.find(m => m.metricName === 'DeadClickCount');
-  const quick = data.find(m => m.metricName === 'QuickBackClick');
-  const scroll = data.find(m => m.metricName === 'ExcessiveScroll');
+  const traffic = data.find((m) => m.metricName === 'Traffic');
+  const rage = data.find((m) => m.metricName === 'RageClickCount');
+  const dead = data.find((m) => m.metricName === 'DeadClickCount');
+  const quick = data.find((m) => m.metricName === 'QuickBackClick');
+  const scroll = data.find((m) => m.metricName === 'ExcessiveScroll');
 
   const pageMetrics = new Map();
 
@@ -149,7 +153,9 @@ function extractMetrics(data) {
       quick_backs: aggregateQuick,
       excessive_scrolling: aggregateScroll,
     },
-    pages: Array.from(pageMetrics.values()).filter(p => p.total_sessions > 0 || p.dead_clicks > 0 || p.rage_clicks > 0)
+    pages: Array.from(pageMetrics.values()).filter(
+      (p) => p.total_sessions > 0 || p.dead_clicks > 0 || p.rage_clicks > 0
+    ),
   };
 }
 
@@ -158,12 +164,12 @@ async function upsertToSupabase(rows) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'resolution=merge-duplicates,return=representation'
+      Prefer: 'resolution=merge-duplicates,return=representation',
     },
-    body: JSON.stringify(rows)
+    body: JSON.stringify(rows),
   });
 
   if (!res.ok) {
@@ -176,7 +182,7 @@ async function upsertToSupabase(rows) {
 
 async function main() {
   console.log('Fetching Microsoft Clarity insights...');
-  
+
   // 1-day (trailing 24h)
   const data1 = await fetchClarity(1);
   const metrics1 = extractMetrics(data1);
@@ -194,7 +200,7 @@ async function main() {
       quick_backs: metrics1.aggregate.quick_backs,
       excessive_scrolling: metrics1.aggregate.excessive_scrolling,
     },
-    ...metrics1.pages.map(p => ({
+    ...metrics1.pages.map((p) => ({
       date: today,
       page_path: p.page_path,
       total_sessions: p.total_sessions,
@@ -202,7 +208,7 @@ async function main() {
       dead_clicks: p.dead_clicks,
       quick_backs: p.quick_backs,
       excessive_scrolling: p.excessive_scrolling,
-    }))
+    })),
   ];
 
   console.log(`Writing ${rowsToUpsert.length} metric records to Supabase for date ${today}...`);
@@ -216,12 +222,12 @@ async function main() {
   console.log(`Dead Clicks: ${metrics1.aggregate.dead_clicks}`);
   console.log(`Quick Backs: ${metrics1.aggregate.quick_backs}`);
   console.log(`Excessive Scrolling: ${metrics1.aggregate.excessive_scrolling}`);
-  
+
   console.log('\nTop Page Paths:');
   console.table(metrics1.pages.slice(0, 8));
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error('Execution failed:', err);
   process.exit(1);
 });
