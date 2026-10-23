@@ -92,3 +92,70 @@ Required checks: repository build/check, relevant form/handler tests, desktop/mo
 2. Complete GA4 and production nurture/booking measurement without treating those gaps as zero outcomes.
 3. Draft positioning and automation-page changes with evidence, not a wholesale redesign.
 4. Use the first weekly review to inspect delivered PRs and real inquiries, not agent activity counts.
+
+## Rebuild and Sprint directive — October 23, 2026
+
+This user-approved direction supersedes conflicting sequencing or positioning above. It documents requirements, not completed implementation or a verified Sanity audit.
+
+### Decisions
+
+- Template: Kairo. Implementation repository: ziaflow/astro-wind-zf-test.
+- Preserve existing root-level article slugs and /blog.
+- Brand: charcoal, grey and black with red accents; direct, factual copy.
+- Exclude unsupported claims until substantiated.
+- Primary offer: Lead Capture & Follow-Up Sprint.
+- Preserve existing collectors, integrations and agent schedules.
+- Do not bulk-publish the 15 reported drafts; that count and the audited Sanity dataset have not been independently verified here.
+- Monday launch priority (October 26): working Kairo inquiry path, SEO/content parity, and tested existing integrations. Additional automation and content expansion follow.
+
+### Mandatory content sequence
+
+1. Identify the audited Sanity project and dataset. Record project ID/name, Studio URL, dataset, schema and query perspective. The supplied audit reports no accessible projects in its session; this is not an independently verified current access result.
+2. Map every live URL to its actual content source, including all articles and all service pages, not only six. Inventory fields: URL/status, canonical, repository file or Sanity document/project/dataset/perspective, title, slug, intended Kairo template, replacement/redirect decision, images, claims evidence, reviewer and preview URL.
+3. Model service content for Kairo: audience, problem, deliverables, process, FAQs and working CTA. Inventory precedes service-page modeling.
+4. Reconcile posts individually: match live article to draft; inspect duplicates, preserve established slugs, flag missing images. Never infer that zero published Sanity documents means the live website has no content; repository files or another dataset may supply it.
+5. Provide a preview and publication checklist per approved page: metadata, canonical, internal links, images, supported claims, mobile/keyboard inquiry path and tested integrations. Missing servicePage documents alone do not endanger live service URLs; removing working pages before replacements are ready does.
+
+Retain working pages until their replacements pass parity checks. Booking destination, company facts and final publishing reviewer remain unresolved; use claim-neutral drafts and retain the publication review gate.
+
+### Offer and acceptance contract
+
+Positioning: ZiaFlow fixes the gap between a new customer inquiry and a booked job by finding lost leads, connecting follow-up systems and ownership, and leaving a measurable documented operating process.
+
+Defensible promise:
+> For every agreed inquiry source, each accepted inquiry is recorded, assigned an owner, given a next action, and tracked to a known status.
+
+Awaiting response is a known status. A booked job requires booking evidence. Measure automated acknowledgement separately from human response. Promise implementation and a verifiable operating condition; do not promise leads, revenue or AI transformation.
+
+Fixed-scope deliverables:
+- Lead-path audit: agreed inquiry sources mapped from entry to final disposition.
+- Capture repair: forms, calls and included sources reliably enter the agreed workflow.
+- Ownership: each accepted inquiry has an accountable person/system and next action.
+- Fast-response workflow: acknowledgement plus internal notification/escalation, with separately defined human response.
+- Short nurture sequence: follow-up for prospects who do not immediately book/respond; activation remains reviewed.
+- Measurement baseline: source, inquiry, response and booking/outcome data to the extent systems allow.
+- Operator runbook: plain-English exception handling and staff responsibilities.
+- Stabilization: defined post-launch validation for defects and missed handoffs.
+
+Kairo homepage explains the inquiry-to-booking gap and Sprint. Automation page explains deliverables, process, boundaries and acceptance evidence. Assessments diagnose capture/follow-up gaps. Blogs answer practical missed-inquiry, ownership, response and booking questions. Agents flag failed capture, unassigned inquiries, overdue actions and missing outcomes only where verified event sources support those checks. Outreach drafts use verified observations; delivery tests and documents agreed workflows before acceptance.
+
+### Prove the Sprint on ZiaFlow
+
+Trace a labeled test inquiry through capture, assignment, acknowledgement, human follow-up, booking or other disposition, and reporting. Record timestamps and stable IDs for each stage. Test duplicates, provider failures and nonresponse as well as success. Never count a click as booking, acknowledgement as human response, or a test as a new lead. Existing capture tests prove only their tested stages; downstream stages remain unverified until evidence exists.
+
+Before pricing or scheduling a fixed-scope sale, define:
+- Included inquiry sources, integrations and follow-up channels.
+- Client responsibilities and required access.
+- Response targets, escalation ownership and business-hours coverage.
+- Revision limits and stabilization period.
+- Software costs, exclusions and ongoing support.
+
+Price and duration follow those boundaries. During the first 90 days track delivery hours, direct costs, defects and Jeremy's intervention time alongside commercial outcomes. Use evidence to decide what becomes a repeatable managed service or product.
+
+### Review and source references
+
+Public copy, campaign activation and outreach remain unpublished pending review. Documentation updates do not authorize publication, campaign activation or outreach. Preserve the existing review gate.
+
+User-supplied coordination references (contents/updates not independently verified in this action):
+- Launch charter: https://app.clickup.com/t/17tnw2b8wta
+- Content migration/requirements: https://app.clickup.com/t/17tnw2b8wtg
