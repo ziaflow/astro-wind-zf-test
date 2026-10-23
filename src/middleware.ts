@@ -34,12 +34,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';
 
   // Skip static assets and internal requests
-  if (pathname.startsWith('/_astro') || pathname.startsWith('/api') || pathname.startsWith('/favicon')) {
+  if (
+    pathname.startsWith('/_astro') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/favicon')
+  ) {
     return next();
   }
 
   const redirects = await getRedirects();
-  const match = redirects.find((r) => r.from.replace(/\/$/, '') === pathname || r.from === pathname);
+  const match = redirects.find(
+    (r) => r.from.replace(/\/$/, '') === pathname || r.from === pathname
+  );
 
   if (match) {
     const status = match.isPermanent ? 301 : 302;

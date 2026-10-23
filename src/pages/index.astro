@@ -1,7 +1,5 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Header from '~/components/widgets/Header.astro';
-import { headerData } from '~/navigation';
 import StructuralGridHero from '~/components/widgets/StructuralGridHero.astro';
 import ZoltServiceMatrix from '~/components/widgets/ZoltServiceMatrix.astro';
 import Features3 from '~/components/widgets/Features3.astro';
@@ -10,6 +8,7 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
+import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import Content from '~/components/widgets/Content.astro';
@@ -17,7 +16,7 @@ import Content from '~/components/widgets/Content.astro';
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
   description:
-    'Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. Call (602) 834-4239 or schedule a consultation. 50+ clients trust our Phoenix team.',
+    'Custom websites, strategic SEO, PPC, and automation for Arizona businesses. Call (602) 834-4239 or schedule a free consultation with our Phoenix team.',
   ignoreTitleTemplate: true,
   openGraph: {
     url: 'https://ziaflow.com/',
@@ -27,9 +26,22 @@ const metadata = {
     title: 'ZiaFlow | Custom Software & AI Automation Agents',
     description:
       'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. Call (602) 834-4239 to engineer your growth solutions with ZiaFlow.',
+    images: [
+      {
+        url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
+        width: 1200,
+        height: 628,
+        alt: 'ZiaFlow Digital Growth Partner',
+      },
+    ],
   },
   extend: {
     meta: [
+      {
+        property: 'og:logo',
+        content:
+          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/ziaflow_chip_blue.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL3ppYWZsb3dfY2hpcF9ibHVlLnBuZyIsImlhdCI6MTc2NTk1MzE4NSwiZXhwIjoxODkyMDk3MTg1fQ.o89O7epzXcp0ji-a81MFQJZJimZEqr6cc_N8NkGMZZ0',
+      },
       {
         name: 'twitter:card',
         content: 'summary_large_image',
@@ -42,423 +54,399 @@ const metadata = {
         name: 'twitter:title',
         content: 'ZiaFlow | Custom Software & AI Automation Agents',
       },
+      {
+        name: 'twitter:image',
+        content:
+          'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
+      },
     ],
   },
 };
 ---
 
 <Layout metadata={metadata}>
-  <Header slot="header" {...headerData} isSticky isDark />
-  <div id="ziaflow-home" class="dark">
-    <LocalBusinessSchema />
+  <LocalBusinessSchema />
 
-    <StructuralGridHero />
+  <StructuralGridHero />
 
-    <ZoltServiceMatrix />
+  <Brands
+    title="Tech Stack & Partners"
+    subtitle="Built on enterprise-grade infrastructure"
+    icons={[]}
+    images={[
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+        alt: 'AWS',
+      },
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+        alt: 'Azure',
+      },
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+        alt: 'OpenAI',
+      },
+    ]}
+  />
 
-    <Stats
-      stats={[
-        { title: 'Arizona Clients', amount: '50+' },
-        { title: 'Avg. Lead Growth', amount: '150%' },
-        { title: 'Google Rating', amount: '5.0★' },
-        { title: 'Years in Phoenix', amount: '4+' },
-      ]}
-      tagline="Trusted by Phoenix-Area Service Businesses"
-    />
+  <Content
+    isReversed
+    title="AI Voice Automation"
+    subtitle="Reduce reception workload with AI that answers phones, books appointments, and syncs records."
+    items={[
+      {
+        title: '24/7 Availability',
+        description: 'Never miss a patient call. Our AI handles intake, scheduling, and FAQs around the clock.',
+      },
+      {
+        title: 'HIPAA Compliant',
+        description: 'Secure, private, and fully compliant voice infrastructure for medical and dental practices.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AI Voice Automation',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Automate Your <span class="text-primary">Front Desk</span>
+      </h3>
+    </Fragment>
+  </Content>
 
-    <Content
-      title="Data-Driven Content Strategy"
-      subtitle="Proprietary AI that analyzes competitor data to write grounded, SEO-optimized content."
-      items={[
-        {
-          title: 'Competitor Analysis',
-          description:
-            'Our AI scans the top-ranking competitors in your niche to identify content gaps and opportunities.',
+  <ZoltServiceMatrix />
+
+  <Stats
+    stats={[
+      { title: 'Arizona Clients', amount: '50+' },
+      { title: 'Avg. Lead Growth', amount: '150%' },
+      { title: 'Google Rating', amount: '5.0★' },
+      { title: 'Years in Phoenix', amount: '4+' },
+    ]}
+    tagline="Trusted by Phoenix-Area Service Businesses"
+  />
+
+  <Content
+    title="Data-Driven Content Strategy"
+    subtitle="Proprietary AI that analyzes competitor data to write grounded, SEO-optimized content."
+    items={[
+      {
+        title: 'Competitor Analysis',
+        description:
+          'Our AI scans the top-ranking competitors in your niche to identify content gaps and opportunities.',
+      },
+      {
+        title: 'Optimized Workflow',
+        description: 'Generate high-quality, undetectable AI content that ranks on Google and engages real humans.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Data Driven Dashboard',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        <span class="text-primary">Intelligence</span> Dashboard
+      </h3>
+    </Fragment>
+  </Content>
+
+  <Testimonials
+    title="Trusted by Tech Leaders"
+    tagline="Success Stories"
+    testimonials={[
+      {
+        testimonial:
+          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
+        name: 'K. B.',
+        job: 'COO',
+      },
+      {
+        testimonial:
+          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
+        name: 'J. M.',
+        job: 'Investor',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Ready to engineer your growth?"
+    subtitle="Book a transparent technical consultation or call us immediately. No sales pressure, just a roadmap to automation."
+    actions={[
+      {
+        variant: 'primary',
+        text: '📞 (602) 834-4239',
+        href: 'tel:+16028344239',
+        classes: {
+          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
         },
-        {
-          title: 'Optimized Workflow',
-          description: 'Generate high-quality, undetectable AI content that ranks on Google and engages real humans.',
-        },
-      ]}
-      image={{
-        src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        alt: 'Data Driven Dashboard',
-      }}
-    >
-      <Fragment slot="content">
-        <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-          <span class="text-primary">Intelligence</span> Dashboard
-        </h3>
-      </Fragment>
-    </Content>
+      },
+      {
+        variant: 'primary',
+        text: 'Book Tech Consult',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
+      },
+      {
+        variant: 'secondary',
+        text: 'Contact Us',
+        href: 'mailto:info@ziaflow.com',
+      },
+    ]}
+  />
 
-    <Testimonials
-      title="Trusted by Tech Leaders"
-      tagline="Success Stories"
-      testimonials={[
-        {
-          testimonial:
-            'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
-          name: 'K. B.',
-          job: 'COO',
-        },
-        {
-          testimonial:
-            'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
-          name: 'J. M.',
-          job: 'Investor',
-        },
-      ]}
-    />
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Answers to common questions about our services and process."
+    tagline="FAQ"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'What makes ZiaFlow different from other agencies?',
+        description:
+          "We specialize in the home services, medical, and ecommerce sectors, understanding their unique challenges. Our in-house team includes software developers and AI experts, allowing us to build custom solutions that other agencies can't.",
+      },
+      {
+        title: 'How do you measure success?',
+        description:
+          'We focus on what matters: leads and revenue. Our transparent dashboards track calls, appointments, and sales, providing clear insight into your ROI.',
+      },
+      {
+        title: 'Do you work with businesses outside of Arizona?',
+        description:
+          'Yes. While we proudly serve businesses in Phoenix, Scottsdale, Tucson, and Glendale, we also partner with companies nationwide to provide digital marketing, custom software, and cloud solutions.',
+      },
+      {
+        title: 'How quickly will I see results?',
+        description:
+          'PPC campaigns can generate leads within days, while SEO typically shows significant improvement in 3-6 months. We provide realistic timelines for all projects upfront.',
+      },
+      {
+        title: 'What is included in your marketing automation services?',
+        description:
+          'Our AI-powered automation can handle lead nurturing, appointment scheduling, customer follow-ups, review requests, and service inquiries. We customize every system to fit your specific business processes.',
+      },
+    ]}
+  />
 
-    <CallToAction
-      title="Ready to engineer your growth?"
-      subtitle="Book a transparent technical consultation or call us immediately. No sales pressure, just a roadmap to automation."
-      actions={[
-        {
-          variant: 'primary',
+  <Features3
+    title="Contact ZiaFlow"
+    subtitle="Choose the method that works best for you"
+    columns={4}
+    items={[
+      {
+        title: 'Call Us Now',
+        icon: 'tabler:phone-call',
+        callToAction: {
           text: '📞 (602) 834-4239',
           href: 'tel:+16028344239',
-          classes: {
-            btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
-          },
+          variant: 'link',
         },
-        {
-          variant: 'primary',
-          text: 'Book Tech Consult',
-          href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-          icon: 'tabler:calendar',
-        },
-        {
-          variant: 'secondary',
-          text: 'Contact Us',
+      },
+      {
+        title: 'Email',
+        icon: 'tabler:mail',
+        callToAction: {
+          text: 'info@ziaflow.com',
           href: 'mailto:info@ziaflow.com',
+          variant: 'link',
         },
-      ]}
-    />
+      },
+      {
+        title: 'Visit',
+        icon: 'tabler:map-pin',
+        callToAction: {
+          text: 'Phoenix, AZ 85023',
+          href: 'https://maps.google.com?q=Phoenix+AZ+85023',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Schedule',
+        icon: 'tabler:calendar',
+        callToAction: {
+          text: 'Book Meeting',
+          href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
 
-    <FAQs
-      title="Frequently Asked Questions"
-      subtitle="Answers to common questions about our services and process."
-      tagline="FAQ"
-      classes={{ container: 'max-w-6xl' }}
-      items={[
-        {
-          title: 'What makes ZiaFlow different from other agencies?',
-          description:
-            "We specialize in the home services, medical, and ecommerce sectors, understanding their unique challenges. Our in-house team includes software developers and AI experts, allowing us to build custom solutions that other agencies can't.",
-        },
-        {
-          title: 'How do you measure success?',
-          description:
-            'We focus on what matters: leads and revenue. Our transparent dashboards track calls, appointments, and sales, providing clear insight into your ROI.',
-        },
-        {
-          title: 'Do you work with businesses outside of Arizona?',
-          description:
-            'Yes. While we proudly serve businesses in Phoenix, Scottsdale, Tucson, and Glendale, we also partner with companies nationwide to provide digital marketing, custom software, and cloud solutions.',
-        },
-        {
-          title: 'How quickly will I see results?',
-          description:
-            'PPC campaigns can generate leads within days, while SEO typically shows significant improvement in 3-6 months. We provide realistic timelines for all projects upfront.',
-        },
-        {
-          title: 'What is included in your marketing automation services?',
-          description:
-            'Our AI-powered automation can handle lead nurturing, appointment scheduling, customer follow-ups, review requests, and service inquiries. We customize every system to fit your specific business processes.',
-        },
-      ]}
-    />
+  <BlogLatestPosts
+    title="Digital Marketing Insights"
+    information="Local SEO, automation playbooks, CRO, and case studies for Arizona businesses."
+  />
 
-    <Features3
-      title="Contact ZiaFlow"
-      subtitle="Choose the method that works best for you"
-      columns={4}
-      items={[
-        {
-          title: 'Call Us Now',
-          icon: 'tabler:phone-call',
-          callToAction: {
-            text: '📞 (602) 834-4239',
-            href: 'tel:+16028344239',
-            variant: 'link',
-          },
-        },
-        {
-          title: 'Email',
-          icon: 'tabler:mail',
-          callToAction: {
-            text: 'info@ziaflow.com',
-            href: 'mailto:info@ziaflow.com',
-            variant: 'link',
-          },
-        },
-        {
-          title: 'Visit',
-          icon: 'tabler:map-pin',
-          callToAction: {
-            text: 'Phoenix, AZ 85023',
-            href: 'https://maps.google.com?q=Phoenix+AZ+85023',
-            variant: 'link',
-          },
-        },
-        {
-          title: 'Schedule',
-          icon: 'tabler:calendar',
-          callToAction: {
-            text: 'Book Meeting',
-            href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-            variant: 'link',
-          },
-        },
-      ]}
-    />
+  <script is:inline>
+    (function () {
+      const w = window;
+      function getParam(name) {
+        try {
+          return new URLSearchParams(w.location.search).get(name) || '';
+        } catch {
+          return '';
+        }
+      }
 
-    <BlogLatestPosts
-      title="Digital Marketing Insights"
-      information="Local SEO, automation playbooks, CRO, and case studies for Arizona businesses."
-    />
+      function setHiddenField(form, name, value) {
+        const input = form.querySelector(`input[name="${name}"]`);
+        if (input) input.value = value;
+      }
 
-    <script is:inline>
-      (function () {
-        const w = window;
-        function getParam(name) {
+      function populateHiddenFields() {
+        const wrapper = document.getElementById('form');
+        if (!wrapper) return;
+
+        const form = wrapper.querySelector('form') || wrapper;
+
+        // Populate UTM parameters
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach((k) => {
+          setHiddenField(form, k, getParam(k));
+        });
+        // Populate Clarity session ID
+        if (typeof w.clarity === 'function' && typeof w.clarity.getSessionId === 'function') {
           try {
-            return new URLSearchParams(w.location.search).get(name) || '';
-          } catch {
-            return '';
+            w.clarity.getSessionId((id) => {
+              setHiddenField(form, 'clarity_session_id', id || '');
+            });
+          } catch (err) {
+            console.error('Clarity session ID error:', err);
+          }
+        } else if (Array.isArray(w.dataLayer)) {
+          for (let i = w.dataLayer.length - 1; i >= 0; i--) {
+            const item = w.dataLayer[i];
+            if (item && item.clarity_session_id) {
+              setHiddenField(form, 'clarity_session_id', item.clarity_session_id);
+              break;
+            }
           }
         }
+      }
 
-        function setHiddenField(form, name, value) {
-          const input = form.querySelector(`input[name="${name}"]`);
-          if (input) input.value = value;
-        }
+      function attachFormTracking() {
+        const wrapper = document.getElementById('form');
+        if (!wrapper) return;
 
-        function populateHiddenFields() {
-          const wrapper = document.getElementById('form');
-          if (!wrapper) return;
-
-          const form = wrapper.querySelector('form') || wrapper;
-
-          // Populate UTM parameters
-          ['utm_source', 'utm_medium', 'utm_campaign'].forEach((k) => {
-            setHiddenField(form, k, getParam(k));
-          });
-          // Populate Clarity session ID
-          if (typeof w.clarity === 'function' && typeof w.clarity.getSessionId === 'function') {
+        const form = wrapper.querySelector('form') || wrapper;
+        if (!form) return;
+        form.addEventListener(
+          'submit',
+          function () {
             try {
-              w.clarity.getSessionId((id) => {
-                setHiddenField(form, 'clarity_session_id', id || '');
+              const eventId = 'ev_' + Date.now();
+              setHiddenField(form, 'event_id', eventId);
+
+              // DataLayer push
+              w.dataLayer = w.dataLayer || [];
+              w.dataLayer.push({
+                event: 'form_submit',
+                form_id: 'homepage_contact',
+                event_id: eventId,
               });
+
+              // Google Analytics
+              if (typeof w.gtag === 'function') {
+                w.gtag('event', 'form_submit', {
+                  event_category: 'engagement',
+                  event_label: 'homepage_contact',
+                  event_id: eventId,
+                });
+              }
             } catch (err) {
-              console.error('Clarity session ID error:', err);
+              console.error('Form tracking error:', err);
             }
-          } else if (Array.isArray(w.dataLayer)) {
-            for (let i = w.dataLayer.length - 1; i >= 0; i--) {
-              const item = w.dataLayer[i];
-              if (item && item.clarity_session_id) {
-                setHiddenField(form, 'clarity_session_id', item.clarity_session_id);
-                break;
+          },
+          { passive: true }
+        );
+      }
+
+      function attachCTAClickTracking() {
+        document.addEventListener(
+          'click',
+          function (e) {
+            const el = e.target?.closest ? e.target.closest('a') : null;
+            if (!el || !el.href) return;
+
+            const href = el.getAttribute('href') || '';
+
+            // Track booking link clicks
+            if (href.indexOf('outlook.office.com') !== -1) {
+              const eventId = 'ev_cta_' + Date.now();
+              w.dataLayer = w.dataLayer || [];
+              w.dataLayer.push({
+                event: 'cta_click',
+                cta: 'book_consult',
+                href: href,
+                event_id: eventId,
+              });
+
+              if (typeof w.gtag === 'function') {
+                w.gtag('event', 'click', {
+                  event_category: 'CTA',
+                  event_label: 'book_consult',
+                  event_id: eventId,
+                });
               }
             }
-          }
-        }
 
-        function attachFormTracking() {
-          const wrapper = document.getElementById('form');
-          if (!wrapper) return;
-
-          const form = wrapper.querySelector('form') || wrapper;
-          if (!form) return;
-          form.addEventListener(
-            'submit',
-            function () {
-              try {
-                const eventId = 'ev_' + Date.now();
-                setHiddenField(form, 'event_id', eventId);
-
-                // DataLayer push
-                w.dataLayer = w.dataLayer || [];
-                w.dataLayer.push({
-                  event: 'form_submit',
-                  form_id: 'homepage_contact',
+            // Track phone call link clicks
+            if (href.indexOf('tel:') !== -1) {
+              const eventId = 'ev_call_' + Date.now();
+              w.dataLayer = w.dataLayer || [];
+              w.dataLayer.push({
+                event: 'cta_click',
+                cta: 'call_now',
+                href: href,
+                event_id: eventId,
+              });
+              if (typeof w.gtag === 'function') {
+                w.gtag('event', 'click', {
+                  event_category: 'CTA',
+                  event_label: 'call_now',
                   event_id: eventId,
                 });
-
-                // Google Analytics
-                if (typeof w.gtag === 'function') {
-                  w.gtag('event', 'form_submit', {
-                    event_category: 'engagement',
-                    event_label: 'homepage_contact',
-                    event_id: eventId,
-                  });
-                }
-              } catch (err) {
-                console.error('Form tracking error:', err);
               }
-            },
-            { passive: true }
-          );
-        }
+            }
 
-        function attachCTAClickTracking() {
-          document.addEventListener(
-            'click',
-            function (e) {
-              const el = e.target?.closest ? e.target.closest('a') : null;
-              if (!el || !el.href) return;
-
-              const href = el.getAttribute('href') || '';
-
-              // Track booking link clicks
-              if (href.indexOf('outlook.office.com') !== -1) {
-                const eventId = 'ev_cta_' + Date.now();
-                w.dataLayer = w.dataLayer || [];
-                w.dataLayer.push({
-                  event: 'cta_click',
-                  cta: 'book_consult',
-                  href: href,
+            // Track contact link clicks
+            if (href.indexOf('/contact') !== -1 || href.indexOf('#estimate') !== -1) {
+              const eventId = 'ev_cta_' + Date.now();
+              w.dataLayer = w.dataLayer || [];
+              w.dataLayer.push({
+                event: 'cta_click',
+                cta: 'contact',
+                href: href,
+                event_id: eventId,
+              });
+              if (typeof w.gtag === 'function') {
+                w.gtag('event', 'click', {
+                  event_category: 'CTA',
+                  event_label: 'contact',
                   event_id: eventId,
                 });
-
-                if (typeof w.gtag === 'function') {
-                  w.gtag('event', 'click', {
-                    event_category: 'CTA',
-                    event_label: 'book_consult',
-                    event_id: eventId,
-                  });
-                }
               }
+            }
+          },
+          { passive: true }
+        );
+      }
 
-              // Track phone call link clicks
-              if (href.indexOf('tel:') !== -1) {
-                const eventId = 'ev_call_' + Date.now();
-                w.dataLayer = w.dataLayer || [];
-                w.dataLayer.push({
-                  event: 'cta_click',
-                  cta: 'call_now',
-                  href: href,
-                  event_id: eventId,
-                });
-                if (typeof w.gtag === 'function') {
-                  w.gtag('event', 'click', {
-                    event_category: 'CTA',
-                    event_label: 'call_now',
-                    event_id: eventId,
-                  });
-                }
-              }
-
-              // Track contact link clicks
-              if (href.indexOf('/contact') !== -1 || href.indexOf('#estimate') !== -1) {
-                const eventId = 'ev_cta_' + Date.now();
-                w.dataLayer = w.dataLayer || [];
-                w.dataLayer.push({
-                  event: 'cta_click',
-                  cta: 'contact',
-                  href: href,
-                  event_id: eventId,
-                });
-                if (typeof w.gtag === 'function') {
-                  w.gtag('event', 'click', {
-                    event_category: 'CTA',
-                    event_label: 'contact',
-                    event_id: eventId,
-                  });
-                }
-              }
-            },
-            { passive: true }
-          );
-        }
-
-        // Initialize on DOM ready
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function () {
-            populateHiddenFields();
-            attachFormTracking();
-            attachCTAClickTracking();
-          });
-        } else {
+      // Initialize on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
           populateHiddenFields();
           attachFormTracking();
           attachCTAClickTracking();
-        }
-      })();
-    </script>
-  </div>
+        });
+      } else {
+        populateHiddenFields();
+        attachFormTracking();
+        attachCTAClickTracking();
+      }
+    })();
+  </script>
 </Layout>
-
-<style is:global>
-  body:has(#ziaflow-home),
-  body:has(#ziaflow-home) .dark {
-    --aw-color-bg-page: #1a1a1a;
-    --aw-color-bg-page-dark: #1a1a1a;
-    --aw-color-text-heading: #ffffff;
-    --aw-color-text-default: #ededed;
-    --aw-color-text-muted: #c4c4c4;
-    --aw-color-accent: #d76a76;
-    background-color: #1a1a1a;
-    color: #ededed;
-    color-scheme: dark;
-  }
-
-  #ziaflow-home,
-  #ziaflow-home > section,
-  body:has(#ziaflow-home) header,
-  body:has(#ziaflow-home) footer {
-    background: #1a1a1a;
-    color: #ededed;
-  }
-
-  body:has(#ziaflow-home) #header {
-    background: #1a1a1a !important;
-  }
-
-  body:has(#ziaflow-home) footer > [aria-hidden='true'] {
-    background: #1a1a1a;
-  }
-
-  #ziaflow-home :is(.bg-white, .bg-default, .bg-page) {
-    background-color: #1a1a1a;
-  }
-
-  #ziaflow-home div[class*='rounded'][class*='shadow'],
-  #ziaflow-home div[class*='rounded'][class*='border'] {
-    background: #242424;
-    border-color: #484848;
-  }
-
-  #ziaflow-home :is(h1, h2, h3, h4) {
-    color: #ffffff;
-  }
-
-  #ziaflow-home :is(.text-muted, .text-slate-400, .text-gray-400) {
-    color: #c4c4c4;
-  }
-
-  body:has(#ziaflow-home) :is(a, button)[class*='bg-emerald'],
-  #ziaflow-home :is(a, button)[class*='bg-[#3F9B93]'] {
-    background: #a22a36;
-    border-color: #a22a36;
-    color: #ffffff;
-    box-shadow: none;
-  }
-
-  #ziaflow-home [class*='text-[#3f9b93]'],
-  #ziaflow-home [class*='text-[#3F9B93]'],
-  body:has(#ziaflow-home) footer a[class*='text-emerald'] {
-    color: #ee9ca5;
-  }
-
-  #ziaflow-home .digital-gradient-text {
-    background-image: linear-gradient(90deg, #ffffff, #ee9ca5);
-  }
-
-  body:has(#ziaflow-home) :is(a, button):focus-visible {
-    outline: 2px solid #ee9ca5;
-    outline-offset: 4px;
-  }
-</style>
