@@ -123,11 +123,13 @@ Retain working pages until their replacements pass parity checks. Booking destin
 Positioning: ZiaFlow fixes the gap between a new customer inquiry and a booked job by finding lost leads, connecting follow-up systems and ownership, and leaving a measurable documented operating process.
 
 Defensible promise:
+
 > For every agreed inquiry source, each accepted inquiry is recorded, assigned an owner, given a next action, and tracked to a known status.
 
 Awaiting response is a known status. A booked job requires booking evidence. Measure automated acknowledgement separately from human response. Promise implementation and a verifiable operating condition; do not promise leads, revenue or AI transformation.
 
 Fixed-scope deliverables:
+
 - Lead-path audit: agreed inquiry sources mapped from entry to final disposition.
 - Capture repair: forms, calls and included sources reliably enter the agreed workflow.
 - Ownership: each accepted inquiry has an accountable person/system and next action.
@@ -144,6 +146,7 @@ Kairo homepage explains the inquiry-to-booking gap and Sprint. Automation page e
 Trace a labeled test inquiry through capture, assignment, acknowledgement, human follow-up, booking or other disposition, and reporting. Record timestamps and stable IDs for each stage. Test duplicates, provider failures and nonresponse as well as success. Never count a click as booking, acknowledgement as human response, or a test as a new lead. Existing capture tests prove only their tested stages; downstream stages remain unverified until evidence exists.
 
 Before pricing or scheduling a fixed-scope sale, define:
+
 - Included inquiry sources, integrations and follow-up channels.
 - Client responsibilities and required access.
 - Response targets, escalation ownership and business-hours coverage.
@@ -157,5 +160,6 @@ Price and duration follow those boundaries. During the first 90 days track deliv
 Public copy, campaign activation and outreach remain unpublished pending review. Documentation updates do not authorize publication, campaign activation or outreach. Preserve the existing review gate.
 
 User-supplied coordination references (contents/updates not independently verified in this action):
+
 - Launch charter: https://app.clickup.com/t/17tnw2b8wta
 - Content migration/requirements: https://app.clickup.com/t/17tnw2b8wtg
