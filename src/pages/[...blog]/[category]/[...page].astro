@@ -21,6 +21,7 @@ const currentPage = page.currentPage ?? 1;
 
 const metadata = {
   title: `Category '${category.title}' ${currentPage > 1 ? ` - Page ${currentPage}` : ''}`,
+  description: `Browse in-depth articles, case studies, and actionable insights on ${category.title} from ZiaFlow.`,
   robots: {
     index: blogCategoryRobots?.index,
     follow: blogCategoryRobots?.follow,

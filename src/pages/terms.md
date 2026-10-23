@@ -1,5 +1,6 @@
 ---
 title: 'Terms and Conditions'
+description: 'Review the Terms and Conditions for using ZiaFlow digital transformation, software engineering, and marketing automation services.'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 

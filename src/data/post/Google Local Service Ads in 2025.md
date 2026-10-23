@@ -1,7 +1,7 @@
 ---
 publishDate: 2025-11-23T00:00:00Z
-title: 'Google Local Service Ads in 2025: The SEO & Conversion Success Blueprint'
-excerpt: Discover how Google Local Service Ads dominate local search in 2025 with pay-per-lead, verified trust signals, and AI-driven optimization for unbeatable conversion and ROI.
+title: 'Google Local Service Ads in 2025: Local Search Blueprint'
+excerpt: Learn how Google Local Service Ads dominate local search with pay-per-lead, verified trust badges, and AI optimization for unbeatable conversion and ROI.
 image: https://images.unsplash.com/photo-1706609331851-735d88d20612?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 category: 'Paid Search'
 tags:
