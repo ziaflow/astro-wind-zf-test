@@ -16,7 +16,7 @@ import type { AstroIntegration } from 'astro';
 import sanity from '@sanity/astro';
 import astrowind from './vendor/integration';
 
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -28,9 +28,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   site: 'https://ziaflow.com',
   output: 'static',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: vercel(),
   experimental: {
     parallelPrerender: true,
   },
