@@ -20,7 +20,11 @@ const services: ServiceItem[] = [
     icon: 'tabler:robot',
     description:
       'Deploy 24/7 autonomous phone reception, patient triage, and workflow bots that eliminate repetitive admin overhead.',
-    highlights: ['HIPAA-compliant voice infrastructure', 'Instant calendar booking & sync', 'Context retention across calls'],
+    highlights: [
+      'HIPAA-compliant voice infrastructure',
+      'Instant calendar booking & sync',
+      'Context retention across calls',
+    ],
     link: getPermalink('/services/automation'),
   },
   {
@@ -30,7 +34,11 @@ const services: ServiceItem[] = [
     icon: 'tabler:chart-arrows',
     description:
       'Dominate Google Search and earn citation share across AI engines like Bing Copilot, ChatGPT, and Perplexity.',
-    highlights: ['Schema entity architecture', 'Local Phoenix Google Business Profile', 'Generative Engine Optimization (GEO)'],
+    highlights: [
+      'Schema entity architecture',
+      'Local Phoenix Google Business Profile',
+      'Generative Engine Optimization (GEO)',
+    ],
     link: getPermalink('/services/seo'),
   },
   {
@@ -40,7 +48,11 @@ const services: ServiceItem[] = [
     icon: 'tabler:code',
     description:
       'Fast, secure web applications built on modern serverless stacks. Zero bloat, maximum conversion rate, and sub-second loads.',
-    highlights: ['Astro & Next.js modern architecture', 'Sub-second Core Web Vitals', 'Custom client portals & integrations'],
+    highlights: [
+      'Astro & Next.js modern architecture',
+      'Sub-second Core Web Vitals',
+      'Custom client portals & integrations',
+    ],
     link: getPermalink('/services/web-development'),
   },
   {
@@ -50,7 +62,11 @@ const services: ServiceItem[] = [
     icon: 'tabler:target',
     description:
       'High-intent lead generation combining Google Local Service Ads (pay-per-lead) with automated qualification and CRM routing.',
-    highlights: ['Google Guaranteed verification setup', 'Real-time conversion tracking (GA4)', 'Lead quality dispute management'],
+    highlights: [
+      'Google Guaranteed verification setup',
+      'Real-time conversion tracking (GA4)',
+      'Lead quality dispute management',
+    ],
     link: getPermalink('/services/ppc'),
   },
   {
@@ -78,75 +94,84 @@ const services: ServiceItem[] = [
 
 <section class="py-16 md:py-24 bg-[#0a0f24] text-white border-b border-slate-800/80 relative isolate">
   <!-- Subtle ambient background light -->
-  <div class="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-[#a22a36]/10 blur-[120px] rounded-full -z-10" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[300px] bg-[#a22a36]/10 blur-[120px] rounded-full -z-10"
+    aria-hidden="true"
+  >
+  </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#3f9b93]/15 text-[#3f9b93] border border-[#3f9b93]/30 mb-4">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#3f9b93]/15 text-[#3f9b93] border border-[#3f9b93]/30 mb-4"
+      >
         <span>Integrated Capabilities</span>
       </div>
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-heading text-white">
         Engineered for <span class="digital-gradient-text">Measurable Growth</span>
       </h2>
       <p class="mt-4 text-slate-300 text-lg leading-relaxed">
-        Full-stack digital transformation: autonomous AI agents, conversion-focused web builds, and strategic acquisition.
+        Full-stack digital transformation: autonomous AI agents, conversion-focused web builds, and strategic
+        acquisition.
       </p>
     </div>
 
     <!-- Zolt Interactive Feature Cards Matrix -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service) => (
-        <div class="relative group p-8 rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-md shadow-lg hover:border-slate-700 hover:bg-slate-900/90 transition-all duration-300 flex flex-col justify-between">
-          <div>
-            {/* Top Category & Icon Row */}
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-semibold uppercase tracking-wider text-[#3f9b93]">
-                {service.category}
-              </span>
-              <div class="p-3 rounded-xl bg-slate-800/80 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
-                <Icon name={service.icon} class="w-6 h-6" />
+      {
+        services.map((service) => (
+          <div class="relative group p-8 rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-md shadow-lg hover:border-slate-700 hover:bg-slate-900/90 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              {/* Top Category & Icon Row */}
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-xs font-semibold uppercase tracking-wider text-[#3f9b93]">{service.category}</span>
+                <div class="p-3 rounded-xl bg-slate-800/80 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+                  <Icon name={service.icon} class="w-6 h-6" />
+                </div>
               </div>
+
+              {/* Title */}
+              <h3 class="text-xl font-bold font-heading text-white mb-3 group-hover:text-primary transition-colors">
+                {service.title}
+              </h3>
+
+              {/* Description */}
+              <p class="text-slate-400 text-sm leading-relaxed mb-6">{service.description}</p>
+
+              {/* Highlights Checklist */}
+              <ul class="space-y-2 mb-8">
+                {service.highlights.map((h) => (
+                  <li class="flex items-start text-xs text-slate-300">
+                    <Icon name="tabler:check" class="w-4 h-4 text-[#3f9b93] mr-2 shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <!-- Title -->
-            <h3 class="text-xl font-bold font-heading text-white mb-3 group-hover:text-primary transition-colors">
-              {service.title}
-            </h3>
-
-            <!-- Description -->
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-              {service.description}
-            </p>
-
-            <!-- Highlights Checklist -->
-            <ul class="space-y-2 mb-8">
-              {service.highlights.map((h) => (
-                <li class="flex items-start text-xs text-slate-300">
-                  <Icon name="tabler:check" class="w-4 h-4 text-[#3f9b93] mr-2 shrink-0 mt-0.5" />
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Bottom Action Link */}
+            <a
+              href={service.link}
+              class="inline-flex items-center text-sm font-semibold text-white group-hover:text-[#3f9b93] transition-colors mt-auto pt-4 border-t border-slate-800/60"
+            >
+              <span>Explore Service Details</span>
+              <Icon name="tabler:chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
-
-          <!-- Bottom Action Link -->
-          <a
-            href={service.link}
-            class="inline-flex items-center text-sm font-semibold text-white group-hover:text-[#3f9b93] transition-colors mt-auto pt-4 border-t border-slate-800/60"
-          >
-            <span>Explore Service Details</span>
-            <Icon name="tabler:chevron-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <!-- Bottom Matrix CTA -->
-    <div class="mt-14 p-6 sm:p-8 rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900 via-[#11172f] to-slate-900 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+    <div
+      class="mt-14 p-6 sm:p-8 rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900 via-[#11172f] to-slate-900 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl"
+    >
       <div>
         <h4 class="text-xl font-bold text-white font-heading">Need a custom technical roadmap?</h4>
-        <p class="text-slate-400 text-sm mt-1">We evaluate your current stack and identify exact high-ROI automation gaps.</p>
+        <p class="text-slate-400 text-sm mt-1">
+          We evaluate your current stack and identify exact high-ROI automation gaps.
+        </p>
       </div>
       <a
         href="https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled"
