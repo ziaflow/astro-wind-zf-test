@@ -16,7 +16,10 @@ export const POST: APIRoute = async ({ request }) => {
     if (contentType.includes('application/json')) {
       const text = await request.text();
       data = text ? JSON.parse(text) : {};
-    } else if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
+    } else if (
+      contentType.includes('application/x-www-form-urlencoded') ||
+      contentType.includes('multipart/form-data')
+    ) {
       const formData = await request.formData();
       data = Object.fromEntries(formData.entries());
     } else {
@@ -29,7 +32,12 @@ export const POST: APIRoute = async ({ request }) => {
     const message = typeof data.message === 'string' ? data.message : '';
     const phone = typeof data.phone === 'string' ? data.phone : undefined;
     const company = typeof data.company === 'string' ? data.company : undefined;
-    const serviceInterest = typeof data.service_interest === 'string' ? data.service_interest : (typeof data.service_needed === 'string' ? data.service_needed : undefined);
+    const serviceInterest =
+      typeof data.service_interest === 'string'
+        ? data.service_interest
+        : typeof data.service_needed === 'string'
+          ? data.service_needed
+          : undefined;
     const otherData = { ...data };
     delete otherData.name;
     delete otherData.email;
