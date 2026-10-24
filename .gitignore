@@ -39,3 +39,6 @@ pnpm-lock.yaml
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Local Vercel build output
+.vercel/

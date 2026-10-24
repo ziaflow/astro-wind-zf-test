@@ -46,7 +46,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'dark bg-[#242424] text-white top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -54,7 +54,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   <div class="absolute inset-0"></div>
   <div
     class:list={[
-      'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
+      'relative text-white py-3 px-3 md:px-6 mx-auto w-full',
       {
         'md:flex md:justify-between': position !== 'center',
       },
@@ -73,7 +73,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       <div class="flex items-center gap-2 md:hidden">
         <a
           href="tel:+16028344239"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs tracking-wide shadow-md transition-all hover:scale-105 active:scale-95"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary hover:bg-secondary text-white font-bold text-xs tracking-wide shadow-md transition-all hover:scale-105 active:scale-95"
           aria-label="Call (602) 834-4239"
         >
           <span>📞</span>
@@ -134,7 +134,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <li class="md:hidden mt-4 w-full px-4">
           <a
             href="tel:+16028344239"
-            class="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-base shadow-lg transition-all"
+            class="flex items-center justify-center gap-2 w-full py-3 px-5 rounded-xl bg-primary hover:bg-secondary text-white font-bold text-base shadow-lg transition-all"
             aria-label="Call (602) 834-4239"
           >
             <span>📞</span>

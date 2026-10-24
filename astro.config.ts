@@ -116,5 +116,9 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    ssr: {
+      // Bundle Supabase's ESM packages so the deployed Node function does not load them as CommonJS.
+      noExternal: [/^@supabase\//],
+    },
   },
 });

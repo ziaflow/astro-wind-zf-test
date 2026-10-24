@@ -2,8 +2,8 @@
 import Button from '~/components/ui/Button.astro';
 import type { Form as Props } from '~/types';
 
-const emailBackend = import.meta.env.EMAIL_BACKEND || (import.meta.env.SMTP_HOST ? 'nodemailer' : 'web3forms');
-const useNodemailer = emailBackend === 'nodemailer';
+// The shared form uses durable server intake, independently of email transport.
+const useNodemailer = true;
 
 const {
   inputs = [],
@@ -11,7 +11,7 @@ const {
   disclaimer,
   button = 'Contact us',
   description = '',
-  action = useNodemailer ? '/api/contact' : 'https://api.web3forms.com/submit',
+  action = '/api/contact',
   method = 'POST',
   accessKey,
   redirect,
@@ -150,13 +150,21 @@ if (!useNodemailer && !resolvedAccessKey) {
     const resultEl = document.getElementById(datasetResultId);
 
     if (form && resultEl) {
+      let submissionId = crypto.randomUUID();
+      let submitting = false;
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (submitting || !form.reportValidity()) return;
+        submitting = true;
         resultEl.textContent = 'Please wait...';
         resultEl.classList.remove('text-green-500', 'text-red-500');
 
         const formData = new FormData(form);
-        const payload = JSON.stringify(Object.fromEntries(formData.entries()));
+        const payload = JSON.stringify({
+          ...Object.fromEntries(formData.entries()),
+          submission_id: submissionId,
+          page_url: window.location.href,
+        });
 
         try {
           const response = await fetch(actionUrl, {
@@ -169,40 +177,12 @@ if (!useNodemailer && !resolvedAccessKey) {
           });
 
           const data = await response.json();
-          if (response.ok) {
+          if (response.ok && data.submission_id === submissionId) {
             resultEl.textContent = data.message || successMessage || 'Thank you!';
             resultEl.classList.add('text-green-500');
 
-            // Customer.io Lead Identification & Trigger Event
-            try {
-              const parsedEntries = Object.fromEntries(formData.entries());
-              const userEmail = parsedEntries.email;
-              const userName = parsedEntries.name || '';
-              const [firstName, ...restName] = String(userName).split(' ');
-              const lastName = restName.join(' ');
-
-              if (window._cio && userEmail) {
-                window._cio.identify({
-                  id: userEmail,
-                  email: userEmail,
-                  first_name: firstName || undefined,
-                  last_name: lastName || undefined,
-                  phone: parsedEntries.phone || undefined,
-                  service_interest: parsedEntries.service_interest || undefined,
-                  created_at: Math.floor(Date.now() / 1000),
-                });
-
-                window._cio.track('contact_form_submitted', {
-                  message: parsedEntries.message || '',
-                  page_url: window.location.href,
-                  service_interest: parsedEntries.service_interest || '',
-                  phone: parsedEntries.phone || '',
-                });
-              }
-            } catch (cioErr) {
-              console.warn('Customer.io client dispatch note:', cioErr);
-            }
-
+            // Follow-up is held server-side; no browser campaign trigger.
+            submissionId = crypto.randomUUID();
             form.reset();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';
@@ -214,6 +194,7 @@ if (!useNodemailer && !resolvedAccessKey) {
           resultEl.classList.add('text-red-500');
         }
 
+        submitting = false;
         setTimeout(() => {
           resultEl.textContent = '';
         }, 5000);
