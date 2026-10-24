@@ -125,7 +125,7 @@ class Page(HTMLParser):
         return [a.get('content', '') for a in self.meta if a.get('name', a.get('property', '')).lower() == name]
 
 
-def capture(url):
+def capture(url, include_copy=False):
     try:
         status, final, headers, body = fetch(url)
         page = Page()
@@ -152,7 +152,8 @@ def capture(url):
                 'internal_paths': sorted(internal_paths), 'images': page.images,
                 'missing_same_page_fragments': sorted(set(same_page_fragments)),
                 'main_text_sha256': hashlib.sha256(main.encode()).hexdigest(),
-                'main_text_characters': len(main), 'main_element_present': bool(main)}
+                'main_text_characters': len(main), 'main_element_present': bool(main),
+                **({'main_text': main} if include_copy else {})}
     except Exception as error:
         return {'requested_url': url, 'error': f'{type(error).__name__}: {error}'}
 
@@ -186,6 +187,8 @@ def main():
     parser.add_argument('--output', required=True)
     parser.add_argument('--url', action='append', default=[])
     parser.add_argument('--max-pages', type=int, default=150)
+    parser.add_argument('--include-copy', action='store_true',
+                        help='Archive normalized public main-element text for copy parity review')
     args = parser.parse_args()
     if not 1 <= args.max_pages <= 500:
         parser.error('--max-pages must be 1..500')
@@ -194,7 +197,7 @@ def main():
     if not urls:
         parser.error('No sitemap URLs discovered; supply explicit --url routes. No successful baseline was written.')
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-        pages = list(pool.map(capture, urls))
+        pages = list(pool.map(lambda url: capture(url, include_copy=args.include_copy), urls))
     result = {'origin': ORIGIN, 'captured_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'read_only': True, 'truncated': truncated, 'discovery_errors': discovery_errors, 'pages': pages,
               'limitations': ['Public server HTML, not browser execution or Sanity inventory.',
@@ -210,3 +213,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
