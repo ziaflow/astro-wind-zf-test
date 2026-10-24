@@ -1,0 +1,25 @@
+# ZiaFlow
+
+> Phoenix Web Development & Digital Marketing Agency
+
+## About
+ZiaFlow is a digital transformation agency based in Phoenix, Arizona. We specialize in custom web development, local SEO, PPC, and marketing automation for service-based businesses.
+
+## Key Services
+- **Web Development**: Custom websites, booking systems, and integrations.
+- **SEO**: Local search optimization for Phoenix, Scottsdale, Tempe, and Mesa.
+- **PPC**: Google Ads and social media advertising.
+- **Automation**: Workflow automation and CRM implementation.
+
+## Content Structure
+- `/`: Homepage (Overview, Services, Case Studies)
+- `/about`: Company mission, values, and team.
+- `/contact`: Contact form and consultation booking.
+- `/services/*`: Detailed service pages.
+- `/case-studies/*`: Client success stories.
+- `/blog/*`: Digital marketing insights and guides.
+
+## Contact
+- **Email**: info@ziaflow.com
+- **Phone**: (480) 819-29292
+- **Location**: Phoenix, AZ 85023

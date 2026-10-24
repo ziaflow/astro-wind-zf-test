@@ -2,23 +2,17 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
-import QuickLeadForm from '~/components/QuickLeadForm.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import ServiceSchema from '~/components/seo/ServiceSchema.astro';
-import ProjectShowcase from '~/components/widgets/ProjectShowcase.astro';
 
 const metadata = {
-  title: 'Web Engineering & Conversion Optimization | ZiaFlow Phoenix',
+  title: 'Web Development & Performance Engineering',
   description:
-    'Custom Astro websites engineered for sub-second speed, edge-validated lead capture, and automated CRM routing for Phoenix service businesses.',
+    'High-converting, lightning-fast websites built for speed and engagement. Forensic audits, responsive architecture, and SEO-engineered frameworks.',
 };
 
 const serviceData = {
-  name: 'Web Development & Application Engineering',
+  name: 'Web Development Services',
   description:
     'Conversion-first websites built for speed and performance. We conduct forensic audits of user behavior to design interfaces that convert.',
   url: 'https://ziaflow.com/services/web-development',
@@ -29,163 +23,49 @@ const serviceData = {
 <Layout metadata={metadata}>
   <ServiceSchema {...serviceData} />
 
-  {/* 1. Clear Offer Hero with Primary & Secondary Scoping Actions */}
   <Hero
-    tagline="Engineering & CRO"
-    title="Websites Engineered for Velocity, Verification & Inbound Inquiries"
-    subtitle="We reject generic brochure websites. ZiaFlow builds sub-second digital assets on modern stacks like Astro, connecting edge-validated lead intake directly into your HubSpot, Supabase, and dispatch workflows. Turn passive clicks into booked jobs."
+    tagline="Web Development"
+    title="Engineered for Conversion"
+    subtitle="We reject the idea of 'brochure' websites. Our development team builds conversion-first digital assets using modern frameworks like Astro for lightning-fast load speeds. We conduct forensic audits of user behavior to design interfaces that guide visitors effortlessly toward booking an appointment or making a purchase. This is the core of your digital real estate."
     actions={[
       {
         variant: 'primary',
-        text: 'Request Architecture Diagnostic',
-        href: '#inquiry-form',
-        icon: 'tabler:arrow-right',
-      },
-      {
-        variant: 'secondary',
-        text: 'Schedule Consultation',
+        text: 'Book Consultation',
         href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
         icon: 'tabler:calendar',
       },
     ]}
   />
 
-  {/* 2. Tangible Benefits Grid */}
   <Features
-    tagline="The Architecture Advantage"
-    title="Why Arizona Businesses Upgrade from WordPress & Wix to Astro"
-    subtitle="Bloated templates lose up to 40% of their mobile traffic to slow load times and unverified form drops. Here is how our architecture works differently."
+    title="Why Choose Us?"
     items={[
       {
-        title: 'Sub-Second Page Velocity',
-        description:
-          'Static HTML delivered via global edge networks with zero JavaScript bloat. Google Lighthouse scores consistently 95+ for maximum mobile conversion.',
+        title: 'Lightning Fast',
+        description: 'Built with modern frameworks like Astro for instant load times.',
         icon: 'tabler:bolt',
       },
       {
-        title: 'Edge-Validated Lead Capture',
-        description:
-          'Sanitized form inputs and anti-spam verification before data hits your CRM. No discarded inquiries, missing fields, or fake submissions.',
-        icon: 'tabler:shield-check',
+        title: 'Conversion Focused',
+        description: 'Designed to turn visitors into leads and customers.',
+        icon: 'tabler:target',
       },
       {
-        title: 'Automated CRM & SMS Dispatch',
-        description:
-          'Instant two-way synchronization to Supabase, HubSpot, and Customer.io so your estimators and intake staff respond in minutes, not hours.',
-        icon: 'tabler:refresh',
-      },
-      {
-        title: 'GEO & LLM Search Authority',
-        description:
-          'Comprehensive structured schema, high-intent service taxonomies, and clear entity signals optimized for AI-driven answers and local search visibility.',
-        icon: 'tabler:brain',
+        title: 'Responsive Design',
+        description: 'Looks and works perfectly on every device.',
+        icon: 'tabler:device-mobile',
       },
     ]}
   />
 
-  {/* 3. Phased Engineering Process */}
-  <Steps
-    tagline="Execution Playbook"
-    title="From Bottleneck Forensic to Production Deployment in 4 Weeks"
-    items={[
+  <CallToAction
+    title="Ready for a better website?"
+    actions={[
       {
-        title: 'Step 1: Forensic Intake & Performance Audit',
-        description:
-          'We inspect your existing analytics, Clarity heatmaps, and server logs to locate where inbound traffic bounces or abandons form fields.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Step 2: Component Architecture & Conversion Design',
-        description:
-          'We build high-contrast, accessible Astro components matching your brand guidelines, with mobile-first tap targets and sticky conversion triggers.',
-        icon: 'tabler:layout-grid',
-      },
-      {
-        title: 'Step 3: Edge Integrations & CRM Pipelines',
-        description:
-          'We wire secure server endpoints to Supabase, Customer.io, and your dispatch system, testing delivery under simulated traffic.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Step 4: Launch, Verification & Attributed Follow-Up',
-        description:
-          'Zero-downtime deployment backed by automated Customer.io email and SMS follow-ups, tracking every inquiry to a booked consultation.',
-        icon: 'tabler:rocket',
+        variant: 'primary',
+        text: 'Book Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
       },
     ]}
   />
-
-  {/* 4. Project Proof & Case Studies */}
-  <ProjectShowcase
-    title="Recent Production Work"
-    subtitle="See how real Arizona organizations streamlined operations and accelerated inquiry response times."
-    tagline="Proven Results"
-    limit={2}
-  />
-
-  {/* 5. Client Testimonials */}
-  <Testimonials
-    tagline="Client Feedback"
-    title="Trusted by Arizona Service Leaders"
-    testimonials={[
-      {
-        testimonial:
-          'Before ZiaFlow, our front office was losing hours every morning re-entering patient forms, and our mobile site took 5 seconds to load. Our new intake flow cut waiting times to 3 minutes and inquiries jumped 35%.',
-        name: 'Dr. Marcus Vance',
-        job: 'Managing Partner, Desert Ridge Dental',
-      },
-      {
-        testimonial:
-          'Our commercial estimators used to find out about emergency mechanical calls hours late. The edge routing ZiaFlow built cut our quote turnaround to 18 minutes. It has been a game changer for our bottom line.',
-        name: 'Brent Calhoun',
-        job: 'Operations Director, Desert Peak Mechanical',
-      },
-    ]}
-  />
-
-  {/* 6. Frequently Asked Questions */}
-  <FAQs
-    tagline="Common Questions"
-    title="Frequently Asked Questions About Our Web Engineering"
-    classes={{ container: 'max-w-4xl' }}
-    items={[
-      {
-        title: 'Why Astro instead of WordPress or Webflow?',
-        description:
-          'Astro delivers zero client-side JavaScript by default, resulting in near-instant mobile load times (under 1 second). WordPress requires dozens of heavy plugins that slow down mobile visitors and break frequently. Astro provides enterprise stability and developer flexibility without security vulnerabilities.',
-      },
-      {
-        title: 'How does our existing CRM or dispatch software integrate?',
-        description:
-          'We engineer custom API endpoints that validate inquiries and immediately route them to HubSpot, Salesforce, Jobber, ServiceTitan, or Supabase. You do not need to replace your existing internal CRM.',
-      },
-      {
-        title: 'What happens after an inquiry is submitted?',
-        description:
-          'The submission is logged to a secure database, an instant notification is sent to your on-call team, and Customer.io triggers a branded acknowledgment email with calendar booking links.',
-      },
-      {
-        title: 'How long does a typical redesign and intake overhaul take?',
-        description:
-          'Most service-business projects are designed, engineered, and deployed to production within 3 to 5 weeks with zero downtime for your active operations.',
-      },
-    ]}
-  />
-
-  {/* 7. Embedded Inquiry Form & Diagnostic Offer */}
-  <WidgetWrapper id="inquiry-form" containerClass="max-w-5xl mx-auto">
-    <Headline
-      tagline="Get Started"
-      title="Request an Inbound Diagnostic & Scoping Call"
-      subtitle="Tell us about your current site and intake workflow. We’ll review your speed, form completion rates, and CRM pipeline and provide actionable findings."
-    />
-    <div
-      class="mx-auto w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900/90 sm:p-10"
-    >
-      <QuickLeadForm />
-      <p class="mt-4 text-center text-xs text-slate-500 dark:text-slate-400">
-        Submissions trigger an instant architecture review. We respect your inbox and never share your data.
-      </p>
-    </div>
-  </WidgetWrapper>
 </Layout>

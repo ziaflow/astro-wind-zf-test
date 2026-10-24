@@ -8,11 +8,11 @@ interface Link {
   href?: string;
   ariaLabel?: string;
   icon?: string;
+  svg?: string;
 }
 
 interface Links {
   title?: string;
-  href?: string;
   links: Array<Link>;
 }
 
@@ -24,28 +24,44 @@ export interface Props {
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Astro.props;
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 ---
 
-<footer class="relative bg-[#171717] text-white border-t border-[#404040] not-prose">
-  <div class="absolute inset-0 bg-[#171717] pointer-events-none" aria-hidden="true"></div>
+<footer
+  class:list={[{ dark: theme === 'dark' }, 'relative border-t border-slate-800 bg-[#070b19] text-slate-300 not-prose']}
+>
   <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 text-white intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+    class="absolute inset-0 bg-gradient-to-b from-[#070b19] via-[#090e21] to-[#04060d] pointer-events-none"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="relative max-w-7xl mx-auto px-4 sm:px-6 text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
   >
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl text-white hover:text-red-200 transition" href={getHomePermalink()}
+          <a class="inline-block font-bold text-xl text-white hover:text-primary transition" href={getHomePermalink()}
             >{SITE?.name}</a
           >
         </div>
-        <div class="text-sm text-gray-200/80 flex gap-1">
+        <div class="mb-3">
+          <a
+            href="tel:+16028344239"
+            class="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition"
+            aria-label="Call (602) 834-4239"
+          >
+            <span>📞</span>
+            <span>(602) 834-4239</span>
+          </a>
+        </div>
+        <div class="text-sm text-slate-400 flex gap-1">
           {
             secondaryLinks.map(({ text, href }, index) => (
               <>
                 {index !== 0 ? ' · ' : ''}
                 <a
-                  class="text-gray-200/80 hover:text-white hover:underline transition duration-150 ease-in-out"
+                  class="text-slate-400 hover:text-white hover:underline transition duration-150 ease-in-out"
                   href={href}
                   set:html={text}
                 />
@@ -55,26 +71,15 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
         </div>
       </div>
       {
-        links.map(({ title, href, links }) => (
+        links.map(({ title, links }) => (
           <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="text-white font-semibold mb-2">
-              {href ? (
-                <a
-                  href={href}
-                  class="text-white hover:text-red-200 hover:underline transition duration-150 ease-in-out"
-                >
-                  {title}
-                </a>
-              ) : (
-                title
-              )}
-            </div>
+            <div class="text-white font-semibold mb-2">{title}</div>
             {links && Array.isArray(links) && links.length > 0 && (
               <ul class="text-sm">
                 {links.map(({ text, href, ariaLabel }) => (
                   <li class="mb-2">
                     <a
-                      class="text-gray-200/80 hover:text-white hover:underline transition duration-150 ease-in-out"
+                      class="text-slate-400 hover:text-white transition duration-150 ease-in-out"
                       href={href}
                       aria-label={ariaLabel}
                     >
@@ -88,18 +93,21 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
         ))
       }
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8 border-t border-[#404040]/50">
+    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
       {
         socialLinks?.length ? (
           <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+            {socialLinks.map(({ ariaLabel, href, text, icon, svg }) => (
               <li>
                 <a
-                  class="text-gray-200 hover:text-white hover:bg-[#262626] focus:outline-none focus:ring-4 focus:ring-red-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
+                  class="text-slate-400 hover:text-white hover:bg-slate-800/80 focus:outline-none focus:ring-4 focus:ring-slate-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
                   aria-label={ariaLabel}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {icon && <Icon name={icon} class="w-5 h-5" />}
+                  {svg && <Fragment set:html={svg} />}
                   <Fragment set:html={text} />
                 </a>
               </li>
@@ -110,7 +118,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '' } = Ast
         )
       }
 
-      <div class="text-sm mr-4 text-gray-200/90">
+      <div class="text-sm mr-4 text-slate-400">
         <Fragment set:html={footNote} />
       </div>
     </div>

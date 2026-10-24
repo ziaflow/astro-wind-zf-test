@@ -3,8 +3,6 @@ import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import Button from '~/components/ui/Button.astro';
-import AskAIButton from '~/components/common/AIFloatingMenu.astro';
-
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
@@ -78,8 +76,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary hover:bg-secondary text-white font-bold text-xs tracking-wide shadow-md transition-all hover:scale-105 active:scale-95"
           aria-label="Call (602) 834-4239"
         >
-          <span class="text-sm">📞</span>
-          <span>Call Now</span>
+          <span>📞</span>
+          <span>(602) 834-4239</span>
         </a>
         <ToggleMenu />
       </div>
@@ -91,9 +89,6 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       <ul
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center items-center"
       >
-        <li class="flex items-center">
-          <AskAIButton variant="inline" />
-        </li>
         {
           links.map(({ text, href, links }) => (
             <li class={links?.length ? 'dropdown' : ''}>
@@ -143,7 +138,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             aria-label="Call (602) 834-4239"
           >
             <span>📞</span>
-            <span>Call (602) 834-4239</span>
+            <span>(602) 834-4239</span>
           </a>
         </li>
       </ul>

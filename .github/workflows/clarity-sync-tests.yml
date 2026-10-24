@@ -1,0 +1,23 @@
+name: Clarity sync tests
+on:
+  push:
+    paths:
+      - 'supabase/functions/clarity-sync/**'
+      - 'tests/clarity-sync.test.mjs'
+      - '.github/workflows/clarity-sync-tests.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/clarity-sync/**'
+      - 'tests/clarity-sync.test.mjs'
+      - '.github/workflows/clarity-sync-tests.yml'
+permissions:
+  contents: read
+jobs:
+  parser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/clarity-sync.test.mjs

@@ -2,8 +2,8 @@
 import Button from '~/components/ui/Button.astro';
 import type { Form as Props } from '~/types';
 
-const emailBackend = import.meta.env.EMAIL_BACKEND || (import.meta.env.SMTP_HOST ? 'nodemailer' : 'web3forms');
-const useNodemailer = emailBackend === 'nodemailer';
+// The shared form uses durable server intake, independently of email transport.
+const useNodemailer = true;
 
 const {
   inputs = [],
@@ -11,7 +11,7 @@ const {
   disclaimer,
   button = 'Contact us',
   description = '',
-  action = useNodemailer ? '/api/contact' : 'https://api.web3forms.com/submit',
+  action = '/api/contact',
   method = 'POST',
   accessKey,
   redirect,
@@ -150,13 +150,21 @@ if (!useNodemailer && !resolvedAccessKey) {
     const resultEl = document.getElementById(datasetResultId);
 
     if (form && resultEl) {
+      let submissionId = crypto.randomUUID();
+      let submitting = false;
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (submitting || !form.reportValidity()) return;
+        submitting = true;
         resultEl.textContent = 'Please wait...';
         resultEl.classList.remove('text-green-500', 'text-red-500');
 
         const formData = new FormData(form);
-        const payload = JSON.stringify(Object.fromEntries(formData.entries()));
+        const payload = JSON.stringify({
+          ...Object.fromEntries(formData.entries()),
+          submission_id: submissionId,
+          page_url: window.location.href,
+        });
 
         try {
           const response = await fetch(actionUrl, {
@@ -169,43 +177,12 @@ if (!useNodemailer && !resolvedAccessKey) {
           });
 
           const data = await response.json();
-          if (response.ok) {
+          if (response.ok && data.submission_id === submissionId) {
             resultEl.textContent = data.message || successMessage || 'Thank you!';
             resultEl.classList.add('text-green-500');
 
-            // Fire GTM, GA4 & Customer.io conversion events
-            import('~/utils/analytics').then(
-              ({ trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent }) => {
-                trackFormSubmission({
-                  form_id: datasetFormId,
-                  form_name: datasetFormId,
-                });
-                trackEmailSent({
-                  email_type: 'lead_notification',
-                  status: 'sent',
-                  form_name: datasetFormId,
-                });
-
-                const emailVal = formData.get('email') || '';
-                const nameVal = formData.get('name') || '';
-                if (emailVal) {
-                  const nameParts = nameVal.trim().split(/\s+/);
-                  identifyCustomerIo({
-                    email: emailVal.trim(),
-                    first_name: nameParts[0] || '',
-                    last_name: nameParts.slice(1).join(' ') || '',
-                    phone: formData.get('phone') || '',
-                    intake_source: datasetFormId,
-                  });
-                  trackCustomerIoEvent('contact_form_submitted', {
-                    form_id: datasetFormId,
-                    message: formData.get('message') || formData.get('comments') || '',
-                    intake_source: datasetFormId,
-                  });
-                }
-              }
-            );
-
+            // Follow-up is held server-side; no browser campaign trigger.
+            submissionId = crypto.randomUUID();
             form.reset();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';
@@ -217,6 +194,7 @@ if (!useNodemailer && !resolvedAccessKey) {
           resultEl.classList.add('text-red-500');
         }
 
+        submitting = false;
         setTimeout(() => {
           resultEl.textContent = '';
         }, 5000);

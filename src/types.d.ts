@@ -39,7 +39,6 @@ export interface Post {
   /**  */
   Content?: AstroComponentFactory;
   content?: string;
-  sanityBody?: unknown[];
 
   /**  */
   readingTime?: number;
@@ -188,7 +187,7 @@ export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link';
   text?: string;
   icon?: string;
-  classes?: Record<string, string>;
+  classes?: Record<string, string> | string;
   type?: 'button' | 'submit' | 'reset';
 }
 

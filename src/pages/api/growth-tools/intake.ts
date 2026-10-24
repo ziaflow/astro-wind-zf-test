@@ -6,7 +6,8 @@ import { getTool, assess, estimate, stackSummary, VERSION } from '~/lib/growth-t
 
 export const prerender = false;
 const json = (body: unknown, status = 200) => {
-  if (status >= 400) console.warn(JSON.stringify({ scope: 'growth_intake', status, error: (body as { error?: string }).error }));
+  if (status >= 400)
+    console.warn(JSON.stringify({ scope: 'growth_intake', status, error: (body as { error?: string }).error }));
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 };
 export const POST: APIRoute = async ({ request, clientAddress }) => {

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { isValidKey, submitUrls } from './indexnow.mjs';
 
 /**
  * Script to submit URLs to IndexNow (Bing, Yandex, etc.)
@@ -8,26 +7,8 @@ import { isValidKey, submitUrls } from './indexnow.mjs';
  */
 
 const SITE_URL = 'https://ziaflow.com';
-const API_KEY = process.env.INDEXNOW_KEY?.trim();
-const DIST_DIR = fs.existsSync('dist/client') ? 'dist/client' : 'dist';
-
-function keyFileIsValid(key) {
-  const keyFile = path.join(DIST_DIR, `${key}.txt`);
-  if (!fs.existsSync(keyFile)) {
-    console.error(`❌ Key file ${key}.txt not found in ${DIST_DIR}/. Add public/${key}.txt containing the key.`);
-    return false;
-  }
-  // The key file must be UTF-8 and contain exactly the key.
-  const contents = fs
-    .readFileSync(keyFile, 'utf-8')
-    .replace(/^\uFEFF/, '')
-    .trim();
-  if (contents !== key) {
-    console.error(`❌ ${keyFile} does not contain the key. IndexNow would respond 403 Forbidden.`);
-    return false;
-  }
-  return true;
-}
+const API_KEY = process.env.INDEXNOW_KEY;
+const DIST_DIR = 'dist';
 
 async function submitToIndexNow() {
   try {
@@ -37,10 +18,6 @@ async function submitToIndexNow() {
       console.warn('⚠️ INDEXNOW_KEY environment variable is not set. Skipping IndexNow submission.');
       return;
     }
-    if (!isValidKey(API_KEY) || !keyFileIsValid(API_KEY)) {
-      console.warn('⚠️ Skipping IndexNow submission.');
-      return;
-    }
 
     // 1. Find all sitemap files in the dist directory
     const files = fs.readdirSync(DIST_DIR);
@@ -48,11 +25,14 @@ async function submitToIndexNow() {
       (f) => f.startsWith('sitemap-') && f.endsWith('.xml') && f !== 'sitemap-index.xml'
     );
 
-    const allUrls = [];
+    let allUrls = [];
+
     for (const file of sitemapFiles) {
-      const content = fs.readFileSync(path.join(DIST_DIR, file), 'utf-8');
-      for (const match of content.matchAll(/<loc>\s*(.*?)\s*<\/loc>/g)) {
-        allUrls.push(match[1].replace(/&amp;/g, '&'));
+      const filePath = path.join(DIST_DIR, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const matches = content.matchAll(/<loc>(.*?)<\/loc>/g);
+      for (const match of matches) {
+        allUrls.push(match[1]);
       }
     }
 
@@ -60,10 +40,36 @@ async function submitToIndexNow() {
       console.warn('⚠️ No URLs found in sitemaps. Skipping IndexNow submission.');
       return;
     }
-    console.log(`Found ${new Set(allUrls).size} unique URLs to submit.`);
 
-    // 2. Submit (failures are logged, not thrown, so the build isn't broken if IndexNow is down)
-    await submitUrls({ siteUrl: SITE_URL, key: API_KEY, urls: allUrls });
+    // Deduplicate URLs
+    const uniqueUrls = [...new Set(allUrls)];
+    console.log(`Found ${uniqueUrls.length} unique URLs to submit.`);
+
+    // 2. Prepare payload
+    const payload = {
+      host: new URL(SITE_URL).host,
+      key: API_KEY,
+      keyLocation: `${SITE_URL}/${API_KEY}.txt`,
+      urlList: uniqueUrls,
+    };
+
+    // 3. Submit to IndexNow API
+    const response = await fetch('https://api.indexnow.org/IndexNow', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      console.log('✅ IndexNow submission successful!');
+    } else {
+      const errorText = await response.text();
+      console.error(`❌ IndexNow submission failed with status ${response.status}: ${response.statusText}`);
+      console.error('Response:', errorText);
+      // We don't exit with 1 here to avoid breaking the build if the IndexNow API is down
+    }
   } catch (error) {
     console.error('❌ Error during IndexNow submission:', error);
   }

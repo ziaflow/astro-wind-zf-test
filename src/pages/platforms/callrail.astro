@@ -1,0 +1,80 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'CallRail Call Tracking | ZiaFlow',
+  description:
+    'CallRail call tracking setup for service businesses: which campaigns and pages produce phone calls, with call recordings and source attribution.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Measurement"
+    title="CallRail"
+    subtitle="For service businesses, the phone call is often the conversion — and it's the one that standard web analytics misses. CallRail closes that gap: it shows which campaigns, pages, and searches produced each call, records the conversations (where legal), and connects phone leads to their source. Without call tracking, phone inquiries can be missing from your measurement entirely."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  />
+
+  <Features
+    title="What We Set Up"
+    items={[
+      {
+        title: 'Call Tracking Numbers',
+        description:
+          'Numbers per source — Google Ads, Yelp, organic — so every call is attributed to what produced it.',
+        icon: 'tabler:device-mobile',
+      },
+      {
+        title: 'Call Recordings & Transcripts',
+        description: 'Where legal and useful: hear what customers actually ask before they book.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Form Call Tracking',
+        description: 'CallRail forms and dynamic number insertion wired into your site and campaigns.',
+        icon: 'tabler:plug-connected',
+      },
+    ]}
+  />
+
+  <Features
+    title="How It Fits Your Stack"
+    items={[
+      {
+        title: 'With GA4',
+        description: 'Web inquiries in GA4, phone inquiries in CallRail — one complete view of demand.',
+        icon: 'tabler:chart-arrows',
+        callToAction: { text: 'Google Analytics', href: '/platforms/google-analytics' },
+      },
+      {
+        title: 'With Ads',
+        description: 'Yelp and Google Ads judged on calls and bookings — not on impressions or clicks.',
+        icon: 'tabler:target',
+        callToAction: { text: 'Google Ads', href: '/platforms/google-ads' },
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Do you know which ads produce calls?"
+    subtitle="If not, call tracking is usually the fastest measurement win available."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Consultation',
+        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,22 @@
+
+> @onwidget/astrowind@1.0.0-beta.52 dev
+> astro dev
+
+[2m12:38:37[22m [34m[astrowind][39m Astrowind `./src/config.yaml` has been loaded.
+[2m12:38:37[22m [34m[types][39m Generated [2m2ms[22m
+[2m12:38:38[22m [34m[content][39m Syncing content
+[2m12:38:38[22m [34m[content][39m Astro config changed
+[2m12:38:38[22m [34m[content][39m Clearing content store
+[InvalidContentEntryDataError] post ΓåÆ google-local-service-ads-in-2025 data does not match collection schema.
+
+  title**: **title: Required
+
+  Hint:
+    See https://docs.astro.build/en/guides/content-collections/ for more information on content schemas.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/
+  Location:
+    C:\Users\jerem\astro-wind-zf-test\src\data\post\Google Local Service Ads in 2025.md:0:0
+  Stack trace:
+    at getEntryDataAndImages (file:///C:/Users/jerem/astro-wind-zf-test/node_modules/astro/dist/content/utils.js:161:26)
+    at async syncData (C:/Users/jerem/astro-wind-zf-test/node_modules/astro/dist/content/loaders/glob.js:97:28)

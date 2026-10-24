@@ -1,5 +1,6 @@
 ---
 title: 'Privacy Policy'
+description: 'Read the ZiaFlow Privacy Policy to learn how we protect your personal information, handle customer data, and maintain transparency.'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 

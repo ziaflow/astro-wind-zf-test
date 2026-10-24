@@ -57,50 +57,6 @@ export const postType = defineType({
       description: 'A brief summary for search engine results. Matches your MDX excerpt.',
       rows: 3,
       validation: (Rule) => Rule.max(160).warning('Keep under 160 characters'),
-      options: {
-        ai: {
-          prompt:
-            'Generate a compelling, high-converting SEO meta description under 155 characters summarizing the article title and body content. Include an actionable takeaway.',
-        },
-      },
-    }),
-    // 🛡️ EDITORIAL WORKFLOW & GOVERNANCE FIELDS
-    defineField({
-      name: 'editorialStatus',
-      title: 'Editorial Review Status',
-      type: 'string',
-      options: {
-        list: [
-          {title: '🤖 Drafted by AI Agent', value: 'ai_drafted'},
-          {title: '🔍 In Editorial Fact-Check', value: 'in_editor_review'},
-          {title: '✅ Ready for Jeremy Review', value: 'ready_for_human_review'},
-          {title: '🚀 Approved & Published', value: 'approved'},
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'ai_drafted',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'editorNotes',
-      title: 'Editor Agent Critique & Verification Notes',
-      type: 'text',
-      description:
-        'Automated fact-checking notes, claim verification results, and recommended tweaks.',
-      rows: 4,
-      options: {
-        ai: {
-          prompt:
-            'Review the post body against Ziaflow editorial standards. Summarize key strengths, verify technical accuracy, and suggest improvements.',
-        },
-      },
-    }),
-    defineField({
-      name: 'targetKeywords',
-      title: 'Target Search Keywords',
-      type: 'array',
-      of: [{type: 'string'}],
-      description: 'Search queries targeted for Google Search Console & Copilot citations.',
     }),
   ],
 })

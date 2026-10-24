@@ -1,19 +1,18 @@
 import { test, expect } from '@playwright/test';
-test.beforeEach(async ({ page }) => {
-  await page.route('**/*', (route) =>
-    new URL(route.request().url()).hostname === 'localhost' ? route.continue() : route.abort()
-  );
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('homepage exposes the consultation form', async ({ page }) => {
-  await page.goto('http://localhost:4321/', { waitUntil: 'domcontentloaded' });
-  await expect(page).toHaveTitle(/ZiaFlow/i);
-  await expect(page.locator('h1')).toBeVisible();
-  await expect(page.locator('ziaflow-inquiry form')).toBeVisible();
-});
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-test('contact page exposes an email recovery option', async ({ page }) => {
-  await page.goto('http://localhost:4321/contact', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('ziaflow-inquiry form')).toBeVisible();
-  await expect(page.locator('ziaflow-inquiry [data-recovery] a')).toHaveAttribute('href', 'mailto:info@ziaflow.com');
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });

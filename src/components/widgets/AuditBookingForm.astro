@@ -23,7 +23,7 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
     <form
       id="audit-booking-form"
       method="POST"
-      action="/api/forms/audit"
+      action="/_api/forms/audit"
       class="space-y-4"
       data-ga-event="form_submission"
       data-ga-label="audit_booking"
@@ -158,50 +158,30 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       const data = Object.fromEntries(formData);
 
       try {
+        // Push to dataLayer for GTM tracking
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'form_submission',
+            form_name: 'audit_booking',
+            email: data.email,
+            company: data.company_name,
+          });
+        }
+
         // Submit form to serverless handler
-        const response = await fetch('/api/forms/audit', {
+        const response = await fetch('/_api/forms/audit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
 
         if (response.ok) {
-          // Push to dataLayer, GA4 & Customer.io
-          const { trackFormSubmission, trackEmailSent, identifyCustomerIo, trackCustomerIoEvent } =
-            await import('~/utils/analytics');
-          trackFormSubmission({
-            form_id: 'audit-booking-form',
-            form_name: 'audit_booking',
-          });
-          trackEmailSent({
-            email_type: 'audit_booking',
-            status: 'sent',
-            form_name: 'audit_booking',
-          });
-
-          // Customer.io: Identify and track audit request
-          const userEmail = (data.email || '').trim();
-          identifyCustomerIo({
-            email: userEmail,
-            first_name: data.first_name || '',
-            last_name: data.last_name || '',
-            phone: data.phone || '',
-            company_name: data.company_name || '',
-            service_interest: 'Growth Audit',
-            intake_source: 'audit_booking_form',
-          });
-
-          trackCustomerIoEvent('contact_form_submitted', {
-            form_id: 'audit-booking-form',
-            form_type: 'audit_booking',
-            company_name: data.company_name || '',
-            message: data.message || '',
-            intake_source: 'audit_booking_form',
-          });
-
           // Show success message
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
+
+          // Optional: Redirect after 2 seconds or perform other actions
+          // window.location.href = '/thank-you';
         } else {
           alert('Something went wrong. Please try again.');
         }

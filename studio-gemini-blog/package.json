@@ -9,7 +9,6 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "typegen": "sanity typegen generate",
     "deploy-graphql": "sanity graphql deploy"
   },
   "dependencies": {
