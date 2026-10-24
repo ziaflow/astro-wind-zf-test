@@ -51,6 +51,16 @@ class BaselineTests(unittest.TestCase):
         self.assertIn('TimeoutError', result['error'])
         self.assertNotIn('status', result)
 
+    def test_copy_archive_is_opt_in_and_excludes_script_text(self):
+        html = '<main><h1>Our services</h1><p>Existing copy.</p><script>not public copy</script></main>'
+        with patch.object(capture, 'fetch', return_value=(200, capture.ORIGIN + '/', {}, html)):
+            default = capture.capture(capture.ORIGIN + '/')
+            archived = capture.capture(capture.ORIGIN + '/', include_copy=True)
+        self.assertNotIn('main_text', default)
+        self.assertEqual(archived['main_text'], 'Our services Existing copy.')
+        self.assertEqual(archived['main_text_sha256'], default['main_text_sha256'])
+
 
 if __name__ == '__main__':
     unittest.main()
+
