@@ -70,10 +70,17 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  // Own the server lifecycle in CI: do not rely on an unrelated background process.
+  // Keep this run local and message-suppressed; live intake remains separately opted in.
+  webServer: {
+    command: 'npm run dev -- --host localhost --port 4321 --ignore-lock',
+    url: 'http://localhost:4321/growth-tools/website-project-estimator',
+    reuseExistingServer: false,
+    timeout: 120_000,
+    env: {
+      WEBSITE_INTAKE_ENABLED: 'false',
+      WEBSITE_INTAKE_TEST_ONLY: 'true',
+      GROWTH_WELCOME_ENABLED: 'false',
+    },
+  },
 });

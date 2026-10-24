@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, feat/five-growth-tools ]
 jobs:
   test:
     timeout-minutes: 60
