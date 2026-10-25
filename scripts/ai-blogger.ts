@@ -1,5 +1,7 @@
 import { createClient } from '@sanity/client';
-import OpenAI from 'openai';
+import { OpenAI, AzureOpenAI } from 'openai';
+import { getBloggerConfig } from './blogger-config.mjs';
+import { randomUUID } from 'node:crypto';
 import slugify from 'slugify';
 import dotenv from 'dotenv';
 
@@ -26,32 +28,9 @@ const sanity = createClient({
   useCdn: false,
   apiVersion: SANITY_API_VERSION,
 });
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  baseURL: process.env.OPENAI_API_BASE,
-  defaultQuery: { 'api-version': '2024-05-01-preview' }, // Updated to match your screen
-  defaultHeaders: { 'api-key': process.env.OPENAI_API_KEY },
-});
+const provider = getBloggerConfig(process.env);
+const openai = provider.kind === 'azure' ? new AzureOpenAI(provider.options) : new OpenAI(provider.options);
 // --- Main Agent Logic ---
-async function notifyIndexNow(url: string) {
-  const payload = {
-    host: 'ziaflow.com',
-    key: process.env.INDEXNOW_KEY, // Your generated key
-    keyLocation: `https://ziaflow.com/${process.env.INDEXNOW_KEY}.txt`,
-    urlList: [url],
-  };
-
-  try {
-    const response = await fetch('https://api.indexnow.org/indexnow', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify(payload),
-    });
-    if (response.ok) console.log(`🚀 IndexNow notified for: ${url}`);
-  } catch (err) {
-    console.error('❌ IndexNow notification failed:', err);
-  }
-}
 async function runAgent() {
   console.log('🤖 AI Blogger Agent Starting...');
 
@@ -103,7 +82,7 @@ async function runAgent() {
   console.log(`✍️ Generating content for: ${topic}...`);
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-5.2',
+    model: provider.model,
     messages: [
       {
         role: 'system',
@@ -147,14 +126,14 @@ async function runAgent() {
     style: 'normal',
   }));
 
-  // 5. Publish to Sanity
+  // 5. Save a draft for internal review; never publish or notify search engines.
   const slug = slugify(generatedPost.title, { lower: true, strict: true });
 
   const doc = {
+    _id: `drafts.${randomUUID()}`,
     _type: 'post',
     title: generatedPost.title,
     slug: { _type: 'slug', current: slug },
-    publishedAt: new Date().toISOString(),
     seoDescription: generatedPost.seoDescription,
     category: generatedPost.category,
     body: blocks,
@@ -162,45 +141,14 @@ async function runAgent() {
   };
 
   const createdPost = await sanity.create(doc);
-  console.log(`✅ Post published: ${createdPost.title} (${createdPost._id})`);
-
-  // Notify IndexNow
-  const postUrl = `https://ziaflow.com/blog/${slug}`;
-  await notifyIndexNow(postUrl);
-
-  // 6. Update Dashboard
-  // Remove the used topic
-  // Update last run time
-  const mutations = [];
-
-  if (topicsQueue && topicsQueue.length > 0 && topicsQueue[0] === topic) {
-    // Remove first element
-    // Sanity array removal can be tricky with unset by index, easiest is to filter
-    const newQueue = topicsQueue.slice(1);
-    mutations.push({ patch: { id: 'globalSeoDashboard', set: { topicsQueue: newQueue } } });
-  }
-
-  // If we used a keyword gap, we might want to remove it too, but let's stick to queue for now logic.
-
-  mutations.push({
-    patch: {
-      id: 'globalSeoDashboard',
-      set: {
-        lastRunTimestamp: new Date().toISOString(),
-        status: 'READY',
-      },
-    },
-  });
-
-  // Execute patches
-  for (const mut of mutations) {
-    await sanity.transaction().patch(mut.patch.id, mut.patch).commit();
-  }
-
-  console.log('🏁 Dashboard updated.');
+  console.log(`Draft saved for internal review (${createdPost._id}). Topic queue left unchanged.`);
 }
 
 runAgent().catch((err) => {
-  console.error('❌ Agent crashed:', err);
+  // SDK errors can include request details; log only the status and a safe action.
+  const status = err && typeof err === 'object' && 'status' in err ? err.status : 'unknown';
+  console.error(
+    `Blogger failed (status ${status}). Verify provider mode, endpoint, deployment/model, and credential. No publication was performed.`
+  );
   process.exit(1);
 });

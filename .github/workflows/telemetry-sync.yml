@@ -1,42 +1,31 @@
-name: Sync Telemetry & Run Agent Diagnostics
+name: Check Canonical Telemetry Freshness
 
 on:
   schedule:
-    # Run daily at 02:00 UTC (19:00 Phoenix MST)
     - cron: '0 2 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/check-telemetry-freshness.mjs'
+      - 'tests/telemetry-freshness.test.mjs'
+      - '.github/workflows/telemetry-sync.yml'
+
+permissions:
+  contents: read
 
 jobs:
-  telemetry-sync:
+  telemetry-health:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Sync Microsoft Clarity telemetry to Supabase
+          node-version: '22'
+      - name: Test freshness rules without network access
+        run: node --test tests/telemetry-freshness.test.mjs
+      - name: Check existing Supabase snapshots (no provider export)
+        if: github.event_name != 'pull_request'
         env:
-          CLARITY_API_TOKEN: ${{ secrets.CLARITY_API_TOKEN }}
-          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/sync-clarity-to-supabase.mjs
-
-      - name: Sync Google Analytics & Search Console metrics
-        env:
-          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/sync-google-metrics.mjs
-
-      - name: Run Agent UX & SEO Diagnostics
-        env:
-          PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/agent-ux-optimizer.mjs
+        run: node scripts/check-telemetry-freshness.mjs
