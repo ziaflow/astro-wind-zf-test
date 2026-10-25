@@ -1,0 +1,19 @@
+{
+  "status": "match",
+  "baseline_captured_at": "2026-10-24T01:05:41.932910+00:00",
+  "candidate_captured_at": "2026-10-25T15:05:54.355627+00:00",
+  "baseline_pages": 58,
+  "candidate_pages": 58,
+  "missing_paths": [],
+  "added_paths": [],
+  "changes": [],
+  "unavailable_fields": [],
+  "failed_captures": [],
+  "limitations": [
+    "Offline comparison only; no network requests or form submissions.",
+    "A match preserves captured defects too and is not release approval.",
+    "Schema types do not establish complete JSON-LD value parity.",
+    "Does not verify browser behavior, intermediate redirects, sitemap coverage, Sanity access, analytics or hosted lead persistence.",
+    "Copy hashes compare normalized main text including its order; intentional layout changes require review, not automatic approval."
+  ]
+}
