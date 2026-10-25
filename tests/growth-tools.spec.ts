@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
 const base = 'http://localhost:4321';
 test.beforeEach(async ({ page }) => {
+  // These are local application checks, not a Clarity integration test. Keep QA
+  // traffic out of live telemetry and avoid provider CORS failures in WebKit.
+  await page.route(/^https:\/\/(?:[a-z0-9-]+\.)*clarity\.ms\//i, (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' })
+  );
   page.on('pageerror', (error) => {
     throw error;
   });

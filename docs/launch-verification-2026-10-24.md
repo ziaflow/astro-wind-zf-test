@@ -37,3 +37,17 @@ Review the stacked CI repair and require passing remote browser checks, then com
 ClickUp read/write reconciliation must resume after its temporary quota reset; use the existing tasks above, not duplicates. Keep unresolved access/owner inputs in the existing Trello card https://trello.com/c/Bazo6h9E. Owner decisions still include final publishing approval and the verified booking destination. Existing Sanity/GA4 access gaps remain unverified in this run. Preserve the paused optimizer until its pause is reviewed; do not create a replacement.
 
 Rollback: revert only this browser-server configuration/workflow repair. Do not merge or release automatically. No production deployment, database change, client assignment, marketing activation or client message was performed.
+
+## Evening follow-up — October 24
+
+The remote run at 3b426e3 finished at 08:05 Phoenix: 38 passed, one failed, three live-QA cases skipped. The failed WebKit case was assessment-answer separation. All three attempts raised a Clarity collector access-control exception from scripts.clarity.ms while navigating between tools. This supersedes the earlier pending remote status; it is not a passing browser gate.
+
+The same draft now fulfills Clarity requests with an empty script in the growth-tool test setup before navigation. This isolates local application tests from the external telemetry service and keeps those QA events out of live Clarity. Application page errors still fail tests; no assertions, browsers, retries or live-intake gates were removed. Production analytics source and collector configuration are unchanged. This does not repair or verify deployed Clarity; retain a separate hosted analytics check.
+
+Current source is unchanged: main d49c0e3, PR #20 adafa15, PR #22 bbf4d26. Production remains READY at deployment dpl_9Et1HAoWsRfttSRdy59NytmUcbFa. No Kairo replacement or hosted persistence is inferred from these states.
+
+Fresh ClickUp list-scoped search returned all 13 delivery tasks (no additional page), including implementation, SEO baseline, intake and release gates. List details, individual task descriptions and the supplied 11-page map remain blocked by the temporary daily quota, with about 23 minutes left at the first evening check. Treat this scoped repair as continuation of the previously identified release-verification work; priority/dependency details could not be revalidated. No task status is changed.
+
+The existing monitor's October 24 run is recorded completed at 08:24 Phoenix, with a matching result. It reports the same browser failure, a legacy telemetry workflow failure, and main's Analytics no-var failure. It also reports a verified September 24–October 21 GSC snapshot (4 clicks, 347 impressions) and a 07:41 Clarity success with five active cron entries. These are attributed monitor results, not new database checks by this coordinator. Existing PR #20 already contains the Analytics declaration fix. No duplicate exporter or agent was created; the legacy telemetry issue remains separate work.
+
+Validation of the telemetry isolation: changed-test ESLint and formatting passed. The first local Chromium rerun could not launch because its browser executable was absent; no assertions executed. WebKit download reported missing system libraries. Exact-commit remote browser validation is required before this draft is accepted. The earlier 11/32 local results above belong to the morning tree and must not be attributed to this revision.
