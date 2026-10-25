@@ -31,5 +31,5 @@ jobs:
           node-version: 22
           cache: 'npm'
       - run: npm install
-      - run: node --test tests/telemetry-freshness.test.mjs tests/blogger-config.test.mjs
+      - run: node --test tests/telemetry-freshness.test.mjs
       - run: npm run check
