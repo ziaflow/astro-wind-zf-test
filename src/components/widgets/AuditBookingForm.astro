@@ -23,12 +23,13 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
     <form
       id="audit-booking-form"
       method="POST"
-      action="/_api/forms/audit"
+      action="/api/contact"
       class="space-y-4"
       data-ga-event="form_submission"
       data-ga-label="audit_booking"
     >
       <input type="hidden" name="form_type" value="audit_booking" />
+      <input type="hidden" name="service_interest" value="Growth Audit" />
       <input type="hidden" name="from_email" value="mailto:info@ziaflow.com" />
 
       {/* Anti-spam honeypot field */}
@@ -161,7 +162,16 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       e.preventDefault();
 
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
+      const rawData = Object.fromEntries(formData);
+
+      const fullName = [rawData.first_name, rawData.last_name].filter(Boolean).join(' ').trim() || rawData.name || '';
+      const payload = {
+        ...rawData,
+        name: fullName,
+        company: rawData.company_name || rawData.company || '',
+        service_interest: rawData.service_interest || 'Growth Audit',
+        idempotency_key: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+      };
 
       try {
         // Push to dataLayer for GTM tracking
@@ -169,27 +179,24 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
           window.dataLayer.push({
             event: 'form_submission',
             form_name: 'audit_booking',
-            email: data.email,
-            company: data.company_name,
+            email: payload.email,
+            company: payload.company,
           });
         }
 
-        // Submit form to serverless handler
-        const response = await fetch('/_api/forms/audit', {
+        // Submit form to unified contact handler
+        const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          body: JSON.stringify(payload),
         });
 
         if (response.ok) {
-          // Show success message
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
-
-          // Optional: Redirect after 2 seconds or perform other actions
-          // window.location.href = '/thank-you';
         } else {
-          alert('Something went wrong. Please try again.');
+          const errData = await response.json().catch(() => ({}));
+          alert(errData.message || 'Something went wrong. Please try again.');
         }
       } catch (error) {
         console.error('Form submission error:', error);
