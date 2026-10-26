@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-26T01:07:44.554464+00:00",
+  "legacy_ga4": {
+    "rows": 8,
+    "latest_date": "2026-10-16"
+  },
+  "limitations": [
+    "Catalog privileges are database-role evidence, not an external HTTP exploit test.",
+    "Service-role grant is not proof of a working internal consumer.",
+    "Cron enabled is not proof of successful execution.",
+    "No provider payloads, lead rows, credentials, or cron commands selected.",
+    "Legacy row counts and dates do not establish metric provenance or delivery."
+  ],
+  "view_access": [
+    {
+      "name": "view_unified_page_intelligence",
+      "anon_select": true,
+      "object_exists": true,
+      "service_select": true,
+      "security_invoker": false,
+      "authenticated_select": true
+    },
+    {
+      "name": "website_confirmed_leads_daily",
+      "anon_select": false,
+      "object_exists": true,
+      "service_select": true,
+      "security_invoker": true,
+      "authenticated_select": false
+    },
+    {
+      "name": "website_lead_observations",
+      "anon_select": false,
+      "object_exists": true,
+      "service_select": true,
+      "security_invoker": true,
+      "authenticated_select": false
+    }
+  ],
+  "source_snapshots": [
+    {
+      "grain": "period_aggregate",
+      "source": "gsc",
+      "property": "sc-domain:ziaflow.com",
+      "period_end": "2026-10-21",
+      "captured_at": "2026-10-24T15:21:51.840595+00:00",
+      "period_start": "2026-09-24"
+    },
+    {
+      "grain": "period_aggregate",
+      "source": "gsc",
+      "property": "sc-domain:ziaflow.com",
+      "period_end": "2026-10-20",
+      "captured_at": "2026-10-23T15:55:41.520586+00:00",
+      "period_start": "2026-09-23"
+    },
+    {
+      "grain": "period_aggregate",
+      "source": "gsc",
+      "property": "sc-domain:ziaflow.com",
+      "period_end": "2026-10-19",
+      "captured_at": "2026-10-22T23:47:02.345442+00:00",
+      "period_start": "2026-09-22"
+    }
+  ],
+  "active_cron_entries": 5,
+  "customerio_reporting": {
+    "rows": 0,
+    "latest_date": null
+  },
+  "clarity_latest_success": "2026-10-26T00:17:03.086+00:00",
+  "internal_view_access_gate": false
+}
