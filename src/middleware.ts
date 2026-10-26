@@ -31,11 +31,13 @@ async function getRedirects(): Promise<SanityRedirect[]> {
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  // 301 Redirect HTTP -> HTTPS
-  const forwardedProto = context.request.headers.get('x-forwarded-proto');
-  if (forwardedProto === 'http' || context.url.protocol === 'http:') {
-    const httpsUrl = new URL(context.url.pathname + context.url.search, 'https://ziaflow.com');
-    return context.redirect(httpsUrl.toString(), 301);
+  // 301 Redirect HTTP -> HTTPS (only in production)
+  if (!import.meta.env.DEV) {
+    const forwardedProto = context.request.headers.get('x-forwarded-proto');
+    if (forwardedProto === 'http' || context.url.protocol === 'http:') {
+      const httpsUrl = new URL(context.url.pathname + context.url.search, 'https://ziaflow.com');
+      return context.redirect(httpsUrl.toString(), 301);
+    }
   }
 
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';

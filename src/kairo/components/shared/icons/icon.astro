@@ -1,0 +1,15 @@
+---
+import { icons, type IconName } from '@/components/shared/icons/icons';
+import { cn } from '@/utils/cn';
+
+export type { IconName };
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<span class={cn('icon inline-block size-4 shrink-0', className)} aria-hidden="true" set:html={icons[name]} />

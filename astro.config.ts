@@ -132,7 +132,11 @@ export default defineConfig({
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
+        '@': path.resolve(__dirname, './src/kairo'),
       },
+    },
+    optimizeDeps: {
+      include: ['number-flow'],
     },
     ssr: {
       noExternal: ['@supabase/supabase-js'],

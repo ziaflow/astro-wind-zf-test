@@ -1,0 +1,136 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import PulseUnderline from '@/components/shared/ui/pulse-underline.astro';
+import SignalLine from '@/components/shared/ui/signal-line.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { footerContact, footerCopy, footerGroups, footerLegalLinks } from '@/data/footer';
+import { site } from '@/data/site';
+import { chars } from '@/utils/text';
+
+const word = chars(site.name.toUpperCase());
+const wordSize = `clamp(3rem, ${Math.min(23, 118 / word.length).toFixed(2)}vw, 22rem)`;
+---
+
+<footer class="relative z-0 overflow-hidden bg-ink-2 lg:sticky lg:bottom-0" data-footer>
+  <div class="shell pt-14 md:pt-16" data-footer-inner>
+    <!-- Top Contact Methods Banner -->
+    <div class="rounded-3xl border border-line bg-ink/70 p-6 md:p-10 backdrop-blur-xl mb-12">
+      <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between border-b border-line pb-6">
+        <div>
+          <span class="font-mono text-label text-signal uppercase tracking-wider">Get in Touch</span>
+          <h2 class="mt-1 font-display text-title font-bold text-bone">{footerContact.title}</h2>
+        </div>
+        <p class="max-w-[34ch] text-sm text-mute">{footerContact.subtitle}</p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+        {footerContact.methods.map((method) => (
+          <a
+            href={method.href}
+            target={method.href.startsWith('http') ? '_blank' : undefined}
+            rel={method.href.startsWith('http') ? 'noopener' : undefined}
+            class="group relative flex flex-col justify-between rounded-2xl border border-line bg-ink-2 p-5 transition-all duration-300 hover:border-signal hover:bg-ink-3">
+            <span class="font-mono text-label text-mute uppercase transition-colors group-hover:text-signal">
+              {method.label}
+            </span>
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <span class="font-display text-lg font-bold text-bone transition-colors group-hover:text-signal">
+                {method.value}
+              </span>
+              <span class="btn-icon size-4 text-mute transition-colors group-hover:text-signal" data-dir="right">
+                <Icon name="arrow-up-right" />
+                <Icon name="arrow-up-right" />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation Columns: Services, Blog, Company, Connect -->
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-12">
+      {footerGroups.map((group) => (
+        <div class={group.title === 'Services' ? 'md:col-span-5' : group.title === 'Blog' ? 'md:col-span-4' : 'md:col-span-3'}>
+          <h3 class="font-mono text-label font-bold text-mute uppercase tracking-wider">{group.title}</h3>
+          <ul class="mt-5 flex flex-col gap-2.5">
+            {group.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener' : undefined}
+                  class="group relative inline-flex text-sm text-mute transition-colors duration-300 hover:text-bone">
+                  <TextRoll text={link.label} />
+                  <PulseUnderline />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <SignalLine class="mt-8 h-20 md:mt-10 md:h-20" spike={0.18} />
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pt-4 text-sm text-mute">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <p>{footerCopy.legal}</p>
+        <div class="flex items-center gap-4 text-xs">
+          {footerLegalLinks.map((item, idx) => (
+            <>
+              {idx > 0 && <span>·</span>}
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener"
+                class="hover:text-bone transition-colors underline-offset-4 hover:underline">
+                {item.label}
+              </a>
+            </>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        class="group flex items-center gap-3 text-bone"
+        data-back-top
+        aria-label={footerCopy.backToTop}>
+        <span class="hidden sm:inline">
+          <TextRoll text={footerCopy.backToTop} />
+        </span>
+        <span class="relative grid size-11 place-items-center">
+          <svg viewBox="0 0 44 44" class="absolute inset-0 size-full -rotate-90" aria-hidden="true">
+            <circle cx="22" cy="22" r="21" fill="none" stroke="var(--color-line-strong)" stroke-width="1"></circle>
+            <circle
+              cx="22"
+              cy="22"
+              r="21"
+              fill="none"
+              stroke="var(--color-signal)"
+              stroke-width="1.5"
+              pathLength="1"
+              stroke-dasharray="1"
+              stroke-dashoffset="1"
+              data-back-top-ring></circle>
+          </svg>
+          <span class="btn-icon" data-dir="up">
+            <Icon name="arrow-up" />
+            <Icon name="arrow-up" />
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="relative pt-12" data-footer-mark aria-hidden="true">
+    <p
+      style={`font-size:${wordSize}`}
+      class="flex justify-center px-3 font-display leading-[0.82] font-extrabold tracking-[-0.06em] whitespace-nowrap text-bone"
+      data-footer-word>
+      {word.map((c, i) => (
+        <span class={i === word.length - 1 ? 'inline-block text-signal' : 'inline-block'} data-footer-letter>
+          {c}
+        </span>
+      ))}
+    </p>
+  </div>
+</footer>
