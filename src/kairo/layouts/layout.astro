@@ -6,6 +6,7 @@ import Menu from '@/components/shared/layout/menu.astro';
 import Navbar from '@/components/shared/layout/navbar.astro';
 import Transition from '@/components/shared/layout/transition.astro';
 import ViewChip from '@/components/shared/layout/view-chip.astro';
+import AIFloatingMenu from '~/components/common/AIFloatingMenu.astro';
 import { site } from '@/data/site';
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME } from '@/utils/generate-meta-data';
 
@@ -125,6 +126,7 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
     <Navbar />
     <Menu />
     <ViewChip />
+    <AIFloatingMenu variant="side" />
     <div class="relative z-10 bg-ink" data-page>
       <main id="main">
         <slot />

@@ -49,15 +49,26 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
           data-nav-progress></li>
       </ul>
     </nav>
-    <div class="pointer-events-auto flex items-center gap-2" data-nav-item>
+    <div class="pointer-events-auto flex items-center gap-2 sm:gap-3" data-nav-item>
+      <!-- Prominent Phone Number -->
+      <a
+        href="tel:+16028344239"
+        class="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink-2/90 px-3 sm:px-4 h-11 text-xs md:text-sm font-mono font-medium text-bone hover:border-signal hover:text-signal transition-all shadow-sm group"
+        aria-label="Call ZiaFlow directly at (602) 834-4239"
+      >
+        <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-signal group-hover:scale-110 transition-transform">📞</span>
+        <span class="font-bold tracking-tight text-bone group-hover:text-signal transition-colors">(602) 834-4239</span>
+      </a>
+
       <Button
         label={site.cta.secondary.label}
         href={site.cta.secondary.href}
         variant="outline"
         icon={false}
-        class="hidden h-11 xl:inline-flex"
+        class="hidden 2xl:inline-flex h-11"
       />
-      <Button label={site.cta.primary.label} href={site.cta.primary.href} class="h-11 max-xs:px-4" />
+      <Button label={site.cta.primary.label} href={site.cta.primary.href} class="h-11 max-sm:hidden" />
       <button
         type="button"
         class="grid size-11 place-items-center rounded-full border border-line bg-ink-2/70 backdrop-blur-xl lg:hidden"

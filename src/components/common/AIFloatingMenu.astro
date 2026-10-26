@@ -34,23 +34,35 @@ const platforms = [
   },
 ];
 
-const variant = Astro.props.variant ?? 'float';
+const variant = Astro.props.variant ?? 'side';
 const isInline = variant === 'inline';
+const isSide = variant === 'side';
 const rootId = isInline ? undefined : 'aiSummaryFloat';
 ---
 
 <div
   id={rootId}
-  class:list={['ai-summary-root', isInline ? 'ai-summary-inline' : 'ai-summary-float']}
+  class:list={[
+    'ai-summary-root',
+    isInline ? 'ai-summary-inline' : isSide ? 'ai-summary-side' : 'ai-summary-float',
+  ]}
   data-ai-summary-root
 >
   <button
-    class:list={['ai-summary-toggle', isInline && 'ai-summary-toggle-inline']}
+    class:list={[
+      'ai-summary-toggle',
+      isInline && 'ai-summary-toggle-inline',
+      isSide && 'ai-summary-toggle-side group',
+    ]}
     data-ai-toggle
     aria-label="Ask AI about ZiaFlow"
     type="button"
   >
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="relative flex items-center justify-center">
+      <span class="size-2 rounded-full bg-emerald-400 animate-ping absolute"></span>
+      <span class="size-2 rounded-full bg-emerald-400"></span>
+    </div>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M12 2L2 7L12 12L22 7L12 2Z"
         stroke="currentColor"
@@ -62,7 +74,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
       <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
       ></path>
     </svg>
-    <span>Ask AI</span>
+    <span class={isSide ? 'ai-side-text' : ''}>Ask AI</span>
   </button>
   <div class="ai-summary-menu" data-ai-menu>
     <div class="ai-summary-menu-header">
@@ -88,6 +100,83 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 <style>
   .ai-summary-root {
     z-index: 9999;
+  }
+
+  .ai-summary-side {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 9999;
+  }
+
+  .ai-summary-toggle-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 10px;
+    background: linear-gradient(180deg, #a22a36 0%, #7c1e29 100%);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-right: none;
+    border-radius: 16px 0 0 16px;
+    box-shadow: -4px 0 24px rgba(162, 42, 54, 0.5);
+    cursor: pointer;
+    min-width: 44px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ai-summary-toggle-side:hover {
+    transform: translateX(-4px);
+    box-shadow: -6px 0 32px rgba(162, 42, 54, 0.7);
+    background: #a22a36;
+  }
+
+  .ai-side-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .ai-summary-side .ai-summary-menu {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    margin-right: 12px;
+    background: #232323;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    min-width: 270px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ai-summary-side .ai-summary-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .ai-summary-side .ai-summary-menu-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .ai-summary-side .ai-summary-menu-link {
+    color: #b8b8b8;
+  }
+
+  .ai-summary-side .ai-summary-menu-link:hover {
+    background: #2c2c2c;
+    color: #ffffff;
   }
 
   .ai-summary-float {
