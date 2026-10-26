@@ -1,0 +1,14 @@
+# .github/dependabot.yml
+version: 2
+updates:
+  # Monitor and update Node.js dependencies (Astro, Tailwind, etc.)
+  - package-ecosystem: "npm" 
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+
+  # Monitor and update GitHub Actions workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
