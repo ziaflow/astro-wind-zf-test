@@ -29,9 +29,7 @@ export default defineConfig({
   site: 'https://ziaflow.com',
   output: 'static',
   adapter: vercel(),
-  experimental: {
-    parallelPrerender: true,
-  },
+
 
   integrations: [
     tailwind({

@@ -4,6 +4,9 @@
       "type": "stdio",
       "command": "tessl",
       "args": ["mcp", "start"]
+    },
+    "vercel": {
+      "url": "https://mcp.vercel.com"
     }
   }
 }

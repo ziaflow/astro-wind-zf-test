@@ -31,6 +31,12 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       <input type="hidden" name="form_type" value="audit_booking" />
       <input type="hidden" name="from_email" value="mailto:info@ziaflow.com" />
 
+      {/* Anti-spam honeypot field */}
+      <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+        <label for="audit_website_url">Leave this field blank</label>
+        <input type="text" id="audit_website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
+      </div>
+
       <!-- First Name -->
       <div>
         <label for="first_name" class="block text-sm font-medium text-slate-900 dark:text-white mb-1">

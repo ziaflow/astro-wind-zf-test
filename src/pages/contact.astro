@@ -3,11 +3,11 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import { BUSINESS_PHONE } from '~/utils/utils';
 
 const metadata = {
   title: 'Contact ZiaFlow - Digital Transformation Experts in Phoenix',
-  description:
-    'Get in touch with ZiaFlow. Call (602) 834-4239 or schedule your free consultation for custom development, automation, and digital marketing solutions.',
+  description: `Get in touch with ZiaFlow. Call ${BUSINESS_PHONE.display} or schedule your free consultation for custom development, automation, and digital marketing solutions.`,
 };
 ---
 
@@ -19,7 +19,7 @@ const metadata = {
     subtitle="Ready to transform your business? Call us directly for immediate assistance or send us your project details below."
     callToAction={{
       variant: 'primary',
-      text: '📞 (602) 834-4239',
+      text: `📞 ${BUSINESS_PHONE.display}`,
       href: 'tel:+16028344239',
       class:
         'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
@@ -113,10 +113,10 @@ const metadata = {
       },
       {
         title: 'Phone',
-        description: 'Direct line for new inquiries and support: (602) 834-4239',
+        description: `Direct line for new inquiries and support: ${BUSINESS_PHONE.display}`,
         icon: 'tabler:phone-call',
         callToAction: {
-          text: '📞 (602) 834-4239',
+          text: `📞 ${BUSINESS_PHONE.display}`,
           href: 'tel:+16028344239',
           variant: 'primary',
           class:
