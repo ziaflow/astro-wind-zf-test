@@ -131,12 +131,15 @@ const services: ServiceItem[] = [
                 </div>
               </div>
 
+              {/* Title */}
               <h3 class="text-xl font-bold font-heading text-white mb-3 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
 
+              {/* Description */}
               <p class="text-slate-400 text-sm leading-relaxed mb-6">{service.description}</p>
 
+              {/* Highlights Checklist */}
               <ul class="space-y-2 mb-8">
                 {service.highlights.map((h) => (
                   <li class="flex items-start text-xs text-slate-300">
@@ -147,6 +150,7 @@ const services: ServiceItem[] = [
               </ul>
             </div>
 
+            {/* Bottom Action Link */}
             <a
               href={service.link}
               class="inline-flex items-center text-sm font-semibold text-white group-hover:text-[#3f9b93] transition-colors mt-auto pt-4 border-t border-slate-800/60"

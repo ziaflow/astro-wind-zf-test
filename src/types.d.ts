@@ -188,7 +188,6 @@ export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
   text?: string;
   icon?: string;
   classes?: Record<string, string> | string;
-  class?: string;
   type?: 'button' | 'submit' | 'reset';
 }
 

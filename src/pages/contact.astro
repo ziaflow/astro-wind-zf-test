@@ -6,7 +6,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import { BUSINESS_PHONE } from '~/utils/utils';
 
 const metadata = {
-  title: 'Contact ZiaFlow - Digital Transformation Experts in Phoenix',
+  title: 'Contact Our Phoenix Digital Agency',
   description: `Get in touch with ZiaFlow. Call ${BUSINESS_PHONE.display} or schedule your free consultation for custom development, automation, and digital marketing solutions.`,
 };
 ---
@@ -21,8 +21,9 @@ const metadata = {
       variant: 'primary',
       text: `📞 ${BUSINESS_PHONE.display}`,
       href: 'tel:+16028344239',
-      class:
-        'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+      classes: {
+        btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
+      },
     }}
     callToAction2={{
       variant: 'secondary',

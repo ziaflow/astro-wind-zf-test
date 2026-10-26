@@ -58,6 +58,8 @@ export default [
       'dist',
       'node_modules',
       '.github',
+      '.vercel',
+      '.agent',
       'types.generated.d.ts',
       '.astro',
       '.sanity',

@@ -101,3 +101,43 @@ const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.goo
     )
   }
 </>
+
+<script is:inline>
+  (function () {
+    var PHONE_DIGITS = "6028344239";
+
+    document.addEventListener("click", function (e) {
+      var link = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
+      if (!link) return;
+
+      var href = link.getAttribute("href") || "";
+      var digits = href.replace(/\D/g, "");
+      if (digits.slice(-10) !== PHONE_DIGITS) return;
+
+      var props = {
+        phone_number: "(602) 834-4239",
+        page_url: window.location.href,
+        page_path: window.location.pathname,
+        link_text: (link.textContent || "").trim().slice(0, 100)
+      };
+
+      // Customer.io JavaScript snippet (legacy) or the newer JS source
+      if (window._cio && typeof window._cio.track === "function") {
+        window._cio.track("phone_click", props);
+      } else if (window.analytics && typeof window.analytics.track === "function") {
+        window.analytics.track("phone_click", props);
+      }
+
+      // Google Analytics / GTM fallback
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: "phone_click",
+          ...props
+        });
+      }
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "phone_click", props);
+      }
+    }, { passive: true });
+  })();
+</script>
