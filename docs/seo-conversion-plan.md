@@ -163,3 +163,12 @@ User-supplied coordination references (contents/updates not independently verifi
 
 - Launch charter: https://app.clickup.com/t/17tnw2b8wta
 - Content migration/requirements: https://app.clickup.com/t/17tnw2b8wtg
+
+
+## Verified weekly review — October 25, 2026
+
+See [the weekly connection and search review](analytics-review-2026-10-25.md) and its companion notebook for the October 19–25 evidence and revised execution order. This update supersedes stale completion claims, but preserves the newer user direction to retain existing copy/pages/SEO while changing the Kairo presentation.
+
+The deployed contact form currently posts to Web3Forms. Its connection to durable Supabase receipts is unverified; main contact.ts still has conditional writes and a success path without verified insert results. The browser event contact_form_submitted does not match draft Customer.io campaign 3's form_submit trigger. Restore one tested intake/event contract before declaring the funnel ready. The earlier claim of zero October 22 inquiries is superseded by two recorded non-test submissions and five excluded tests.
+
+Fix operational/release gates, prove isolated receipt-backed intake, review reporting access, connect GA4 reporting and lifecycle outcomes, then refresh existing automation/conversion articles using the finalized 28-day GSC baseline. Seven-day GSC totals remain unavailable from the connected API. Remove the AI blogger through PR #26 rather than repairing its credentials. Preserve all marketing, publication and merge review gates.
