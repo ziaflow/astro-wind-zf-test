@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { createHash } from 'crypto';
+import crypto, { createHash } from 'node:crypto';
 import { supabaseAdmin } from '~/lib/supabase-admin';
 
 export const prerender = false;
@@ -24,26 +24,85 @@ interface CustomerIoWebhookEvent {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  // 1. Optional Secret Verification (if configured in env)
-  const expectedSecret = import.meta.env.CUSTOMER_IO_WEBHOOK_SECRET;
-  if (expectedSecret) {
-    const authHeader = request.headers.get('authorization') || '';
-    const secretHeader = request.headers.get('x-cio-webhook-secret') || '';
-    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  // 1. Read raw request body as text BEFORE any JSON parsing (preserves exact bytes for HMAC)
+  let rawBody: string;
+  try {
+    rawBody = await request.text();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Failed to read request body' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
-    if (token !== expectedSecret && secretHeader !== expectedSecret) {
-      console.warn('[customerio-webhook] unauthorized access attempt');
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+  // 2. Customer.io Cryptographic Signature Verification
+  const signingKey = import.meta.env.CIO_WEBHOOK_SIGNING_KEY || import.meta.env.CUSTOMER_IO_WEBHOOK_SIGNING_KEY;
+  const timestamp = request.headers.get('x-cio-timestamp') ?? '';
+  const signature = request.headers.get('x-cio-signature') ?? '';
+
+  if (signingKey) {
+    if (!timestamp || !signature) {
+      console.warn('[customerio-webhook] rejected: missing x-cio-timestamp or x-cio-signature header');
+      return new Response(JSON.stringify({ error: 'Missing signature headers' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    // Replay defense: verify timestamp is within a 5-minute (300 seconds) tolerance window
+    const parsedTimestamp = Number(timestamp);
+    if (!isNaN(parsedTimestamp)) {
+      const currentSeconds = Math.floor(Date.now() / 1000);
+      if (Math.abs(currentSeconds - parsedTimestamp) > 300) {
+        console.warn(`[customerio-webhook] rejected: timestamp out of tolerance (${timestamp} vs ${currentSeconds})`);
+        return new Response(JSON.stringify({ error: 'Timestamp expired' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
+    // Recompute signature: v0:<timestamp>:<raw body>
+    const expected = crypto
+      .createHmac('sha256', signingKey)
+      .update(`v0:${timestamp}:${rawBody}`)
+      .digest('hex');
+
+    const expectedBuffer = Buffer.from(expected);
+    const signatureBuffer = Buffer.from(signature);
+
+    if (
+      expectedBuffer.length !== signatureBuffer.length ||
+      !crypto.timingSafeEqual(expectedBuffer, signatureBuffer)
+    ) {
+      console.warn('[customerio-webhook] rejected: signature mismatch');
+      return new Response(JSON.stringify({ error: 'Invalid signature' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+  } else {
+    // Fallback: Optional legacy bearer token check if signing key is not yet configured
+    const legacySecret = import.meta.env.CUSTOMER_IO_WEBHOOK_SECRET;
+    if (legacySecret) {
+      const authHeader = request.headers.get('authorization') || '';
+      const secretHeader = request.headers.get('x-cio-webhook-secret') || '';
+      const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+
+      if (token !== legacySecret && secretHeader !== legacySecret) {
+        console.warn('[customerio-webhook] unauthorized access attempt (legacy check)');
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
   }
 
-  // 2. Parse Payload (supports single object or batch array)
-  let rawBody: unknown;
+  // 3. Parse JSON from verified raw body
+  let parsedPayload: unknown;
   try {
-    rawBody = await request.json();
+    parsedPayload = JSON.parse(rawBody || '{}');
   } catch {
     return new Response(JSON.stringify({ error: 'Invalid JSON payload' }), {
       status: 400,
@@ -51,10 +110,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const events: CustomerIoWebhookEvent[] = Array.isArray(rawBody)
-    ? rawBody
-    : typeof rawBody === 'object' && rawBody !== null
-      ? [rawBody as CustomerIoWebhookEvent]
+  const events: CustomerIoWebhookEvent[] = Array.isArray(parsedPayload)
+    ? parsedPayload
+    : typeof parsedPayload === 'object' && parsedPayload !== null
+      ? [parsedPayload as CustomerIoWebhookEvent]
       : [];
 
   if (events.length === 0) {
@@ -72,7 +131,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  // 3. Normalize records for idempotent upsert
+  // 4. Normalize records for idempotent upsert
   const records = events.map((event) => {
     const data = event.data || {};
     const recipient = String(data.recipient || data.email || event.recipient || 'unknown').toLowerCase();
@@ -116,7 +175,7 @@ export const POST: APIRoute = async ({ request }) => {
     };
   });
 
-  // 4. Ingest into Supabase (idempotent: ignoreDuplicates on conflict with event_id)
+  // 5. Ingest into Supabase (idempotent: ignoreDuplicates on conflict with event_id)
   const { error: insertError } = await supabaseAdmin
     .from('email_delivery_events')
     .upsert(records, { onConflict: 'event_id', ignoreDuplicates: true });

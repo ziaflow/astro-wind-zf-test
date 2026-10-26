@@ -64,4 +64,10 @@ This playbook documents verified best practices, debugging workflows, and quirks
   1. Go to **Settings** -> **Workspace Settings** -> **Reporting Webhooks**.
   2. Add Webhook URL: `https://ziaflow.com/api/webhooks/customerio`.
   3. Select events: Delivery, Open, Click, Bounce, Failure, Unsubscribe.
+  4. Copy the webhook **Signing Key** and add it as `CIO_WEBHOOK_SIGNING_KEY` in Vercel environment variables.
+* **Cryptographic Signature Verification:**
+  - Headers read: `X-CIO-Timestamp` and `X-CIO-Signature`.
+  - Signed string format: `v0:<timestamp>:<raw body>`.
+  - Verification: Computes `crypto.createHmac('sha256', CIO_WEBHOOK_SIGNING_KEY)` over the exact unparsed `request.text()` body and compares with `crypto.timingSafeEqual`.
+  - Replay Defense: Rejects requests where `X-CIO-Timestamp` differs from server time by more than 300 seconds (5 minutes).
 * **Idempotency:** Events are deduped on `event_id` with Postgres `onConflict: 'event_id', ignoreDuplicates: true`.
