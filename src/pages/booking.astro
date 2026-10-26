@@ -1,11 +1,12 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import BookingFrame from '~/components/common/BookingFrame.astro';
+import AuditBookingForm from '~/components/widgets/AuditBookingForm.astro';
 
 const metadata = {
   title: 'Book a Strategy Session | ZiaFlow',
   description:
-    'Schedule a free strategy session with ZiaFlow. Access the Microsoft Bookings calendar to reserve your spot in seconds.',
+    'Schedule a free strategy session with ZiaFlow. Book via calendar or request a complimentary 48-hour video growth audit.',
 };
 ---
 
@@ -15,11 +16,22 @@ const metadata = {
       <p class="text-sm font-semibold uppercase tracking-[0.3em] text-secondary mb-4">Book Instantly</p>
       <h1 class="text-4xl font-bold font-heading mb-4">Schedule Your Call with ZiaFlow</h1>
       <p class="text-lg text-muted">
-        Use the embedded Microsoft Bookings calendar below to find a time that works best for you. If the calendar
-        doesn&rsquo;t load, use the fallback link provided beneath the embed.
+        Use the embedded calendar below to select a time that fits your schedule, or request an asynchronous video audit below.
       </p>
     </div>
 
     <BookingFrame />
+
+    <div class="mt-20 pt-16 border-t border-slate-200 dark:border-slate-800">
+      <div class="text-center mb-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-2">No Meeting Required</p>
+        <h2 class="text-3xl font-bold font-heading mb-3">Prefer an Asynchronous Video Audit?</h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Share your website and business objectives below. We will record a personalized forensic video audit analyzing your site speed, SEO visibility, and conversion leaks within 48 hours.
+        </p>
+      </div>
+
+      <AuditBookingForm />
+    </div>
   </section>
 </Layout>

@@ -52,6 +52,16 @@ This playbook documents verified best practices, debugging workflows, and quirks
   "lead_id": "lead_uuid_here",
   "form_type": "contact_us",
   "is_test": false,
-  "idempotency_key": "sub_uuid_here"
-}
 ```
+
+---
+
+## 6. Downstream Delivery Telemetry (Reporting Webhooks)
+* **Ingest Endpoint:** `POST https://ziaflow.com/api/webhooks/customerio`
+* **Destination Table:** `public.email_delivery_events`
+* **Supported Events:** `email_delivered`, `email_opened`, `email_clicked`, `email_bounced`, `email_failed`, `email_spammed`, `email_unsubscribed`.
+* **Configuration in Customer.io:**
+  1. Go to **Settings** -> **Workspace Settings** -> **Reporting Webhooks**.
+  2. Add Webhook URL: `https://ziaflow.com/api/webhooks/customerio`.
+  3. Select events: Delivery, Open, Click, Bounce, Failure, Unsubscribe.
+* **Idempotency:** Events are deduped on `event_id` with Postgres `onConflict: 'event_id', ignoreDuplicates: true`.

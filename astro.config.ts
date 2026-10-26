@@ -97,6 +97,8 @@ export default defineConfig({
   // REDIRECTS: Managing Link Equity (301s)
   redirects: {
     '/old-service-page': '/services/web-development',
+    '/local-visibility-check': '/audit',
+    '/website-project-estimator': '/audit',
   },
 
   image: {
