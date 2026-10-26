@@ -36,7 +36,11 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap({
-      filter: (page) => !page.includes('/admin') && !page.includes('/staging'),
+      filter: (page) =>
+        !page.includes('/admin') &&
+        !page.includes('/staging') &&
+        !page.includes('/category/') &&
+        !page.includes('/tag/'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -99,6 +103,20 @@ export default defineConfig({
     '/old-service-page': '/services/web-development',
     '/local-visibility-check': '/audit',
     '/website-project-estimator': '/audit',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/guide-to-web-development-2026':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/2026-web-development-guide':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/case-studies/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
+    '/case-studies/phoenix-commercial-hvac': '/phoenix-commercial-hvac-lead-intake',
   },
 
   image: {

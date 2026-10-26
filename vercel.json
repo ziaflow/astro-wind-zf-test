@@ -1,7 +1,70 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-forwarded-proto",
+          "value": "http"
+        }
+      ],
+      "destination": "https://ziaflow.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/guide-to-web-development-2026",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/2026-web-development-guide",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/phoenix-commercial-hvac-lead-intake",
+      "destination": "/phoenix-commercial-hvac-lead-intake",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/:path*",
+      "destination": "/services/automation",
+      "permanent": true
+    }
+  ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
     {
       "source": "/_astro/(.*)",
       "headers": [

@@ -31,6 +31,13 @@ async function getRedirects(): Promise<SanityRedirect[]> {
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
+  // 301 Redirect HTTP -> HTTPS
+  const forwardedProto = context.request.headers.get('x-forwarded-proto');
+  if (forwardedProto === 'http' || context.url.protocol === 'http:') {
+    const httpsUrl = new URL(context.url.pathname + context.url.search, 'https://ziaflow.com');
+    return context.redirect(httpsUrl.toString(), 301);
+  }
+
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';
 
   // Rate limiting for public lead intake endpoint (max 50 requests/minute per IP)
@@ -55,6 +62,28 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Skip static assets and internal requests
   if (pathname.startsWith('/_astro') || pathname.startsWith('/api') || pathname.startsWith('/favicon')) {
     return next();
+  }
+
+  // Built-in 301 Redirect for duplicate Web Dev 2026 guide
+  if (
+    pathname === '/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites' ||
+    pathname === '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites' ||
+    pathname === '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites' ||
+    pathname === '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites' ||
+    pathname === '/guide-to-web-development-2026' ||
+    pathname === '/2026-web-development-guide'
+  ) {
+    return context.redirect(
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+      301
+    );
+  }
+
+  if (
+    pathname === '/case-studies/phoenix-commercial-hvac-lead-intake' ||
+    pathname === '/case-studies/phoenix-commercial-hvac'
+  ) {
+    return context.redirect('/phoenix-commercial-hvac-lead-intake', 301);
   }
 
   const redirects = await getRedirects();
