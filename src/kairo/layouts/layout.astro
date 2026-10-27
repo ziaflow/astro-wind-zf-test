@@ -7,6 +7,10 @@ import Navbar from '@/components/shared/layout/navbar.astro';
 import Transition from '@/components/shared/layout/transition.astro';
 import ViewChip from '@/components/shared/layout/view-chip.astro';
 import AIFloatingMenu from '~/components/common/AIFloatingMenu.astro';
+import Analytics from '~/components/common/Analytics.astro';
+import AnalyticsBody from '~/components/common/AnalyticsBody.astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import VercelAnalytics from '@vercel/analytics/astro';
 import { site } from '@/data/site';
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME } from '@/utils/generate-meta-data';
 
@@ -114,8 +118,12 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
         opacity: 0;
       }
     </style>
+    <Analytics />
+    <SpeedInsights />
+    <VercelAnalytics />
   </head>
   <body>
+    <AnalyticsBody />
     <a
       href="#main"
       class="fixed top-3 left-3 z-[110] -translate-y-24 rounded-full bg-bone px-4 py-2 text-sm text-ink focus:translate-y-0">
