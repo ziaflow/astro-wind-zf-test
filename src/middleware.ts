@@ -39,16 +39,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const ip = getClientIp(context.request);
     const { allowed, resetInSeconds } = checkRateLimit(ip, { maxRequests: 50, windowMs: 60_000 });
     if (!allowed) {
-      return new Response(
-        JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }),
-        {
-          status: 429,
-          headers: {
-            'Content-Type': 'application/json',
-            'Retry-After': String(resetInSeconds),
-          },
-        }
-      );
+      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(resetInSeconds),
+        },
+      });
     }
   }
 
