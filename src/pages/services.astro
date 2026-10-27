@@ -7,11 +7,11 @@ import Steps from '~/components/widgets/Steps.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import { BUSINESS_PHONE } from '~/utils/utils';
 
 const metadata = {
   title: 'Phoenix Home Service Marketing | ZiaFlow',
-  description:
-    'Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call (602) 834-4239 to grow your booked leads.',
+  description: `Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call ${BUSINESS_PHONE.display} to grow your booked leads.`,
 };
 ---
 
@@ -38,7 +38,7 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: '📞 (602) 834-4239',
+        text: `📞 ${BUSINESS_PHONE.display}`,
         href: 'tel:+16028344239',
         classes: {
           btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
@@ -289,7 +289,7 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: '📞 (602) 834-4239',
+        text: `📞 ${BUSINESS_PHONE.display}`,
         href: 'tel:+16028344239',
         classes: {
           btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',

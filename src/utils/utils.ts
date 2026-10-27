@@ -1,5 +1,11 @@
 import { I18N } from 'astrowind:config';
 
+export const BUSINESS_PHONE = {
+  raw: '+16028344239',
+  display: '(602) 834-4239',
+  href: 'tel:+16028344239',
+};
+
 export const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(I18N?.language, {
   year: 'numeric',
   month: 'short',

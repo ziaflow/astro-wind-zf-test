@@ -6,6 +6,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import { BUSINESS_PHONE } from '~/utils/utils';
 
 const metadata = {
   title: 'Pricing & Transparent Packages',
@@ -49,7 +50,7 @@ const metadata = {
           },
         ],
         callToAction: {
-          text: '📞 (602) 834-4239',
+          text: `📞 ${BUSINESS_PHONE.display}`,
           href: 'tel:+16028344239',
         },
       },
@@ -76,7 +77,7 @@ const metadata = {
           },
         ],
         callToAction: {
-          text: '📞 (602) 834-4239',
+          text: `📞 ${BUSINESS_PHONE.display}`,
           href: 'tel:+16028344239',
         },
         hasRibbon: true,
@@ -102,7 +103,7 @@ const metadata = {
           },
         ],
         callToAction: {
-          text: '📞 (602) 834-4239',
+          text: `📞 ${BUSINESS_PHONE.display}`,
           href: 'tel:+16028344239',
         },
       },

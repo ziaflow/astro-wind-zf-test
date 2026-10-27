@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+dist
+.output
+.vercel
+.ziaflow-ops
+outputs
+astro-wind-zf-test
+studio-gemini-blog
+gemini-blog
+tests
+playwright-report
+test-results

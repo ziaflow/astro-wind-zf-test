@@ -12,11 +12,11 @@ import Brands from '~/components/widgets/Brands.astro';
 
 import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import Content from '~/components/widgets/Content.astro';
+import { BUSINESS_PHONE } from '~/utils/utils';
 
 const metadata = {
   title: 'Phoenix Web Development & Digital Marketing Agency | ZiaFlow',
-  description:
-    'Custom websites, strategic SEO, PPC, and automation for Arizona businesses. Call (602) 834-4239 or schedule a free consultation with our Phoenix team.',
+  description: `Custom websites, strategic SEO, PPC, and automation for Arizona businesses. Call ${BUSINESS_PHONE.display} or schedule a free consultation with our Phoenix team.`,
   ignoreTitleTemplate: true,
   openGraph: {
     url: 'https://ziaflow.com/',
@@ -24,8 +24,7 @@ const metadata = {
     type: 'website',
     locale: 'en',
     title: 'ZiaFlow | Custom Software & AI Automation Agents',
-    description:
-      'Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. Call (602) 834-4239 to engineer your growth solutions with ZiaFlow.',
+    description: `Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. Call ${BUSINESS_PHONE.display} to engineer your growth solutions with ZiaFlow.`,
     images: [
       {
         url: 'https://gmldsdtmahtgrbwwowtn.supabase.co/storage/v1/object/sign/website-test/img/Gemini_Generated_Image_k750obk750obk750.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82M2Y5NTg4Mi1kODM0LTQ5NDAtOGZmMy1hZjRjYjFhMTgxMTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3ZWJzaXRlLXRlc3QvaW1nL0dlbWluaV9HZW5lcmF0ZWRfSW1hZ2Vfazc1MG9iazc1MC5wbmciLCJpYXQiOjE3NjU3NzcyNjIsImV4cCI6MTc2ODM2OTI2Mn0.hgxadaMuQQ09A97vMrpIxODVc0Ehe7ROPAn64N1yTOU',
@@ -178,7 +177,7 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: '📞 (602) 834-4239',
+        text: `📞 ${BUSINESS_PHONE.display}`,
         href: 'tel:+16028344239',
         classes: {
           btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
@@ -241,7 +240,7 @@ const metadata = {
         title: 'Call Us Now',
         icon: 'tabler:phone-call',
         callToAction: {
-          text: '📞 (602) 834-4239',
+          text: `📞 ${BUSINESS_PHONE.display}`,
           href: 'tel:+16028344239',
           variant: 'link',
         },

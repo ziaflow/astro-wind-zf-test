@@ -33,6 +33,22 @@ async function getRedirects(): Promise<SanityRedirect[]> {
 export const onRequest = defineMiddleware(async (context, next) => {
   const pathname = context.url.pathname.replace(/\/$/, '') || '/';
 
+  // Rate limiting for public lead intake endpoint (max 50 requests/minute per IP)
+  if (pathname === '/api/contact' && context.request.method === 'POST') {
+    const { checkRateLimit, getClientIp } = await import('~/lib/rate-limiter');
+    const ip = getClientIp(context.request);
+    const { allowed, resetInSeconds } = checkRateLimit(ip, { maxRequests: 50, windowMs: 60_000 });
+    if (!allowed) {
+      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(resetInSeconds),
+        },
+      });
+    }
+  }
+
   // Skip static assets and internal requests
   if (pathname.startsWith('/_astro') || pathname.startsWith('/api') || pathname.startsWith('/favicon')) {
     return next();

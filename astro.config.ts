@@ -29,9 +29,6 @@ export default defineConfig({
   site: 'https://ziaflow.com',
   output: 'static',
   adapter: vercel(),
-  experimental: {
-    parallelPrerender: true,
-  },
 
   integrations: [
     tailwind({
@@ -99,6 +96,8 @@ export default defineConfig({
   // REDIRECTS: Managing Link Equity (301s)
   redirects: {
     '/old-service-page': '/services/web-development',
+    '/local-visibility-check': '/audit',
+    '/website-project-estimator': '/audit',
   },
 
   image: {
@@ -115,6 +114,9 @@ export default defineConfig({
       alias: {
         '~': path.resolve(__dirname, './src'),
       },
+    },
+    ssr: {
+      noExternal: ['@supabase/supabase-js'],
     },
   },
 });

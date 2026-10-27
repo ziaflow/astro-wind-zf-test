@@ -41,6 +41,16 @@ if (!useNodemailer && !resolvedAccessKey) {
   {!useNodemailer && redirect && <input type="hidden" name="redirect" value={redirect} />}
   {!useNodemailer && <input type="hidden" name="subject" value={subject} />}
   {!useNodemailer && <input type="hidden" name="from_name" value={fromName} />}
+  {/* Anti-spam honeypot field: invisible to humans, traps automated spam bots */}
+  <div
+    class="opacity-0 absolute -z-10 select-none pointer-events-none"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <label for="website_url">Leave this field blank</label>
+    <input type="text" id="website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
+  </div>
   <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" tabindex="-1" />
 
   {
@@ -156,7 +166,13 @@ if (!useNodemailer && !resolvedAccessKey) {
         resultEl.classList.remove('text-green-500', 'text-red-500');
 
         const formData = new FormData(form);
-        const payload = JSON.stringify(Object.fromEntries(formData.entries()));
+        const fields = Object.fromEntries(formData.entries());
+        // Same-origin server intake dedupes retries using one key per submission attempt.
+        if (actionUrl.startsWith('/')) {
+          form.dataset.idempotencyKey = form.dataset.idempotencyKey || crypto.randomUUID();
+          fields.idempotency_key = form.dataset.idempotencyKey;
+        }
+        const payload = JSON.stringify(fields);
 
         try {
           const response = await fetch(actionUrl, {
@@ -203,6 +219,7 @@ if (!useNodemailer && !resolvedAccessKey) {
               console.warn('Customer.io client dispatch note:', cioErr);
             }
 
+            delete form.dataset.idempotencyKey;
             form.reset();
           } else {
             resultEl.textContent = data.message || errorMessage || 'Submission failed.';

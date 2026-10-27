@@ -21,10 +21,10 @@ const fallbackId = `booking-fallback-${Math.random().toString(36).slice(2, 9)}`;
   </div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ iframeId, fallbackId }}>
   (() => {
-    const iframe = document.getElementById('${iframeId}');
-    const fallback = document.getElementById('${fallbackId}');
+    const iframe = document.getElementById(iframeId);
+    const fallback = document.getElementById(fallbackId);
     if (!iframe || !fallback) return;
 
     const hideFallback = () => fallback.classList.add('booking-fallback--hidden');
