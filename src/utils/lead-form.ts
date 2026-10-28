@@ -54,14 +54,17 @@ export function bindLeadForms() {
         // Honeypot responses have no receipt. Never count them as accepted leads.
         if (result.submission_id && !result.duplicate) {
           try {
-            const analytics = window as Window & { dataLayer?: unknown[] };
-            analytics.dataLayer = analytics.dataLayer || [];
-            analytics.dataLayer.push({
-              event: 'generate_lead',
+            const analytics = window as Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+            const properties = {
               form_type: payload.form_type,
               page_path: payload.page,
               submission_id: result.submission_id,
-            });
+            };
+            if (typeof analytics.gtag === 'function') analytics.gtag('event', 'generate_lead', properties);
+            else {
+              analytics.dataLayer = analytics.dataLayer || [];
+              analytics.dataLayer.push({ event: 'generate_lead', ...properties });
+            }
           } catch {
             // Analytics availability must never turn a saved inquiry into an error.
           }

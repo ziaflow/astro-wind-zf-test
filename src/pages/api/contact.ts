@@ -118,14 +118,15 @@ export const POST: APIRoute = async ({ request }) => {
     const testToken = import.meta.env.TEST_SUBMISSION_TOKEN;
     const isTest = Boolean(testToken) && request.headers.get('x-test-token') === testToken;
 
+    let pageSubmittedFrom = sourcePath(data, request.headers.get('referer'));
+
     // Deduplication key: client idempotency key, else a hash of the content within a 10-minute window.
     const dedupKey = idempotencyKey
       ? `client:${idempotencyKey}`
       : `hash:${createHash('sha256')
-          .update([email, message, String(otherData.page ?? ''), Math.floor(Date.now() / 600000)].join('|'))
+          .update([email, message, pageSubmittedFrom, Math.floor(Date.now() / 600000)].join('|'))
           .digest('hex')}`;
 
-    const pageSubmittedFrom = sourcePath(data, request.headers.get('referer'));
     otherData.page = pageSubmittedFrom;
     otherData.page_url = `https://ziaflow.com${pageSubmittedFrom}`;
     for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
@@ -166,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
       // Retry or simultaneous duplicate: reuse the existing receipt instead of creating another.
       const { data: existing, error: lookupError } = await supabaseAdmin
         .from('lead_submissions')
-        .select('id, status, payload, is_test')
+        .select('id, status, payload, is_test, page_submitted_from')
         .eq('dedup_key', dedupKey)
         .single();
       if (lookupError || !existing) {
@@ -178,6 +179,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
       receiptPayload = existing.payload;
       receiptIsTest = existing.is_test;
+      pageSubmittedFrom = existing.page_submitted_from || pageSubmittedFrom;
       submissionId = existing.id;
       alreadyPersisted = existing.status === 'persisted';
     } else {
@@ -185,21 +187,23 @@ export const POST: APIRoute = async ({ request }) => {
       return json({ message: 'We could not save your message. Please try again.' }, 500);
     }
 
+    const savedExtra = (receiptPayload.extra || {}) as Record<string, unknown>;
+
     // 2. Lead linked to the receipt. Unique submission_id means a retry can never create a second lead.
     if (!alreadyPersisted) {
       const { error: leadError } = await supabaseAdmin.from('leads').upsert(
         {
           submission_id: submissionId,
-          name: name || null,
-          email,
-          phone: phone || null,
-          company_name: company || otherData.company_name || null,
-          service_needed: serviceInterest || otherData.service_needed || 'Contact Inquiry',
-          comments: message || null,
+          name: receiptPayload.name || null,
+          email: receiptPayload.email,
+          phone: receiptPayload.phone || null,
+          company_name: receiptPayload.company || savedExtra.company_name || null,
+          service_needed: receiptPayload.service_interest || savedExtra.service_needed || 'Contact Inquiry',
+          comments: receiptPayload.message || null,
           page_submitted_from: pageSubmittedFrom,
           status: 'new',
           score: 10,
-          is_test: isTest,
+          is_test: receiptIsTest,
         },
         { onConflict: 'submission_id', ignoreDuplicates: true }
       );
