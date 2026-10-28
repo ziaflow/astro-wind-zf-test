@@ -20,20 +20,19 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       Fill out the form below. We'll deliver a personalized video audit within 48 hours.
     </p>
 
-    <form
-      id="audit-booking-form"
-      method="POST"
-      action="/api/contact"
-      class="space-y-4"
-      data-ga-event="form_submission"
-      data-ga-label="audit_booking"
-    >
+    <form data-lead-form id="audit-booking-form" method="POST" action="/api/contact" class="space-y-4">
+      <input type="hidden" name="page" value={Astro.url.pathname} />
       <input type="hidden" name="form_type" value="audit_booking" />
       <input type="hidden" name="service_interest" value="Growth Audit" />
       <input type="hidden" name="from_email" value="mailto:info@ziaflow.com" />
 
       {/* Anti-spam honeypot field */}
-      <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+      <div
+        class="opacity-0 absolute -z-10 select-none pointer-events-none"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+        aria-hidden="true"
+        tabindex="-1"
+      >
         <label for="audit_website_url">Leave this field blank</label>
         <input type="text" id="audit_website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
       </div>
@@ -134,15 +133,16 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       <button
         type="submit"
         class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-        data-ga-event="form_submit_click"
-        data-ga-label="audit_booking_submit"
       >
         Book My Free Audit
       </button>
+      <p data-form-status role="status" aria-live="polite" hidden></p>
     </form>
 
     <!-- Success Message (hidden, shown on submit) -->
     <div
+      data-form-success
+      role="status"
       id="audit-form-success"
       class="hidden mt-4 p-4 bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded-md"
     >
@@ -153,57 +153,9 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
   </div>
 </div>
 
-<script is:inline>
-  const form = document.getElementById('audit-booking-form');
-  const successDiv = document.getElementById('audit-form-success');
-
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const rawData = Object.fromEntries(formData);
-
-      const fullName = [rawData.first_name, rawData.last_name].filter(Boolean).join(' ').trim() || rawData.name || '';
-      const payload = {
-        ...rawData,
-        name: fullName,
-        company: rawData.company_name || rawData.company || '',
-        service_interest: rawData.service_interest || 'Growth Audit',
-        idempotency_key: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
-      };
-
-      try {
-        // Push to dataLayer for GTM tracking
-        if (window.dataLayer) {
-          window.dataLayer.push({
-            event: 'form_submission',
-            form_name: 'audit_booking',
-            email: payload.email,
-            company: payload.company,
-          });
-        }
-
-        // Submit form to unified contact handler
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        if (response.ok) {
-          form.classList.add('hidden');
-          successDiv.classList.remove('hidden');
-        } else {
-          const errData = await response.json().catch(() => ({}));
-          alert(errData.message || 'Something went wrong. Please try again.');
-        }
-      } catch (error) {
-        console.error('Form submission error:', error);
-        alert('Error submitting form. Please try again.');
-      }
-    });
-  }
+<script>
+  import { bindLeadForms } from '~/utils/lead-form';
+  bindLeadForms();
 </script>
 
 <style>
