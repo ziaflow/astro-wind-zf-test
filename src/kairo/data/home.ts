@@ -2,123 +2,113 @@ import { site } from '@/data/site';
 
 export const hero = {
   lines: [
-    { text: 'How does our existing' },
-    { text: 'software integrate with', accent: 'ZiaFlow?' },
+    { text: 'Turn inbound inquiries into' },
+    { text: 'booked jobs with', accent: 'ZiaFlow.' },
   ],
   intro:
-    'ZiaFlow connects seamlessly with your current software, databases, CRM, and storefronts — delivering high-performance Astro development, AI automation, and web engineering.',
+    'ZiaFlow fixes the gap between customer contact and booked revenue for Arizona service businesses with documented lead capture, instant routing, and accountable follow-up.',
 };
 
 export const logosSection = {
-  label: 'Trusted by teams who would rather hear it first',
+  label: 'Integrated across your operational tools and CRM stack',
 };
 
 export const manifesto = {
   eyebrow: `Why ${site.name}`,
   parts: [
-    { text: 'Your company already knows what is about to go wrong.' },
+    { text: 'Most service businesses lose revenue between the click and the first phone call.' },
     { image: '/images/manifesto-face.jpg' },
-    { text: 'It is buried in a dashboard nobody opened, a ticket marked low,' },
+    { text: 'Leads slip through unmonitored forms, missed voicemail, and delayed replies.' },
     { image: '/images/manifesto-city.jpg' },
-    { text: `a call that ended early. ${site.name} listens to all of it` },
+    { text: `ZiaFlow captures every accepted inquiry, assigns an owner, triggers instant response,` },
     { image: '/images/manifesto-hand.jpg' },
-    { text: 'and tells you while there is still time to act.' },
+    { text: 'and tracks every prospect to a known status.' },
   ] as ({ text: string } | { image: string })[],
   hint: 'Drag across the line, or tap it',
 };
 
 export const productStory = {
-  title: ['Signal,', 'not noise.'],
+  title: ['Inquiry to', 'booked job.'],
   heroImage: '/images/journal-face.jpg',
   tiles: [
     'gallery-corridor',
-    'journal-noise',
-    'gallery-street',
-    'manifesto-city',
     'gallery-desk',
-    'journal-light',
-    'gallery-tower',
-    'product-reveal',
-    'journal-blur',
-    'gallery-road',
-    'capability-lights',
-    'journal-swirl',
-    'about-city',
+    'gallery-street',
     'gallery-window',
   ].map((name) => `/images/${name}.jpg`),
   acts: [
     {
-      tab: 'Collect',
-      title: 'Every signal, in one place.',
-      body: 'Metrics, tickets, calls and docs stream in from the tools your team already uses.',
-      count: 12480,
-      unit: 'signals today',
+      tab: 'Capture',
+      title: 'Every inquiry, recorded.',
+      body: 'Website forms, phone calls, Google LSAs, and chat route directly into a unified database.',
+      count: 24,
+      unit: 'inquiries logged',
     },
     {
-      tab: 'Filter',
-      title: 'The noise, filtered out.',
-      body: `${site.name} knows what normal looks like for each number, so routine movement stays quiet.`,
-      count: 37,
-      unit: 'real changes',
+      tab: 'Route',
+      title: 'Assigned in seconds.',
+      body: 'Instant notifications alert the accountable owner with source attribution so no lead sits idle.',
+      count: 100,
+      unit: '% assigned',
     },
     {
-      tab: 'Flag',
-      title: 'The moment, flagged.',
-      body: 'One change worth acting on, sent to the person who owns it, with the cause attached.',
+      tab: 'Convert',
+      title: 'Tracked to a known status.',
+      body: 'Structured follow-up keeps every accepted inquiry moving toward a booked consultation or clear quote.',
       count: 1,
-      unit: 'brief sent',
+      unit: 'pipeline view',
     },
   ],
 };
 
 export const capabilities = {
-  title: 'Everything it takes to act first.',
+  title: 'Everything it takes to keep every lead accountable.',
   detect: {
-    title: 'Spots the shift',
-    body: `Every metric gets its own normal range. ${site.name} flags what breaks it, with the likely cause.`,
-    label: 'Checkout errors 3x',
+    title: 'Spots the leak',
+    body: 'Identifies failed form submissions, broken phone tracking, and slow follow-up before leads go cold.',
+    label: 'Form error flagged',
   },
   connect: {
-    title: 'Plugs into your stack',
-    body: 'Billing, CRM, support, product analytics and your warehouse. Read-only, connected in minutes.',
+    title: 'Plugs into your tools',
+    body: 'Web forms, call tracking, CRM, and email. Read-only connectors and webhooks set up without code disruption.',
     image: '/images/capability-lights.jpg',
   },
   rank: {
-    title: 'Ranks by impact',
-    body: 'Changes are sorted by what they cost, so the biggest one is always on top.',
+    title: 'Ranks by urgency',
+    body: 'Inquiries are prioritized by urgency and intent so immediate service requests get same-hour attention.',
     items: [
-      { title: 'Enterprise renewals slipping', value: '$48k at risk' },
-      { title: 'Checkout errors in Germany', value: '212 orders' },
-      { title: 'Onboarding drop-off on step 3', value: '-9% this week' },
+      { title: 'Emergency Service Call', value: 'Immediate dispatch' },
+      { title: 'Commercial Website Scope', value: 'Discovery scheduled' },
+      { title: 'Local Service Ad Inquiry', value: 'Follow-up sent' },
     ],
   },
   brief: {
-    title: 'Writes the brief',
-    body: 'One short message with the cause, the size and an owner. Sent where that person works.',
-    text: 'Checkout errors in Germany tripled after Tuesday’s release. 212 orders failed. Likely cause: the new address check. Suggested owner: Payments.',
+    title: 'Writes the dispatch brief',
+    body: 'Clear dispatch notification sent directly to your phone or inbox with prospect details, source, and assigned next action.',
+    text: 'New inquiry from Phoenix via Google LSA. Service: Lead Capture Sprint. Contact: (602) 834-4239. Assigned owner: Intake. Next action: Schedule discovery call.',
   },
   privacy: {
-    title: 'Private by default',
-    body: 'SSO, audit logs and field-level redaction. Your data never trains shared models.',
+    title: 'Private & verified',
+    body: 'Field-level validation, encrypted database storage, and spam protection. Client data is never shared or used to train external models.',
   },
 };
 
 export const howItWorks = {
-  title: 'Up and running in an afternoon.',
+  title: 'The Lead Capture & Follow-Up Sprint.',
   watchHint: 'Drag the line',
 };
 
 export const storiesSection = {
-  title: 'Teams that saw it coming.',
-  body: `Freight networks, labs and payment companies use ${site.name} to hear about problems while they are still small.`,
-  cta: { label: 'All customer stories', href: '/customers' },
+  title: 'Documented results from real operations.',
+  body: 'Arizona service businesses and growth operators use ZiaFlow to ensure no inquiry slips through the cracks.',
+  cta: { label: 'Explore Services', href: '/services' },
 };
 
 export const proofSection = {
-  title: 'In their own words.',
+  title: 'What business operators say.',
 };
 
 export const closingCta = {
-  title: 'Catch the next one before it lands.',
-  body: 'Connect your first source in twenty minutes. Free for small teams, no card needed.',
+  title: 'Stop Losing Inquiries Between Click and Call.',
+  body: 'Schedule a 30-minute discovery session with our Phoenix team. We will review your lead path and scope a Lead Capture & Follow-Up Sprint.',
 };

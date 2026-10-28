@@ -6,7 +6,6 @@ import Menu from '@/components/shared/layout/menu.astro';
 import Navbar from '@/components/shared/layout/navbar.astro';
 import Transition from '@/components/shared/layout/transition.astro';
 import ViewChip from '@/components/shared/layout/view-chip.astro';
-import AIFloatingMenu from '~/components/common/AIFloatingMenu.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import AnalyticsBody from '~/components/common/AnalyticsBody.astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
@@ -134,7 +133,6 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
     <Navbar />
     <Menu />
     <ViewChip />
-    <AIFloatingMenu variant="side" />
     <div class="relative z-10 bg-ink" data-page>
       <main id="main">
         <slot />
