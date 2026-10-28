@@ -3,12 +3,20 @@ on:
   push:
     paths:
       - 'src/pages/api/contact.ts'
+      - 'src/lib/intake-delivery.ts'
+      - 'src/utils/lead-form.ts'
+      - 'src/components/**'
       - 'tests/contact-capture.test.mjs'
+      - 'tests/lead-form.test.mjs'
       - '.github/workflows/contact-capture-tests.yml'
   pull_request:
     paths:
       - 'src/pages/api/contact.ts'
+      - 'src/lib/intake-delivery.ts'
+      - 'src/utils/lead-form.ts'
+      - 'src/components/**'
       - 'tests/contact-capture.test.mjs'
+      - 'tests/lead-form.test.mjs'
       - '.github/workflows/contact-capture-tests.yml'
 permissions:
   contents: read
@@ -21,4 +29,4 @@ jobs:
         with:
           node-version: 22
       - run: npm install
-      - run: node --test tests/contact-capture.test.mjs
+      - run: node --test tests/contact-capture.test.mjs tests/lead-form.test.mjs

@@ -2,12 +2,18 @@
 // src/components/QuickLeadForm.astro
 ---
 
-<form id="quick-lead-form" class="space-y-4">
+<form data-lead-form action="/api/contact" method="POST" id="quick-lead-form" class="space-y-4">
+  <input type="hidden" name="page" value={Astro.url.pathname} />
   <input type="hidden" name="form_type" value="quick" />
   <input type="hidden" name="page_submitted_from" value={Astro.url.pathname} />
 
   {/* Anti-spam honeypot field: invisible to humans, traps automated spam bots */}
-  <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+  <div
+    class="opacity-0 absolute -z-10 select-none pointer-events-none"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+    aria-hidden="true"
+    tabindex="-1"
+  >
     <label for="quick_website_url">Leave this field blank</label>
     <input type="text" id="quick_website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
   </div>
@@ -72,49 +78,17 @@
   >
     Submit Inquiry
   </button>
-  <p id="quick-status" class="hidden rounded-xl border p-3 text-center text-sm font-medium"></p>
+  <p
+    data-form-status
+    role="status"
+    aria-live="polite"
+    id="quick-status"
+    class="hidden rounded-xl border p-3 text-center text-sm font-medium"
+  >
+  </p>
 </form>
 
 <script>
-  const form = document.getElementById('quick-lead-form') as HTMLFormElement;
-  const statusEl = document.getElementById('quick-status') as HTMLElement;
-  const btn = document.getElementById('quick-submit-btn') as HTMLButtonElement;
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (btn.disabled) return;
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-    statusEl.classList.add('hidden');
-    statusEl.className = 'hidden rounded-xl border p-3 text-center text-sm font-medium';
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (res.ok) {
-        statusEl.textContent = 'Success! We have received your inquiry and will reply shortly.';
-        statusEl.className =
-          'block rounded-xl border border-green-300 bg-green-50 p-3 text-center text-sm font-medium text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300';
-        form.reset();
-      } else {
-        throw new Error(result.message || 'Server rejected submission');
-      }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Submission failed. Please email info@ziaflow.com directly.';
-      statusEl.textContent = msg;
-      statusEl.className =
-        'block rounded-xl border border-red-300 bg-red-50 p-3 text-center text-sm font-medium text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-300';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = originalText;
-    }
-  });
+  import { bindLeadForms } from '~/utils/lead-form';
+  bindLeadForms();
 </script>

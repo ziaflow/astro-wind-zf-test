@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 import { createHash } from 'node:crypto';
 import { supabaseAdmin } from '~/lib/supabase-admin';
+import { deliverWithReceipt, pipelineBatch, sourcePath, type ReceiptPayload } from '~/lib/intake-delivery';
 
 export const prerender = false;
 
@@ -38,11 +39,13 @@ export const POST: APIRoute = async ({ request }) => {
       data = text ? JSON.parse(text) : {};
     }
 
-    const name = asString(data.name, 200);
+    const name =
+      asString(data.name, 200) ||
+      asString([data.first_name, data.last_name].filter((part) => typeof part === 'string').join(' '), 200);
     const email = asString(data.email, 320)?.toLowerCase() ?? '';
-    const message = asString(data.message, 5000) ?? '';
+    const message = asString(data.message, 5000) ?? asString(data.comments, 5000) ?? '';
     const phone = asString(data.phone, 50);
-    const company = asString(data.company, 200);
+    const company = asString(data.company, 200) ?? asString(data.company_name, 200);
     const serviceInterest = asString(data.service_interest, 200) ?? asString(data.service_needed, 200);
     const idempotencyKey = asString(data.idempotency_key, 100);
     const websiteUrlHoneypot = asString(data.website_url, 500);
@@ -65,10 +68,10 @@ export const POST: APIRoute = async ({ request }) => {
     const { allowed, resetInSeconds } = checkRateLimit(clientIp, { maxRequests: 50, windowMs: 60_000 });
     if (!allowed) {
       console.warn(`[contact] rate limit exceeded for IP: ${clientIp}`);
-      return new Response(
-        JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }),
-        { status: 429, headers: { 'Content-Type': 'application/json', 'Retry-After': String(resetInSeconds) } }
-      );
+      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': String(resetInSeconds) },
+      });
     }
 
     // 2. Honeypot check: if filled, silently drop the database insert and return 200 OK so bots are deceived
@@ -93,7 +96,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (HTML_TAG_REGEX.test(message) || urlMatches.length >= 2 || SUSPICIOUS_TLD_REGEX.test(combinedContent)) {
       console.warn('[contact] rejected: excessive URLs, HTML markup, or blocked TLD detected in message');
-      return json({ message: 'Messages containing promotional links, HTML tags, or blocked domains are not accepted.' }, 400);
+      return json(
+        { message: 'Messages containing promotional links, HTML tags, or blocked domains are not accepted.' },
+        400
+      );
     }
 
     if (!email || !EMAIL_PATTERN.test(email)) {
@@ -106,6 +112,8 @@ export const POST: APIRoute = async ({ request }) => {
       return json({ message: 'We could not save your message. Please try again later.' }, 503);
     }
 
+    const database = supabaseAdmin;
+
     // Server-controlled test flag: only a request carrying the secret token is marked as a test.
     const testToken = import.meta.env.TEST_SUBMISSION_TOKEN;
     const isTest = Boolean(testToken) && request.headers.get('x-test-token') === testToken;
@@ -117,7 +125,24 @@ export const POST: APIRoute = async ({ request }) => {
           .update([email, message, String(otherData.page ?? ''), Math.floor(Date.now() / 600000)].join('|'))
           .digest('hex')}`;
 
-    const pageSubmittedFrom = String(otherData.page || '/contact');
+    const pageSubmittedFrom = sourcePath(data, request.headers.get('referer'));
+    otherData.page = pageSubmittedFrom;
+    otherData.page_url = `https://ziaflow.com${pageSubmittedFrom}`;
+    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+      otherData[key] = asString(data[key], 500) || '';
+    }
+    const initialPayload: ReceiptPayload = {
+      name,
+      email,
+      phone,
+      company,
+      message,
+      service_interest: serviceInterest,
+      extra: otherData,
+      deliveries: { webhook: { status: 'pending' }, pipeline: { status: 'pending' } },
+    };
+    let receiptPayload = initialPayload;
+    let receiptIsTest = isTest;
 
     // 1. Receipt (restricted table; holds the raw payload). A unique dedup_key makes retries idempotent.
     let submissionId: string;
@@ -130,7 +155,7 @@ export const POST: APIRoute = async ({ request }) => {
         status: 'validated',
         is_test: isTest,
         page_submitted_from: pageSubmittedFrom,
-        payload: { name, email, phone, company, message, service_interest: serviceInterest, extra: otherData },
+        payload: initialPayload,
       })
       .select('id')
       .single();
@@ -141,13 +166,18 @@ export const POST: APIRoute = async ({ request }) => {
       // Retry or simultaneous duplicate: reuse the existing receipt instead of creating another.
       const { data: existing, error: lookupError } = await supabaseAdmin
         .from('lead_submissions')
-        .select('id, status')
+        .select('id, status, payload, is_test')
         .eq('dedup_key', dedupKey)
         .single();
       if (lookupError || !existing) {
         console.error('[contact] duplicate receipt lookup failed:', lookupError?.message);
         return json({ message: 'We could not save your message. Please try again.' }, 500);
       }
+      if (existing.payload.email !== email || existing.payload.message !== message) {
+        return json({ message: 'This submission identifier was already used. Please reload the form.' }, 409);
+      }
+      receiptPayload = existing.payload;
+      receiptIsTest = existing.is_test;
       submissionId = existing.id;
       alreadyPersisted = existing.status === 'persisted';
     } else {
@@ -194,45 +224,91 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // Customer.io Intake Webhook Dispatch (Stage 2)
-    // Skips duplicate replays and automated test/watchdog traffic
-    const cioWebhookUrl = import.meta.env.CUSTOMER_IO_WEBHOOK_URL;
-    if (!alreadyPersisted && !isTest && cioWebhookUrl) {
+    // Independent persistence and delivery state: a saved lead can safely retry a rejected dispatch.
+    const receiptStore = {
+      async read(): Promise<ReceiptPayload> {
+        const { data: receipt, error } = await database
+          .from('lead_submissions')
+          .select('payload')
+          .eq('id', submissionId)
+          .single();
+        if (error || !receipt) throw new Error('Delivery receipt unavailable');
+        return receipt.payload;
+      },
+      async replace(previous: ReceiptPayload, next: ReceiptPayload) {
+        const { data: changed, error } = await database
+          .from('lead_submissions')
+          .update({ payload: next })
+          .eq('id', submissionId)
+          .eq('payload', JSON.stringify(previous))
+          .select('id');
+        if (error) throw new Error('Delivery receipt could not be updated');
+        return changed?.length === 1;
+      },
+    };
+    const delivery: Record<string, string> = {};
+    if (!receiptIsTest) {
       try {
-        const cioPayload = {
-          name: name || '',
-          email: email || '',
-          phone: phone || '',
-          company: company || '',
-          service: serviceInterest || 'General Inquiry',
-          message: message || '',
-          inquiry: message || '',
-          source_page: pageSubmittedFrom || '/contact',
-          submission_id: submissionId,
-          lead_id: submissionId,
-          form_type: String(otherData.form_type || 'contact_us'),
-          is_test: false,
-          idempotency_key: idempotencyKey || submissionId,
-        };
+        const cioWebhookUrl = import.meta.env.CUSTOMER_IO_WEBHOOK_URL;
+        if (cioWebhookUrl) {
+          const storedExtra = (receiptPayload.extra || {}) as Record<string, unknown>;
+          const cioPayload = {
+            name: receiptPayload.name || '',
+            email: receiptPayload.email,
+            phone: receiptPayload.phone || '',
+            company: receiptPayload.company || '',
+            service: receiptPayload.service_interest || 'General Inquiry',
+            message: receiptPayload.message || '',
+            inquiry: receiptPayload.message || '',
+            source_page: storedExtra.page || pageSubmittedFrom,
+            submission_id: submissionId,
+            lead_id: submissionId,
+            form_type: storedExtra.form_type || 'contact_us',
+            is_test: false,
+            idempotency_key: submissionId,
+          };
+          delivery.webhook = await deliverWithReceipt(receiptStore, 'webhook', () =>
+            fetch(cioWebhookUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(cioPayload),
+              redirect: 'error',
+              signal: AbortSignal.timeout(10_000),
+            })
+          );
+        } else delivery.webhook = 'not_configured';
 
-        const cioRes = await fetch(cioWebhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(cioPayload),
-        });
-
-        if (!cioRes.ok) {
-          console.warn('[contact] Customer.io webhook returned non-200 status:', cioRes.status);
-        } else {
-          console.log('[contact] Customer.io webhook triggered successfully for submission', submissionId);
-        }
-      } catch (cioErr) {
-        console.warn('[contact] Customer.io dispatch note (lead saved to database):', cioErr);
+        // The existing server-intake Pipelines source identifies the person before the canonical event.
+        // The welcome/nurture campaign remains draft until separately reviewed and activated.
+        const writeKey = import.meta.env.CIO_CDP_WRITE_KEY;
+        if (writeKey && delivery.webhook !== 'in_progress') {
+          const endpoint =
+            import.meta.env.CUSTOMER_IO_CDP_REGION === 'eu'
+              ? 'https://cdp-eu.customer.io/v1/batch'
+              : 'https://cdp.customer.io/v1/batch';
+          delivery.pipeline = await deliverWithReceipt(receiptStore, 'pipeline', () =>
+            fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Strict-Mode': '1',
+                Authorization: `Basic ${Buffer.from(`${writeKey}:`).toString('base64')}`,
+              },
+              body: JSON.stringify(pipelineBatch(submissionId, receiptPayload, new Date().toISOString())),
+              redirect: 'error',
+              signal: AbortSignal.timeout(10_000),
+            })
+          );
+        } else delivery.pipeline = writeKey ? 'in_progress' : 'not_configured';
+      } catch {
+        // Preserve the successful intake, and surface recoverable dispatch status without exposing secrets.
+        delivery.status = 'needs_review';
+        console.warn('[contact] delivery journal requires review for submission', submissionId);
       }
     }
 
     // Best-effort SMTP internal notification as fallback, only for the first persisted copy
-    if (!alreadyPersisted && import.meta.env.SMTP_HOST && import.meta.env.SMTP_USER) {
+    if (!alreadyPersisted && !receiptIsTest && import.meta.env.SMTP_HOST && import.meta.env.SMTP_USER) {
       try {
         const transporter = nodemailer.createTransport({
           host: import.meta.env.SMTP_HOST,
@@ -280,7 +356,15 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    return json({ message: 'Thanks! We received your message.', submission_id: submissionId, duplicate: alreadyPersisted }, 200);
+    return json(
+      {
+        message: 'Thanks! We received your message.',
+        submission_id: submissionId,
+        duplicate: alreadyPersisted,
+        delivery,
+      },
+      200
+    );
   } catch (error) {
     console.error('Contact Form Error:', error);
     return json({ message: 'Failed to send message' }, 500);
