@@ -35,7 +35,9 @@ const metadata = {
                 <h2 class="text-xl font-bold mb-2 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors">
                   {post.title}
                 </h2>
-                <p class="text-gray-500 text-sm">{new Date(post.publishedAt).toLocaleDateString()}</p>
+                <p class="text-gray-500 text-sm">
+                  <time datetime={new Date(post.publishedAt).toISOString()}>{new Date(post.publishedAt).toLocaleDateString()}</time>
+                </p>
               </div>
             </article>
           </a>

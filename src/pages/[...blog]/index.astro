@@ -43,9 +43,42 @@ const metadata = merge(
   },
   { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
 ) as MetaData;
+
+const publishDateIso = post.publishDate ? new Date(post.publishDate).toISOString() : undefined;
+const updateDateIso = post.updateDate ? new Date(post.updateDate).toISOString() : publishDateIso;
+
+const postImageUrl = typeof image === 'string' ? image : image?.src ? new URL(image.src, Astro.site || 'https://ziaflow.com').toString() : undefined;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+  headline: post.title,
+  description: post.excerpt,
+  ...(postImageUrl ? { image: [postImageUrl] } : {}),
+  datePublished: publishDateIso,
+  dateModified: updateDateIso,
+  author: {
+    '@type': 'Person',
+    name: post.author || 'ZiaFlow Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ziaflow.com/logo.png',
+    },
+  },
+};
 ---
 
 <Layout metadata={metadata}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
   <SinglePost post={{ ...post, image: image }} url={url}>
     {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
   </SinglePost>

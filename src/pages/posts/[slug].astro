@@ -31,9 +31,41 @@ const metadata = {
   title: post.title,
   description: post.seoDescription,
 };
+
+const publishDateIso = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined;
+const updateDateIso = post._updatedAt ? new Date(post._updatedAt).toISOString() : publishDateIso;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://ziaflow.com').toString();
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  headline: post.title,
+  description: post.seoDescription,
+  ...(postImageUrl ? { image: [postImageUrl] } : {}),
+  datePublished: publishDateIso,
+  dateModified: updateDateIso,
+  author: {
+    '@type': 'Person',
+    name: post.author?.name || 'ZiaFlow Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ziaflow.com/logo.png',
+    },
+  },
+};
 ---
 
 <Layout metadata={metadata}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <main class="container mx-auto px-6 py-12 max-w-3xl">
     <a href="/posts" class="inline-block mb-6 text-primary hover:underline">&larr; Back to posts</a>
 
@@ -50,9 +82,20 @@ const metadata = {
         )
       }
       <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-      <p class="text-gray-500 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-        Published on {new Date(post.publishedAt).toLocaleDateString()}
-      </p>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+        <span class="inline-flex items-center gap-1">
+          <span>Published:</span>
+          {publishDateIso && <time datetime={publishDateIso}>{new Date(post.publishedAt).toLocaleDateString()}</time>}
+        </span>
+        {
+          post._updatedAt && post._updatedAt !== post.publishedAt && (
+            <span class="inline-flex items-center gap-1 text-primary dark:text-blue-400 font-medium">
+              <span>Updated:</span>
+              <time datetime={updateDateIso}>{new Date(post._updatedAt).toLocaleDateString()}</time>
+            </span>
+          )
+        }
+      </div>
 
       <div class="prose prose-lg dark:prose-invert max-w-none">
         {Array.isArray(post.body) && <PortableText value={post.body} />}
