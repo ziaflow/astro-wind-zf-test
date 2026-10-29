@@ -1,0 +1,75 @@
+---
+import Layout from '@/layouts/layout.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import RoiCalculator from '@/components/home/roi-calculator.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import Cta from '@/components/shared/cta.astro';
+import { tools } from '~/lib/growth-tools/engine.mjs';
+
+export const prerender = true;
+---
+
+<Layout
+  title="Interactive Growth & Diagnostic Tools | ZiaFlow Phoenix"
+  description="Plan your next website and diagnose gaps in lead follow-up, software stack costs, local Google Maps visibility, and conversion readiness."
+>
+  <PageHero
+    lines={['Interactive tools.', 'Checkable clarity.']}
+    accent={1}
+    intro="Five interactive planning and diagnostic tools built for Arizona operators. Clear assumptions, practical action steps, and downloadable results without entering an email."
+  />
+
+  <section class="shell pb-24">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        tools.map((tool, i) => (
+          <a
+            href={'/growth-tools/' + tool.slug}
+            class="group flex flex-col justify-between rounded-2xl border border-line bg-ink-2 p-8 transition-all duration-300 hover:border-signal hover:-translate-y-1 focus:outline focus:outline-2 focus:outline-signal"
+          >
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">
+                0{i + 1} / {tool.service}
+              </p>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-[-0.02em] text-bone group-hover:text-signal transition-colors">
+                {tool.title}
+              </h2>
+              <p class="mt-3 text-sm leading-relaxed text-mute">{tool.intro}</p>
+            </div>
+            <div class="mt-8 flex items-center justify-between border-t border-line pt-5 text-sm font-semibold text-bone group-hover:text-signal transition-colors">
+              <span>Launch interactive tool</span>
+              <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </div>
+          </a>
+        ))
+      }
+      <a
+        href="/audit"
+        class="group flex flex-col justify-between rounded-2xl border border-signal/40 bg-signal/10 p-8 transition-all duration-300 hover:border-signal hover:bg-signal/15 hover:-translate-y-1"
+      >
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">
+            06 / Custom Engineering Review
+          </p>
+          <h2 class="mt-4 font-display text-2xl font-bold tracking-[-0.02em] text-bone">
+            Free 48-Hour Forensic Video Audit
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-mute">
+            Want our Phoenix engineering team to inspect your live site, forms, Core Web Vitals, and local search pack rankings directly? Request a custom video walkthrough.
+          </p>
+        </div>
+        <div class="mt-8 flex items-center justify-between border-t border-line pt-5 text-sm font-semibold text-signal">
+          <span>Claim your 48-hr audit</span>
+          <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </div>
+      </a>
+    </div>
+    <p class="mt-10 text-xs font-mono text-dim">
+      Estimates are illustrative planning ranges. Assessments use your self-reported answers and do not independently verify technical performance, search rankings, or sales outcomes.
+    </p>
+  </section>
+
+  <RoiCalculator />
+  <AuditSection />
+  <Cta />
+</Layout>

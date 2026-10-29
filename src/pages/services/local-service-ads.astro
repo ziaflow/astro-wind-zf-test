@@ -1,58 +1,82 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Google Local Service Ads (LSA) Management',
-  description:
-    'Get Google Guaranteed at the top of Phoenix search results. Pay-per-lead calls, dispute protection, and verification management for contractors.',
-};
-
-const serviceData = {
-  name: 'Google Local Service Ads (LSA)',
-  description:
-    'Dominate the top of Google Search with Google Guaranteed badges. We handle the complex verification and screening process to get you qualified.',
-  url: 'https://ziaflow.com/services/local-service-ads',
-  image: 'https://ziaflow.com/assets/images/lsa-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Local Service Ads"
-    title="Verified Trust at the Top"
-    subtitle="Dominate the absolute top of Google Search with Google Guaranteed badges. We handle the complex verification and screening process to get you qualified. LSA connects you directly with local customers via pay-per-lead phone calls, ensuring you only pay for genuine opportunities, not just clicks."
-    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
-  />
-
-  <Features
-    title="Why LSAs?"
-    items={[
-      {
-        title: 'Top of Page Visibility',
-        description: 'Appear above traditional paid search ads and organic listings.',
-        icon: 'tabler:arrow-bar-to-up',
-      },
-      {
-        title: 'Google Guaranteed',
-        description: 'Build instant trust with the green checkmark badge.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'Pay Per Lead',
-        description: 'Only pay for valid calls from potential customers.',
-        icon: 'tabler:currency-dollar',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Get Google Guaranteed."
-    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
-  />
-</Layout>
+<KairoServicePage
+  title="Google Local Service Ads (LSA) Phoenix | ZiaFlow"
+  description="Book more jobs from Google Local Service Ads in Phoenix, AZ. We manage Google Guaranteed verification, bidding, disputes, and instant lead follow-up."
+  url="https://ziaflow.com/services/local-service-ads"
+  eyebrow="Google Guaranteed · Pay-Per-Lead"
+  heroLines={['Google Local Service', 'Ads that book jobs.']}
+  heroIntro="Appear at the very top of Google with the Google Guaranteed badge. We pair active LSA bidding and dispute management with instant speed-to-lead automation so you win the job before competitors answer the phone."
+  deliverables={[
+    {
+      title: 'Google Guaranteed Onboarding & Verification',
+      tag: 'Compliance',
+      description: 'End-to-end management of license checks, insurance verification, and background screening to keep your badge active without suspension.',
+    },
+    {
+      title: 'Job-Type & Geo-Territory Bidding',
+      tag: 'Targeting',
+      description: 'Precision filtering by Phoenix metro zip codes and high-margin service categories so your budget only funds profitable calls.',
+    },
+    {
+      title: 'Speed-to-Lead Call & Message Routing',
+      tag: 'Ranking Factor',
+      description: 'Google rewards LSA profiles that answer and book quickly. We wire instant SMS/dispatch alerts so no LSA call or message goes unanswered.',
+    },
+    {
+      title: 'Invalid Lead Auditing & Credit Disputes',
+      tag: 'Cost Control',
+      description: 'Systematic review of call recordings and messages to flag wrong-trade, out-of-area, or solicitors for Google account credits.',
+    },
+    {
+      title: 'Automated Post-Job LSA Review Velocity',
+      tag: 'Ad Rank',
+      description: 'Automated SMS review requests sent right after service completion to steadily grow the verified review count that drives LSA placement.',
+    },
+    {
+      title: 'Unified Database Attribution',
+      tag: 'Telemetry',
+      description: 'Every LSA inquiry is logged alongside organic and web-form leads so you know your true cost per booked job.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Audit',
+      title: 'Profile & Territory Review',
+      description: 'We audit your current LSA profile, service categories, zip codes, and missed-call rate.',
+    },
+    {
+      step: 'Step 2 · Connect',
+      title: 'Instant Dispatch Wiring',
+      description: 'We connect LSA phone and message endpoints into your rapid-response dispatch workflow.',
+    },
+    {
+      step: 'Step 3 · Optimize',
+      title: 'Bid & Review Acceleration',
+      description: 'We tune bidding modes and activate automated post-job review requests to lift ad impression share.',
+    },
+    {
+      step: 'Step 4 · Protect',
+      title: 'Weekly Lead & Dispute Triage',
+      description: 'We audit lead quality, mark booked outcomes inside Google’s portal, and dispute invalid charges.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'How does Google decide which contractor shows up first in Local Service Ads?',
+      answer: 'Unlike traditional Google Ads where the highest bidder wins, LSA rankings heavily weight your responsiveness (how fast you answer calls and messages), your verified review volume and recency, proximity to the searcher, and business hours.',
+    },
+    {
+      question: 'Why pair LSA management with ZiaFlow’s Lead Capture Sprint?',
+      answer: 'Even a great LSA campaign fails if a call goes to voicemail or a message sits unread for 30 minutes—Google will actually throttle your ad impressions if your response rate drops. Our automation ensures instant response and owner dispatch.',
+    },
+    {
+      question: 'Which Phoenix industries qualify for Google Local Service Ads?',
+      answer: 'HVAC, plumbing, electrical, roofing, garage doors, locksmiths, appliance repair, landscaping, pest control, carpet cleaning, water damage restoration, legal practices, dental offices, and real estate services all qualify.',
+    },
+  ]}
+/>

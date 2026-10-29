@@ -1,38 +1,38 @@
 ---
 order: 3
-client: Mirelab
-industry: Health
-title: Mirelab runs a calmer lab with one brief instead of nine dashboards.
-summary: A diagnostics lab used Kairo to watch turnaround times, equipment health and clinic tickets in one place.
+client: Desert Peak Contracting
+industry: Commercial Contracting
+title: Repairing mobile conversion leaks and sub-second Astro architecture for commercial bids.
+summary: A forensic technical audit uncovered broken mobile form endpoints and slow scripts; an Astro rebuild restored instant load times and verified bid capture.
 cover: /images/story-mirelab.jpg
-gallery: [/images/gallery-desk.jpg, /images/gallery-window.jpg]
+gallery: [/images/gallery-window.jpg, /images/gallery-tower.jpg]
 year: '2026'
-team: Lab operations, 85 people
+team: Estimating & Project Management
 results:
-  - value: '-19%'
-    label: median sample turnaround
-  - value: '9 to 1'
-    label: dashboards replaced by one brief
-  - value: '4.8/5'
-    label: clinic satisfaction score
+  - value: '99+'
+    label: mobile PageSpeed & Core Web Vitals score
+  - value: '1 wk'
+    label: from forensic audit to production repair
+  - value: '100%'
+    label: verified persistence on bid submissions
 quote:
-  text: My Monday starts with one brief instead of nine dashboards. It reads like a sharp analyst wrote it overnight.
-  name: Maren Holt
-  role: Chief Operating Officer
+  text: The forensic audit identified broken form endpoints on mobile that had been costing us inquiries for months. The fixes were implemented and verified on the same week.
+  name: M. D.
+  role: Managing Partner
 ---
 
 ## The problem
 
-Mirelab processes samples for clinics across three countries. Turnaround time is the whole business, and it depends on dozens of machines, couriers and shifts. Problems surfaced as angry calls from clinics.
+Prospective commercial clients visiting from mobile devices encountered sluggish page loads, shifting layouts, and a project inquiry form that silently failed when optional fields were omitted. Because there was no server-side receipt log, the estimating team had no visibility into dropped bid requests.
 
 ## What changed
 
-Kairo connected to the lab information system, the courier feed and the support inbox. It now spots a slowing analyser or a late courier route before the clinic notices.
+ZiaFlow performed a 48-hour Forensic Audit followed by a targeted conversion and infrastructure overhaul.
 
-- Equipment drift flagged with the affected sample batches
-- Courier delays matched to the clinics they will hit
-- A Monday brief for leadership, daily briefs for shift leads
+- Re-engineered the frontend on Astro with zero render-blocking client bundles for sub-second mobile load times
+- Replaced fragile third-party form widgets with an atomic `/api/contact` endpoint backed by Supabase receipt logging
+- Added cryptographic webhook telemetry so every confirmation email is verified as delivered
 
 ## The outcome
 
-Median turnaround dropped by almost a fifth, and the operations team retired eight dashboards nobody had time to read.
+Mobile visitors now experience instant page transitions and a frictionless bid request flow, while the estimating team receives immediate, structured project briefs with guaranteed database persistence.

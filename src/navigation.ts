@@ -39,6 +39,14 @@ export const headerData = {
       links: [{ text: 'All Articles', href: getBlogPermalink() }, ...blogLinks],
     },
     {
+      text: 'Pricing',
+      href: getPermalink('/pricing'),
+    },
+    {
+      text: 'Free Audit',
+      href: getPermalink('/audit'),
+    },
+    {
       text: 'About',
       href: getPermalink('/about'),
     },

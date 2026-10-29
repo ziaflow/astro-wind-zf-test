@@ -1,40 +1,40 @@
 ---
 order: 1
-client: Halden Freight
-industry: Logistics
-title: Halden cut stockouts by a third without hiring a single analyst.
-summary: A 40-warehouse freight network used Kairo to spot demand shifts days before they emptied shelves.
+client: Phoenix Commercial HVAC
+industry: HVAC & Mechanical
+title: Turning emergency AC inquiries into dispatched technicians in under 60 seconds.
+summary: How a Greater Phoenix commercial HVAC operator unified web forms, Google Local Service Ads, and call tracking into an accountable intake pipeline.
 cover: /images/story-halden.jpg
 gallery: [/images/gallery-road.jpg, /images/gallery-corridor.jpg]
-year: '2025'
-team: Operations, 60 people
+year: '2026'
+team: Field Dispatch & Service Operations
 results:
-  - value: '-34%'
-    label: stockouts across the network
-  - value: '5 days'
-    label: earlier warning on demand spikes
+  - value: '<60s'
+    label: automated acknowledgement & dispatch alert
+  - value: '100%'
+    label: accepted inquiries recorded in database
   - value: '0'
-    label: new analyst hires needed
+    label: unassigned emergency service leads
 quote:
-  text: It caught a pricing bug on a Sunday night that would have cost us the whole month. Nobody was even looking at that chart.
-  name: Tobi Mensah
-  role: Head of Revenue Operations
+  text: Our dispatch used to chase voicemail and unassigned email notifications. Now every inquiry is recorded in Supabase and alerted to staff immediately.
+  name: R. T.
+  role: Service Operations Manager
 ---
 
 ## The problem
 
-Halden moves goods for more than three hundred retailers through forty warehouses. Their planning team had good dashboards and no time to read them. By the time a demand spike showed up in the weekly review, the shelves were already empty.
+During peak Phoenix summer heat, commercial and residential HVAC inquiries arrive simultaneously across web forms, Google Local Service Ads (LSAs), and direct phone lines. When a form notification landed in a shared inbox or a call went to voicemail after 4 PM, high-ticket commercial replacement leads booked with competing contractors before the morning triage.
 
 ## What changed
 
-Kairo connected to Halden's warehouse management system, their order data and the support queue. Within a week it had a baseline for every lane and every product family. The first useful brief arrived on day nine: a regional surge in cold-chain orders, three days ahead of the usual pattern.
+ZiaFlow executed a **Lead Capture & Follow-Up Sprint**, mapping every inbound source into an atomic database ledger with automated owner assignment and escalation.
 
-- Briefs land in the planning channel at 7am, ranked by revenue at risk
-- Each brief links to the exact orders and lanes behind it
-- Planners ask follow-up questions in plain English and get answers in seconds
+- Every web inquiry and LSA lead writes an immutable receipt and lead record before dispatching alerts
+- Immediate SMS and email acknowledgement confirms receipt and sets clear callback expectations for the customer
+- High-urgency commercial repair inquiries trigger priority dispatch notifications to the on-call service manager
 
-> We stopped reading dashboards on Monday morning. We read one page and make three decisions.
+> Having an operational runbook for inquiry follow-up completely removed the guesswork for our front office.
 
 ## The outcome
 
-Stockouts fell by a third over two quarters. The planning team stayed the same size, and spends its Monday mornings deciding instead of digging.
+Every accepted inquiry is now logged with source attribution, assigned an owner within seconds, and tracked to a known disposition—eliminating silent form drops and unassigned after-hours leads.

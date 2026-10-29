@@ -1,13 +1,13 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-
-import Layout from '~/layouts/PageLayout.astro';
+import KairoLayout from '@/layouts/layout.astro';
+import PageHero from '@/components/shared/page-hero.astro';
 import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
-// import PostTags from "~/components/blog/Tags.astro";
-
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import Cta from '@/components/shared/cta.astro';
+import { getStaticPathsBlogList } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -20,35 +20,26 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-// const allCategories = await findCategories();
-// const allTags = await findTags();
-
-const metadata = {
-  title: `Blog${currentPage > 1 ? ` - Page ${currentPage}` : ''}`,
-  description:
-    'Insights, tutorials, and practical strategies on AI automation, technical SEO, and conversion optimization from the ZiaFlow engineering team.',
-  robots: {
-    index: blogListRobots?.index && currentPage === 1,
-    follow: blogListRobots?.follow,
-  },
-  openGraph: {
-    type: 'blog',
-  },
-};
+const title = `Phoenix Web Engineering, SEO & Lead Automation Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''} | ZiaFlow`;
+const description =
+  'Actionable engineering guides, Phoenix conversion playbooks, Google Local Service Ads strategies, and marketing automation blueprints from the ZiaFlow team.';
 ---
 
-<Layout metadata={metadata}>
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline
-      subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
-    >
-      The Blog
-    </Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
+<KairoLayout title={title} description={description}>
+  <PageHero
+    lines={['Playbooks on systems,', 'search & conversion.']}
+    accent={1}
+    intro="Practical engineering guides, Arizona case blueprints, and step-by-step checklists on lead capture automation, technical SEO, and high-converting web architecture."
+  />
+
+  <section class="shell pb-24 md:pb-32 border-t border-line pt-14">
+    <div class="max-w-4xl mx-auto">
+      <BlogList posts={page.data} />
+      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+    </div>
   </section>
-</Layout>
+
+  <AuditSection />
+  <SalesForm />
+  <Cta />
+</KairoLayout>

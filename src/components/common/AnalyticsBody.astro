@@ -1,7 +1,7 @@
 ---
 import { ANALYTICS } from 'astrowind:config';
 
-const gtmId = ANALYTICS?.vendors?.googleTagManager?.id;
+const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.googleTagManager?.id;
 ---
 
 {

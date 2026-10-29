@@ -1,71 +1,82 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Phoenix Web Development & Performance Engineering',
-  description:
-    'High-converting, lightning-fast websites built for speed and engagement. Forensic audits, responsive architecture, and SEO-engineered frameworks.',
-};
-
-const serviceData = {
-  name: 'Web Development Services',
-  description:
-    'Conversion-first websites built for speed and performance. We conduct forensic audits of user behavior to design interfaces that convert.',
-  url: 'https://ziaflow.com/services/web-development',
-  image: 'https://ziaflow.com/assets/images/web-dev-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Web Development"
-    title="Phoenix Web Development & Performance Engineering"
-    subtitle="We reject the idea of 'brochure' websites. Our development team builds conversion-first digital assets using modern frameworks like Astro for lightning-fast load speeds. We conduct forensic audits of user behavior to design interfaces that guide visitors effortlessly toward booking an appointment or making a purchase. This is the core of your digital real estate."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Why Choose Us?"
-    items={[
-      {
-        title: 'Lightning Fast',
-        description: 'Built with modern frameworks like Astro for instant load times.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Conversion Focused',
-        description: 'Designed to turn visitors into leads and customers.',
-        icon: 'tabler:target',
-      },
-      {
-        title: 'Responsive Design',
-        description: 'Looks and works perfectly on every device.',
-        icon: 'tabler:device-mobile',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Ready for a better website?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Phoenix Web Development Agency | Fast Astro & Custom Websites | ZiaFlow"
+  description="Custom high-speed web development in Phoenix, AZ. We build sub-second Astro, React, and Tailwind websites wired for SEO, mobile conversion, and automated lead capture."
+  url="https://ziaflow.com/services/web-development"
+  eyebrow="Web Engineering · Astro, React & Supabase"
+  heroLines={['Sub-second websites', 'built to convert.']}
+  heroIntro="Bloated WordPress themes and broken plugins cost you mobile leads every single day. We engineer ultra-fast, secure websites on Astro and modern edge infrastructure with built-in lead persistence."
+  deliverables={[
+    {
+      title: 'Sub-Second Astro & Tailwind Architecture',
+      tag: 'Performance',
+      description: 'Zero unnecessary JavaScript shipped to the browser, delivering 99+ Google PageSpeed scores and instant mobile loads on cellular connections.',
+    },
+    {
+      title: 'Server-Verified Lead Capture Forms',
+      tag: 'Zero Dropped Leads',
+      description: 'Every contact and quote form writes directly to an encrypted Supabase receipt table before firing CRM and SMS webhooks.',
+    },
+    {
+      title: 'Mobile-First Conversion UX',
+      tag: 'Conversion',
+      description: 'Sticky click-to-call headers, clear service-area proof, interactive ROI diagnostics, and accessible keyboard/touch navigation.',
+    },
+    {
+      title: 'Built-In Technical SEO & Schema',
+      tag: 'Search Ready',
+      description: 'Clean semantic HTML, automated XML sitemaps, self-referencing canonicals, OpenGraph cards, and JSON-LD structured data out of the box.',
+    },
+    {
+      title: 'URL & Slug Parity Migration',
+      tag: 'Safe Cutover',
+      description: 'When rebuilding an existing site, we map every legacy URL and article slug so you preserve 100% of your existing search equity.',
+    },
+    {
+      title: 'Isolated Preview Deployments & CI/CD',
+      tag: 'Quality Control',
+      description: 'Every change is tested on an isolated Vercel preview URL for mobile and desktop QA before touching your live production domain.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Inventory',
+      title: 'URL & Conversion Mapping',
+      description: 'We inventory every live URL, ranking query, and inquiry path so nothing valuable is lost during the rebuild.',
+    },
+    {
+      step: 'Step 2 · Architecture',
+      title: 'Design System & Copy Briefs',
+      description: 'We craft direct, defensible copy and high-contrast editorial layouts tailored to your buyers.',
+    },
+    {
+      step: 'Step 3 · Engineering',
+      title: 'Astro Build & Pipeline Wiring',
+      description: 'We build the frontend, optimize responsive WebP assets, and connect `/api/contact` to Supabase and your CRM.',
+    },
+    {
+      step: 'Step 4 · Launch',
+      title: 'Parity Check & Live Cutover',
+      description: 'After mobile QA, link verification, and tagged form testing, we switch DNS with zero downtime.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Why do you build with Astro instead of WordPress or Wix?',
+      answer: 'WordPress relies on heavy PHP plugins and database queries on every page load, making it slow on mobile and vulnerable to plugin breaks. Astro pre-renders ultra-clean HTML at the edge and only loads interactive JavaScript where needed—resulting in instant load times, rock-solid security, and higher conversion rates.',
+    },
+    {
+      question: 'Will redesigning our website hurt our current Google rankings?',
+      answer: 'Only if done carelessly. We follow a strict URL inventory and parity protocol: preserving established slugs, mapping 301 redirects for any consolidated pages, and upgrading on-page schema so your search visibility improves rather than drops.',
+    },
+    {
+      question: 'Can our team still edit blog posts and content easily?',
+      answer: 'Yes. We support clean MDX content collections as well as headless CMS studios (like Sanity) so your team can publish articles or case studies while keeping the frontend blazingly fast.',
+    },
+  ]}
+/>

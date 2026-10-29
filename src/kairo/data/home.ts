@@ -2,61 +2,71 @@ import { site } from '@/data/site';
 
 export const hero = {
   lines: [
-    { text: 'Turn inbound inquiries into' },
-    { text: 'booked jobs with', accent: 'ZiaFlow.' },
+    { text: 'Turn More Inquiries' },
+    { text: 'Into', accent: 'Booked Work.' },
   ],
   intro:
-    'ZiaFlow fixes the gap between customer contact and booked revenue for Arizona service businesses with documented lead capture, instant routing, and accountable follow-up.',
+    'ZiaFlow helps service businesses capture every inquiry, respond in seconds, and follow through until the job is booked.',
 };
 
 export const logosSection = {
-  label: 'Integrated across your operational tools and CRM stack',
+  label: 'Connected across your website, phones, and scheduling tools',
 };
 
 export const manifesto = {
   eyebrow: `Why ${site.name}`,
   parts: [
-    { text: 'Most service businesses lose revenue between the click and the first phone call.' },
+    { text: 'Most service businesses lose revenue between the first click and the callback.' },
     { image: '/images/manifesto-face.jpg' },
-    { text: 'Leads slip through unmonitored forms, missed voicemail, and delayed replies.' },
+    { text: 'Inquiries slip through unmonitored forms, missed voicemails, and slow replies.' },
     { image: '/images/manifesto-city.jpg' },
-    { text: `ZiaFlow captures every accepted inquiry, assigns an owner, triggers instant response,` },
+    { text: `ZiaFlow captures every inquiry, sends an immediate reply, assigns an owner,` },
     { image: '/images/manifesto-hand.jpg' },
-    { text: 'and tracks every prospect to a known status.' },
+    { text: 'and tracks every lead to booked work.' },
   ] as ({ text: string } | { image: string })[],
-  hint: 'Drag across the line, or tap it',
+  hint: 'ZiaFlow brings measurable operational change — from first inquiry to booked work',
 };
 
 export const productStory = {
-  title: ['Inquiry to', 'booked job.'],
+  title: ['Three steps to', 'booked work.'],
   heroImage: '/images/journal-face.jpg',
   tiles: [
     'gallery-corridor',
-    'gallery-desk',
+    'journal-noise',
     'gallery-street',
+    'manifesto-city',
+    'gallery-desk',
+    'journal-light',
+    'gallery-tower',
+    'product-reveal',
+    'journal-blur',
+    'gallery-road',
+    'capability-lights',
+    'journal-swirl',
+    'about-city',
     'gallery-window',
   ].map((name) => `/images/${name}.jpg`),
   acts: [
     {
-      tab: 'Capture',
+      tab: '1. Capture',
       title: 'Every inquiry, recorded.',
-      body: 'Website forms, phone calls, Google LSAs, and chat route directly into a unified database.',
-      count: 24,
-      unit: 'inquiries logged',
-    },
-    {
-      tab: 'Route',
-      title: 'Assigned in seconds.',
-      body: 'Instant notifications alert the accountable owner with source attribution so no lead sits idle.',
+      body: 'Website forms, phone calls, and Google Local Service Ads route directly into one verified lead log so nothing gets lost.',
       count: 100,
-      unit: '% assigned',
+      unit: '% inquiries logged',
     },
     {
-      tab: 'Convert',
-      title: 'Tracked to a known status.',
-      body: 'Structured follow-up keeps every accepted inquiry moving toward a booked consultation or clear quote.',
+      tab: '2. Respond',
+      title: 'Replied & assigned in seconds.',
+      body: 'Prospects receive an immediate confirmation while your team gets an instant text and email alert with clear ownership.',
+      count: 60,
+      unit: 'sec response target',
+    },
+    {
+      tab: '3. Book',
+      title: 'Tracked to booked work.',
+      body: 'Structured follow-up keeps every inquiry moving from initial contact to a scheduled appointment or clear quote.',
       count: 1,
-      unit: 'pipeline view',
+      unit: 'clear pipeline view',
     },
   ],
 };
@@ -94,14 +104,14 @@ export const capabilities = {
 };
 
 export const howItWorks = {
-  title: 'The Lead Capture & Follow-Up Sprint.',
-  watchHint: 'Drag the line',
+  title: 'A concrete three-step service process.',
+  watchHint: 'Instant response & real-time pipeline tracking',
 };
 
 export const storiesSection = {
   title: 'Documented results from real operations.',
-  body: 'Arizona service businesses and growth operators use ZiaFlow to ensure no inquiry slips through the cracks.',
-  cta: { label: 'Explore Services', href: '/services' },
+  body: 'Arizona service businesses use ZiaFlow to make sure every inquiry is captured, answered fast, and followed through to booked work.',
+  cta: { label: 'View All Case Studies', href: '/case-studies' },
 };
 
 export const proofSection = {
@@ -109,6 +119,6 @@ export const proofSection = {
 };
 
 export const closingCta = {
-  title: 'Stop Losing Inquiries Between Click and Call.',
-  body: 'Schedule a 30-minute discovery session with our Phoenix team. We will review your lead path and scope a Lead Capture & Follow-Up Sprint.',
+  title: 'Turn More Inquiries Into Booked Work.',
+  body: 'Book a 30-minute consultation with our Phoenix team. We will review how inquiries enter your business today and map a clear 3-step plan to capture and book more work.',
 };

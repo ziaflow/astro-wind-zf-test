@@ -6,8 +6,10 @@ import Menu from '@/components/shared/layout/menu.astro';
 import Navbar from '@/components/shared/layout/navbar.astro';
 import Transition from '@/components/shared/layout/transition.astro';
 import ViewChip from '@/components/shared/layout/view-chip.astro';
+import AIFloatingMenu from '~/components/common/AIFloatingMenu.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import AnalyticsBody from '~/components/common/AnalyticsBody.astro';
+import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import VercelAnalytics from '@vercel/analytics/astro';
 import { site } from '@/data/site';
@@ -15,20 +17,40 @@ import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME } from '@/utils/generate-
 
 const accentVars = `:root{--color-signal:${site.accent};--color-signal-soft:color-mix(in srgb, ${site.accent} 14%, transparent);}`;
 
+interface MetadataProp {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string | URL;
+}
+
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   preloader?: boolean;
+  metadata?: MetadataProp;
 }
 
-const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, image, preloader = false } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
+const {
+  title: rawTitle,
+  description: rawDesc,
+  image: rawImage,
+  preloader = false,
+  metadata,
+} = Astro.props;
+
+const title = rawTitle ?? metadata?.title ?? DEFAULT_TITLE;
+const description = rawDesc ?? metadata?.description ?? DEFAULT_DESCRIPTION;
+const image = rawImage ?? metadata?.image;
+const canonical = metadata?.canonical
+  ? new URL(String(metadata.canonical), Astro.site)
+  : new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image ?? '/images/product-reveal.jpg', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" data-preloader={preloader ? '' : undefined}>
+<html lang="en" class="dark" data-preloader={preloader ? '' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -117,6 +139,8 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
         opacity: 0;
       }
     </style>
+    <LocalBusinessSchema />
+    <slot name="head" />
     <Analytics />
     <SpeedInsights />
     <VercelAnalytics />
@@ -139,6 +163,7 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
       </main>
     </div>
     <Footer />
+    <AIFloatingMenu />
     <script>
       import '@/components/animation/main';
     </script>

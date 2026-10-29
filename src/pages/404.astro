@@ -1,24 +1,25 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getHomePermalink } from '~/utils/permalinks';
+import Layout from '@/layouts/layout.astro';
+import Button from '@/components/shared/ui/button.astro';
+import { notFoundPage } from '@/data/pages';
 
-const title = `Error 404`;
+export const prerender = true;
 ---
 
-<Layout metadata={{ title }}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">
-          But dont worry, you can find plenty of other things on our homepage.
-        </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn ml-4">Back to homepage</a>
-      </div>
+<Layout title={notFoundPage.meta.title} description={notFoundPage.meta.description}>
+  <section class="shell flex min-h-[85dvh] flex-col justify-center py-32">
+    <p class="font-mono text-label text-signal uppercase">{notFoundPage.eyebrow}</p>
+    <h1 class="mt-4 font-display text-hero font-extrabold tracking-[-0.04em] text-bone">
+      {notFoundPage.lines.map((line) => (
+        <span class="block">
+          {line.text} {line.accent && <span class="text-signal">{line.accent}</span>}
+        </span>
+      ))}
+    </h1>
+    <p class="mt-8 max-w-[40ch] text-lead text-mute">{notFoundPage.body}</p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <Button label={notFoundPage.cta.label} href={notFoundPage.cta.href} />
+      <Button label="Claim Free Audit" href="/audit" variant="outline" />
     </div>
   </section>
 </Layout>

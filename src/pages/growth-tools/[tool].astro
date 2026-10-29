@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/layout.astro';
+import GrowthTool from '~/components/growth-tools/GrowthTool.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import Cta from '@/components/shared/cta.astro';
+import { tools } from '~/lib/growth-tools/engine.mjs';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return tools.map((tool) => ({ params: { tool: tool.slug }, props: { tool } }));
+}
+const { tool } = Astro.props;
+---
+
+<Layout
+  title={`${tool.title} | ZiaFlow Phoenix`}
+  description={`${tool.intro} Free interactive ${tool.service.toLowerCase()} tool by ZiaFlow in Phoenix.`}
+>
+  <div class="pt-20">
+    <GrowthTool slug={tool.slug} />
+  </div>
+  <AuditSection />
+  <Cta />
+</Layout>

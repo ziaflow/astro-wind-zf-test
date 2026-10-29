@@ -1,54 +1,58 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Performance Tracking & Analytics | ZiaFlow',
-  description: 'Forensic data tracking and custom dashboards for real-time ROI measurement.',
-};
-
-const serviceData = {
-  name: 'Performance Tracking & Analytics',
-  description:
-    'Forensic data tracking and custom dashboards for real-time ROI measurement. We provide total transparency so you can see exactly how your digital infrastructure is performing.',
-  url: 'https://ziaflow.com/services/performance-tracking',
-  image: 'https://ziaflow.com/assets/images/analytics-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Performance Tracking"
-    title="Data-Driven Transparency"
-    subtitle="We believe in forensic data, not guesses. We implement custom dashboards that track the metrics that actually matter to your bottom line: calls booked, forms filled, and revenue generated. We provide total transparency so you can see exactly how your digital infrastructure is performing in real-time."
-    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
-  />
-
-  <Features
-    title="Metrics That Matter"
-    items={[
-      {
-        title: 'Real-Time Dashboards',
-        description: 'See your campaign performance as it happens.',
-        icon: 'tabler:dashboard',
-      },
-      {
-        title: 'Conversion Tracking',
-        description: 'Know exactly which leads turned into paying customers.',
-        icon: 'tabler:chart-sankey',
-      },
-      {
-        title: 'Revenue Attribution',
-        description: 'Connect marketing spend directly to revenue generated.',
-        icon: 'tabler:coin',
-      },
-    ]}
-  />
-
-  <CallToAction title="See your true ROI." actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]} />
-</Layout>
+<KairoServicePage
+  title="Marketing Attribution & Lead Tracking Phoenix | ZiaFlow"
+  description="Accurate marketing attribution and lead pipeline telemetry for Arizona businesses. Unify Search Console, Clarity, CallRail, and database lead receipts."
+  url="https://ziaflow.com/services/performance-tracking"
+  eyebrow="Marketing Telemetry · Verified Attribution"
+  heroLines={['Evidence under', 'every marketing claim.']}
+  heroIntro="Stop guessing which channel produced a customer. We build server-side Supabase telemetry that connects Search Console queries, Clarity behavior, call tracking, and verified form receipts into one honest ledger."
+  deliverables={[
+    {
+      title: 'Atomic Lead & Receipt Database Ledger',
+      tag: 'Single Source of Truth',
+      description: 'Every accepted inquiry is logged in `lead_submissions` and `leads` with source page, timestamp, deduplication key, and test-traffic isolation.',
+    },
+    {
+      title: 'Automated Microsoft Clarity & GSC Sync',
+      tag: 'Scheduled Pipelines',
+      description: 'Scheduled Supabase Edge Functions and data monitors capturing finalized search impressions and trailing behavioral metrics without manual exports.',
+    },
+    {
+      title: 'Cryptographic Email Delivery Telemetry',
+      tag: 'Deliverability',
+      description: 'HMAC-verified reporting webhooks (`email_delivery_events`) confirming that every prospect confirmation and internal alert was actually delivered.',
+    },
+    {
+      title: 'CallRail & Booking Outcome Integration',
+      tag: 'Full Funnel',
+      description: 'Connecting phone call tracking and calendar bookings to inquiry records so you measure Inquiry-to-Held-Meeting and Paid-Project rates.',
+    },
+  ]}
+  processSteps={[
+    { step: 'Step 1 · Instrument', title: 'Server-Side Receipt Logging', description: 'We replace unverified client-side pixel guesses with server-confirmed database events.' },
+    { step: 'Step 2 · Isolate', title: 'QA & Spam Separation', description: 'We filter out synthetic tests (`is_test=true`), duplicates, and bots from business counts.' },
+    { step: 'Step 3 · Unify', title: 'Search + Behavior + Intake', description: 'We align GSC snapshots, Clarity metrics, and confirmed inquiries by page.' },
+    { step: 'Step 4 · Brief', title: 'Actionable Operator Reporting', description: 'Clear weekly and 28-day cohort reviews focused on qualified inquiries and booked jobs.' },
+  ]}
+  faqs={[
+    {
+      question: 'Why don’t you rely solely on standard GA4 button-click events?',
+      answer: 'Ad blockers, cookie banners, and failed form submissions make client-side button clicks unreliable. By logging an atomic receipt in Supabase inside `/api/contact` and separating test payloads, your lead count reflects 100% real, persisted inquiries.',
+    },
+    {
+      question: 'Can you integrate CallRail with our website and CRM?',
+      answer: 'Yes. We configure dynamic number insertion (DNI) and webhook routing so phone inquiries carry the same source-page and campaign attribution as web forms.',
+    },
+  ]}
+  relatedLinks={[
+    { label: 'CallRail Platform Integration Guide', href: '/platforms/callrail', category: 'Integration' },
+    { label: 'Marketing Automation for Arizona SMBs', href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings', category: 'Guide' },
+    { label: 'View Pricing & Sprint Scopes', href: '/pricing', category: 'Pricing' },
+    { label: 'Explore Case Studies', href: '/case-studies', category: 'Case Studies' },
+  ]}
+/>

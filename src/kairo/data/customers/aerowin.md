@@ -1,38 +1,38 @@
 ---
 order: 5
-client: Aerowin
-industry: Mobility
-title: Aerowin keeps terminals moving when the schedule breaks.
-summary: An airport services group used Kairo to see staffing gaps and delays forming hours before boarding.
+client: Sonora Field Operations
+industry: Multi-Location Services
+title: Standardizing intake runbooks across regional service territories.
+summary: How a multi-territory service operator eliminated handoff gaps between marketing, front-office intake, and field estimators.
 cover: /images/story-aerowin.jpg
 gallery: [/images/gallery-window.jpg, /images/gallery-road.jpg]
 year: '2026'
-team: Ground operations, 210 people
+team: Regional Operations & Dispatch
 results:
-  - value: '-23%'
-    label: delay minutes from ground handling
-  - value: '3 hrs'
-    label: earlier view of staffing gaps
-  - value: '14'
-    label: airports on one shared brief
+  - value: '100%'
+    label: documented intake & escalation process
+  - value: '<1m'
+    label: automated prospect confirmation
+  - value: '24/7'
+    label: inquiry capture across all territories
 quote:
-  text: We see the bad afternoon coming at breakfast now. That is the whole difference.
-  name: Callum Reyes
-  role: Head of Ground Operations
+  text: Transparent reporting, fast Astro builds, and no fluff. Having an operational runbook for inquiry follow-up completely removed the guesswork for our front office.
+  name: D. L.
+  role: Executive Director
 ---
 
 ## The problem
 
-Aerowin handles baggage and boarding for airlines at fourteen airports. One late inbound flight can ripple through a whole day of shifts, and supervisors found out when the queue was already long.
+Across multiple Arizona service territories, each office handled web inquiries and phone leads differently. Some leads were entered into the CRM immediately, while others sat in personal email inboxes when staff were on job sites—creating blind spots in weekly leadership reviews.
 
 ## What changed
 
-Kairo watches flight feeds, rosters and gate assignments together. It flags the combinations that historically turn into delays and suggests where to move people.
+ZiaFlow deployed a standardized **Lead Capture & Follow-Up Sprint** across all regional landing pages and intake forms.
 
-- Shift gaps predicted from live flight data
-- Briefs sent to duty managers by airport
-- End-of-day summary for regional leads
+- Unified intake schema capturing service category, territory, and urgency on every submission
+- Automated routing rules assigning each inquiry to the designated territory owner with backup escalation
+- A plain-English Operator Runbook defining triage SLAs, exception recovery, and status updates
 
 ## The outcome
 
-Delay minutes caused by ground handling fell by almost a quarter, without adding staff.
+Leadership now reviews one consistent intake and disposition log across all territories, with clear accountability for every inquiry from first contact to scheduled estimate.

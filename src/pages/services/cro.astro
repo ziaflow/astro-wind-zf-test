@@ -1,58 +1,78 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Conversion Rate Optimization (CRO) Services in Phoenix',
-  description:
-    'Turn website visitors into paying clients with data-driven CRO, UX forensics, and rigorous A/B testing. Maximize revenue from current traffic.',
-};
-
-const serviceData = {
-  name: 'Conversion Rate Optimization',
-  description:
-    'Turn more visitors into customers with data-driven CRO strategies. We squeeze more revenue out of your existing traffic.',
-  url: 'https://ziaflow.com/services/cro',
-  image: 'https://ziaflow.com/assets/images/cro-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Conversion Rate Optimization"
-    title="Conversion Rate Optimization (CRO) Services in Phoenix"
-    subtitle="Traffic is wasted if it doesn't convert. We use a scientific approach to analyze user behavior, identifying exactly where prospects drop off. By engineering fixes—whether it's form placement, page speed, or trust signals—we squeeze more revenue out of your existing traffic, lowering your customer acquisition cost."
-    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
-  />
-
-  <Features
-    title="Maximize Every Click"
-    items={[
-      {
-        title: 'Behavior Analysis',
-        description: 'Understand how users interact with your site using heatmaps and recordings.',
-        icon: 'tabler:analyze',
-      },
-      {
-        title: 'A/B Testing',
-        description: 'Test headlines, offers, and layouts to find what works best.',
-        icon: 'tabler:flask',
-      },
-      {
-        title: 'UX Improvements',
-        description: 'Remove friction points that stop users from converting.',
-        icon: 'tabler:user-check',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Stop wasting traffic."
-    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
-  />
-</Layout>
+<KairoServicePage
+  title="Conversion Rate Optimization (CRO) Phoenix | ZiaFlow"
+  description="Turn more existing website visitors into booked work in Phoenix, AZ. We fix mobile form friction, slow load times, and broken call paths."
+  url="https://ziaflow.com/services/cro"
+  eyebrow="Conversion Architecture · Behavioral Analytics"
+  heroLines={['Stop paying for clicks', 'that never convert.']}
+  heroIntro="Doubling your ad budget on a leaky website just doubles your wasted spend. We inspect real visitor behavior with Microsoft Clarity, eliminate mobile form friction, and engineer high-trust inquiry paths."
+  deliverables={[
+    {
+      title: 'Microsoft Clarity Heatmap & Friction Analysis',
+      tag: 'Behavioral Data',
+      description: 'Automated trailing-24-hour behavioral snapshots tracking scroll depth, rage clicks, dead clicks, and script errors across key landing pages.',
+    },
+    {
+      title: 'Mobile Call & Form Path Repair',
+      tag: 'UX Engineering',
+      description: 'Fixing missing #form anchors, overlapping mobile buttons, slow input validation, and confusing multi-field layouts.',
+    },
+    {
+      title: 'Interactive Lead Magnets & ROI Calculators',
+      tag: 'Engagement',
+      description: 'Replacing passive "Contact Us" walls with interactive readiness checklists, instant audit requests, and ROI calculators that pre-qualify buyers.',
+    },
+    {
+      title: 'Defensible Proof & Offer Positioning',
+      tag: 'Copywriting',
+      description: 'Replacing vague marketing fluff with specific deliverables, clear process steps, and checkable operator proof right next to the CTA.',
+    },
+    {
+      title: 'Server-Confirmed Conversion Telemetry',
+      tag: 'Accuracy',
+      description: 'Tracking actual persisted database receipts (`lead_submissions`) rather than counting broken button clicks as conversions.',
+    },
+    {
+      title: '28-Day Cohort Validation',
+      tag: 'Measurement',
+      description: 'Measuring before-and-after performance across complete, non-overlapping periods with strict rollback guardrails.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Diagnose',
+      title: 'Clarity & Funnel Inspection',
+      description: 'We analyze where mobile and desktop visitors drop off, rage-click, or abandon forms.',
+    },
+    {
+      step: 'Step 2 · Hypothesize',
+      title: 'Evidence-Backed Scope',
+      description: 'We log a specific finding with baseline metrics, target page, and acceptance criteria.',
+    },
+    {
+      step: 'Step 3 · Ship',
+      title: 'Isolated PR & Preview QA',
+      description: 'We implement the UX, speed, or copy improvement and verify keyboard and mobile task completion.',
+    },
+    {
+      step: 'Step 4 · Measure',
+      title: 'Confirmed Lead Verification',
+      description: 'We monitor confirmed non-test inquiries and engagement metrics over the post-change window.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Do we need massive traffic to benefit from CRO?',
+      answer: 'No. When traffic is modest, fixing functional conversion barriers—like a broken anchor link, a slow mobile hero, a generic offer, or a form that fails silently—delivers immediate impact without needing thousands of A/B split-test sessions.',
+    },
+    {
+      question: 'How do you track conversions accurately?',
+      answer: 'Many agencies fire a conversion pixel the moment a user clicks a button, even if the form errored out. ZiaFlow only fires a confirmed lead event after the submission is validated and persisted in our Supabase receipt ledger.',
+    },
+  ]}
+/>

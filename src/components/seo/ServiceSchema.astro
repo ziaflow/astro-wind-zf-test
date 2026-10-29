@@ -3,21 +3,19 @@ interface Props {
   name: string;
   description: string;
   url: string;
-  image: string;
+  image?: string;
 }
 
-const { name, description, url, image } = Astro.props;
+const { name, description, url, image = '/images/product-reveal.jpg' } = Astro.props;
 
-// Automate: Ensure Image URL is absolute for Schema compliance
 const siteUrl = 'https://ziaflow.com';
 const absoluteImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
-// Stability: Hardcoded Organization Data with Trust Signals
 const organization = {
   '@type': 'ProfessionalService',
   name: 'ZiaFlow',
   url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
+  logo: `${siteUrl}/favicon.svg`,
   sameAs: [
     'https://www.linkedin.com/company/ziaflow/',
     'https://www.facebook.com/ZiaFlowAZ/',
@@ -28,22 +26,14 @@ const organization = {
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: '2822 E Greenway Rd Suite 10 B',
     addressLocality: 'Phoenix',
     addressRegion: 'AZ',
-    postalCode: '85302',
+    postalCode: '85032',
     addressCountry: 'US',
-  },
-  // Social Proof: Leveraging your 5.0 rating from 50+ clients
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '50',
-    bestRating: '5',
-    worstRating: '1',
   },
 };
 
-// Speed: Dynamic Service Data mapped to specific intent
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -54,11 +44,12 @@ const schema = {
     { '@type': 'City', name: 'Scottsdale' },
     { '@type': 'City', name: 'Mesa' },
     { '@type': 'City', name: 'Tempe' },
+    { '@type': 'City', name: 'Chandler' },
     { '@type': 'City', name: 'Glendale' },
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Digital Growth Services',
+    name: 'Digital Growth & Lead Automation Services',
     itemListElement: [
       {
         '@type': 'Offer',

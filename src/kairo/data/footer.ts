@@ -3,44 +3,51 @@ import type { FooterGroup } from '@/interface';
 
 export const footerGroups: FooterGroup[] = [
   {
-    title: 'Services',
+    title: 'Core Services',
     links: [
-      { label: 'Automation & Lead Sprints', href: '/services/automation' },
-      { label: 'Technical SEO', href: '/services/seo' },
-      { label: 'PPC & Local Service Ads', href: '/services/ppc' },
-      { label: 'Web Development & CRO', href: '/services/web-development' },
-      { label: 'Ecommerce Platforms', href: '/services/ecommerce' },
+      { label: 'All Services Hub', href: '/services' },
+      { label: 'Lead Capture & Automation', href: '/services/automation' },
+      { label: 'Phoenix Technical SEO', href: '/services/seo' },
+      { label: 'Google Local Service Ads (LSA)', href: '/services/local-service-ads' },
+      { label: 'Google Business Profile (GBP)', href: '/services/gmb-optimization' },
+      { label: 'Web Development & Astro', href: '/services/web-development' },
+      { label: 'Conversion Optimization (CRO)', href: '/services/cro' },
+      { label: 'Review & Reputation Systems', href: '/services/review-management' },
     ],
   },
   {
-    title: 'Articles & Guides',
+    title: 'Interactive Tools & Playbooks',
     links: [
-      { label: 'All Articles', href: '/blog' },
-      { label: 'Marketing Automation for Arizona Service Businesses', href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings' },
-      { label: 'Website Conversion Checklist for Phoenix Businesses', href: '/website-conversion-checklist-for-phoenix-businesses' },
-      { label: 'Google Local Service Ads: SEO & Quality Playbook', href: '/google-local-service-ads-in-2025' },
-      { label: 'How to Tackle Website Analysis Tasks', href: '/website-analysis-tasks' },
-      { label: 'Reduce Bounce Rate with AI: Practical Guide', href: '/reduce-bounce-rate-with-ai' },
+      { label: 'All Interactive Business Tools', href: '/growth-tools' },
+      { label: 'Website Project Estimator', href: '/growth-tools/website-project-estimator' },
+      { label: 'Lead Follow-Up Assessment', href: '/growth-tools/lead-follow-up-assessment' },
+      { label: 'Software Stack Assessment', href: '/growth-tools/software-stack-assessment' },
+      { label: 'Local Visibility Check', href: '/growth-tools/local-visibility-check' },
+      { label: 'Website Conversion Checklist', href: '/growth-tools/website-conversion-checklist' },
+      { label: 'All Articles & Insights', href: '/blog' },
     ],
   },
   {
-    title: 'ZiaFlow',
+    title: 'ZiaFlow & Funnel',
     links: [
       { label: 'Home', href: '/' },
-      { label: 'About', href: '/about' },
-      { label: 'Contact ZiaFlow', href: '/contact' },
+      { label: 'Pricing & Sprint Scopes', href: '/pricing' },
+      { label: 'Case Studies & Blueprints', href: '/case-studies' },
+      { label: 'Free 48-Hr Forensic Audit', href: '/audit' },
+      { label: 'About ZiaFlow', href: '/about' },
+      { label: 'Contact & Intake Form', href: '/contact#form' },
     ],
   },
 ];
 
 export const footerContact = {
   title: 'Contact ZiaFlow',
-  subtitle: 'Direct Phoenix contact channels for inquiries and support',
+  subtitle: 'Direct Phoenix engineering & intake channels',
   methods: [
     {
       label: 'Direct Phone',
       value: '(602) 834-4239',
-      href: 'tel:6028344239',
+      href: 'tel:+16028344239',
     },
     {
       label: 'Inquiry Email',
@@ -49,7 +56,7 @@ export const footerContact = {
     },
     {
       label: 'Consultation',
-      value: 'Book Meeting',
+      value: 'Book Strategy Call',
       href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
     },
   ],
@@ -63,5 +70,5 @@ export const footerLegalLinks = [
 export const footerCopy = {
   followTitle: 'Connect',
   backToTop: 'Back to top',
-  legal: `© ${new Date().getFullYear()} ${site.name}`,
+  legal: `© ${new Date().getFullYear()} ${site.name} LLC · Phoenix, Arizona`,
 };

@@ -115,12 +115,12 @@ export const journalPage = {
 export const aboutPage = {
   meta: {
     title: 'About ZiaFlow',
-    description: `${site.name} is a Phoenix-based digital engineering and transformation agency specializing in web performance, lead intake automation, and conversion systems.`,
+    description: `Meet ZiaFlow in Phoenix, AZ. We build fast websites, automated lead capture, and 60-second follow-up systems that turn inquiries into booked work.`,
   },
   hero: {
-    lines: ['Engineering systems', 'for businesses', 'that convert.'],
+    lines: ['Systems built', 'to turn inquiries', 'into booked work.'],
     accent: 2,
-    intro: `Based in Phoenix, Arizona, ${site.name} helps service businesses, e-commerce brands, and local operators unlock their potential through custom web engineering, marketing automation, and conversion systems.`,
+    intro: `Based in Phoenix, Arizona, ${site.name} helps service businesses capture every inquiry, respond in seconds, and follow through with clear ownership until the work is booked.`,
     image: '/images/about-hero.jpg',
     imageAlt: 'ZiaFlow digital systems and web development in Phoenix, Arizona',
     facts: [
@@ -134,10 +134,10 @@ export const aboutPage = {
     body: 'Founded in Arizona with a focused mission: engineer websites that load fast, forms that never fail, and follow-up workflows that convert.',
   },
   values: { title: 'What we hold ourselves to.' },
-  team: { title: 'The people behind the systems.' },
+  team: { title: 'Disciplines behind the systems.' },
   roles: {
-    title: 'Collaborate with ZiaFlow.',
-    body: 'Based in Phoenix, Arizona. We partner with forward-thinking operators, contractors, and agencies.',
+    title: 'Work with ZiaFlow.',
+    body: 'Based in Phoenix, Arizona. Choose a focused engagement track or schedule a consultation with our engineering team.',
   },
 };
 

@@ -1,58 +1,52 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Google Business Profile (GMB) Optimization',
-  description:
-    'Dominate Google Maps and local 3-pack search in Phoenix. Capture high-intent customers with optimized Google Business Profiles. Call (602) 834-4239.',
-};
-
-const serviceData = {
-  name: 'Google Business Profile Optimization',
-  description:
-    'Optimize your Google Business Profile to capture local search traffic. We turn your profile into a conversion point, not just a directory listing.',
-  url: 'https://ziaflow.com/services/gmb-optimization',
-  image: 'https://ziaflow.com/assets/images/gmb-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="GMB Optimization"
-    title="Your Local Storefront"
-    subtitle="For local service businesses, the Map Pack is the new homepage. We fully optimize your Google Business Profile—from accurate categorizations to geo-tagged visual assets—to ensure you appear prominently when neighbors are searching for your services. We turn your profile into a conversion point, not just a directory listing."
-    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
-  />
-
-  <Features
-    title="Map Pack Dominance"
-    items={[
-      {
-        title: 'Complete Profile Optimization',
-        description: 'Ensure every field is filled accurately for maximum visibility.',
-        icon: 'tabler:file-check',
-      },
-      {
-        title: 'Local SEO Strategy',
-        description: 'Target local keywords to appear in relevant searches.',
-        icon: 'tabler:map-pin',
-      },
-      {
-        title: 'Visual Assets',
-        description: 'Geo-tagged photos and videos to showcase your work.',
-        icon: 'tabler:photo',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Claim your local presence."
-    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
-  />
-</Layout>
+<KairoServicePage
+  title="Google Business Profile Optimization Phoenix | ZiaFlow"
+  description="Rank higher in the Phoenix Google Map Pack with professional Google Business Profile optimization, category tuning, and automated review requests."
+  url="https://ziaflow.com/services/gmb-optimization"
+  eyebrow="Local Map Pack · Phoenix & Valley-Wide"
+  heroLines={['Own the Phoenix', 'Google Map Pack.']}
+  heroIntro="When Arizona customers search for a local service provider, 70%+ of calls go directly to the top 3 results in the Google Map Pack. We engineer your Google Business Profile for maximum local visibility and direct call conversion."
+  deliverables={[
+    {
+      title: 'Primary & Secondary Category Alignment',
+      tag: 'Map Rank',
+      description: 'Forensic competitor analysis across Phoenix metro zip codes to configure exact primary and secondary GBP categories and service catalogs.',
+    },
+    {
+      title: 'UTM-Tagged Website & Booking Links',
+      tag: 'Attribution',
+      description: 'Dedicated tracking parameters on your profile website, appointment, and call actions so every Map Pack lead is attributed in Search Console and Supabase.',
+    },
+    {
+      title: 'Automated Post-Job Review Velocity',
+      tag: 'Trust Signal',
+      description: 'Direct integration with your dispatch workflow to send automated SMS/email review requests right after service completion.',
+    },
+    {
+      title: 'Structured Q&A, Services & Photo Geo-Relevance',
+      tag: 'Entity Signals',
+      description: 'Complete population of service descriptions, buyer FAQs, and authentic operational photography aligned with your website’s LocalBusiness schema.',
+    },
+  ]}
+  processSteps={[
+    { step: 'Step 1 · Audit', title: 'Map Grid & Category Check', description: 'We benchmark your current Map Pack visibility and category gaps across Phoenix.' },
+    { step: 'Step 2 · Align', title: 'NAP & Schema Parity', description: 'We synchronize your GBP fields with your website’s LocalBusiness JSON-LD markup.' },
+    { step: 'Step 3 · Automate', title: 'Review & Booking Wiring', description: 'We connect automated review requests and UTM-tracked booking links.' },
+    { step: 'Step 4 · Grow', title: 'Ongoing Post & Q&A Cadence', description: 'Regular profile updates, review responses, and spam-listing defense.' },
+  ]}
+  faqs={[
+    {
+      question: 'Why isn’t our Google Business Profile showing up in the top 3 Map Pack?',
+      answer: 'Map Pack rankings depend on three pillars: Relevance (exact primary/secondary categories and matching website schema), Prominence (consistent review velocity and local authority), and Proximity. Fixing mismatched categories and connecting your GBP to a fast, schema-rich service page often unlocks rapid movement.',
+    },
+    {
+      question: 'How do you track calls and leads coming from our Google Business Profile?',
+      answer: 'We configure UTM source/medium tags on your GBP website and booking links and integrate call tracking so every inquiry generated by Google Maps is recorded separately in your lead database.',
+    },
+  ]}
+/>

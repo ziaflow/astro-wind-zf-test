@@ -1,38 +1,38 @@
 ---
 order: 4
-client: Ledgerly
-industry: Finance
-title: Ledgerly saves accounts in week two, not in the quarterly review.
-summary: A B2B payments company used Kairo to catch the early signs of churn hiding in usage and support data.
+client: Southwest Advisory & Capital
+industry: Financial & Advisory
+title: Full-funnel attribution and executive intake automation with zero data leaks.
+summary: An investment and advisory group deployed high-trust web architecture, strict spam filtering, and executive email triage powered by ZiaFlow.
 cover: /images/story-ledgerly.jpg
-gallery: [/images/gallery-street.jpg, /images/gallery-corridor.jpg]
+gallery: [/images/gallery-desk.jpg, /images/gallery-window.jpg]
 year: '2025'
-team: Customer success, 34 people
+team: Executive & Advisory Team
 results:
-  - value: '+12 pts'
-    label: net revenue retention
-  - value: '3 weeks'
-    label: earlier churn warning
-  - value: '41%'
-    label: fewer escalations
+  - value: '100%'
+    label: attributed inquiry provenance
+  - value: '0'
+    label: bot or spam submissions reaching partners
+  - value: '24hr'
+    label: turnaround on custom engineering updates
 quote:
-  text: We used to find out about churn in the quarterly review. Now Kairo tells us in week two, while the account is still saveable.
-  name: Ines Okafor
-  role: VP Customer Success
+  text: When it comes to web performance, form tracking, and SEO architecture, ZiaFlow is remarkably knowledgeable and efficient. They gave our team clear visibility into our lead attribution.
+  name: S. K.
+  role: Comptroller
 ---
 
 ## The problem
 
-Ledgerly's customers rarely announce they are leaving. Usage tapers, tickets get shorter and the champion stops joining calls. The signs were all there, spread across four tools.
+High-value advisory and capital inquiries require strict confidentiality, clean source attribution, and immediate partner routing. Legacy contact forms were cluttered with promotional bot spam and lacked source-page tracking, making it difficult to evaluate which content assets drove qualified partner conversations.
 
 ## What changed
 
-Kairo combined product usage, billing, ticket sentiment and call transcripts into one picture per account. When an account started to drift, the owner got a brief with the evidence and a suggested next step.
+ZiaFlow implemented multi-layer server-side intake protection and executive workflow automation.
 
-- Account-level baselines across usage, billing and support
-- Call transcripts checked for budget and competitor mentions
-- Weekly risk review generated automatically
+- Defense-in-depth rate limiting, honeypot validation, and TLD/markup filtering at the API edge
+- Source-page and campaign attribution persisted alongside every validated inquiry receipt
+- Direct partner alerts with structured brief summaries and one-click reply routing
 
 ## The outcome
 
-Churn warnings arrive three weeks earlier, and net revenue retention rose by twelve points in a year.
+Partners receive clean, high-signal inquiry briefs with exact page attribution and zero spam noise, backed by an auditable database trail.

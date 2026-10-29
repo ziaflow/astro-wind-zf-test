@@ -1,4 +1,3 @@
-import { site } from '@/data/site';
 import type { Milestone, Role, TeamMember, Value } from '@/interface';
 
 export const milestones: Milestone[] = [
@@ -48,16 +47,16 @@ export const values: Value[] = [
 ];
 
 export const team: TeamMember[] = [
-  { name: 'Jeremy', role: 'Principal & Lead Systems Engineer', image: '/images/team-amara.jpg' },
-  { name: 'Systems & Architecture', role: 'Full-Stack Engineering & Astro', image: '/images/team-jonas.jpg' },
-  { name: 'Data & Automation', role: 'Supabase, Webhooks & Pipeline Integration', image: '/images/team-lin.jpg' },
-  { name: 'Search & CRO', role: 'Technical SEO & Conversion Architecture', image: '/images/team-rafael.jpg' },
-  { name: 'Client Operations', role: 'Intake Runbooks & Quality Assurance', image: '/images/team-sade.jpg' },
-  { name: 'Advisory', role: 'Commercial Growth & Strategy', image: '/images/team-viktor.jpg' },
+  { name: 'Jeremy · Principal', role: 'Lead Systems & Full-Stack Engineer', image: '/images/gallery-desk.jpg' },
+  { name: 'Web Architecture', role: 'Astro, TypeScript & Edge Performance', image: '/images/step-connect.jpg' },
+  { name: 'Intake & Automation', role: 'Supabase, Customer.io & Webhook Routing', image: '/images/gallery-corridor.jpg' },
+  { name: 'Search & Local Pack', role: 'Technical SEO, GBP & LSA Operations', image: '/images/step-watch.jpg' },
+  { name: 'Conversion Systems', role: 'Interactive Diagnostics, CRO & Attribution', image: '/images/capability-lights.jpg' },
+  { name: 'Client Operations', role: 'Documented Runbooks & SLA Verification', image: '/images/gallery-window.jpg' },
 ];
 
 export const roles: Role[] = [
-  { title: 'Full-Stack Engineer', team: 'Engineering', location: 'Phoenix, AZ or Remote' },
-  { title: 'Automation Engineer', team: 'Integrations', location: 'Phoenix, AZ or Remote' },
-  { title: 'Technical SEO Specialist', team: 'Growth', location: 'Phoenix, AZ or Remote' },
+  { title: 'Lead Capture & Follow-Up Sprint', team: 'Fixed-Scope Implementation', location: 'Phoenix, AZ & Nationwide' },
+  { title: 'Custom Astro Website & CRO Rebuild', team: 'Web Engineering', location: 'Sub-Second Edge Delivery' },
+  { title: 'Technical SEO, GBP & Local Service Ads', team: 'Search & Growth', location: 'Greater Phoenix & Multi-Location' },
 ];

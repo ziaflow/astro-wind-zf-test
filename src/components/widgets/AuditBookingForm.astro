@@ -181,6 +181,11 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
 <script is:inline>
   const form = document.getElementById('audit-booking-form');
   const successDiv = document.getElementById('audit-form-success');
+  const makeAuditKey = () =>
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  let activeAuditKey = makeAuditKey();
 
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -188,6 +193,7 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
 
       const formData = new FormData(form);
       const rawData = Object.fromEntries(formData);
+      const params = new URLSearchParams(window.location.search);
 
       const fullName = [rawData.first_name, rawData.last_name].filter(Boolean).join(' ').trim() || rawData.name || '';
       const payload = {
@@ -195,33 +201,47 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
         name: fullName,
         company: rawData.company_name || rawData.company || '',
         service_interest: rawData.service_interest || 'Growth Audit',
-        idempotency_key: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+        page: window.location.pathname,
+        page_url: window.location.href,
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_term: params.get('utm_term') || '',
+        utm_content: params.get('utm_content') || '',
+        idempotency_key: activeAuditKey,
       };
 
       try {
-        // Push to dataLayer for GTM tracking
-        if (window.dataLayer) {
-          window.dataLayer.push({
-            event: 'form_submission',
-            form_name: 'audit_booking',
-            email: payload.email,
-            company: payload.company,
-          });
-        }
-
-        // Submit form to unified contact handler
         const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
+        const body = await response.json().catch(() => ({}));
 
         if (response.ok) {
+          if (!body.duplicate) {
+            if (window.dataLayer) {
+              window.dataLayer.push({
+                event: 'form_submission',
+                form_name: 'audit_booking',
+                email: payload.email,
+                company: payload.company,
+              });
+            }
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'generate_lead', {
+                event_category: 'engagement',
+                event_label: 'audit_booking',
+                value: 1,
+              });
+            }
+          }
+          activeAuditKey = makeAuditKey();
           form.classList.add('hidden');
           successDiv.classList.remove('hidden');
         } else {
-          const errData = await response.json().catch(() => ({}));
-          alert(errData.message || 'Something went wrong. Please try again.');
+          alert(body.message || 'Something went wrong. Please try again.');
         }
       } catch (error) {
         console.error('Form submission error:', error);

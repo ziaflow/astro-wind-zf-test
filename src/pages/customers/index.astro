@@ -1,0 +1,23 @@
+---
+import Layout from '@/layouts/layout.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import StoryGrid from '@/components/customers/story-grid.astro';
+import ResultsBand from '@/components/customers/results-band.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import Cta from '@/components/shared/cta.astro';
+import { customersPage } from '@/data/pages';
+
+export const prerender = true;
+---
+
+<Layout
+  title="Client Operations & Case Studies | ZiaFlow"
+  description={customersPage.meta.description}
+  metadata={{ canonical: 'https://ziaflow.com/case-studies' }}
+>
+  <PageHero lines={customersPage.hero.lines} intro={customersPage.hero.intro} accent={1} />
+  <StoryGrid />
+  <ResultsBand />
+  <AuditSection />
+  <Cta title={customersPage.cta.title} body={customersPage.cta.body} />
+</Layout>

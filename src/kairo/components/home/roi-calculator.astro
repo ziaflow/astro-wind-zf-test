@@ -1,0 +1,244 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+---
+
+<section id="calculator" class="relative isolate overflow-hidden border-t border-line py-24 md:py-32 scroll-mt-24" aria-labelledby="roi-heading">
+  <div class="shell">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+      <!-- Left: Interactive Controls -->
+      <div class="lg:col-span-7">
+        <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-3 py-1 text-xs font-mono uppercase tracking-wider text-signal mb-6">
+          <span class="size-1.5 rounded-full bg-signal"></span>
+          Interactive Lead-Leak Diagnostic
+        </span>
+
+        <h2 id="roi-heading" class="font-display text-title font-bold text-bone tracking-tight">
+          Calculate the cost of slow follow-up.
+        </h2>
+        <p class="mt-4 max-w-[54ch] text-mute leading-relaxed">
+          When web inquiries, missed calls, or Google Local Service Ads wait hours for a callback, prospects book the next contractor in search results. Adjust the sliders to model your operation.
+        </p>
+
+        <div class="mt-10 space-y-8 rounded-2xl border border-line bg-ink-2/70 p-6 sm:p-8">
+          <!-- Slider 1: Monthly Leads -->
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <label for="roi-leads" class="text-sm font-medium text-bone">
+                Monthly Inbound Calls & Web Inquiries
+              </label>
+              <span id="roi-leads-val" class="font-mono text-base font-bold text-signal bg-ink px-3 py-1 rounded-full border border-line">
+                80 / mo
+              </span>
+            </div>
+            <input
+              id="roi-leads"
+              type="range"
+              min="20"
+              max="400"
+              step="10"
+              value="80"
+              class="w-full accent-[#A22A36] h-2 bg-ink rounded-lg cursor-pointer"
+            />
+            <div class="flex justify-between text-xs font-mono text-dim mt-1.5">
+              <span>20 leads/mo</span>
+              <span>200 leads/mo</span>
+              <span>400+ leads/mo</span>
+            </div>
+          </div>
+
+          <!-- Slider 2: Avg Job Value -->
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <label for="roi-ticket" class="text-sm font-medium text-bone">
+                Average Booked Job / Project Value
+              </label>
+              <span id="roi-ticket-val" class="font-mono text-base font-bold text-signal bg-ink px-3 py-1 rounded-full border border-line">
+                $2,500
+              </span>
+            </div>
+            <input
+              id="roi-ticket"
+              type="range"
+              min="300"
+              max="12000"
+              step="100"
+              value="2500"
+              class="w-full accent-[#A22A36] h-2 bg-ink rounded-lg cursor-pointer"
+            />
+            <div class="flex justify-between text-xs font-mono text-dim mt-1.5">
+              <span>$300</span>
+              <span>$5,000</span>
+              <span>$12,000+</span>
+            </div>
+          </div>
+
+          <!-- Slider 3: Missed / Delayed Rate -->
+          <div>
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <label for="roi-leak" class="text-sm font-medium text-bone">
+                After-Hours, Voicemail, or Slow Reply Rate (&gt;15 mins)
+              </label>
+              <span id="roi-leak-val" class="font-mono text-base font-bold text-signal bg-ink px-3 py-1 rounded-full border border-line">
+                25%
+              </span>
+            </div>
+            <input
+              id="roi-leak"
+              type="range"
+              min="10"
+              max="50"
+              step="5"
+              value="25"
+              class="w-full accent-[#A22A36] h-2 bg-ink rounded-lg cursor-pointer"
+            />
+            <div class="flex justify-between text-xs font-mono text-dim mt-1.5">
+              <span>10% (Tight triage)</span>
+              <span>25% (Industry avg)</span>
+              <span>50% (Heavy leak)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Live Financial Output Card -->
+      <div class="lg:col-span-5">
+        <div class="relative overflow-hidden rounded-2xl border border-signal/50 bg-ink-2 p-8 sm:p-10 shadow-[0_24px_70px_rgba(0,0,0,0.65)]">
+          <div class="absolute -top-24 -right-24 size-56 rounded-full bg-signal/15 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+          <p class="font-mono text-xs uppercase tracking-wider text-mute">
+            Estimated Annual Revenue Left on the Table
+          </p>
+          <p id="roi-annual-out" class="mt-3 font-display text-[clamp(2.75rem,5vw,4.25rem)] leading-none font-extrabold text-bone tracking-tight">
+            $210,000
+          </p>
+          <p class="mt-2 text-xs font-mono text-signal">
+            ≈ <span id="roi-monthly-out">$17,500</span> / month in uncaptured opportunities
+          </p>
+
+          <div class="mt-8 grid grid-cols-2 gap-4 border-t border-b border-line py-6">
+            <div>
+              <p class="font-mono text-xs text-mute uppercase">Recoverable Jobs</p>
+              <p id="roi-jobs-out" class="mt-1 font-display text-2xl font-bold text-bone">
+                7 jobs / mo
+              </p>
+              <p class="text-[11px] text-dim mt-0.5">At 35% close on rescued leads</p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-mute uppercase">Staff Time Saved</p>
+              <p id="roi-hours-out" class="mt-1 font-display text-2xl font-bold text-bone">
+                20 hrs / mo
+              </p>
+              <p class="text-[11px] text-dim mt-0.5">Automated intake & CRM routing</p>
+            </div>
+          </div>
+
+          <p class="mt-6 text-xs text-mute leading-relaxed">
+            *Illustrative model based on conservative 35% booking conversion when missed or delayed inquiries receive sub-60-second automated acknowledgement and assigned owner dispatch.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3">
+            <a
+              id="roi-cta-btn"
+              href="#audit"
+              class="btn group relative h-14 w-full justify-center rounded-full bg-signal px-6 font-semibold text-bone hover:bg-signal-dark transition-all"
+              data-btn
+            >
+              <span class="btn-fill bg-bone" aria-hidden="true"></span>
+              <TextRoll text="Plug This Leak — Request Free Audit" />
+              <span class="btn-icon" data-dir="right">
+                <Icon name="arrow-right" />
+                <Icon name="arrow-right" />
+              </span>
+            </a>
+            <a
+              href="tel:+16028344239"
+              class="text-center font-mono text-xs text-mute hover:text-bone py-2 transition-colors"
+            >
+              Or call Phoenix Engineering directly: 📞 (602) 834-4239
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function initRoiCalculator() {
+      const leadsInput = document.getElementById('roi-leads');
+      const ticketInput = document.getElementById('roi-ticket');
+      const leakInput = document.getElementById('roi-leak');
+      if (!leadsInput || !ticketInput || !leakInput) return;
+
+      const leadsVal = document.getElementById('roi-leads-val');
+      const ticketVal = document.getElementById('roi-ticket-val');
+      const leakVal = document.getElementById('roi-leak-val');
+      const annualOut = document.getElementById('roi-annual-out');
+      const monthlyOut = document.getElementById('roi-monthly-out');
+      const jobsOut = document.getElementById('roi-jobs-out');
+      const hoursOut = document.getElementById('roi-hours-out');
+      const ctaBtn = document.getElementById('roi-cta-btn');
+
+      const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+      function update() {
+        const leads = Number(leadsInput.value) || 80;
+        const ticket = Number(ticketInput.value) || 2500;
+        const leakPct = Number(leakInput.value) || 25;
+
+        const leakedLeads = leads * (leakPct / 100);
+        const recoverableJobs = Math.max(1, Math.round(leakedLeads * 0.35));
+        const monthlyLost = recoverableJobs * ticket;
+        const annualLost = monthlyLost * 12;
+        const hoursSaved = Math.max(4, Math.round(leads * 0.25));
+
+        if (leadsVal) leadsVal.textContent = leads + ' / mo';
+        if (ticketVal) ticketVal.textContent = fmt.format(ticket);
+        if (leakVal) leakVal.textContent = leakPct + '%';
+        if (monthlyOut) monthlyOut.textContent = fmt.format(monthlyLost);
+        if (annualOut) annualOut.textContent = fmt.format(annualLost);
+        if (jobsOut) jobsOut.textContent = recoverableJobs + (recoverableJobs === 1 ? ' job / mo' : ' jobs / mo');
+        if (hoursOut) hoursOut.textContent = hoursSaved + ' hrs / mo';
+
+        const summary = `ROI Diagnostic: ${leads} leads/mo, $${ticket} avg job, ${leakPct}% leak rate (~${fmt.format(monthlyLost)}/mo recoverable).`;
+        const auditMsg = document.getElementById('message');
+        if (auditMsg && (!auditMsg.value || auditMsg.value.startsWith('ROI Diagnostic:'))) {
+          auditMsg.value = summary;
+        }
+        const salesMsg = document.getElementById('sales-message');
+        if (salesMsg && (!salesMsg.value || salesMsg.value.startsWith('ROI Diagnostic:'))) {
+          salesMsg.value = summary;
+        }
+      }
+
+      leadsInput.addEventListener('input', update);
+      ticketInput.addEventListener('input', update);
+      leakInput.addEventListener('input', update);
+
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', function () {
+          update();
+          if (window.dataLayer) {
+            window.dataLayer.push({
+              event: 'roi_calculator_cta_click',
+              leads_per_month: Number(leadsInput.value),
+              avg_ticket: Number(ticketInput.value),
+              leak_rate: Number(leakInput.value),
+            });
+          }
+          const target = document.getElementById('audit') || document.getElementById('form');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+
+      update();
+    }
+
+    initRoiCalculator();
+    document.addEventListener('astro:page-load', initRoiCalculator);
+  })();
+</script>

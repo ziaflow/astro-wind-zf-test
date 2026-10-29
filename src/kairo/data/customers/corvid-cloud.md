@@ -1,38 +1,38 @@
 ---
 order: 6
-client: Corvid Cloud
-industry: Infrastructure
-title: Corvid spots costly usage changes before the invoice does.
-summary: A cloud hosting provider used Kairo to connect infrastructure costs to the customers and releases driving them.
+client: Apex Custom Engineering
+industry: Custom Software & AI
+title: Bespoke web portals, Supabase telemetry, and automated client onboarding.
+summary: Engineering custom full-stack web applications and automated webhook pipelines without third-party SaaS bloat.
 cover: /images/story-corvid.jpg
 gallery: [/images/gallery-corridor.jpg, /images/gallery-tower.jpg]
-year: '2024'
-team: Finance and platform, 48 people
+year: '2025'
+team: Engineering & Operations
 results:
-  - value: '-17%'
-    label: infrastructure spend per customer
-  - value: '6 hrs'
-    label: average time to catch a cost spike
-  - value: '$1.3M'
-    label: annual savings identified
+  - value: '24hr'
+    label: deployment turnaround on scoped sprints
+  - value: '100%'
+    label: client-owned codebase & database schema
+  - value: '0'
+    label: proprietary vendor lock-in
 quote:
-  text: Finance and engineering finally look at the same story. Kairo writes it for both of us.
-  name: Noor Haddad
-  role: VP Finance
+  text: ZiaFlow is a top-notch engineering partner with reliable service, deep technical knowledge, and direct communication. They do not over-promise; they deliver exactly what was scoped.
+  name: J. M.
+  role: Commercial Investor
 ---
 
 ## The problem
 
-Corvid's cloud bill grew faster than revenue, and nobody could say why until the invoice arrived. Finance saw totals, engineering saw graphs, and the two rarely met.
+Growing operators often outgrow brittle no-code zaps and disconnected plugins that break silently when APIs change. They need production-grade web applications, row-level security databases, and cryptographically verified webhook pipelines that their business actually owns.
 
 ## What changed
 
-Kairo linked cost data to deploys, customers and regions. When spend jumped, the brief named the release and the accounts behind it.
+ZiaFlow engineered a custom Astro + Supabase + Edge Function architecture tailored to the client's exact operational workflow.
 
-- Cost anomalies traced to the deploy that caused them
-- Per-customer margin tracked daily
-- Shared briefs for finance and platform leads
+- Server-only database views and idempotent RPC transactions protecting customer records
+- Automated behavioral and search telemetry syncing on scheduled intervals without manual exports
+- Isolated preview deployments and automated regression checks before every production release
 
 ## The outcome
 
-Spend per customer fell by seventeen percent, and cost spikes are now caught the same morning.
+The organization operates on a fast, maintainable, client-owned software stack with zero recurring bloatware fees and complete visibility into operational data.

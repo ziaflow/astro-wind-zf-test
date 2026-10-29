@@ -30,7 +30,6 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
 
-
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -40,7 +39,12 @@ export default defineConfig({
         !page.includes('/admin') &&
         !page.includes('/staging') &&
         !page.includes('/category/') &&
-        !page.includes('/tag/'),
+        !page.includes('/tag/') &&
+        !page.includes('/form-test') &&
+        !page.includes('/kairo-preview') &&
+        !page.includes('/posts') &&
+        !page.endsWith('/ziaflow') &&
+        !page.includes('/ziaflow/'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -101,8 +105,9 @@ export default defineConfig({
   // REDIRECTS: Managing Link Equity (301s)
   redirects: {
     '/old-service-page': '/services/web-development',
-    '/local-visibility-check': '/audit',
-    '/website-project-estimator': '/audit',
+    '/kairo-preview': '/',
+    '/local-visibility-check': '/growth-tools/local-visibility-check',
+    '/website-project-estimator': '/growth-tools/website-project-estimator',
     '/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
       '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
     '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':

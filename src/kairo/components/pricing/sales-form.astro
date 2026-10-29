@@ -10,16 +10,29 @@ const field =
   'h-13 w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 text-bone placeholder:text-dim transition-colors duration-300 focus:border-bone focus:outline-none aria-invalid:border-signal';
 ---
 
-<section id="sales" class="relative scroll-mt-24 border-t border-line" aria-labelledby="sales-title">
+<section id="form" class="relative scroll-mt-24 border-t border-line" aria-labelledby="sales-title">
+  <span id="sales" class="absolute -top-24" aria-hidden="true"></span>
   <div class="shell grid grid-cols-1 gap-14 py-24 md:py-32 lg:grid-cols-12">
     <div class="flex flex-col justify-between gap-10 lg:col-span-5">
       <div>
-        <h2 id="sales-title" class="max-w-[12ch] font-display text-title font-bold text-bone" data-split>
+        <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-3 py-1 text-xs font-mono uppercase tracking-wider text-signal mb-6">
+          <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Direct Engineering Intake
+        </span>
+        <h2 id="sales-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
           {copy.title}
         </h2>
-        <p class="mt-6 max-w-[40ch] text-mute" data-reveal>
+        <p class="mt-6 max-w-[42ch] text-mute leading-relaxed" data-reveal>
           {copy.body}
         </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4 text-xs font-mono text-mute">
+          <a href="tel:+16028344239" class="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink-2 px-4 py-2.5 text-bone hover:border-signal hover:text-signal transition-colors">
+            📞 (602) 834-4239
+          </a>
+          <a href="mailto:info@ziaflow.com" class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-4 py-2.5 text-mute hover:text-bone transition-colors">
+            ✉️ info@ziaflow.com
+          </a>
+        </div>
       </div>
       <Media src={copy.image} alt={copy.imageAlt} class="hidden aspect-[4/3] lg:block" sizes="40vw" />
     </div>
@@ -34,6 +47,12 @@ const field =
       data-sending={copy.sending}
       data-success-free={copy.success.free}
       data-success-demo={copy.success.demo}>
+      {/* Anti-spam honeypot field */}
+      <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+        <label for="sales-website-url">Leave this field blank</label>
+        <input type="text" id="sales-website-url" name="website_url" value="" autocomplete="off" tabindex="-1" />
+      </div>
+
       <fieldset>
         <legend class="font-mono text-label text-mute uppercase">{copy.intentLegend}</legend>
         <div class="mt-4 inline-flex rounded-full border border-line bg-ink-2 p-1">
@@ -55,7 +74,7 @@ const field =
       <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2" data-sales-fields>
         <div class="flex flex-col gap-2">
           <label for="sales-name" class="text-sm text-bone">
-            {fields.name.label}
+            {fields.name.label} *
           </label>
           <input
             id="sales-name"
@@ -70,7 +89,7 @@ const field =
         </div>
         <div class="flex flex-col gap-2">
           <label for="sales-email" class="text-sm text-bone">
-            {fields.email.label}
+            {fields.email.label} *
           </label>
           <input
             id="sales-email"
@@ -85,8 +104,22 @@ const field =
           <p id="sales-email-error" class="min-h-5 text-sm text-signal" data-error-for="email"></p>
         </div>
         <div class="flex flex-col gap-2">
+          <label for="sales-phone" class="text-sm text-bone">
+            Phone Number
+          </label>
+          <input
+            id="sales-phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            class={field}
+            placeholder="(602) 555-0199"
+          />
+          <p class="min-h-5 text-sm text-dim">For rapid dispatch & SMS confirmation.</p>
+        </div>
+        <div class="flex flex-col gap-2">
           <label for="sales-company" class="text-sm text-bone">
-            {fields.company.label}
+            {fields.company.label} *
           </label>
           <input
             id="sales-company"
@@ -100,6 +133,20 @@ const field =
           <p id="sales-company-error" class="min-h-5 text-sm text-signal" data-error-for="company"></p>
         </div>
         <div class="flex flex-col gap-2">
+          <label for="sales-service" class="text-sm text-bone">
+            Primary Service Interest
+          </label>
+          <select id="sales-service" name="service_interest" class={`${field} appearance-none bg-ink`}>
+            <option value="Lead Capture & Follow-Up Sprint">Lead Capture & Follow-Up Sprint</option>
+            <option value="Marketing Automation & AI Workflows">Marketing Automation & AI Workflows</option>
+            <option value="Custom Website & CRO Engineering">Custom Website & CRO Engineering</option>
+            <option value="Local Phoenix SEO & GBP Optimization">Local Phoenix SEO & GBP Optimization</option>
+            <option value="Google Local Service Ads (LSA) & PPC">Google Local Service Ads (LSA) & PPC</option>
+            <option value="Custom Software / Full-Stack App">Custom Software / Full-Stack App</option>
+          </select>
+          <p class="min-h-5 text-sm text-dim">Select your primary priority.</p>
+        </div>
+        <div class="flex flex-col gap-2">
           <label for="sales-size" class="text-sm text-bone">
             {fields.size.label}
           </label>
@@ -110,7 +157,7 @@ const field =
           </select>
           <p class="min-h-5 text-sm text-dim">{fields.size.help}</p>
         </div>
-        <div class="flex flex-col gap-2 md:col-span-2" data-demo-only hidden>
+        <div class="flex flex-col gap-2 md:col-span-2" data-demo-only>
           <label for="sales-message" class="text-sm text-bone">
             {fields.message.label}
           </label>

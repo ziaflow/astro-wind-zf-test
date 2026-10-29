@@ -1,71 +1,52 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Custom Software & Internal Tool Development in Phoenix',
-  description:
-    'Bespoke operational tools, portals, and custom software for scaling businesses. Streamline workflow bottlenecks and build proprietary software assets.',
-};
-
-const serviceData = {
-  name: 'Custom Software Development',
-  description:
-    'Bespoke operational tools and custom software for scaling businesses. We build proprietary assets that streamline operations.',
-  url: 'https://ziaflow.com/services/software',
-  image: 'https://ziaflow.com/assets/images/software-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Custom Software"
-    title="Custom Software & Internal Tool Development in Phoenix"
-    subtitle="When off-the-shelf software limits your growth, we build the solution. From custom CRMs for home service businesses to secure patient portals, our in-house engineering team develops software that fits your specific workflows. We build proprietary assets that streamline operations and increase the valuation of your company."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Tailored Solutions"
-    items={[
-      {
-        title: 'Efficiency First',
-        description: 'Software built around your workflows, not the other way around.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Scalable Architecture',
-        description: 'Built to grow with your business, supporting thousands of users.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Proprietary IP',
-        description: 'Own your technology and increase your business valuation.',
-        icon: 'tabler:copyright',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Build what you need."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Custom Software & AI Workflow Engineering Phoenix | ZiaFlow"
+  description="Bespoke software development, internal business tools, and AI workflow systems in Phoenix, AZ. Built on Astro, Next.js, TypeScript, and Supabase."
+  url="https://ziaflow.com/services/software"
+  eyebrow="Custom Software · Full-Stack & AI Agents"
+  heroLines={['Bespoke software', 'your business owns.']}
+  heroIntro="When off-the-shelf SaaS tools and brittle no-code zaps hit their limits, we engineer production-grade web applications, Supabase databases, and autonomous AI agent workflows tailored to your operation."
+  deliverables={[
+    {
+      title: 'Full-Stack Web Applications & Portals',
+      tag: 'TypeScript / Astro / Next.js',
+      description: 'Fast, secure customer portals, estimating calculators, dispatch dashboards, and internal tools built on modern TypeScript architectures.',
+    },
+    {
+      title: 'Supabase PostgreSQL & Edge Function Backends',
+      tag: 'Database Architecture',
+      description: 'Row-Level Security (RLS) schemas, atomic RPC transactions, encrypted Vault credentials, and scheduled `pg_cron` automation.',
+    },
+    {
+      title: 'Multi-Agent AI & LLM Triage Workflows',
+      tag: 'AI Engineering',
+      description: 'Grounded AI agents that classify incoming inquiries, draft operator briefs from verified database rows, and automate repetitive back-office tasks.',
+    },
+    {
+      title: 'Cryptographic Webhook & ERP Bridges',
+      tag: 'Integrations',
+      description: 'Idempotent, HMAC-verified API bridges connecting your CRM, accounting, payment, and field-service platforms.',
+    },
+  ]}
+  processSteps={[
+    { step: 'Step 1 · Scope', title: 'Architecture & Data Contract', description: 'We define exact database schemas, API boundaries, security rules, and acceptance tests.' },
+    { step: 'Step 2 · Sprint', title: 'Iterative Engineering', description: 'We build in rapid sprints with live Vercel preview deployments you can test every week.' },
+    { step: 'Step 3 · Harden', title: 'Security & Load Verification', description: 'We verify RLS policies, rate limiting, idempotency, and error recovery.' },
+    { step: 'Step 4 · Handover', title: '100% Code Ownership', description: 'Full GitHub repository, documentation, and runbook handover with optional SLA support.' },
+  ]}
+  faqs={[
+    {
+      question: 'Do we own the source code and database you build for us?',
+      answer: 'Yes. Everything is committed to your GitHub organization and deployed on your cloud accounts (Vercel, Supabase, AWS). You never pay per-seat ransom fees for your own internal software.',
+    },
+    {
+      question: 'How do you keep AI agents from hallucinating or exposing private data?',
+      answer: 'We follow strict evidence-first rules: agents read from restricted, privacy-safe database views, treat external inputs as untrusted data, and link every generated brief back to the exact database rows that produced it.',
+    },
+  ]}
+/>

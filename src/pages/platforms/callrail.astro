@@ -1,84 +1,54 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'CallRail Call Tracking | ZiaFlow',
-  description:
-    'CallRail call tracking setup for service businesses: which campaigns and pages produce phone calls, with call recordings and source attribution.',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <Hero
-    tagline="Measurement"
-    title="CallRail"
-    subtitle="For service businesses, the phone call is often the conversion — and it's the one that standard web analytics misses. CallRail closes that gap: it shows which campaigns, pages, and searches produced each call, records the conversations (where legal), and connects phone leads to their source. Without call tracking, phone inquiries can be missing from your measurement entirely."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="What We Set Up"
-    items={[
-      {
-        title: 'Call Tracking Numbers',
-        description:
-          'Numbers per source — Google Ads, Yelp, organic — so every call is attributed to what produced it.',
-        icon: 'tabler:device-mobile',
-      },
-      {
-        title: 'Call Recordings & Transcripts',
-        description:
-          'Where legal and useful: hear what customers actually ask before they book.',
-        icon: 'tabler:eye',
-      },
-      {
-        title: 'Form Call Tracking',
-        description:
-          'CallRail forms and dynamic number insertion wired into your site and campaigns.',
-        icon: 'tabler:plug-connected',
-      },
-    ]}
-  />
-
-  <Features
-    title="How It Fits Your Stack"
-    items={[
-      {
-        title: 'With GA4',
-        description:
-          'Web inquiries in GA4, phone inquiries in CallRail — one complete view of demand.',
-        icon: 'tabler:chart-arrows',
-        callToAction: { text: 'Google Analytics', href: '/platforms/google-analytics' },
-      },
-      {
-        title: 'With Ads',
-        description:
-          'Yelp and Google Ads judged on calls and bookings — not on impressions or clicks.',
-        icon: 'tabler:target',
-        callToAction: { text: 'Google Ads', href: '/platforms/google-ads' },
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Do you know which ads produce calls?"
-    subtitle="If not, call tracking is usually the fastest measurement win available."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="CallRail Call Tracking & Attribution Setup Phoenix | ZiaFlow"
+  description="CallRail call tracking and dynamic number insertion (DNI) setup for Arizona service businesses. Know exactly which campaigns, keywords, and pages produce phone leads."
+  url="https://ziaflow.com/platforms/callrail"
+  eyebrow="Call Attribution · Dynamic Number Insertion"
+  heroLines={['Attribute every', 'inbound phone call.']}
+  heroIntro="For Arizona service businesses, the phone call is often the primary conversion—and standard web analytics misses it completely. We wire CallRail directly into your website, Google Ads, GBP, and Supabase lead ledger."
+  deliverables={[
+    {
+      title: 'Dynamic Number Insertion (DNI) Pools',
+      tag: 'Page & Keyword Level',
+      description: 'Dedicated tracking numbers across Google Ads, Local Service Ads, Google Business Profile, and organic search so every call is tied to its exact source.',
+    },
+    {
+      title: 'Missed-Call Instant Text-Back & Dispatch',
+      tag: 'Lead Rescue',
+      description: 'Webhook integration that immediately texts back a missed caller and dispatches an urgent alert to your on-call staff.',
+    },
+    {
+      title: 'Call Recording, Transcripts & Lead Qualification',
+      tag: 'Quality Control',
+      description: 'Automated transcripts and call tagging separating genuine new customer inquiries from vendor calls and existing client support.',
+    },
+    {
+      title: 'Unified Database & Offline Ads Sync',
+      tag: 'ROAS Clarity',
+      description: 'Syncing qualified phone calls into your Supabase lead ledger and Google Ads offline conversions.',
+    },
+  ]}
+  processSteps={[
+    { step: 'Step 1 · Provision', title: 'Local 602/480/623 Number Pools', description: 'We configure local Phoenix area-code number pools and forwarding rules.' },
+    { step: 'Step 2 · Deploy', title: 'Edge DNI & Webhook Setup', description: 'We install lightweight swap scripts and connect CallRail webhooks to your intake database.' },
+    { step: 'Step 3 · Automate', title: 'Missed-Call Recovery', description: 'We activate instant SMS follow-up when lines are busy or after hours.' },
+    { step: 'Step 4 · Attribute', title: 'Unified Lead Reporting', description: 'Phone leads and web forms appear side-by-side by source page and campaign.' },
+  ]}
+  faqs={[
+    {
+      question: 'Will Dynamic Number Insertion (DNI) hurt our Local SEO or NAP consistency?',
+      answer: 'No. Dynamic Number Insertion only swaps the phone number for human browser sessions using JavaScript, while search engine crawlers (Googlebot) always read your canonical primary business phone number in the raw HTML and LocalBusiness schema.',
+    },
+  ]}
+  relatedLinks={[
+    { label: 'Performance Tracking & Supabase Telemetry', href: '/services/performance-tracking', category: 'Service' },
+    { label: 'High-Intent PPC & Google Ads', href: '/services/ppc', category: 'Service' },
+    { label: 'Lead Capture & Follow-Up Automation', href: '/services/automation', category: 'Flagship Sprint' },
+    { label: 'Google Local Service Ads (LSA)', href: '/services/local-service-ads', category: 'Service' },
+  ]}
+/>

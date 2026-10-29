@@ -1,70 +1,49 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Social Media Marketing | ZiaFlow',
-  description: 'Strategic social media management that builds trust and drives revenue.',
-};
-
-const serviceData = {
-  name: 'Social Media Marketing',
-  description:
-    'Strategic social media management that builds trust and drives revenue through organic content and paid campaigns.',
-  url: 'https://ziaflow.com/services/social-media',
-  image: 'https://ziaflow.com/assets/images/social-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Social Media Marketing"
-    title="Strategic Asset Building"
-    subtitle="We move beyond vanity metrics like 'likes' to focus on engagement that drives revenue. Our approach combines organic content strategies that establish your brand’s authority with targeted paid social campaigns to accelerate reach. We build a consistent digital presence that builds trust (Stability) while utilizing social platforms as a direct channel for customer acquisition."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Our Approach"
-    items={[
-      {
-        title: 'Revenue-Focused Strategy',
-        description: 'We focus on metrics that matter: leads, sales, and ROI.',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Organic Authority',
-        description: 'Build long-term trust with high-quality, relevant content.',
-        icon: 'tabler:brand-instagram',
-      },
-      {
-        title: 'Paid Acceleration',
-        description: 'Amplify your reach with targeted ad campaigns.',
-        icon: 'tabler:ad',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Ready to build your brand?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Social Media & Paid Social Lead Generation Phoenix | ZiaFlow"
+  description="High-converting social media systems and Meta/LinkedIn lead funnels for Arizona businesses—wired directly into instant SMS and CRM follow-up."
+  url="https://ziaflow.com/services/social-media"
+  eyebrow="Social Lead Systems · Instant Intake Sync"
+  heroLines={['Social demand wired', 'to instant follow-up.']}
+  heroIntro="Social leads go cold in minutes if they sit in a CSV export. We connect your social campaigns and authority content directly into sub-60-second SMS acknowledgement and CRM dispatch."
+  deliverables={[
+    {
+      title: 'Direct Lead-Form to CRM & SMS Sync',
+      tag: 'Speed-to-Lead',
+      description: 'Instant webhook routing from social lead forms and landing pages into your database and staff dispatch notifications.',
+    },
+    {
+      title: 'High-Contrast Visual & Case Study Assets',
+      tag: 'Creative Proof',
+      description: 'Authentic operational visuals and proof-backed carousels demonstrating real project outcomes rather than generic stock templates.',
+    },
+    {
+      title: 'Retargeting & Conversion Landing Pages',
+      tag: 'Full Funnel',
+      description: 'Capturing high-intent website visitors who didn’t book on their first visit and guiding them back to your Free Audit or Consultation funnel.',
+    },
+    {
+      title: 'Attributed Pipeline Reporting',
+      tag: 'ROI Clarity',
+      description: 'Tracking social inquiries all the way to held meetings and booked jobs inside your unified lead ledger.',
+    },
+  ]}
+  processSteps={[
+    { step: 'Step 1 · Wire', title: 'Webhook & Pixel Setup', description: 'We connect social lead endpoints directly into your `/api/contact` and CRM pipeline.' },
+    { step: 'Step 2 · Build', title: 'Offer & Landing Assets', description: 'We create high-trust landing pages and visual proof assets.' },
+    { step: 'Step 3 · Triage', title: 'Sub-60s Response Loop', description: 'Every social inquiry receives immediate confirmation and owner assignment.' },
+    { step: 'Step 4 · Measure', title: 'Booked-Job Attribution', description: 'We evaluate performance by qualified appointments rather than vanity likes.' },
+  ]}
+  faqs={[
+    {
+      question: 'Why do social media leads often have lower close rates than search leads—and how do you fix it?',
+      answer: 'Social prospects are interrupted while scrolling rather than actively searching for an emergency repair. If you wait 4 hours to call them, they forget they filled out the form. By triggering an instant SMS and callback dispatch within 60 seconds, contact and booking rates rise dramatically.',
+    },
+  ]}
+  showRoiCalculator={false}
+/>
