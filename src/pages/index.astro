@@ -18,10 +18,10 @@ const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How does ZiaFlow fix lost leads for Arizona service businesses?',
+      name: 'How does ZiaFlow help Arizona service businesses manage incoming inquiries?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Through our Lead Capture & Follow-Up Sprint, we audit every inbound source (web forms, phone tracking numbers, and Google Local Service Ads), repair silent capture failures, wire sub-60-second automated acknowledgement and staff SMS/CRM dispatch, and hand over a documented operator runbook.',
+        text: 'Through our Lead Capture & Follow-Up Sprint, we audit your agreed inquiry sources (such as web forms, call-tracking endpoints, and Google Local Service Ads), repair broken capture points, connect automated prospect acknowledgement, alert responsible staff, and provide a documented operating runbook so every accepted inquiry has an owner and a next step.',
       },
     },
     {
@@ -29,15 +29,15 @@ const faqSchema = {
       name: 'What services does ZiaFlow provide in Phoenix, Arizona?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'ZiaFlow specializes in high-speed Astro web development, marketing and lead follow-up automation, technical local SEO, Google Business Profile (GBP) optimization, Google Local Service Ads (LSA) management, conversion rate optimization (CRO), and custom software engineering.',
+        text: 'ZiaFlow builds fast Astro websites and implements lead capture, CRM routing, technical SEO, and conversion systems for Arizona service businesses.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How quickly can we get a technical website and conversion audit?',
+      name: 'How do we get started with ZiaFlow?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Our Phoenix engineering team records and delivers a custom 10-minute forensic video audit breaking down your Core Web Vitals, search visibility, and lead capture leaks within 48 business hours.',
+        text: 'You can book a consultation call or contact our Phoenix team directly. We will review how inquiries enter your business today, identify broken handoffs, and outline a fixed-scope Sprint.',
       },
     },
   ],
@@ -45,8 +45,8 @@ const faqSchema = {
 ---
 
 <Layout
-  title="Turn More Inquiries Into Booked Work | ZiaFlow Phoenix"
-  description="ZiaFlow helps Phoenix service businesses capture every inquiry, respond in under 60 seconds, and turn website traffic into booked work. Call (602) 834-4239."
+  title="Websites and Lead Follow-Up for Arizona Service Businesses | ZiaFlow"
+  description="ZiaFlow builds websites and connects inquiry capture, CRM routing, and follow-up. Give every accepted inquiry an owner and a next step. Call (602) 834-4239."
   preloader
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

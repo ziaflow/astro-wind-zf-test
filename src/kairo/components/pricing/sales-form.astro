@@ -157,6 +157,30 @@ const field =
           </select>
           <p class="min-h-5 text-sm text-dim">{fields.size.help}</p>
         </div>
+        <div class="flex flex-col gap-2 md:col-span-2">
+          <label for="sales-current-systems" class="text-sm text-bone">
+            Current Website & Intake Systems
+          </label>
+          <input
+            id="sales-current-systems"
+            name="current_systems"
+            class={field}
+            placeholder="e.g. WordPress, HubSpot, ServiceTitan, CallRail, or Gmail"
+          />
+          <p class="min-h-5 text-sm text-dim">What tools receive customer inquiries today?</p>
+        </div>
+        <div class="flex flex-col gap-2 md:col-span-2">
+          <label for="sales-handoff-problem" class="text-sm text-bone">
+            What happens after someone contacts your business?
+          </label>
+          <input
+            id="sales-handoff-problem"
+            name="handoff_notes"
+            class={field}
+            placeholder="e.g. Leads sit in an unmonitored inbox, or nobody is assigned to follow up"
+          />
+          <p class="min-h-5 text-sm text-dim">Where do inquiries stall or lose momentum?</p>
+        </div>
         <div class="flex flex-col gap-2 md:col-span-2" data-demo-only>
           <label for="sales-message" class="text-sm text-bone">
             {fields.message.label}
