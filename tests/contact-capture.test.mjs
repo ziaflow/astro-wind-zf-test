@@ -1,12 +1,22 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import test from 'node:test';
 import ts from 'typescript';
 
-const source = readFileSync(new URL('../src/pages/api/contact.ts', import.meta.url), 'utf8')
-  .replaceAll('import.meta.env', 'testEnv')
-  .replace(/^import nodemailer.*;$/m, '');
+const deliverySource = readFileSync(new URL('../src/lib/intake-delivery.ts', import.meta.url), 'utf8').replaceAll(
+  'export function ',
+  'function '
+);
+const source =
+  deliverySource +
+  '\n' +
+  readFileSync(new URL('../src/pages/api/contact.ts', import.meta.url), 'utf8')
+    .replaceAll('import.meta.env', 'testEnv')
+    .replace(/^import \{ createHash \}.*;$/m, '')
+    .replace(/^import nodemailer.*;$/m, '')
+    .replace(/^import \{ deliverWithReceipt.*;$/m, '');
 const compiled = ts
   .transpileModule(source, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
@@ -24,6 +34,8 @@ function handler(fetchImpl, configured = true) {
     URL,
     AbortSignal,
     crypto,
+    createHash,
+    Buffer,
     console: { error() {}, warn() {} },
   });
 }
