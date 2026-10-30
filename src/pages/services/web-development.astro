@@ -5,78 +5,70 @@ export const prerender = true;
 ---
 
 <KairoServicePage
-  title="Phoenix Web Development Agency | Fast Websites | ZiaFlow"
-  description="High-speed Astro web development for Arizona service businesses. Clean semantic code connected to reliable inquiry capture and follow-up."
+  title="Web Development in Phoenix | ZiaFlow"
+  description="Build or improve a Phoenix business website with clear service pages, contact paths, technical SEO foundations, and useful integrations."
   url="https://ziaflow.com/services/web-development"
-  eyebrow="Web Engineering · Fast Astro & Supabase"
-  heroLines={['Fast websites wired', 'for real inquiries.']}
-  heroIntro="Slow pages and fragile form plugins lose prospective customers before they ever make contact. We build clean, high-performance websites on Astro and edge infrastructure, connected directly to a verified intake and follow-up process."
+  eyebrow="Website Design & Development"
+  overview="Plan the pages, platform, integrations, and launch requirements around what your business and customers need."
+  heroLines={['A website built', 'around the next step.']}
+  heroIntro="Your website should help customers understand your services and contact your business. ZiaFlow builds and improves websites for Arizona businesses, with attention to page structure, mobile usability, search basics, and clear contact paths."
+  deliverablesTitle="The right website for the job."
+  deliverablesIntro="We scope the platform and features to fit your content, functionality, budget, and ongoing maintenance needs."
   deliverables={[
     {
-      title: 'Sub-Second Astro Architecture',
-      tag: 'Performance',
-      description: 'Clean HTML delivery without unnecessary client JavaScript, ensuring fast mobile load times and solid Core Web Vitals on cellular connections.',
+      title: 'Page and content planning',
+      tag: 'Planning',
+      description: 'Map the pages customers need, the information each page should include, and the actions visitors should be able to take.',
     },
     {
-      title: 'Tested Intake Form Integration',
-      tag: 'Reliability',
-      description: 'Contact and quote forms route directly to server-side receipt logging with spam defense before firing alerts or CRM webhooks.',
+      title: 'Website design and development',
+      tag: 'Build',
+      description: 'Create responsive pages and reusable components that support the agreed visual direction and content structure.',
     },
     {
-      title: 'Mobile-First Service Layouts',
-      tag: 'Layout',
-      description: 'Clear service descriptions, prominent phone numbers, straightforward calls to action, and accessible touch targets.',
+      title: 'Forms and business integrations',
+      tag: 'Connections',
+      description: 'Connect agreed contact forms, scheduling tools, analytics, or CRM handoffs based on available access and supported methods.',
     },
     {
-      title: 'Technical SEO & Structured Schema',
-      tag: 'Search Ready',
-      description: 'Self-referencing canonicals, automated XML sitemaps, OpenGraph cards, and schema markup aligned with your business profile.',
+      title: 'Technical search foundations',
+      tag: 'SEO',
+      description: 'Set page titles, descriptions, canonical URLs, structured data where appropriate, and sitemap behavior.',
     },
     {
-      title: 'URL & Redirect Mapping',
-      tag: 'Migration',
-      description: 'When rebuilding an existing site, we map legacy URLs and article paths to preserve established search equity.',
+      title: 'Content migration and redirects',
+      tag: 'Rebuilds',
+      description: 'For a rebuild, inventory priority URLs and plan content transfer and redirects for changed paths.',
     },
     {
-      title: 'Isolated Preview Environments',
-      tag: 'Quality Control',
-      description: 'Every update is deployed to an isolated Vercel preview URL for verification before deploying to your production domain.',
+      title: 'Launch review',
+      tag: 'Handover',
+      description: 'Review links, forms, mobile layouts, and agreed page details before handing off the site.',
     },
   ]}
   processSteps={[
-    {
-      step: 'Step 1 · Discovery',
-      title: 'URL & Page Inventory',
-      description: 'We map existing pages, ranking queries, and intake paths to plan a clean structure without losing existing traffic.',
-    },
-    {
-      step: 'Step 2 · Design & Content',
-      title: 'Direct Layouts & Copy',
-      description: 'We structure clear, service-specific pages focused on answering prospective buyer questions and establishing local fit.',
-    },
-    {
-      step: 'Step 3 · Development',
-      title: 'Astro Build & Form Wiring',
-      description: 'We code the frontend, optimize visual assets, and connect forms to verified database storage and notification hooks.',
-    },
-    {
-      step: 'Step 4 · Verification',
-      title: 'QA & Safe Cutover',
-      description: 'After link checking, mobile review, and test form submissions, we point DNS with zero downtime.',
-    },
+    { step: 'Plan', title: 'Inventory pages and needs', description: 'Review the current site, content, contact paths, and required features.' },
+    { step: 'Design', title: 'Shape the page experience', description: 'Agree on the visual direction, page structure, content priorities, and calls to action.' },
+    { step: 'Build', title: 'Develop and connect', description: 'Implement the pages and agreed integrations on the selected platform.' },
+    { step: 'Review', title: 'Check before launch', description: 'Review key URLs, links, forms, mobile layouts, and migration requirements.' },
   ]}
   faqs={[
     {
-      question: 'Why build with Astro instead of a template builder?',
-      answer: 'Astro pre-renders static HTML at the edge, eliminating heavy database overhead on every page view. This delivers faster page speeds, lower hosting costs, and fewer plugin vulnerabilities.',
+      question: 'Which platform should we use?',
+      answer: 'The best platform depends on how often you update content, the features you need, and who will maintain the site. We review those requirements before recommending a build approach.',
     },
     {
-      question: 'Will rebuilding our website affect current search rankings?',
-      answer: 'We inventory existing ranking URLs and configure 301 redirects for any altered paths, preserving search equity while improving page speed and mobile usability.',
+      question: 'Can you rebuild a site without changing its important URLs?',
+      answer: 'We can inventory current URLs and plan to preserve them where practical. If a URL must change, we document the redirect and verify the destination.',
     },
     {
-      question: 'How do forms connect to our existing email or CRM?',
-      answer: 'Forms submit to server endpoints that log an atomic receipt in Supabase, then trigger webhooks to your CRM or email provider. If a webhook fails, the record is saved for manual recovery.',
+      question: 'Can the website connect to our CRM or scheduling tool?',
+      answer: 'Often, yes. We confirm the specific service, access, and integration method during scoping, then include supported connections in the agreed deliverables.',
     },
+  ]}
+  relatedLinks={[
+    { label: 'SEO services', href: '/services/seo', category: 'Related service' },
+    { label: 'Conversion optimization', href: '/services/cro', category: 'Related service' },
+    { label: 'Lead capture and follow-up', href: '/services/automation', category: 'Related service' },
   ]}
 />

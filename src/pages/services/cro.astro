@@ -5,74 +5,70 @@ export const prerender = true;
 ---
 
 <KairoServicePage
-  title="Conversion Rate Optimization (CRO) Phoenix | ZiaFlow"
-  description="Capture more inquiries from existing website visitors in Phoenix, AZ. We fix mobile form friction, slow load times, and broken call paths."
+  title="Conversion Rate Optimization in Phoenix | ZiaFlow"
+  description="Find and fix friction in your Phoenix website’s contact paths, forms, calls to action, and measurement."
   url="https://ziaflow.com/services/cro"
-  eyebrow="Conversion Architecture · Behavioral Analytics"
-  heroLines={['Stop paying for clicks', 'that never convert.']}
-  heroIntro="Adding ad spend to a website with broken forms or slow mobile pages wastes budget. We inspect visitor behavior with Microsoft Clarity, remove friction from mobile forms, and fix broken inquiry paths."
+  eyebrow="Conversion Rate Optimization"
+  overview="Review what visitors see and do, prioritize practical changes, and measure the contact actions your site can reliably track."
+  heroLines={['Make it easier', 'to contact you.']}
+  heroIntro="If visitors reach your site but don’t take the next step, unclear messaging, a difficult form, or a confusing contact path may be getting in the way. ZiaFlow reviews those paths and helps prioritize practical improvements."
+  deliverablesTitle="Improve the path from visit to inquiry."
+  deliverablesIntro="We start with the available analytics and the customer journey. Recommendations depend on traffic, tracking quality, and the pages in scope."
   deliverables={[
     {
-      title: 'Microsoft Clarity Heatmap & Friction Analysis',
-      tag: 'Behavioral Data',
-      description: 'Automated trailing-24-hour behavioral snapshots tracking scroll depth, rage clicks, dead clicks, and script errors across key landing pages.',
+      title: 'Contact path review',
+      tag: 'Journey',
+      description: 'Review how visitors move from service pages to calls, forms, email, or scheduling links on key pages.',
     },
     {
-      title: 'Mobile Call & Form Path Repair',
-      tag: 'UX Engineering',
-      description: 'Fixing missing #form anchors, overlapping mobile buttons, slow input validation, and confusing multi-field layouts.',
+      title: 'Form usability checks',
+      tag: 'Forms',
+      description: 'Check form clarity, field requirements, validation messages, mobile behavior, and what happens after submission.',
     },
     {
-      title: 'Interactive Lead Magnets & ROI Calculators',
-      tag: 'Engagement',
-      description: 'Replacing passive "Contact Us" walls with interactive readiness checklists, instant audit requests, and ROI calculators that pre-qualify buyers.',
+      title: 'Page messaging review',
+      tag: 'Content',
+      description: 'Look for unclear service descriptions, missing next steps, and gaps between the page promise and contact options.',
     },
     {
-      title: 'Defensible Proof & Offer Positioning',
-      tag: 'Copywriting',
-      description: 'Replacing vague marketing fluff with specific deliverables, clear process steps, and checkable operator proof right next to the CTA.',
+      title: 'Behavior and analytics review',
+      tag: 'Evidence',
+      description: 'Use available analytics or session behavior data to identify questions for investigation, while accounting for limited sample sizes.',
     },
     {
-      title: 'Server-Confirmed Conversion Telemetry',
-      tag: 'Accuracy',
-      description: 'Tracking actual persisted database receipts (`lead_submissions`) rather than counting broken button clicks as conversions.',
+      title: 'Prioritized improvement plan',
+      tag: 'Recommendations',
+      description: 'Document observed issues, recommended changes, expected effort, and a way to review each change.',
     },
     {
-      title: '28-Day Cohort Validation',
-      tag: 'Measurement',
-      description: 'Measuring before-and-after performance across complete, non-overlapping periods with strict rollback guardrails.',
+      title: 'Measurement setup',
+      tag: 'Tracking',
+      description: 'Review or configure agreed events for form submissions, calls, and other contact actions.',
     },
   ]}
   processSteps={[
-    {
-      step: 'Step 1 · Diagnose',
-      title: 'Clarity & Funnel Inspection',
-      description: 'We analyze where mobile and desktop visitors drop off, rage-click, or abandon forms.',
-    },
-    {
-      step: 'Step 2 · Hypothesize',
-      title: 'Evidence-Backed Scope',
-      description: 'We log a specific finding with baseline metrics, target page, and acceptance criteria.',
-    },
-    {
-      step: 'Step 3 · Ship',
-      title: 'Isolated PR & Preview QA',
-      description: 'We implement the UX, speed, or copy improvement and verify keyboard and mobile task completion.',
-    },
-    {
-      step: 'Step 4 · Measure',
-      title: 'Confirmed Lead Verification',
-      description: 'We monitor confirmed non-test inquiries and engagement metrics over the post-change window.',
-    },
+    { step: 'Inspect', title: 'Review key pages', description: 'Walk through the main visitor paths on desktop and mobile and review available data.' },
+    { step: 'Prioritize', title: 'Document friction', description: 'Separate confirmed usability issues from hypotheses and choose the first practical fixes.' },
+    { step: 'Improve', title: 'Make agreed changes', description: 'Update page content, forms, or contact paths within the approved scope.' },
+    { step: 'Measure', title: 'Review the signals', description: 'Check tracked contact actions and note limitations before drawing conclusions.' },
   ]}
   faqs={[
     {
-      question: 'Do we need massive traffic to benefit from CRO?',
-      answer: 'No. When traffic is modest, fixing functional conversion barriers—like a broken anchor link, a slow mobile hero, a generic offer, or a form that fails silently—delivers immediate impact without needing thousands of A/B split-test sessions.',
+      question: 'Do we need high traffic for conversion work?',
+      answer: 'No. Functional issues and confusing contact paths can be reviewed at any traffic level. Small samples do limit what can be concluded from behavioral patterns or experiments.',
     },
     {
-      question: 'How do you track conversions accurately?',
-      answer: 'Many agencies fire a conversion pixel the moment a user clicks a button, even if the form errored out. ZiaFlow only fires a confirmed lead event after the submission is validated and persisted in our Supabase receipt ledger.',
+      question: 'Do you guarantee a conversion increase?',
+      answer: 'No. We identify issues, make agreed changes, and review available measurement. Results depend on visitors, offer, market conditions, and tracking quality.',
     },
+    {
+      question: 'Can you review forms that connect to our CRM?',
+      answer: 'Yes, when access is available. We can map the visitor experience through form submission and review the handoff to the next system in scope.',
+    },
+  ]}
+  relatedLinks={[
+    { label: 'Web development services', href: '/services/web-development', category: 'Related service' },
+    { label: 'Lead capture and follow-up', href: '/services/automation', category: 'Related service' },
+    { label: 'SEO services', href: '/services/seo', category: 'Related service' },
   ]}
 />

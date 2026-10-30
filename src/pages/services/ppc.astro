@@ -5,48 +5,70 @@ export const prerender = true;
 ---
 
 <KairoServicePage
-  title="Phoenix PPC & Google Ads Management | ZiaFlow"
-  description="High-intent Google Ads management in Phoenix, AZ. We pair targeted search campaigns with fast landing pages and verified lead tracking."
+  title="PPC Management in Phoenix | Google Ads | ZiaFlow"
+  description="Plan, launch, and measure paid search campaigns for Phoenix businesses with clear targeting, landing pages, and conversion tracking."
   url="https://ziaflow.com/services/ppc"
-  eyebrow="Paid Search Engineering · Google & Microsoft Ads"
-  heroLines={['Paid search wired', 'to verified inquiries.']}
-  heroIntro="Stop burning ad spend sending broad traffic to slow, generic homepages. We set up exact-intent Google Search campaigns paired with fast landing pages and verified lead attribution."
+  eyebrow="Paid Search & Campaign Measurement"
+  overview="Set campaign goals, locations, budgets, landing pages, and inquiry tracking before paid search goes live."
+  heroLines={['Paid search with', 'clear measurement.']}
+  heroIntro="Paid search can reach people actively looking for a service. ZiaFlow helps Phoenix businesses plan and manage search campaigns with defined locations, budgets, landing pages, and conversion events."
+  deliverablesTitle="A campaign built around agreed goals."
+  deliverablesIntro="We clarify what counts as a useful inquiry and how it will be measured before launch. Scope depends on your account, market, and budget."
   deliverables={[
     {
-      title: 'Exact-Intent Commercial Keyword Architecture',
+      title: 'Account and campaign review',
+      tag: 'Audit',
+      description: 'Review campaign structure, search terms, targeting, ads, and existing conversion actions where account access is available.',
+    },
+    {
+      title: 'Keyword and location planning',
       tag: 'Targeting',
-      description: 'Tightly themed ad groups targeting high-intent Phoenix buyers ("emergency repair", "quote", "near me") backed by aggressive negative-keyword lists.',
+      description: 'Organize search themes and service areas around the work you want to promote and the customers you can serve.',
     },
     {
-      title: 'Dedicated Fast Astro Landing Pages',
-      tag: 'Quality Score',
-      description: 'Custom landing pages that load quickly on mobile, lifting Google Ads Quality Scores and lowering your cost per click.',
+      title: 'Ad and landing page alignment',
+      tag: 'Experience',
+      description: 'Make the ad message and destination page consistent, with a clear service description and contact option.',
     },
     {
-      title: 'Server-Verified Offline Conversion Tracking',
-      tag: 'Attribution',
-      description: 'Feeding only validated, non-spam database leads back into Google Ads so Smart Bidding optimizes for real customers instead of bots.',
+      title: 'Conversion tracking review',
+      tag: 'Measurement',
+      description: 'Configure or review inquiry events for agreed forms and calls, and document what each event represents.',
     },
     {
-      title: 'Immediate Lead Dispatch & Call Tracking',
-      tag: 'Speed-to-Lead',
-      description: 'Every paid click that calls or submits a form triggers immediate alerts so your team can follow up right away.',
+      title: 'Search term refinement',
+      tag: 'Optimization',
+      description: 'Review search terms and exclusions to reduce irrelevant traffic and keep targeting aligned with campaign goals.',
+    },
+    {
+      title: 'Plain-language reporting',
+      tag: 'Reporting',
+      description: 'Summarize spend, campaign activity, and recorded inquiries with known tracking limitations clearly identified.',
     },
   ]}
   processSteps={[
-    { step: 'Step 1 · Audit', title: 'Wasted Spend Analysis', description: 'We inspect search terms, negative keywords, conversion actions, and landing page speed.' },
-    { step: 'Step 2 · Build', title: 'Landing Page & Campaign Setup', description: 'We launch high-converting landing pages wired to `/api/contact` and call tracking.' },
-    { step: 'Step 3 · Filter', title: 'Negative Keyword & Bot Guard', description: 'We strip out informational clicks, competitor job-seekers, and spam form fills.' },
-    { step: 'Step 4 · Scale', title: 'Cost-Per-Qualified-Inquiry Tuning', description: 'We allocate budget strictly to the ad groups and territories producing qualified inquiries.' },
+    { step: 'Review', title: 'Assess the account', description: 'Check existing setup, goals, landing pages, tracking, and available history.' },
+    { step: 'Plan', title: 'Agree on targeting and budget', description: 'Define service areas, campaign themes, budget limits, and useful inquiry criteria.' },
+    { step: 'Launch', title: 'Set up and verify', description: 'Build the agreed campaigns and check destination pages and conversion events.' },
+    { step: 'Improve', title: 'Review and refine', description: 'Use account and inquiry data to guide changes to targeting, ads, and landing pages.' },
   ]}
   faqs={[
     {
-      question: 'Why do so many Google Ads campaigns fail for local service businesses?',
-      answer: 'Two reasons: broad-match keywords that waste budget on DIY searches, and sending paid clicks to a slow homepage with no follow-up process. We solve both by pairing tight search intent with fast landing pages and immediate team alerts.',
+      question: 'How quickly can a PPC campaign start?',
+      answer: 'Launch timing depends on account access, campaign scope, landing-page readiness, and tracking. We confirm the required setup and approval steps before launch.',
     },
     {
-      question: 'Should we run Google Local Service Ads (LSAs), traditional Search PPC, or both?',
-      answer: 'For qualifying trades (HVAC, plumbing, electrical, roofing, legal), LSAs capture top-of-page pay-per-lead calls, while Search PPC captures specific high-margin services and custom commercial queries. We often run both into one unified intake pipeline.',
+      question: 'Do you guarantee a certain cost per lead?',
+      answer: 'No. Costs and inquiry volume depend on competition, budget, offer, location, and follow-up. We agree on how performance will be measured and report the available data.',
     },
+    {
+      question: 'Should we use paid search or Local Services Ads?',
+      answer: 'They serve different campaign formats and eligibility requirements. We can review your services, market, and account setup to determine which options are worth considering.',
+    },
+  ]}
+  relatedLinks={[
+    { label: 'Conversion optimization', href: '/services/cro', category: 'Related service' },
+    { label: 'Lead capture and follow-up', href: '/services/automation', category: 'Related service' },
+    { label: 'Website development services', href: '/services/web-development', category: 'Related service' },
   ]}
 />

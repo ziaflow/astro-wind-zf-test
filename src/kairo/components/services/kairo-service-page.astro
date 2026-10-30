@@ -3,8 +3,6 @@ import Layout from '@/layouts/layout.astro';
 import PageHero from '@/components/shared/page-hero.astro';
 import Icon from '@/components/shared/icons/icon.astro';
 import Button from '@/components/shared/ui/button.astro';
-import RoiCalculator from '@/components/home/roi-calculator.astro';
-import AuditSection from '@/components/home/audit-section.astro';
 import SalesForm from '@/components/pricing/sales-form.astro';
 import Cta from '@/components/shared/cta.astro';
 import ServiceSchema from '~/components/seo/ServiceSchema.astro';
@@ -38,6 +36,7 @@ interface Props {
   description: string;
   url: string;
   eyebrow: string;
+  overview: string;
   heroLines: [string, string];
   heroIntro: string;
   deliverablesTitle?: string;
@@ -47,7 +46,6 @@ interface Props {
   processSteps: ProcessStep[];
   faqs: ServiceFaq[];
   relatedLinks?: RelatedLink[];
-  showRoiCalculator?: boolean;
 }
 
 const {
@@ -55,21 +53,16 @@ const {
   description,
   url,
   eyebrow,
+  overview,
   heroLines,
   heroIntro,
-  deliverablesTitle = 'Engineered deliverables & scope.',
-  deliverablesIntro = 'Every engagement is built around verifiable milestones, clean architecture, and measurable business outcomes.',
+  deliverablesTitle = 'What’s included.',
+  deliverablesIntro = 'The exact scope depends on your systems, goals, and access. We agree on deliverables before work begins.',
   deliverables,
-  processTitle = 'How we implement & verify.',
+  processTitle = 'How the work is done.',
   processSteps,
   faqs,
-  relatedLinks = [
-    { label: 'Marketing Automation for Arizona SMBs', href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings', category: 'Guide' },
-    { label: 'Website Conversion Checklist for Phoenix Businesses', href: '/website-conversion-checklist-for-phoenix-businesses', category: 'Checklist' },
-    { label: 'View Pricing & Sprint Scopes', href: '/pricing', category: 'Pricing' },
-    { label: 'Explore Arizona Case Studies', href: '/case-studies', category: 'Case Studies' },
-  ],
-  showRoiCalculator = true,
+  relatedLinks = [],
 } = Astro.props;
 
 const faqSchema = {
@@ -92,142 +85,119 @@ const faqSchema = {
 
   <PageHero lines={heroLines} intro={heroIntro} accent={1} />
 
-  <!-- Quick Action & Defensible Promise Bar -->
-  <section class="shell pb-16 md:pb-24" aria-label="Service overview bar">
+  <section class="shell pb-16 md:pb-20" aria-label="Service overview">
     <div class="flex flex-col gap-6 rounded-2xl border border-line bg-ink-2/80 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
-      <div class="space-y-2 max-w-2xl">
+      <div class="max-w-2xl space-y-2">
         <span class="inline-flex items-center gap-2 font-mono text-xs uppercase text-signal">
           <span class="size-2 rounded-full bg-signal"></span>
           {eyebrow}
         </span>
-        <p class="text-sm sm:text-base text-bone font-medium leading-relaxed">
-          For every agreed inquiry source, each accepted inquiry is recorded, assigned an owner, given a next action, and tracked to a known status.
-        </p>
+        <p class="text-sm font-medium leading-relaxed text-bone sm:text-base">{overview}</p>
       </div>
-      <div class="flex flex-wrap items-center gap-3 shrink-0">
+      <div class="flex shrink-0 flex-wrap items-center gap-3">
         <Button label={site.cta.primary.label} href={site.cta.primary.href} />
-        <Button label="Request Free Audit" href="#audit" variant="outline" />
+        <Button label="View deliverables" href="#deliverables" variant="outline" />
       </div>
     </div>
   </section>
 
-  <!-- Core Deliverables Grid -->
-  <section class="shell py-20 md:py-28 border-t border-line" aria-labelledby="deliverables-heading">
-    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+  <section id="deliverables" class="shell scroll-mt-24 border-t border-line py-16 md:py-24" aria-labelledby="deliverables-heading">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-4">
-        <p class="font-mono text-label text-signal uppercase">Scope & Architecture</p>
+        <p class="font-mono text-label uppercase text-signal">Scope</p>
         <h2 id="deliverables-heading" class="mt-4 font-display text-title font-bold text-bone">
           {deliverablesTitle}
         </h2>
-        <p class="mt-4 text-mute leading-relaxed">
-          {deliverablesIntro}
-        </p>
+        <p class="mt-4 leading-relaxed text-mute">{deliverablesIntro}</p>
       </div>
-      <div class="lg:col-span-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
         {deliverables.map((item, idx) => (
-          <article class="flex flex-col justify-between rounded-2xl border border-line bg-ink-2/60 p-6 sm:p-8 transition-colors hover:border-bone/40">
-            <div>
-              <div class="flex items-center justify-between gap-4 mb-4">
-                <span class="font-mono text-xs text-signal">0{idx + 1}</span>
-                {item.tag && (
-                  <span class="rounded-full border border-line bg-ink px-2.5 py-0.5 font-mono text-[11px] uppercase text-mute">
-                    {item.tag}
-                  </span>
-                )}
-              </div>
-              <h3 class="font-display text-xl font-bold text-bone">{item.title}</h3>
-              <p class="mt-3 text-sm text-mute leading-relaxed">{item.description}</p>
+          <article class="flex flex-col rounded-2xl border border-line bg-ink-2/60 p-6 transition-colors hover:border-bone/40 sm:p-7">
+            <div class="mb-4 flex items-center justify-between gap-4">
+              <span class="font-mono text-xs text-signal">{String(idx + 1).padStart(2, '0')}</span>
+              {item.tag && (
+                <span class="rounded-full border border-line bg-ink px-2.5 py-0.5 font-mono text-[11px] uppercase text-mute">
+                  {item.tag}
+                </span>
+              )}
             </div>
+            <h3 class="font-display text-xl font-bold text-bone">{item.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-mute">{item.description}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Implementation Process -->
-  <section class="shell py-20 md:py-28 border-t border-line" aria-labelledby="process-heading">
-    <div class="mb-14 max-w-2xl">
-      <p class="font-mono text-label text-signal uppercase">Execution Protocol</p>
+  <section class="shell border-t border-line py-16 md:py-24" aria-labelledby="process-heading">
+    <div class="mb-10 max-w-2xl md:mb-12">
+      <p class="font-mono text-label uppercase text-signal">Process</p>
       <h2 id="process-heading" class="mt-4 font-display text-title font-bold text-bone">
         {processTitle}
       </h2>
     </div>
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {processSteps.map((p) => (
-        <div class="rounded-2xl border border-line bg-ink p-6 sm:p-8 flex flex-col justify-between">
-          <div>
-            <span class="inline-block rounded-full bg-signal/15 px-3 py-1 font-mono text-xs font-bold text-signal uppercase">
-              {p.step}
-            </span>
-            <h3 class="mt-5 font-display text-lg font-bold text-bone">{p.title}</h3>
-            <p class="mt-3 text-sm text-mute leading-relaxed">{p.description}</p>
-          </div>
-        </div>
+    <ol class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {processSteps.map((p, idx) => (
+        <li class="rounded-2xl border border-line bg-ink p-6 sm:p-7">
+          <span class="font-mono text-xs uppercase text-signal">0{idx + 1} · {p.step}</span>
+          <h3 class="mt-4 font-display text-lg font-bold text-bone">{p.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-mute">{p.description}</p>
+        </li>
       ))}
-    </div>
+    </ol>
   </section>
 
-  {showRoiCalculator && <RoiCalculator />}
-
-  <!-- Service FAQs (GEO / AEO Direct Answers) -->
-  <section class="shell py-20 md:py-28 border-t border-line" aria-labelledby="service-faq-heading">
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+  <section class="shell border-t border-line py-16 md:py-24" aria-labelledby="service-faq-heading">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
       <div class="lg:col-span-4">
-        <p class="font-mono text-label text-signal uppercase">Direct Answers</p>
+        <p class="font-mono text-label uppercase text-signal">Answers</p>
         <h2 id="service-faq-heading" class="mt-4 font-display text-title font-bold text-bone">
-          Frequently asked questions.
+          Frequently asked questions
         </h2>
-        <p class="mt-4 text-sm text-mute leading-relaxed">
-          Clear answers on timelines, deliverables, ownership, and technical integration in Phoenix, AZ.
+        <p class="mt-4 text-sm leading-relaxed text-mute">
+          Learn what the work involves, what affects the scope, and what to expect next.
         </p>
       </div>
-      <div class="lg:col-span-8 divide-y divide-line border-t border-b border-line">
+      <div class="divide-y divide-line border-y border-line lg:col-span-8">
         {faqs.map((faq) => (
-          <details class="group py-6">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-semibold text-bone hover:text-signal transition-colors">
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-semibold text-bone transition-colors hover:text-signal">
               <span>{faq.question}</span>
-              <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-mute group-open:rotate-45 group-open:border-signal group-open:text-signal transition-transform">
+              <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-mute transition-transform group-open:rotate-45 group-open:border-signal group-open:text-signal">
                 +
               </span>
             </summary>
-            <p class="mt-4 text-sm text-mute leading-relaxed max-w-[68ch]">
-              {faq.answer}
-            </p>
+            <p class="mt-4 max-w-[68ch] text-sm leading-relaxed text-mute">{faq.answer}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Contextual Internal Links & Playbooks -->
-  <section class="shell py-16 md:py-24 border-t border-line" aria-label="Related playbooks and services">
-    <p class="font-mono text-xs uppercase tracking-wider text-mute mb-6">
-      Connected Resources & Playbooks
-    </p>
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {relatedLinks.map((link) => (
-        <a
-          href={link.href}
-          class="group flex flex-col justify-between rounded-xl border border-line bg-ink-2/50 p-5 transition-all hover:border-signal"
-        >
-          <div>
-            {link.category && (
-              <span class="font-mono text-[11px] uppercase text-signal">{link.category}</span>
-            )}
-            <p class="mt-2 font-display text-base font-bold text-bone group-hover:text-signal transition-colors">
-              {link.label}
-            </p>
-          </div>
-          <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-mute group-hover:text-bone">
-            Explore <Icon name="arrow-up-right" class="size-3.5" />
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
+  {relatedLinks.length > 0 && (
+    <section class="shell border-t border-line py-14 md:py-20" aria-label="Related resources">
+      <p class="mb-6 font-mono text-xs uppercase tracking-wider text-mute">Related resources</p>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {relatedLinks.map((link) => (
+          <a
+            href={link.href}
+            class="group flex flex-col justify-between rounded-xl border border-line bg-ink-2/50 p-5 transition-colors hover:border-signal"
+          >
+            <div>
+              {link.category && <span class="font-mono text-[11px] uppercase text-signal">{link.category}</span>}
+              <p class="mt-2 font-display text-base font-bold text-bone transition-colors group-hover:text-signal">
+                {link.label}
+              </p>
+            </div>
+            <span class="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-mute group-hover:text-bone">
+              Read more <Icon name="arrow-up-right" class="size-3.5" />
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
-  <!-- Embedded Lead Funnel & Forensic Audit -->
-  <AuditSection />
   <SalesForm />
   <Cta />
 </Layout>

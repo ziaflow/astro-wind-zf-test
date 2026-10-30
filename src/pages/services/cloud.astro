@@ -5,45 +5,70 @@ export const prerender = true;
 ---
 
 <KairoServicePage
-  title="Cloud Architecture, Supabase & Edge Infrastructure Phoenix | ZiaFlow"
-  description="Modern cloud infrastructure, Supabase database security, Vercel edge deployments, and cryptographic webhook engineering in Phoenix, AZ."
+  title="Cloud Solutions and Integrations in Phoenix | ZiaFlow"
+  description="Connect websites, applications, and business tools with cloud and integration work scoped to your systems and operating needs."
   url="https://ziaflow.com/services/cloud"
-  eyebrow="Cloud & Edge Infrastructure · Vercel, Supabase & AWS"
-  heroLines={['Resilient cloud &', 'edge infrastructure.']}
-  heroIntro="We architect secure, zero-downtime cloud backends, row-level security Postgres databases, and edge APIs that keep your digital operations fast, compliant, and auditable."
+  eyebrow="Cloud Systems & Integrations"
+  overview="Review your current systems and requirements, then scope a practical way to connect services, data, and workflows."
+  heroLines={['Connect the systems', 'your team relies on.']}
+  heroIntro="When business tools don’t share information cleanly, staff may need to re-enter data or rely on manual workarounds. ZiaFlow helps Arizona businesses assess and connect websites, applications, and cloud services around a defined workflow."
+  deliverablesTitle="Cloud work scoped to your requirements."
+  deliverablesIntro="The right approach depends on the systems you already use, the information involved, and who will maintain the connection."
   deliverables={[
     {
-      title: 'Supabase & PostgreSQL Security Hardening',
-      tag: 'Database Security',
-      description: 'Row-Level Security (RLS) policies, `security_invoker` views, encrypted Supabase Vault secrets, and atomic stored procedures.',
+      title: 'Current system review',
+      tag: 'Discovery',
+      description: 'Document the services, data, access, and handoffs involved in the workflow you want to improve.',
     },
     {
-      title: 'Edge Rate Limiting & Bot Defense',
-      tag: 'Protection',
-      description: 'Defense-in-depth IP rate limiting, HMAC webhook verification, replay-window checks, and automated spam filtering.',
+      title: 'Application connections',
+      tag: 'Integrations',
+      description: 'Connect supported tools through available APIs, webhooks, or other documented integration methods.',
     },
     {
-      title: 'Scheduled Cron & Serverless Pipelines',
-      tag: 'Automation',
-      description: 'Reliable `pg_cron` and Edge Function workers with daily quota caps, idempotency keys, and failure logging.',
+      title: 'Data flow planning',
+      tag: 'Data',
+      description: 'Define what information moves between systems, when it moves, and how the team can identify an error.',
     },
     {
-      title: 'Zero-Downtime CI/CD & Preview Environments',
-      tag: 'DevOps',
-      description: 'Automated GitHub + Vercel pipelines with isolated branch previews and regression checks before production deployment.',
+      title: 'Hosting and deployment review',
+      tag: 'Infrastructure',
+      description: 'Review hosting and deployment options for the website, application, or integration within the project scope.',
+    },
+    {
+      title: 'Access and responsibilities',
+      tag: 'Operations',
+      description: 'Document required access, system ownership, and the responsibilities needed to maintain the solution.',
+    },
+    {
+      title: 'Handover documentation',
+      tag: 'Handover',
+      description: 'Provide a practical reference for the agreed workflow, its dependencies, and known limitations.',
     },
   ]}
   processSteps={[
-    { step: 'Step 1 · Review', title: 'Security & Infrastructure Audit', description: 'We inspect exposed keys, database grants, RLS policies, and API endpoints.' },
-    { step: 'Step 2 · Isolate', title: 'Vault & Role Separation', description: 'We move secrets into encrypted server vaults and restrict public table access.' },
-    { step: 'Step 3 · Automate', title: 'CI/CD & Cron Hardening', description: 'We add idempotency, rate limits, and automated health checks.' },
-    { step: 'Step 4 · Monitor', title: 'Daily Telemetry Watchdog', description: 'Automated monitoring alerts your team only when a real operational issue occurs.' },
+    { step: 'Understand', title: 'Map systems and needs', description: 'Review the current tools, users, data, and workflow requirements.' },
+    { step: 'Scope', title: 'Choose an approach', description: 'Agree on integration boundaries, access, acceptance criteria, and support ownership.' },
+    { step: 'Implement', title: 'Build the connection', description: 'Configure the approved cloud or application changes within the agreed scope.' },
+    { step: 'Review', title: 'Verify and document', description: 'Check the intended data flow and provide a handover with operating notes.' },
   ]}
   faqs={[
     {
-      question: 'Can you audit and secure our existing Supabase or cloud backend?',
-      answer: 'Yes. We frequently audit existing Postgres/Supabase projects to lock down permissive RLS policies, move API tokens into Supabase Vault, and make webhook endpoints idempotent.',
+      question: 'Can you work with our existing cloud tools?',
+      answer: 'Often, yes. We first confirm the services, access, technical constraints, and integration methods available for your setup.',
+    },
+    {
+      question: 'Do we need to replace our CRM or other software?',
+      answer: 'Not necessarily. The first step is to understand the workflow and see whether existing systems can be connected in a practical and supportable way.',
+    },
+    {
+      question: 'Do you provide ongoing cloud support?',
+      answer: 'Ongoing monitoring or maintenance depends on the project and is agreed separately. The handover documents the operating responsibilities for the work delivered.',
     },
   ]}
-  showRoiCalculator={false}
+  relatedLinks={[
+    { label: 'Custom software services', href: '/services/software', category: 'Related service' },
+    { label: 'Lead capture and follow-up', href: '/services/automation', category: 'Related service' },
+    { label: 'Web development services', href: '/services/web-development', category: 'Related service' },
+  ]}
 />
