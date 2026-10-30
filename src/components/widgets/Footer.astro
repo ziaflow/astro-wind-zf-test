@@ -61,296 +61,445 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="wrap grid">
-    <section class="brand" aria-label="ZiaFlow contact">
-      <a class="wordmark" href={getHomePermalink()}>
-        Zia<span>Flow</span>
-      </a>
-      <p>Websites, software, and automation.<br />Built to work together.</p>
-      <address>
-        <span>Phoenix, Arizona</span>
-        <a href="tel:+16028344239">(602) 834-4239</a>
-        <a href="mailto:jeremy@ziaflow.com">jeremy@ziaflow.com</a>
-      </address>
-      <a class="cta" href={getPermalink('/contact')}>
-        <span>Let’s build what’s next</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-    </section>
-
-    {
-      links &&
-        links.map((group) => (
-          <nav aria-label={group.title}>
-            <h2>{group.title}</h2>
-            <ul>
-              {group.links &&
-                group.links.map((link) => (
-                  <li>
-                    <a href={link.href}>{link.text || link.label}</a>
-                  </li>
-                ))}
-            </ul>
-          </nav>
-        ))
-    }
-
-    {
-      socialLinks && socialLinks.length > 0 && (
-        <nav aria-label="Connect">
-          <h2>Connect</h2>
-          <ul>
-            {socialLinks.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  target={item.href?.startsWith('http') ? '_blank' : undefined}
-                  rel={item.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  aria-label={item.ariaLabel || item.text}
-                >
-                  {item.text || item.ariaLabel}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )
-    }
-  </div>
-
-  <div class="wrap tagline">
-    <span>ARIZONA ROOTS. CONNECTED POSSIBILITIES.</span>
-    <span>Custom software · AI automation · Digital growth</span>
-  </div>
-
-  <div class="scene">
-    <svg viewBox="0 0 1600 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Decorative Arizona Desert Sunset Backdrop -->
+  <div class="scene-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 1600 650" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="zf-footer-sky" x2="0" y2="1">
-          <stop stop-color="#1a1a1a"></stop>
-          <stop offset="1" stop-color="#7c1e29"></stop>
+        <linearGradient id="zf-footer-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#111113"></stop>
+          <stop offset="45%" stop-color="#18181c"></stop>
+          <stop offset="85%" stop-color="#4a151b"></stop>
+          <stop offset="100%" stop-color="#7c1e29"></stop>
         </linearGradient>
-        <linearGradient id="zf-footer-sun" x2="0" y2="1">
-          <stop stop-color="#fff0e6"></stop>
-          <stop offset="1" stop-color="#a22a36"></stop>
+        <linearGradient id="zf-footer-sun" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fff5eb"></stop>
+          <stop offset="50%" stop-color="#fdb878"></stop>
+          <stop offset="100%" stop-color="#a22a36"></stop>
         </linearGradient>
+        <radialGradient id="zf-sun-glow" cx="65%" cy="38%" r="45%">
+          <stop offset="0%" stop-color="#f97316" stop-opacity="0.35"></stop>
+          <stop offset="50%" stop-color="#a22a36" stop-opacity="0.18"></stop>
+          <stop offset="100%" stop-color="#18181c" stop-opacity="0"></stop>
+        </radialGradient>
         <pattern id="zf-footer-grain" width="19" height="23" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="5" r=".7" fill="white" opacity=".16"></circle>
-          <circle cx="14" cy="17" r=".8" fill="black" opacity=".16"></circle>
+          <circle cx="3" cy="5" r=".7" fill="white" opacity=".12"></circle>
+          <circle cx="14" cy="17" r=".8" fill="black" opacity=".15"></circle>
         </pattern>
       </defs>
-      <path fill="url(#zf-footer-sky)" d="M0 0h1600v420H0z"></path>
-      <circle cx="1040" cy="174" r="120" fill="url(#zf-footer-sun)"></circle>
+
+      <!-- Sky Base -->
+      <rect width="1600" height="650" fill="url(#zf-footer-sky)"></rect>
+
+      <!-- Ambient Sun Glow -->
+      <rect width="1600" height="650" fill="url(#zf-sun-glow)"></rect>
+
+      <!-- Setting Sun -->
+      <circle cx="1060" cy="270" r="130" fill="url(#zf-footer-sun)" opacity="0.92"></circle>
+
+      <!-- Distant Mountain Ridge -->
       <path
-        fill="#7c1e29"
-        d="M0 267 150 208 250 244 460 70 625 218 760 169 910 261 1120 181 1270 235 1430 140 1600 217V420H0Z"></path>
-      <path fill="#a22a36" d="M0 300Q210 213 430 292T880 283T1300 268T1600 250V420H0Z"></path>
-      <path fill="#1a1a1a" d="M0 360Q210 283 430 350T900 330T1330 345T1600 310V420H0Z"></path>
-      <g fill="none" stroke="#3f9b93" stroke-width="19" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M190 347V197M190 272H157V228M190 295H224V246"></path>
-        <path d="M1380 341V208M1380 274H1351V238M1380 291H1411V248"></path>
-        <path d="M532 353V280M532 319H513V296" stroke-width="10"></path>
-        <path d="M1200 331V281M1200 309H1216V290" stroke-width="8"></path>
+        fill="#5a161e"
+        opacity="0.8"
+        d="M0 430 L120 370 L250 410 L460 230 L630 380 L760 330 L910 420 L1120 340 L1270 395 L1430 300 L1600 380 L1600 650 L0 650 Z"
+      ></path>
+
+      <!-- Mid Garnet Hills -->
+      <path fill="#7c1e29" d="M0 480 Q210 390 430 470 T880 460 T1300 440 T1600 420 L1600 650 L0 650 Z"></path>
+
+      <!-- Desert Foreground Ridge -->
+      <path fill="#141416" d="M0 540 Q210 460 430 530 T900 510 T1330 525 T1600 490 L1600 650 L0 650 Z"></path>
+
+      <!-- Saguaro Cacti Silhouettes -->
+      <g fill="none" stroke="#3f9b93" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Far left tall saguaro -->
+        <g stroke-width="20">
+          <path d="M190 530 V370 M190 445 H156 V400 M190 470 H225 V420"></path>
+        </g>
+        <!-- Far right tall saguaro -->
+        <g stroke-width="20">
+          <path d="M1390 525 V385 M1390 455 H1360 V415 M1390 472 H1422 V428"></path>
+        </g>
+        <!-- Mid-distance cacti -->
+        <path d="M530 535 V460 M530 500 H510 V475" stroke-width="11"></path>
+        <path d="M1190 515 V465 M1190 493 H1206 V475" stroke-width="9"></path>
       </g>
-      <path
-        fill="url(#zf-footer-grain)"
-        d="M0 267 150 208 250 244 460 70 625 218 760 169 910 261 1120 181 1270 235 1430 140 1600 217V420H0Z"></path>
+
+      <!-- Subtle Landscape Texture -->
+      <path fill="url(#zf-footer-grain)" d="M0 480 Q210 390 430 470 T880 460 T1300 440 T1600 420 L1600 650 L0 650 Z"
+      ></path>
     </svg>
+
+    <!-- Legibility Shade (Subtle Dark Gradient) -->
+    <div class="overlay-shade"></div>
   </div>
 
-  <div class="wrap legal">
-    <span>© {currentYear} ZiaFlow. All rights reserved.</span>
-    <nav aria-label="Legal">
-      {secondaryLinks.map((link) => <a href={link.href}>{link.text || link.label}</a>)}
-    </nav>
-    <span>Built in Arizona. Engineered for what’s next.</span>
+  <!-- Content Layer (Selectable & Clickable) -->
+  <div class="content-layer">
+    <div class="wrap grid">
+      <!-- Brand & Contact Card -->
+      <section class="brand-panel" aria-label="ZiaFlow contact">
+        <a class="wordmark" href={getHomePermalink()}>
+          Zia<span>Flow</span>
+        </a>
+        <p class="description">Websites, software, and automation.<br />Built to work together.</p>
+        <address class="contact-info">
+          <span class="location">Phoenix, Arizona</span>
+          <a class="phone" href="tel:+16028344239">(602) 834-4239</a>
+          <a class="email" href="mailto:jeremy@ziaflow.com">jeremy@ziaflow.com</a>
+        </address>
+        <a class="cta" href={getPermalink('/contact')}>
+          <span>Let’s build what’s next</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <!-- Navigation Columns -->
+      {
+        links &&
+          links.map((group) => (
+            <nav class="nav-col" aria-label={group.title}>
+              <h2>{group.title}</h2>
+              <ul>
+                {group.links &&
+                  group.links.map((link) => (
+                    <li>
+                      <a href={link.href}>{link.text || link.label}</a>
+                    </li>
+                  ))}
+              </ul>
+            </nav>
+          ))
+      }
+
+      {
+        socialLinks && socialLinks.length > 0 && (
+          <nav class="nav-col" aria-label="Connect">
+            <h2>Connect</h2>
+            <ul>
+              {socialLinks.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target={item.href?.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    aria-label={item.ariaLabel || item.text}
+                  >
+                    {item.text || item.ariaLabel}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+    </div>
+
+    <!-- Tagline Bar -->
+    <div class="wrap tagline">
+      <span class="tagline-title">ARIZONA ROOTS. CONNECTED POSSIBILITIES.</span>
+      <span class="tagline-desc">Custom software · AI automation · Digital growth</span>
+    </div>
+
+    <!-- Legal Bottom Bar -->
+    <div class="wrap legal">
+      <span>© {currentYear} ZiaFlow. All rights reserved.</span>
+      <nav aria-label="Legal">
+        {secondaryLinks.map((link) => <a href={link.href}>{link.text || link.label}</a>)}
+      </nav>
+      <span>Built in Arizona. Engineered for what’s next.</span>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: #1a1a1a;
-    color: #fff;
-    font-family: inherit;
     position: relative;
+    background: #111113;
+    color: #ffffff;
+    font-family: inherit;
+    overflow: hidden;
     z-index: 10;
   }
+
+  /* Arizona Landscape Backdrop */
+  .scene-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .scene-backdrop svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Overlay shade to ensure text remains 100% WCAG AAA legible */
+  .overlay-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(17, 17, 19, 0.85) 0%,
+      rgba(17, 17, 19, 0.45) 45%,
+      rgba(17, 17, 19, 0.4) 70%,
+      rgba(17, 17, 19, 0.82) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Foreground Content Layer */
+  .content-layer {
+    position: relative;
+    z-index: 2;
+  }
+
   .wrap {
     max-width: 1360px;
     margin: auto;
     padding-inline: clamp(24px, 5vw, 80px);
   }
+
+  /* 5-Column Responsive Layout: Brand (wide) + 4 Links Columns */
   .grid {
-    padding-top: 76px;
+    padding-top: clamp(48px, 6vw, 76px);
     display: grid;
-    grid-template-columns: 1.6fr repeat(auto-fit, minmax(150px, 1fr));
-    gap: 48px;
+    grid-template-columns: minmax(260px, 1.4fr) repeat(4, minmax(130px, 1fr));
+    gap: clamp(24px, 3.5vw, 44px);
+    align-items: start;
   }
+
+  /* Brand Card Panel */
+  .brand-panel {
+    background: rgba(22, 22, 26, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: clamp(20px, 3vw, 32px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  }
+
   .wordmark {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 750;
-    letter-spacing: -1.5px;
+    letter-spacing: -1.2px;
     text-decoration: none;
-    color: #fff;
+    color: #ffffff;
     display: inline-block;
   }
+
   .wordmark span {
     color: #3f9b93;
   }
-  .brand p {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #cfcfcf;
-    margin: 20px 0;
-  }
-  .footer a {
-    color: inherit;
-    text-underline-offset: 5px;
-  }
-  .footer a:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 5px;
-  }
-  address {
-    display: grid;
-    gap: 12px;
+
+  .description {
     font-size: 14px;
+    line-height: 1.7;
+    color: #d1d5db;
+    margin: 14px 0 18px;
+  }
+
+  .contact-info {
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
     font-style: normal;
   }
-  address a {
+
+  .location {
+    color: #9ca3af;
+    font-weight: 500;
+  }
+
+  .contact-info a {
+    color: #f3f4f6;
     text-decoration: none;
     overflow-wrap: anywhere;
+    transition: color 0.15s ease;
   }
+
+  .contact-info a:hover {
+    color: #3f9b93;
+    text-decoration: underline;
+  }
+
   .cta {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 25px;
-    padding: 15px 24px;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 12px 22px;
     border-radius: 99px;
     background: #a22a36;
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
+    box-shadow: 0 4px 14px rgba(162, 42, 54, 0.4);
     transition:
       background 0.2s ease,
-      transform 0.2s ease;
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
+
   .cta:hover {
-    background: #7c1e29;
-    transform: translateY(-1px);
+    background: #c23342;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(162, 42, 54, 0.6);
   }
-  nav h2 {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+
+  /* Nav Columns */
+  .nav-col {
+    background: rgba(22, 22, 26, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: clamp(16px, 2.5vw, 24px);
+    transition: border-color 0.2s ease;
+  }
+
+  .nav-col:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .nav-col h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #fff;
-    margin: 8px 0 23px;
+    color: #f9fafb;
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
-  nav ul {
+
+  .nav-col ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 15px;
+    gap: 11px;
   }
-  nav a {
-    font-size: 14px;
-    color: #ccc;
+
+  .nav-col a {
+    font-size: 13px;
+    color: #d1d5db;
     text-decoration: none;
     line-height: 1.5;
-    transition: color 0.15s ease;
+    transition:
+      color 0.15s ease,
+      transform 0.15s ease;
+    display: inline-block;
   }
-  nav a:hover,
-  address a:hover {
+
+  .nav-col a:hover {
+    color: #ffffff;
     text-decoration: underline;
-    color: white;
+    text-underline-offset: 4px;
+    transform: translateX(2px);
   }
+
+  /* Tagline Strip */
   .tagline {
-    padding-top: 55px;
+    padding-top: 48px;
+    padding-bottom: 18px;
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: #aaa;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
-  .scene {
-    overflow: hidden;
-    margin-top: 14px;
-    position: relative;
+
+  .tagline-title {
+    font-weight: 700;
+    color: #e5e7eb;
   }
-  .scene svg {
-    display: block;
-    width: 100%;
-    height: auto;
+
+  .tagline-desc {
+    color: #9ca3af;
   }
+
+  /* Legal Bar */
   .legal {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     gap: 16px;
-    padding-block: 24px;
-    border-top: 1px solid #3b3b3b;
-    color: #bbb;
+    padding-block: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
     font-size: 12px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
+
   .legal nav {
     display: flex;
-    gap: 24px;
+    gap: 20px;
   }
+
   .legal a {
     font-size: 12px;
-    color: #bbb;
+    color: #d1d5db;
     text-decoration: none;
+    transition: color 0.15s ease;
   }
+
   .legal a:hover {
-    color: #fff;
+    color: #ffffff;
     text-decoration: underline;
   }
 
-  @media (min-width: 1500px) {
-    .scene {
-      max-height: 410px;
-    }
-    .scene svg {
-      margin-top: -20px;
+  /* Responsiveness */
+  @media (max-width: 1180px) {
+    .grid {
+      grid-template-columns: minmax(260px, 1.4fr) repeat(2, minmax(130px, 1fr));
+      gap: 28px;
     }
   }
-  @media (max-width: 950px) {
+
+  @media (max-width: 860px) {
     .grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 35px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
-    .brand {
+    .brand-panel {
       grid-column: 1 / -1;
     }
   }
-  @media (max-width: 560px) {
+
+  @media (max-width: 640px) {
     .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      padding-top: 45px;
-      gap: 35px 25px;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 36px;
+      gap: 14px;
+    }
+    .brand-panel {
+      grid-column: 1 / -1;
     }
     .tagline {
       flex-direction: column;
-      padding-top: 40px;
-      gap: 10px;
-    }
-    .scene svg {
-      width: 185%;
-      max-width: none;
-      margin-left: -43%;
+      align-items: flex-start;
+      gap: 8px;
     }
     .legal {
       flex-direction: column;
       align-items: flex-start;
-    }
-    nav a {
-      overflow-wrap: anywhere;
+      gap: 12px;
     }
   }
 </style>
