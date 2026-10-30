@@ -10,11 +10,13 @@ export const prerender = true;
   <section class="shell flex min-h-[85dvh] flex-col justify-center py-32">
     <p class="font-mono text-label text-signal uppercase">{notFoundPage.eyebrow}</p>
     <h1 class="mt-4 font-display text-hero font-extrabold tracking-[-0.04em] text-bone">
-      {notFoundPage.lines.map((line) => (
-        <span class="block">
-          {line.text} {line.accent && <span class="text-signal">{line.accent}</span>}
-        </span>
-      ))}
+      {
+        notFoundPage.lines.map((line) => (
+          <span class="block">
+            {line.text} {line.accent && <span class="text-signal">{line.accent}</span>}
+          </span>
+        ))
+      }
     </h1>
     <p class="mt-8 max-w-[40ch] text-lead text-mute">{notFoundPage.body}</p>
     <div class="mt-10 flex flex-wrap gap-4">

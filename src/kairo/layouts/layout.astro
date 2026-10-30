@@ -87,13 +87,13 @@ const ogImage = new URL(image ?? '/images/product-reveal.jpg', Astro.site);
     </style>
     <script is:inline>
       (function () {
-        var root = document.documentElement;
+        const root = document.documentElement;
         if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         root.classList.add('js');
         try {
           if (sessionStorage.getItem('kairo:transition')) root.classList.add('is-arriving');
           else if (root.hasAttribute('data-preloader')) root.classList.add('is-loading');
-        } catch (e) {}
+        } catch { /* ignore */ }
       })();
     </script>
     <style is:inline>

@@ -22,8 +22,7 @@ export const GET: APIRoute = async () => {
     {
       title: 'High-Speed Astro Web Development',
       slug: 'web-development',
-      description:
-        'Sub-second websites built on Astro, Tailwind CSS, and Supabase with server-verified lead capture.',
+      description: 'Sub-second websites built on Astro, Tailwind CSS, and Supabase with server-verified lead capture.',
     },
     {
       title: 'Google Local Service Ads (LSA) Management',

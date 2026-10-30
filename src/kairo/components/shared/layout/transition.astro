@@ -24,7 +24,7 @@ import { site } from '@/data/site';
 </div>
 <script is:inline>
   try {
-    var pending = JSON.parse(sessionStorage.getItem('kairo:transition') || 'null');
+    const pending = JSON.parse(sessionStorage.getItem('kairo:transition') || 'null');
     if (pending && pending.label) document.querySelector('[data-transition-label]').textContent = pending.label;
-  } catch (e) {}
+  } catch { /* ignore */ }
 </script>

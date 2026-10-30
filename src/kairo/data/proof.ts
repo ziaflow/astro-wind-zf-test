@@ -1,4 +1,3 @@
-import { site } from '@/data/site';
 import type { Testimonial } from '@/interface';
 
 export const testimonials: Testimonial[] = [

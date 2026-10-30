@@ -42,10 +42,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 
 <div
   id={rootId}
-  class:list={[
-    'ai-summary-root',
-    isInline ? 'ai-summary-inline' : isSide ? 'ai-summary-side' : 'ai-summary-float',
-  ]}
+  class:list={['ai-summary-root', isInline ? 'ai-summary-inline' : isSide ? 'ai-summary-side' : 'ai-summary-float']}
   data-ai-summary-root
 >
   <div class="ai-floating-bar">
@@ -72,24 +69,34 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"></path>
-        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        ></path>
-        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        ></path>
+        <path
+          d="M2 17L12 22L22 17"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M2 12L12 17L22 12"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
       </svg>
       <span class="ai-label">Ask AI</span>
     </button>
-    {!isInline && (
-      <button
-        type="button"
-        class="ai-dismiss-btn"
-        data-ai-dismiss
-        aria-label="Close Ask AI button"
-        title="Dismiss Ask AI"
-      >
-        &times;
-      </button>
-    )}
+    {
+      !isInline && (
+        <button
+          type="button"
+          class="ai-dismiss-btn"
+          data-ai-dismiss
+          aria-label="Close Ask AI button"
+          title="Dismiss Ask AI"
+        >
+          &times;
+        </button>
+      )
+    }
   </div>
 
   <div class="ai-summary-menu" data-ai-menu>
@@ -112,33 +119,11 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
 
     <!-- Panel 1: Instant Project Triage & Callback -->
     <div class="ai-panel active" data-ai-panel="triage">
-      <p class="ai-triage-intro">
-        Request a fast engineering callback or run an interactive diagnostic tool.
-      </p>
+      <p class="ai-triage-intro">Request a fast engineering callback or run an interactive diagnostic tool.</p>
       <form class="ai-triage-form" data-ai-triage-form>
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name *"
-          required
-          maxlength="120"
-          class="ai-input"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Work email *"
-          required
-          maxlength="254"
-          class="ai-input"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone (optional)"
-          maxlength="40"
-          class="ai-input"
-        />
+        <input type="text" name="name" placeholder="Your name *" required maxlength="120" class="ai-input" />
+        <input type="email" name="email" placeholder="Work email *" required maxlength="254" class="ai-input" />
+        <input type="tel" name="phone" placeholder="Phone (optional)" maxlength="40" class="ai-input" />
         <select name="service_interest" class="ai-input">
           <option value="Lead Capture & Follow-Up Sprint">Lead Capture & Follow-Up Sprint</option>
           <option value="Web Development & Astro Rebuild">Web Development & Astro Rebuild</option>
@@ -147,9 +132,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
           <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
         </select>
         <input type="text" name="website_url" tabindex="-1" autocomplete="off" class="ai-honeypot" aria-hidden="true" />
-        <button type="submit" class="ai-submit-btn" data-ai-triage-submit>
-          Request Fast Callback →
-        </button>
+        <button type="submit" class="ai-submit-btn" data-ai-triage-submit> Request Fast Callback → </button>
         <p class="ai-triage-status" data-ai-triage-status aria-live="polite"></p>
       </form>
       <div class="ai-quick-actions">
@@ -214,7 +197,9 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
   .ai-summary-toggle-side:hover {
     transform: translateY(-2px);
     border-color: #a22a36;
-    box-shadow: 0 0 24px rgba(162, 42, 54, 0.45), 0 12px 28px rgba(0, 0, 0, 0.65);
+    box-shadow:
+      0 0 24px rgba(162, 42, 54, 0.45),
+      0 12px 28px rgba(0, 0, 0, 0.65);
   }
 
   .ai-dismiss-btn {
@@ -596,14 +581,18 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
         if (sessionStorage.getItem('ziaflow:ai-dismissed') === '1') {
           root.style.display = 'none';
         }
-      } catch (e) {}
+      } catch {
+        /* ignore */
+      }
 
       dismissBtn?.addEventListener('click', (event) => {
         event.stopPropagation();
         root.style.display = 'none';
         try {
           sessionStorage.setItem('ziaflow:ai-dismissed', '1');
-        } catch (e) {}
+        } catch {
+          /* ignore */
+        }
       });
 
       if (!toggle || !menu) return;

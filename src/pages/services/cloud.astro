@@ -15,34 +15,55 @@ export const prerender = true;
     {
       title: 'Supabase & PostgreSQL Security Hardening',
       tag: 'Database Security',
-      description: 'Row-Level Security (RLS) policies, `security_invoker` views, encrypted Supabase Vault secrets, and atomic stored procedures.',
+      description:
+        'Row-Level Security (RLS) policies, `security_invoker` views, encrypted Supabase Vault secrets, and atomic stored procedures.',
     },
     {
       title: 'Edge Rate Limiting & Bot Defense',
       tag: 'Protection',
-      description: 'Defense-in-depth IP rate limiting, HMAC webhook verification, replay-window checks, and automated spam filtering.',
+      description:
+        'Defense-in-depth IP rate limiting, HMAC webhook verification, replay-window checks, and automated spam filtering.',
     },
     {
       title: 'Scheduled Cron & Serverless Pipelines',
       tag: 'Automation',
-      description: 'Reliable `pg_cron` and Edge Function workers with daily quota caps, idempotency keys, and failure logging.',
+      description:
+        'Reliable `pg_cron` and Edge Function workers with daily quota caps, idempotency keys, and failure logging.',
     },
     {
       title: 'Zero-Downtime CI/CD & Preview Environments',
       tag: 'DevOps',
-      description: 'Automated GitHub + Vercel pipelines with isolated branch previews and regression checks before production deployment.',
+      description:
+        'Automated GitHub + Vercel pipelines with isolated branch previews and regression checks before production deployment.',
     },
   ]}
   processSteps={[
-    { step: 'Step 1 · Review', title: 'Security & Infrastructure Audit', description: 'We inspect exposed keys, database grants, RLS policies, and API endpoints.' },
-    { step: 'Step 2 · Isolate', title: 'Vault & Role Separation', description: 'We move secrets into encrypted server vaults and restrict public table access.' },
-    { step: 'Step 3 · Automate', title: 'CI/CD & Cron Hardening', description: 'We add idempotency, rate limits, and automated health checks.' },
-    { step: 'Step 4 · Monitor', title: 'Daily Telemetry Watchdog', description: 'Automated monitoring alerts your team only when a real operational issue occurs.' },
+    {
+      step: 'Step 1 · Review',
+      title: 'Security & Infrastructure Audit',
+      description: 'We inspect exposed keys, database grants, RLS policies, and API endpoints.',
+    },
+    {
+      step: 'Step 2 · Isolate',
+      title: 'Vault & Role Separation',
+      description: 'We move secrets into encrypted server vaults and restrict public table access.',
+    },
+    {
+      step: 'Step 3 · Automate',
+      title: 'CI/CD & Cron Hardening',
+      description: 'We add idempotency, rate limits, and automated health checks.',
+    },
+    {
+      step: 'Step 4 · Monitor',
+      title: 'Daily Telemetry Watchdog',
+      description: 'Automated monitoring alerts your team only when a real operational issue occurs.',
+    },
   ]}
   faqs={[
     {
       question: 'Can you audit and secure our existing Supabase or cloud backend?',
-      answer: 'Yes. We frequently audit existing Postgres/Supabase projects to lock down permissive RLS policies, move API tokens into Supabase Vault, and make webhook endpoints idempotent.',
+      answer:
+        'Yes. We frequently audit existing Postgres/Supabase projects to lock down permissive RLS policies, move API tokens into Supabase Vault, and make webhook endpoints idempotent.',
     },
   ]}
   showRoiCalculator={false}

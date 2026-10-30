@@ -40,7 +40,7 @@ export const leavePage = (url: URL, label: string, fromRight: boolean) => {
         const pending: Pending = { label, fromRight };
         try {
           sessionStorage.setItem(KEY, JSON.stringify(pending));
-        } catch {}
+        } catch { /* ignore */ }
         window.location.href = url.href;
       },
     })
@@ -60,7 +60,7 @@ export const playArrive = (done: () => void) => {
   try {
     pending = JSON.parse(sessionStorage.getItem(KEY) ?? 'null');
     sessionStorage.removeItem(KEY);
-  } catch {}
+  } catch { /* ignore */ }
 
   if (!overlay) {
     root.classList.remove('is-arriving');

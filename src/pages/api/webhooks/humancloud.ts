@@ -46,7 +46,10 @@ export const POST: APIRoute = async ({ request, url }) => {
       const headerSecret =
         request.headers.get('x-webhook-secret') ||
         request.headers.get('x-humancloud-secret') ||
-        request.headers.get('authorization')?.replace(/^Bearer\s+/i, '').trim();
+        request.headers
+          .get('authorization')
+          ?.replace(/^Bearer\s+/i, '')
+          .trim();
       const querySecret = url.searchParams.get('token') || url.searchParams.get('secret');
 
       if (headerSecret !== configuredSecret && querySecret !== configuredSecret) {
@@ -73,34 +76,18 @@ export const POST: APIRoute = async ({ request, url }) => {
     // 3. Normalize Event & Lead Data
     const rawData = payload.data || {};
     const eventName = String(
-      payload.event ||
-      payload.event_type ||
-      payload.type ||
-      rawData.event ||
-      'brief_received'
+      payload.event || payload.event_type || payload.type || rawData.event || 'brief_received'
     ).trim();
 
-    const name = String(
-      rawData.buyer_name ||
-      rawData.name ||
-      payload.name ||
-      'Human Cloud Inbound Buyer'
-    ).trim();
+    const name = String(rawData.buyer_name || rawData.name || payload.name || 'Human Cloud Inbound Buyer').trim();
 
-    const email = String(
-      rawData.buyer_email ||
-      rawData.email ||
-      payload.email ||
-      'info+humancloud@ziaflow.com'
-    ).trim().toLowerCase();
+    const email = String(rawData.buyer_email || rawData.email || payload.email || 'info+humancloud@ziaflow.com')
+      .trim()
+      .toLowerCase();
 
     const phone = String(rawData.phone || payload.phone || '').trim();
     const company = String(
-      rawData.company_name ||
-      rawData.company ||
-      rawData.organization ||
-      payload.company ||
-      'Human Cloud Marketplace'
+      rawData.company_name || rawData.company || rawData.organization || payload.company || 'Human Cloud Marketplace'
     ).trim();
 
     const briefTitle = rawData.title ? `Title: ${rawData.title}\n` : '';
@@ -108,13 +95,10 @@ export const POST: APIRoute = async ({ request, url }) => {
     const briefTimeline = rawData.timeline ? `Timeline: ${rawData.timeline}\n` : '';
     const description = String(rawData.description || rawData.message || payload.message || '').trim();
 
-    const combinedComments = [
-      `[Human Cloud Event: ${eventName}]`,
-      briefTitle,
-      briefBudget,
-      briefTimeline,
-      description,
-    ].filter(Boolean).join('\n').trim();
+    const combinedComments = [`[Human Cloud Event: ${eventName}]`, briefTitle, briefBudget, briefTimeline, description]
+      .filter(Boolean)
+      .join('\n')
+      .trim();
 
     const isTest = Boolean(payload.is_test || rawData.is_test);
 
@@ -125,9 +109,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       : `hc-${eventName}-${email}-${createHash('sha256').update(rawBody).digest('hex').slice(0, 16)}`;
     const dedupKey = createHash('sha256').update(dedupSource).digest('hex');
 
-    let submissionId = (typeof crypto !== 'undefined' && crypto.randomUUID)
-      ? crypto.randomUUID()
-      : `hc-${Date.now()}`;
+    let submissionId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `hc-${Date.now()}`;
     let alreadyPersisted = false;
 
     // 5. Persist to Supabase

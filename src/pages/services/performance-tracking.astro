@@ -15,43 +15,69 @@ export const prerender = true;
     {
       title: 'Atomic Lead & Receipt Database Ledger',
       tag: 'Single Source of Truth',
-      description: 'Every accepted inquiry is logged in `lead_submissions` and `leads` with source page, timestamp, deduplication key, and test-traffic isolation.',
+      description:
+        'Every accepted inquiry is logged in `lead_submissions` and `leads` with source page, timestamp, deduplication key, and test-traffic isolation.',
     },
     {
       title: 'Automated Microsoft Clarity & GSC Sync',
       tag: 'Scheduled Pipelines',
-      description: 'Scheduled Supabase Edge Functions and data monitors capturing finalized search impressions and trailing behavioral metrics without manual exports.',
+      description:
+        'Scheduled Supabase Edge Functions and data monitors capturing finalized search impressions and trailing behavioral metrics without manual exports.',
     },
     {
       title: 'Cryptographic Email Delivery Telemetry',
       tag: 'Deliverability',
-      description: 'HMAC-verified reporting webhooks (`email_delivery_events`) confirming that every prospect confirmation and internal alert was actually delivered.',
+      description:
+        'HMAC-verified reporting webhooks (`email_delivery_events`) confirming that every prospect confirmation and internal alert was actually delivered.',
     },
     {
       title: 'CallRail & Booking Outcome Integration',
       tag: 'Full Funnel',
-      description: 'Connecting phone call tracking and calendar bookings to inquiry records so you measure Inquiry-to-Held-Meeting and Paid-Project rates.',
+      description:
+        'Connecting phone call tracking and calendar bookings to inquiry records so you measure Inquiry-to-Held-Meeting and Paid-Project rates.',
     },
   ]}
   processSteps={[
-    { step: 'Step 1 · Instrument', title: 'Server-Side Receipt Logging', description: 'We replace unverified client-side pixel guesses with server-confirmed database events.' },
-    { step: 'Step 2 · Isolate', title: 'QA & Spam Separation', description: 'We filter out synthetic tests (`is_test=true`), duplicates, and bots from business counts.' },
-    { step: 'Step 3 · Unify', title: 'Search + Behavior + Intake', description: 'We align GSC snapshots, Clarity metrics, and confirmed inquiries by page.' },
-    { step: 'Step 4 · Brief', title: 'Actionable Operator Reporting', description: 'Clear weekly and 28-day cohort reviews focused on qualified inquiries and booked jobs.' },
+    {
+      step: 'Step 1 · Instrument',
+      title: 'Server-Side Receipt Logging',
+      description: 'We replace unverified client-side pixel guesses with server-confirmed database events.',
+    },
+    {
+      step: 'Step 2 · Isolate',
+      title: 'QA & Spam Separation',
+      description: 'We filter out synthetic tests (`is_test=true`), duplicates, and bots from business counts.',
+    },
+    {
+      step: 'Step 3 · Unify',
+      title: 'Search + Behavior + Intake',
+      description: 'We align GSC snapshots, Clarity metrics, and confirmed inquiries by page.',
+    },
+    {
+      step: 'Step 4 · Brief',
+      title: 'Actionable Operator Reporting',
+      description: 'Clear weekly and 28-day cohort reviews focused on qualified inquiries and booked jobs.',
+    },
   ]}
   faqs={[
     {
       question: 'Why don’t you rely solely on standard GA4 button-click events?',
-      answer: 'Ad blockers, cookie banners, and failed form submissions make client-side button clicks unreliable. By logging an atomic receipt in Supabase inside `/api/contact` and separating test payloads, your lead count reflects 100% real, persisted inquiries.',
+      answer:
+        'Ad blockers, cookie banners, and failed form submissions make client-side button clicks unreliable. By logging an atomic receipt in Supabase inside `/api/contact` and separating test payloads, your lead count reflects 100% real, persisted inquiries.',
     },
     {
       question: 'Can you integrate CallRail with our website and CRM?',
-      answer: 'Yes. We configure dynamic number insertion (DNI) and webhook routing so phone inquiries carry the same source-page and campaign attribution as web forms.',
+      answer:
+        'Yes. We configure dynamic number insertion (DNI) and webhook routing so phone inquiries carry the same source-page and campaign attribution as web forms.',
     },
   ]}
   relatedLinks={[
     { label: 'CallRail Platform Integration Guide', href: '/platforms/callrail', category: 'Integration' },
-    { label: 'Marketing Automation for Arizona SMBs', href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings', category: 'Guide' },
+    {
+      label: 'Marketing Automation for Arizona SMBs',
+      href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
+      category: 'Guide',
+    },
     { label: 'View Pricing & Sprint Scopes', href: '/pricing', category: 'Pricing' },
     { label: 'Explore Case Studies', href: '/case-studies', category: 'Case Studies' },
   ]}
