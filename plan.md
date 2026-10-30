@@ -12,9 +12,10 @@
 ZiaFlow engineers high-performance websites and verified lead follow-up systems for Arizona service businesses.
 
 ### Primary Value Proposition
+
 - **Headline:** Websites and lead follow-up for Arizona service businesses
 - **Core Offer:** The **Lead Capture & Follow-Up Sprint**
-- **Promise:** *Give every accepted inquiry an owner and a next step.*
+- **Promise:** _Give every accepted inquiry an owner and a next step._
 - **Scope Contract:**
   1. Capture up to three agreed inquiry sources (e.g., website contact form, Google Local Service Ads, phone routing).
   2. Record atomic, deduplicated lead receipts in a secured database ledger (`lead_submissions` & `leads`).
@@ -26,6 +27,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 ## 2. Completed Milestones & Current Status
 
 ### A. Kairo Design System & UI Modernization
+
 - [x] **Dark Obsidian & Garnet Aesthetic:** Adopted charcoal `#101010` / `#1a1a1a`, crimson/garnet `#A22A36` signal accent, and turquoise `#3F9B93` operational touches.
 - [x] **Typography & Token Scale:** Ported `@theme` tokens and font scales (`hero`, `display`, `title`, `subtitle`, `lead`, `label`) with `@layer` protection.
 - [x] **Navigation & Header:** Modernized sticky navigation with direct phone CTA `(602) 834-4239`, Microsoft Bookings link, and streamlined mobile drawer.
@@ -44,6 +46,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
   - Connected across all layouts via `src/kairo/components/shared/layout/footer.astro`.
 
 ### B. Supabase Assets & Database Telemetry
+
 - [x] **Storage Integration (`src/lib/supabase-assets.ts`):**
   - Connected to active Supabase storage bucket `web-img`.
   - Configured asset mappings: `ZiaFlow_Logo_solo.png`, `ziaflow_com_updated.png`, `Google_Partner.png`, `microsoft_partner.png`, `tiktok_partner.jpg`.
@@ -56,6 +59,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
   - Gated telemetry: Microsoft Clarity, GA4, and Customer.io restricted strictly to production hosts (`(www.)?ziaflow.com`).
 
 ### C. Claim Discipline & Copy Alignment
+
 - [x] **Defensible Sales Claims:** Eliminated unverified promises ("turn every inquiry into a booked job", "guaranteed leads", sub-60s SLA guarantees, rigid 48-hr video turnaround promises).
 - [x] **Service Pages Grounded:**
   - `/services/automation`: Bounded Sprint scope, operator responsibilities, explicit exclusions.
@@ -64,6 +68,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
   - `/services/cro`, `/services/ppc`, `/services/local-service-ads`: Aligned with verified inquiry generation rather than speculative booking claims.
 
 ### D. Verification & CI/CD Health
+
 - [x] **Unit & Integration Tests:** 35 / 35 passing (`node --test tests/growth-tools.test.mjs tests/growth-welcome.test.mjs tests/telemetry-freshness.test.mjs tests/contact-capture.test.mjs`).
 - [x] **Type Checking:** 0 errors (`npx tsc --noEmit`).
 - [x] **ESLint:** Clean pass across all files (`npm run check:eslint`).
@@ -74,13 +79,13 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 
 ## 3. Tasks in Progress & Next Milestones
 
-| ID | Phase | Task Description | Acceptance Criteria | Target |
-|---|---|---|---|---|
-| **T-1** | Intake QA | Execute tagged synthetic test submission (`is_test=true`) on Vercel preview deployment | Database receipt logged in `lead_submissions` and `leads`; excluded from production metrics | Day 1 |
-| **T-2** | Visual Audit | Inspect Playwright screenshots of all service pages with new footer across mobile (375px), tablet (768px), and desktop (1280px) | Zero horizontal overflow, clean touch targets, no text clipping | Day 1 |
-| **T-3** | PR Merging | Convert GitHub PR #41 from Draft to Ready for Review and squash-merge to `main` | All GitHub Actions checks green, preview verified by team | Day 2 |
-| **T-4** | Telemetry Sync | Verify daily scheduled cron synchronization for GSC, Clarity, and GA4 in Supabase Edge Functions | Snapshot rows written to `analytics_source_snapshots` and `clarity_sync_runs` | Day 3 |
-| **T-5** | Content Sprints | Deploy connected pair updates for Phoenix conversion checklist and local HVAC case study | Internal anchor integrity, zero broken links, schema validated with Google Rich Results Test | Day 4 |
+| ID      | Phase           | Task Description                                                                                                                | Acceptance Criteria                                                                          | Target |
+| ------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------ |
+| **T-1** | Intake QA       | Execute tagged synthetic test submission (`is_test=true`) on Vercel preview deployment                                          | Database receipt logged in `lead_submissions` and `leads`; excluded from production metrics  | Day 1  |
+| **T-2** | Visual Audit    | Inspect Playwright screenshots of all service pages with new footer across mobile (375px), tablet (768px), and desktop (1280px) | Zero horizontal overflow, clean touch targets, no text clipping                              | Day 1  |
+| **T-3** | PR Merging      | Convert GitHub PR #41 from Draft to Ready for Review and squash-merge to `main`                                                 | All GitHub Actions checks green, preview verified by team                                    | Day 2  |
+| **T-4** | Telemetry Sync  | Verify daily scheduled cron synchronization for GSC, Clarity, and GA4 in Supabase Edge Functions                                | Snapshot rows written to `analytics_source_snapshots` and `clarity_sync_runs`                | Day 3  |
+| **T-5** | Content Sprints | Deploy connected pair updates for Phoenix conversion checklist and local HVAC case study                                        | Internal anchor integrity, zero broken links, schema validated with Google Rich Results Test | Day 4  |
 
 ---
 

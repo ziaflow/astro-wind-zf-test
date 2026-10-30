@@ -20,18 +20,13 @@ export const SUPABASE_ASSETS = {
  * Generates a signed URL for an image in the Supabase storage bucket.
  * Defaults to 1-year expiration (31536000 seconds).
  */
-export async function getSupabaseAssetUrl(
-  path: string,
-  expiresInSeconds: number = 31536000
-): Promise<string | null> {
+export async function getSupabaseAssetUrl(path: string, expiresInSeconds: number = 31536000): Promise<string | null> {
   if (!supabaseAdmin) {
     return null;
   }
 
   try {
-    const { data, error } = await supabaseAdmin.storage
-      .from(BUCKET)
-      .createSignedUrl(path, expiresInSeconds);
+    const { data, error } = await supabaseAdmin.storage.from(BUCKET).createSignedUrl(path, expiresInSeconds);
 
     if (error || !data?.signedUrl) {
       console.warn(`[supabase-assets] Failed to sign URL for ${path}:`, error?.message);

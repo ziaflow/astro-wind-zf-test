@@ -1,16 +1,20 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import { sanityClient } from 'sanity:client';
-import { createImageUrlBuilder } from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url';
 import { PortableText } from 'astro-portabletext';
+import type { PortableTextBlock } from '@portabletext/types';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const SLUGS_QUERY = `*[_type == "post" && defined(slug.current) && publishedAt <= now()]{
-    "params": {"slug": slug.current}
-  }`;
   try {
-    return await sanityClient.fetch(SLUGS_QUERY);
+    const posts = await sanityClient.fetch(
+      `*[_type == "post" && defined(slug.current) && publishedAt <= now()]{ "slug": slug.current }`
+    );
+    return posts.map(({ slug }: { slug: string }) => ({
+      params: { slug },
+    }));
   } catch (err) {
     console.warn(
       '[posts/[slug]] Sanity getStaticPaths skipped during build:',
@@ -26,11 +30,19 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug && publishedAt <=
 interface SanityPost {
   title?: string;
   excerpt?: string;
+  seoDescription?: string;
   mainImage?: SanityImageSource;
   publishedAt?: string;
-  body?: unknown;
+  _updatedAt?: string;
+  body?: PortableTextBlock | PortableTextBlock[];
+  author?: {
+    name?: string;
+    role?: string;
+    image?: string;
+  };
   [key: string]: unknown;
 }
+
 let post: SanityPost | null = null;
 try {
   post = await sanityClient.fetch(POST_QUERY, { slug });
@@ -48,9 +60,9 @@ const urlFor = (source: SanityImageSource) =>
 
 const postImageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1200).height(675).url() : null;
 
-const metadata = {
+const metadata: { title?: string; description?: string } = {
   title: post.title,
-  description: post.seoDescription,
+  description: typeof post.seoDescription === 'string' ? post.seoDescription : undefined,
 };
 
 const publishDateIso = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined;
@@ -108,7 +120,11 @@ const articleSchema = {
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-mute mb-8 pb-8 border-b border-line">
         <span class="inline-flex items-center gap-1">
           <span>Published:</span>
-          {publishDateIso && <time datetime={publishDateIso}>{new Date(post.publishedAt).toLocaleDateString()}</time>}
+          {
+            publishDateIso && post.publishedAt && (
+              <time datetime={publishDateIso}>{new Date(post.publishedAt).toLocaleDateString()}</time>
+            )
+          }
         </span>
         {
           post._updatedAt && post._updatedAt !== post.publishedAt && (
