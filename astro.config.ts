@@ -14,7 +14,6 @@ import prefetch from '@astrojs/prefetch';
 import type { AstroIntegration } from 'astro';
 
 import sanity from '@sanity/astro';
-import astrowind from './vendor/integration';
 
 import vercel from '@astrojs/vercel';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
@@ -92,9 +91,6 @@ export default defineConfig({
       Logger: 1,
     }),
 
-    astrowind({
-      config: './src/config.yaml',
-    }),
     sanity({
       projectId: '92p0tpps',
       dataset: 'production',
