@@ -9,20 +9,29 @@ const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.goo
 ---
 
 <script is:inline define:vars={{ gaId }}>
-  window.__zfIsProdHost =
-    typeof window !== 'undefined' &&
-    (/^(www\.)?ziaflow\.com$/i.test(window.location.hostname) ||
-      new URLSearchParams(window.location.search).get('debug_analytics') === '1');
-  if (gaId && window.__zfIsProdHost) {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      // eslint-disable-next-line prefer-rest-params
-      window.dataLayer.push(arguments);
+  (function () {
+    if (typeof window === 'undefined') return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const isInternalQA =
+      urlParams.get('utm_source') === 'internal-qa' ||
+      urlParams.get('utm_medium') === 'verification' ||
+      urlParams.get('internal_qa') === '1' ||
+      Boolean(window.localStorage && window.localStorage.getItem('zf_internal_user') === '1');
+
+    window.__zfIsProdHost =
+      !isInternalQA &&
+      (/^(www\.)?ziaflow\.com$/i.test(window.location.hostname) || urlParams.get('debug_analytics') === '1');
+    if (gaId && window.__zfIsProdHost) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId);
     }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', gaId);
-  }
+  })();
 </script>
 
 <script is:inline>

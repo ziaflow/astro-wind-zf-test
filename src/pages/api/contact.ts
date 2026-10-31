@@ -114,9 +114,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     const database = supabaseAdmin;
 
-    // Server-controlled test flag: only a request carrying the secret token is marked as a test.
+    // Server-controlled test flag: automatically mark as test if not production, or if matching test tokens/QA traffic
     const testToken = import.meta.env.TEST_SUBMISSION_TOKEN;
-    const isTest = Boolean(testToken) && request.headers.get('x-test-token') === testToken;
+    const isTest =
+      import.meta.env.VERCEL_ENV !== 'production' ||
+      (Boolean(testToken) && request.headers.get('x-test-token') === testToken) ||
+      asString(data.utm_source, 100) === 'internal-qa' ||
+      asString(data.utm_medium, 100) === 'verification' ||
+      email.endsWith('@example.com') ||
+      email.endsWith('.test');
 
     let pageSubmittedFrom = sourcePath(data, request.headers.get('referer'));
 
