@@ -88,6 +88,7 @@ const blogPostingSchema = {
   title={metadata.title}
   description={metadata.description}
   metadata={{
+    ...metadata,
     title: metadata.title,
     description: metadata.description,
     canonical: metadata.canonical || url,

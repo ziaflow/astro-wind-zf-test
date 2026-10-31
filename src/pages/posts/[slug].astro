@@ -60,8 +60,12 @@ const urlFor = (source: SanityImageSource) =>
 
 const postImageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1200).height(675).url() : null;
 
-const metadata: { title?: string; description?: string } = {
+const metadata = {
   title: post.title,
+  openGraph: {
+    type: 'article',
+    ...(postImageUrl ? { images: [{ url: postImageUrl, width: 1200, height: 675 }] } : {}),
+  },
   description: typeof post.seoDescription === 'string' ? post.seoDescription : undefined,
 };
 

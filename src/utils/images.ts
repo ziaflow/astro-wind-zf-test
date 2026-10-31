@@ -74,6 +74,16 @@ export const adaptOpenGraphImages = async (
           };
         }
 
+        // Public assets already have a stable served URL; do not ask Astro to infer
+        // dimensions from a source file that lives outside the imported asset graph.
+        if (typeof resolvedImage === 'string' && resolvedImage.startsWith('/')) {
+          return {
+            url: String(new URL(resolvedImage, astroSite)),
+            width: image.width ?? defaultWidth,
+            height: image.height ?? defaultHeight,
+          };
+        }
+
         let _image: OptimizedImage | undefined;
 
         if (
