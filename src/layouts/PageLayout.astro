@@ -9,15 +9,7 @@ export interface Props {
 const { metadata } = Astro.props;
 ---
 
-<KairoLayout
-  title={metadata?.title}
-  description={metadata?.description}
-  metadata={{
-    title: metadata?.title,
-    description: metadata?.description,
-    canonical: metadata?.canonical,
-  }}
->
+<KairoLayout title={metadata?.title} description={metadata?.description} metadata={metadata}>
   <div class="pt-20">
     <slot />
   </div>

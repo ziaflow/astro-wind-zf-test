@@ -16,6 +16,7 @@ const { frontmatter } = Astro.props;
 <KairoLayout
   title={frontmatter?.title ? `${frontmatter.title} | ZiaFlow` : undefined}
   description={frontmatter?.description}
+  metadata={{ robots: frontmatter?.robots }}
 >
   <section class="shell pt-36 pb-24 md:pt-44 md:pb-32">
     <div class="max-w-3xl">
