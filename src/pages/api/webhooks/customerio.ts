@@ -63,18 +63,12 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Recompute signature: v0:<timestamp>:<raw body>
-    const expected = crypto
-      .createHmac('sha256', signingKey)
-      .update(`v0:${timestamp}:${rawBody}`)
-      .digest('hex');
+    const expected = crypto.createHmac('sha256', signingKey).update(`v0:${timestamp}:${rawBody}`).digest('hex');
 
     const expectedBuffer = Buffer.from(expected);
     const signatureBuffer = Buffer.from(signature);
 
-    if (
-      expectedBuffer.length !== signatureBuffer.length ||
-      !crypto.timingSafeEqual(expectedBuffer, signatureBuffer)
-    ) {
+    if (expectedBuffer.length !== signatureBuffer.length || !crypto.timingSafeEqual(expectedBuffer, signatureBuffer)) {
       console.warn('[customerio-webhook] rejected: signature mismatch');
       return new Response(JSON.stringify({ error: 'Invalid signature' }), {
         status: 401,
