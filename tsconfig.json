@@ -7,7 +7,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@/*": ["src/kairo/*"],
+      "astrowind:config": ["src/config/site.ts"]
     },
     "types": ["@sanity/astro/module"]
   },

@@ -1,6 +1,5 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-
+import KairoLayout from '@/layouts/layout.astro';
 import type { MetaData } from '~/types';
 
 export interface Props {
@@ -12,21 +11,20 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
-
-const metadata: MetaData = {
-  title: frontmatter?.title,
-  description: frontmatter?.description,
-  robots: frontmatter?.robots,
-};
 ---
 
-<Layout metadata={metadata}>
-  <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
-    <h1 class="font-bold font-heading text-4xl md:text-5xl leading-tighter tracking-tighter">{frontmatter.title}</h1>
-    <div
-      class="mx-auto prose prose-lg max-w-4xl dark:prose-invert dark:prose-headings:text-slate-300 prose-md prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8"
-    >
-      <slot />
+<KairoLayout
+  title={frontmatter?.title ? `${frontmatter.title} | ZiaFlow` : undefined}
+  description={frontmatter?.description}
+  metadata={{ robots: frontmatter?.robots }}
+>
+  <section class="shell pt-36 pb-24 md:pt-44 md:pb-32">
+    <div class="max-w-3xl">
+      <p class="font-mono text-xs uppercase tracking-wider text-signal mb-4">ZiaFlow Legal & Policy</p>
+      <h1 class="font-display text-title font-bold text-bone tracking-tight">{frontmatter.title}</h1>
+      <div class="prose-kairo mt-10 text-mute leading-relaxed space-y-6">
+        <slot />
+      </div>
     </div>
   </section>
-</Layout>
+</KairoLayout>

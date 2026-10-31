@@ -1,0 +1,173 @@
+---
+import '@/styles/global.css';
+import Footer from '@/components/shared/layout/footer.astro';
+import Loader from '@/components/shared/layout/loader.astro';
+import Menu from '@/components/shared/layout/menu.astro';
+import Navbar from '@/components/shared/layout/navbar.astro';
+import Transition from '@/components/shared/layout/transition.astro';
+import ViewChip from '@/components/shared/layout/view-chip.astro';
+import AIFloatingMenu from '~/components/common/AIFloatingMenu.astro';
+import Analytics from '~/components/common/Analytics.astro';
+import AnalyticsBody from '~/components/common/AnalyticsBody.astro';
+import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import VercelAnalytics from '@vercel/analytics/astro';
+import { site } from '@/data/site';
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE } from '@/utils/generate-meta-data';
+import Metadata from '~/components/common/Metadata.astro';
+import SiteVerification from '~/components/common/SiteVerification.astro';
+import type { MetaData } from '~/types';
+
+const accentVars = `:root{--color-signal:${site.accent};--color-signal-soft:color-mix(in srgb, ${site.accent} 14%, transparent);}`;
+
+interface MetadataProp extends Omit<MetaData, 'canonical'> {
+  image?: string;
+  canonical?: string | URL;
+}
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  preloader?: boolean;
+  metadata?: MetadataProp;
+}
+
+const {
+  title: rawTitle,
+  description: rawDesc,
+  image: rawImage,
+  preloader = false,
+  metadata,
+} = Astro.props;
+
+const title = rawTitle ?? metadata?.title ?? DEFAULT_TITLE;
+const description = rawDesc ?? metadata?.description ?? DEFAULT_DESCRIPTION;
+const image = rawImage ?? metadata?.image;
+const canonical = metadata?.canonical
+  ? new URL(String(metadata.canonical), Astro.site)
+  : new URL(Astro.url.pathname, Astro.site);
+const openGraph = {
+  ...metadata?.openGraph,
+  images: image
+    ? [{ url: image, width: 1200, height: 630 }]
+    : metadata?.openGraph?.images?.length
+      ? metadata.openGraph.images
+      : [{ url: '/images/og-image.jpg', width: 1200, height: 630 }],
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark" data-preloader={preloader ? '' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Metadata
+      {...metadata}
+      title={title}
+      description={description}
+      canonical={canonical.toString()}
+      ignoreTitleTemplate={metadata?.ignoreTitleTemplate ?? true}
+      openGraph={openGraph}
+    />
+    <SiteVerification />
+    <meta name="theme-color" content="#1A1A1A" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={Astro.generator} />
+    <style is:inline set:html={accentVars}></style>
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style is:inline>
+      :root {
+        --font-display-face: 'Cabinet Grotesk', sans-serif;
+        --font-body-face: 'General Sans', sans-serif;
+        --font-mono-face: 'JetBrains Mono', monospace;
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        const root = document.documentElement;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        root.classList.add('js');
+        try {
+          if (sessionStorage.getItem('kairo:transition')) root.classList.add('is-arriving');
+          else if (root.hasAttribute('data-preloader')) root.classList.add('is-loading');
+        } catch { /* ignore */ }
+      })();
+    </script>
+    <style is:inline>
+      html.is-loading [data-loader] {
+        display: block;
+      }
+      html.is-loading [data-nav] [data-logo-mark] {
+        opacity: 0;
+      }
+      html.is-arriving [data-transition] {
+        visibility: visible;
+      }
+      [data-transition-col] {
+        transform: translateY(101%);
+      }
+      html.is-arriving [data-transition-col] {
+        transform: none;
+      }
+      .js [data-intro] {
+        opacity: 0;
+      }
+      .js [data-hero-line] > * {
+        transform: translateY(110%);
+      }
+      .js [data-split],
+      .js [data-words] {
+        visibility: hidden;
+      }
+      .js [data-reveal] {
+        opacity: 0;
+        transform: translateY(2.5rem);
+      }
+      .js [data-reveal-media] {
+        clip-path: inset(100% 0 0 0);
+      }
+      .js [data-nav-item] {
+        opacity: 0;
+      }
+      .js [data-product-tile] {
+        opacity: 0;
+      }
+      .js [data-product-hero] {
+        opacity: 0;
+      }
+    </style>
+    <LocalBusinessSchema />
+    <slot name="head" />
+    <Analytics />
+    <SpeedInsights />
+    <VercelAnalytics />
+  </head>
+  <body>
+    <AnalyticsBody />
+    <a
+      href="#main"
+      class="fixed top-3 left-3 z-[110] -translate-y-24 rounded-full bg-bone px-4 py-2 text-sm text-ink focus:translate-y-0">
+      Skip to content
+    </a>
+    {preloader && <Loader />}
+    <Transition />
+    <Navbar />
+    <Menu />
+    <ViewChip />
+    <div class="relative z-10 bg-ink" data-page>
+      <main id="main">
+        <slot />
+      </main>
+    </div>
+    <Footer />
+    <AIFloatingMenu />
+    <script>
+      import '@/components/animation/main';
+    </script>
+  </body>
+</html>

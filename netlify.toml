@@ -7,3 +7,25 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "http://ziaflow.com/*"
+  to = "https://ziaflow.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.ziaflow.com/*"
+  to = "https://ziaflow.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites"
+  to = "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites"
+  status = 301
+
+[[redirects]]
+  from = "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites"
+  to = "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites"
+  status = 301

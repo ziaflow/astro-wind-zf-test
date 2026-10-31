@@ -1,325 +1,205 @@
 ---
-import PhoneLink from '~/components/PhoneLink.astro';
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Content from '~/components/widgets/Content.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import { BUSINESS_PHONE } from '~/utils/utils';
+import Layout from '@/layouts/layout.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import Icon from '@/components/shared/icons/icon.astro';
+import HowItWorks from '@/components/home/how-it-works.astro';
+import RoiCalculator from '@/components/home/roi-calculator.astro';
+import Proof from '@/components/home/proof.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import Cta from '@/components/shared/cta.astro';
 
-const metadata = {
-  title: 'Phoenix Home Service Marketing | ZiaFlow',
-  description: `Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call ${BUSINESS_PHONE.display} to grow your booked leads.`,
-};
+export const prerender = true;
+
+const serviceCatalog = [
+  {
+    category: 'Flagship Sprint',
+    title: 'Lead Capture & Marketing Automation',
+    href: '/services/automation',
+    summary:
+      'Audit every inquiry source, repair silent form drops, automate <60s SMS/email confirmation, and sync directly with your CRM and dispatch team.',
+    highlights: [
+      'Lead-Path Audit & Database Receipts',
+      'Instant SMS & Email Dispatch',
+      'Superhuman & Customer.io Workflows',
+    ],
+  },
+  {
+    category: 'Search & GEO',
+    title: 'Phoenix Technical SEO & AI Visibility',
+    href: '/services/seo',
+    summary:
+      'Capture high-intent Arizona buyers across Google Search, Map Packs, ChatGPT, and Perplexity with structured schema and striking-distance content.',
+    highlights: [
+      'LocalBusiness & Service JSON-LD',
+      'GEO / Answer Engine Optimization',
+      'Core Web Vitals & Crawl Repair',
+    ],
+  },
+  {
+    category: 'Web Engineering',
+    title: 'High-Speed Web Development (Astro)',
+    href: '/services/web-development',
+    summary:
+      'Sub-second websites engineered on Astro, Tailwind CSS, and Supabase—designed specifically to convert mobile service traffic into booked calls.',
+    highlights: ['99+ PageSpeed Performance', 'Mobile-First Conversion Flows', 'Zero Bloated Plugin Lock-In'],
+  },
+  {
+    category: 'Paid Lead Gen',
+    title: 'Google Local Service Ads (LSA)',
+    href: '/services/local-service-ads',
+    summary:
+      'Pay-per-lead Google Guaranteed campaign management, dispute protection, and instant lead triage for Phoenix home and commercial contractors.',
+    highlights: ['Google Guaranteed Verification', 'Invalid Lead Dispute Management', 'Direct Call & Message Routing'],
+  },
+  {
+    category: 'Local Authority',
+    title: 'Google Business Profile (GBP) Optimization',
+    href: '/services/gmb-optimization',
+    summary:
+      'Turn local map views into direct calls with category tuning, geo-grid tracking, Q&A seeding, and automated post-service review velocity.',
+    highlights: ['Map Pack Ranking Architecture', 'Service Area & Category Tuning', 'Automated Review Integration'],
+  },
+  {
+    category: 'Conversion Architecture',
+    title: 'Conversion Rate Optimization (CRO)',
+    href: '/services/cro',
+    summary:
+      'Eliminate form friction, broken mobile CTAs, and high bounce rates using Microsoft Clarity heatmaps and server-verified intake testing.',
+    highlights: [
+      'Clarity Behavior & Scroll Analysis',
+      'Frictionless Multi-Step Intake',
+      'Mobile Call & Booking Path Repair',
+    ],
+  },
+  {
+    category: 'Paid Search',
+    title: 'High-Intent PPC & Search Campaigns',
+    href: '/services/ppc',
+    summary:
+      'Precision Google and Microsoft Search campaigns paired with dedicated high-converting landing pages and full-funnel lead attribution.',
+    highlights: [
+      'Exact-Intent Keyword Targeting',
+      'Dedicated Conversion Landing Pages',
+      'Database-Backed ROAS Tracking',
+    ],
+  },
+  {
+    category: 'Reputation Engine',
+    title: 'Review & Reputation Management',
+    href: '/services/review-management',
+    summary:
+      'Automated SMS and email review requests triggered immediately after job completion to build 5-star social proof across Google and Yelp.',
+    highlights: ['Automated Post-Job SMS Requests', 'Negative Feedback Triage Flow', 'Review Response Playbooks'],
+  },
+  {
+    category: 'Telemetry & BI',
+    title: 'Performance Tracking & Attribution',
+    href: '/services/performance-tracking',
+    summary:
+      'Unified Supabase telemetry combining Google Search Console, Microsoft Clarity, CallRail, and verified form receipts without vanity metrics.',
+    highlights: ['Atomic Lead & Receipt Logging', 'Source-Page Attribution', 'Executive Weekly Briefs'],
+  },
+  {
+    category: 'Custom Software',
+    title: 'Bespoke Software & AI Agent Systems',
+    href: '/services/software',
+    summary:
+      'Custom internal portals, customer dashboards, Supabase backends, and multi-agent AI workflows built for operational scale.',
+    highlights: [
+      'Full-Stack Astro / Next.js / Supabase',
+      'Custom Webhook & API Pipelines',
+      '100% Client-Owned Codebase',
+    ],
+  },
+  {
+    category: 'Commerce',
+    title: 'High-Converting E-Commerce Platforms',
+    href: '/services/ecommerce',
+    summary:
+      'Headless commerce, Shopify speed optimization, and automated abandoned-checkout recovery engineered for measurable revenue lift.',
+    highlights: ['Sub-Second Product Pages', 'Checkout Friction Removal', 'Customer.io Retention Flows'],
+  },
+  {
+    category: 'Infrastructure',
+    title: 'Cloud Architecture & Edge Security',
+    href: '/services/cloud',
+    summary:
+      'Resilient deployments on Vercel, AWS, and Supabase with row-level security, cryptographic webhook verification, and edge rate limiting.',
+    highlights: ['Row-Level Security (RLS) Audits', 'HMAC Webhook Verification', 'Zero-Downtime CI/CD Previews'],
+  },
+];
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-  <Hero
-    tagline="🏆 Arizona Home Service Marketing Experts"
-    title="Phoenix Home Service Marketing - Google Local Service Ads & Google Business Profile"
-    subtitle="Get more qualified local leads with LSAs, optimized Google Business Profiles, review automation, and conversion-focused local marketing."
-    content={`
-      <div class="max-w-4xl mx-auto">
-        <p class="text-lg text-muted mb-6 dark:text-slate-300">
-          ZiaFlow helps Arizona HVAC, plumbing, electrical, and landscaping companies convert searchers into booked jobs using Google Local Service Ads (LSAs), Google Business Profile optimization, and reputation systems built for local markets. Book a free strategy call to see a custom 30/60/90 roadmap for your business.
-        </p>
-        
-        <div class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-          <p class="mb-2">
-            <strong>Clients typically see 40%+ average lead increases</strong> • 500+ businesses served • 98% client satisfaction
-          </p>
-          <a href="/services/automation" class="text-primary hover:underline font-medium">See case studies →</a>
-        </div>
+<Layout
+  title="Web Design, SEO & Lead Automation Services | ZiaFlow"
+  description="Explore ZiaFlow's digital services in Phoenix, AZ: Lead Capture & Follow-Up Sprints, fast Astro web design, local SEO, Google LSAs, and custom software."
+>
+  <PageHero
+    lines={['Systems engineered', 'for booked revenue.']}
+    accent={1}
+    intro="We don't sell disconnected marketing retainers. ZiaFlow engineers high-speed websites, automated lead capture & follow-up pipelines, and local search dominance for Arizona businesses."
+  />
+
+  <!-- Services Matrix -->
+  <section class="shell pb-24 md:pb-32" aria-labelledby="services-matrix-title">
+    <div class="flex flex-col justify-between gap-6 border-t border-line pt-10 md:flex-row md:items-end mb-14">
+      <div>
+        <p class="font-mono text-label text-signal uppercase">Capabilities Catalog</p>
+        <h2 id="services-matrix-title" class="mt-3 font-display text-title font-bold text-bone">
+          12 specialized engineering & growth disciplines.
+        </h2>
       </div>
-    `}
-    actions={[
-      {
-        variant: 'primary',
-        text: `📞 ${BUSINESS_PHONE.display}`,
-        href: 'tel:+16028344239',
-        classes: {
-          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
-        },
-      },
-      {
-        variant: 'secondary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-      {
-        variant: 'secondary',
-        text: 'Download Free LSA Guide',
-        href: '#lsa-guide',
-        icon: 'tabler:download',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Phoenix home service marketing - Google Local Service Ads and GMB optimization',
-    }}
-  />
+      <a
+        href="/pricing"
+        class="inline-flex items-center gap-2 font-mono text-xs uppercase text-signal hover:text-bone transition-colors"
+      >
+        Compare Sprint & Retainer Pricing <Icon name="arrow-up-right" class="size-4" />
+      </a>
+    </div>
 
-  <!-- Features2 Widget ************** -->
-  <Features2
-    id="services"
-    title="Our Specialized Services for Home Service Businesses"
-    subtitle="Focused services that drive measurable bookings and reduce wasted ad spend."
-    columns={3}
-    items={[
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
-        title: 'Google Local Service Ads (LSAs)',
-        description: 'Pay-per-lead campaigns managed for maximum ROI and lead quality.',
-        icon: 'tabler:ad-2',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/local-service-ads',
-        },
-      },
-      {
-        title: 'Google Business Profile (GMB) Optimization',
-        description: 'Local-first profiles that increase visibility, clicks, and calls.',
-        icon: 'tabler:map-pin',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/gmb-optimization',
-        },
-      },
-      {
-        title: 'Review & Reputation Management',
-        description: 'Automated review requests, response workflows, and dispute handling to build trust.',
-        icon: 'tabler:star',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/review-management',
-        },
-      },
-      {
-        title: 'Performance Tracking & Reporting',
-        description: 'Real-time dashboards, weekly summaries, and transparent KPIs so you know where leads come from.',
-        icon: 'tabler:chart-line',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/performance-tracking',
-        },
-      },
-      {
-        title: 'Conversion & Booking Optimization',
-        description: 'Faster booking paths, optimized landing pages, and form tracking that turn visits into jobs.',
-        icon: 'tabler:target',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/cro',
-        },
-      },
-      {
-        title: 'Audit & Automation',
-        description: 'Lead routing, reminders, and CRM syncs that save admin hours and improve close rates.',
-        icon: 'tabler:robot',
-        callToAction: {
-          text: 'Learn more',
-          href: '/services/automation',
-        },
-      },
-    ]}
-  />
+        serviceCatalog.map((srv) => (
+          <a
+            href={srv.href}
+            class="group flex flex-col justify-between rounded-2xl border border-line bg-ink-2/60 p-7 transition-all duration-300 hover:border-signal hover:bg-ink-2"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-3">
+                <span class="rounded-full border border-line bg-ink px-3 py-1 font-mono text-[11px] uppercase text-signal">
+                  {srv.category}
+                </span>
+                <span class="grid size-9 place-items-center rounded-full border border-line text-mute transition-all group-hover:rotate-45 group-hover:border-signal group-hover:bg-signal group-hover:text-bone">
+                  <Icon name="arrow-up-right" class="size-4" />
+                </span>
+              </div>
+              <h3 class="mt-6 font-display text-2xl font-bold text-bone group-hover:text-signal transition-colors">
+                {srv.title}
+              </h3>
+              <p class="mt-3 text-sm text-mute leading-relaxed">{srv.summary}</p>
+              <ul class="mt-6 space-y-2 border-t border-line pt-5">
+                {srv.highlights.map((h) => (
+                  <li class="flex items-center gap-2.5 text-xs text-bone">
+                    <span class="size-1.5 rounded-full bg-signal" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <span class="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase text-mute group-hover:text-bone">
+              View Service Scope & Deliverables →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
-  <Content
-    isReversed
-    title="Feeling Lost in the Local Search Maze?"
-    subtitle="Common issues we solve for Arizona home service businesses:"
-    items={[
-      {
-        title: 'Inconsistent Lead Flow',
-        description: 'Feast-or-famine scheduling makes it impossible to plan staffing and growth.',
-        icon: 'tabler:calendar-x',
-      },
-      {
-        title: 'Confusing Ad Spend',
-        description: 'Low conversion rates and high cost-per-lead draining your marketing budget.',
-        icon: 'tabler:coin-off',
-      },
-      {
-        title: 'Poor GMB & Reviews',
-        description: 'Low review volume and unoptimized profiles reducing trust and visibility.',
-        icon: 'tabler:star-off',
-      },
-      {
-        title: 'Manual Time Waste',
-        description: 'Hours wasted on manual follow-up, scheduling, and billing instead of revenue work.',
-        icon: 'tabler:clock-x',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
-      alt: 'Common challenges for Arizona home service businesses',
-    }}
-  />
-
-  <!-- Content Widget **************** -->
-  <Content
-    isAfterContent
-    title="ZiaFlow - Your Local Growth Partner"
-    subtitle="We specialize exclusively in Arizona home service marketing. That means deep local knowledge, seasonal strategy, and playbooks that produce predictable lead volume."
-    items={[
-      {
-        title: 'Google Local Service Ads Certified Experts',
-        description: 'Official LSA certification and proven campaign management expertise.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'Proven Results for Home Services',
-        description: 'Documented success for HVAC, plumbing, electrical, and landscaping businesses.',
-        icon: 'tabler:chart-arrows-vertical',
-      },
-      {
-        title: 'Local Market Expertise',
-        description: 'Deep experience across Phoenix, Scottsdale, Tempe, Mesa, and statewide Arizona.',
-        icon: 'tabler:map-2',
-      },
-      {
-        title: 'Case Studies & Metrics',
-        description: 'Before/after data and documented results you can verify.',
-        icon: 'tabler:file-analytics',
-        callToAction: {
-          text: 'See case studies',
-          href: '/services/automation',
-        },
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
-      alt: 'ZiaFlow Arizona home service marketing experts',
-    }}
-  />
-
-  <!-- Steps Widget ****************** -->
-  <Steps
-    title="Our Simple 3-Step Growth Plan"
-    items={[
-      {
-        title: 'Step 1: Discovery',
-        description:
-          'Schedule a free discovery session. We audit your LSA/GMB setup, current campaigns, and lead flows to identify immediate gains.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Step 2: Targeted Roadmap',
-        description:
-          'Receive a customized 30/60/90 roadmap that prioritizes high-impact fixes: LSA setup/optimization, GMB fixes, review automation, and conversion improvements.',
-        icon: 'tabler:map',
-      },
-      {
-        title: 'Step 3: Launch & Optimize',
-        description:
-          'We launch campaigns, automate follow-up, and iteratively optimize using real-world lead data so your cost-per-lead drops and booked jobs rise.',
-        icon: 'tabler:rocket',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=870&q=80',
-      alt: 'ZiaFlow 3-step growth process',
-    }}
-  />
-
-  <!-- Testimonials Widget *********** -->
-  <Testimonials
-    title="Trusted by Arizona Business Owners"
-    tagline="Client Success Stories"
-    testimonials={[
-      {
-        testimonial:
-          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended!',
-        name: 'J. M.',
-        job: 'Investor',
-      },
-      {
-        testimonial:
-          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
-        name: 'K. B.',
-        job: 'COO',
-      },
-      {
-        testimonial:
-          'When it comes to website building and SEO, Ziaflow is very knowledgeable and extremely efficient. They helped me and some of my clients with website consulting and optimization. They are very affordable for small businesses that are growing and startups that need to get a head start.',
-        name: 'S. K.',
-        job: 'Comptroller',
-      },
-    ]}
-  />
-
-  <!-- FAQs Widget ******************* -->
-  <FAQs
-    title="Frequently Asked Questions"
-    columns={1}
-    items={[
-      {
-        title: 'What are Google Local Service Ads (LSAs)?',
-        description:
-          'LSAs are pay-per-lead ads that appear at the top of Google for local service searches. You pay when a customer contacts you through the ad. <a href="#lsa-guide" class="text-primary hover:underline">Download our free guide</a> to learn more.',
-        icon: 'tabler:help',
-      },
-      {
-        title: 'How soon will I see results?',
-        description:
-          'Many clients start receiving qualified leads within 2–4 weeks of launch. Meaningful, sustained improvements typically emerge in 60–90 days as we optimize for quality and volume.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Do you work with businesses outside Arizona?',
-        description:
-          'Our primary expertise is Arizona markets, but we do take select clients nationwide. <a href="/contact" class="text-primary hover:underline">Contact us</a> to discuss your market and goals.',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </FAQs>
-
-  <!-- CallToAction Widget *********** -->
-  <CallToAction
-    title="Ready to Grow Your Home Service Business?"
-    subtitle="Stop losing leads to competitors. Let's build a local lead machine for your service area - predictable, scalable, and measurable."
-    actions={[
-      {
-        variant: 'primary',
-        text: `📞 ${BUSINESS_PHONE.display}`,
-        href: 'tel:+16028344239',
-        classes: {
-          btn: 'bg-emerald-500 hover:bg-emerald-600 border-emerald-500 hover:border-emerald-600 font-bold text-white shadow-lg shadow-emerald-500/25',
-        },
-      },
-      {
-        variant: 'secondary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-      {
-        variant: 'secondary',
-        text: 'Download Free LSA Guide',
-        href: '#lsa-guide',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="subtitle">
-      <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
-        <p class="mb-2">
-          <strong>Phone:</strong>
-          <a href="tel:+16028344239" class="text-primary hover:underline font-bold">📞 (602) 834-4239</a> •
-          <strong>Email:</strong>
-          <a href="mailto:info@ziaflow.com" class="text-primary hover:underline">Email Us</a>
-        </p>
-        <p>Serving Phoenix, Scottsdale, Tempe, Mesa and statewide Arizona</p>
-      </div>
-    </Fragment>
-  </CallToAction>
+  <HowItWorks />
+  <RoiCalculator />
+  <Proof />
+  <AuditSection />
+  <SalesForm />
+  <Cta />
 </Layout>

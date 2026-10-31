@@ -1,17 +1,19 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-
 import merge from 'lodash.merge';
 import type { ImageMetadata } from 'astro';
-import Layout from '~/layouts/PageLayout.astro';
+import KairoLayout from '@/layouts/layout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
 import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import Cta from '@/components/shared/cta.astro';
 
 import { getCanonical, getPermalink } from '~/utils/permalinks';
 import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
-import RelatedPosts from '~/components/blog/RelatedPosts.astro';
 
 export const prerender = true;
 
@@ -43,12 +45,64 @@ const metadata = merge(
   },
   { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
 ) as MetaData;
+
+const publishDateIso = post.publishDate ? new Date(post.publishDate).toISOString() : undefined;
+const updateDateIso = post.updateDate ? new Date(post.updateDate).toISOString() : publishDateIso;
+
+const postImageUrl =
+  typeof image === 'string'
+    ? image
+    : image?.src
+      ? new URL(image.src, Astro.site || 'https://ziaflow.com').toString()
+      : undefined;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+  headline: post.title,
+  description: post.excerpt,
+  ...(postImageUrl ? { image: [postImageUrl] } : {}),
+  datePublished: publishDateIso,
+  dateModified: updateDateIso,
+  author: {
+    '@type': 'Person',
+    name: post.author || 'ZiaFlow Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ziaflow.com/favicon.svg',
+    },
+  },
+};
 ---
 
-<Layout metadata={metadata}>
-  <SinglePost post={{ ...post, image: image }} url={url}>
-    {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
-  </SinglePost>
-  <ToBlogLink />
-  <RelatedPosts post={post} />
-</Layout>
+<KairoLayout
+  title={metadata.title}
+  description={metadata.description}
+  metadata={{
+    ...metadata,
+    title: metadata.title,
+    description: metadata.description,
+    canonical: metadata.canonical || url,
+  }}
+>
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  <div class="pt-24">
+    <SinglePost post={{ ...post, image: image }} url={url}>
+      {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
+    </SinglePost>
+    <ToBlogLink />
+    <RelatedPosts post={post} />
+  </div>
+  <AuditSection />
+  <SalesForm />
+  <Cta />
+</KairoLayout>

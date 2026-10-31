@@ -4,7 +4,7 @@ import { AstroSeo } from '@astrolib/seo';
 
 import type { Props as AstroSeoProps } from '@astrolib/seo';
 
-import { SITE, METADATA, I18N } from 'astrowind:config';
+import { SITE, METADATA, I18N } from '~/config/site';
 import type { MetaData } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
 
@@ -63,6 +63,10 @@ const seoProps: AstroSeoProps = merge(
     twitter: twitter,
   }
 );
+
+const adaptedOpenGraph = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
+const twitterImage = adaptedOpenGraph?.images?.[0]?.url;
 ---
 
-<AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />
+<AstroSeo {...{ ...seoProps, openGraph: adaptedOpenGraph }} />
+{twitterImage && <meta name="twitter:image" content={twitterImage} />}

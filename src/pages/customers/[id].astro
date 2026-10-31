@@ -1,0 +1,43 @@
+---
+import Layout from '@/layouts/layout.astro';
+import StoryHero from '@/components/customers-details/story-hero.astro';
+import StoryResults from '@/components/customers-details/story-results.astro';
+import StoryBody from '@/components/customers-details/story-body.astro';
+import StoryGallery from '@/components/customers-details/story-gallery.astro';
+import NextStory from '@/components/customers-details/next-story.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import { getStories, type Story } from '@/utils/collections';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const stories = await getStories();
+  return stories.map((story, index) => ({
+    params: { id: story.id },
+    props: {
+      story,
+      next: stories[(index + 1) % stories.length],
+    },
+  }));
+}
+
+interface Props {
+  story: Story;
+  next: Story;
+}
+
+const { story, next } = Astro.props;
+---
+
+<Layout
+  title={`${story.data.client} — ${story.data.industry} Case Study | ZiaFlow`}
+  description={story.data.summary}
+  image={story.data.cover}
+>
+  <StoryHero story={story} />
+  <StoryResults story={story} />
+  <StoryBody story={story} />
+  <StoryGallery story={story} />
+  <AuditSection />
+  {next && <NextStory story={next} />}
+</Layout>
