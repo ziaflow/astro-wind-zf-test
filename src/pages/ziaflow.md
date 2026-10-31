@@ -15,7 +15,7 @@
 <h2 align="left">Our Technology Stack</h2>
 <img align="left" style="max-width: 100%; height: 26vh;" src="YOUR_TECH_IMAGE_URL">
 
-[![Our Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,python,php,mysql,mongodb,wordpress,shopify,gcp,aws,docker&perline=4)](<>)
+![Our Skills](https://skillicons.dev/icons?i=html,css,js,react,nodejs,python,php,mysql,mongodb,wordpress,shopify,gcp,aws,docker&perline=4)
 
 <br clear="left"/>
 
