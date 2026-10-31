@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": "^18.17.1 || ^20.3.0 || >= 21.0.0"
+    "node": ">=22.22.0 <23"
   },
   "scripts": {
     "dev": "astro dev",
@@ -23,7 +23,10 @@
     "indexnow": "node scripts/submit-indexnow.mjs",
     "fix": "npm run fix:eslint && npm run fix:prettier",
     "fix:eslint": "eslint --fix .",
-    "fix:prettier": "prettier -w ."
+    "fix:prettier": "prettier -w .",
+    "build:validate": "astro build && npm run check:links",
+    "test:intake": "node --test tests/contact-capture.test.mjs tests/lead-form.test.mjs tests/growth-tools.test.mjs tests/growth-welcome.test.mjs",
+    "test:browser": "playwright test --project=chromium"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.3",
@@ -96,5 +99,6 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.39.0",
     "unist-util-visit": "^5.0.0"
-  }
+  },
+  "packageManager": "npm@10.9.4"
 }

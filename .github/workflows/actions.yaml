@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - feature/kairo-redesign
   push:
     branches:
       - main
@@ -16,10 +17,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: '.nvmrc'
           cache: 'npm'
-      - run: npm install
-      - run: npm run build
+      - run: npm ci
+      - run: npm run build:validate
 
   check:
     runs-on: ubuntu-latest
@@ -28,7 +29,7 @@ jobs:
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: '.nvmrc'
           cache: 'npm'
-      - run: npm install
+      - run: npm ci
       - run: npm run check
