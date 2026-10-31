@@ -7,7 +7,12 @@
   <input type="hidden" name="page_submitted_from" value={Astro.url.pathname} />
 
   {/* Anti-spam honeypot field: invisible to humans, traps automated spam bots */}
-  <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+  <div
+    class="opacity-0 absolute -z-10 select-none pointer-events-none"
+    style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+    aria-hidden="true"
+    tabindex="-1"
+  >
     <label for="contact_website_url">Leave this field blank</label>
     <input type="text" id="contact_website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
   </div>

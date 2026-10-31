@@ -33,7 +33,12 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
       <input type="hidden" name="from_email" value="mailto:info@ziaflow.com" />
 
       {/* Anti-spam honeypot field */}
-      <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+      <div
+        class="opacity-0 absolute -z-10 select-none pointer-events-none"
+        style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+        aria-hidden="true"
+        tabindex="-1"
+      >
         <label for="audit_website_url">Leave this field blank</label>
         <input type="text" id="audit_website_url" name="website_url" value="" autocomplete="off" tabindex="-1" />
       </div>
@@ -170,7 +175,10 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
         name: fullName,
         company: rawData.company_name || rawData.company || '',
         service_interest: rawData.service_interest || 'Growth Audit',
-        idempotency_key: (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+        idempotency_key:
+          typeof crypto !== 'undefined' && crypto.randomUUID
+            ? crypto.randomUUID()
+            : 'audit-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
       };
 
       try {

@@ -65,10 +65,10 @@ export const POST: APIRoute = async ({ request }) => {
     const { allowed, resetInSeconds } = checkRateLimit(clientIp, { maxRequests: 50, windowMs: 60_000 });
     if (!allowed) {
       console.warn(`[contact] rate limit exceeded for IP: ${clientIp}`);
-      return new Response(
-        JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }),
-        { status: 429, headers: { 'Content-Type': 'application/json', 'Retry-After': String(resetInSeconds) } }
-      );
+      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': String(resetInSeconds) },
+      });
     }
 
     // 2. Honeypot check: if filled, silently drop the database insert and return 200 OK so bots are deceived
@@ -93,7 +93,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (HTML_TAG_REGEX.test(message) || urlMatches.length >= 2 || SUSPICIOUS_TLD_REGEX.test(combinedContent)) {
       console.warn('[contact] rejected: excessive URLs, HTML markup, or blocked TLD detected in message');
-      return json({ message: 'Messages containing promotional links, HTML tags, or blocked domains are not accepted.' }, 400);
+      return json(
+        { message: 'Messages containing promotional links, HTML tags, or blocked domains are not accepted.' },
+        400
+      );
     }
 
     if (!email || !EMAIL_PATTERN.test(email)) {
@@ -280,7 +283,10 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    return json({ message: 'Thanks! We received your message.', submission_id: submissionId, duplicate: alreadyPersisted }, 200);
+    return json(
+      { message: 'Thanks! We received your message.', submission_id: submissionId, duplicate: alreadyPersisted },
+      200
+    );
   } catch (error) {
     console.error('Contact Form Error:', error);
     return json({ message: 'Failed to send message' }, 500);

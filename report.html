@@ -1,190 +1,639 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SEO Performance Audit — Oct 23, 2026</title>
-<style>
-:root{--bg:#fff;--fg:#0a0a0a;--fg-2:#454545;--fg-3:#8f8f8f;--rule:#ebebeb;--rule-2:#dcdcdc;--sunk:#fafafa;--accent:#0a0a0a}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--fg);margin:0;padding:0 24px 120px;font-size:18px;line-height:1.65;letter-spacing:-.003em;font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.shell{max-width:1100px;margin:0 auto}
-header{padding:40px 0 0;max-width:660px}
-h1{font-size:clamp(34px,6vw,56px);font-weight:700;line-height:1.03;letter-spacing:-.035em;margin:0;text-wrap:balance}
-.byline{margin:24px 0 0;font-size:16px;color:var(--fg-2)}
-.body{display:grid;grid-template-columns:minmax(0,660px) 1fr;gap:0 64px;margin:48px 0 0}
-article{grid-column:1;grid-row:1;min-width:0}
-.rail{grid-column:2;grid-row:1;font-size:14px;color:var(--fg-3);padding-top:6px}
-.rail .sticky{position:sticky;top:40px}
-.toc-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);margin:0 0 10px}
-.toc ol{list-style:none;margin:0;padding:0}
-.toc li{margin:0 0 7px}
-.toc a{color:var(--fg-2);text-decoration:none}
-.toc a:hover{color:var(--fg)}
-@media (max-width:900px){.body{grid-template-columns:1fr}.rail{display:none}}
-article p{margin:0 0 26px;text-wrap:pretty}
-h2{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.2;margin:60px 0 22px;text-wrap:balance}
-h3{font-size:20px;font-weight:600;letter-spacing:-.015em;margin:38px 0 14px}
-.finding{list-style:none;padding:0;margin:0 0 26px}
-.finding li{margin:0 0 8px;color:var(--fg-2)}
-.finding b{color:var(--accent);font-weight:600}
-a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--rule-2)}
-strong{font-weight:600}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:var(--sunk);border:1px solid var(--rule);padding:1px 5px;border-radius:4px}
-ul,ol{margin:0 0 26px;padding-left:22px}li{margin:0 0 11px}li::marker{color:var(--fg-3)}
-.note{border-left:2px solid var(--fg);padding:2px 0 2px 22px;margin:0 0 26px}
-.note p{margin:0;color:var(--fg-2)}
-.note p+p{margin-top:14px}
-.tw{overflow-x:auto;margin:0 0 30px}
-table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:440px}
-th{text-align:left;font-weight:500;color:var(--fg-3);padding:0 20px 10px 0;border-bottom:1px solid var(--rule-2);white-space:nowrap}
-td{padding:13px 20px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--fg-2)}
-td:first-child{color:var(--fg)}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-td:last-child,th:last-child{padding-right:0}
-tr:last-child td{border-bottom:none}
-figure{margin:0 0 30px}
-figcaption{font-size:14px;color:var(--fg-3);margin-top:8px}
-.bars{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;gap:10px 12px;align-items:center;font-size:14px}
-.bars .label{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bars .track{display:block;height:20px;background:var(--sunk)}
-.bars .bar{display:block;height:100%;background:var(--accent);opacity:.25}
-.bars .value{font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
-svg{display:block;max-width:100%;height:auto}
-hr{border:none;border-top:1px solid var(--rule);margin:60px 0}
-footer{max-width:660px;margin:64px 0 0;padding:26px 0 0;border-top:1px solid var(--rule);font-size:15px;color:var(--fg-3)}
-@media print{
-  @page{margin:0 0 12mm 0;@bottom-center{content:counter(page) " of " counter(pages);font:10px -apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;color:#8f8f8f}}
-  body{background:#fff;color:#111;padding:14mm 16mm 6mm;font-size:11pt}
-  .shell,.body{display:block;max-width:none}
-  header{padding:0;max-width:none}
-  h1{font-size:26pt}
-  h2{font-size:15pt;margin:22pt 0 10pt}
-  h3{font-size:12pt;margin:14pt 0 6pt}
-  article,footer{max-width:none}
-  .rail{display:none}
-  h1,h2,h3{break-after:avoid}
-  table,figure,.note,svg{break-inside:avoid}
-  tr,td,th{break-inside:avoid}
-  p,li{orphans:3;widows:3}
-  thead{display:table-header-group}
-  .tw{overflow:visible}
-  table{font-size:10pt;min-width:0}
-  .byline,footer,figcaption{font-size:9.5pt}
-  svg,.bars .bar,.bars .track{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  a{text-decoration:none}
-}
-</style></head>
-<body><div class="shell">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SEO Performance Audit — Oct 23, 2026</title>
+    <style>
+      :root {
+        --bg: #fff;
+        --fg: #0a0a0a;
+        --fg-2: #454545;
+        --fg-3: #8f8f8f;
+        --rule: #ebebeb;
+        --rule-2: #dcdcdc;
+        --sunk: #fafafa;
+        --accent: #0a0a0a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        margin: 0;
+        padding: 0 24px 120px;
+        font-size: 18px;
+        line-height: 1.65;
+        letter-spacing: -0.003em;
+        font-family:
+          Geist,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Helvetica,
+          Arial,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .shell {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      header {
+        padding: 40px 0 0;
+        max-width: 660px;
+      }
+      h1 {
+        font-size: clamp(34px, 6vw, 56px);
+        font-weight: 700;
+        line-height: 1.03;
+        letter-spacing: -0.035em;
+        margin: 0;
+        text-wrap: balance;
+      }
+      .byline {
+        margin: 24px 0 0;
+        font-size: 16px;
+        color: var(--fg-2);
+      }
+      .body {
+        display: grid;
+        grid-template-columns: minmax(0, 660px) 1fr;
+        gap: 0 64px;
+        margin: 48px 0 0;
+      }
+      article {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+      }
+      .rail {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 14px;
+        color: var(--fg-3);
+        padding-top: 6px;
+      }
+      .rail .sticky {
+        position: sticky;
+        top: 40px;
+      }
+      .toc-label {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--fg-3);
+        margin: 0 0 10px;
+      }
+      .toc ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .toc li {
+        margin: 0 0 7px;
+      }
+      .toc a {
+        color: var(--fg-2);
+        text-decoration: none;
+      }
+      .toc a:hover {
+        color: var(--fg);
+      }
+      @media (max-width: 900px) {
+        .body {
+          grid-template-columns: 1fr;
+        }
+        .rail {
+          display: none;
+        }
+      }
+      article p {
+        margin: 0 0 26px;
+        text-wrap: pretty;
+      }
+      h2 {
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+        margin: 60px 0 22px;
+        text-wrap: balance;
+      }
+      h3 {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        margin: 38px 0 14px;
+      }
+      .finding {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 26px;
+      }
+      .finding li {
+        margin: 0 0 8px;
+        color: var(--fg-2);
+      }
+      .finding b {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      a {
+        color: var(--fg);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-color: var(--rule-2);
+      }
+      strong {
+        font-weight: 600;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.86em;
+        background: var(--sunk);
+        border: 1px solid var(--rule);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      ul,
+      ol {
+        margin: 0 0 26px;
+        padding-left: 22px;
+      }
+      li {
+        margin: 0 0 11px;
+      }
+      li::marker {
+        color: var(--fg-3);
+      }
+      .note {
+        border-left: 2px solid var(--fg);
+        padding: 2px 0 2px 22px;
+        margin: 0 0 26px;
+      }
+      .note p {
+        margin: 0;
+        color: var(--fg-2);
+      }
+      .note p + p {
+        margin-top: 14px;
+      }
+      .tw {
+        overflow-x: auto;
+        margin: 0 0 30px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 15.5px;
+        min-width: 440px;
+      }
+      th {
+        text-align: left;
+        font-weight: 500;
+        color: var(--fg-3);
+        padding: 0 20px 10px 0;
+        border-bottom: 1px solid var(--rule-2);
+        white-space: nowrap;
+      }
+      td {
+        padding: 13px 20px 13px 0;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+        color: var(--fg-2);
+      }
+      td:first-child {
+        color: var(--fg);
+      }
+      td.n,
+      th.n {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      td:last-child,
+      th:last-child {
+        padding-right: 0;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      figure {
+        margin: 0 0 30px;
+      }
+      figcaption {
+        font-size: 14px;
+        color: var(--fg-3);
+        margin-top: 8px;
+      }
+      .bars {
+        display: grid;
+        grid-template-columns: minmax(120px, 210px) 1fr auto;
+        gap: 10px 12px;
+        align-items: center;
+        font-size: 14px;
+      }
+      .bars .label {
+        color: var(--fg-2);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .bars .track {
+        display: block;
+        height: 20px;
+        background: var(--sunk);
+      }
+      .bars .bar {
+        display: block;
+        height: 100%;
+        background: var(--accent);
+        opacity: 0.25;
+      }
+      .bars .value {
+        font-variant-numeric: tabular-nums;
+        min-width: 3ch;
+        text-align: right;
+      }
+      svg {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid var(--rule);
+        margin: 60px 0;
+      }
+      footer {
+        max-width: 660px;
+        margin: 64px 0 0;
+        padding: 26px 0 0;
+        border-top: 1px solid var(--rule);
+        font-size: 15px;
+        color: var(--fg-3);
+      }
+      @media print {
+        @page {
+          margin: 0 0 12mm 0;
+          @bottom-center {
+            content: counter(page) ' of ' counter(pages);
+            font:
+              10px -apple-system,
+              BlinkMacSystemFont,
+              Helvetica,
+              Arial,
+              sans-serif;
+            color: #8f8f8f;
+          }
+        }
+        body {
+          background: #fff;
+          color: #111;
+          padding: 14mm 16mm 6mm;
+          font-size: 11pt;
+        }
+        .shell,
+        .body {
+          display: block;
+          max-width: none;
+        }
+        header {
+          padding: 0;
+          max-width: none;
+        }
+        h1 {
+          font-size: 26pt;
+        }
+        h2 {
+          font-size: 15pt;
+          margin: 22pt 0 10pt;
+        }
+        h3 {
+          font-size: 12pt;
+          margin: 14pt 0 6pt;
+        }
+        article,
+        footer {
+          max-width: none;
+        }
+        .rail {
+          display: none;
+        }
+        h1,
+        h2,
+        h3 {
+          break-after: avoid;
+        }
+        table,
+        figure,
+        .note,
+        svg {
+          break-inside: avoid;
+        }
+        tr,
+        td,
+        th {
+          break-inside: avoid;
+        }
+        p,
+        li {
+          orphans: 3;
+          widows: 3;
+        }
+        thead {
+          display: table-header-group;
+        }
+        .tw {
+          overflow: visible;
+        }
+        table {
+          font-size: 10pt;
+          min-width: 0;
+        }
+        .byline,
+        footer,
+        figcaption {
+          font-size: 9.5pt;
+        }
+        svg,
+        .bars .bar,
+        .bars .track {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <h1>SEO Performance Audit — Oct 23, 2026</h1>
+        <p class="byline">Prepared for ZiaFlow · October 23, 2026</p>
+      </header>
 
-<header>
-  <h1>SEO Performance Audit — Oct 23, 2026</h1>
-  <p class="byline">Prepared for ZiaFlow · October 23, 2026</p>
-</header>
+      <div class="body">
+        <aside class="rail">
+          <div class="sticky">
+            <p class="toc-label">Contents</p>
+            <nav class="toc" aria-label="Contents">
+              <ol>
+                <li><a href="#executive-summary">Executive Summary</a></li>
+                <li><a href="#search-console-performance">Search Console Performance</a></li>
+                <li><a href="#keyword-rankings-and-demand">Keyword Rankings &amp; Demand</a></li>
+                <li><a href="#technical-health-and-cannibalization">Technical Health &amp; Cannibalization</a></li>
+                <li><a href="#what-to-do-next">What to do next</a></li>
+                <li><a href="#how-this-report-was-made">How this report was made</a></li>
+              </ol>
+            </nav>
+          </div>
+        </aside>
+        <article>
+          <p>
+            Organic search is in an early accumulation phase: brand search ranks position 1, but non-brand commercial
+            demand is held back by keyword cannibalization and low topical authority.
+          </p>
 
-<div class="body">
-  <aside class="rail"><div class="sticky">
-    <p class="toc-label">Contents</p>
-    <nav class="toc" aria-label="Contents">
-      <ol>
-        <li><a href="#executive-summary">Executive Summary</a></li>
-        <li><a href="#search-console-performance">Search Console Performance</a></li>
-        <li><a href="#keyword-rankings-and-demand">Keyword Rankings &amp; Demand</a></li>
-        <li><a href="#technical-health-and-cannibalization">Technical Health &amp; Cannibalization</a></li>
-        <li><a href="#what-to-do-next">What to do next</a></li>
-        <li><a href="#how-this-report-was-made">How this report was made</a></li>
-      </ol>
-    </nav>
-  </div></aside>
-  <article>
+          <h2 id="executive-summary">Executive Summary</h2>
+          <ul>
+            <li>
+              <strong>Total Organic Traffic:</strong> 4 clicks across 339 impressions (1.18% average CTR) over the
+              28-day window ending Oct 20, 2026.
+            </li>
+            <li>
+              <strong>Brand Monopolization:</strong> 75% of all organic clicks come from brand queries (<code
+                >"ziaflow"</code
+              >
+              at position 1.2).
+            </li>
+            <li>
+              <strong>Commercial Pipeline:</strong> High-intent queries like
+              <code>web development phoenix</code> (position 3.9) and
+              <code>google local service ads contractor phoenix</code> (position 2.0) generate daily impressions and
+              high click-through rates (5.4% to 7.8%) on specific landing pages.
+            </li>
+            <li>
+              <strong>Measurement Baseline:</strong> Supabase logs confirm 7 total historical lead submissions, showing
+              that past high conversion counts in GA4 were firing on page visits rather than backend completions.
+            </li>
+          </ul>
 
-    <p>Organic search is in an early accumulation phase: brand search ranks position 1, but non-brand commercial demand is held back by keyword cannibalization and low topical authority.</p>
+          <h2 id="search-console-performance">Search Console Performance</h2>
+          <p>
+            Organic visibility is concentrated in the home page and top-level service pages. Service pages with
+            localized intent convert impressions at a significantly higher rate than generic blog articles.
+          </p>
 
-    <h2 id="executive-summary">Executive Summary</h2>
-    <ul>
-      <li><strong>Total Organic Traffic:</strong> 4 clicks across 339 impressions (1.18% average CTR) over the 28-day window ending Oct 20, 2026.</li>
-      <li><strong>Brand Monopolization:</strong> 75% of all organic clicks come from brand queries (<code>"ziaflow"</code> at position 1.2).</li>
-      <li><strong>Commercial Pipeline:</strong> High-intent queries like <code>web development phoenix</code> (position 3.9) and <code>google local service ads contractor phoenix</code> (position 2.0) generate daily impressions and high click-through rates (5.4% to 7.8%) on specific landing pages.</li>
-      <li><strong>Measurement Baseline:</strong> Supabase logs confirm 7 total historical lead submissions, showing that past high conversion counts in GA4 were firing on page visits rather than backend completions.</li>
-    </ul>
+          <div class="tw">
+            <table>
+              <thead>
+                <tr>
+                  <th>Landing Page</th>
+                  <th class="n">Impressions</th>
+                  <th class="n">Clicks</th>
+                  <th class="n">CTR</th>
+                  <th class="n">Avg Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>https://ziaflow.com/</code></td>
+                  <td class="n">139</td>
+                  <td class="n">3</td>
+                  <td class="n">2.16%</td>
+                  <td class="n">4.2</td>
+                </tr>
+                <tr>
+                  <td><code>https://ziaflow.com/about</code></td>
+                  <td class="n">99</td>
+                  <td class="n">1</td>
+                  <td class="n">1.01%</td>
+                  <td class="n">3.1</td>
+                </tr>
+                <tr>
+                  <td><code>/marketing-automation-for-arizona...</code></td>
+                  <td class="n">114</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">23.0</td>
+                </tr>
+                <tr>
+                  <td><code>/services/automation</code></td>
+                  <td class="n">46</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">5.4</td>
+                </tr>
+                <tr>
+                  <td><code>/services/seo</code></td>
+                  <td class="n">43</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">7.0</td>
+                </tr>
+                <tr>
+                  <td><code>/services/software</code></td>
+                  <td class="n">43</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">4.8</td>
+                </tr>
+                <tr>
+                  <td><code>/services/ecommerce</code></td>
+                  <td class="n">34</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">5.5</td>
+                </tr>
+                <tr>
+                  <td><code>/services/web-development</code></td>
+                  <td class="n">21</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">4.3</td>
+                </tr>
+                <tr>
+                  <td><code>/services/ppc</code></td>
+                  <td class="n">19</td>
+                  <td class="n">0</td>
+                  <td class="n">0.00%</td>
+                  <td class="n">18.6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-    <h2 id="search-console-performance">Search Console Performance</h2>
-    <p>Organic visibility is concentrated in the home page and top-level service pages. Service pages with localized intent convert impressions at a significantly higher rate than generic blog articles.</p>
+          <figure>
+            <div class="bars" role="img" aria-label="Search impressions by page">
+              <span class="label">Home (/)</span><span class="track"><span class="bar" style="width: 100%"></span></span
+              ><span class="value">139</span> <span class="label">Marketing Blog</span
+              ><span class="track"><span class="bar" style="width: 82%"></span></span><span class="value">114</span>
+              <span class="label">About</span><span class="track"><span class="bar" style="width: 71%"></span></span
+              ><span class="value">99</span> <span class="label">/services/automation</span
+              ><span class="track"><span class="bar" style="width: 33%"></span></span><span class="value">46</span>
+              <span class="label">/services/seo</span
+              ><span class="track"><span class="bar" style="width: 31%"></span></span><span class="value">43</span>
+            </div>
+            <figcaption>Impressions by landing page over the trailing 28 days.</figcaption>
+          </figure>
 
-    <div class="tw">
-      <table>
-        <thead><tr><th>Landing Page</th><th class="n">Impressions</th><th class="n">Clicks</th><th class="n">CTR</th><th class="n">Avg Position</th></tr></thead>
-        <tbody>
-          <tr><td><code>https://ziaflow.com/</code></td><td class="n">139</td><td class="n">3</td><td class="n">2.16%</td><td class="n">4.2</td></tr>
-          <tr><td><code>https://ziaflow.com/about</code></td><td class="n">99</td><td class="n">1</td><td class="n">1.01%</td><td class="n">3.1</td></tr>
-          <tr><td><code>/marketing-automation-for-arizona...</code></td><td class="n">114</td><td class="n">0</td><td class="n">0.00%</td><td class="n">23.0</td></tr>
-          <tr><td><code>/services/automation</code></td><td class="n">46</td><td class="n">0</td><td class="n">0.00%</td><td class="n">5.4</td></tr>
-          <tr><td><code>/services/seo</code></td><td class="n">43</td><td class="n">0</td><td class="n">0.00%</td><td class="n">7.0</td></tr>
-          <tr><td><code>/services/software</code></td><td class="n">43</td><td class="n">0</td><td class="n">0.00%</td><td class="n">4.8</td></tr>
-          <tr><td><code>/services/ecommerce</code></td><td class="n">34</td><td class="n">0</td><td class="n">0.00%</td><td class="n">5.5</td></tr>
-          <tr><td><code>/services/web-development</code></td><td class="n">21</td><td class="n">0</td><td class="n">0.00%</td><td class="n">4.3</td></tr>
-          <tr><td><code>/services/ppc</code></td><td class="n">19</td><td class="n">0</td><td class="n">0.00%</td><td class="n">18.6</td></tr>
-        </tbody>
-      </table>
-    </div>
+          <h2 id="keyword-rankings-and-demand">Keyword Rankings &amp; Demand</h2>
+          <p>
+            Search impressions fall into three distinct query categories: brand terms, local high-intent services, and
+            informational queries.
+          </p>
 
-    <figure>
-      <div class="bars" role="img" aria-label="Search impressions by page">
-        <span class="label">Home (/)</span><span class="track"><span class="bar" style="width:100%"></span></span><span class="value">139</span>
-        <span class="label">Marketing Blog</span><span class="track"><span class="bar" style="width:82%"></span></span><span class="value">114</span>
-        <span class="label">About</span><span class="track"><span class="bar" style="width:71%"></span></span><span class="value">99</span>
-        <span class="label">/services/automation</span><span class="track"><span class="bar" style="width:33%"></span></span><span class="value">46</span>
-        <span class="label">/services/seo</span><span class="track"><span class="bar" style="width:31%"></span></span><span class="value">43</span>
+          <h3>Top Query Clusters</h3>
+          <ul class="finding">
+            <li>
+              <b>Brand Queries:</b> <code>"ziaflow"</code> holds position 1.2 with a 14.3% CTR. It is the only keyword
+              delivering steady organic clicks today.
+            </li>
+            <li>
+              <b>Local Commercial Queries:</b> High commercial intent terms such as
+              <code>"business automation for local service pros"</code> (position 61.9),
+              <code>"crm automation for small business arizona"</code> (position 20.2), and
+              <code>"ppc management services arizona"</code> (position 75.0) are indexing but rank outside the click
+              window.
+            </li>
+            <li>
+              <b>Long-Tail Educational Queries:</b> Informational terms like
+              <code>"website conversion tips"</code> (position 1.0) and
+              <code>"ways to reduce bounce rates with ai"</code> (position 2.0) rank in the top 3, but total search
+              volume is currently under 10 impressions per month.
+            </li>
+          </ul>
+
+          <div class="note">
+            <p>
+              Daily GSC metric logs in Supabase (<code>metrics_gsc_daily</code>) show verified traction for localized
+              queries: <code>"google local service ads contractor phoenix"</code> delivers a 7.8% CTR at position 2.0,
+              proving local contractor positioning attracts qualified searchers.
+            </p>
+          </div>
+
+          <h2 id="technical-health-and-cannibalization">Technical Health &amp; Cannibalization</h2>
+
+          <h3>Internal Keyword Cannibalization on Brand</h3>
+          <ul class="finding">
+            <li>
+              <b>Problem:</b> Search Console records 12 distinct URLs indexing for the brand query
+              <code>"ziaflow"</code>, including non-canonical HTTP URLs (<code>http://ziaflow.com/</code>), service
+              pages, and legal pages.
+            </li>
+            <li>
+              <b>Change:</b> Enforce a single canonical authority for brand search by pointing all internal brand logos
+              to <code>https://ziaflow.com</code> and ensuring strict HTTP-to-HTTPS 301 redirects at the edge.
+            </li>
+            <li>
+              <b>Expected effect:</b> Concentrates search equity onto the homepage, eliminating split impressions and
+              raising homepage CTR above 5%.
+            </li>
+          </ul>
+
+          <h3>Service Architecture Disconnect</h3>
+          <ul class="finding">
+            <li>
+              <b>Problem:</b> The hub page <code>https://ziaflow.com/services</code> generated only 1 impression
+              (position 68), while individual sub-services receive up to 46 impressions.
+            </li>
+            <li>
+              <b>Change:</b> Rework <code>/services</code> into an index linking directly to Phoenix sub-services (SEO,
+              Web Development, Automation, PPC) with clear internal anchor text.
+            </li>
+            <li>
+              <b>Expected effect:</b> Distributes page authority evenly, helping sub-service pages break through page 1
+              (positions 1–3) for localized commercial searches.
+            </li>
+          </ul>
+
+          <hr />
+          <h2 id="what-to-do-next">What to do next</h2>
+          <ol>
+            <li>
+              Submit <code>https://ziaflow.com/sitemap-index.xml</code> directly in Search Console (the legacy
+              <code>/sitemap.xml</code> URL returns a 404).
+            </li>
+            <li>
+              Consolidate service page internal linking from the header, footer, and <code>/services</code> hub to
+              resolve internal keyword competition.
+            </li>
+            <li>
+              Optimize on-page metadata for <code>crm automation for small business arizona</code> and
+              <code>lead follow up automation</code> on <code>/services/automation</code> to lift rankings from page 2
+              into page 1.
+            </li>
+          </ol>
+
+          <h2 id="how-this-report-was-made">How this report was made</h2>
+          <p>
+            Generated by the
+            <a href="https://openseo.so/docs/skills/seo-report" target="_blank" rel="noopener"
+              >OpenSEO SEO Report skill</a
+            >, run by Antigravity on October 23, 2026.
+          </p>
+          <ul class="finding">
+            <li>
+              <b>Tools:</b> Supabase Search Console snapshot (<code>analytics_source_snapshots</code>), Supabase daily
+              metric tables (<code>metrics_gsc_daily</code>, <code>metrics_ga4_daily</code>), and OpenSEO project data.
+            </li>
+            <li>
+              <b>Verified:</b> Live HTTP response codes, XML sitemap endpoints, canonical tags, and robots meta tags
+              verified against production <code>https://ziaflow.com</code>.
+            </li>
+          </ul>
+        </article>
       </div>
-      <figcaption>Impressions by landing page over the trailing 28 days.</figcaption>
-    </figure>
 
-    <h2 id="keyword-rankings-and-demand">Keyword Rankings &amp; Demand</h2>
-    <p>Search impressions fall into three distinct query categories: brand terms, local high-intent services, and informational queries.</p>
-
-    <h3>Top Query Clusters</h3>
-    <ul class="finding">
-      <li><b>Brand Queries:</b> <code>"ziaflow"</code> holds position 1.2 with a 14.3% CTR. It is the only keyword delivering steady organic clicks today.</li>
-      <li><b>Local Commercial Queries:</b> High commercial intent terms such as <code>"business automation for local service pros"</code> (position 61.9), <code>"crm automation for small business arizona"</code> (position 20.2), and <code>"ppc management services arizona"</code> (position 75.0) are indexing but rank outside the click window.</li>
-      <li><b>Long-Tail Educational Queries:</b> Informational terms like <code>"website conversion tips"</code> (position 1.0) and <code>"ways to reduce bounce rates with ai"</code> (position 2.0) rank in the top 3, but total search volume is currently under 10 impressions per month.</li>
-    </ul>
-
-    <div class="note">
-      <p>Daily GSC metric logs in Supabase (<code>metrics_gsc_daily</code>) show verified traction for localized queries: <code>"google local service ads contractor phoenix"</code> delivers a 7.8% CTR at position 2.0, proving local contractor positioning attracts qualified searchers.</p>
+      <footer>Prepared with OpenSEO. Data as of October 23, 2026.</footer>
     </div>
-
-    <h2 id="technical-health-and-cannibalization">Technical Health &amp; Cannibalization</h2>
-
-    <h3>Internal Keyword Cannibalization on Brand</h3>
-    <ul class="finding">
-      <li><b>Problem:</b> Search Console records 12 distinct URLs indexing for the brand query <code>"ziaflow"</code>, including non-canonical HTTP URLs (<code>http://ziaflow.com/</code>), service pages, and legal pages.</li>
-      <li><b>Change:</b> Enforce a single canonical authority for brand search by pointing all internal brand logos to <code>https://ziaflow.com</code> and ensuring strict HTTP-to-HTTPS 301 redirects at the edge.</li>
-      <li><b>Expected effect:</b> Concentrates search equity onto the homepage, eliminating split impressions and raising homepage CTR above 5%.</li>
-    </ul>
-
-    <h3>Service Architecture Disconnect</h3>
-    <ul class="finding">
-      <li><b>Problem:</b> The hub page <code>https://ziaflow.com/services</code> generated only 1 impression (position 68), while individual sub-services receive up to 46 impressions.</li>
-      <li><b>Change:</b> Rework <code>/services</code> into an index linking directly to Phoenix sub-services (SEO, Web Development, Automation, PPC) with clear internal anchor text.</li>
-      <li><b>Expected effect:</b> Distributes page authority evenly, helping sub-service pages break through page 1 (positions 1–3) for localized commercial searches.</li>
-    </ul>
-
-    <hr>
-    <h2 id="what-to-do-next">What to do next</h2>
-    <ol>
-      <li>Submit <code>https://ziaflow.com/sitemap-index.xml</code> directly in Search Console (the legacy <code>/sitemap.xml</code> URL returns a 404).</li>
-      <li>Consolidate service page internal linking from the header, footer, and <code>/services</code> hub to resolve internal keyword competition.</li>
-      <li>Optimize on-page metadata for <code>crm automation for small business arizona</code> and <code>lead follow up automation</code> on <code>/services/automation</code> to lift rankings from page 2 into page 1.</li>
-    </ol>
-
-    <h2 id="how-this-report-was-made">How this report was made</h2>
-    <p>Generated by the <a href="https://openseo.so/docs/skills/seo-report" target="_blank" rel="noopener">OpenSEO SEO Report skill</a>, run by Antigravity on October 23, 2026.</p>
-    <ul class="finding">
-      <li><b>Tools:</b> Supabase Search Console snapshot (<code>analytics_source_snapshots</code>), Supabase daily metric tables (<code>metrics_gsc_daily</code>, <code>metrics_ga4_daily</code>), and OpenSEO project data.</li>
-      <li><b>Verified:</b> Live HTTP response codes, XML sitemap endpoints, canonical tags, and robots meta tags verified against production <code>https://ziaflow.com</code>.</li>
-    </ul>
-
-  </article>
-</div>
-
-<footer>Prepared with OpenSEO. Data as of October 23, 2026.</footer>
-</div></body></html>
+  </body>
+</html>
