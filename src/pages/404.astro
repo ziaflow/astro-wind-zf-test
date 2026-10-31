@@ -7,7 +7,7 @@ export const prerender = true;
 ---
 
 <Layout title={notFoundPage.meta.title} description={notFoundPage.meta.description}>
-  <section class="shell flex min-h-[85dvh] flex-col justify-center py-32">
+  <section class="shell flex min-h-[85dvh] flex-col justify-center py-24 md:py-32">
     <p class="font-mono text-label text-signal uppercase">{notFoundPage.eyebrow}</p>
     <h1 class="mt-4 font-display text-hero font-extrabold tracking-[-0.04em] text-bone">
       {
@@ -18,10 +18,45 @@ export const prerender = true;
         ))
       }
     </h1>
-    <p class="mt-8 max-w-[40ch] text-lead text-mute">{notFoundPage.body}</p>
+    <p class="mt-8 max-w-[44ch] text-lead text-mute">{notFoundPage.body}</p>
     <div class="mt-10 flex flex-wrap gap-4">
       <Button label={notFoundPage.cta.label} href={notFoundPage.cta.href} />
       <Button label="Claim Free Audit" href="/audit" variant="outline" />
+      <Button label="Contact Engineering" href="/contact" variant="outline" />
+    </div>
+
+    <div class="mt-16 border-t border-line pt-12">
+      <p class="font-mono text-xs uppercase tracking-wider text-dim">Popular Destinations</p>
+      <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <a
+          href="/services"
+          class="group rounded-xl border border-line bg-ink-2 p-4 transition-colors hover:border-signal"
+        >
+          <div class="font-display font-semibold text-bone group-hover:text-signal transition-colors">Services →</div>
+          <p class="mt-1 text-xs text-mute">Custom web dev, SEO, PPC, and AI automation systems.</p>
+        </a>
+        <a
+          href="/growth-tools"
+          class="group rounded-xl border border-line bg-ink-2 p-4 transition-colors hover:border-signal"
+        >
+          <div class="font-display font-semibold text-bone group-hover:text-signal transition-colors">
+            Growth Tools →
+          </div>
+          <p class="mt-1 text-xs text-mute">Interactive estimators, lead follow-up, and stack audits.</p>
+        </a>
+        <a href="/blog" class="group rounded-xl border border-line bg-ink-2 p-4 transition-colors hover:border-signal">
+          <div class="font-display font-semibold text-bone group-hover:text-signal transition-colors">
+            Playbooks & Blog →
+          </div>
+          <p class="mt-1 text-xs text-mute">Actionable guides on CRO, Local Service Ads, and automation.</p>
+        </a>
+        <a href="/audit" class="group rounded-xl border border-line bg-ink-2 p-4 transition-colors hover:border-signal">
+          <div class="font-display font-semibold text-bone group-hover:text-signal transition-colors">
+            Free 48-Hr Audit →
+          </div>
+          <p class="mt-1 text-xs text-mute">Get a comprehensive teardown of speed, SEO, and conversion leaks.</p>
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
