@@ -1,71 +1,70 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Cloud Infrastructure & Managed Hosting',
-  description:
-    'Secure, resilient cloud architecture on AWS and Azure. Engineered for speed, strict compliance, and maximum uptime for growing applications.',
-};
-
-const serviceData = {
-  name: 'Cloud Solutions & Hosting',
-  description:
-    'Secure, scalable cloud environments on Azure and AWS. Architecting the digital foundation that ensures your business stays online.',
-  url: 'https://ziaflow.com/services/cloud',
-  image: 'https://ziaflow.com/assets/images/cloud-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Cloud Solutions"
-    title="Enterprise-Grade Infrastructure"
-    subtitle="As a Microsoft Partner, we don't just host websites; we architect secure, scalable cloud environments on Azure and AWS. Whether you need database migration, secure application hosting, or compliance-focused storage (HIPAA), we build the digital foundation that ensures your business stays online, secure, and ready to scale."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Our Expertise"
-    items={[
-      {
-        title: 'Azure & AWS Architects',
-        description: 'Certified experts designing robust cloud infrastructure.',
-        icon: 'tabler:cloud',
-      },
-      {
-        title: 'Secure Migration',
-        description: 'Move your data and applications safely to the cloud.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Compliance & Security',
-        description: 'HIPAA and SOC2 compliant configurations for sensitive data.',
-        icon: 'tabler:lock-check',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Ready to migrate?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Cloud Architecture, Supabase & Edge Infrastructure Phoenix | ZiaFlow"
+  description="Modern cloud infrastructure, Supabase database security, Vercel edge deployments, and cryptographic webhook engineering in Phoenix, AZ."
+  url="https://ziaflow.com/services/cloud"
+  eyebrow="Cloud & Edge Infrastructure · Vercel, Supabase & AWS"
+  heroLines={['Resilient cloud &', 'edge infrastructure.']}
+  heroIntro="We architect secure, zero-downtime cloud backends, row-level security Postgres databases, and edge APIs that keep your digital operations fast, compliant, and auditable."
+  deliverables={[
+    {
+      title: 'Supabase & PostgreSQL Security Hardening',
+      tag: 'Database Security',
+      description:
+        'Row-Level Security (RLS) policies, `security_invoker` views, encrypted Supabase Vault secrets, and atomic stored procedures.',
+    },
+    {
+      title: 'Edge Rate Limiting & Bot Defense',
+      tag: 'Protection',
+      description:
+        'Defense-in-depth IP rate limiting, HMAC webhook verification, replay-window checks, and automated spam filtering.',
+    },
+    {
+      title: 'Scheduled Cron & Serverless Pipelines',
+      tag: 'Automation',
+      description:
+        'Reliable `pg_cron` and Edge Function workers with daily quota caps, idempotency keys, and failure logging.',
+    },
+    {
+      title: 'Zero-Downtime CI/CD & Preview Environments',
+      tag: 'DevOps',
+      description:
+        'Automated GitHub + Vercel pipelines with isolated branch previews and regression checks before production deployment.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Review',
+      title: 'Security & Infrastructure Audit',
+      description: 'We inspect exposed keys, database grants, RLS policies, and API endpoints.',
+    },
+    {
+      step: 'Step 2 · Isolate',
+      title: 'Vault & Role Separation',
+      description: 'We move secrets into encrypted server vaults and restrict public table access.',
+    },
+    {
+      step: 'Step 3 · Automate',
+      title: 'CI/CD & Cron Hardening',
+      description: 'We add idempotency, rate limits, and automated health checks.',
+    },
+    {
+      step: 'Step 4 · Monitor',
+      title: 'Daily Telemetry Watchdog',
+      description: 'Automated monitoring alerts your team only when a real operational issue occurs.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Can you audit and secure our existing Supabase or cloud backend?',
+      answer:
+        'Yes. We frequently audit existing Postgres/Supabase projects to lock down permissive RLS policies, move API tokens into Supabase Vault, and make webhook endpoints idempotent.',
+    },
+  ]}
+  showRoiCalculator={false}
+/>

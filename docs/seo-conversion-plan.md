@@ -1,6 +1,6 @@
 # ZiaFlow SEO and conversion execution plan
 
-Updated October 22, 2026 (America/Phoenix).
+Updated October 28, 2026 (America/Phoenix) — Accelerated Day-by-Day Schedule.
 
 ## Business objective and boundaries
 
@@ -23,19 +23,19 @@ Keep the existing Astro/Tailwind website, Supabase evidence store, GitHub review
 - Current main source mixes web/marketing metadata with AI/enterprise hero content; it includes numerical performance and compliance claims requiring substantiation. A cached search-rendered version differs from current main/direct HTML: always verify the deployed version rather than trusting cached text.
 - GSC provider access is trial_full through October 27. The monitor must flag access restrictions before they silently stop refreshes.
 
-## Ordered work
+## Ordered work (Accelerated 5-Day Schedule)
 
 | Priority / window | Work                                                                                                                                                                                                                                                           | Acceptance evidence                                                                                                                                                                    | Owner                                       |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| P0 / first 2 days | Repair missing homepage CTA destination. Route the existing automation CTA to the real contact page with a clear service cue, or introduce a real accessible form section in a separate scoped change.                                                         | Live link reaches a real inquiry path on mobile and desktop; no missing fragment; QA submission saved once and excluded from business counts.                                          | Improvement agent, draft PR                 |
-| P0 / first week   | Finish measurement and follow-up verification. Connect read-only GA4 reporting; reconcile a tagged test journey; verify contact receipt, Customer.io identity/event, permitted welcome delivery, booking confirmation.                                         | Each stage has a timestamp and stable event ID; success means persisted acceptance, not button click. Test journeys stay separate. Activation remains under existing internal review.  | Jeremy + monitor                            |
-| P1 / week 1       | Align homepage title, description, H1, offer and next step around websites and lead follow-up for Arizona service businesses. Proposed primary CTA: Discuss your website and follow-up. Secondary: Explore the assessment, only if that tool is actually live. | One clear audience/outcome, accurate deliverable description, functional CTA, accessible mobile form. No invented response-time or budget promises.                                    | Researcher briefs; improvement agent drafts |
-| P1 / week 1       | Audit numerical claims, testimonials, client counts and compliance language against original evidence. Replace unsupported marketing claims with specific process/deliverable explanations through human review.                                               | Claim-to-source register; permission for client examples; no fabricated case studies, ratings, certifications or outcomes.                                                             | Jeremy, editorial review                    |
-| P1 / weeks 1–2    | Technical crawl of production: HTTP/www redirects, self canonicals, sitemap, robots, indexability, duplicate article slugs, broken internal links, schema accuracy, mobile navigation and form errors.                                                         | Record actual status/redirect chains, canonical tags and sitemap entries. Inspect duplicates before consolidating; preserve useful URLs with redirects if consolidation is warranted.  | Monitor + researcher                        |
-| P1 / weeks 2–3    | Refresh the Arizona automation article and related service page as a connected pair. Article answers workflow questions; service page explains the implementation offer.                                                                                       | Preserve existing URLs; demonstrate inquiry → CRM → follow-up → booking with exceptions, ownership and human review. Add relevant contextual internal links and a working inquiry CTA. | Researcher + improvement agent              |
-| P2 / weeks 3–4    | Refresh the Phoenix conversion checklist with practical messaging, trust, form and CTA checks. Connect it to the separate conversion checklist tool only after production QA.                                                                                  | Useful examples and actionable checks; service link; server-confirmed inquiry event; no forced meeting before delivering advertised value.                                             | Researcher + improvement agent              |
-| P2 / days 31–60   | Improve SEO service and web-development service pages based on actual query intent; add one verified implementation example with scope, method and limitations.                                                                                                | Query-to-page mapping, unique useful copy, accurate structured data and clear next step. Avoid near-identical city pages and bulk articles.                                            | Researcher                                  |
-| P3 / days 61–90   | Review matured search and funnel cohorts, keep supported improvements, and extend the best-performing offer/tool.                                                                                                                                              | Compare complete non-overlapping periods; include absolute counts, lead quality and changes shipped. No lift claim when sample is inconclusive.                                        | Jeremy + agents                             |
+| P0 / Day 1        | Repair missing homepage CTA destination. Route the existing automation CTA to the real contact page with a clear service cue, or introduce a real accessible form section in a separate scoped change.                                                         | Live link reaches a real inquiry path on mobile and desktop; no missing fragment; QA submission saved once and excluded from business counts.                                          | Improvement agent, draft PR                 |
+| P0 / Day 1        | Finish measurement and follow-up verification. Connect read-only GA4 reporting; reconcile a tagged test journey; verify contact receipt, Customer.io identity/event, permitted welcome delivery, booking confirmation.                                         | Each stage has a timestamp and stable event ID; success means persisted acceptance, not button click. Test journeys stay separate. Activation remains under existing internal review.  | Jeremy + monitor                            |
+| P1 / Day 2        | Align homepage title, description, H1, offer and next step around websites and lead follow-up for Arizona service businesses. Proposed primary CTA: Discuss your website and follow-up. Secondary: Explore the assessment, only if that tool is actually live. | One clear audience/outcome, accurate deliverable description, functional CTA, accessible mobile form. No invented response-time or budget promises.                                    | Researcher briefs; improvement agent drafts |
+| P1 / Day 2        | Audit numerical claims, testimonials, client counts and compliance language against original evidence. Replace unsupported marketing claims with specific process/deliverable explanations through human review.                                               | Claim-to-source register; permission for client examples; no fabricated case studies, ratings, certifications or outcomes.                                                             | Jeremy, editorial review                    |
+| P1 / Day 3        | Technical crawl of production: HTTP/www redirects, self canonicals, sitemap, robots, indexability, duplicate article slugs, broken internal links, schema accuracy, mobile navigation and form errors.                                                         | Record actual status/redirect chains, canonical tags and sitemap entries. Inspect duplicates before consolidating; preserve useful URLs with redirects if consolidation is warranted.  | Monitor + researcher                        |
+| P1 / Day 3        | Refresh the Arizona automation article and related service page as a connected pair. Article answers workflow questions; service page explains the implementation offer.                                                                                       | Preserve existing URLs; demonstrate inquiry → CRM → follow-up → booking with exceptions, ownership and human review. Add relevant contextual internal links and a working inquiry CTA. | Researcher + improvement agent              |
+| P2 / Day 4        | Refresh the Phoenix conversion checklist with practical messaging, trust, form and CTA checks. Connect it to the separate conversion checklist tool only after production QA.                                                                                  | Useful examples and actionable checks; service link; server-confirmed inquiry event; no forced meeting before delivering advertised value.                                             | Researcher + improvement agent              |
+| P2 / Day 4        | Improve SEO service and web-development service pages based on actual query intent; add one verified implementation example with scope, method and limitations.                                                                                                | Query-to-page mapping, unique useful copy, accurate structured data and clear next step. Avoid near-identical city pages and bulk articles.                                            | Researcher                                  |
+| P3 / Day 5        | Review search and funnel cohorts, keep supported improvements, and extend the best-performing offer/tool.                                                                                                                                                      | Compare complete non-overlapping periods; include absolute counts, lead quality and changes shipped. No lift claim when sample is inconclusive.                                        | Jeremy + agents                             |
 
 ## First content briefs
 
@@ -56,17 +56,17 @@ References:
 
 Use three business outcomes; operational diagnostics explain them.
 
-| KPI                           | Definition and source                                                                                                                                                                                       | Decision / limitation                                                                                            |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Qualified website inquiries   | Unique accepted, non-test inquiries manually confirmed as a service fit with a real need and agreed next step. Supabase receipt + qualification record; deduplicate repeat inquiries about one opportunity. | Weekly absolute count; do not use raw form count as quality. Qualification workflow still needed.                |
-| Inquiry-to-held-meeting rate  | Qualified inquiry cohort with a held meeting within 30 days / qualified inquiry cohort. Use booking and attendance outcomes, not calendar-link clicks.                                                      | Review matured cohorts monthly; zero denominator = unavailable. Meeting source still needed.                     |
-| Website-sourced paid projects | Unique website-sourced opportunities with signed scope and first cleared payment; show count and collected revenue separately.                                                                              | Ultimate commercial outcome. Do not attribute revenue from a form alone. Agreement/payment sources still needed. |
+| KPI                           | Definition and source                                                                                                                                                                                       | Decision / limitation                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Qualified website inquiries   | Unique accepted, non-test inquiries manually confirmed as a service fit with a real need and agreed next step. Supabase receipt + qualification record; deduplicate repeat inquiries about one opportunity. | Daily/rolling absolute count; do not use raw form count as quality. Qualification workflow still needed.        |
+| Inquiry-to-held-meeting rate  | Qualified inquiry cohort with a held meeting / qualified inquiry cohort. Use booking and attendance outcomes, not calendar-link clicks.                                                                     | Review rolling cohorts; zero denominator = unavailable. Meeting source still needed.                            |
+| Website-sourced paid projects | Unique website-sourced opportunities with signed scope and first cleared payment; show count and collected revenue separately.                                                                              | Ultimate commercial outcome. Do not attribute revenue from a form alone. Agreement/payment sources still needed.|
 
 Drivers: GSC relevant-query clicks and page CTR; confirmed non-test forms by source page; form starts/errors/accepted completions once instrumentation is verified. Session-to-lead rate requires aligned GA4 eligible sessions and accepted lead events in the same scope/timezone; until then show unavailable.
 
 Guardrails: qualified share of inquiries, persistence errors, spam/duplicate share, accessibility/mobile task completion, and unsubscribe/complaint signals when nurture is approved. Phone and booking clicks remain intent signals, not completed leads.
 
-Targets: week 1 aims for reliable test-path evidence and a prioritized baseline, not an invented conversion benchmark. By day 30 review the first complete comparable 28-day cohort and set numerical acquisition/qualification goals using capacity and observed counts. Revenue targets require offer value and close-rate evidence. No promise of a specific ranking or percentage lift.
+Targets: Day 1–2 aims for reliable test-path evidence and a prioritized baseline, not an invented conversion benchmark. By Day 5 review the complete execution checklist and set numerical acquisition/qualification goals using capacity and observed counts. Revenue targets require offer value and close-rate evidence. No promise of a specific ranking or percentage lift.
 
 ## Agent operating loop
 
@@ -82,16 +82,17 @@ GitHub stores source and reviews; Vercel provides isolated deployment previews f
 
 ## Change and measurement rules
 
-One small change per PR. Record commit/deployment date and which URL changed. Bug fixes need reproducible before/after checks. Copy/content changes use a frozen 28-day pre-change baseline and a complete 28-day post-change period after allowing search data to finalize; longer if traffic remains sparse. Avoid causal claims from uncontrolled before/after comparisons or overlapping windows. Do not split today's tiny traffic into A/B variants.
+One small change per PR. Record commit/deployment date and which URL changed. Bug fixes need reproducible before/after checks. Copy/content changes use a frozen pre-change baseline and a complete post-change period after allowing search data to finalize. Avoid causal claims from uncontrolled before/after comparisons or overlapping windows. Do not split today's tiny traffic into A/B variants.
 
 Required checks: repository build/check, relevant form/handler tests, desktop/mobile CTA and keyboard path, accepted/rejected form behavior, QA exclusion, no secret/PII in client scripts or findings. Roll back the isolated change if it breaks intake or navigation. Legal/compliance, pricing, consent, campaign activation and client claims remain human-reviewed.
 
-## Immediate handoff
+## Immediate handoff (Days 1–5)
 
-1. Queue missing #form destination as a functional repair.
-2. Complete GA4 and production nurture/booking measurement without treating those gaps as zero outcomes.
-3. Draft positioning and automation-page changes with evidence, not a wholesale redesign.
-4. Use the first weekly review to inspect delivered PRs and real inquiries, not agent activity counts.
+1. Day 1: Queue missing #form destination as a functional repair and verify GA4 / production nurture & booking measurement.
+2. Day 2: Ship positioning, claim audit, and automation-page changes with evidence.
+3. Day 3: Complete technical crawl, Kairo core image swaps, and Arizona automation article + service page connected pair.
+4. Day 4: Ship Phoenix conversion checklist refresh, interactive assessment/calculator, and SEO/web-dev service page updates.
+5. Day 5: Inspect delivered PRs, verified test journeys, and real inquiries.
 
 ## Rebuild and Sprint directive — October 23, 2026
 
@@ -106,15 +107,14 @@ This user-approved direction supersedes conflicting sequencing or positioning ab
 - Primary offer: Lead Capture & Follow-Up Sprint.
 - Preserve existing collectors, integrations and agent schedules.
 - Do not bulk-publish the 15 reported drafts; that count and the audited Sanity dataset have not been independently verified here.
-- Monday launch priority (October 26): working Kairo inquiry path, SEO/content parity, and tested existing integrations. Additional automation and content expansion follow.
+- Immediate launch priority: working Kairo inquiry path, SEO/content parity, and tested existing integrations within days. Additional automation and content expansion follow immediately in Days 3–5.
 
-### Mandatory content sequence
+### Mandatory content sequence (Days 1–5)
 
-1. Identify the audited Sanity project and dataset. Record project ID/name, Studio URL, dataset, schema and query perspective. The supplied audit reports no accessible projects in its session; this is not an independently verified current access result.
-2. Map every live URL to its actual content source, including all articles and all service pages, not only six. Inventory fields: URL/status, canonical, repository file or Sanity document/project/dataset/perspective, title, slug, intended Kairo template, replacement/redirect decision, images, claims evidence, reviewer and preview URL.
-3. Model service content for Kairo: audience, problem, deliverables, process, FAQs and working CTA. Inventory precedes service-page modeling.
-4. Reconcile posts individually: match live article to draft; inspect duplicates, preserve established slugs, flag missing images. Never infer that zero published Sanity documents means the live website has no content; repository files or another dataset may supply it.
-5. Provide a preview and publication checklist per approved page: metadata, canonical, internal links, images, supported claims, mobile/keyboard inquiry path and tested integrations. Missing servicePage documents alone do not endanger live service URLs; removing working pages before replacements are ready does.
+1. **Day 1:** Identify the audited Sanity project and dataset. Record project ID/name, Studio URL, dataset, schema and query perspective. Map every live URL to its actual content source, including all articles and all service pages, not only six. Inventory fields: URL/status, canonical, repository file or Sanity document/project/dataset/perspective, title, slug, intended Kairo template, replacement/redirect decision, images, claims evidence, reviewer and preview URL.
+2. **Day 2:** Model service content for Kairo: audience, problem, deliverables, process, FAQs and working CTA. Inventory precedes service-page modeling.
+3. **Day 3:** Reconcile posts individually: match live article to draft; inspect duplicates, preserve established slugs, flag missing images. Never infer that zero published Sanity documents means the live website has no content; repository files or another dataset may supply it.
+4. **Day 4–5:** Provide a preview and publication checklist per approved page: metadata, canonical, internal links, images, supported claims, mobile/keyboard inquiry path and tested integrations. Missing servicePage documents alone do not endanger live service URLs; removing working pages before replacements are ready does.
 
 Retain working pages until their replacements pass parity checks. Booking destination, company facts and final publishing reviewer remain unresolved; use claim-neutral drafts and retain the publication review gate.
 
@@ -153,7 +153,7 @@ Before pricing or scheduling a fixed-scope sale, define:
 - Revision limits and stabilization period.
 - Software costs, exclusions and ongoing support.
 
-Price and duration follow those boundaries. During the first 90 days track delivery hours, direct costs, defects and Jeremy's intervention time alongside commercial outcomes. Use evidence to decide what becomes a repeatable managed service or product.
+Price and duration follow those boundaries. Track delivery hours, direct costs, defects and Jeremy's intervention time daily alongside commercial outcomes. Use evidence to decide what becomes a repeatable managed service or product.
 
 ### Review and source references
 

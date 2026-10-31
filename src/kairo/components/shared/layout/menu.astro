@@ -1,0 +1,84 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import Media from '@/components/shared/ui/media.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { site } from '@/data/site';
+import { menuLinks } from '@/data/navbar';
+
+const previews: Record<string, string> = {
+  '/': '/images/product-reveal.jpg',
+  '/services': '/images/step-connect.jpg',
+  '/growth-tools': '/images/gallery-corridor.jpg',
+  '/pricing': '/images/capability-lights.jpg',
+  '/case-studies': '/images/story-halden.jpg',
+  '/audit': '/images/step-watch.jpg',
+  '/blog': '/images/journal-noise.jpg',
+  '/about': '/images/about-hero.jpg',
+  '/contact': '/images/gallery-desk.jpg',
+};
+---
+
+<div
+  id="menu"
+  class="invisible fixed inset-0 z-[65] bg-ink"
+  style="clip-path: circle(0% at 100% 0%)"
+  data-menu
+  aria-hidden="true"
+  data-lenis-prevent>
+  <div class="shell grid h-full grid-cols-1 gap-10 pt-24 pb-8 md:grid-cols-12 overflow-y-auto">
+    <nav aria-label="Menu" class="flex flex-col justify-between md:col-span-7">
+      <ul class="flex flex-col">
+        {menuLinks.map((link) => (
+          <li class="overflow-hidden">
+            <a
+              href={link.href}
+              class="group flex items-baseline gap-4 py-1 font-display text-[clamp(2.25rem,8vw,4.5rem)] leading-[1.05] font-bold tracking-[-0.04em] text-bone hover:text-signal transition-colors"
+              data-menu-link
+              data-preview={link.href}
+              data-label={link.label}>
+              <TextRoll text={link.label} />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="my-4 pt-4 border-t border-line flex flex-wrap gap-3">
+        <a
+          href="tel:+16028344239"
+          class="inline-flex items-center gap-3 rounded-full border border-line-strong bg-ink-2 px-5 py-3 text-sm font-mono font-bold text-bone hover:border-signal hover:text-signal transition-all"
+          aria-label="Direct phone call (602) 834-4239"
+        >
+          <span class="size-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>📞 (602) 834-4239</span>
+        </a>
+        <a
+          href="/audit"
+          class="inline-flex items-center gap-2 rounded-full bg-signal px-5 py-3 text-sm font-semibold text-bone hover:bg-signal-dark transition-all"
+        >
+          <span>Claim Free 48-Hr Audit →</span>
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center gap-3" data-menu-meta>
+        {site.socials.map((social) => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={`${site.name} on ${social.label}`}
+            class="grid size-11 place-items-center rounded-full border border-line text-mute transition-colors duration-300 hover:border-bone hover:text-bone">
+            <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="size-5" />
+          </a>
+        ))}
+        <a href={`mailto:${site.email}`} class="group ml-auto text-sm text-mute hover:text-bone">
+          <TextRoll text={site.email} />
+        </a>
+      </div>
+    </nav>
+    <div class="relative hidden md:col-span-5 md:block" data-menu-preview>
+      {Object.entries(previews).map(([href, src], i) => (
+        <div class="absolute inset-0" style={`opacity:${i === 0 ? 1 : 0}`} data-menu-image={href}>
+          <Media src={src} alt="" reveal={false} class="size-full" sizes="40vw" />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

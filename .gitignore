@@ -38,6 +38,8 @@ pnpm-lock.yaml
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/.playwright-mcp/
+*-screenshot.png
 /playwright/.auth/
 
 .vercel/

@@ -1,6 +1,6 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
+import { getStaticPathsBlogCategory } from '~/utils/blog';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
@@ -23,8 +23,8 @@ const metadata = {
   title: `Category '${category.title}' ${currentPage > 1 ? ` - Page ${currentPage}` : ''}`,
   description: `Browse in-depth articles, case studies, and actionable insights on ${category.title} from ZiaFlow.`,
   robots: {
-    index: blogCategoryRobots?.index,
-    follow: blogCategoryRobots?.follow,
+    index: false,
+    follow: true,
   },
 };
 ---

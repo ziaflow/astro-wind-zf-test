@@ -1,6 +1,6 @@
 import slugify from 'limax';
 
-import { SITE, APP_BLOG } from 'astrowind:config';
+import { SITE, APP_BLOG } from '~/config/site';
 
 import { trim } from '~/utils/utils';
 
@@ -47,7 +47,9 @@ export const getPermalink = (slug = '', type = 'page'): string => {
     slug.startsWith('http://') ||
     slug.startsWith('://') ||
     slug.startsWith('#') ||
-    slug.startsWith('javascript:')
+    slug.startsWith('javascript:') ||
+    slug.startsWith('vbscript:') ||
+    slug.startsWith('data:')
   ) {
     return slug;
   }

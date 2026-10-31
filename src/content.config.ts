@@ -65,6 +65,39 @@ const postCollection = defineCollection({
   }),
 });
 
+const customersCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/kairo/data/customers' }),
+  schema: z.object({
+    order: z.number(),
+    client: z.string(),
+    industry: z.string(),
+    title: z.string(),
+    summary: z.string(),
+    cover: z.string(),
+    gallery: z.array(z.string()).length(2),
+    year: z.string(),
+    team: z.string(),
+    results: z.array(z.object({ value: z.string(), label: z.string() })).length(3),
+    quote: z.object({ text: z.string(), name: z.string(), role: z.string() }),
+  }),
+});
+
+const journalCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/kairo/data/journal' }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    category: z.string(),
+    date: z.string(),
+    readTime: z.string(),
+    cover: z.string(),
+    author: z.object({ name: z.string(), role: z.string(), image: z.string() }),
+    featured: z.boolean().optional(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  customers: customersCollection,
+  journal: journalCollection,
 };

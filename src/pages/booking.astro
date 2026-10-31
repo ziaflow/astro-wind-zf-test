@@ -1,37 +1,29 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from '@/layouts/layout.astro';
+import PageHero from '@/components/shared/page-hero.astro';
 import BookingFrame from '~/components/common/BookingFrame.astro';
-import AuditBookingForm from '~/components/widgets/AuditBookingForm.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
 
-const metadata = {
-  title: 'Book a Strategy Session | ZiaFlow',
-  description:
-    'Schedule a free strategy session with ZiaFlow. Book via calendar or request a complimentary 48-hour video growth audit.',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <section class="px-4 py-16 mx-auto max-w-5xl sm:px-6 lg:px-8">
-    <div class="mb-10 text-center">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-secondary mb-4">Book Instantly</p>
-      <h1 class="text-4xl font-bold font-heading mb-4">Schedule Your Call with ZiaFlow</h1>
-      <p class="text-lg text-muted">
-        Use the embedded calendar below to select a time that fits your schedule, or request an asynchronous video audit below.
-      </p>
-    </div>
+<Layout
+  title="Book a Strategy Session | Phoenix Web & Automation Engineering | ZiaFlow"
+  description="Schedule a live 30-minute strategy session with ZiaFlow in Phoenix, AZ, or request a complimentary 48-hour forensic video audit."
+>
+  <PageHero
+    lines={['Book your strategy', 'session live.']}
+    accent={1}
+    intro="Pick a time on our Phoenix engineering calendar below to review your website, lead capture pipeline, and automation scope—or request an asynchronous 10-minute forensic video audit."
+  />
 
-    <BookingFrame />
-
-    <div class="mt-20 pt-16 border-t border-slate-200 dark:border-slate-800">
-      <div class="text-center mb-8">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-2">No Meeting Required</p>
-        <h2 class="text-3xl font-bold font-heading mb-3">Prefer an Asynchronous Video Audit?</h2>
-        <p class="text-muted max-w-2xl mx-auto">
-          Share your website and business objectives below. We will record a personalized forensic video audit analyzing your site speed, SEO visibility, and conversion leaks within 48 hours.
-        </p>
-      </div>
-
-      <AuditBookingForm />
+  <section class="shell pb-24 md:pb-32" aria-label="Calendar booking">
+    <div class="rounded-2xl border border-line bg-ink-2/80 p-4 sm:p-8">
+      <BookingFrame />
     </div>
   </section>
+
+  <AuditSection />
+  <SalesForm />
 </Layout>

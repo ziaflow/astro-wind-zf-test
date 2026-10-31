@@ -1,57 +1,74 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Review Management & Reputation | ZiaFlow',
-  description: 'Automated review requests and reputation management for service businesses.',
-};
-
-const serviceData = {
-  name: 'Review Management & Reputation',
-  description:
-    'Automated review requests and reputation management for service businesses. We help you systematically collect genuine client feedback.',
-  url: 'https://ziaflow.com/services/review-management',
-  image: 'https://ziaflow.com/assets/images/review-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Review Management"
-    title="Automated Social Proof"
-    subtitle="Reputation is a currency. We implement automated workflows that request reviews via SMS and email immediately after service completion, drastically increasing your review volume. We help you build a strong foundation of client feedback that improves your local SEO and provides the social proof necessary to close new leads."
-    actions={[{ variant: 'primary', text: 'Book Consultation', href: '/contact', icon: 'tabler:calendar' }]}
-  />
-
-  <Features
-    title="Build Trust on Autopilot"
-    items={[
-      {
-        title: 'Automated Requests',
-        description: 'Send review requests via SMS/Email instantly after a job.',
-        icon: 'tabler:send',
-      },
-      {
-        title: 'Review Monitoring',
-        description: 'Get notified of new reviews so you can respond quickly.',
-        icon: 'tabler:eye',
-      },
-      {
-        title: 'Sentiment Analysis',
-        description: 'Understand customer feedback at a glance.',
-        icon: 'tabler:mood-smile',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Get more 5-star reviews."
-    actions={[{ variant: 'primary', text: 'Contact Us', href: '/contact' }]}
-  />
-</Layout>
+<KairoServicePage
+  title="Review & Reputation Management Phoenix | ZiaFlow"
+  description="Automate Google and Yelp review collection for your Phoenix business. Turn completed jobs into 5-star reviews with SMS and email follow-up."
+  url="https://ziaflow.com/services/review-management"
+  eyebrow="Reputation Automation · Google & Local Trust"
+  heroLines={['Turn completed jobs', 'into 5-star proof.']}
+  heroIntro="Your happiest customers rarely remember to leave a review unless you make it effortless. We wire automated SMS and email review requests directly into your job-completion workflow."
+  deliverables={[
+    {
+      title: 'Automated Post-Service SMS & Email Requests',
+      tag: 'Velocity',
+      description:
+        'Triggered automatically when a job or consultation is marked complete in your CRM, delivering a one-tap direct Google review link.',
+    },
+    {
+      title: 'Smart Reminder & Follow-Up Sequence',
+      tag: 'Completion',
+      description:
+        'Polite, timed follow-up nudges for busy customers who didn’t click the first text, maximizing review conversion without annoyance.',
+    },
+    {
+      title: 'Internal Service Recovery Triage',
+      tag: 'Quality Control',
+      description:
+        'Immediate internal alerts if a customer reports an issue so your operations manager can resolve concerns promptly and professionally.',
+    },
+    {
+      title: 'On-Site Review Schema & Proof Widgets',
+      tag: 'Conversion',
+      description:
+        'Displaying verified operator testimonials and structured rating markup across your key service pages to lift conversion rates.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Connect',
+      title: 'CRM Trigger Setup',
+      description: 'We connect your invoice or job-completion status to our review dispatch webhook.',
+    },
+    {
+      step: 'Step 2 · Craft',
+      title: 'Frictionless SMS Templates',
+      description: 'We configure direct-to-Google review links that open in one tap on iOS and Android.',
+    },
+    {
+      step: 'Step 3 · Automate',
+      title: 'Sequence & Alerts',
+      description: 'We activate the initial request, 48-hour gentle reminder, and staff notification alerts.',
+    },
+    {
+      step: 'Step 4 · Amplify',
+      title: 'Map Pack & On-Page Lift',
+      description: 'Consistent review velocity strengthens both your Google Business Profile and LSA rank.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Why does review velocity matter so much for Phoenix SEO and LSAs?',
+      answer:
+        'Google evaluates not just your total review count, but how recently and consistently customers review your business—and whether those reviews mention your specific services and city.',
+    },
+    {
+      question: 'Does this require our technicians to manually text customers?',
+      answer:
+        'No. Once a job is marked completed in your dispatch system or CRM, the workflow runs automatically in the background.',
+    },
+  ]}
+/>

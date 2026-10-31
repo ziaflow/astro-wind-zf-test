@@ -1,4 +1,4 @@
-import { I18N } from 'astrowind:config';
+import { I18N } from '~/config/site';
 
 export const BUSINESS_PHONE = {
   raw: '+16028344239',

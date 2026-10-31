@@ -36,16 +36,28 @@ const { post, url } = Astro.props;
             </a>
           )
         }
-        <div class="flex items-center text-sm text-muted dark:text-slate-400 gap-1.5">
-          <Icon name="tabler:calendar" class="w-4 h-4 inline-block -mt-0.5" />
-          <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+        <div class="flex flex-wrap items-center text-sm text-muted dark:text-slate-400 gap-x-3 gap-y-1">
+          <span class="inline-flex items-center gap-1">
+            <Icon name="tabler:calendar" class="w-4 h-4 inline-block -mt-0.5" />
+            <span>Published:</span>
+            <time datetime={new Date(post.publishDate).toISOString()}>{getFormattedDate(post.publishDate)}</time>
+          </span>
+          {
+            post.updateDate && (
+              <span class="inline-flex items-center gap-1 text-primary dark:text-blue-400 font-medium">
+                <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5" />
+                <span>Updated:</span>
+                <time datetime={new Date(post.updateDate).toISOString()}>{getFormattedDate(post.updateDate)}</time>
+              </span>
+            )
+          }
           {
             post.author && (
-              <>
+              <span class="inline-flex items-center gap-1">
                 <span>·</span>
                 <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5" />
                 <span>{post.author}</span>
-              </>
+              </span>
             )
           }
         </div>

@@ -1,21 +1,54 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import { sanityClient } from 'sanity:client';
-import { createImageUrlBuilder } from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url';
 import { PortableText } from 'astro-portabletext';
+import type { PortableTextBlock } from '@portabletext/types';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
-  const SLUGS_QUERY = `*[_type == "post" && defined(slug.current) && publishedAt <= now()]{
-    "params": {"slug": slug.current}
-  }`;
-  return await sanityClient.fetch(SLUGS_QUERY);
+  try {
+    const posts = await sanityClient.fetch(
+      `*[_type == "post" && defined(slug.current) && publishedAt <= now()]{ "slug": slug.current }`
+    );
+    return posts.map(({ slug }: { slug: string }) => ({
+      params: { slug },
+    }));
+  } catch (err) {
+    console.warn(
+      '[posts/[slug]] Sanity getStaticPaths skipped during build:',
+      err instanceof Error ? err.message : err
+    );
+    return [];
+  }
 }
 
 const { slug } = Astro.params;
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug && publishedAt <= now()][0]`;
-const post = await sanityClient.fetch(POST_QUERY, { slug });
+interface SanityPost {
+  title?: string;
+  excerpt?: string;
+  seoDescription?: string;
+  mainImage?: SanityImageSource;
+  publishedAt?: string;
+  _updatedAt?: string;
+  body?: PortableTextBlock | PortableTextBlock[];
+  author?: {
+    name?: string;
+    role?: string;
+    image?: string;
+  };
+  [key: string]: unknown;
+}
+
+let post: SanityPost | null = null;
+try {
+  post = await sanityClient.fetch(POST_QUERY, { slug });
+} catch {
+  post = null;
+}
 
 if (!post) {
   return Astro.redirect('/404');
@@ -27,15 +60,49 @@ const urlFor = (source: SanityImageSource) =>
 
 const postImageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1200).height(675).url() : null;
 
-const metadata = {
+const metadata: { title?: string; description?: string } = {
   title: post.title,
+  description: typeof post.seoDescription === 'string' ? post.seoDescription : undefined,
+};
+
+const publishDateIso = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined;
+const updateDateIso = post._updatedAt ? new Date(post._updatedAt).toISOString() : publishDateIso;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://ziaflow.com').toString();
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  headline: post.title,
   description: post.seoDescription,
+  ...(postImageUrl ? { image: [postImageUrl] } : {}),
+  datePublished: publishDateIso,
+  dateModified: updateDateIso,
+  author: {
+    '@type': 'Person',
+    name: post.author?.name || 'ZiaFlow Team',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ziaflow.com/favicon.svg',
+    },
+  },
 };
 ---
 
 <Layout metadata={metadata}>
-  <main class="container mx-auto px-6 py-12 max-w-3xl">
-    <a href="/posts" class="inline-block mb-6 text-primary hover:underline">&larr; Back to posts</a>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <section class="shell py-16 max-w-3xl mx-auto">
+    <a href="/blog" class="inline-block mb-6 font-mono text-xs uppercase text-signal hover:underline"
+      >&larr; Back to articles</a
+    >
 
     <article>
       {
@@ -49,14 +116,29 @@ const metadata = {
           />
         )
       }
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-      <p class="text-gray-500 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-        Published on {new Date(post.publishedAt).toLocaleDateString()}
-      </p>
+      <h1 class="font-display text-4xl md:text-5xl font-bold text-bone mb-4 leading-tight">{post.title}</h1>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-mute mb-8 pb-8 border-b border-line">
+        <span class="inline-flex items-center gap-1">
+          <span>Published:</span>
+          {
+            publishDateIso && post.publishedAt && (
+              <time datetime={publishDateIso}>{new Date(post.publishedAt).toLocaleDateString()}</time>
+            )
+          }
+        </span>
+        {
+          post._updatedAt && post._updatedAt !== post.publishedAt && (
+            <span class="inline-flex items-center gap-1 text-signal font-medium">
+              <span>Updated:</span>
+              <time datetime={updateDateIso}>{new Date(post._updatedAt).toLocaleDateString()}</time>
+            </span>
+          )
+        }
+      </div>
 
-      <div class="prose prose-lg dark:prose-invert max-w-none">
-        {Array.isArray(post.body) && <PortableText value={post.body} />}
+      <div class="prose-kairo max-w-none">
+        {post.body && <PortableText value={post.body} />}
       </div>
     </article>
-  </main>
+  </section>
 </Layout>

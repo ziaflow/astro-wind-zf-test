@@ -4,6 +4,16 @@ node_modules
 .changeset
 .vercel
 .agent
-src/components/common/Analytics.astro
+.agents
+agents
+docs
+report.html
+astro-wind-zf-test
+outputs
+studio-gemini-blog
 studio-gemini-blog/.sanity
+src/components/common/Analytics.astro
+src/kairo
+src/data/post-generated
+src/data/post
 .vscode/tasks.json

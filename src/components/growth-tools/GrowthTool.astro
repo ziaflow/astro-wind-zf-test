@@ -1,0 +1,736 @@
+---
+import { getTool } from '~/lib/growth-tools/engine.mjs';
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+const tool = getTool(slug)!;
+---
+
+<section class="growth-tool" data-growth-tool={slug}>
+  <a href="/growth-tools" class="back-link">← All business tools</a>
+  <header>
+    <p class="eyebrow">ZIAFLOW / BUSINESS CLARITY</p><h1>{tool.title}</h1><p class="intro">{tool.intro}</p><p
+      class="subnote"
+    >
+      No email required to view or download your results.
+    </p>
+  </header>
+  <div class="tool-grid">
+    <form id="assessment-form">
+      {
+        tool.kind === 'estimate' ? (
+          <fieldset>
+            <legend>Build your planning scenario</legend>
+            <label>
+              Pages <input type="number" name="pages" min="1" max="100" step="1" value="5" required />
+            </label>
+            <label>
+              Integrations <input type="number" name="integrations" min="0" max="20" step="1" value="0" required />
+            </label>
+            <label>
+              Languages <input type="number" name="languages" min="1" max="10" step="1" value="1" required />
+            </label>
+            <label>
+              Content{' '}
+              <select name="content">
+                <option value="ready">Ready to use</option>
+                <option value="editing">Needs editing</option>
+                <option value="writing">Needs writing</option>
+              </select>
+            </label>
+            <label>
+              Planning hourly assumption (USD){' '}
+              <input type="number" name="rate" min="25" max="300" step="1" value="100" required />
+            </label>
+            <p class="hint">This assumption is editable. It is not ZiaFlow's approved price list.</p>
+            <label class="check">
+              <input type="checkbox" name="commerce" /> Commerce setup
+            </label>
+            <label class="check">
+              <input type="checkbox" name="migration" /> Existing-site migration
+            </label>
+          </fieldset>
+        ) : (
+          <>
+            <p class="notice">
+              Guided self-assessment. We do not scan your site, access your CRM, or measure search rankings here.
+              Unknown answers are excluded from the readiness score.
+            </p>
+            {tool.kind === 'local' && (
+              <fieldset>
+                <legend>Business context</legend>
+                <label>
+                  Business name <input name="business" maxlength="160" placeholder="e.g. Desert Peak Mechanical" />
+                </label>
+                <label>
+                  City / service area <input name="city" maxlength="120" placeholder="e.g. Phoenix, AZ" />
+                </label>
+                <label>
+                  Main service <input name="service" maxlength="160" placeholder="e.g. Commercial HVAC Repair" />
+                </label>
+                <p>
+                  <a id="local-search" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">
+                    Open Maps to check your business ↗
+                  </a>
+                </p>
+                <p class="hint">
+                  Search results vary by location and time. Save observations in the evidence notes below.
+                </p>
+              </fieldset>
+            )}
+            {tool.questions.map(([id, label, , , , evidence], i) => (
+              <fieldset>
+                <legend>
+                  {i + 1}. {label}
+                </legend>
+                <p class="hint">{evidence}</p>
+                <label>
+                  Assessment{' '}
+                  <select name={String(id)}>
+                    <option value="">Choose an answer</option>
+                    <option value="yes">Yes</option>
+                    <option value="partly">Partly</option>
+                    <option value="no">No</option>
+                    <option value="unknown">Not sure</option>
+                    <option value="na">Not applicable</option>
+                  </select>
+                </label>
+                <label>
+                  Evidence / observation (optional)
+                  <textarea name={'note_' + id} maxlength="600" rows="2" placeholder="What did you check, and when?" />
+                </label>
+              </fieldset>
+            ))}
+            {tool.kind === 'stack' && (
+              <fieldset>
+                <legend>Your software inventory</legend>
+                <p class="hint">
+                  Add up to 20 tools. Enter monthly costs and weekly manual handoff hours without double-counting tasks.
+                </p>
+                <div id="stack-rows" />
+                <button type="button" id="add-tool">
+                  + Add software
+                </button>
+              </fieldset>
+            )}
+          </>
+        )
+      }
+      <div class="form-actions">
+        <button class="primary" type="submit" disabled>Show my results</button>
+        <button type="button" id="reset-tool">Clear this assessment</button>
+      </div>
+    </form>
+    <aside>
+      <section id="results" tabindex="-1" aria-label="Your results">
+        <h2>Your next steps</h2><p class="hint">
+          Complete the questions to see your results. Your answers stay in this browser tab until you clear them or
+          close the tab.
+        </p>
+      </section>
+      <p role="status" id="tool-status" aria-live="polite"></p>
+      <div id="result-actions" hidden>
+        <div class="action-buttons">
+          <button type="button" id="download-result">Download report (JSON)</button>
+          <button type="button" id="print-result">Print / save PDF</button>
+        </div>
+        <form id="review-form">
+          <h2>{tool.cta}</h2><p class="hint">
+            Share this assessment for a human review. We will use your email to respond to this request.
+          </p>
+          <label>Name <input name="name" autocomplete="name" maxlength="120" required /></label>
+          <label>Email <input type="email" name="email" autocomplete="email" maxlength="254" required /></label>
+          <label>Company <input name="company" autocomplete="organization" maxlength="200" /></label>
+          <label
+            >Website (optional) <input name="url" type="url" placeholder="https://example.com" maxlength="500" /></label
+          >
+          <label>What would you like help with?<textarea name="goal" maxlength="1500" rows="3"></textarea></label>
+          <label class="check"
+            ><input name="marketing" type="checkbox" /> Also send me occasional ZiaFlow advice and service updates. I can
+            unsubscribe.</label
+          >
+          <label class="trap" aria-hidden="true">Leave empty<input name="fax" tabindex="-1" autocomplete="off" /></label
+          >
+          <p class="hint"><a href="/privacy">Privacy policy</a></p>
+          <button class="primary" type="submit">Request a review</button><p
+            role="status"
+            id="review-status"
+            aria-live="polite"
+          >
+          </p>
+        </form>
+      </div>
+    </aside>
+  </div>
+  <noscript>These interactive tools require JavaScript. Contact ZiaFlow for a guided review.</noscript>
+</section>
+<script>
+  import { getTool, assess, estimate, stackSummary, VERSION } from '~/lib/growth-tools/engine.mjs';
+  const root = document.querySelector<HTMLElement>('[data-growth-tool]');
+  if (root) {
+    const slug = root.dataset.growthTool!;
+    const tool = getTool(slug)!;
+    const form = root.querySelector<HTMLFormElement>('#assessment-form')!;
+    const review = root.querySelector<HTMLFormElement>('#review-form')!;
+    const results = root.querySelector<HTMLElement>('#results')!;
+    const status = root.querySelector<HTMLElement>('#tool-status')!;
+    const key = 'zf-growth:' + VERSION + ':' + slug;
+    type AssessmentReport = ReturnType<typeof assess> & { inventory?: ReturnType<typeof stackSummary> };
+    type ToolReport = ReturnType<typeof estimate> | AssessmentReport;
+    let report: ToolReport | null = null,
+      snapshot: Record<string, unknown> | null = null,
+      requestId = crypto.randomUUID(),
+      dirty = true;
+    const money = (n: number) =>
+      new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+    const node = (tag: string, text: string, parent: HTMLElement = results) => {
+      const el = document.createElement(tag);
+      el.textContent = text;
+      parent.append(el);
+      return el;
+    };
+    const readRows = () =>
+      Array.from(root.querySelectorAll<HTMLElement>('.stack-row')).map((row) => ({
+        name: row.querySelector<HTMLInputElement>('[data-name]')!.value,
+        function: row.querySelector<HTMLInputElement>('[data-function]')!.value,
+        cost: Number(row.querySelector<HTMLInputElement>('[data-cost]')!.value),
+        hours: Number(row.querySelector<HTMLInputElement>('[data-hours]')!.value),
+      }));
+    const addRow = (data: Record<string, string | number> = {}) => {
+      const target = root.querySelector<HTMLElement>('#stack-rows');
+      if (!target || target.children.length >= 20) return;
+      const row = document.createElement('div');
+      row.className = 'stack-row';
+      for (const [label, attr, type, max] of [
+        ['Software name', 'name', 'text', '100'],
+        ['Primary purpose', 'function', 'text', '80'],
+        ['Monthly USD cost', 'cost', 'number', '100000'],
+        ['Manual handoff hours / week', 'hours', 'number', '168'],
+      ]) {
+        const lab = document.createElement('label');
+        lab.textContent = label;
+        const input = document.createElement('input');
+        input.type = type;
+        input.dataset[attr] = '';
+        if (type === 'number') {
+          input.min = '0';
+          input.max = max;
+          input.step = '0.25';
+          input.value = String(data[attr] ?? 0);
+        } else {
+          input.maxLength = Number(max);
+          input.value = String(data[attr] ?? '');
+        }
+        lab.append(input);
+        row.append(lab);
+      }
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.textContent = 'Remove software';
+      remove.onclick = () => {
+        row.remove();
+        invalidate();
+        save();
+      };
+      row.append(remove);
+      target.append(row);
+    };
+    const save = () => {
+      try {
+        sessionStorage.setItem(
+          key,
+          JSON.stringify({ fields: Object.fromEntries(new FormData(form)), rows: readRows() })
+        );
+      } catch {
+        /* Storage is optional. */
+      }
+    };
+    const invalidate = () => {
+      dirty = true;
+      report = null;
+      root.querySelector<HTMLElement>('#result-actions')!.hidden = true;
+      status.textContent = 'Answers changed. Show results again to update your report.';
+    };
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(key) || 'null');
+      if (saved) {
+        for (const [name, value] of Object.entries(saved.fields)) {
+          const el = form.elements.namedItem(name);
+          if (el instanceof HTMLInputElement) {
+            if (el.type === 'checkbox') el.checked = value === 'on';
+            else el.value = String(value);
+          } else if (el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement) el.value = String(value);
+        }
+        for (const row of saved.rows || []) addRow(row);
+      }
+    } catch {
+      /* Ignore unavailable or obsolete storage. */
+    }
+    root.querySelector('#add-tool')?.addEventListener('click', () => {
+      addRow();
+      invalidate();
+      save();
+    });
+    form.addEventListener('input', () => {
+      invalidate();
+      save();
+    });
+    form.addEventListener('change', () => {
+      if (tool.kind === 'local') {
+        const data = new FormData(form);
+        const link = root.querySelector<HTMLAnchorElement>('#local-search')!;
+        link.href =
+          'https://www.google.com/maps/search/?api=1&query=' +
+          encodeURIComponent([data.get('business'), data.get('city'), data.get('service')].filter(Boolean).join(' '));
+      }
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      try {
+        const data = new FormData(form);
+        const fields = Object.fromEntries(data);
+        snapshot =
+          tool.kind === 'estimate'
+            ? {
+                pages: Number(data.get('pages')),
+                integrations: Number(data.get('integrations')),
+                languages: Number(data.get('languages')),
+                rate: Number(data.get('rate')),
+                content: String(data.get('content')),
+                commerce: data.has('commerce'),
+                migration: data.has('migration'),
+              }
+            : {
+                answers: Object.fromEntries(tool.questions.map(([id]) => [id, String(data.get(String(id)) || '')])),
+                notes: Object.fromEntries(tool.questions.map(([id]) => [id, String(data.get('note_' + id) || '')])),
+                context: { business: fields.business || '', city: fields.city || '', service: fields.service || '' },
+                rows: readRows(),
+              };
+        report =
+          tool.kind === 'estimate'
+            ? estimate(snapshot)
+            : {
+                ...assess(slug, snapshot.answers as Record<string, string>),
+                ...(tool.kind === 'stack'
+                  ? { inventory: stackSummary(snapshot.rows as ReturnType<typeof readRows>) }
+                  : {}),
+              };
+        results.replaceChildren();
+        node('h2', tool.title + ' — results');
+        if ('low' in report) {
+          node('h3', money(report.low) + ' – ' + money(report.high));
+          node(
+            'p',
+            report.weeksLow + '–' + report.weeksHigh + ' indicative weeks • ' + report.hours + ' planning hours'
+          );
+          for (const item of report.breakdown) if (item.hours) node('p', item.label + ': ' + item.hours + ' hours');
+          node('p', report.disclaimer);
+          for (const text of report.exclusions) node('p', text);
+        } else {
+          node(
+            'h3',
+            report.score === null
+              ? 'More evidence needed'
+              : (report.complete ? 'Self-reported readiness: ' : 'Provisional readiness: ') + report.score + '/100'
+          );
+          node(
+            'p',
+            report.assessed +
+              ' of ' +
+              report.total +
+              ' checks assessed (' +
+              report.coverage +
+              '% coverage). Not sure and not applicable answers do not count as failures.'
+          );
+          node('h3', 'Start here');
+          if (!report.priorities.length)
+            node(
+              'p',
+              report.score === null
+                ? 'Verify the unknown checks before drawing a conclusion.'
+                : 'No gaps were reported in assessed checks. Verify the evidence before treating these as confirmed strengths.'
+            );
+          for (const item of report.priorities) {
+            node('h4', String(item.label));
+            node('p', String(item.fix));
+          }
+          if (report.unknown.length) {
+            node('h3', 'Needs verification');
+            for (const item of report.unknown) node('p', item.label + ': ' + item.evidence);
+          }
+          if (report.inventory) {
+            node('h3', 'Inventory review');
+            node(
+              'p',
+              money(report.inventory.monthlyCost) +
+                '/month listed; ' +
+                report.inventory.manualHoursPerWeek +
+                ' manual hours/week entered.'
+            );
+            for (const group of report.inventory.overlapCandidates)
+              node('p', 'Review overlap in ' + group.purpose + ': ' + group.names.join(', '));
+            node('p', report.inventory.note);
+          }
+          node('p', 'This checklist does not predict rankings, conversion lift, lost revenue, or sales.');
+        }
+        node('p', 'Service fit: ' + tool.service);
+        dirty = false;
+        requestId = crypto.randomUUID();
+        root.querySelector<HTMLElement>('#result-actions')!.hidden = false;
+        status.textContent = 'Results ready. You can download them without sharing contact details.';
+        results.focus();
+        save();
+      } catch {
+        status.textContent = 'Check the values entered and try again.';
+      }
+    });
+    root.querySelector('#reset-tool')!.addEventListener('click', () => {
+      form.reset();
+      root.querySelector('#stack-rows')?.replaceChildren();
+      try {
+        sessionStorage.removeItem(key);
+      } catch {
+        /* Optional browser storage. */
+      }
+      invalidate();
+      results.replaceChildren();
+      node('h2', 'Assessment cleared');
+      review.reset();
+    });
+    root.querySelector('#print-result')!.addEventListener('click', () => window.print());
+    root.querySelector('#download-result')!.addEventListener('click', () => {
+      if (!report || dirty) return;
+      const blob = new Blob(
+        [
+          JSON.stringify(
+            { title: tool.title, createdAt: new Date().toISOString(), input: snapshot, result: report },
+            null,
+            2
+          ),
+        ],
+        { type: 'application/json' }
+      );
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = slug + '-report.json';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    form.querySelector<HTMLButtonElement>('button[type=submit]')!.disabled = false;
+    review.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const output = root.querySelector<HTMLElement>('#review-status')!;
+      if (!report || dirty) {
+        output.textContent = 'Update your results before requesting a review.';
+        return;
+      }
+      if (!review.reportValidity()) return;
+      const fields = Object.fromEntries(new FormData(review));
+      const button = review.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      button.disabled = true;
+      output.textContent = 'Saving your request…';
+      try {
+        const response = await fetch('/api/growth-tools/intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: requestId,
+            tool: slug,
+            input: snapshot,
+            name: fields.name,
+            email: fields.email,
+            company: fields.company,
+            url: fields.url,
+            goal: fields.goal,
+            marketingConsent: fields.marketing === 'on',
+            fax: fields.fax,
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error();
+        const win = window as unknown as {
+          dataLayer?: Record<string, unknown>[];
+          gtag?: (...args: unknown[]) => void;
+        };
+        if (win.dataLayer) {
+          win.dataLayer.push({
+            event: 'form_submission',
+            form_name: `growth_tool_${slug}`,
+            service_interest: tool.service,
+          });
+        }
+        if (typeof win.gtag === 'function') {
+          win.gtag('event', 'generate_lead', {
+            event_category: 'growth_tool',
+            event_label: slug,
+            value: 1,
+          });
+        }
+        output.textContent =
+          data.welcome === 'accepted'
+            ? 'Your request is saved and your welcome email has been accepted for sending. ZiaFlow will review your details.'
+            : 'Your review request is saved. ZiaFlow will review the details before following up.';
+      } catch {
+        output.textContent =
+          'We could not save your request. Your results are still available; please retry or contact ZiaFlow.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
+<style>
+  .growth-tool {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2.5rem 1.5rem 6rem;
+    color: #f5f5f2;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono-face, monospace);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #b8b8b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .back-link:hover {
+    color: #a22a36;
+  }
+  .growth-tool header {
+    max-width: 780px;
+    margin: 1.75rem 0 3rem;
+  }
+  .eyebrow {
+    font-family: var(--font-mono-face, monospace);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    color: #a22a36;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--font-display-face, sans-serif);
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin: 0.8rem 0 1.2rem;
+    color: #f5f5f2;
+  }
+  .intro {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #b8b8b8;
+  }
+  .subnote {
+    font-size: 0.85rem;
+    color: #8e8e8e;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  fieldset,
+  #results,
+  #review-form {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #232323;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  #results {
+    border-color: rgba(162, 42, 54, 0.45);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+  legend {
+    font-family: var(--font-display-face, sans-serif);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0 0.4rem;
+    color: #f5f5f2;
+  }
+  p {
+    margin: 0.6rem 0 1rem;
+    line-height: 1.6;
+  }
+  .hint {
+    font-size: 0.88rem;
+    color: #b8b8b8;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin: 1rem 0;
+    color: #f5f5f2;
+  }
+  input:not([type='checkbox']),
+  select,
+  textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.65rem;
+    padding: 0.75rem 0.9rem;
+    margin-top: 0.4rem;
+    background: #141414;
+    color: #f5f5f2;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+  input:not([type='checkbox']):focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #a22a36;
+  }
+  input[type='checkbox'] {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: #a22a36;
+    margin-top: 0.2rem;
+  }
+  .check {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    font-weight: 500;
+    color: #b8b8b8;
+  }
+  .form-actions,
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+  }
+  button {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #232323;
+    color: #f5f5f2;
+    border-radius: 9999px;
+    padding: 0.8rem 1.35rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  button:hover:not(:disabled) {
+    border-color: #f5f5f2;
+    background: #2c2c2c;
+  }
+  .primary {
+    background: #a22a36;
+    border-color: #a22a36;
+    color: #f5f5f2;
+  }
+  .primary:hover:not(:disabled) {
+    background: #89212c;
+    border-color: #89212c;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  h2 {
+    font-family: var(--font-display-face, sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f5f5f2;
+  }
+  #results :global(h3) {
+    font-family: var(--font-display-face, sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 1.25rem 0 0.5rem;
+    color: #a22a36;
+  }
+  #results :global(h4) {
+    font-weight: 700;
+    margin: 1rem 0 0.35rem;
+    color: #f5f5f2;
+  }
+  #results :global(p) {
+    color: #d4d4d0;
+    font-size: 0.95rem;
+  }
+  a {
+    color: #f5f5f2;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: #a22a36;
+  }
+  :focus-visible {
+    outline: 2px solid #a22a36;
+    outline-offset: 3px;
+  }
+  .notice {
+    border-left: 3px solid #a22a36;
+    background: rgba(162, 42, 54, 0.08);
+    padding: 0.85rem 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: #d4d4d0;
+    font-size: 0.92rem;
+  }
+  #tool-status,
+  #review-status {
+    font-size: 0.9rem;
+    color: #34d399;
+    min-height: 1.5rem;
+  }
+  .trap {
+    position: absolute;
+    left: -10000px;
+  }
+  .stack-row {
+    padding: 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    background: #1a1a1a;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  @media (max-width: 860px) {
+    .tool-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media print {
+    #assessment-form,
+    #review-form,
+    #result-actions > .action-buttons,
+    header,
+    a,
+    body :global(#header),
+    body :global(footer) {
+      display: none !important;
+    }
+    .tool-grid {
+      display: block;
+    }
+    .growth-tool {
+      padding: 0;
+      color: #000;
+    }
+    #results {
+      border: 0;
+      background: #fff;
+      color: #000;
+    }
+  }
+</style>

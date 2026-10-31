@@ -1,7 +1,8 @@
 ---
 publishDate: 2025-11-25T00:00:00Z
+updateDate: 2026-10-28T16:55:00.000Z
 title: 'How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors'
-excerpt: 'A practical guide on how to find pricing sections, extract icons, and generate color schemes from images using browser developer tools and online resources.'
+excerpt: 'Website analysis is the technical evaluation of a site’s pricing structures, UI asset libraries, and visual design systems using browser developer tools and automated extractors.'
 image: '~/assets/images/blog/website-analysis-tasks.png'
 category: 'Conversion Optimization'
 tags:
@@ -14,92 +15,78 @@ metadata:
   canonical: https://ziaflow.com/website-analysis-tasks
 ---
 
-Here is a practical guide on how to tackle common website analysis tasks, including finding pricing sections, extracting icons, and developing color schemes from images.
+**Website analysis is the technical evaluation of a website's layout, UI asset libraries, and visual design systems to uncover conversion structures, extract reusable digital assets, and audit competitor positioning.** To analyze any website efficiently, practitioners inspect pricing models through DOM hierarchy and network triggers, isolate icon assets via SVG sprite and font inspection, and generate color palettes by sampling raster imagery with palette extraction algorithms.
+
+### Key Takeaways & Quick Overview
+
+- **Pricing Discovery**: Scan top navigation menus, footer sitemaps, and search the DOM tree for keywords like `pricing`, `plans`, and `tier`.
+- **Icon Extraction**: Inspect SVG symbols in the Elements tab or filter HTTP requests in the Network tab under `Img` and `Font`.
+- **Color Scheme Sampling**: Extract dominant hex codes from key visual assets using color extraction tools (Coolors, Adobe Color) and verify WCAG contrast ratios.
+
+---
 
 ## 1. How to Find All Pricing Sections on a Website
 
-Finding pricing sections often involves a combination of direct navigation and using browser developer tools.
+To find all pricing sections on a website, check the primary navigation and footer links first, then inspect the DOM tree for pricing component containers and filter the Network tab for subscription API endpoints. Most commercial websites place pricing tables under `/pricing`, within product comparison anchors, or inside modal checkouts.
 
-### Method
+### Direct Navigation and Page Footers
 
-**Direct Navigation:**
-Start by looking for common navigation links like "Pricing," "Plans," "Services," "Shop," or "Buy" in the main menu, footer, or prominent call-to-action buttons. Many websites also feature a clear pricing section on their homepage or a dedicated "Pricing" page.
+Check the primary header navigation and secondary footer sitemaps for links titled "Pricing," "Plans," "Subscriptions," "Enterprise," or "Compare Tiers." Dedicated pricing pages host the canonical billing matrices and tier breakdowns. If no direct link exists, check the navigation menu under "Products" or look for high-visibility "Get Started" buttons that route directly to pricing selectors.
 
-**Scroll and Scan:**
-Pricing sections typically feature a structured layout, often with multiple columns or "cards" representing different plans (e.g., Basic, Pro, Enterprise). Look for features like:
+### Visual Scanning for Pricing Cards
 
-- Prominent price displays.
-- Monthly/annual billing toggles.
-- Feature lists (often with checkmarks).
-- Clear call-to-action buttons like "Sign Up" or "Get Started."
-- Visual emphasis on a "most popular" or "best value" plan.
+Look for distinct multi-column grid layouts with recurring visual patterns such as price tags, billing cadence switches (monthly vs. annual toggles), checklist features, and distinct CTA buttons. Tiered pricing designs usually highlight a central "Recommended" or "Most Popular" card with contrasting border styling or elevation badges.
 
-**Browser Developer Tools (Inspect Element):**
+### Browser Developer Tools DOM Search
 
-1. Right-click anywhere on the page and select "Inspect" (or "Inspect Element").
-2. In the "Elements" tab, you can manually scroll through the HTML structure. Look for `div` elements or sections with IDs or classes containing terms like "pricing," "plans," "rates," or "subscription."
-3. You can also use the "Select an element" tool (often a mouse pointer icon) in the developer tools. Click this, then hover over different areas of the webpage. As you hover, the corresponding HTML in the "Elements" tab will highlight, helping you identify distinct sections that might contain pricing information.
+1. Right-click the page, open DevTools (`Ctrl+Shift+I` or `Cmd+Option+I`), and activate the **Elements** panel.
+2. Press `Ctrl+F` (or `Cmd+F`) to search the HTML source code for selectors such as `id="pricing"`, `class="pricing"`, `class="plans"`, `data-tier`, or `data-plan`.
+3. Use the element picker tool (`Ctrl+Shift+C`) to click visible cards, immediately exposing the underlying pricing container attributes and hidden plan data in the DOM tree.
 
-> **Customization Tip:** When inspecting, pay attention to unique CSS class names or IDs. These can sometimes give you clues about the section's purpose (e.g., `id="pricing-table"`).
+---
 
-## 2. How to See All Icons in a Website
+## 2. How to See and Extract All Icons on a Website
 
-To see all icons used on a website, you'll primarily leverage your browser's developer tools.
+To see and extract all icons on a website, filter asset requests in the browser's Network panel by image and font MIME types, inspect inline SVG tags in the Elements tree, and retrieve favicon assets from standard header link tags. Modern websites load icons as vector SVGs, CSS sprite sheets, or web font glyphs.
 
-### Methods
+### Extracting Favicons and App Icons
 
-**Favicons (Browser Tab Icons):**
-For the small icon that appears in the browser tab (favicon), you can use online tools like Favicon Extractor or Icon Scraper. Simply enter the website's URL, and these tools will extract and display the favicon in various sizes.
+Locate the website's favicon by inspecting the `<head>` section of the HTML document for `<link rel="icon">` or `<link rel="apple-touch-icon">` elements. Alternatively, open your browser and navigate directly to `[domain.com]/favicon.ico` or utilize specialized favicon extraction endpoints to retrieve high-resolution PNG and SVG variants.
 
-**General Icons (Images, SVGs, Icon Fonts):**
+### Network Panel Filtering for Icons and SVGs
 
-_Browser Developer Tools (Network Tab):_
+1. Open DevTools and switch to the **Network** tab.
+2. Refresh the target page to capture every asset request during initial rendering.
+3. Filter by **Img** to view standalone SVG, WebP, and PNG icon files, or filter by **Font** to identify icon font bundles like Font Awesome or Material Icons (`.woff2`, `.woff`).
+4. Click any asset in the list to preview the icon, inspect its dimensions, and copy its direct URL or SVG markup.
 
-1. Open Developer Tools (right-click -> "Inspect" or F12).
-2. Go to the "Network" tab.
-3. Refresh the page to capture all network requests.
-4. Use the filter options to narrow down by file type:
-   - Select "Img" to see all image files (JPG, PNG, GIF, SVG).
-   - Look for "Font" to identify icon fonts (like Font Awesome, Material Icons).
-   - You can also type `resource-type:image` in the filter box.
-5. This will show you a list of all requested images and fonts. You can click on individual entries to view them or see their details.
+### Elements Panel Inspection for Inline SVGs
 
-_Browser Developer Tools (Elements Tab):_
+Inline SVGs do not trigger separate image network requests because their code sits directly within the page markup. In the Elements panel, search the DOM for `<svg>` elements, right-click the root tag, and select **Copy > Copy element** to capture the complete vector markup including viewBox coordinates and path coordinates.
 
-1. In the "Elements" tab, you can inspect the HTML structure. Look for `<img>` tags, `<svg>` elements, or `<i>` or `<span>` tags that have classes related to icon libraries (e.g., `class="fas fa-home"` for Font Awesome).
-2. Use the "Select an element" tool. Hover over visible icons on the page. The "Elements" tab will highlight the corresponding HTML, allowing you to see if it's an image, SVG, or an icon font character.
+---
 
-_Browser Developer Tools (Sources or Application Tab):_
-Some browsers also allow you to browse resources by file type in the "Sources" or "Application" tabs, which can group images or fonts.
+## 3. How to Extract and Build a Better Color Scheme From an Image
 
-> **Customization Tip:** If you're looking for icons from a specific icon library, try searching the "Elements" tab for common class prefixes (e.g., `fa-` for Font Awesome, `material-icons` for Material Design Icons).
+To build a balanced website color scheme from an image, sample the dominant and accent hues using an automated palette extractor, organize the colors into semantic UI roles, and test background-to-text contrast against WCAG accessibility standards. Visual imagery provides organic color harmonies that make digital interfaces look cohesive.
 
-## 3. How to Use an Image to Help Develop a Better Color Scheme
+### Selecting the Anchor Brand Image
 
-Leveraging an image to create a color scheme is a fantastic way to ensure visual harmony and evoke a specific mood.
+Choose an image that directly reflects the intended tone, brand personality, and industry aesthetic of your website build. Natural photographs produce earthy, balanced tones, architectural photography provides sharp neutral palettes, and high-tech product renders deliver modern tech palettes with electric accent contrasts.
 
-### Method
+### Using Palette Extraction Tools
 
-**Choose Your Image:**
-Select an image that embodies the aesthetic, mood, or brand identity you want for your color scheme. This could be a photograph, an illustration, or even a texture.
+1. Upload the chosen image into a palette generator such as Coolors, Adobe Color, Canva Palette Generator, or Colormind.
+2. The generator extracts 4 to 6 dominant hex color codes, identifying primary background shades, secondary support hues, and high-visibility accents.
+3. Lock the strongest brand colors and cycle alternate tonal variations for complementary accents until you have a complete design system.
 
-**Use an Online Color Palette Generator:**
-Several free online tools can extract a color palette from an uploaded image. Popular options include:
+### Semantic Mapping and WCAG Contrast Verification
 
-- **Coolors:** Upload an image and it will automatically generate a palette. You can then fine-tune it or lock specific colors.
-- **Canva Color Palette Generator:** Upload your photo, and it creates a palette based on the hues within the image.
-- **Adobe Color:** Allows you to extract themes and gradients from images.
-- **VOCSO Color Palette Generator:** Upload an image and it extracts a palette, providing HEX codes.
-- **ColorMagic / Colormind:** These AI-powered tools also offer image-to-palette generation.
+Distribute the extracted hex values into clear functional roles: 60% neutral surface colors (backgrounds and card wrappers), 30% primary brand colors (navigation, headers, badges), and 10% high-contrast accent colors (primary action buttons and alerts). Finally, run text and background pairs through a WCAG contrast checker to ensure body text achieves at least a 4.5:1 contrast ratio.
 
-**Analyze and Refine the Palette:**
+---
 
-- These tools typically provide 3-5 dominant colors from the image, often with their HEX codes.
-- Consider the generated colors: Do they represent the desired mood? Are there enough contrasting colors for text and backgrounds?
-- Many tools allow you to adjust the palette, pick specific colors from the image, or add/remove colors.
-- Check for accessibility: Some tools, like Coolors, offer contrast checkers to ensure your text and background colors are readable for everyone.
+## Summary of Website Analysis Methods
 
-**Apply to Your Design:**
-Use the extracted HEX codes to guide your choice of primary, secondary, accent, and neutral colors for your website, branding, or project.
+Website analysis combines automated browser diagnostics with visual heuristics to extract critical UI and commercial data. To evaluate pricing, navigate to dedicated URLs or search DOM trees for tier classes. To capture icons, filter the Network panel for SVG/Font assets and copy inline vector tags. To generate color schemes, sample image palettes and validate them against WCAG accessibility guidelines before applying them to CSS design tokens.
 
-> **Customization Tip:** Don't just stick to the automatically generated palette. Experiment by manually selecting different points on your image within the tool to create variations, or adjust the sliders to shift hues and saturation until you hit just the right combination.

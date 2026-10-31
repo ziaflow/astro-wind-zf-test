@@ -1,70 +1,90 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'SEO Services - Phoenix & Arizona | ZiaFlow',
-  description: 'Technical SEO and content strategies that build lasting market authority.',
-};
-
-const serviceData = {
-  name: 'SEO Services',
-  description:
-    'Technical SEO and content strategies that build lasting market authority. We position your business to dominate search results for high-intent queries.',
-  url: 'https://ziaflow.com/services/seo',
-  image: 'https://ziaflow.com/assets/images/seo-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="SEO Services"
-    title="Lasting Market Authority"
-    subtitle="SEO is your long-term stability play. We treat your search rankings as digital real estate that appreciates over time. Through technical forensic audits, local content strategies, and authority building, we position your business to dominate search results for high-intent queries. We focus on the keywords that drive revenue, not just traffic."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Our SEO Strategy"
-    items={[
-      {
-        title: 'Technical Audits',
-        description: 'Forensic analysis of your site’s health and indexing.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Content Strategy',
-        description: "Creating content that answers your customers' questions.",
-        icon: 'tabler:writing',
-      },
-      {
-        title: 'Authority Building',
-        description: 'Earning high-quality backlinks to boost your domain trust.',
-        icon: 'tabler:link',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Ready to rank higher?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Technical SEO & Local Search Phoenix | ZiaFlow"
+  description="Improve technical foundations and local search visibility for Phoenix and Arizona service businesses using Search Console evidence."
+  url="https://ziaflow.com/services/seo"
+  eyebrow="Search & Local Visibility · Phoenix & Arizona"
+  heroLines={['Technical SEO grounded in', 'real search demand.']}
+  heroIntro="ZiaFlow helps Arizona service businesses improve crawlability, page performance, and content relevance using Search Console evidence. We prioritize technical fixes and useful service pages, then track search performance and confirmed inquiries."
+  deliverables={[
+    {
+      title: 'Striking-Distance Keyword Improvements',
+      tag: 'Search Console',
+      description:
+        'Clearer titles and page content aligned with relevant search intent, upgrading queries ranking in positions 5–20 based on verified Search Console data.',
+    },
+    {
+      title: 'Technical Crawl & Site Architecture',
+      tag: 'Infrastructure',
+      description:
+        'Resolution of redirect chains, duplicate URLs, broken internal links, XML sitemap hygiene, and measured page-performance improvements.',
+    },
+    {
+      title: 'Structured Content & Answer Clarity',
+      tag: 'Search Clarity',
+      description:
+        'Direct-answer content structure, comparison tables, and accurate structured data to make key business information unambiguous to search engines.',
+    },
+    {
+      title: 'LocalBusiness & Service Schema',
+      tag: 'Structured Data',
+      description:
+        'Machine-readable JSON-LD graphs linking your verified service areas, business credentials, customer reviews, and primary offerings.',
+    },
+    {
+      title: 'Connected Service & Guide Pairs',
+      tag: 'Content Strategy',
+      description:
+        'Educational articles paired directly with focused service pages so informational visitors can easily take a practical next step.',
+    },
+    {
+      title: 'Measured Search Telemetry',
+      tag: 'Telemetry',
+      description:
+        'Period-over-period Search Console snapshots paired with confirmed database lead receipts to evaluate accepted inquiries over time.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Baseline',
+      title: 'GSC & Technical Crawl',
+      description:
+        'We audit finalized Search Console queries, live canonical tags, schema blocks, and crawl response times.',
+    },
+    {
+      step: 'Step 2 · Fixes',
+      title: 'Crawl & Schema Repair',
+      description:
+        'We eliminate crawl bloat, fix internal link gaps, and deploy validated LocalBusiness and Service schema.',
+    },
+    {
+      step: 'Step 3 · Optimization',
+      title: 'Striking-Distance Updates',
+      description:
+        'We align titles, headers, direct-answer intros, and internal links around verified commercial search intent.',
+    },
+    {
+      step: 'Step 4 · Telemetry',
+      title: 'Cohort Tracking',
+      description:
+        'We monitor finalized impressions, click-through rates, and confirmed non-test inquiries over complete 28-day reporting windows.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'How is ZiaFlow’s approach to SEO different from traditional agencies?',
+      answer:
+        'We treat SEO as systems engineering: measured Astro code performance, machine-readable structured schema, verified Search Console query targeting, and server-side lead receipts rather than vanity keyword reports.',
+    },
+    {
+      question: 'How soon can we expect to see search movement?',
+      answer:
+        'Search performance varies based on competition, crawl frequency, and site history. We evaluate changes using complete 28-day Search Console reporting windows rather than daily fluctuations.',
+    },
+  ]}
+/>

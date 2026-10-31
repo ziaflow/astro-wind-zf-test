@@ -1,0 +1,217 @@
+---
+import { pricingPage } from '@/data/pages';
+import Icon from '@/components/shared/icons/icon.astro';
+import Media from '@/components/shared/ui/media.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+
+const copy = pricingPage.sales;
+const { fields, sizes } = copy;
+const field =
+  'h-13 w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 text-bone placeholder:text-dim transition-colors duration-300 focus:border-bone focus:outline-none aria-invalid:border-signal';
+---
+
+<section id="form" class="relative scroll-mt-24 border-t border-line" aria-labelledby="sales-title">
+  <span id="sales" class="absolute -top-24" aria-hidden="true"></span>
+  <div class="shell grid grid-cols-1 gap-14 py-24 md:py-32 lg:grid-cols-12">
+    <div class="flex flex-col justify-between gap-10 lg:col-span-5">
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-3 py-1 text-xs font-mono uppercase tracking-wider text-signal mb-6">
+          <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Direct Engineering Intake
+        </span>
+        <h2 id="sales-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
+          {copy.title}
+        </h2>
+        <p class="mt-6 max-w-[42ch] text-mute leading-relaxed" data-reveal>
+          {copy.body}
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4 text-xs font-mono text-mute">
+          <a href="tel:+16028344239" class="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink-2 px-4 py-2.5 text-bone hover:border-signal hover:text-signal transition-colors">
+            📞 (602) 834-4239
+          </a>
+          <a href="mailto:info@ziaflow.com" class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-4 py-2.5 text-mute hover:text-bone transition-colors">
+            ✉️ info@ziaflow.com
+          </a>
+        </div>
+      </div>
+      <Media src={copy.image} alt={copy.imageAlt} class="hidden aspect-[4/3] lg:block" sizes="40vw" />
+    </div>
+
+    <form
+      class="lg:col-span-6 lg:col-start-7"
+      novalidate
+      data-sales-form
+      data-error-name={fields.name.error}
+      data-error-email={fields.email.error}
+      data-error-company={fields.company.error}
+      data-sending={copy.sending}
+      data-success-free={copy.success.free}
+      data-success-demo={copy.success.demo}>
+      {/* Anti-spam honeypot field */}
+      <div class="opacity-0 absolute -z-10 select-none pointer-events-none" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true" tabindex="-1">
+        <label for="sales-website-url">Leave this field blank</label>
+        <input type="text" id="sales-website-url" name="website_url" value="" autocomplete="off" tabindex="-1" />
+      </div>
+
+      <fieldset>
+        <legend class="font-mono text-label text-mute uppercase">{copy.intentLegend}</legend>
+        <div class="mt-4 inline-flex rounded-full border border-line bg-ink-2 p-1">
+          <label class="relative cursor-pointer">
+            <input type="radio" name="intent" value="free" class="peer sr-only" checked data-intent-input />
+            <span class="flex h-10 items-center rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 peer-checked:bg-bone peer-checked:text-ink peer-focus-visible:outline-2 peer-focus-visible:outline-signal">
+              {copy.intents.free}
+            </span>
+          </label>
+          <label class="relative cursor-pointer">
+            <input type="radio" name="intent" value="demo" class="peer sr-only" data-intent-input />
+            <span class="flex h-10 items-center rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 peer-checked:bg-bone peer-checked:text-ink peer-focus-visible:outline-2 peer-focus-visible:outline-signal">
+              {copy.intents.demo}
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2" data-sales-fields>
+        <div class="flex flex-col gap-2">
+          <label for="sales-name" class="text-sm text-bone">
+            {fields.name.label} *
+          </label>
+          <input
+            id="sales-name"
+            name="name"
+            autocomplete="name"
+            required
+            class={field}
+            placeholder={fields.name.placeholder}
+            aria-describedby="sales-name-error"
+          />
+          <p id="sales-name-error" class="min-h-5 text-sm text-signal" data-error-for="name"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-email" class="text-sm text-bone">
+            {fields.email.label} *
+          </label>
+          <input
+            id="sales-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class={field}
+            placeholder={fields.email.placeholder}
+            aria-describedby="sales-email-error"
+          />
+          <p id="sales-email-error" class="min-h-5 text-sm text-signal" data-error-for="email"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-phone" class="text-sm text-bone">
+            Phone Number
+          </label>
+          <input
+            id="sales-phone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            class={field}
+            placeholder="(602) 555-0199"
+          />
+          <p class="min-h-5 text-sm text-dim">For rapid dispatch & SMS confirmation.</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-company" class="text-sm text-bone">
+            {fields.company.label} *
+          </label>
+          <input
+            id="sales-company"
+            name="company"
+            autocomplete="organization"
+            required
+            class={field}
+            placeholder={fields.company.placeholder}
+            aria-describedby="sales-company-error"
+          />
+          <p id="sales-company-error" class="min-h-5 text-sm text-signal" data-error-for="company"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-service" class="text-sm text-bone">
+            Primary Service Interest
+          </label>
+          <select id="sales-service" name="service_interest" class={`${field} appearance-none bg-ink`}>
+            <option value="Lead Capture & Follow-Up Sprint">Lead Capture & Follow-Up Sprint</option>
+            <option value="Marketing Automation & AI Workflows">Marketing Automation & AI Workflows</option>
+            <option value="Custom Website & CRO Engineering">Custom Website & CRO Engineering</option>
+            <option value="Local Phoenix SEO & GBP Optimization">Local Phoenix SEO & GBP Optimization</option>
+            <option value="Google Local Service Ads (LSA) & PPC">Google Local Service Ads (LSA) & PPC</option>
+            <option value="Custom Software / Full-Stack App">Custom Software / Full-Stack App</option>
+          </select>
+          <p class="min-h-5 text-sm text-dim">Select your primary priority.</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-size" class="text-sm text-bone">
+            {fields.size.label}
+          </label>
+          <select id="sales-size" name="size" class={`${field} appearance-none bg-ink`}>
+            {sizes.map((size) => (
+              <option>{size}</option>
+            ))}
+          </select>
+          <p class="min-h-5 text-sm text-dim">{fields.size.help}</p>
+        </div>
+        <div class="flex flex-col gap-2 md:col-span-2">
+          <label for="sales-current-systems" class="text-sm text-bone">
+            Current Website & Intake Systems
+          </label>
+          <input
+            id="sales-current-systems"
+            name="current_systems"
+            class={field}
+            placeholder="e.g. WordPress, HubSpot, ServiceTitan, CallRail, or Gmail"
+          />
+          <p class="min-h-5 text-sm text-dim">What tools receive customer inquiries today?</p>
+        </div>
+        <div class="flex flex-col gap-2 md:col-span-2">
+          <label for="sales-handoff-problem" class="text-sm text-bone">
+            What happens after someone contacts your business?
+          </label>
+          <input
+            id="sales-handoff-problem"
+            name="handoff_notes"
+            class={field}
+            placeholder="e.g. Leads sit in an unmonitored inbox, or nobody is assigned to follow up"
+          />
+          <p class="min-h-5 text-sm text-dim">Where do inquiries stall or lose momentum?</p>
+        </div>
+        <div class="flex flex-col gap-2 md:col-span-2" data-demo-only>
+          <label for="sales-message" class="text-sm text-bone">
+            {fields.message.label}
+          </label>
+          <textarea
+            id="sales-message"
+            name="message"
+            rows="3"
+            class={`${field} h-auto resize-none py-3`}
+            placeholder={fields.message.placeholder}></textarea>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="submit"
+          class="btn group relative h-14 bg-signal px-8 font-semibold text-bone hover:bg-signal-dark disabled:opacity-70"
+          data-btn
+          data-sales-submit>
+          <span class="btn-fill bg-bone" aria-hidden="true"></span>
+          <span data-submit-label data-free={copy.submit.free} data-demo={copy.submit.demo}>
+            <TextRoll text={copy.submit.free} />
+          </span>
+          <span class="btn-icon" data-dir="right">
+            <Icon name="arrow-right" />
+            <Icon name="arrow-right" />
+          </span>
+        </button>
+        <p class="max-w-[30ch] text-sm text-mute">{copy.consent}</p>
+      </div>
+      <p class="mt-6 min-h-6 text-sm" role="status" aria-live="polite" data-sales-status></p>
+    </form>
+  </div>
+</section>

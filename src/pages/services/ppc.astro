@@ -1,71 +1,74 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'PPC Management & Google Ads Campaigns',
-  description:
-    'Drive qualified leads with high-ROI pay-per-click management for Google and Microsoft Ads. Target high-intent buyers ready to convert today.',
-};
-
-const serviceData = {
-  name: 'PPC Management',
-  description:
-    'High-ROI pay-per-click management for Google and Microsoft Ads. Targeting high-intent keywords to capture customers exactly when they are ready to buy.',
-  url: 'https://ziaflow.com/services/ppc',
-  image: 'https://ziaflow.com/assets/images/ppc-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="PPC Management"
-    title="Instant Speed & Cash Flow"
-    subtitle="When you need immediate leads, our PPC campaigns turn on the faucet. We manage Google and Microsoft Ads with a strict focus on ROI, targeting high-intent keywords to capture customers exactly when they are ready to buy. We balance this 'Speed' with the 'Stability' of SEO to ensure you aren't solely reliant on ad spend forever."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="ROI Obsessed"
-    items={[
-      {
-        title: 'High Intent Targeting',
-        description: 'We bid on keywords that convert, not just bring traffic.',
-        icon: 'tabler:target-arrow',
-      },
-      {
-        title: 'Data-Driven Optimization',
-        description: 'Continuous A/B testing to lower customer acquisition costs.',
-        icon: 'tabler:chart-arrows',
-      },
-      {
-        title: 'Transparent Reporting',
-        description: 'Clear dashboards showing exactly where your budget goes.',
-        icon: 'tabler:report-analytics',
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Start getting leads today."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Phoenix PPC & Google Ads Management | ZiaFlow"
+  description="High-intent Google Ads management in Phoenix, AZ. We pair targeted search campaigns with fast landing pages and verified lead tracking."
+  url="https://ziaflow.com/services/ppc"
+  eyebrow="Paid Search Engineering · Google & Microsoft Ads"
+  heroLines={['Paid search wired', 'to verified inquiries.']}
+  heroIntro="Stop burning ad spend sending broad traffic to slow, generic homepages. We set up exact-intent Google Search campaigns paired with fast landing pages and verified lead attribution."
+  deliverables={[
+    {
+      title: 'Exact-Intent Commercial Keyword Architecture',
+      tag: 'Targeting',
+      description:
+        'Tightly themed ad groups targeting high-intent Phoenix buyers ("emergency repair", "quote", "near me") backed by aggressive negative-keyword lists.',
+    },
+    {
+      title: 'Dedicated Fast Astro Landing Pages',
+      tag: 'Quality Score',
+      description:
+        'Custom landing pages that load quickly on mobile, lifting Google Ads Quality Scores and lowering your cost per click.',
+    },
+    {
+      title: 'Server-Verified Offline Conversion Tracking',
+      tag: 'Attribution',
+      description:
+        'Feeding only validated, non-spam database leads back into Google Ads so Smart Bidding optimizes for real customers instead of bots.',
+    },
+    {
+      title: 'Immediate Lead Dispatch & Call Tracking',
+      tag: 'Speed-to-Lead',
+      description:
+        'Every paid click that calls or submits a form triggers immediate alerts so your team can follow up right away.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Audit',
+      title: 'Wasted Spend Analysis',
+      description: 'We inspect search terms, negative keywords, conversion actions, and landing page speed.',
+    },
+    {
+      step: 'Step 2 · Build',
+      title: 'Landing Page & Campaign Setup',
+      description: 'We launch high-converting landing pages wired to `/api/contact` and call tracking.',
+    },
+    {
+      step: 'Step 3 · Filter',
+      title: 'Negative Keyword & Bot Guard',
+      description: 'We strip out informational clicks, competitor job-seekers, and spam form fills.',
+    },
+    {
+      step: 'Step 4 · Scale',
+      title: 'Cost-Per-Qualified-Inquiry Tuning',
+      description: 'We allocate budget strictly to the ad groups and territories producing qualified inquiries.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Why do so many Google Ads campaigns fail for local service businesses?',
+      answer:
+        'Two reasons: broad-match keywords that waste budget on DIY searches, and sending paid clicks to a slow homepage with no follow-up process. We solve both by pairing tight search intent with fast landing pages and immediate team alerts.',
+    },
+    {
+      question: 'Should we run Google Local Service Ads (LSAs), traditional Search PPC, or both?',
+      answer:
+        'For qualifying trades (HVAC, plumbing, electrical, roofing, legal), LSAs capture top-of-page pay-per-lead calls, while Search PPC captures specific high-margin services and custom commercial queries. We often run both into one unified intake pipeline.',
+    },
+  ]}
+/>

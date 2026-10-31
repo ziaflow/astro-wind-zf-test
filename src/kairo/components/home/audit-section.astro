@@ -1,0 +1,120 @@
+---
+import AuditBookingForm from '~/components/widgets/AuditBookingForm.astro';
+import Icon from '@/components/shared/icons/icon.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { site } from '@/data/site';
+---
+
+<section id="audit" class="relative isolate overflow-hidden border-t border-line scroll-mt-24 py-24 md:py-32" aria-labelledby="audit-heading">
+  <!-- Subtle ambient canvas glows -->
+  <div class="absolute -top-32 left-1/4 -z-10 size-96 rounded-full bg-signal/10 blur-[128px] pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -bottom-32 right-1/4 -z-10 size-96 rounded-full bg-teal/10 blur-[128px] pointer-events-none" aria-hidden="true"></div>
+
+  <div class="shell">
+    <div class="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:items-start">
+      <!-- Left Column: Value Proposition & Evidence -->
+      <div class="flex flex-col justify-between gap-10 lg:col-span-5">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-3 py-1 text-xs font-mono uppercase tracking-wider text-signal mb-6">
+            <span class="size-1.5 rounded-full bg-signal animate-pulse"></span>
+            Complimentary Analysis
+          </span>
+
+          <h2 id="audit-heading" class="font-display text-title font-bold text-bone tracking-tight">
+            Find exactly where your site is losing revenue.
+          </h2>
+
+          <p class="mt-6 text-lead text-mute leading-relaxed">
+            No sales scripts or aggressive pitches. We inspect your production build and record a 10-minute forensic video breaking down your technical bottlenecks.
+          </p>
+
+          <!-- Audit Deliverables List -->
+          <div class="mt-10 space-y-6">
+            <div class="flex items-start gap-4">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full border border-line-strong bg-ink-2 text-xs font-bold text-signal">
+                01
+              </span>
+              <div>
+                <h3 class="font-display text-sm font-semibold text-bone">Core Web Vitals & Real-Device Speed</h3>
+                <p class="mt-1 text-xs text-dim leading-relaxed">
+                  Laboratory and real-user mobile performance analysis, render-blocking scripts, and server response times.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full border border-line-strong bg-ink-2 text-xs font-bold text-signal">
+                02
+              </span>
+              <div>
+                <h3 class="font-display text-sm font-semibold text-bone">Conversion Leaks & UX Friction</h3>
+                <p class="mt-1 text-xs text-dim leading-relaxed">
+                  Cognitive load and mobile friction points preventing qualified visitors from booking or calling.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full border border-line-strong bg-ink-2 text-xs font-bold text-signal">
+                03
+              </span>
+              <div>
+                <h3 class="font-display text-sm font-semibold text-bone">Organic & AI Answer Engine (GEO) Coverage</h3>
+                <p class="mt-1 text-xs text-dim leading-relaxed">
+                  How your brand appears in Google Search, ChatGPT, Perplexity, and local Phoenix market queries.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <span class="grid size-7 shrink-0 place-items-center rounded-full border border-line-strong bg-ink-2 text-xs font-bold text-signal">
+                04
+              </span>
+              <div>
+                <h3 class="font-display text-sm font-semibold text-bone">Ranked Action Plan</h3>
+                <p class="mt-1 text-xs text-dim leading-relaxed">
+                  Specific, prioritized code and content fixes ranked by expected ROI and development effort.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alternate Path: Direct Calendar Booking -->
+        <div class="rounded-xl border border-line bg-ink-2/60 p-6 backdrop-blur-sm">
+          <p class="font-mono text-xs text-mute uppercase tracking-wider mb-2">Prefer a live strategy call?</p>
+          <p class="text-xs text-dim mb-4 leading-relaxed">
+            Skip the 48-hour video queue and book directly on our engineering calendar.
+          </p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href={site.cta.primary.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn group h-10 rounded-full border border-line-strong bg-ink px-4 text-xs font-medium text-bone hover:border-bone transition-all"
+              data-btn
+            >
+              <span class="btn-fill bg-bone" aria-hidden="true"></span>
+              <TextRoll text="Live Calendar" />
+              <span class="btn-icon size-3.5" data-dir="right">
+                <Icon name="arrow-up-right" class="size-3.5" />
+                <Icon name="arrow-up-right" class="size-3.5" />
+              </span>
+            </a>
+            <a
+              href="tel:+16028344239"
+              class="text-xs font-mono text-mute hover:text-bone transition-colors py-2 px-1"
+            >
+              📞 (602) 834-4239
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: The Embedded Audit Form -->
+      <div class="lg:col-span-7 lg:col-start-6">
+        <AuditBookingForm />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,81 +1,116 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import ServiceSchema from '~/components/seo/ServiceSchema.astro';
+import KairoServicePage from '@/components/services/kairo-service-page.astro';
 
-const metadata = {
-  title: 'Business Automation & AI Workflow Systems',
-  description:
-    'Scale client intake, CRM workflows, and 24/7 lead qualification for Arizona service businesses. Eliminate bottlenecks with custom automation.',
-};
-
-const serviceData = {
-  name: 'Marketing Automation & AI',
-  description:
-    'Deploy intelligent AI agents and workflow automation to nurture leads 24/7. Replace manual chaos with engineered efficiency.',
-  url: 'https://ziaflow.com/services/automation',
-  image: 'https://ziaflow.com/assets/images/automation-hero.jpg',
-};
+export const prerender = true;
 ---
 
-<Layout metadata={metadata}>
-  <ServiceSchema {...serviceData} />
-
-  <Hero
-    tagline="Automation & AI"
-    title="The Automation Layer"
-    subtitle="Stop losing revenue to slow response times. We deploy intelligent AI agents and workflow automation to nurture leads 24/7, ensuring no opportunity slips through the cracks. From instant SMS booking confirmations to backend CRM routing, we replace manual chaos with engineered efficiency. This isn't just about saving time; it's about building an intake system that scales without adding headcount."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-        icon: 'tabler:calendar',
-      },
-    ]}
-  />
-
-  <Features
-    title="Key Benefits"
-    items={[
-      {
-        title: '24/7 Lead Nurturing',
-        description: 'Never miss a lead with always-on AI agents that respond instantly.',
-        icon: 'tabler:clock-24',
-      },
-      {
-        title: 'Workflow Automation',
-        description: 'Streamline your operations by automating repetitive tasks and data entry.',
-        icon: 'tabler:settings-automation',
-      },
-      {
-        title: 'CRM Integration',
-        description: 'Seamlessly sync data between your marketing channels and CRM.',
-        icon: 'tabler:database-import',
-      },
-      {
-        title: 'Executive Productivity & Email Systems',
-        description:
-          'As a Superhuman Go Partner, we deploy ultra-fast AI email workflows and executive intake automation for high-growth teams.',
-        icon: 'tabler:mail-fast',
-        callToAction: {
-          text: 'Superhuman Partner Directory',
-          href: 'https://superhuman.com/find-a-partner/partner/ziaflow',
-        },
-      },
-    ]}
-  />
-
-  <CallToAction
-    title="Ready to automate your growth?"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Book Consultation',
-        href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
-      },
-    ]}
-  />
-</Layout>
+<KairoServicePage
+  title="Lead Capture & Follow-Up Sprint | ZiaFlow Phoenix"
+  description="Fix broken inquiry handoffs. ZiaFlow connects website forms, CRM routing, and staff follow-up for Arizona service businesses with a documented runbook."
+  url="https://ziaflow.com/services/automation"
+  eyebrow="Purchasable Fixed Scope · Lead Capture & Follow-Up Sprint"
+  heroLines={['Website inquiries &', 'accountable follow-up.']}
+  heroIntro="Stop losing qualified customer inquiries to broken forms, delayed notifications, and unclear staff ownership. We audit your agreed inquiry channels, repair capture points, connect prompt acknowledgement and internal dispatch, and deliver a plain-English operator runbook."
+  deliverablesTitle="The Fixed-Scope Lead Capture & Follow-Up Sprint."
+  deliverablesIntro="A defined engagement for Arizona service businesses wanting reliable intake across agreed sources, clear staff ownership, and tested recovery procedures."
+  deliverables={[
+    {
+      title: 'Inquiry Source Audit & Boundary Map',
+      tag: 'Scoping',
+      description:
+        'Audit of up to 3 agreed inquiry sources (e.g., website contact form, primary call-tracking line, or Google Local Service Ads endpoint) to identify failure points.',
+    },
+    {
+      title: 'Tested Capture & Receipt Logging',
+      tag: 'Capture',
+      description:
+        'Server-side validation, spam protection, and database receipt persistence (Supabase) with failure alerting so your team knows immediately if a webhook fails.',
+    },
+    {
+      title: 'Prompt Prospect Acknowledgement',
+      tag: 'Customer Experience',
+      description:
+        'Permitted confirmation email or SMS sent promptly upon receipt, setting realistic expectations on business hours and when a team member will reach out.',
+    },
+    {
+      title: 'Internal Staff Alerting & Ownership',
+      tag: 'Handoff',
+      description:
+        'Internal email and text notifications routed directly to the accountable staff member with prospect details, inquiry source, and assigned next action.',
+    },
+    {
+      title: 'Supported CRM & Intake Connection',
+      tag: 'Integration',
+      description:
+        'Connection into your existing supported CRM or dispatch software (HubSpot, GoHighLevel, or Customer.io) via standard webhooks and documented API contracts.',
+    },
+    {
+      title: 'Plain-English Operator Runbook & Handover',
+      tag: 'Runbook',
+      description:
+        'Clear documentation covering daily inquiry triage, exception handling, manual recovery steps, and agreed client responsibilities.',
+    },
+  ]}
+  processSteps={[
+    {
+      step: 'Step 1 · Audit & Access',
+      title: 'Inquiry Path Mapping',
+      description:
+        'We inventory agreed forms and endpoints, confirm client administrative access, and map existing failure points and notification delays.',
+    },
+    {
+      step: 'Step 2 · Implementation',
+      title: 'Capture & Routing Setup',
+      description:
+        'We implement server-side receipt logging, connect CRM/email webhooks, and configure internal alert templates.',
+    },
+    {
+      step: 'Step 3 · Verification',
+      title: 'End-to-End Test Journey',
+      description:
+        'We run labeled test inquiries across mobile and desktop to verify capture, alert delivery, duplicate handling, and database receipts.',
+    },
+    {
+      step: 'Step 4 · Handover & Stabilization',
+      title: 'Runbook Walkthrough',
+      description:
+        'We train your designated operator on the runbook, review manual recovery procedures, and monitor the live intake queue during initial stabilization.',
+    },
+  ]}
+  faqs={[
+    {
+      question: 'Which inquiry sources are included in the Sprint?',
+      answer:
+        'The standard Sprint includes up to three agreed inquiry sources—typically your primary website form, main call-tracking number, and a secondary form or ad endpoint. Additional custom integrations or legacy systems are scoped separately.',
+    },
+    {
+      question: 'Does ZiaFlow guarantee that every inquiry turns into a booked job?',
+      answer:
+        'No. Final booking depends on your service pricing, schedule availability, customer fit, and team follow-through. Our commitment is operational: for every agreed source, each accepted inquiry is captured, assigned an accountable owner, given a clear next action, and tracked to a known status.',
+    },
+    {
+      question: 'What are the client responsibilities during the Sprint?',
+      answer:
+        'Clients provide timely administrative access to their website hosting, domain DNS, and CRM/intake software, designate a primary staff owner for inquiry triage, and participate in the kickoff audit and runbook handover.',
+    },
+    {
+      question: 'What is excluded from the Sprint scope?',
+      answer:
+        'The Sprint focuses strictly on inquiry capture, routing, and operational follow-up. It excludes ongoing paid ad spend, third-party software subscription fees (e.g., Twilio, CRM plans), custom mobile app development, and outbound cold outreach campaigns.',
+    },
+  ]}
+  relatedLinks={[
+    {
+      label: 'Marketing Automation for Arizona Service Businesses (Full Guide)',
+      href: '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
+      category: 'Educational Guide',
+    },
+    {
+      label: 'Website Conversion Checklist for Phoenix Businesses',
+      href: '/website-conversion-checklist-for-phoenix-businesses',
+      category: 'Diagnostic Guide',
+    },
+    { label: 'View Pricing & Sprint Scopes', href: '/pricing', category: 'Pricing' },
+    { label: 'Explore Arizona Case Studies', href: '/case-studies', category: 'Case Studies' },
+  ]}
+/>

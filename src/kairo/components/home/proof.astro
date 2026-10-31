@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '@/components/shared/icons/icon.astro';
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
+import { proofSection } from '@/data/home';
+import { testimonials } from '@/data/proof';
+import { resolveImage } from '@/utils/image';
+
+const slots = [...testimonials, ...testimonials];
+const [first] = testimonials;
+const payload = testimonials.map(({ quote, name, role, company, metric }) => ({ quote, name, role, company, metric }));
+---
+
+<section
+  class="relative overflow-hidden py-24 md:py-32"
+  data-ring-section
+  data-ring-data={JSON.stringify(payload)}
+  aria-labelledby="proof-title">
+  <div class="shell flex items-end justify-between gap-8">
+    <h2 id="proof-title" class="max-w-[12ch] font-display text-title font-bold text-bone" data-split>
+      {proofSection.title}
+    </h2>
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        class="grid size-12 place-items-center rounded-full border border-line-strong text-bone transition-colors duration-300 hover:border-bone hover:bg-bone hover:text-ink"
+        aria-label="Previous testimonial"
+        data-ring-prev>
+        <Icon name="arrow-left" />
+      </button>
+      <button
+        type="button"
+        class="grid size-12 place-items-center rounded-full border border-line-strong text-bone transition-colors duration-300 hover:border-bone hover:bg-bone hover:text-ink"
+        aria-label="Next testimonial"
+        data-ring-next>
+        <Icon name="arrow-right" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="relative mt-8 h-[clamp(28rem,68vh,46rem)] cursor-grab touch-pan-y select-none [perspective:900px] active:cursor-grabbing md:[perspective:1150px]"
+    data-ring-stage
+    data-chip="Drag"
+    aria-hidden="true">
+    <div
+      class="pointer-events-none absolute top-[72%] left-1/2 h-[150%] w-[300%] origin-top [transform:translateX(-50%)_rotateX(78deg)] [background-image:linear-gradient(var(--color-line-strong)_1px,transparent_1px),linear-gradient(90deg,var(--color-line-strong)_1px,transparent_1px)] [background-size:96px_96px] [mask-image:linear-gradient(to_bottom,#000_0%,transparent_55%)]"
+      data-ring-floor></div>
+    <div class="absolute top-[42%] left-1/2 [transform-style:preserve-3d]" data-ring>
+      {slots.map((item, i) => (
+        <figure
+          class="group absolute top-0 left-0 w-[clamp(16rem,27vw,28rem)] [backface-visibility:hidden]"
+          data-ring-card
+          data-slot={i}>
+          <div class="relative overflow-hidden border border-line bg-ink-2 [-webkit-box-reflect:below_14px_linear-gradient(transparent_62%,rgb(0_0_0/0.28))]">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={resolveImage(item.image)}
+                alt=""
+                widths={[400, 700]}
+                sizes="24vw"
+                draggable="false"
+                class="absolute inset-0 size-full object-cover transition-[scale] duration-700 ease-(--ease-out-expo) group-hover:scale-105"
+              />
+            </div>
+            <figcaption class="flex items-end justify-between gap-4 p-4 md:p-5">
+              <div class="min-w-0">
+                <p class="truncate font-display text-lg leading-tight font-bold text-bone">{item.company}</p>
+                <p class="truncate text-xs text-mute">{item.name}</p>
+              </div>
+              <p class="shrink-0 font-display text-2xl font-bold tracking-[-0.03em] text-signal">
+                {`${item.metric.prefix ?? ''}${item.metric.value}${item.metric.suffix ?? ''}`}
+              </p>
+            </figcaption>
+            <span class="pointer-events-none absolute inset-0 bg-ink" style="opacity:0" data-ring-shade></span>
+          </div>
+        </figure>
+      ))}
+    </div>
+  </div>
+
+  <div class="shell relative mt-4 grid grid-cols-1 gap-10 md:grid-cols-12 md:items-end">
+    <blockquote class="md:col-span-8">
+      <p
+        class="max-w-[30ch] font-display text-[clamp(1.625rem,2.6vw,2.75rem)] leading-[1.1] font-medium tracking-[-0.025em] text-bone"
+        aria-live="polite"
+        data-ring-quote>
+        &ldquo;{first.quote}&rdquo;
+      </p>
+    </blockquote>
+    <div class="flex flex-col gap-6 md:col-span-4 md:items-end md:text-right">
+      <div>
+        <p class="font-medium text-bone" data-ring-name>
+          {first.name}
+        </p>
+        <p class="text-sm text-mute" data-ring-role>
+          {first.role}, {first.company}
+        </p>
+      </div>
+      <div class="flex items-baseline gap-3 md:flex-row-reverse">
+        <NumberFlow
+          value={first.metric.value}
+          prefix={first.metric.prefix}
+          suffix={first.metric.suffix}
+          duration={1.2}
+          class="font-display text-[clamp(2.5rem,4.5vw,4.5rem)] leading-none font-extrabold tracking-[-0.04em] text-signal"
+        />
+        <span class="max-w-[16ch] text-sm text-mute" data-ring-label>
+          {first.metric.label}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
