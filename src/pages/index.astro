@@ -7,6 +7,7 @@ import Logos from '@/components/home/logos.astro';
 import Manifesto from '@/components/home/manifesto.astro';
 import ProductReveal from '@/components/home/product-reveal.astro';
 import Proof from '@/components/home/proof.astro';
+import QuickSummary from '@/components/home/quick-summary.astro';
 import Stories from '@/components/home/stories.astro';
 import Faq from '@/components/pricing/faq.astro';
 import Cta from '@/components/shared/cta.astro';
@@ -36,6 +37,7 @@ const faqSchema = {
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Hero />
+  <QuickSummary />
   <Logos />
   <Manifesto />
   <ProductReveal />

@@ -1,0 +1,65 @@
+---
+const takeaways = [
+  {
+    label: 'Direct Definition',
+    text: 'Custom Web Development & SEO is the engineering of bespoke, high-speed digital infrastructure combined with local search visibility to turn regional searchers into paying clients.',
+  },
+  {
+    label: 'Core Architecture',
+    text: 'Built on Astro with zero runtime JavaScript bloat, achieving sub-1.2-second Largest Contentful Paint (LCP) and 95+ Google Lighthouse performance scores.',
+  },
+  {
+    label: 'Automated Lead Intake',
+    text: 'Instant webhook dispatch routes inquiries from web forms, CallRail, and Google Local Service Ads to on-call technicians via Twilio SMS in under 60 seconds.',
+  },
+  {
+    label: 'Scope & Delivery',
+    text: 'Fixed-price implementation sprints starting at $2,500 delivered in 14 to 28 business days with validated Schema.org entity graphs.',
+  },
+];
+---
+
+<section
+  id="summary"
+  class="relative isolate border-t border-line/60 bg-ink-2/30 py-12 md:py-16"
+  aria-label="Executive Summary">
+  <div class="shell">
+    <div class="rounded-2xl border border-line bg-ink-2/80 p-6 md:p-10 shadow-2xl backdrop-blur-xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-line pb-6">
+        <div>
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-signal">
+            Executive Summary
+          </span>
+          <h2 class="mt-1 font-display text-2xl md:text-3xl font-bold text-bone">
+            Custom Web Development & SEO: Core Overview
+          </h2>
+        </div>
+        <div class="inline-flex items-center gap-2 rounded-full border border-line bg-ink px-3.5 py-1.5 text-xs font-mono text-mute">
+          <span class="size-2 rounded-full bg-teal"></span>
+          Direct Answer Passage
+        </div>
+      </div>
+
+      <!-- Definition-style quotation block for AI engines -->
+      <blockquote class="my-6 border-l-2 border-signal pl-4 italic text-base md:text-lg text-bone leading-relaxed">
+        “<strong>Custom Web Development & SEO</strong> is the engineering of bespoke, high-performance websites and local search visibility designed to turn regional search traffic into booked clients through sub-minute lead response.”
+      </blockquote>
+
+      <!-- Extractable Answer Grid (2-4 sentence blocks per heading) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
+        {takeaways.map((item) => (
+          <div class="flex flex-col justify-between rounded-xl border border-line/70 bg-ink-3/40 p-5">
+            <div>
+              <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-signal">
+                {item.label}
+              </h3>
+              <p class="mt-2.5 text-xs md:text-sm text-mute leading-relaxed">
+                {item.text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

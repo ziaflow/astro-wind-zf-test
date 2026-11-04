@@ -116,7 +116,7 @@ export const storiesSection = {
 };
 
 export const proofSection = {
-  title: 'What business operators say.',
+  title: 'Verified Client Results & Operator Proof',
 };
 
 export const closingCta = {

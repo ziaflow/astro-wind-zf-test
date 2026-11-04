@@ -215,3 +215,46 @@ test('Content quality avoids boilerplate n-grams and incorporates concrete opera
   }
 });
 
+test('Answer extractability provides an answer-first direct definition and executive summary block', () => {
+  const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
+  const summarySource = readFileSync(resolve('src/kairo/components/home/quick-summary.astro'), 'utf-8');
+  const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
+
+  // Verify mounting on homepage right after Hero
+  assert.match(
+    indexSource,
+    /<Hero\s*\/>\s*<QuickSummary\s*\/>/,
+    'QuickSummary must be mounted immediately following Hero'
+  );
+
+  // Verify direct definition blockquote
+  assert.match(
+    summarySource,
+    /<blockquote[^>]*>[\s\S]*<strong>Custom Web Development & SEO<\/strong>\s+is/i,
+    'Must include direct quoteable definition sentence with strong entity name'
+  );
+
+  // Verify executive summary H2 and H3 extractable sections
+  assert.match(
+    summarySource,
+    /<h2[^>]*>[\s\S]*Custom Web Development & SEO: Core Overview[\s\S]*<\/h2>/,
+    'Must contain summary H2 heading'
+  );
+  assert.match(
+    summarySource,
+    /<h3[^>]*>[\s\S]*\{item\.label\}[\s\S]*<\/h3>/,
+    'Must render H3 headings for each takeaway item'
+  );
+  assert.match(
+    summarySource,
+    /label:\s*'Direct Definition'/,
+    'Must include Direct Definition takeaway card'
+  );
+
+  // Ensure "What business operators say." is eliminated from proofSection
+  assert.ok(
+    !homeDataSource.includes('What business operators say.'),
+    'Pseudo-question heading "What business operators say." must be eliminated'
+  );
+});
+
