@@ -120,6 +120,7 @@ test('discovers runtime tools, requires retrieval, streams text and closes the M
   assert.equal(response.headers.get('cache-control'), 'no-store');
   assert.match(response.headers.get('content-type'), /text\/event-stream/);
   assert.equal(observed.connection.transport.headers.Authorization, `Bearer ${env.SANITY_ORGANIZATION_TOKEN}`);
+  assert.equal(observed.connection.protocolVersionDiscovery, false);
   assert.equal(observed.generation.tools, tools);
   assert.equal(observed.generation.stopWhen, 10);
   assert.equal(observed.generation.prepareStep({ stepNumber: 0 }).toolChoice, 'required');

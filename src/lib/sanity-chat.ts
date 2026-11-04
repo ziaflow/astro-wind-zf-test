@@ -130,11 +130,13 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
 
   try {
     client = await createMCPClient({
+      // This Context endpoint uses the initialization handshake, not stateless server/discover.
+      protocolVersionDiscovery: false,
       transport: {
         type: 'http',
         url: MCP_URL,
         headers: { Authorization: `Bearer ${env.SANITY_ORGANIZATION_TOKEN}` },
-        fetch: async (input, init) => {
+        fetch: async (input: Parameters<typeof fetch>[0], init?: Parameters<typeof fetch>[1]) => {
           const response = await fetch(input, {
             ...init,
             signal: init?.signal ? AbortSignal.any([signal, init.signal]) : signal,

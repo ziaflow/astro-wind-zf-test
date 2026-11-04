@@ -9,6 +9,7 @@ try {
   /* optional */
 }
 const token = process.env.SANITY_CHAT_ACCESS_TOKEN || local.SANITY_CHAT_ACCESS_TOKEN;
+const previewCookie = process.env.VERCEL_PREVIEW_COOKIE || local.VERCEL_PREVIEW_COOKIE;
 const endpoint = process.argv[2];
 const question =
   process.argv[3] ||
@@ -20,7 +21,11 @@ if (url.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(url.hostna
 if (!url.pathname.endsWith('/api/sanity-chat')) throw Error('Expected the Sanity chat API path.');
 const response = await fetch(url, {
   method: 'POST',
-  headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+  headers: {
+    authorization: `Bearer ${token}`,
+    'content-type': 'application/json',
+    ...(previewCookie ? { cookie: previewCookie } : {}),
+  },
   body: JSON.stringify({ messages: [{ role: 'user', content: question }] }),
   redirect: 'error',
 });
@@ -42,7 +47,10 @@ for await (const chunk of response.body.pipeThrough(new TextDecoderStream())) {
     const data = JSON.parse(event.match(/^data: (.+)$/m)?.[1] || '{}');
     if (name === 'text') process.stdout.write(data.delta);
     if (name === 'tool') console.log(`\n[Sanity tool: ${data.name}; success: ${data.success}]`);
-    if (name === 'error') throw Error(data.message);
+    if (name === 'error')
+      throw Error(
+        `${data.message} (Sanity HTTP: ${data.sanityStatus ?? 'unknown'}; model HTTP: ${data.modelStatus ?? 'unknown'}; request: ${data.requestId})`
+      );
     if (name === 'finish') {
       complete = data.complete;
       toolCalls = data.successfulToolCalls;

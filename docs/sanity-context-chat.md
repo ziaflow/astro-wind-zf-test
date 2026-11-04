@@ -33,7 +33,8 @@ node scripts/test-sanity-chat.mjs https://YOUR-DEPLOYMENT/api/sanity-chat
 
 An optional second argument supplies your question. Use a question whose answer you
 can independently check in Sanity. For protected Vercel previews, authenticate to the
-preview separately; this script does not disable deployment protection.
+preview separately; this script does not disable deployment protection. A temporary
+authorized preview cookie can be supplied as server-only `VERCEL_PREVIEW_COOKIE`.
 
 The request must carry `Authorization: Bearer <SANITY_CHAT_ACCESS_TOKEN>` and JSON:
 
@@ -60,6 +61,9 @@ limiter is per warm server instance; it is supplementary, not a distributed quot
 The MCP client closes on completion, cancellation, timeout and failures. Requests,
 credentials and raw tool results are not logged by this integration. Source access
 and provider retention still follow the Sanity/OpenAI account settings.
+
+Compatibility: this endpoint uses the MCP initialization handshake. The client sets
+`protocolVersionDiscovery: false` to avoid the newer SDK's stateless discovery probe.
 
 ## Verification
 
