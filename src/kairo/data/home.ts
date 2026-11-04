@@ -1,4 +1,5 @@
 import { site } from '@/data/site';
+import type { Faq } from '@/interface';
 
 export const hero = {
   lines: [
@@ -122,3 +123,31 @@ export const closingCta = {
   title: 'Discuss your website and follow-up.',
   body: 'Book a consultation with our Phoenix team. We will review how inquiries enter your business today, identify broken handoffs, and scope a practical Sprint.',
 };
+
+export const homeFaqs: Faq[] = [
+  {
+    question: 'What does Custom Web Development & SEO include for Phoenix businesses?',
+    answer:
+      'Custom Web Development & SEO combines bespoke, high-performance web engineering with technical and local search optimization. ZiaFlow designs lightweight Astro websites, implements structured data schema, repairs intake points, and optimizes for Google Maps and striking-distance search rankings to drive qualified local leads.',
+  },
+  {
+    question: 'How does ZiaFlow connect website inquiries to CRM and lead follow-up?',
+    answer:
+      'Through our Lead Capture & Follow-Up Sprint, we audit your inquiry endpoints (such as web forms, call tracking, and Google Local Service Ads), connect automated prospect notifications, route lead details directly into your CRM, and provide a documented operating runbook so every inquiry has an accountable owner and a next step.',
+  },
+  {
+    question: 'How fast can ZiaFlow design, build, and launch a custom website?',
+    answer:
+      'Most custom web development projects and lead capture implementations launch within 2 to 4 weeks. We work in fixed-scope sprints with transparent milestone reviews, ensuring rapid delivery without bloated agency retainers or deferred handoffs.',
+  },
+  {
+    question: 'Why should Arizona service companies choose custom web development over generic templates?',
+    answer:
+      'Generic templates often suffer from sluggish loading speeds, code bloat, and poor mobile conversion rates. Custom web development built on modern web standards delivers sub-second load times, flawless Core Web Vitals, enterprise security, and tailor-made lead capture workflows engineered specifically for local conversion.',
+  },
+  {
+    question: 'How do we get started with a consultation or website audit?',
+    answer:
+      'You can book a consultation call directly through our online scheduler or call our Phoenix team at (602) 834-4239. We review how inquiries enter your business today, identify dropped opportunities, and outline a fixed-scope plan to modernize your web presence and intake pipeline.',
+  },
+];

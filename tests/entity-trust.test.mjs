@@ -88,3 +88,35 @@ test('Footer reinforces the entity name across brand panel and tagline', () => {
     'Footer tagline bar must display "CUSTOM WEB DEVELOPMENT & SEO"'
   );
 });
+
+test('Visible FAQ component is mounted on homepage with matching FAQPage schema', () => {
+  const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
+  const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
+
+  // Verify visible FAQ mounting
+  assert.match(
+    indexSource,
+    /<Faq\s+title="[^"]*"\s+items=\{homeFaqs\}/,
+    'Homepage must visibly mount <Faq /> with items={homeFaqs}'
+  );
+
+  // Verify FAQPage JSON-LD schema mirrors visible items
+  assert.match(
+    indexSource,
+    /mainEntity:\s*homeFaqs\.map/,
+    'FAQPage schema must dynamically mirror visible homeFaqs array'
+  );
+
+  // Verify count of questions is 3-5
+  const questionMatches = Array.from(homeDataSource.matchAll(/question:\s*['"]([^'"]+)['"]/g));
+  assert.ok(
+    questionMatches.length >= 3 && questionMatches.length <= 8,
+    `Must have between 3 and 8 question headings, found ${questionMatches.length}`
+  );
+
+  // Verify all questions are question-style (end with ?)
+  for (const [, q] of questionMatches) {
+    assert.ok(q.endsWith('?'), `FAQ question must end with '?': ${q}`);
+  }
+});
+
