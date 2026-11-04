@@ -1,4 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
+import { resolveLegacyRedirect } from './config/redirects';
 import { sanityClient } from 'sanity:client';
 
 interface SanityRedirect {
@@ -46,15 +47,23 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (pathname === '/api/contact' && context.request.method === 'POST') {
     const { checkRateLimit, getClientIp } = await import('~/lib/rate-limiter');
     const ip = getClientIp(context.request);
-    const { allowed, resetInSeconds } = checkRateLimit(ip, { maxRequests: 50, windowMs: 60_000 });
+    const { allowed, resetInSeconds } = checkRateLimit(ip, {
+      maxRequests: 50,
+      windowMs: 60_000,
+    });
     if (!allowed) {
-      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'Retry-After': String(resetInSeconds),
-        },
-      });
+      return new Response(
+        JSON.stringify({
+          message: 'Too many requests. Please wait before submitting again.',
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': String(resetInSeconds),
+          },
+        }
+      );
     }
   }
 
@@ -63,88 +72,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return next();
   }
 
-  // Built-in 301 Redirects for legacy routes, growth tools, and renamed URLs
-  const builtInRedirects: Record<string, string> = {
-    '/old-service-page': '/services/web-development',
-    '/kairo-preview': '/',
-
-    // Growth Tools
-    '/local-visibility-check': '/growth-tools/local-visibility-check',
-    '/website-project-estimator': '/growth-tools/website-project-estimator',
-    '/lead-follow-up-assessment': '/growth-tools/lead-follow-up-assessment',
-    '/software-stack-assessment': '/growth-tools/software-stack-assessment',
-    '/website-conversion-checklist': '/growth-tools/website-conversion-checklist',
-
-    // Blog post legacy slug variations
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/blog/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/guide-to-web-development-2026':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/2026-web-development-guide':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
-
-    // Legacy /blog/:slug routes mapping to root /:slug
-    '/blog/google-local-service-ads-in-2025': '/google-local-service-ads-in-2025',
-    '/blog/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings':
-      '/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
-    '/blog/reduce-bounce-rate-with-ai': '/reduce-bounce-rate-with-ai',
-    '/blog/website-analysis-tasks': '/website-analysis-tasks',
-    '/blog/website-conversion-checklist-for-phoenix-businesses': '/website-conversion-checklist-for-phoenix-businesses',
-    '/blog/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
-
-    // Legacy Service & Sub-technology Slugs
-    '/services/astro': '/services/web-development',
-    '/services/react': '/services/web-development',
-    '/services/wix': '/services/web-development',
-    '/services/shopify': '/services/ecommerce',
-
-    // Case Studies
-    '/case-studies/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
-    '/case-studies/phoenix-commercial-hvac': '/phoenix-commercial-hvac-lead-intake',
-    '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
-
-    // Posts archive & legacy /posts/ routes
-    '/posts': '/blog',
-    '/posts/microsoft-ads-complete-guide-2026': '/services/ppc',
-    '/microsoft-ads-complete-guide-2026': '/services/ppc',
-    '/blog/microsoft-ads-complete-guide-2026': '/services/ppc',
-    '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
-    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-
-    // Legacy WordPress Slugs & Taxonomy
-    '/hello-world': '/blog',
-    '/about-ziaflow': '/about',
-    '/category/strategy': '/blog',
-    '/category/tutorial': '/blog',
-    '/category/uncategorized': '/blog',
-    '/category/analysis': '/blog',
-    '/category/paid-search': '/services/ppc',
-    '/category/marketing-automation': '/services/automation',
-    '/category/conversion-optimization': '/services/cro',
-    '/category/web-development': '/services/web-development',
-    '/category/ai-automation': '/services/automation',
-    '/tag/analysis': '/blog',
-    '/tag/artificial': '/blog',
-    '/tag/software': '/blog',
-    '/2021/01/20/consulted-admitting-is-power-acuteness': '/blog',
-  };
-
   // Immediate 410 Gone for legacy spam / Network Solutions exploits
   if (pathname.includes('netsoltrademark.php') || pathname.includes('__media__')) {
     return new Response('Gone', { status: 410 });
@@ -152,7 +79,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // Legacy WordPress date archives (/2021/..., /2022/...)
   if (/^\/\d{4}\/\d{2}\/\d{2}\//.test(pathname)) {
-    return context.redirect('/blog', 301);
+    return context.redirect('/blog' + context.url.search, 301);
   }
 
   // Normalize legacy WordPress query parameters (?p=1, ?page_id=2)
@@ -160,8 +87,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect('/', 301);
   }
 
-  if (builtInRedirects[pathname]) {
-    return context.redirect(builtInRedirects[pathname], 301);
+  const legacyDestination = resolveLegacyRedirect(pathname, context.url.search);
+  if (legacyDestination) {
+    return context.redirect(legacyDestination, 301);
   }
 
   const redirects = await getRedirects();
