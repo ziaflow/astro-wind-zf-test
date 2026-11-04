@@ -120,3 +120,43 @@ test('Visible FAQ component is mounted on homepage with matching FAQPage schema'
   }
 });
 
+test('Evidence & benchmarks section provides self-contained citability with outbound source links', () => {
+  const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
+  const benchmarksSource = readFileSync(resolve('src/kairo/components/home/evidence-benchmarks.astro'), 'utf-8');
+
+  // Verify mounting on homepage
+  assert.match(
+    indexSource,
+    /<EvidenceBenchmarks\s*\/>/,
+    'Homepage must visibly mount <EvidenceBenchmarks />'
+  );
+
+  // Verify self-contained headings and main entity inclusion
+  assert.ok(
+    benchmarksSource.includes(ENTITY_NAME),
+    'Benchmarks section must ground claims by repeating "Custom Web Development & SEO"'
+  );
+
+  // Verify authoritative outbound sources
+  const expectedSources = [
+    'https://web.dev/articles/vitals',
+    'https://hbr.org/2011/03/the-short-life-of-online-sales-leads',
+    'https://www.brightlocal.com/research/local-consumer-review-survey/',
+    'https://schema.org/LocalBusiness',
+  ];
+
+  for (const source of expectedSources) {
+    assert.ok(
+      benchmarksSource.includes(source),
+      `Benchmarks section must cite verified source: ${source}`
+    );
+  }
+
+  // Verify comparison table exists with semantic table tags
+  assert.match(benchmarksSource, /<table\b/, 'Benchmarks must contain a semantic <table>');
+  assert.match(benchmarksSource, /<thead\b/, 'Comparison table must contain <thead>');
+  assert.match(benchmarksSource, /<tbody\b/, 'Comparison table must contain <tbody>');
+  assert.match(benchmarksSource, /scope="col"/, 'Table headers must define scope="col"');
+  assert.match(benchmarksSource, /scope="row"/, 'Row headers must define scope="row"');
+});
+
