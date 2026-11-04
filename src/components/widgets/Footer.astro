@@ -137,11 +137,11 @@ const currentYear = new Date().getFullYear();
   <div class="content-layer">
     <div class="wrap grid">
       <!-- Brand & Contact Card -->
-      <section class="brand-panel" aria-label="ZiaFlow contact">
-        <a class="wordmark" href={getHomePermalink()}>
+      <section class="brand-panel" aria-label="Custom Web Development & SEO | ZiaFlow contact">
+        <a class="wordmark" href={getHomePermalink()} aria-label="Custom Web Development & SEO | ZiaFlow">
           Zia<span>Flow</span>
         </a>
-        <p class="description">Websites, software, and automation.<br />Built to work together.</p>
+        <p class="description"><strong>Custom Web Development & SEO</strong><br />Websites, software, and automation. Built to work together.</p>
         <address class="contact-info">
           <span class="location">Phoenix, Arizona</span>
           <a class="phone" href="tel:+16028344239">(602) 834-4239</a>
@@ -196,13 +196,13 @@ const currentYear = new Date().getFullYear();
 
     <!-- Tagline Bar -->
     <div class="wrap tagline">
-      <span class="tagline-title">ARIZONA ROOTS. CONNECTED POSSIBILITIES.</span>
+      <span class="tagline-title">CUSTOM WEB DEVELOPMENT & SEO</span>
       <span class="tagline-desc">Custom software · AI automation · Digital growth</span>
     </div>
 
     <!-- Legal Bottom Bar -->
     <div class="wrap legal">
-      <span>© {currentYear} ZiaFlow. All rights reserved.</span>
+      <span>© {currentYear} ZiaFlow — Custom Web Development & SEO. All rights reserved.</span>
       <nav aria-label="Legal">
         {secondaryLinks.map((link) => <a href={link.href}>{link.text || link.label}</a>)}
       </nav>

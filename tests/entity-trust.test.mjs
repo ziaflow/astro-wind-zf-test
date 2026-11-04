@@ -1,0 +1,90 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const ENTITY_NAME = 'Custom Web Development & SEO';
+
+test('Homepage title explicitly contains the entity name', () => {
+  const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
+  assert.match(
+    indexSource,
+    /title="[^"]*Custom Web Development & SEO[^"]*"/,
+    'Homepage Layout title must include "Custom Web Development & SEO"'
+  );
+});
+
+test('Homepage H1 explicitly includes the entity name', () => {
+  const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
+  assert.match(
+    homeDataSource,
+    /text:\s*['"]Custom Web Development & SEO['"]/,
+    'Hero heading lines must contain "Custom Web Development & SEO"'
+  );
+});
+
+test('Opening copy directly defines the entity within the first sentences', () => {
+  const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
+  assert.match(
+    homeDataSource,
+    /intro:\s*['"]Custom Web Development & SEO is/,
+    'Hero opening copy must begin with a direct definition of "Custom Web Development & SEO"'
+  );
+});
+
+test('Organization / LocalBusiness schema aligns with entity and contains verified sameAs links', () => {
+  const schemaSource = readFileSync(resolve('src/components/seo/LocalBusinessSchema.astro'), 'utf-8');
+  
+  assert.match(
+    schemaSource,
+    /name:\s*['"]Custom Web Development & SEO['"]/,
+    'Schema name must match the primary entity name'
+  );
+  
+  assert.match(
+    schemaSource,
+    /@type':\s*\[[^\]]*'Organization'[^\]]*'LocalBusiness'/,
+    'Schema @type must include Organization and LocalBusiness'
+  );
+
+  const requiredSameAs = [
+    'https://www.linkedin.com/company/ziaflow/',
+    'https://www.facebook.com/ZiaFlowAZ/',
+    'https://www.instagram.com/ziaflowaz/',
+    'https://www.yelp.com/biz/ziaflow-phoenix',
+  ];
+
+  for (const url of requiredSameAs) {
+    assert.ok(
+      schemaSource.includes(url),
+      `Schema sameAs must include verified identity profile: ${url}`
+    );
+  }
+});
+
+test('Logo and navigation include accessible entity name', () => {
+  const logoSource = readFileSync(resolve('src/kairo/components/shared/icons/logo.astro'), 'utf-8');
+  assert.ok(
+    logoSource.includes(ENTITY_NAME),
+    'Logo sr-only text must include "Custom Web Development & SEO"'
+  );
+
+  const navbarSource = readFileSync(resolve('src/kairo/components/shared/layout/navbar.astro'), 'utf-8');
+  assert.ok(
+    navbarSource.includes(ENTITY_NAME),
+    'Navbar home link aria-label must include "Custom Web Development & SEO"'
+  );
+});
+
+test('Footer reinforces the entity name across brand panel and tagline', () => {
+  const footerSource = readFileSync(resolve('src/components/widgets/Footer.astro'), 'utf-8');
+  assert.ok(
+    footerSource.includes(ENTITY_NAME),
+    'Footer must explicitly mention "Custom Web Development & SEO"'
+  );
+  assert.match(
+    footerSource,
+    /<span class="tagline-title">CUSTOM WEB DEVELOPMENT & SEO<\/span>/,
+    'Footer tagline bar must display "CUSTOM WEB DEVELOPMENT & SEO"'
+  );
+});

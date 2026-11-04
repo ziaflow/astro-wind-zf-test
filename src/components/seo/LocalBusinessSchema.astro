@@ -6,11 +6,14 @@ const supabaseLogoUrl = await getSupabaseAssetUrl(SUPABASE_ASSETS.logoSolo);
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
+  '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
   name: 'Custom Web Development & SEO',
+  legalName: 'ZiaFlow LLC',
+  alternateName: 'ZiaFlow',
   description:
-    'ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
+    'Custom Web Development & SEO is the engineering of high-performance websites and local search visibility. ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
   image: supabaseLogoUrl || defaultLogoUrl,
+  logo: supabaseLogoUrl || defaultLogoUrl,
   '@id': 'https://ziaflow.com/#organization',
   url: 'https://ziaflow.com/',
   telephone: '+1-602-834-4239',

@@ -2,11 +2,11 @@ import { site } from '@/data/site';
 
 export const hero = {
   lines: [
-    { text: 'Websites and lead follow-up' },
+    { text: 'Custom Web Development & SEO' },
     { text: 'for', accent: 'Arizona service businesses.' },
   ],
   intro:
-    'ZiaFlow builds websites and connects inquiry capture, CRM routing, and follow-up. Our Lead Capture & Follow-Up Sprint repairs agreed handoffs and gives your team a documented process for managing new inquiries.',
+    'Custom Web Development & SEO is the engineering of high-performance websites and local search visibility built to turn search traffic into booked clients. ZiaFlow builds fast digital platforms with automated inquiry capture, CRM routing, and accountable lead follow-up for Arizona service businesses.',
 };
 
 export const logosSection = {
