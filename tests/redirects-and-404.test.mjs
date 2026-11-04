@@ -44,7 +44,12 @@ test('redirects in astro.config.ts cover all critical legacy endpoints without l
     '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
     '/category/strategy': '/blog',
     '/category/tutorial': '/blog',
+    '/category/marketing-automation': '/services/automation',
+    '/category/uncategorized': '/blog',
     '/posts': '/blog',
+    '/posts/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/hello-world': '/blog',
+    '/about-ziaflow': '/about',
   };
 
   for (const [from, to] of Object.entries(expectedMappings)) {
@@ -70,11 +75,19 @@ test('middleware mirrors redirect coverage for SSR and edge routing', () => {
     '/services/shopify',
     '/case-studies/scottsdale-dental-patient-intake-automation',
     '/category/strategy',
+    '/category/marketing-automation',
+    '/posts/microsoft-ads-complete-guide-2026',
+    '/hello-world',
   ];
 
   for (const key of criticalKeys) {
     assert.ok(middlewareSource.includes(key), `middleware.ts should explicitly cover redirect for ${key}`);
   }
+
+  // Verify 410 protection and date regex patterns
+  assert.ok(middlewareSource.includes('netsoltrademark.php'), 'middleware should contain 410 rule for netsoltrademark.php');
+  assert.ok(middlewareSource.includes('status: 410'), 'middleware should return 410 Gone for spam exploits');
+  assert.ok(middlewareSource.includes('/^\\/\\d{4}\\/\\d{2}\\/\\d{2}\\//'), 'middleware should redirect dated WordPress slugs');
 });
 
 test('404 template contains high-value recovery navigation paths', () => {

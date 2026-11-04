@@ -149,12 +149,35 @@ export default defineConfig({
     '/case-studies/phoenix-commercial-hvac': '/phoenix-commercial-hvac-lead-intake',
     '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
 
-    // Empty / Legacy Categories
+    // Posts archive & legacy /posts/ routes
+    '/posts': '/blog',
+    '/posts/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/blog/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+
+    // Legacy WordPress Slugs & Taxonomy
+    '/hello-world': '/blog',
+    '/about-ziaflow': '/about',
     '/category/strategy': '/blog',
     '/category/tutorial': '/blog',
-
-    // Posts archive
-    '/posts': '/blog',
+    '/category/uncategorized': '/blog',
+    '/category/analysis': '/blog',
+    '/category/paid-search': '/services/ppc',
+    '/category/marketing-automation': '/services/automation',
+    '/category/conversion-optimization': '/services/cro',
+    '/category/web-development': '/services/web-development',
+    '/category/ai-automation': '/services/automation',
+    '/tag/analysis': '/blog',
+    '/tag/artificial': '/blog',
+    '/tag/software': '/blog',
+    '/2021/01/20/consulted-admitting-is-power-acuteness': '/blog',
   },
 
   image: {

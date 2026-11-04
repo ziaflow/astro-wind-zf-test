@@ -114,13 +114,51 @@ export const onRequest = defineMiddleware(async (context, next) => {
     '/case-studies/phoenix-commercial-hvac': '/phoenix-commercial-hvac-lead-intake',
     '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
 
-    // Empty / Legacy Categories
+    // Posts archive & legacy /posts/ routes
+    '/posts': '/blog',
+    '/posts/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/blog/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+
+    // Legacy WordPress Slugs & Taxonomy
+    '/hello-world': '/blog',
+    '/about-ziaflow': '/about',
     '/category/strategy': '/blog',
     '/category/tutorial': '/blog',
-
-    // Posts archive
-    '/posts': '/blog',
+    '/category/uncategorized': '/blog',
+    '/category/analysis': '/blog',
+    '/category/paid-search': '/services/ppc',
+    '/category/marketing-automation': '/services/automation',
+    '/category/conversion-optimization': '/services/cro',
+    '/category/web-development': '/services/web-development',
+    '/category/ai-automation': '/services/automation',
+    '/tag/analysis': '/blog',
+    '/tag/artificial': '/blog',
+    '/tag/software': '/blog',
+    '/2021/01/20/consulted-admitting-is-power-acuteness': '/blog',
   };
+
+  // Immediate 410 Gone for legacy spam / Network Solutions exploits
+  if (pathname.includes('netsoltrademark.php') || pathname.includes('__media__')) {
+    return new Response('Gone', { status: 410 });
+  }
+
+  // Legacy WordPress date archives (/2021/..., /2022/...)
+  if (/^\/\d{4}\/\d{2}\/\d{2}\//.test(pathname)) {
+    return context.redirect('/blog', 301);
+  }
+
+  // Normalize legacy WordPress query parameters (?p=1, ?page_id=2)
+  if (context.url.searchParams.has('p') || context.url.searchParams.has('page_id')) {
+    return context.redirect('/', 301);
+  }
 
   if (builtInRedirects[pathname]) {
     return context.redirect(builtInRedirects[pathname], 301);
