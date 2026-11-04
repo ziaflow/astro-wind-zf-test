@@ -1,18 +1,4 @@
 ---
-import { ANALYTICS } from '~/config/site';
-
-const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.googleTagManager?.id;
+// GTM loads through Analytics.astro after production-host and internal-QA checks.
+// A static noscript iframe cannot honor those checks on preview deployments.
 ---
-
-{
-  gtmId ? (
-    <noscript>
-      <iframe
-        src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-      />
-    </noscript>
-  ) : null
-}
