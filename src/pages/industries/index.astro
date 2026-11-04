@@ -1,0 +1,12 @@
+---
+import Directory from '~/components/expansion/ExpansionDirectory.astro';
+import { pagesOfKind } from '~/data/expansion-pages';
+export const prerender = true;
+---
+
+<Directory
+  title="Arizona Industry Marketing & Workflow Services | ZiaFlow"
+  description="Explore website, marketing, and administrative workflow planning for Arizona home services, healthcare businesses, and law firms."
+  heading="Different industries. Different workflows."
+  pages={pagesOfKind('industry')}
+/>
