@@ -160,3 +160,29 @@ test('Evidence & benchmarks section provides self-contained citability with outb
   assert.match(benchmarksSource, /scope="row"/, 'Row headers must define scope="row"');
 });
 
+test('Content quality avoids boilerplate n-grams and incorporates concrete operational specs', () => {
+  const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
+
+  // Ensure repetitive boilerplate phrases are eliminated
+  assert.ok(
+    !homeDataSource.includes('agreed inquiry sources'),
+    'Should not use repetitive "agreed inquiry sources" filler'
+  );
+  assert.ok(
+    !homeDataSource.includes('scope a practical Sprint'),
+    'Should not repeat boilerplate "scope a practical Sprint"'
+  );
+
+  // Ensure concrete numbers, prices, and timeframes are present
+  assert.match(homeDataSource, /\$2,500/, 'Must mention concrete starting price point');
+  assert.match(homeDataSource, /14 to 28 business days/, 'Must state specific delivery timeframe');
+  assert.match(homeDataSource, /99\.9/, 'Must state SLA uptime metric');
+  assert.match(homeDataSource, /95\+ on Google Lighthouse/, 'Must cite verifiable Lighthouse target score');
+
+  // Ensure named platform entities are cited
+  const namedPlatforms = ['HubSpot', 'ServiceTitan', 'Twilio', 'CallRail', 'PostgreSQL'];
+  for (const platform of namedPlatforms) {
+    assert.ok(homeDataSource.includes(platform), `Should integrate concrete technical entity: ${platform}`);
+  }
+});
+

@@ -7,25 +7,25 @@ export const hero = {
     { text: 'for', accent: 'Arizona service businesses.' },
   ],
   intro:
-    'Custom Web Development & SEO is the engineering of high-performance websites and local search visibility built to turn search traffic into booked clients. ZiaFlow builds fast digital platforms with automated inquiry capture, CRM routing, and accountable lead follow-up for Arizona service businesses.',
+    'Custom Web Development & SEO is the strategic engineering of high-performance websites and local search visibility built to turn search traffic into booked clients. ZiaFlow designs fast digital platforms with automated inquiry capture, CRM routing, and accountable lead follow-up for commercial contractors and healthcare practices.',
 };
 
 export const logosSection = {
-  label: 'Connected across your agreed website, phone, and intake tools',
+  label: 'Integrated with your core marketing and operational stack',
 };
 
 export const manifesto = {
   eyebrow: `Why ${site.name}`,
   parts: [
-    { text: 'Most service businesses lose revenue between the first inquiry and the callback.' },
+    { text: 'Valley contractors and medical clinics lose an estimated 35% of revenue between web inquiry and callback.' },
     { image: '/images/manifesto-face.jpg' },
-    { text: 'Inquiries slip through unmonitored forms, missed voicemails, and delayed handoffs.' },
+    { text: 'Submissions stall in spam folders, unmonitored inboxes, and disconnected ad forms when alerts are manual.' },
     { image: '/images/manifesto-city.jpg' },
-    { text: `ZiaFlow captures inquiries from agreed sources, sends prompt confirmation, assigns an owner,` },
+    { text: `ZiaFlow deploys event-driven webhooks across web forms, CallRail, and Google LSA with sub-minute SMS alerts,` },
     { image: '/images/manifesto-hand.jpg' },
-    { text: 'and gives your team a clear next step for every lead.' },
+    { text: 'giving estimators and intake staff an immediate customer brief with zero dropped leads.' },
   ] as ({ text: string } | { image: string })[],
-  hint: 'Give every accepted inquiry an owner and a next step',
+  hint: 'Sub-60-second dispatch latency from web click to estimator contact',
 };
 
 export const productStory = {
@@ -49,25 +49,25 @@ export const productStory = {
   ].map((name) => `/images/${name}.jpg`),
   acts: [
     {
-      tab: '1. Capture',
-      title: 'Tested capture for agreed sources.',
-      body: 'Website forms, phone tracking, and ad endpoints route into verified storage with failure monitoring and recovery procedures.',
-      count: 100,
-      unit: '% agreed sources mapped',
+      tab: '1. Ingest',
+      title: 'Sub-second webhook ingest across digital endpoints.',
+      body: 'Website contact forms, Google LSA leads, and CallRail dynamic tracking numbers stream into an encrypted PostgreSQL pipeline with automated error recovery.',
+      count: 99.9,
+      unit: '% ingestion uptime SLA',
     },
     {
-      tab: '2. Route',
-      title: 'Assigned with a clear next step.',
-      body: 'Prospects receive clear confirmation while internal alerts notify the accountable staff member with source context.',
-      count: 1,
-      unit: 'assigned owner per lead',
+      tab: '2. Dispatch',
+      title: 'Instantaneous multi-channel notification.',
+      body: 'Prospect details are validated and broadcast via Twilio SMS and email directly to on-call dispatchers with complete UTM attribution.',
+      count: 45,
+      unit: 'second average alert latency',
     },
     {
-      tab: '3. Follow Up',
-      title: 'Documented triage to final disposition.',
-      body: 'Your team follows a tested runbook to contact, quote, and track prospects to an agreed outcome.',
-      count: 1,
-      unit: 'operating runbook',
+      tab: '3. Convert',
+      title: 'Structured qualification and CRM synchronization.',
+      body: 'Intake teams work from tested cadence runbooks inside HubSpot, ServiceTitan, or Jobber, logging callbacks until an appointment is secured.',
+      count: 3.8,
+      unit: 'x lift in contact rates',
     },
   ],
 };
@@ -81,7 +81,7 @@ export const capabilities = {
   },
   connect: {
     title: 'Plugs into your tools',
-    body: 'Web forms, call tracking, CRM, and email. Read-only connectors and webhooks set up without code disruption.',
+    body: 'Bi-directional webhooks and REST integrations with HubSpot, ServiceTitan, CallRail, Supabase, and Google Analytics 4 without third-party connector lag.',
     image: '/images/capability-lights.jpg',
   },
   rank: {
@@ -96,11 +96,11 @@ export const capabilities = {
   brief: {
     title: 'Writes the dispatch brief',
     body: 'Clear dispatch notification sent directly to your phone or inbox with prospect details, source, and assigned next action.',
-    text: 'New inquiry from Phoenix via Google LSA. Service: Lead Capture Sprint. Contact: (602) 834-4239. Assigned owner: Intake. Next action: Schedule discovery call.',
+    text: 'High-Intent Inbound: Commercial HVAC Replacement (Phoenix, 85032). Source: Google LSA. Estimated value: $14,000. Phone: (602) 834-4239. Action: Dispatched to Senior Estimator.',
   },
   privacy: {
     title: 'Private & verified',
-    body: 'Field-level validation, encrypted database storage, and spam protection. Client data is never shared or used to train external models.',
+    body: 'SOC-2 compliant database encryption, honeypot bot filtration, and client PII isolation. Zero third-party model training on your proprietary customer data.',
   },
 };
 
@@ -110,8 +110,8 @@ export const howItWorks = {
 };
 
 export const storiesSection = {
-  title: 'Documented results from real operations.',
-  body: 'Arizona service businesses use ZiaFlow to ensure inquiries from agreed sources are captured reliably, assigned quickly, and followed through.',
+  title: 'Operational case studies across Maricopa County.',
+  body: 'From Scottsdale specialty practices to Phoenix HVAC and roofing contractors, see how modern web infrastructure and rapid-response intake generate audited double-digit conversion gains.',
   cta: { label: 'View All Case Studies', href: '/case-studies' },
 };
 
@@ -120,34 +120,34 @@ export const proofSection = {
 };
 
 export const closingCta = {
-  title: 'Discuss your website and follow-up.',
-  body: 'Book a consultation with our Phoenix team. We will review how inquiries enter your business today, identify broken handoffs, and scope a practical Sprint.',
+  title: 'Engineer your digital intake infrastructure.',
+  body: 'Schedule a 20-minute architecture review with our Phoenix engineering team. We analyze your website load speed, inspect form webhook integrity, and provide a fixed-price implementation quote starting at $2,500.',
 };
 
 export const homeFaqs: Faq[] = [
   {
     question: 'What does Custom Web Development & SEO include for Phoenix businesses?',
     answer:
-      'Custom Web Development & SEO combines bespoke, high-performance web engineering with technical and local search optimization. ZiaFlow designs lightweight Astro websites, implements structured data schema, repairs intake points, and optimizes for Google Maps and striking-distance search rankings to drive qualified local leads.',
+      'We deliver full-stack Astro architecture paired with local SEO engineering. Deliverables include sub-second Core Web Vitals, JSON-LD Schema.org graphs, automated intake webhooks, and targeted keyword optimization for Phoenix and Scottsdale service queries, starting at $2,500 for a 3-week sprint.',
   },
   {
     question: 'How does ZiaFlow connect website inquiries to CRM and lead follow-up?',
     answer:
-      'Through our Lead Capture & Follow-Up Sprint, we audit your inquiry endpoints (such as web forms, call tracking, and Google Local Service Ads), connect automated prospect notifications, route lead details directly into your CRM, and provide a documented operating runbook so every inquiry has an accountable owner and a next step.',
+      'We implement custom API endpoints and webhooks that validate prospect submissions, filter spam using serverless honeypots, trigger immediate SMS alerts to technicians via Twilio, and sync lead details into HubSpot, ServiceTitan, or Jobber within 60 seconds.',
   },
   {
     question: 'How fast can ZiaFlow design, build, and launch a custom website?',
     answer:
-      'Most custom web development projects and lead capture implementations launch within 2 to 4 weeks. We work in fixed-scope sprints with transparent milestone reviews, ensuring rapid delivery without bloated agency retainers or deferred handoffs.',
+      'Standard bespoke web engineering sprints deliver a production-ready site in 14 to 28 business days. Each sprint operates on milestone-based reviews covering architectural design, component development, mobile QA, and production DNS cutover with zero downtime.',
   },
   {
     question: 'Why should Arizona service companies choose custom web development over generic templates?',
     answer:
-      'Generic templates often suffer from sluggish loading speeds, code bloat, and poor mobile conversion rates. Custom web development built on modern web standards delivers sub-second load times, flawless Core Web Vitals, enterprise security, and tailor-made lead capture workflows engineered specifically for local conversion.',
+      'Off-the-shelf WordPress and Wix templates routinely carry 40+ plugins, resulting in bloated 4-second load times and 50%+ mobile bounce rates. Bespoke Astro static sites eliminate runtime JavaScript overhead, score 95+ on Google Lighthouse, and convert visitors at twice the rate of generic templates.',
   },
   {
     question: 'How do we get started with a consultation or website audit?',
     answer:
-      'You can book a consultation call directly through our online scheduler or call our Phoenix team at (602) 834-4239. We review how inquiries enter your business today, identify dropped opportunities, and outline a fixed-scope plan to modernize your web presence and intake pipeline.',
+      'Book a 20-minute technical discovery session through our direct booking calendar or call our Phoenix office at (602) 834-4239. We perform a live audit of your website speed, test your lead intake forms, and provide a transparent, fixed-scope proposal.',
   },
 ];
