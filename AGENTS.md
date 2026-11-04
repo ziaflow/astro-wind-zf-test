@@ -1,3 +1,9 @@
+<!--
+  Parent Operating Manifest: c:\Users\jerem\Agents\AGENTS.md
+  Runtime: Antigravity / Hermes web-engineer profile
+  Safety: Read-only audits & draft-first; no forced git pushes or destructive DB commands.
+-->
+
 # Gemini Agent Instructions for Sanity
 
 This document provides a set of instructions for Gemini agents (such as the one in Cursor) to interact with the Sanity Content Lake. By following these guidelines, the agent can perform tasks like content creation, schema management, and SEO optimization more effectively.

@@ -95,6 +95,11 @@ export async function syncGSCData(records) {
 
 // CLI runner if executed directly
 async function run() {
+  console.error(
+    'REFUSED: scripts/sync-google-metrics.mjs contains fabricated sample metrics and must not write to production.'
+  );
+  process.exit(1);
+
   console.log('--- Reading existing GA4 & GSC telemetry from Supabase ---');
   const ga4Existing = await readSupabaseTable('metrics_ga4_daily', 'order=date.desc,page_path.asc');
   console.log(`GA4 records found: ${ga4Existing.length}`);

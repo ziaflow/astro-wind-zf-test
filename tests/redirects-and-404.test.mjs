@@ -37,8 +37,12 @@ test('redirects in astro.config.ts cover all critical legacy endpoints without l
     '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
     '/category/strategy': '/blog',
     '/category/tutorial': '/blog',
+    '/category/marketing-automation': '/services/automation',
+    '/category/uncategorized': '/blog',
     '/posts': '/blog',
     '/posts/microsoft-ads-complete-guide-2026': '/services/ppc',
+    '/hello-world': '/blog',
+    '/about-ziaflow': '/about',
     '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
     '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-higher-converting-websites':
       '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
@@ -117,6 +121,11 @@ test('middleware returns permanent redirects with attribution and trailing-slash
     );
     assert.equal(response.status, 404);
   }
+
+  // Verify 410 protection and date regex patterns
+  assert.ok(source.includes('netsoltrademark.php'), 'middleware should contain 410 rule for netsoltrademark.php');
+  assert.ok(source.includes('status: 410'), 'middleware should return 410 Gone for spam exploits');
+  assert.ok(source.includes('^\\/\\d{4}\\/\\d{2}\\/\\d{2}\\/'), 'middleware should redirect dated WordPress slugs');
 });
 
 test('404 template contains high-value recovery navigation paths', () => {

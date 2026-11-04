@@ -1,56 +1,43 @@
 ---
 import Capabilities from '@/components/home/capabilities.astro';
+import EvidenceBenchmarks from '@/components/home/evidence-benchmarks.astro';
 import Hero from '@/components/home/hero.astro';
 import HowItWorks from '@/components/home/how-it-works.astro';
 import Logos from '@/components/home/logos.astro';
 import Manifesto from '@/components/home/manifesto.astro';
 import ProductReveal from '@/components/home/product-reveal.astro';
 import Proof from '@/components/home/proof.astro';
+import QuickSummary from '@/components/home/quick-summary.astro';
 import Stories from '@/components/home/stories.astro';
+import Faq from '@/components/pricing/faq.astro';
 import Cta from '@/components/shared/cta.astro';
 import Layout from '@/layouts/layout.astro';
+import { homeFaqs } from '@/data/home';
 
 export const prerender = true;
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'How does ZiaFlow help Arizona service businesses manage incoming inquiries?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Through our Lead Capture & Follow-Up Sprint, we audit your agreed inquiry sources (such as web forms, call-tracking endpoints, and Google Local Service Ads), repair broken capture points, connect automated prospect acknowledgement, alert responsible staff, and provide a documented operating runbook so every accepted inquiry has an owner and a next step.',
-      },
+  mainEntity: homeFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
     },
-    {
-      '@type': 'Question',
-      name: 'What services does ZiaFlow provide in Phoenix, Arizona?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'ZiaFlow builds fast Astro websites and implements lead capture, CRM routing, technical SEO, and conversion systems for Arizona service businesses.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do we get started with ZiaFlow?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'You can book a consultation call or contact our Phoenix team directly. We will review how inquiries enter your business today, identify broken handoffs, and outline a fixed-scope Sprint.',
-      },
-    },
-  ],
+  })),
 };
 ---
 
 <Layout
-  title="Websites and Lead Follow-Up for Arizona Service Businesses | ZiaFlow"
-  description="ZiaFlow builds websites and connects inquiry capture, CRM routing, and follow-up. Give every accepted inquiry an owner and a next step. Call (602) 834-4239."
+  title="Custom Web Development & SEO for Arizona Service Businesses | ZiaFlow"
+  description="ZiaFlow provides custom web development & SEO for Arizona service businesses. Fast Astro websites, local search optimization, and automated lead follow-up. Call (602) 834-4239."
   preloader
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Hero />
+  <QuickSummary />
   <Logos />
   <Manifesto />
   <ProductReveal />
@@ -58,5 +45,7 @@ const faqSchema = {
   <HowItWorks />
   <Stories />
   <Proof />
+  <EvidenceBenchmarks />
+  <Faq title="Questions, answered." items={homeFaqs} id="home-faq" />
   <Cta />
 </Layout>

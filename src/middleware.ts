@@ -72,6 +72,21 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return next();
   }
 
+  // Immediate 410 Gone for legacy spam / Network Solutions exploits
+  if (pathname.includes('netsoltrademark.php') || pathname.includes('__media__')) {
+    return new Response('Gone', { status: 410 });
+  }
+
+  // Legacy WordPress date archives (/2021/..., /2022/...)
+  if (/^\/\d{4}\/\d{2}\/\d{2}\//.test(pathname)) {
+    return context.redirect('/blog' + context.url.search, 301);
+  }
+
+  // Normalize legacy WordPress query parameters (?p=1, ?page_id=2)
+  if (context.url.searchParams.has('p') || context.url.searchParams.has('page_id')) {
+    return context.redirect('/', 301);
+  }
+
   const legacyDestination = resolveLegacyRedirect(pathname, context.url.search);
   if (legacyDestination) {
     return context.redirect(legacyDestination, 301);
