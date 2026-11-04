@@ -12,15 +12,19 @@ const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.goo
   (function () {
     if (typeof window === 'undefined') return;
     const urlParams = new URLSearchParams(window.location.search);
+    let isInternalUser = false;
+    try {
+      isInternalUser = window.localStorage.getItem('zf_internal_user') === '1';
+    } catch {
+      // Browser storage may be unavailable; URL-based QA exclusions still apply.
+    }
     const isInternalQA =
       urlParams.get('utm_source') === 'internal-qa' ||
       urlParams.get('utm_medium') === 'verification' ||
       urlParams.get('internal_qa') === '1' ||
-      Boolean(window.localStorage && window.localStorage.getItem('zf_internal_user') === '1');
+      isInternalUser;
 
-    window.__zfIsProdHost =
-      !isInternalQA &&
-      (/^(www\.)?ziaflow\.com$/i.test(window.location.hostname) || urlParams.get('debug_analytics') === '1');
+    window.__zfIsProdHost = !isInternalQA && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
     if (gaId && window.__zfIsProdHost) {
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -35,122 +39,129 @@ const gtmId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || ANALYTICS?.vendors?.goo
 </script>
 
 <script is:inline>
-  window.clarity = window.clarity || function(...args) { (window.clarity.q = window.clarity.q || []).push(args) };
+  window.clarity =
+    window.clarity ||
+    function (...args) {
+      (window.clarity.q = window.clarity.q || []).push(args);
+    };
 </script>
 
-<>
-  {
-    gtmId && (
-      <>
-        <script
-          is:inline
-          define:vars={{ gtmId }}
-          set:html={`
-        if (window.__zfIsProdHost) {
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});const f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer',gtmId);
-        }
-      `}
-        />
-        <script is:inline define:vars={{ gaId }}>
-          if (gaId && window.__zfIsProdHost) {
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-            document.head.appendChild(script);
-          }
-        </script>
-      </>
-    )
+<script is:inline define:vars={{ gtmId }}>
+  if (gtmId && window.__zfIsProdHost) {
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      const f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', gtmId);
+  }
+</script>
+
+<script is:inline define:vars={{ gaId }}>
+  if (gaId && window.__zfIsProdHost) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    document.head.appendChild(script);
+  }
+</script>
+
+{clarityId && <div id="clarity-setup" data-id={clarityId} class="hidden" />}
+
+<script>
+  import Clarity from '@microsoft/clarity';
+
+  declare global {
+    interface Window {
+      clarity: (...args: unknown[]) => void;
+      __zfIsProdHost?: boolean;
+    }
   }
 
-  {
-    clarityId && (
-      <>
-        <div id="clarity-setup" data-id={clarityId} class="hidden"></div>
-        <script>
-          import Clarity from '@microsoft/clarity';
+  const element = document.getElementById('clarity-setup');
+  if (element && window.__zfIsProdHost) {
+    const id = element.dataset.id;
+    if (id) {
+      Clarity.init(id);
 
-          declare global {
-            interface Window {
-              clarity: (...args: unknown[]) => void;
-              __zfIsProdHost?: boolean;
+      // Tracking Scroll Depth
+      let maxScroll = 0;
+      window.addEventListener(
+        'scroll',
+        () => {
+          const scrollPercent = Math.round(
+            ((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight) * 100
+          );
+          if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
+            maxScroll = scrollPercent;
+            if (window.clarity) {
+              window.clarity('set', 'scroll_depth', maxScroll.toString());
+              if (maxScroll >= 75) window.clarity('upgrade', 'high scroll depth');
             }
           }
+        },
+        { passive: true }
+      );
 
-          const element = document.getElementById('clarity-setup');
-          if (element && window.__zfIsProdHost) {
-            const id = element.dataset.id;
-            if (id) {
-              Clarity.init(id);
-
-              // Tracking Scroll Depth
-              let maxScroll = 0;
-              window.addEventListener('scroll', () => {
-                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
-                if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
-                  maxScroll = scrollPercent;
-                  if (window.clarity) {
-                    window.clarity("set", "scroll_depth", maxScroll.toString());
-                    if (maxScroll >= 75) window.clarity("upgrade", "high scroll depth");
-                  }
-                }
-              }, { passive: true });
-
-              // Track Dead Clicks (Simplified)
-              document.addEventListener('click', (e) => {
-                const target = e.target as HTMLElement;
-                if (!target.closest('a') && !target.closest('button') && !target.closest('input')) {
-                  if (target.innerText?.length < 50 && (target.classList.contains('icon') || target.title)) {
-                    if (window.clarity) window.clarity("event", "potential_dead_click");
-                  }
-                }
-              }, { passive: true });
+      // Track Dead Clicks (Simplified)
+      document.addEventListener(
+        'click',
+        (e) => {
+          const target = e.target as HTMLElement;
+          if (!target.closest('a') && !target.closest('button') && !target.closest('input')) {
+            if (target.innerText?.length < 50 && (target.classList.contains('icon') || target.title)) {
+              if (window.clarity) window.clarity('event', 'potential_dead_click');
             }
           }
-        </script>
-      </>
-    )
+        },
+        { passive: true }
+      );
+    }
   }
-</>
+</script>
 
 <script is:inline>
   (function () {
-    const PHONE_DIGITS = "6028344239";
+    const PHONE_DIGITS = '6028344239';
 
-    document.addEventListener("click", function (e) {
-      const link = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
-      if (!link) return;
+    document.addEventListener(
+      'click',
+      function (e) {
+        const link = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
+        if (!link) return;
 
-      const href = link.getAttribute("href") || "";
-      const digits = href.replace(/\D/g, "");
-      if (digits.slice(-10) !== PHONE_DIGITS) return;
+        const href = link.getAttribute('href') || '';
+        const digits = href.replace(/\D/g, '');
+        if (digits.slice(-10) !== PHONE_DIGITS) return;
 
-      const props = {
-        phone_number: "(602) 834-4239",
-        page_url: window.location.href,
-        page_path: window.location.pathname,
-        link_text: (link.textContent || "").trim().slice(0, 100)
-      };
+        const props = {
+          phone_number: '(602) 834-4239',
+          page_url: window.location.href,
+          page_path: window.location.pathname,
+          link_text: (link.textContent || '').trim().slice(0, 100),
+        };
 
-      if (window._cio && typeof window._cio.track === "function") {
-        window._cio.track("phone_click", props);
-      } else if (window.analytics && typeof window.analytics.track === "function") {
-        window.analytics.track("phone_click", props);
-      }
+        if (window._cio && typeof window._cio.track === 'function') {
+          window._cio.track('phone_click', props);
+        } else if (window.analytics && typeof window.analytics.track === 'function') {
+          window.analytics.track('phone_click', props);
+        }
 
-      if (window.dataLayer && Array.isArray(window.dataLayer)) {
-        window.dataLayer.push({
-          event: "phone_click",
-          ...props
-        });
-      }
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "phone_click", props);
-      }
-    }, { passive: true });
+        if (window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({
+            event: 'phone_click',
+            ...props,
+          });
+        }
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'phone_click', props);
+        }
+      },
+      { passive: true }
+    );
   })();
 </script>
