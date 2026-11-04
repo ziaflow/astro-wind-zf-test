@@ -51,10 +51,14 @@ export function bindLeadForms() {
         });
         const result = await response.json();
         if (!response.ok) throw new Error(result.message || 'We could not save your request. Please try again.');
-        // Honeypot responses have no receipt. Never count them as accepted leads.
-        if (result.submission_id && !result.duplicate) {
+        const analytics = window as Window & {
+          __zfIsProdHost?: boolean;
+          dataLayer?: unknown[];
+          gtag?: (...args: unknown[]) => void;
+        };
+        // Count new receipts only after the shared production/QA gate allows tracking.
+        if (result.submission_id && !result.duplicate && result.is_test !== true && analytics.__zfIsProdHost === true) {
           try {
-            const analytics = window as Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
             const properties = {
               form_type: payload.form_type,
               page_path: payload.page,

@@ -4,7 +4,7 @@ import { runInNewContext } from 'node:vm';
 import test from 'node:test';
 import ts from 'typescript';
 
-function fixture(fetchImpl) {
+function fixture(fetchImpl, trackingAllowed = true) {
   let submit,
     nextId = 0;
   const fields = { email: 'qa@example.com', name: 'Internal QA', message: 'QA request' };
@@ -25,6 +25,7 @@ function fixture(fetchImpl) {
     },
   };
   const window = {
+    __zfIsProdHost: trackingAllowed,
     location: { pathname: '/audit', origin: 'https://ziaflow.com', search: '?utm_source=qa&utm_campaign=form-test' },
   };
   const module = { exports: {} };
@@ -101,4 +102,31 @@ test('accepted-lead analytics exclude email and message content', async () => {
   assert.equal(event.page_path, '/audit');
   assert.equal(event.email, undefined);
   assert.equal(event.message, undefined);
+});
+
+for (const allowed of [false, null]) {
+  test(`saved inquiry succeeds without analytics when tracking gate is ${allowed}`, async () => {
+    const app = fixture(async () => Response.json({ submission_id: 'qa-receipt', duplicate: false }), allowed);
+    const events = [];
+    app.window.gtag = (...args) => events.push(args);
+    await app.submit();
+    assert.equal(events.length, 0);
+    assert.equal(app.window.dataLayer, undefined);
+    assert.equal(app.button.disabled, false);
+    assert.match(app.status.textContent, /received/);
+  });
+}
+
+test('server-marked test receipt never emits a production conversion', async () => {
+  const app = fixture(async () => Response.json({ submission_id: 'qa-receipt', duplicate: false, is_test: true }));
+  await app.submit();
+  assert.equal(app.window.dataLayer, undefined);
+  assert.match(app.status.textContent, /received/);
+});
+
+test('binding a form does not emit a lead event on page load', () => {
+  const app = fixture(async () => {
+    throw new Error('No submission expected');
+  });
+  assert.equal(app.window.dataLayer, undefined);
 });
