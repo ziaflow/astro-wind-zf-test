@@ -117,6 +117,7 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
   let client: Awaited<ReturnType<typeof createMCPClient>> | undefined;
   let sanityStatus: number | undefined;
   let modelStatus: number | undefined;
+  let modelErrorCode: string | undefined;
   let closed = false;
   const close = async () => {
     if (closed) return;
@@ -141,7 +142,8 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
             ...init,
             signal: init?.signal ? AbortSignal.any([signal, init.signal]) : signal,
           });
-          if (!response.ok) sanityStatus = response.status;
+          // GET 405 is expected for Context's optional inbound SSE channel.
+          if (!response.ok && init?.method === 'POST') sanityStatus = response.status;
           return response;
         },
       },
@@ -167,6 +169,23 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
         if (error && typeof error === 'object' && 'statusCode' in error && typeof error.statusCode === 'number') {
           modelStatus = error.statusCode;
         }
+        if (error && typeof error === 'object' && 'responseBody' in error && typeof error.responseBody === 'string') {
+          try {
+            const code = JSON.parse(error.responseBody)?.error?.code;
+            if (
+              [
+                'credit_balance_exhausted',
+                'insufficient_quota',
+                'rate_limit_exceeded',
+                'invalid_api_key',
+                'model_not_found',
+              ].includes(code)
+            )
+              modelErrorCode = code;
+          } catch {
+            /* Never forward a raw provider response. */
+          }
+        }
       },
       onAbort: close,
       onEnd: close,
@@ -180,14 +199,26 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
         let toolCalls = 0;
         let successfulToolCalls = 0;
         let failed = false;
+        let hasAnswer = false;
+        let finishReason: string | undefined;
         try {
           emit('start', { requestId, discoveredTools: Object.keys(tools) });
           for await (const part of result.stream) {
-            if (part.type === 'text-delta') emit('text', { delta: part.text });
+            if (part.type === 'text-delta') {
+              hasAnswer ||= part.text.trim().length > 0;
+              emit('text', { delta: part.text });
+            }
+            if (part.type === 'finish') finishReason = part.finishReason;
             if (part.type === 'tool-result') {
               toolCalls++;
-              successfulToolCalls++;
-              emit('tool', { name: part.toolName, success: true });
+              const mcpError =
+                part.output &&
+                typeof part.output === 'object' &&
+                'isError' in part.output &&
+                part.output.isError === true;
+              if (mcpError) failed = true;
+              else successfulToolCalls++;
+              emit('tool', { name: part.toolName, success: !mcpError });
             }
             if (part.type === 'tool-error') {
               toolCalls++;
@@ -196,14 +227,16 @@ export async function sanityChat(request: Request, env: SanityChatEnv): Promise<
             }
             if (part.type === 'error' || part.type === 'abort') failed = true;
           }
-          if (failed || !successfulToolCalls)
+          const complete = !failed && successfulToolCalls > 0 && hasAnswer && finishReason === 'stop';
+          if (!complete)
             emit('error', {
               message: 'Sanity retrieval or model generation failed. Retry or check server configuration.',
               requestId,
               sanityStatus,
               modelStatus,
+              modelErrorCode,
             });
-          emit('finish', { requestId, toolCalls, successfulToolCalls, complete: !failed && successfulToolCalls > 0 });
+          emit('finish', { requestId, toolCalls, successfulToolCalls, complete, finishReason });
           output.close();
         } catch {
           if (!cancelled) {

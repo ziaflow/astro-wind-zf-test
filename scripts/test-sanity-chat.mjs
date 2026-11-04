@@ -49,7 +49,7 @@ for await (const chunk of response.body.pipeThrough(new TextDecoderStream())) {
     if (name === 'tool') console.log(`\n[Sanity tool: ${data.name}; success: ${data.success}]`);
     if (name === 'error')
       throw Error(
-        `${data.message} (Sanity HTTP: ${data.sanityStatus ?? 'unknown'}; model HTTP: ${data.modelStatus ?? 'unknown'}; request: ${data.requestId})`
+        `${data.message} (Sanity HTTP: ${data.sanityStatus ?? 'none reported'}; model HTTP: ${data.modelStatus ?? 'unknown'}; model code: ${data.modelErrorCode ?? 'unknown'}; request: ${data.requestId})`
       );
     if (name === 'finish') {
       complete = data.complete;

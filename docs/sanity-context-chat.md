@@ -75,3 +75,16 @@ The automated tests cover access controls, input bounds, dynamic discovery, stre
 cleanup and sanitized failures. They mock upstream services. The test script above
 performs the separate real end-to-end retrieval/model check and fails on incomplete
 or ungrounded (no successful tool call) responses.
+
+### Live verification: November 4, 2026
+
+- The protected Vercel preview accepted the private API credential and connected to
+  the real Sanity Context endpoint. Runtime discovery returned six tools.
+- The initialization handshake resolved the earlier HTTP 400 discovery failure.
+  Context's optional GET/SSE channel returning 405 is expected and is not a failed
+  content query.
+- The full model test could not complete: OpenAI returned HTTP 429. An isolated
+  OpenAI request confirmed `credit_balance_exhausted` / `insufficient_quota`.
+  No model tool execution or grounded answer was claimed as successful.
+- Add OpenAI API credits and rerun the script to finish the end-to-end test.
+- Seven automated regression tests pass, including cancellation and incomplete answers.

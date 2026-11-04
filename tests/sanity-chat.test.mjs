@@ -16,7 +16,7 @@ const env = {
   SANITY_CHAT_ACCESS_TOKEN: 'test-only-private-access-token-with-32-characters',
 };
 
-function setup({ discoveryFails = false, parts, blocked = false } = {}) {
+function setup({ discoveryFails = false, parts, blocked = false, waitForAbort = false } = {}) {
   const observed = { closes: 0, connections: 0 };
   const tools = { arbitrary_runtime_tool: { description: 'Discovered, never hardcoded.' } };
   const module = { exports: {} };
@@ -50,9 +50,17 @@ function setup({ discoveryFails = false, parts, blocked = false } = {}) {
             observed.generation = options;
             return {
               stream: (async function* () {
+                if (waitForAbort) {
+                  await new Promise((resolve) =>
+                    options.abortSignal.addEventListener('abort', resolve, { once: true })
+                  );
+                  await options.onAbort();
+                  return;
+                }
                 yield* parts ?? [
                   { type: 'tool-result', toolName: 'arbitrary_runtime_tool' },
                   { type: 'text-delta', text: 'Evidence-backed test answer.' },
+                  { type: 'finish', finishReason: 'stop' },
                 ];
                 await options.onEnd();
               })(),
@@ -143,6 +151,15 @@ test('tool/model failure and absent retrieval cannot produce a complete result',
     [{ type: 'error', error: Error('provider-test-only') }],
     [{ type: 'tool-error', toolName: 'arbitrary_runtime_tool', error: Error('organization-test-only') }],
     [{ type: 'text-delta', text: 'Unsupported model answer' }],
+    [
+      { type: 'tool-result', toolName: 'arbitrary_runtime_tool', output: { isError: true } },
+      { type: 'text-delta', text: 'Retrieval failed' },
+      { type: 'finish', finishReason: 'stop' },
+    ],
+    [
+      { type: 'tool-result', toolName: 'arbitrary_runtime_tool' },
+      { type: 'finish', finishReason: 'length' },
+    ],
   ]) {
     const { post, observed } = setup({ parts });
     const body = await (await post(request())).text();
@@ -152,4 +169,14 @@ test('tool/model failure and absent retrieval cannot produce a complete result',
     assert.ok(!body.includes('organization-test-only'));
     assert.equal(observed.closes, 1);
   }
+});
+
+test('cancelling the response aborts generation and closes the MCP client once', async () => {
+  const { post, observed } = setup({ waitForAbort: true });
+  const response = await post(request());
+  const reader = response.body.getReader();
+  await reader.read();
+  await reader.cancel();
+  assert.equal(observed.generation.abortSignal.aborted, true);
+  assert.equal(observed.closes, 1);
 });
