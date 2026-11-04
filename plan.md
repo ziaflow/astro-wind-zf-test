@@ -150,3 +150,18 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 2. **Deterministic Attribution:** Inquiries must preserve UTM parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) and source page URL.
 3. **Environment Hygiene:** Development and preview environments must never contaminate production metrics in Clarity, Google Analytics 4, or Customer.io.
 4. **Evidence Before Assertions:** All analytics interpretations must cite exact date bounds, matched scopes, and verifiable request-level evidence before diagnosing traffic health.
+
+Inspection complete:
+
+- **Stack:** Astro 7 on Vercel.
+- **Existing AI:** OpenAI code using `gpt-5.2`; no server chat endpoint.
+- **Existing “Ask AI”:** external AI links, not an embedded chat.
+- **Missing credentials:** neither `SANITY_ORGANIZATION_TOKEN` nor `OPENAI_API_KEY` is configured in Vercel.
+
+Following your instructions, I’ve paused before implementation.
+
+1. Create a **Sanity organization token with Context Viewer permissions** at [Organization API tokens](https://www.sanity.io/organizations/ofTbUkOHg/api/tokens). Save it in Vercel as `SANITY_ORGANIZATION_TOKEN` for Preview and Production. **Do not paste it here.**
+2. Add your existing `OPENAI_API_KEY` server-side, or tell me to create one securely.
+3. Choose the destination: **API endpoint only**, **a dedicated chat page**, or **replace the existing Ask AI panel**.
+
+No files or settings changed; the end-to-end test has not run.
