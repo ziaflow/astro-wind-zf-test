@@ -32,19 +32,48 @@ test('Opening copy directly defines the entity within the first sentences', () =
   );
 });
 
-test('Organization / LocalBusiness schema aligns with entity and contains verified sameAs links', () => {
+test('Organization, WebSite, and LocalBusiness schema align with visible brand and title/H1', () => {
   const schemaSource = readFileSync(resolve('src/components/seo/LocalBusinessSchema.astro'), 'utf-8');
   
+  // Organization with brand name
   assert.match(
     schemaSource,
-    /name:\s*['"]Custom Web Development & SEO['"]/,
-    'Schema name must match the primary entity name'
+    /@type':\s*'Organization'/,
+    'Schema must contain an explicit Organization object'
   );
-  
   assert.match(
     schemaSource,
-    /@type':\s*\[[^\]]*'Organization'[^\]]*'LocalBusiness'/,
-    'Schema @type must include Organization and LocalBusiness'
+    /name:\s*'ZiaFlow'/,
+    'Schema name must match the visible brand name "ZiaFlow"'
+  );
+  assert.match(
+    schemaSource,
+    /alternateName:\s*'Custom Web Development & SEO'/,
+    'Schema alternateName must ground the main entity "Custom Web Development & SEO"'
+  );
+
+  // WebSite schema with headline
+  assert.match(
+    schemaSource,
+    /@type':\s*'WebSite'/,
+    'Schema must contain an explicit WebSite object'
+  );
+
+  // WebPage schema with name = title and headline = H1
+  assert.match(
+    schemaSource,
+    /@type':\s*'WebPage'/,
+    'Schema must contain an explicit WebPage object'
+  );
+  assert.match(
+    schemaSource,
+    /name:\s*'Custom Web Development & SEO for Arizona Service Businesses \| ZiaFlow'/,
+    'WebPage schema name must match exact visible page title'
+  );
+  assert.match(
+    schemaSource,
+    /headline:\s*'Custom Web Development & SEO for Arizona service businesses\.'/,
+    'WebPage schema headline must match exact visible H1'
   );
 
   const requiredSameAs = [

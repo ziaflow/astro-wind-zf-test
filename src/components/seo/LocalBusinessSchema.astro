@@ -3,45 +3,103 @@ import { getSupabaseAssetUrl, SUPABASE_ASSETS } from '~/lib/supabase-assets';
 
 const defaultLogoUrl = 'https://ziaflow.com/images/default.png';
 const supabaseLogoUrl = await getSupabaseAssetUrl(SUPABASE_ASSETS.logoSolo);
+const logoUrl = supabaseLogoUrl || defaultLogoUrl;
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
-  name: 'Custom Web Development & SEO',
-  legalName: 'ZiaFlow LLC',
-  alternateName: 'ZiaFlow',
-  description:
-    'Custom Web Development & SEO is the engineering of high-performance websites and local search visibility. ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
-  image: supabaseLogoUrl || defaultLogoUrl,
-  logo: supabaseLogoUrl || defaultLogoUrl,
-  '@id': 'https://ziaflow.com/#organization',
-  url: 'https://ziaflow.com/',
-  telephone: '+1-602-834-4239',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '2822 E Greenway Rd Suite 10 B',
-    addressLocality: 'Phoenix',
-    addressRegion: 'AZ',
-    postalCode: '85032',
-    addressCountry: 'US',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 33.6262,
-    longitude: -112.0205,
-  },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '09:00',
-    closes: '17:00',
-  },
-  sameAs: [
-    'https://www.linkedin.com/company/ziaflow/',
-    'https://www.facebook.com/ZiaFlowAZ/',
-    'https://www.instagram.com/ziaflowaz/',
-    'https://www.yelp.com/biz/ziaflow-phoenix',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://ziaflow.com/#organization',
+      name: 'ZiaFlow',
+      legalName: 'ZiaFlow LLC',
+      alternateName: 'Custom Web Development & SEO',
+      url: 'https://ziaflow.com/',
+      logo: {
+        '@type': 'ImageObject',
+        '@id': 'https://ziaflow.com/#logo',
+        url: logoUrl,
+        caption: 'ZiaFlow',
+      },
+      image: logoUrl,
+      telephone: '+1-602-834-4239',
+      sameAs: [
+        'https://www.linkedin.com/company/ziaflow/',
+        'https://www.facebook.com/ZiaFlowAZ/',
+        'https://www.instagram.com/ziaflowaz/',
+        'https://www.yelp.com/biz/ziaflow-phoenix',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://ziaflow.com/#website',
+      url: 'https://ziaflow.com/',
+      name: 'ZiaFlow',
+      alternateName: 'ZiaFlow - Custom Web Development & SEO',
+      headline: 'Custom Web Development & SEO for Arizona service businesses.',
+      description:
+        'ZiaFlow provides custom web development & SEO for Arizona service businesses. Fast Astro websites, local search optimization, and automated lead follow-up.',
+      publisher: {
+        '@id': 'https://ziaflow.com/#organization',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://ziaflow.com/#webpage',
+      url: 'https://ziaflow.com/',
+      name: 'Custom Web Development & SEO for Arizona Service Businesses | ZiaFlow',
+      headline: 'Custom Web Development & SEO for Arizona service businesses.',
+      description:
+        'ZiaFlow provides custom web development & SEO for Arizona service businesses. Fast Astro websites, local search optimization, and automated lead follow-up. Call (602) 834-4239.',
+      isPartOf: {
+        '@id': 'https://ziaflow.com/#website',
+      },
+      about: {
+        '@id': 'https://ziaflow.com/#organization',
+      },
+    },
+    {
+      '@type': 'LocalBusiness',
+      '@id': 'https://ziaflow.com/#localbusiness',
+      name: 'ZiaFlow',
+      legalName: 'ZiaFlow LLC',
+      alternateName: 'Custom Web Development & SEO',
+      headline: 'Custom Web Development & SEO for Arizona service businesses.',
+      description:
+        'Custom Web Development & SEO is the engineering of high-performance websites and local search visibility. ZiaFlow specializes in creating high-performing, responsive websites and local SEO strategies for Phoenix service businesses.',
+      image: logoUrl,
+      url: 'https://ziaflow.com/',
+      telephone: '+1-602-834-4239',
+      priceRange: '$$',
+      parentOrganization: {
+        '@id': 'https://ziaflow.com/#organization',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '2822 E Greenway Rd Suite 10 B',
+        addressLocality: 'Phoenix',
+        addressRegion: 'AZ',
+        postalCode: '85032',
+        addressCountry: 'US',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 33.6262,
+        longitude: -112.0205,
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00',
+      },
+      sameAs: [
+        'https://www.linkedin.com/company/ziaflow/',
+        'https://www.facebook.com/ZiaFlowAZ/',
+        'https://www.instagram.com/ziaflowaz/',
+        'https://www.yelp.com/biz/ziaflow-phoenix',
+      ],
+    },
   ],
 };
 ---
