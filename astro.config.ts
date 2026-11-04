@@ -100,7 +100,7 @@ export default defineConfig({
   ],
 
   // REDIRECTS: Managing Link Equity (301s)
-redirects: LEGACY_REDIRECTS,
+  redirects: LEGACY_REDIRECTS,
 
   image: {
     domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],

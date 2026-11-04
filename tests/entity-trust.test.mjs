@@ -34,18 +34,10 @@ test('Opening copy directly defines the entity within the first sentences', () =
 
 test('Organization, WebSite, and LocalBusiness schema align with visible brand and title/H1', () => {
   const schemaSource = readFileSync(resolve('src/components/seo/LocalBusinessSchema.astro'), 'utf-8');
-  
+
   // Organization with brand name
-  assert.match(
-    schemaSource,
-    /@type':\s*'Organization'/,
-    'Schema must contain an explicit Organization object'
-  );
-  assert.match(
-    schemaSource,
-    /name:\s*'ZiaFlow'/,
-    'Schema name must match the visible brand name "ZiaFlow"'
-  );
+  assert.match(schemaSource, /@type':\s*'Organization'/, 'Schema must contain an explicit Organization object');
+  assert.match(schemaSource, /name:\s*'ZiaFlow'/, 'Schema name must match the visible brand name "ZiaFlow"');
   assert.match(
     schemaSource,
     /alternateName:\s*'Custom Web Development & SEO'/,
@@ -53,18 +45,10 @@ test('Organization, WebSite, and LocalBusiness schema align with visible brand a
   );
 
   // WebSite schema with headline
-  assert.match(
-    schemaSource,
-    /@type':\s*'WebSite'/,
-    'Schema must contain an explicit WebSite object'
-  );
+  assert.match(schemaSource, /@type':\s*'WebSite'/, 'Schema must contain an explicit WebSite object');
 
   // WebPage schema with name = title and headline = H1
-  assert.match(
-    schemaSource,
-    /@type':\s*'WebPage'/,
-    'Schema must contain an explicit WebPage object'
-  );
+  assert.match(schemaSource, /@type':\s*'WebPage'/, 'Schema must contain an explicit WebPage object');
   assert.match(
     schemaSource,
     /name:\s*'Custom Web Development & SEO for Arizona Service Businesses \| ZiaFlow'/,
@@ -84,19 +68,13 @@ test('Organization, WebSite, and LocalBusiness schema align with visible brand a
   ];
 
   for (const url of requiredSameAs) {
-    assert.ok(
-      schemaSource.includes(url),
-      `Schema sameAs must include verified identity profile: ${url}`
-    );
+    assert.ok(schemaSource.includes(url), `Schema sameAs must include verified identity profile: ${url}`);
   }
 });
 
 test('Logo and navigation include accessible entity name', () => {
   const logoSource = readFileSync(resolve('src/kairo/components/shared/icons/logo.astro'), 'utf-8');
-  assert.ok(
-    logoSource.includes(ENTITY_NAME),
-    'Logo sr-only text must include "Custom Web Development & SEO"'
-  );
+  assert.ok(logoSource.includes(ENTITY_NAME), 'Logo sr-only text must include "Custom Web Development & SEO"');
 
   const navbarSource = readFileSync(resolve('src/kairo/components/shared/layout/navbar.astro'), 'utf-8');
   assert.ok(
@@ -107,10 +85,7 @@ test('Logo and navigation include accessible entity name', () => {
 
 test('Footer reinforces the entity name across brand panel and tagline', () => {
   const footerSource = readFileSync(resolve('src/components/widgets/Footer.astro'), 'utf-8');
-  assert.ok(
-    footerSource.includes(ENTITY_NAME),
-    'Footer must explicitly mention "Custom Web Development & SEO"'
-  );
+  assert.ok(footerSource.includes(ENTITY_NAME), 'Footer must explicitly mention "Custom Web Development & SEO"');
   assert.match(
     footerSource,
     /<span class="tagline-title">CUSTOM WEB DEVELOPMENT & SEO<\/span>/,
@@ -154,11 +129,7 @@ test('Evidence & benchmarks section provides self-contained citability with outb
   const benchmarksSource = readFileSync(resolve('src/kairo/components/home/evidence-benchmarks.astro'), 'utf-8');
 
   // Verify mounting on homepage
-  assert.match(
-    indexSource,
-    /<EvidenceBenchmarks\s*\/>/,
-    'Homepage must visibly mount <EvidenceBenchmarks />'
-  );
+  assert.match(indexSource, /<EvidenceBenchmarks\s*\/>/, 'Homepage must visibly mount <EvidenceBenchmarks />');
 
   // Verify self-contained headings and main entity inclusion
   assert.ok(
@@ -175,10 +146,7 @@ test('Evidence & benchmarks section provides self-contained citability with outb
   ];
 
   for (const source of expectedSources) {
-    assert.ok(
-      benchmarksSource.includes(source),
-      `Benchmarks section must cite verified source: ${source}`
-    );
+    assert.ok(benchmarksSource.includes(source), `Benchmarks section must cite verified source: ${source}`);
   }
 
   // Verify comparison table exists with semantic table tags
@@ -245,11 +213,7 @@ test('Answer extractability provides an answer-first direct definition and execu
     /<h3[^>]*>[\s\S]*\{item\.label\}[\s\S]*<\/h3>/,
     'Must render H3 headings for each takeaway item'
   );
-  assert.match(
-    summarySource,
-    /label:\s*'Direct Definition'/,
-    'Must include Direct Definition takeaway card'
-  );
+  assert.match(summarySource, /label:\s*'Direct Definition'/, 'Must include Direct Definition takeaway card');
 
   // Ensure "What business operators say." is eliminated from proofSection
   assert.ok(
@@ -257,4 +221,3 @@ test('Answer extractability provides an answer-first direct definition and execu
     'Pseudo-question heading "What business operators say." must be eliminated'
   );
 });
-

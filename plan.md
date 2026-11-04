@@ -120,14 +120,14 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 
 ## 4. Prioritized Execution Roadmap & Task Ledger
 
-| Priority | Issue / PR | Focus Area | Action Item | Target Deadline | Completion Criterion | Status |
-| :---: | :---: | :--- | :--- | :---: | :--- | :---: |
-| **P0** | [#56](https://github.com/ziaflow/astro-wind-zf-test/issues/56) | **Lead Event Triggers** | Audit GTM (`GTM-5Q2JZPVG`) container tags & GA4 Custom Events to remove page-load triggers for `generate_lead` & `ads_conversion_Contact_Us_1` | Nov 7, 2026 | Page visit/reload produces 0 conversion events; only verified form submission generates 1 event | In Progress |
-| **P0** | [#57](https://github.com/ziaflow/astro-wind-zf-test/issues/57) / [PR #53](https://github.com/ziaflow/astro-wind-zf-test/pull/53) | **QA Traffic Isolation** | Respect QA exclusions when tracking saved website inquiries and gate client analytics scripts | Nov 7, 2026 | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | Ready for Merge |
-| **P1** | [PR #49](https://github.com/ziaflow/astro-wind-zf-test/pull/49) | **404 Elimination** | Map 33 legacy endpoints and variants to permanent 301 redirects and enhance recovery UI | Nov 4, 2026 | Zero unmapped legacy URLs in GSC; build link check passes 100% | **Merged** ✅ |
-| **P1** | [#58](https://github.com/ziaflow/astro-wind-zf-test/issues/58) | **GA4 & GSC Reconciliation** | Align date windows, hostnames, and property streams between GSC (19 clicks) and GA4 (51 google/organic sessions) | Nov 14, 2026 | Documented reconciliation accounting for attribution models and measurement delays | Scheduled |
-| **P1** | [#59](https://github.com/ziaflow/astro-wind-zf-test/issues/59) | **Traffic Anomaly Audit** | Cross-reference Oct 14 and Oct 24 GA4 spikes against Clarity bot logs and edge access logs | Nov 14, 2026 | Verified attribution classifying anomalous traffic | Scheduled |
-| **P2** | [#60](https://github.com/ziaflow/astro-wind-zf-test/issues/60) / [PR #54](https://github.com/ziaflow/astro-wind-zf-test/pull/54) | **Arizona Services & Hubs Expansion** | Editorial review of 14 new editorial hubs & 51-topic registry before production merge | Nov 21, 2026 | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed | In Review |
+| Priority |                                                            Issue / PR                                                            | Focus Area                            | Action Item                                                                                                                                    | Target Deadline | Completion Criterion                                                                                      |     Status      |
+| :------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------- | :-------------: | :-------------------------------------------------------------------------------------------------------- | :-------------: |
+|  **P0**  |                                  [#56](https://github.com/ziaflow/astro-wind-zf-test/issues/56)                                  | **Lead Event Triggers**               | Audit GTM (`GTM-5Q2JZPVG`) container tags & GA4 Custom Events to remove page-load triggers for `generate_lead` & `ads_conversion_Contact_Us_1` |   Nov 7, 2026   | Page visit/reload produces 0 conversion events; only verified form submission generates 1 event           |   In Progress   |
+|  **P0**  | [#57](https://github.com/ziaflow/astro-wind-zf-test/issues/57) / [PR #53](https://github.com/ziaflow/astro-wind-zf-test/pull/53) | **QA Traffic Isolation**              | Respect QA exclusions when tracking saved website inquiries and gate client analytics scripts                                                  |   Nov 7, 2026   | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | Ready for Merge |
+|  **P1**  |                                 [PR #49](https://github.com/ziaflow/astro-wind-zf-test/pull/49)                                  | **404 Elimination**                   | Map 33 legacy endpoints and variants to permanent 301 redirects and enhance recovery UI                                                        |   Nov 4, 2026   | Zero unmapped legacy URLs in GSC; build link check passes 100%                                            |  **Merged** ✅  |
+|  **P1**  |                                  [#58](https://github.com/ziaflow/astro-wind-zf-test/issues/58)                                  | **GA4 & GSC Reconciliation**          | Align date windows, hostnames, and property streams between GSC (19 clicks) and GA4 (51 google/organic sessions)                               |  Nov 14, 2026   | Documented reconciliation accounting for attribution models and measurement delays                        |    Scheduled    |
+|  **P1**  |                                  [#59](https://github.com/ziaflow/astro-wind-zf-test/issues/59)                                  | **Traffic Anomaly Audit**             | Cross-reference Oct 14 and Oct 24 GA4 spikes against Clarity bot logs and edge access logs                                                     |  Nov 14, 2026   | Verified attribution classifying anomalous traffic                                                        |    Scheduled    |
+|  **P2**  | [#60](https://github.com/ziaflow/astro-wind-zf-test/issues/60) / [PR #54](https://github.com/ziaflow/astro-wind-zf-test/pull/54) | **Arizona Services & Hubs Expansion** | Editorial review of 14 new editorial hubs & 51-topic registry before production merge                                                          |  Nov 21, 2026   | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed                |    In Review    |
 
 ---
 
@@ -157,16 +157,16 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 
 A comprehensive query of the live Sanity Content Lake revealed **16 draft articles** currently held in `drafts.*` status (0 published articles):
 
-| Sanity Draft Document ID / Slug | Title | GSC / Bing Target Alignment | Publication Priority |
-| :--- | :--- | :--- | :--- |
-| `marketing-automation-for-phoenix-smbs-connecting-leads-crm-and-client-intake` | Marketing Automation for Phoenix SMBs: Connecting Leads, CRM, and Client Intake | Directly targets `crm automation for local marketing agencies phoenix` (Rank 4.1) & `marketing automation phoenix` (133 imp, Pos 11.4) | **P0 (Immediate Win)** |
-| `intelligent-website-assistants-how-ai-decreases-bounce-rate-retains-context` | Intelligent Website Assistants: How AI Decreases Bounce Rate & Retains Context | Directly targets `help me use ai to reduce my bounce rates` (153 imp, Rank 4.5) & `ways to reduce bounce rates with ai` (82 imp, Rank 5.7) | **P0 (Immediate Win)** |
-| `google-lsa-electricians-phoenix-arizona` | Google Local Service Ads for Electricians: The Phoenix Blueprint for Verified Leads | Matches `google lsa cost trends 2025/2026` & contractor LSA automation inquiries | **P0 (Immediate Win)** |
-| `phoenix-ai-web-engineering-building-custom-high-performance-web-apps-for-arizona-smbs` | Phoenix AI Web Engineering: Building Custom High-Performance Web Apps for Arizona SMBs | Matches conversational query: *"i run a small business in phoenix and need a website built with ai"* (Rank 2.4!) | **P1 (High Authority)** |
-| `microsoft-ads-complete-guide-2026` | Microsoft Ads in 2026: The Complete Guide to Advertising Beyond Google | Matches Bing #1 traffic driver (5 clicks, 92 impressions on Bing) | **P1 (Bing Dominance)** |
-| `phoenix-conversion-rate-optimization-finding-and-fixing-website-conversion-friction` | Phoenix Conversion Rate Optimization: Finding and Fixing Website Conversion Friction | Targets local CRO queries (`top phoenix cro agencies`, `conversion rate optimization phoenix`) | **P1** |
-| `custom-web-applications-for-arizona-smbs-when-ai-features-make-sense` | Custom Web Applications for Arizona SMBs: When AI Features Make Sense | Targets Arizona software & web engineering commercial searches | **P2** |
-| `microsoft-clarity-seo-ux-ui` | Microsoft Clarity: What It Is and Why It Matters for SEO, UX, and UI | Targets technical UX/SEO diagnostics | **P2** |
+| Sanity Draft Document ID / Slug                                                         | Title                                                                                  | GSC / Bing Target Alignment                                                                                                                | Publication Priority    |
+| :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- | :---------------------- |
+| `marketing-automation-for-phoenix-smbs-connecting-leads-crm-and-client-intake`          | Marketing Automation for Phoenix SMBs: Connecting Leads, CRM, and Client Intake        | Directly targets `crm automation for local marketing agencies phoenix` (Rank 4.1) & `marketing automation phoenix` (133 imp, Pos 11.4)     | **P0 (Immediate Win)**  |
+| `intelligent-website-assistants-how-ai-decreases-bounce-rate-retains-context`           | Intelligent Website Assistants: How AI Decreases Bounce Rate & Retains Context         | Directly targets `help me use ai to reduce my bounce rates` (153 imp, Rank 4.5) & `ways to reduce bounce rates with ai` (82 imp, Rank 5.7) | **P0 (Immediate Win)**  |
+| `google-lsa-electricians-phoenix-arizona`                                               | Google Local Service Ads for Electricians: The Phoenix Blueprint for Verified Leads    | Matches `google lsa cost trends 2025/2026` & contractor LSA automation inquiries                                                           | **P0 (Immediate Win)**  |
+| `phoenix-ai-web-engineering-building-custom-high-performance-web-apps-for-arizona-smbs` | Phoenix AI Web Engineering: Building Custom High-Performance Web Apps for Arizona SMBs | Matches conversational query: _"i run a small business in phoenix and need a website built with ai"_ (Rank 2.4!)                           | **P1 (High Authority)** |
+| `microsoft-ads-complete-guide-2026`                                                     | Microsoft Ads in 2026: The Complete Guide to Advertising Beyond Google                 | Matches Bing #1 traffic driver (5 clicks, 92 impressions on Bing)                                                                          | **P1 (Bing Dominance)** |
+| `phoenix-conversion-rate-optimization-finding-and-fixing-website-conversion-friction`   | Phoenix Conversion Rate Optimization: Finding and Fixing Website Conversion Friction   | Targets local CRO queries (`top phoenix cro agencies`, `conversion rate optimization phoenix`)                                             | **P1**                  |
+| `custom-web-applications-for-arizona-smbs-when-ai-features-make-sense`                  | Custom Web Applications for Arizona SMBs: When AI Features Make Sense                  | Targets Arizona software & web engineering commercial searches                                                                             | **P2**                  |
+| `microsoft-clarity-seo-ux-ui`                                                           | Microsoft Clarity: What It Is and Why It Matters for SEO, UX, and UI                   | Targets technical UX/SEO diagnostics                                                                                                       | **P2**                  |
 
 ---
 
@@ -226,16 +226,15 @@ Based on live telemetry from GSC Wizard (162 queries, 60 on Page 1) and Bing Web
 Antigravity operates a unified multi-MCP stack for continuous SEO research, content governance, and intake verification:
 
 1. **`sanity` MCP Server:**
-   * Direct programmatic inspection and publishing of Sanity Studio content lake (`query_documents`, `publish_documents`, `patch_documents`).
-   * Eliminates the need to manually log into Studio to reconcile drafts.
+   - Direct programmatic inspection and publishing of Sanity Studio content lake (`query_documents`, `publish_documents`, `patch_documents`).
+   - Eliminates the need to manually log into Studio to reconcile drafts.
 2. **`gsc-wizard` MCP Server:**
-   * Live Search Console API telemetry (`query_top_queries`, `query_top_pages`, `score_opportunities`).
-   * Tracks AI conversational query shapes (`conversational questions`, `pivot follow-ups`) and alerts on ranking drops.
+   - Live Search Console API telemetry (`query_top_queries`, `query_top_pages`, `score_opportunities`).
+   - Tracks AI conversational query shapes (`conversational questions`, `pivot follow-ups`) and alerts on ranking drops.
 3. **`microsoft-clarity` MCP Server:**
-   * Behavioral user telemetry (`query-analytics-dashboard`, `list-session-recordings`).
-   * Verifies real human engagement vs crawler noise across landing pages.
+   - Behavioral user telemetry (`query-analytics-dashboard`, `list-session-recordings`).
+   - Verifies real human engagement vs crawler noise across landing pages.
 4. **`openseo` MCP Server:**
-   * Competitor keyword mapping and SERP analysis (`research_keywords`, `get_domain_overview`).
+   - Competitor keyword mapping and SERP analysis (`research_keywords`, `get_domain_overview`).
 5. **`github` & `vercel` Tooling:**
-   * Automated verification of pull requests, PR checks (`npm run check`, `test:intake`), and instant preview deployment builds.
-
+   - Automated verification of pull requests, PR checks (`npm run check`, `test:intake`), and instant preview deployment builds.
