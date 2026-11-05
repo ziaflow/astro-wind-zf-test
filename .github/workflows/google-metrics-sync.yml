@@ -1,0 +1,44 @@
+name: Import Google daily metrics
+on:
+  schedule:
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Optional backfill start (YYYY-MM-DD)'
+        type: string
+      end_date:
+        description: 'Optional backfill end (at least three days ago)'
+        type: string
+  pull_request:
+    paths:
+      - 'scripts/sync-google-metrics.mjs'
+      - 'tests/google-metrics-sync.test.mjs'
+      - '.github/workflows/google-metrics-sync.yml'
+permissions:
+  contents: read
+concurrency:
+  group: google-metrics-sync
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - run: node --test tests/google-metrics-sync.test.mjs
+      - name: Import finalized daily data (seven day overlap)
+        if: github.event_name != 'pull_request'
+        env:
+          SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          SYNC_START_DATE: ${{ inputs.start_date }}
+          SYNC_END_DATE: ${{ inputs.end_date }}
+        run: node scripts/sync-google-metrics.mjs

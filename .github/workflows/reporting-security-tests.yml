@@ -1,0 +1,25 @@
+name: Reporting security tests
+on:
+  pull_request:
+    paths:
+      - 'src/pages/api/webhooks/customerio.ts'
+      - 'supabase/migrations/**'
+      - 'tests/customerio-webhook.test.mjs'
+      - 'tests/reporting-view-access*'
+      - '.github/workflows/reporting-security-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci
+      - run: npm install --prefix "$RUNNER_TEMP/reporting-db-test" @electric-sql/pglite@0.5.15 --no-audit --no-fund
+      - run: node --test tests/customerio-webhook.test.mjs tests/reporting-view-access.test.mjs
+        env:
+          REPORTING_TEST_PGLITE: ${{ runner.temp }}/reporting-db-test/node_modules/@electric-sql/pglite/dist/index.js
