@@ -15,7 +15,6 @@ interface SanityPostWebhook {
   _rev?: unknown;
   _type?: unknown;
   _deleted?: unknown;
-  _updatedAt?: unknown;
   title?: unknown;
   slug?: unknown;
   seoDescription?: unknown;
@@ -43,7 +42,7 @@ const asTrimmedString = (value: unknown, maxLength: number) =>
 const getSlug = (value: unknown) => {
   const raw = typeof value === 'string' ? value : typeof value === 'object' && value !== null ? (value as { current?: unknown }).current : '';
   const slug = asTrimmedString(raw, 250);
-  return /^[a-zA-Z0-9][a-zA-Z0-9/_-]*$/.test(slug) ? slug.replace(/^\/+|\/+$/g, '') : '';
+  return /^[a-zA-Z0-9][a-zA-Z0-9-]*$/.test(slug) ? slug : '';
 };
 
 const apiUrl = (docId: string, suffix = '') =>
@@ -147,7 +146,7 @@ export const POST: APIRoute = async ({ request }) => {
   const revision = asTrimmedString(payload._rev, 128);
   const title = asTrimmedString(payload.title, 200);
   const slug = getSlug(payload.slug);
-  const summary = asTrimmedString(payload.seoDescription, 300);
+  const summary = asTrimmedString(payload.seoDescription, 160);
   const bodyText = typeof payload.bodyText === 'string' ? payload.bodyText.slice(0, 200_000).trim() : '';
 
   if (!revision || !title || !slug) {
@@ -167,7 +166,8 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ error: 'Sync state is unavailable' }, 503);
   }
 
-  const sourceUrl = `https://ziaflow.com/${slug}`;
+  // Sanity-backed posts are served from this route in the website repository.
+  const sourceUrl = `https://ziaflow.com/posts/${slug}`;
   const markdown = buildPublishedPostMarkdown({ summary, bodyText, sourceUrl });
   const now = new Date().toISOString();
   const table = supabaseAdmin.from('sanity_docs_sync');
@@ -242,21 +242,34 @@ export const POST: APIRoute = async ({ request }) => {
       await updateDocsPage(docsId, pageId, docsToken, title, summary, markdown);
     } else {
       pageId = await createDocsPage(docsId, docsToken, parentPageId, title, summary, markdown);
+
+      // Save the page ID as soon as the API returns it, so later retries update rather than recreate it.
+      const { data: mapped, error: mappingError } = await table
+        .update({ coda_page_id: pageId, updated_at: new Date().toISOString() })
+        .eq('sanity_document_id', documentId)
+        .eq('sync_status', 'processing')
+        .select('sanity_document_id')
+        .maybeSingle();
+
+      if (mappingError || !mapped) throw new Error('Docs page was created but its mapping could not be saved');
     }
 
     const syncedAt = new Date().toISOString();
-    const { error: saveError } = await table
+    const { data: saved, error: saveError } = await table
       .update({
         coda_page_id: pageId,
         sanity_revision: revision,
         sync_status: 'synced',
         last_error: null,
         updated_at: syncedAt,
+        synced_at: syncedAt,
       })
       .eq('sanity_document_id', documentId)
-      .eq('sync_status', 'processing');
+      .eq('sync_status', 'processing')
+      .select('sanity_document_id')
+      .maybeSingle();
 
-    if (saveError) {
+    if (saveError || !saved) {
       console.error('[sanity-docs-webhook] Docs page synced but mapping could not be saved');
       return json({ error: 'Page synced but sync state could not be saved' }, 503);
     }

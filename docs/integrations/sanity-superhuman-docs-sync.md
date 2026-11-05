@@ -32,7 +32,7 @@ Create a webhook for the Sanity project/dataset used by the site. Configure it t
 - **URL:** `https://ziaflow.com/api/webhooks/sanity-docs` (use the Vercel preview URL for initial testing).
 - **Method:** `POST`; **content type:** JSON.
 - **Triggers:** document create and update only. Do not enable delete triggers.
-- **Filter:** `_type == "post" && !(_id in path("drafts.**"))`.
+- **Filter:** `_type == "post" && defined(publishedAt) && publishedAt <= now() && !(_id in path("drafts.**"))`.
 - **Projection:**
 
 ```groq
@@ -40,9 +40,9 @@ Create a webhook for the Sanity project/dataset used by the site. Configure it t
   "_id": _id,
   "_rev": _rev,
   "_type": _type,
-  "_updatedAt": _updatedAt,
   "title": title,
   "slug": slug.current,
+  "publishedAt": publishedAt,
   "seoDescription": seoDescription,
   "bodyText": pt::text(body)
 }
@@ -70,6 +70,7 @@ After the Supabase table and Vercel secrets are configured and preview tests pas
 
 ## Operational notes
 
+- The website generates Sanity post pages at build time under `/posts/{slug}`. Trigger the normal Vercel site build when publishing a post so the source link in Docs resolves to the current page.
 - HTTP 401 means signature validation failed; 400 means the payload is malformed; 503 indicates missing configuration or sync-state availability; 502 indicates the Docs API call failed.
 - A `processing` row older than five minutes can be reclaimed on a retry. Check the destination document before manually retrying a failed page-creation request if the API accepted the create but the response was lost.
 - The Docs API queues page writes asynchronously. Verify the page in the destination document after the webhook reports success.

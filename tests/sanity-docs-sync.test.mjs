@@ -13,7 +13,7 @@ const signature = createHmac('sha256', secret)
   .update(`${timestamp}.${body}`)
   .digest('base64url');
 
- test('accepts a valid, recent Sanity signature', () => {
+test('accepts a valid, recent Sanity signature', () => {
   assert.equal(
     verifySanityWebhookSignature(body, `t=${timestamp},v1=${signature}`, secret),
     true
@@ -48,8 +48,8 @@ test('renders a markdown page with summary, body, and canonical source link', ()
     buildPublishedPostMarkdown({
       summary: 'A short summary.',
       bodyText: 'First paragraph.\nSecond paragraph.',
-      sourceUrl: 'https://ziaflow.com/example-post',
+      sourceUrl: 'https://ziaflow.com/posts/example-post',
     }),
-    'A short summary.\n\nFirst paragraph.\nSecond paragraph.\n\n---\n[View the published post on ziaflow.com](https://ziaflow.com/example-post)'
+    'A short summary.\n\nFirst paragraph.\nSecond paragraph.\n\n---\n[View the published post on ziaflow.com](https://ziaflow.com/posts/example-post)'
   );
 });
