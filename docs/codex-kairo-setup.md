@@ -1,9 +1,11 @@
 # Kairo development environment
 
 Use only `ziaflow/astro-wind-zf-test`, with the saved environment named
-**ZiaFlow Website — Kairo** and base branch `feature/kairo-redesign`.
-Create task branches from that branch, and target Kairo when proposing setup fixes.
-PR #41 remains the redesign review against `main`.
+**ZiaFlow Website — Kairo** and base branch `main`.
+Create a new task branch from the latest `main` and target `main` in pull requests.
+PR #41 merged on October 31, 2026 at commit
+`50e8376c6bba3f87446c6b81617047edd6f3b3b1`; Kairo is now the released site.
+Do not start new work from the old `feature/kairo-redesign` review branch.
 
 ## Reproducible setup
 
@@ -42,8 +44,9 @@ review its output and `broken-links.log` before claiming link health.
 
 ## Network and credentials
 
-The current task reports an enforced unrestricted HTTP policy and no configured
-secrets. This does not establish the saved environment's editable settings.
+The original setup task reported unrestricted HTTP access and no configured
+secrets. That historical observation does not establish a new task's network
+policy or the saved environment's editable settings.
 For a restricted saved configuration allow package-manager destinations
 (`registry.npmjs.org`), Node downloads (`nodejs.org`), Playwright downloads
 (`cdn.playwright.dev`, `playwright.download.prss.microsoft.com`), and the
@@ -59,7 +62,20 @@ preview/test credentials when testing hosted persistence. Do not import all
 production variables. Hosted preview protection may need a scoped test credential.
 Do not allow `api.indexnow.org` for initial validation.
 
-## Verified baseline and limits
+## Verify the saved environment
+
+In Settings → Codex Cloud → Environments, select the environment containing only
+this repository. Set Node 22.22.0 and npm 10.9.4, select `main`, and configure
+`bash .codex/setup.sh` as its setup command. Ensure browser OS libraries are
+available in the image. Save the configuration, then start a fresh task.
+Repository commits do not publish these environment settings.
+
+In the fresh task, record the branch, commit, Node/npm versions and results of
+`npm run check`, `npm run test:intake`, `npm run build:validate`, and
+`npm run test:browser`. Review link-check warnings even when the command exits 0.
+Treat the environment as ready only after this fresh-task validation succeeds.
+
+## Historical verified baseline and limits
 
 Source: `f56d1b813e054cc8b32b2b2a607b72efba621fc5`, PR #41.
 
@@ -77,14 +93,20 @@ Source: `f56d1b813e054cc8b32b2b2a607b72efba621fc5`, PR #41.
 - Link checker: 16 external status-0 failures, exit 0. External link health is
   unresolved; this is not evidence that the destinations return HTTP 404.
 
-Saved configuration listing/renaming is unavailable in this session (the tool
+Saved configuration listing/renaming was unavailable in the original setup task (the tool
 returns “No handler registered”). The previous three-duplicate finding cannot
-be reverified. Current runtime source configuration ID:
+be reverified. Original runtime source configuration ID:
 `bd20d11d-3fa3-4af4-b330-ad067223906f~cecfg_6ad9605ce32c8197a8d6189b68415a0d`.
 The runtime started on production with Node 24; the setup above was applied in
 this task workspace. Saved configuration publication is not verified.
 
-## Next product work
+## Release evidence and next product work
+
+PR #41 records a READY production deployment and passing build/quality, contact,
+Clarity and six Playwright tests for the released tree. This does not establish
+saved Codex environment publication, a positive live inquiry, a booking outcome,
+or full visual/editorial acceptance. Revalidate against the current commit.
+
 
 Reconcile form/service-copy branches with current Kairo, verify navigation,
 buttons/forms and saved leads on the exact hosted preview, compare SEO/redirects
