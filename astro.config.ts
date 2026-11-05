@@ -11,7 +11,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
-import prefetch from '@astrojs/prefetch';
+
 import type { AstroIntegration } from 'astro';
 
 import sanity from '@sanity/astro';
@@ -29,6 +29,12 @@ export default defineConfig({
   site: 'https://ziaflow.com',
   output: 'static',
   adapter: vercel(),
+
+  // UX: Built-in link prefetching for fast page loads
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
 
   integrations: [
     tailwind({
@@ -66,11 +72,6 @@ export default defineConfig({
           'database',
         ],
       },
-    }),
-
-    // UX: Prefetches links on hover for "instant" page loads
-    prefetch({
-      prefetchAll: true,
     }),
 
     ...whenExternalScripts(() =>

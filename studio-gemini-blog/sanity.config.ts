@@ -1,11 +1,11 @@
 import {assist} from '@sanity/assist'
 import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {structureTool, type StructureResolver} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
 // --- Desk Structure Logic ---
-const deskStructure = (S) =>
+const deskStructure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
@@ -25,7 +25,10 @@ const deskStructure = (S) =>
       // 2. Standard Content Lists (Posts, Authors, etc.)
       ...S.documentTypeListItems().filter(
         // Exclude the 'seoDashboard' type from the standard list view
-        (listItem) => !['seoDashboard'].includes(listItem.getId()),
+        (listItem) => {
+          const id = listItem.getId()
+          return id ? !['seoDashboard'].includes(id) : true
+        },
       ),
     ])
 

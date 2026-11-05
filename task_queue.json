@@ -1,0 +1,38 @@
+{
+  "$schema": "./docs/task_queue_schema.json",
+  "version": "1.0",
+  "name": "AstroWind Overnight Agent Queue",
+  "settings": {
+    "default_model_rotation": ["flash", "flash_lite", "pro"],
+    "cooldown_seconds_between_tasks": 30,
+    "max_retries_per_task": 2
+  },
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Verify broken link checker and report results",
+      "category": "maintenance",
+      "status": "pending",
+      "priority": "normal",
+      "model_tier": "flash_lite",
+      "prompt": "Run 'npm run check:links', inspect the output in broken-links.log, and document any 404s found or confirm all links are healthy.",
+      "created_at": "2026-11-04T18:50:00Z",
+      "completed_at": null,
+      "retry_count": 0,
+      "notes": ""
+    },
+    {
+      "id": "task-002",
+      "title": "Run Astro and ESLint checks and document issues",
+      "category": "code-quality",
+      "status": "pending",
+      "priority": "normal",
+      "model_tier": "flash",
+      "prompt": "Run 'npm run check:astro' and 'npm run check:eslint'. If any errors or warnings occur, record them in check_output.txt and summarize recommended fixes.",
+      "created_at": "2026-11-04T18:50:00Z",
+      "completed_at": null,
+      "retry_count": 0,
+      "notes": ""
+    }
+  ]
+}
