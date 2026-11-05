@@ -1,6 +1,7 @@
 import slugify from 'limax';
 
 import { SITE, APP_BLOG } from '~/config/site';
+import { resolveLegacyRedirect } from '~/config/redirects';
 
 import { trim } from '~/utils/utils';
 
@@ -103,7 +104,11 @@ export const getAsset = (path: string): string =>
     .join('/');
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string => {
+  const path = createPath(BASE_PATHNAME, permalink);
+  const resolved = resolveLegacyRedirect(path);
+  return resolved || path;
+};
 
 /** */
 export const applyGetPermalinks = (menu: object = {}) => {

@@ -98,7 +98,7 @@ Website analysis combines automated browser diagnostics with visual heuristics t
 
 Auditing UI assets and pricing models is only the first step in building a high-converting web platform. Explore our in-depth engineering and local growth guides:
 
-- **[Phoenix CRO Guide: Fix Website Friction & Boost Local Leads](/blog/phoenix-conversion-rate-optimization-finding-and-fixing-friction)**: A practical breakdown of how Valley service businesses eliminate form drop-offs, optimize mobile click-to-call flows, and double inbound inquiries.
+- **[Phoenix CRO Guide: Fix Website Friction & Boost Local Leads](/website-conversion-checklist-for-phoenix-businesses)**: A practical breakdown of how Valley service businesses eliminate form drop-offs, optimize mobile click-to-call flows, and double inbound inquiries.
 - **[Custom Web Development & SEO Services](/services/web-development)**: Learn how ZiaFlow builds bespoke, sub-second Astro web platforms with automated CRM routing and structured Schema.org entity graphs.
-- **[Marketing Automation for Service Businesses](/blog/marketing-automation-for-phoenix-smbs-connecting-leads-crm-and-client-intake)**: How to connect web forms, CallRail, and Google Local Service Ads to instant SMS dispatch and automated customer follow-up.
+- **[Marketing Automation for Service Businesses](/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings)**: How to connect web forms, CallRail, and Google Local Service Ads to instant SMS dispatch and automated customer follow-up.
 - **[Request a Free Technical Audit](/audit)**: We inspect your production build, test your intake workflows, and record a 10-minute video diagnosing your site's bottlenecks.
