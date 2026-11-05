@@ -5,6 +5,10 @@
 
 interface ImportMetaEnv {
   readonly WEB3FORMS_ACCESS_KEY: string;
+  readonly SANITY_DOCS_WEBHOOK_SECRET: string;
+  readonly SUPERHUMAN_DOCS_API_TOKEN: string;
+  readonly SUPERHUMAN_DOCS_DOC_ID: string;
+  readonly SUPERHUMAN_DOCS_PARENT_PAGE_ID: string;
 }
 
 interface ImportMeta {
