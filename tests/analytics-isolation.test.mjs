@@ -93,3 +93,32 @@ for (const [host, search, expected] of [
     }
   });
 }
+
+for (const [host, search, expected] of [
+  ['localhost', '?debug_analytics=1', false],
+  ['preview.vercel.app', '', false],
+  ['ziaflow.com', '?internal_qa=1', false],
+  ['ziaflow.com', '', true],
+]) {
+  test(`Customer.io CDP script respects exclusions on ${host}${search}`, () => {
+    const window = run(host, search);
+    const requests = [];
+    const document = {
+      createElement: () => ({ setAttribute: () => {} }),
+      getElementsByTagName: () => [{ parentNode: { insertBefore: (element) => requests.push(element.src) } }],
+      head: { appendChild: (element) => requests.push(element.src) },
+    };
+    const cioMatch = source.match(/<script is:inline define:vars=\{\{ customerIoWriteKey \}\}>([\s\S]*?)<\/script>/);
+    assert.ok(cioMatch);
+    vm.runInNewContext(cioMatch[1], { window, document, customerIoWriteKey: 'cio-write-key-test', console });
+    if (expected) {
+      assert.equal(requests.length, 1);
+      assert.ok(requests[0].includes('cdp.customer.io/v1/analytics-js/snippet/cio-write-key-test/analytics.min.js'));
+      assert.ok(window.analytics);
+      assert.ok(window.cioanalytics);
+    } else {
+      assert.equal(requests.length, 0);
+      assert.equal(window.cioanalytics, undefined);
+    }
+  });
+}

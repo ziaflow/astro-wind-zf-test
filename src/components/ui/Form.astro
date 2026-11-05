@@ -197,8 +197,8 @@ if (!useNodemailer && !resolvedAccessKey) {
               const [firstName, ...restName] = String(userName).split(' ');
               const lastName = restName.join(' ');
 
-              if (window._cio && userEmail) {
-                window._cio.identify({
+              if (userEmail) {
+                const cioTraits = {
                   id: userEmail,
                   email: userEmail,
                   first_name: firstName || undefined,
@@ -206,14 +206,20 @@ if (!useNodemailer && !resolvedAccessKey) {
                   phone: parsedEntries.phone || undefined,
                   service_interest: parsedEntries.service_interest || undefined,
                   created_at: Math.floor(Date.now() / 1000),
-                });
-
-                window._cio.track('contact_form_submitted', {
+                };
+                const cioProps = {
                   message: parsedEntries.message || '',
                   page_url: window.location.href,
                   service_interest: parsedEntries.service_interest || '',
                   phone: parsedEntries.phone || '',
-                });
+                };
+                if (window.analytics && typeof window.analytics.identify === 'function') {
+                  window.analytics.identify(userEmail, cioTraits);
+                  window.analytics.track('contact_form_submitted', cioProps);
+                } else if (window._cio && typeof window._cio.identify === 'function') {
+                  window._cio.identify(cioTraits);
+                  window._cio.track('contact_form_submitted', cioProps);
+                }
               }
             } catch (cioErr) {
               console.warn('Customer.io client dispatch note:', cioErr);
