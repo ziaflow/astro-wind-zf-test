@@ -51,15 +51,19 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Replay defense: verify timestamp is within a 5-minute (300 seconds) tolerance window
     const parsedTimestamp = Number(timestamp);
-    if (!isNaN(parsedTimestamp)) {
-      const currentSeconds = Math.floor(Date.now() / 1000);
-      if (Math.abs(currentSeconds - parsedTimestamp) > 300) {
-        console.warn(`[customerio-webhook] rejected: timestamp out of tolerance (${timestamp} vs ${currentSeconds})`);
-        return new Response(JSON.stringify({ error: 'Timestamp expired' }), {
-          status: 401,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
+    if (!/^\d+$/.test(timestamp) || !Number.isSafeInteger(parsedTimestamp)) {
+      return new Response(JSON.stringify({ error: 'Invalid timestamp' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    const currentSeconds = Math.floor(Date.now() / 1000);
+    if (Math.abs(currentSeconds - parsedTimestamp) > 300) {
+      console.warn(`[customerio-webhook] rejected: timestamp out of tolerance (${timestamp} vs ${currentSeconds})`);
+      return new Response(JSON.stringify({ error: 'Timestamp expired' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Recompute signature: v0:<timestamp>:<raw body>
@@ -78,6 +82,13 @@ export const POST: APIRoute = async ({ request }) => {
   } else {
     // Fallback: Optional legacy bearer token check if signing key is not yet configured
     const legacySecret = import.meta.env.CUSTOMER_IO_WEBHOOK_SECRET;
+    if (!legacySecret) {
+      console.error('[customerio-webhook] authentication is not configured');
+      return new Response(JSON.stringify({ error: 'Webhook authentication unavailable' }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
     if (legacySecret) {
       const authHeader = request.headers.get('authorization') || '';
       const secretHeader = request.headers.get('x-cio-webhook-secret') || '';
