@@ -26,6 +26,15 @@ test('draft-safe approval validation and no automatic publication timestamp surv
 });
 test('body styles preserve normal, lists, marks and H2-H6 while rejecting new H1 content', () => {
   const body = field('body');
+  const link = body.of[0].marks.annotations.find((annotation) => annotation.name === 'link');
+  let uriOptions;
+  link.fields[0].validation({
+    uri(options) {
+      uriOptions = options;
+      return this;
+    },
+  });
+  assert.equal(uriOptions.allowRelative, true);
   assert.equal(
     body.of[0].styles.some((style) => style.value === 'h1'),
     false
