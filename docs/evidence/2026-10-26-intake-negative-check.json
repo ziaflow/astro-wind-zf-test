@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-26T15:03:05.682349+00:00",
+  "origin": "https://ziaflow.com",
+  "release_ready": false,
+  "limitations": [
+    "Only server HTML and one fixed empty JSON rejection are checked.",
+    "No valid lead, browser submission, durable receipt, provider event, email, consent, booking or delivery was tested.",
+    "A passing negative boundary is not end-to-end or release acceptance."
+  ],
+  "contact_status": 200,
+  "form_count": 1,
+  "contact_api_form_count": 1,
+  "external_form_count": 0,
+  "invalid_api_status": 400,
+  "invalid_email_rejected": true,
+  "negative_boundary_passed": true
+}
