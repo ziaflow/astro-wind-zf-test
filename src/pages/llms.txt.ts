@@ -116,7 +116,7 @@ ${posts
 - Address: 2822 E Greenway Rd Suite 10 B, Phoenix, AZ 85032
 - Phone: +1-602-834-4239
 - Email: info@ziaflow.com
-- Live Calendar: https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled
+- Live Calendar: https://calendly.com/jeremy-sanchez-ziaflow
   `.trim();
 
   return new Response(siteSummary, {

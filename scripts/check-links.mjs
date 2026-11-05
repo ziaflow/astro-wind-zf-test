@@ -14,7 +14,7 @@ async function checkLinks() {
       'https://www.instagram.com/ziaflowaz',
       'https://www.yelp.com',
       'https://superhuman.com',
-      'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      'https://calendly.com/jeremy-sanchez-ziaflow',
       'https://maps.google.com',
       'https://ziaflow.com', // Skip self-referential absolute links during build check
       'https://ruhnueopjedaywiqhpgi.supabase.co', // Skip signed URLs that might timeout or fail auth

@@ -57,7 +57,7 @@ export const footerContact = {
     {
       label: 'Consultation',
       value: 'Book Strategy Call',
-      href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled',
+      href: 'https://calendly.com/jeremy-sanchez-ziaflow',
     },
   ],
 };

@@ -57,5 +57,5 @@ test('booking retains a direct calendar link when an embed cannot load', async (
   expect(html).toContain('Open Booking Portal');
   expect(html).not.toContain('booking-fallback--hidden');
   expect(tags(html, 'iframe').some((tag) => tag.title === 'Book a consultation')).toBe(true);
-  expect(tags(html, 'a').some((tag) => tag.href?.startsWith('https://outlook.office.com/book/'))).toBe(true);
+  expect(tags(html, 'a').some((tag) => tag.href?.startsWith('https://calendly.com/jeremy-sanchez-ziaflow'))).toBe(true);
 });

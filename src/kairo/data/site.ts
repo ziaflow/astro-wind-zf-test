@@ -11,7 +11,7 @@ export const site: SiteConfig = {
   careersEmail: 'info@ziaflow.com',
   accent: '#A22A36',
   cta: {
-    primary: { label: 'Book Consultation', href: 'https://outlook.office.com/book/ZiaFlowIntake@ziaflow.com/?ismsaljsauthenabled' },
+    primary: { label: 'Book Consultation', href: 'https://calendly.com/jeremy-sanchez-ziaflow' },
     secondary: { label: 'Contact', href: '/contact' },
   },
   socials: [
