@@ -1,0 +1,231 @@
+---
+import { Icon } from 'astro-icon/components';
+import { BUSINESS_PHONE } from '~/utils/utils';
+
+export interface Props {
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+  showScrollCue?: boolean;
+}
+
+const {
+  tagline = 'ZF // 01 · PHOENIX WEB ENGINEERING · Q4 AVAILABILITY OPEN',
+  title = 'Custom Software & Web Development That Scales Your Phoenix Business',
+  subtitle = 'We engineer sub-second Astro web platforms, real-time lead capture webhooks, and automated intake pipelines for Valley contractors and commercial services. Zero dropped leads.',
+  showScrollCue = true,
+} = Astro.props;
+---
+
+<section
+  class="relative isolate overflow-hidden bg-[#0A0B0E] text-[#EDEDED] pt-12 pb-14 sm:pt-16 sm:pb-20 border-b border-white/10"
+>
+  <!-- Kairo Ambient Subtle Glow -->
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[760px] h-[380px] bg-gradient-to-b from-[#A22A36]/20 via-[#A22A36]/5 to-transparent blur-[140px] rounded-full -z-10"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute bottom-0 right-10 w-[420px] h-[300px] bg-[#3F9B93]/10 blur-[110px] rounded-full -z-10"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Precision Hairline Grid Pattern -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Editorial Status Bar -->
+    <div class="flex items-center justify-between pb-5 mb-8 border-b border-white/10 text-xs font-mono">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="font-bold tracking-widest text-[#A22A36] uppercase">ZF // 01</span>
+        <span class="text-slate-600">/</span>
+        <span class="tracking-wider text-slate-400 uppercase hidden sm:inline">Phoenix Web Engineering</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+        </span>
+        <span class="tracking-wider text-slate-300 uppercase font-semibold text-[11px] sm:text-xs">
+          Q4 Engineering Open
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Two-Column Viewport (Fitted to Standard Screen Heights) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <!-- Left Column: Copy & Direct High-Contrast CTAs -->
+      <div class="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+        <!-- Monospace Tagline Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300 shadow-sm"
+        >
+          <span class="text-[#A22A36]">●</span>
+          <span>{tagline}</span>
+        </div>
+
+        <!-- High-Impact H1 -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.08] tracking-tight font-heading">
+          {
+            title ? (
+              title
+            ) : (
+              <>
+                Custom Software & Web Development That <span class="text-[#A22A36]">Scales Your Phoenix Business.</span>
+              </>
+            )
+          }
+        </h1>
+
+        <!-- Direct Subtitle -->
+        <p class="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+
+        <!-- Dual High-Contrast Direct Funnels -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2">
+          <!-- Primary CTA -->
+          <a
+            href="/booking"
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#A22A36] hover:bg-[#85212c] text-white font-bold text-base transition-all duration-200 shadow-lg shadow-[#A22A36]/30 hover:scale-[1.02] active:scale-95 cursor-pointer"
+            data-cta="book_strategy_hero"
+          >
+            <Icon name="tabler:calendar" class="w-5 h-5 mr-2 inline-block" />
+            <span>Book 15-Min Strategy Call</span>
+          </a>
+
+          <!-- Secondary CTA -->
+          <a
+            href="/audit"
+            class="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-white/20 hover:border-white/50 bg-white/[0.04] hover:bg-white/[0.08] text-white font-medium text-base transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+            data-cta="run_audit_hero"
+          >
+            <Icon name="tabler:search" class="w-5 h-5 mr-2 inline-block" />
+            <span>Run Free Local Audit</span>
+          </a>
+
+          <!-- Phone Direct Link -->
+          <a
+            href="tel:+16028344239"
+            class="inline-flex items-center justify-center px-4 py-3 rounded-full border border-white/10 bg-black/40 hover:bg-black/60 text-slate-300 text-xs sm:text-sm font-mono hover:text-white transition"
+            data-cta="call_now_hero"
+          >
+            <span>📞 {BUSINESS_PHONE.display}</span>
+          </a>
+        </div>
+
+        <!-- Above-the-Fold Phoenix Trust Row -->
+        <div
+          class="pt-5 border-t border-white/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono text-slate-400"
+        >
+          <span class="flex items-center gap-1.5">
+            <span class="text-emerald-400 font-bold">✓</span> Phoenix, AZ (2822 E Greenway Rd)
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="text-emerald-400 font-bold">✓</span> Fast 2-Week Sprints
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="text-emerald-400 font-bold">✓</span> HIPAA & SOC-2 Compliant
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Column: Kairo 4-Metric Live Telemetry Card -->
+      <div class="lg:col-span-5 w-full">
+        <div
+          class="border border-white/10 rounded-2xl bg-[#121316]/90 p-6 sm:p-7 backdrop-blur-md shadow-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300"
+        >
+          <!-- Card Header -->
+          <div class="flex items-center justify-between pb-4 mb-5 border-b border-white/10 font-mono text-xs">
+            <span class="text-slate-400 uppercase tracking-wider">Operator Proof</span>
+            <span class="text-[#ff7886] font-bold">ZIAFLOW TELEMETRY</span>
+          </div>
+
+          <!-- 4-Grid Metric Display -->
+          <div class="grid grid-cols-2 gap-3.5">
+            <div
+              class="p-4 bg-black/40 rounded-xl border border-white/5 hover:border-[#A22A36]/40 transition group/metric"
+            >
+              <div
+                class="text-2xl sm:text-3xl font-black text-white font-mono group-hover/metric:text-[#A22A36] transition-colors"
+              >
+                +150%
+              </div>
+              <div class="text-xs font-semibold text-slate-200 mt-1">Lead Growth</div>
+              <div class="text-[11px] text-slate-400 font-mono">Arizona SMB Clients</div>
+            </div>
+
+            <div
+              class="p-4 bg-black/40 rounded-xl border border-white/5 hover:border-[#A22A36]/40 transition group/metric"
+            >
+              <div class="text-2xl sm:text-3xl font-black text-[#A22A36] font-mono">45s</div>
+              <div class="text-xs font-semibold text-slate-200 mt-1">Dispatch Latency</div>
+              <div class="text-[11px] text-slate-400 font-mono">Sub-minute alerts</div>
+            </div>
+
+            <div
+              class="p-4 bg-black/40 rounded-xl border border-white/5 hover:border-[#A22A36]/40 transition group/metric"
+            >
+              <div
+                class="text-2xl sm:text-3xl font-black text-white font-mono group-hover/metric:text-emerald-400 transition-colors"
+              >
+                99+
+              </div>
+              <div class="text-xs font-semibold text-slate-200 mt-1">Core Web Vitals</div>
+              <div class="text-[11px] text-slate-400 font-mono">Sub-second mobile</div>
+            </div>
+
+            <div
+              class="p-4 bg-black/40 rounded-xl border border-white/5 hover:border-[#A22A36]/40 transition group/metric"
+            >
+              <div class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">0%</div>
+              <div class="text-xs font-semibold text-slate-200 mt-1">Dropped Leads</div>
+              <div class="text-[11px] text-slate-400 font-mono">Encrypted webhooks</div>
+            </div>
+          </div>
+
+          <!-- Card Footer Anchor -->
+          <div
+            class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-mono"
+          >
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Valley Contracting & Healthcare Stack
+            </span>
+            <a href="/about" class="text-white hover:text-[#A22A36] transition font-medium flex items-center gap-1">
+              <span>View Proof</span>
+              <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5 inline-block" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downward Directional Scroll Indicator (Encourages users to scroll past the 12% drop-off line) -->
+    {
+      showScrollCue && (
+        <div class="mt-12 pt-4 flex flex-col items-center justify-center text-center">
+          <a
+            href="#capabilities"
+            class="group flex flex-col items-center text-slate-400 hover:text-white transition cursor-pointer"
+            aria-label="Scroll to core capabilities"
+          >
+            <span class="text-xs font-mono tracking-widest uppercase text-slate-400 group-hover:text-[#A22A36] transition">
+              Explore Core Architecture & Services
+            </span>
+            <Icon
+              name="tabler:chevron-down"
+              class="w-5 h-5 mt-1 text-slate-400 group-hover:text-white animate-bounce transition"
+            />
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

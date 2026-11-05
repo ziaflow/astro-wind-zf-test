@@ -1,0 +1,435 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import KairoCroHero from '~/components/widgets/KairoCroHero.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import Content from '~/components/widgets/Content.astro';
+import ZoltServiceMatrix from '~/components/widgets/ZoltServiceMatrix.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import LocalBusinessSchema from '~/components/seo/LocalBusinessSchema.astro';
+import { Icon } from 'astro-icon/components';
+import { BUSINESS_PHONE } from '~/utils/utils';
+
+export const prerender = false;
+
+const metadata = {
+  title: 'Custom Software & Web Development That Scales Your Phoenix Business | ZiaFlow (Kairo Preview)',
+  description:
+    'Preview of the Kairo-designed ZiaFlow homepage: sub-second Astro architecture, direct on-site booking, and local marketing automation.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <LocalBusinessSchema />
+
+  <!-- Kairo CRO Hero Component -->
+  <KairoCroHero />
+
+  <!-- Section 1: Core Capabilities (Teased at bottom of 1080p fold) -->
+  <section id="capabilities" class="py-14 bg-[#0E0F12] border-b border-white/10 text-white scroll-mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-white/10">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-[#A22A36] font-bold block mb-1">
+            01 // ARCHITECTURAL PILLARS
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-heading">
+            Engineered for Conversion & Velocity
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 font-mono mt-2 sm:mt-0 max-w-md">
+          Replacing bloated 40-plugin WordPress sites with clean, sub-second serverless code.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Capability 1 -->
+        <div
+          class="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A22A36]/60 transition-all duration-300 group"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-[#A22A36] font-bold">01 / PERFORMANCE</span>
+            <Icon name="tabler:bolt" class="w-6 h-6 text-[#A22A36]" />
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
+            Sub-Second Astro Web Platforms
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Zero-JavaScript static frontends that score 99+ on Google Mobile PageSpeed, eliminating bounce rates and
+            maximizing local search ranking.
+          </p>
+          <a
+            href="/services/web-development"
+            class="text-xs font-mono text-[#ff8793] hover:underline flex items-center gap-1"
+          >
+            <span>Explore web engineering</span>
+            <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 inline-block" />
+          </a>
+        </div>
+
+        <!-- Capability 2 -->
+        <div
+          class="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#3F9B93]/60 transition-all duration-300 group"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-[#3F9B93] font-bold">02 / CAPTURE</span>
+            <Icon name="tabler:webhook" class="w-6 h-6 text-[#3F9B93]" />
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
+            Event-Driven Intake & Dispatch
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            Real-time webhooks connecting forms, CallRail, and Google LSA to Twilio SMS and CRM pipelines. Sub-60-second
+            response latency with zero lost inquiries.
+          </p>
+          <a
+            href="/services/automation"
+            class="text-xs font-mono text-[#3F9B93] hover:underline flex items-center gap-1"
+          >
+            <span>Explore lead pipelines</span>
+            <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 inline-block" />
+          </a>
+        </div>
+
+        <!-- Capability 3 -->
+        <div
+          class="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-emerald-500/60 transition-all duration-300 group"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-emerald-400 font-bold">03 / INTELLIGENCE</span>
+            <Icon name="tabler:cpu" class="w-6 h-6 text-emerald-400" />
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
+            Autonomous Voice & AI Systems
+          </h3>
+          <p class="text-sm text-slate-300 leading-relaxed mb-4">
+            HIPAA-compliant phone agents that answer after-hours calls, triage urgency, and book calendar appointments
+            without receptionist overhead.
+          </p>
+          <a
+            href="/services/software"
+            class="text-xs font-mono text-emerald-400 hover:underline flex items-center gap-1"
+          >
+            <span>Explore AI voice agents</span>
+            <Icon name="tabler:arrow-right" class="w-3.5 h-3.5 inline-block" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Relocated Proof & Social Proof (Moved out of hero to fix fold height) -->
+  <section class="py-14 bg-[#090A0D] border-b border-white/10 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <!-- Trusted Card -->
+        <div
+          class="border border-white/10 bg-[#121316] rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#3F9B93]/60 transition-all"
+        >
+          <div
+            class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 font-mono text-xs text-slate-400"
+          >
+            <span>ENTERPRISE STANDARDS</span>
+            <span class="text-slate-500">VALLEY SCALE</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-3 uppercase tracking-wider text-white">
+            Trusted by Arizona Operators
+          </h3>
+          <p class="text-slate-300 leading-relaxed mb-6 text-sm sm:text-base">
+            Trusted by healthcare clinics, commercial HVAC & roofing contractors, and fast-growing Arizona businesses to
+            deploy mission-critical lead and web infrastructure.
+          </p>
+          <a
+            href="/services/software"
+            class="text-[#3F9B93] font-semibold hover:underline inline-flex items-center text-sm font-mono"
+          >
+            <span>View enterprise solutions</span>
+            <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1 inline-block" />
+          </a>
+        </div>
+
+        <!-- Success Story Card -->
+        <div
+          class="border border-white/10 bg-[#121316] rounded-2xl p-6 sm:p-8 relative overflow-hidden group hover:border-[#A22A36]/60 transition-all"
+        >
+          <div
+            class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 font-mono text-xs text-slate-400"
+          >
+            <span>VERIFIED CASE STUDY</span>
+            <span class="text-emerald-400 font-bold">+150% LEADS</span>
+          </div>
+          <div class="flex items-center mb-4">
+            <div
+              class="w-10 h-10 rounded-full mr-3.5 border border-white/20 bg-slate-800 flex items-center justify-center font-bold text-white text-xs font-mono"
+            >
+              KB
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-sm sm:text-base">K. B.</h4>
+              <p class="text-xs text-slate-400 font-mono">COO, Healthcare Partners</p>
+            </div>
+          </div>
+          <p class="text-slate-300 italic mb-6 text-sm sm:text-base leading-relaxed">
+            "Automated patient intake reduced staff burden by 40%, while modern Astro web architecture verified a 150%
+            lead growth rate over legacy forms."
+          </p>
+          <a
+            href="/services/automation"
+            class="block w-full text-center py-2.5 border border-white/20 text-slate-200 rounded-full hover:bg-white/5 transition-colors font-medium text-xs sm:text-sm font-mono"
+          >
+            Read Automation Case Study &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands / Tech Stack -->
+  <Brands
+    title="Tech Stack & Infrastructure"
+    subtitle="Built on enterprise-grade cloud systems"
+    icons={[]}
+    images={[
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg',
+        alt: 'AWS',
+      },
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
+        alt: 'Azure',
+      },
+      {
+        src: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+        alt: 'OpenAI',
+      },
+    ]}
+  />
+
+  <!-- AI Voice Automation Section -->
+  <Content
+    isReversed
+    title="AI Voice Automation"
+    subtitle="Reduce reception workload with AI that answers phones, books appointments, and syncs records."
+    items={[
+      {
+        title: '24/7 Availability',
+        description:
+          'Never miss a customer or patient call. Our AI handles intake, scheduling, and FAQs around the clock.',
+      },
+      {
+        title: 'HIPAA Compliant',
+        description:
+          'Secure, private, and fully compliant voice infrastructure for medical, dental, and emergency service practices.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AI Voice Automation',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2 font-heading">
+        Automate Your <span class="text-primary">Front Desk</span>
+      </h3>
+    </Fragment>
+  </Content>
+
+  <!-- Zolt Service Matrix -->
+  <ZoltServiceMatrix />
+
+  <!-- Stats Grid -->
+  <Stats
+    stats={[
+      { title: 'Arizona Clients', amount: '50+' },
+      { title: 'Avg. Lead Growth', amount: '150%' },
+      { title: 'Google Rating', amount: '5.0★' },
+      { title: 'Years in Phoenix', amount: '4+' },
+    ]}
+    tagline="Trusted by Phoenix-Area Service Businesses"
+  />
+
+  <!-- Testimonials -->
+  <Testimonials
+    title="Client Testimonials"
+    tagline="Success Stories"
+    testimonials={[
+      {
+        testimonial:
+          'ZiaFlow has transformed our business with their automation solutions. Their tailored approach and expertise have streamlined our processes, saving us time and boosting our productivity. Highly recommend!',
+        name: 'K. B.',
+        job: 'COO, Healthcare Partners',
+      },
+      {
+        testimonial:
+          'Ziaflow is a top-notch company with great service, expert knowledge, and competitive prices. Highly recommended for Valley businesses wanting real technical results.',
+        name: 'J. M.',
+        job: 'Managing Director & Investor',
+      },
+    ]}
+  />
+
+  <!-- Call To Action -->
+  <CallToAction
+    title="Ready to engineer your growth?"
+    subtitle="Book a transparent technical consultation or run your complimentary forensic audit. No sales pressure, just clear metrics."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book 15-Min Strategy Call',
+        href: '/booking',
+        icon: 'tabler:calendar',
+        classes: {
+          btn: 'bg-[#A22A36] hover:bg-[#85212c] border-[#A22A36] text-white font-bold shadow-lg shadow-[#A22A36]/30',
+        },
+      },
+      {
+        variant: 'secondary',
+        text: 'Run Free Local Audit',
+        href: '/audit',
+        icon: 'tabler:search',
+      },
+      {
+        variant: 'secondary',
+        text: `📞 ${BUSINESS_PHONE.display}`,
+        href: 'tel:+16028344239',
+      },
+    ]}
+  />
+
+  <!-- FAQs -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Answers to common questions about our services and engineering sprint process."
+    tagline="FAQ"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'What makes ZiaFlow different from typical web agencies?',
+        description:
+          'We do not build bloated WordPress templates with 40 plugins. We write pure static and serverless code using Astro, Supabase, and automated event webhooks that load in under 1 second and never lose inquiries.',
+      },
+      {
+        title: 'How does your lead intake routing work?',
+        description:
+          'Every form submission and call tracking event is parsed through a secure webhook pipeline that alerts dispatchers via Twilio SMS within 45 seconds and synchronizes data directly to your CRM.',
+      },
+      {
+        title: 'How fast can ZiaFlow deploy a new website or automation?',
+        description:
+          'Our sprint model delivers completed platforms in rapid 2-to-4 week milestones, backed by staging reviews and zero-downtime DNS cutover.',
+      },
+    ]}
+  />
+
+  <!-- Contact Grid -->
+  <Features3
+    title="Contact ZiaFlow"
+    subtitle="Choose the method that works best for you"
+    columns={4}
+    items={[
+      {
+        title: 'Call Us Directly',
+        icon: 'tabler:phone-call',
+        callToAction: {
+          text: `📞 ${BUSINESS_PHONE.display}`,
+          href: 'tel:+16028344239',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Email',
+        icon: 'tabler:mail',
+        callToAction: {
+          text: 'info@ziaflow.com',
+          href: 'mailto:info@ziaflow.com',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Office',
+        icon: 'tabler:map-pin',
+        callToAction: {
+          text: '2822 E Greenway Rd, Phoenix, AZ 85032',
+          href: 'https://maps.google.com?q=2822+E+Greenway+Rd+Phoenix+AZ+85032',
+          variant: 'link',
+        },
+      },
+      {
+        title: 'Online Calendar',
+        icon: 'tabler:calendar',
+        callToAction: {
+          text: 'Book Strategy Call',
+          href: '/booking',
+          variant: 'link',
+        },
+      },
+    ]}
+  />
+
+  <!-- Latest Insights -->
+  <BlogLatestPosts
+    title="Digital Marketing Insights"
+    information="Local SEO, automation playbooks, CRO, and case studies for Arizona businesses."
+  />
+
+  <!-- Telemetry & Event Tracking for new CTAs -->
+  <script is:inline>
+    (function () {
+      const w = window;
+
+      function trackCTA(name, href) {
+        try {
+          const eventId = 'ev_kairo_' + Date.now();
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({
+            event: 'kairo_cta_click',
+            cta_name: name,
+            cta_href: href,
+            event_id: eventId,
+          });
+
+          if (typeof w.gtag === 'function') {
+            w.gtag('event', 'click', {
+              event_category: 'Kairo_CRO',
+              event_label: name,
+              value: href,
+              event_id: eventId,
+            });
+          }
+
+          if (typeof w.clarity === 'function') {
+            w.clarity('event', 'cta_' + name);
+          }
+        } catch (err) {
+          console.error('Kairo CTA tracking error:', err);
+        }
+      }
+
+      document.addEventListener('click', function (e) {
+        const link = e.target?.closest ? e.target.closest('a') : null;
+        if (!link) return;
+
+        const ctaAttr = link.getAttribute('data-cta');
+        const href = link.getAttribute('href') || '';
+
+        if (ctaAttr) {
+          trackCTA(ctaAttr, href);
+        } else if (href.indexOf('/booking') !== -1) {
+          trackCTA('booking_link', href);
+        } else if (href.indexOf('/audit') !== -1) {
+          trackCTA('audit_link', href);
+        } else if (href.indexOf('tel:') !== -1) {
+          trackCTA('phone_call', href);
+        }
+      });
+    })();
+  </script>
+</Layout>
