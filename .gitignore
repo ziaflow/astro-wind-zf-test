@@ -44,5 +44,6 @@ pnpm-lock.yaml
 
 .vercel/
 .ziaflow-ops/
+.playwright-mcp/
 outputs/
 astro-wind-zf-test/

@@ -75,3 +75,4 @@ Or by appending an object to `task_queue.json`:
 - **Atomic scope**: Each task should be doable in 5–15 minutes (e.g. 1 component, 1 test suite, 1 schema migration).
 - **Self-contained**: Include file paths, commands to run, and the expected artifact or verification step.
 - **Verification step**: Explicitly tell the task to verify changes (e.g. `npm run check`, `npm test`) before completing.
+

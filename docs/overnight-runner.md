@@ -62,3 +62,4 @@ Place the following configuration in `~/.gemini/config/sidecars/overnight-batch-
   "description": "Runs one pending task from task_queue.json every 30 minutes overnight."
 }
 ```
+

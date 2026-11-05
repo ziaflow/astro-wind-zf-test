@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Overnight Task Runner for Antigravity (AGY) Agents
- * 
+ *
  * Manages chunked overnight execution by reading task_queue.json,
  * rotating models (flash -> flash_lite -> pro) to distribute quota,
  * and spawning fresh conversations using Antigravity's agentapi.
@@ -32,7 +32,11 @@ function getAgentApiPath() {
   // Try system PATH
   try {
     const whichCmd = process.platform === 'win32' ? 'where agentapi' : 'which agentapi';
-    const out = execSync(whichCmd, { stdio: ['pipe', 'pipe', 'ignore'] }).toString().trim().split('\n')[0].trim();
+    const out = execSync(whichCmd, { stdio: ['pipe', 'pipe', 'ignore'] })
+      .toString()
+      .trim()
+      .split('\n')[0]
+      .trim();
     if (out && fs.existsSync(out)) return out;
   } catch {
     // ignore
@@ -63,10 +67,10 @@ function saveQueue(data) {
 // Show status
 function printStatus(queue) {
   const tasks = queue.tasks || [];
-  const pending = tasks.filter(t => t.status === 'pending');
-  const inProgress = tasks.filter(t => t.status === 'in_progress');
-  const completed = tasks.filter(t => t.status === 'completed');
-  const failed = tasks.filter(t => t.status === 'failed');
+  const pending = tasks.filter((t) => t.status === 'pending');
+  const inProgress = tasks.filter((t) => t.status === 'in_progress');
+  const completed = tasks.filter((t) => t.status === 'completed');
+  const failed = tasks.filter((t) => t.status === 'failed');
 
   console.log('\n=============================================');
   console.log(`📋 Antigravity Overnight Queue Status`);
@@ -78,9 +82,8 @@ function printStatus(queue) {
   console.log('=============================================\n');
 
   tasks.forEach((t) => {
-    const badge = t.status === 'completed' ? '✅' :
-                  t.status === 'in_progress' ? '🔄' :
-                  t.status === 'failed' ? '❌' : '⏳';
+    const badge =
+      t.status === 'completed' ? '✅' : t.status === 'in_progress' ? '🔄' : t.status === 'failed' ? '❌' : '⏳';
     console.log(`${badge} [${t.id}] (${t.model_tier || 'auto'}) ${t.title}`);
   });
   console.log('');
@@ -88,7 +91,7 @@ function printStatus(queue) {
 
 // Sleep helper
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // Execute single task via agentapi
@@ -116,22 +119,17 @@ function executeTask(task, queue, agentApiBin, modelOverride = null) {
     `1. Complete the task thoroughly.`,
     `2. If any tests, checks, or files are updated, verify them.`,
     `3. When finished, write a short summary of what was done.`,
-    `4. Conclude your turn cleanly.`
+    `4. Conclude your turn cleanly.`,
   ].join('\n');
 
-  const args = [
-    'new-conversation',
-    `--model=${model}`,
-    `--title=[Overnight] ${task.title}`,
-    fullPrompt
-  ];
+  const args = ['new-conversation', `--model=${model}`, `--title=[Overnight] ${task.title}`, fullPrompt];
 
   console.log(`Invoking agentapi: ${agentApiBin} new-conversation --model=${model}`);
-  
+
   const result = spawnSync(agentApiBin, args, {
     stdio: 'inherit',
     shell: true,
-    cwd: ROOT_DIR
+    cwd: ROOT_DIR,
   });
 
   if (result.status === 0) {
@@ -168,7 +166,7 @@ function addTask(title, prompt, modelTier = 'flash', priority = 'normal') {
     created_at: new Date().toISOString(),
     completed_at: null,
     retry_count: 0,
-    notes: ''
+    notes: '',
   };
   queue.tasks.push(newTask);
   saveQueue(queue);
@@ -194,7 +192,7 @@ async function runLoop(options) {
 
   while (true) {
     const currentQueue = loadQueue();
-    const pendingTasks = currentQueue.tasks.filter(t => t.status === 'pending');
+    const pendingTasks = currentQueue.tasks.filter((t) => t.status === 'pending');
 
     if (pendingTasks.length === 0) {
       console.log('\n🎉 No pending tasks remaining in queue. Exiting.');
@@ -212,7 +210,7 @@ async function runLoop(options) {
       break;
     }
 
-    const remaining = currentQueue.tasks.filter(t => t.status === 'pending').length;
+    const remaining = currentQueue.tasks.filter((t) => t.status === 'pending').length;
     if (remaining > 0) {
       console.log(`\n⏳ Cooling down for ${cooldownSecs}s before next task (${remaining} remaining)...`);
       await sleep(cooldownSecs * 1000);
@@ -270,7 +268,7 @@ Options:
   printStatus(queue);
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error('Fatal error:', err);
   process.exit(1);
 });
