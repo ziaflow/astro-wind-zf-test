@@ -45,7 +45,7 @@ const { authors } = Astro.props;
               <ul class="flex flex-wrap gap-3 text-sm">
                 {author.socialUrls.map((url, index) => (
                   <li>
-                    <a class="underline" href={url} rel="me">
+                    <a class="underline" href={url}>
                       Profile {index + 1}
                     </a>
                   </li>

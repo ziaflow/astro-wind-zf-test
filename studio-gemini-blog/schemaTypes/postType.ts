@@ -69,6 +69,25 @@ export const postType = defineType({
       of: [
         defineArrayMember({
           type: 'block',
+          // Preserve the deployed link annotation, including existing relative internal links.
+          marks: {
+            annotations: [
+              defineArrayMember({
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  defineField({
+                    name: 'href',
+                    type: 'url',
+                    title: 'Link',
+                    validation: (rule) =>
+                      rule.uri({allowRelative: true, scheme: ['http', 'https', 'mailto', 'tel']}),
+                  }),
+                ],
+              }),
+            ],
+          },
           styles: [
             {title: 'Normal', value: 'normal'},
             {title: 'Heading 2', value: 'h2'},
