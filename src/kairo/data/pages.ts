@@ -38,7 +38,7 @@ export const storyPage = {
 export const pricingPage = {
   meta: {
     title: 'Engagement & Pricing',
-    description: `Transparent Sprint scopes and managed service retainers for custom web engineering, automation, and lead capture.`,
+    description: `Transparent fixed-scope Sprint pricing and managed retainers for custom Astro web engineering, local SEO, and automated CRM lead capture in Phoenix, AZ.`,
   },
   hero: {
     lines: ['Transparent scope.', 'Documented deliverables.'],
@@ -102,7 +102,7 @@ export const pricingPage = {
 export const journalPage = {
   meta: {
     title: 'Journal',
-    description: `Writing from the ${site.name} team on web engineering, lead intake automation, and conversion architecture.`,
+    description: `In-depth engineering guides, conversion playbooks, and local search strategies on modern web development and CRM automation from the ZiaFlow team.`,
   },
   hero: {
     lines: ['Notes on', 'systems & conversion.'],
@@ -142,7 +142,7 @@ export const aboutPage = {
 };
 
 export const notFoundPage = {
-  meta: { title: 'Page not found', description: 'This page slipped past us.' },
+  meta: { title: 'Page not found', description: "Page not found. Discover ZiaFlow's custom web development, local SEO, and automated lead capture solutions in Phoenix, AZ, or return to our homepage." },
   eyebrow: 'Error 404',
   lines: [{ text: 'This page' }, { text: 'slipped', accent: 'past us.' }],
   body: 'The page you are looking for does not exist or has been moved.',

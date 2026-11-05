@@ -3,7 +3,7 @@ order: 6
 client: Apex Custom Engineering
 industry: Custom Software & AI
 title: Bespoke web portals, Supabase telemetry, and automated client onboarding.
-summary: Engineering custom full-stack web applications and automated webhook pipelines without third-party SaaS bloat.
+summary: Engineering custom full-stack web applications, Supabase telemetry, and automated webhook pipelines in Phoenix without third-party SaaS bloat.
 cover: /images/story-corvid.jpg
 gallery: [/images/gallery-corridor.jpg, /images/gallery-tower.jpg]
 year: '2025'
