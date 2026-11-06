@@ -15,6 +15,7 @@ import compress from 'astro-compress';
 import type { AstroIntegration } from 'astro';
 
 import sanity from '@sanity/astro';
+import sentry from '@sentry/astro';
 
 import vercel from '@astrojs/vercel';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
@@ -37,6 +38,12 @@ export default defineConfig({
   },
 
   integrations: [
+    sentry({
+      org: 'ziaflow',
+      project: 'astro-wind-zf-test',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN },
+    }),
     tailwind({
       applyBaseStyles: false,
     }),

@@ -25,15 +25,18 @@ if (fs.existsSync(envPath)) {
 }
 
 const CLARITY_TOKEN = env.CLARITY_API_TOKEN;
+// Server-only sync. Do not use anon key.
+// Note: Production scheduled sync is handled via the clarity-sync Edge Function in Supabase.
+// Running this script manually consumes project API quota from Clarity.
 const SUPABASE_URL = env.PUBLIC_SUPABASE_URL || env.SUPABASE_URL;
-const SUPABASE_KEY = env.SUPABASE_SERVICE_ROLE_KEY || env.PUBLIC_SUPABASE_ANON_KEY;
+const SUPABASE_KEY = env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!CLARITY_TOKEN) {
   console.error('Missing CLARITY_API_TOKEN in .env');
   process.exit(1);
 }
 if (!SUPABASE_URL || !SUPABASE_KEY) {
-  console.error('Missing SUPABASE_URL or SUPABASE_KEY in .env');
+  console.error('Missing server-side SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env');
   process.exit(1);
 }
 

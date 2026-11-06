@@ -1,3 +1,15 @@
+/**
+ * DEPRECATED / DORMANT:
+ * Do not run this script directly in production.
+ * Live Clarity data collection is canonically managed by the `clarity-sync` Supabase Edge Function
+ * scheduled via pg_cron. Running this script manually consumes project quota from Clarity's daily 10-call budget.
+ */
+console.warn('[clarity-insights] Warning: This script is deprecated to avoid exhausting the Clarity daily API budget.');
+if (!process.argv.includes('--force-run-deprecated')) {
+  console.error('Execution halted. Use --force-run-deprecated if manual execution is genuinely needed.');
+  process.exit(0);
+}
+
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

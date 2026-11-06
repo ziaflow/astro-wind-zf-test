@@ -157,58 +157,10 @@ async function run() {
   if (process.argv.includes('--from-supabase')) {
     await syncGscFromSupabaseToSanity({ minImpressions: 0, limit: 10 });
   } else {
-    // Example seed batch
-    const seedOpportunities = [
-      {
-        query: 'ai workflow automation',
-        sourcePlatform: 'gsc',
-        landingPage: 'https://ziaflow.com/services/automation',
-        impressions: 1240,
-        clicks: 18,
-        averagePosition: 12.4,
-        ctr: 1.45,
-        reportDateRange: '2026-07-12 to 2026-10-11',
-        recommendedAction: 'hold_investigate',
-      },
-      {
-        query: 'web development phoenix',
-        sourcePlatform: 'gsc',
-        landingPage: 'https://ziaflow.com/services/web-development',
-        impressions: 890,
-        clicks: 42,
-        averagePosition: 4.2,
-        ctr: 4.72,
-        reportDateRange: '2026-07-12 to 2026-10-11',
-        recommendedAction: 'optimize_existing',
-      },
-      {
-        query: 'marketing automation for contractor arizona',
-        sourcePlatform: 'gsc',
-        landingPage:
-          'https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings',
-        impressions: 640,
-        clicks: 29,
-        averagePosition: 3.1,
-        ctr: 4.53,
-        reportDateRange: '2026-07-12 to 2026-10-11',
-        recommendedAction: 'publish_guide',
-      },
-      {
-        query: 'google local service ads contractor phoenix',
-        sourcePlatform: 'gsc',
-        landingPage: 'https://ziaflow.com/services/local-service-ads',
-        impressions: 510,
-        clicks: 34,
-        averagePosition: 2.1,
-        ctr: 6.67,
-        reportDateRange: '2026-07-12 to 2026-10-11',
-        recommendedAction: 'target_ads',
-      },
-    ];
-
-    console.log(`Writing ${seedOpportunities.length} keyword opportunity records to Sanity...`);
-    await pushKeywordOpportunitiesToSanity(seedOpportunities);
-    console.log('Successfully populated initial Keyword Opportunities in Sanity!');
+    console.error('Error: Refusing to sync without verified data source.');
+    console.error('Usage: node scripts/sync-gsc-to-sanity.mjs --from-supabase');
+    console.error('Hardcoded seed data has been permanently removed to protect Sanity dataset integrity.');
+    process.exit(1);
   }
 }
 
