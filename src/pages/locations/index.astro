@@ -1,0 +1,12 @@
+---
+import Directory from '~/components/expansion/ExpansionDirectory.astro';
+import { pagesOfKind } from '~/data/expansion-pages';
+export const prerender = true;
+---
+
+<Directory
+  title="Arizona Marketing & Website Service Areas | ZiaFlow"
+  description="Plan service-area marketing and website work for Arizona businesses. Start with real coverage, useful local information, and a clear inquiry workflow."
+  heading="Start with where you actually work."
+  pages={pagesOfKind('location')}
+/>

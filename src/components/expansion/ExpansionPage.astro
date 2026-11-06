@@ -1,0 +1,169 @@
+---
+import Layout from '@/layouts/layout.astro';
+import ProjectInquiry from './ProjectInquiry.astro';
+import type { ExpansionPage } from '~/data/expansion-pages';
+
+interface Props {
+  page: ExpansionPage;
+}
+const { page } = Astro.props;
+const category = { service: 'Services', industry: 'Industries', location: 'Locations' }[page.kind];
+const parent = { service: '/services', industry: '/industries', location: '/locations' }[page.kind];
+const canonical = new URL(page.path, 'https://ziaflow.com').toString();
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebPage', '@id': canonical, url: canonical, name: page.title, description: page.description },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ziaflow.com/' },
+        { '@type': 'ListItem', position: 2, name: category, item: `https://ziaflow.com${parent}` },
+        { '@type': 'ListItem', position: 3, name: page.heading, item: canonical },
+      ],
+    },
+    ...(page.kind === 'service'
+      ? [
+          {
+            '@type': 'Service',
+            name: page.heading,
+            url: canonical,
+            description: page.description,
+            provider: { '@type': 'Organization', name: 'ZiaFlow', url: 'https://ziaflow.com' },
+            areaServed: { '@type': 'State', name: 'Arizona' },
+          },
+        ]
+      : []),
+  ],
+};
+---
+
+<Layout title={page.title} description={page.description} metadata={{ canonical }}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <header class="shell pt-36 pb-16 md:pt-44 md:pb-24">
+    <nav aria-label="Breadcrumb" class="mb-10 flex flex-wrap gap-3 font-mono text-xs text-mute">
+      <a href="/" class="hover:text-bone">Home</a><span aria-hidden="true">/</span>
+      <a href={parent} class="hover:text-bone">{category}</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{page.heading}</span>
+    </nav>
+    <p class="font-mono text-xs uppercase tracking-widest text-signal">Arizona businesses · {category}</p>
+    <h1 class="mt-6 max-w-5xl font-display text-5xl font-extrabold leading-tight tracking-tight text-bone md:text-7xl">
+      {page.heading}
+    </h1>
+    <p class="mt-8 max-w-3xl text-lg leading-relaxed text-mute md:text-xl">{page.intro}</p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href="#project-inquiry"
+        class="inline-flex rounded-full bg-signal px-6 py-3 font-semibold text-bone transition-opacity hover:opacity-80"
+        >Discuss your project</a
+      >
+      <a
+        href="/audit"
+        class="inline-flex rounded-full border border-line px-6 py-3 text-bone transition-colors hover:border-signal"
+        >Request a website review</a
+      >
+    </div>
+    {
+      page.slug === 'healthcare' && (
+        <p class="mt-6 max-w-3xl text-sm leading-relaxed text-mute">
+          For business project inquiries only. Do not submit patient information or clinical details through ZiaFlow’s
+          general contact form.
+        </p>
+      )
+    }
+  </header>
+
+  <section class="shell border-t border-line py-16 md:py-24" aria-label="Scope and approach">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="space-y-14 lg:col-span-8">
+        {
+          page.sections.map((section, index) => (
+            <article>
+              <p class="font-mono text-xs text-signal">0{index + 1} / APPROACH</p>
+              <h2 class="mt-4 font-display text-3xl font-bold text-bone md:text-4xl">{section.heading}</h2>
+              <p class="mt-5 text-base leading-relaxed text-mute">{section.body}</p>
+              <ul class="mt-6 space-y-3">
+                {section.items.map((item) => (
+                  <li class="flex gap-3 text-base leading-relaxed text-bone">
+                    <span aria-hidden="true" class="mt-2.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+      <aside class="lg:col-span-4" aria-label="Project starting point">
+        <div class="rounded-2xl border border-line bg-ink-2 p-7 lg:sticky lg:top-28">
+          <p class="font-mono text-xs uppercase text-signal">Start with the current system</p>
+          <h2 class="mt-4 font-display text-2xl font-bold text-bone">Bring the website. Bring the workflow.</h2>
+          <p class="mt-4 text-sm leading-relaxed text-mute">
+            Tell us which service you need, where you serve customers, and what happens after an inquiry arrives. We
+            will define the work, required access, and acceptance checks before implementation.
+          </p>
+          <a href="#project-inquiry" class="mt-6 inline-flex text-sm font-semibold text-signal hover:underline"
+            >Describe your project →</a
+          >
+          <div class="mt-7 border-t border-line pt-6">
+            <p class="text-sm text-mute">Explore related work</p>
+            <ul class="mt-4 space-y-3">
+              {
+                page.related.map((link) => (
+                  <li>
+                    <a href={link.href} class="text-sm text-bone hover:text-signal hover:underline">
+                      {link.label} →
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <ProjectInquiry service={page.title} sensitive={page.slug === 'healthcare' || page.slug === 'legal'} />
+
+  <section class="shell border-t border-line py-16 md:py-24" aria-labelledby="questions-title">
+    <h2 id="questions-title" class="font-display text-3xl font-bold text-bone">Before we start.</h2>
+    <div class="mt-8 max-w-4xl divide-y divide-line border-y border-line">
+      {
+        page.faqs.map((faq) => (
+          <details class="py-6">
+            <>
+              <summary class="cursor-pointer font-display text-xl font-semibold text-bone">{faq.question}</summary>
+              <p class="mt-4 max-w-3xl text-base leading-relaxed text-mute">{faq.answer}</p>
+            </>
+          </details>
+        ))
+      }
+    </div>
+    {
+      page.slug === 'healthcare' && (
+        <p class="mt-8 max-w-3xl text-sm leading-relaxed text-mute">
+          For the practice’s review:{' '}
+          <a
+            class="text-signal underline"
+            href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/hipaa-online-tracking/index.html"
+          >
+            HHS guidance on online tracking technologies
+          </a>
+          . Applicability requires review of the actual data flow; a marketing page does not establish compliance.
+        </p>
+      )
+    }
+    {
+      page.slug === 'ai-search' && (
+        <p class="mt-8 text-sm text-mute">
+          Reference:{' '}
+          <a class="text-signal underline" href="https://developers.google.com/search/docs/appearance/ai-features">
+            Google Search guidance on AI features and websites
+          </a>
+          .
+        </p>
+      )
+    }
+  </section>
+</Layout>

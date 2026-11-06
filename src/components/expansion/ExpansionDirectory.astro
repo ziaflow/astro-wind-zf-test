@@ -1,0 +1,37 @@
+---
+import Layout from '@/layouts/layout.astro';
+import type { ExpansionPage } from '~/data/expansion-pages';
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  pages: ExpansionPage[];
+}
+const { title, description, heading, pages } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <section class="shell pt-36 pb-20 md:pt-44">
+    <p class="font-mono text-xs uppercase tracking-widest text-signal">ZiaFlow · Arizona</p>
+    <h1 class="mt-6 max-w-4xl font-display text-5xl font-bold text-bone md:text-7xl">{heading}</h1>
+    <p class="mt-8 max-w-3xl text-lg leading-relaxed text-mute">{description}</p>
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        pages.map((page) => (
+          <a href={page.path} class="rounded-2xl border border-line bg-ink-2 p-7 transition-colors hover:border-signal">
+            <>
+              <h2 class="font-display text-2xl font-bold text-bone">{page.heading}</h2>
+              <p class="mt-4 text-sm leading-relaxed text-mute">{page.description}</p>
+              <span class="mt-6 inline-block text-sm text-signal">Explore the approach →</span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+    <nav aria-label="Related directories" class="mt-12 flex flex-wrap gap-6 text-sm text-signal">
+      <a href="/services">Services →</a><a href="/industries">Industries →</a><a href="/locations">Locations →</a><a
+        href="/blog">Practical guides →</a
+      >
+    </nav>
+  </section>
+</Layout>

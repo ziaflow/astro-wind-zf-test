@@ -1,0 +1,108 @@
+---
+interface Props {
+  service: string;
+  sensitive?: boolean;
+}
+const { service, sensitive = false } = Astro.props;
+const field =
+  'mt-2 w-full rounded-lg border border-line bg-ink px-4 py-3 text-bone focus:outline-none focus:ring-2 focus:ring-signal';
+---
+
+<section
+  id="project-inquiry"
+  class="shell scroll-mt-28 border-t border-line py-16 md:py-24"
+  aria-labelledby="inquiry-title"
+>
+  <div class="grid gap-10 lg:grid-cols-2">
+    <div>
+      <p class="font-mono text-xs uppercase text-signal">Business project inquiry</p><h2
+        id="inquiry-title"
+        class="mt-4 font-display text-3xl font-bold text-bone"
+      >
+        Tell us what needs to work better.
+      </h2><p class="mt-5 max-w-lg text-base leading-relaxed text-mute">
+        Share the business, website, service area, and operational problem. We will review the request before proposing
+        a scope.
+      </p><p class="mt-5 max-w-lg text-sm leading-relaxed text-mute">
+        {
+          sensitive
+            ? 'Use this form for business project details only. Do not include patient information, confidential legal matter details, or other sensitive personal information.'
+            : 'Include business project details only. Do not include passwords or sensitive customer information.'
+        }
+      </p>
+    </div>
+    <form
+      data-lead-form
+      action="/api/contact"
+      method="POST"
+      class="space-y-5"
+      data-success-message="Thanks! We received your project inquiry."
+    >
+      <input type="hidden" name="form_type" value="expansion_project_inquiry" />
+      <input type="hidden" name="service_interest" value={service} />
+      <input type="hidden" name="page" value={Astro.url.pathname} />
+      <div class="absolute -left-[10000px] size-px overflow-hidden" aria-hidden="true">
+        <label for="exp-website-url">Leave blank</label><input
+          id="exp-website-url"
+          name="website_url"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+      <div>
+        <label for="exp-name" class="text-sm text-bone">Your name <span aria-hidden="true">*</span></label><input
+          id="exp-name"
+          class={field}
+          name="name"
+          autocomplete="name"
+          required
+          maxlength="200"
+        />
+      </div>
+      <div>
+        <label for="exp-email" class="text-sm text-bone">Business email <span aria-hidden="true">*</span></label><input
+          id="exp-email"
+          class={field}
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="320"
+        />
+      </div>
+      <div>
+        <label for="exp-company" class="text-sm text-bone">Business name</label><input
+          id="exp-company"
+          class={field}
+          name="company"
+          autocomplete="organization"
+          maxlength="200"
+        />
+      </div>
+      <div>
+        <label for="exp-message" class="text-sm text-bone">What would you like to improve?</label><textarea
+          id="exp-message"
+          class={field}
+          name="message"
+          rows="4"
+          maxlength="5000"
+          required></textarea>
+      </div>
+      <p class="text-sm leading-relaxed text-mute">
+        Submitting requests a response about this project. Read our <a href="/privacy" class="text-signal underline"
+          >privacy policy</a
+        >.
+      </p>
+      <button
+        type="submit"
+        class="rounded-full bg-signal px-6 py-3 font-semibold text-bone transition-opacity hover:opacity-80 disabled:cursor-wait disabled:opacity-60"
+        >Send project inquiry</button
+      >
+      <p data-form-status role="status" aria-live="polite" class="hidden text-sm text-bone"></p>
+    </form>
+  </div>
+</section>
+<script>
+  import { bindLeadForms } from '~/utils/lead-form';
+  bindLeadForms();
+</script>
