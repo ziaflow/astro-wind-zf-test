@@ -35,6 +35,8 @@
     "bridge:json": "node scripts/hermes-bridge.mjs status --json"
   },
   "dependencies": {
+    "@ai-sdk/mcp": "2.0.90",
+    "@ai-sdk/openai": "4.0.108",
     "@astrojs/markdown-remark": "^7.3.3",
     "@astrojs/node": "^11.1.8",
     "@astrojs/prefetch": "^0.4.1",
@@ -53,6 +55,7 @@
     "@supabase/supabase-js": "^2.87.3",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "ai": "7.0.162",
     "astro": "7.4.0",
     "astro-embed": "^0.9.0",
     "astro-icon": "^1.1.5",

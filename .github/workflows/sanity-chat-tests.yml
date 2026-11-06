@@ -1,0 +1,27 @@
+name: Sanity chat tests
+on:
+  push:
+    paths:
+      - 'src/lib/sanity-chat.ts'
+      - 'src/pages/api/sanity-chat.ts'
+      - 'tests/sanity-chat.test.mjs'
+      - '.github/workflows/sanity-chat-tests.yml'
+  pull_request:
+    paths:
+      - 'src/lib/sanity-chat.ts'
+      - 'src/pages/api/sanity-chat.ts'
+      - 'tests/sanity-chat.test.mjs'
+      - '.github/workflows/sanity-chat-tests.yml'
+permissions:
+  contents: read
+jobs:
+  sanity-chat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: node --test tests/sanity-chat.test.mjs
