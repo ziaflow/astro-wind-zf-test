@@ -14,5 +14,7 @@
   "eslint.useFlatConfig": true,
   "chatgpt.openOnStartup": true,
   "chatgpt.runCodexInWindowsSubsystemForLinux": true,
-  "geminicodeassist.project": "astrowebsite-a9a91"
+  "geminicodeassist.project": "astrowebsite-a9a91",
+  "antigravity.autoOpenFiles": true,
+  "containers.contexts.showInStatusBar": true
 }
