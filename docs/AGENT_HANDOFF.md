@@ -150,3 +150,4 @@ npm run build
 
 3. **Customer.io Live Activation:**
    - The snippet in `Analytics.astro` is wrapped in `{ customerIoWriteKey && ... }`. If tracking does not appear in browser DevTools on production, confirm that `PUBLIC_CUSTOMER_IO_WRITE_KEY` is saved in the Vercel project environment variables and redeploy.
+

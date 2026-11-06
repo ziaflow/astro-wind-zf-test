@@ -46,4 +46,12 @@ pnpm-lock.yaml
 .ziaflow-ops/
 .playwright-mcp/
 outputs/
+
+# Projected Hermes Skills (NTFS junctions)
+.agents/skills/analytics-growth-monitor/
+.agents/skills/circuit-breaker/
+.agents/skills/close-crm-sync/
+.agents/skills/customer-io-journeys/
+.agents/skills/superhuman-triage/
+.agents/skills/ziaflow-web-dev/
 astro-wind-zf-test/

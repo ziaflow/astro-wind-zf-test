@@ -29,7 +29,10 @@
     "test:browser": "playwright test --project=chromium",
     "queue": "node scripts/overnight-runner.mjs --status",
     "queue:run": "node scripts/overnight-runner.mjs --run",
-    "queue:once": "node scripts/overnight-runner.mjs --once"
+    "queue:once": "node scripts/overnight-runner.mjs --once",
+    "bridge": "node scripts/hermes-bridge.mjs",
+    "bridge:status": "node scripts/hermes-bridge.mjs status",
+    "bridge:json": "node scripts/hermes-bridge.mjs status --json"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.3",
