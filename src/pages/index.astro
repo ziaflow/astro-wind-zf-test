@@ -1,51 +1,13 @@
 ---
-import Capabilities from '@/components/home/capabilities.astro';
-import EvidenceBenchmarks from '@/components/home/evidence-benchmarks.astro';
-import Hero from '@/components/home/hero.astro';
-import HowItWorks from '@/components/home/how-it-works.astro';
-import Logos from '@/components/home/logos.astro';
-import Manifesto from '@/components/home/manifesto.astro';
-import ProductReveal from '@/components/home/product-reveal.astro';
-import Proof from '@/components/home/proof.astro';
-import QuickSummary from '@/components/home/quick-summary.astro';
-import Stories from '@/components/home/stories.astro';
-import Faq from '@/components/pricing/faq.astro';
-import Cta from '@/components/shared/cta.astro';
+import HomepageSalesFunnel from '@/components/home/homepage-sales-funnel.astro';
 import Layout from '@/layouts/layout.astro';
-import { homeFaqs } from '@/data/home';
 
 export const prerender = true;
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: homeFaqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer,
-    },
-  })),
-};
 ---
 
 <Layout
-  title="Custom Web Development & SEO for Arizona Service Businesses | ZiaFlow"
-  description="Custom web development and SEO for Arizona service businesses. High-speed Astro websites, local search dominance, and 60-second automated lead follow-up."
-  preloader
+  title="Lead Capture & Follow-Up Sprint for Arizona Service Businesses | ZiaFlow"
+  description="Fix the gap between new inquiries and booked work. ZiaFlow helps Arizona service businesses improve lead capture, ownership, response, follow-up, and measurement."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <Hero />
-  <QuickSummary />
-  <Logos />
-  <Manifesto />
-  <ProductReveal />
-  <Capabilities />
-  <HowItWorks />
-  <Stories />
-  <Proof />
-  <EvidenceBenchmarks />
-  <Faq title="Questions, answered." items={homeFaqs} id="home-faq" />
-  <Cta />
+  <HomepageSalesFunnel />
 </Layout>
