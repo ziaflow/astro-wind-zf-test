@@ -143,65 +143,12 @@ import { site } from '@/data/site';
     </div>
 
     <div class="lg:col-span-7">
-      <div class="rounded-3xl border border-line-strong bg-ink-2 p-6 sm:p-9">
-        <form id="homepage-sales-form" data-lead-form data-success-message="Thanks. Your request is saved. ZiaFlow will follow up about this inquiry." class="space-y-5">
-          <input type="hidden" name="form_type" value="homepage_sales_funnel" />
-          <input type="hidden" name="service_interest" value="Lead Capture & Follow-Up Sprint" />
-          <div class="absolute -left-[10000px] top-auto size-px overflow-hidden" aria-hidden="true">
-            <label for="homepage-website-url">Leave this field blank</label>
-            <input id="homepage-website-url" name="website_url" type="text" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div>
-              <label for="homepage-name" class="mb-2 block text-sm font-medium text-bone">Your name <span aria-hidden="true">*</span></label>
-              <input id="homepage-name" name="name" autocomplete="name" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="Full name" />
-            </div>
-            <div>
-              <label for="homepage-company" class="mb-2 block text-sm font-medium text-bone">Business name <span aria-hidden="true">*</span></label>
-              <input id="homepage-company" name="company" autocomplete="organization" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="Business or clinic" />
-            </div>
-            <div>
-              <label for="homepage-email" class="mb-2 block text-sm font-medium text-bone">Work email <span aria-hidden="true">*</span></label>
-              <input id="homepage-email" name="email" type="email" autocomplete="email" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="you@business.com" />
-            </div>
-            <div>
-              <label for="homepage-phone" class="mb-2 block text-sm font-medium text-bone">Phone <span class="text-dim">(optional)</span></label>
-              <input id="homepage-phone" name="phone" type="tel" autocomplete="tel" class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="(602) 555-0123" />
-            </div>
-          </div>
-
-          <div>
-            <label for="homepage-challenge" class="mb-2 block text-sm font-medium text-bone">Where does follow-through break down?</label>
-            <select id="homepage-challenge" name="lead_challenge" class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30">
-              <option value="">Choose the closest match</option>
-              <option value="missed_calls">Missed calls or unanswered inquiries</option>
-              <option value="slow_response">Slow or inconsistent follow-up</option>
-              <option value="unclear_ownership">Unclear lead ownership or handoffs</option>
-              <option value="disconnected_tools">Disconnected forms, CRM, or scheduling tools</option>
-              <option value="measurement_gap">Hard to tell which leads become bookings</option>
-              <option value="other">Something else</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="homepage-message" class="mb-2 block text-sm font-medium text-bone">Anything useful to know? <span class="text-dim">(optional)</span></label>
-            <textarea id="homepage-message" name="message" rows="3" class="w-full resize-y rounded-xl border border-line-strong bg-ink px-4 py-3 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="A sentence or two about what happens after an inquiry is enough."></textarea>
-          </div>
-
-          <label class="flex items-start gap-3 text-sm leading-relaxed text-mute">
-            <input type="checkbox" name="marketing_consent" value="true" class="mt-1 size-4 accent-signal" />
-            <span>Email me occasional practical tips and ZiaFlow service updates. This is optional; I can unsubscribe at any time.</span>
-          </label>
-          <p class="text-xs leading-relaxed text-dim">Submitting asks ZiaFlow to contact you about this request. Email updates are optional. See the <a class="underline underline-offset-2 hover:text-bone" href="/privacy">privacy policy</a>.</p>
-          <p data-form-status class="hidden text-sm" aria-live="polite"></p>
-          <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-signal px-6 font-semibold text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">Request my lead-flow review</button>
-        </form>
-        <div data-form-success class="hidden rounded-xl border border-signal/40 bg-ink p-6" role="status" aria-live="polite">
-          <h3 class="font-display text-xl font-semibold text-bone">Request received.</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mute">Thanks for sharing. We’ll review the details and follow up about this inquiry.</p>
-          <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex rounded-full border border-line-strong px-4 py-2.5 text-sm font-semibold text-bone hover:border-signal">Book a scoping call</a>
-        </div>
+      <div class="rounded-3xl border border-line-strong bg-ink-2 p-7 sm:p-10">
+        <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">Next step</p>
+        <h3 class="mt-4 font-display text-2xl font-bold text-bone">Tell us about your lead flow.</h3>
+        <p class="mt-4 max-w-[56ch] text-sm leading-relaxed text-mute">Use the existing project intake to share your business details, service interest, and what you want to improve. We’ll review your request and follow up about that inquiry.</p>
+        <a href="/contact#form" class="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-signal px-6 font-semibold text-white transition hover:brightness-110 sm:w-auto">Open the project intake</a>
+        <p class="mt-4 text-xs leading-relaxed text-dim">Prefer to choose a time now? <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-bone">Book a scoping call</a>.</p>
       </div>
     </div>
   </div>
