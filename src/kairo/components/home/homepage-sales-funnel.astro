@@ -1,0 +1,236 @@
+---
+import { site } from '@/data/site';
+---
+
+<section class="relative isolate overflow-hidden border-b border-line">
+  <div class="pointer-events-none absolute -top-40 right-[-8rem] -z-10 size-[34rem] rounded-full bg-signal/15 blur-[120px]" aria-hidden="true"></div>
+  <div class="shell grid min-h-[calc(100svh-5rem)] grid-cols-1 items-center gap-12 py-16 md:py-24 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-6">
+      <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink-2 px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-signal">
+        <span class="size-1.5 rounded-full bg-signal"></span>
+        Lead Capture &amp; Follow-Up Sprint
+      </p>
+      <h1 class="max-w-[13ch] font-display text-hero font-extrabold leading-[0.96] tracking-[-0.045em] text-bone">
+        Turn more inquiries into <span class="text-signal">booked work.</span>
+      </h1>
+      <p class="mt-7 max-w-[58ch] text-lead leading-relaxed text-mute">
+        ZiaFlow helps Arizona service businesses fix the gap between a new inquiry and the next clear action: capture,
+        ownership, fast response, follow-up, and measurement.
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a href="#lead-review" class="btn h-13 rounded-full bg-bone px-6 font-semibold text-ink hover:bg-white" data-btn>
+          <span class="btn-fill bg-white" aria-hidden="true"></span>
+          <span>Request a lead-flow review</span>
+        </a>
+        <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="inline-flex h-13 items-center rounded-full border border-line-strong px-6 text-sm font-medium text-bone transition hover:border-bone">
+          Book a scoping call
+        </a>
+      </div>
+      <p class="mt-5 text-xs text-dim">For home services, clinics, and other appointment-driven teams across Arizona.</p>
+    </div>
+
+    <div class="lg:col-span-6">
+      <div class="rounded-3xl border border-line-strong bg-ink-2/90 p-5 shadow-[0_30px_100px_-40px_rgb(0_0_0/0.9)] sm:p-8">
+        <div class="flex items-center justify-between gap-4 border-b border-line pb-5">
+          <div>
+            <p class="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-dim">A practical path</p>
+            <h2 class="mt-2 font-display text-xl font-bold text-bone sm:text-2xl">From first contact to next step</h2>
+          </div>
+          <span class="rounded-full border border-signal/40 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-wider text-signal">The Sprint</span>
+        </div>
+        <ol class="mt-2 divide-y divide-line">
+          <li class="flex items-center gap-4 py-5">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">01</span>
+            <div><h3 class="font-semibold text-bone">Capture</h3><p class="mt-1 text-sm text-mute">Calls, forms, and referral inquiries land somewhere visible.</p></div>
+          </li>
+          <li class="flex items-center gap-4 py-5">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">02</span>
+            <div><h3 class="font-semibold text-bone">Assign</h3><p class="mt-1 text-sm text-mute">A person owns the response, with a clear handoff.</p></div>
+          </li>
+          <li class="flex items-center gap-4 py-5">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">03</span>
+            <div><h3 class="font-semibold text-bone">Follow up</h3><p class="mt-1 text-sm text-mute">A useful next step is sent, with reply and booking exits.</p></div>
+          </li>
+          <li class="flex items-center gap-4 py-5">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">04</span>
+            <div><h3 class="font-semibold text-bone">Measure</h3><p class="mt-1 text-sm text-mute">Track what arrived, who handled it, and what happened next.</p></div>
+          </li>
+        </ol>
+        <p class="mt-2 border-t border-line pt-5 text-xs leading-relaxed text-dim">Start with the systems and leads you already have. The first step is finding where handoffs break.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="border-b border-line py-20 md:py-28" aria-labelledby="sprint-heading">
+  <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">What we work on</p>
+      <h2 id="sprint-heading" class="mt-4 max-w-[15ch] font-display text-title font-bold leading-tight text-bone">Fix the handoff before adding more complexity.</h2>
+      <p class="mt-5 max-w-[48ch] leading-relaxed text-mute">We review the path a prospect takes today, identify the points where ownership or response breaks down, then scope the smallest practical repairs.</p>
+      <a href="#lead-review" class="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-bone transition hover:text-signal">Talk through your lead flow <span aria-hidden="true">↘</span></a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+      <article class="rounded-2xl border border-line bg-ink-2/70 p-6">
+        <p class="font-mono text-xs text-signal">01 / FIND THE LEAK</p>
+        <h3 class="mt-4 font-display text-xl font-semibold text-bone">Map inquiry capture</h3>
+        <p class="mt-3 text-sm leading-relaxed text-mute">Review calls, website forms, lead sources, and the route each inquiry takes into your team.</p>
+      </article>
+      <article class="rounded-2xl border border-line bg-ink-2/70 p-6">
+        <p class="font-mono text-xs text-signal">02 / SET OWNERSHIP</p>
+        <h3 class="mt-4 font-display text-xl font-semibold text-bone">Make the next action clear</h3>
+        <p class="mt-3 text-sm leading-relaxed text-mute">Define who responds, what happens when they are unavailable, and how handoffs are recorded.</p>
+      </article>
+      <article class="rounded-2xl border border-line bg-ink-2/70 p-6">
+        <p class="font-mono text-xs text-signal">03 / CLOSE THE LOOP</p>
+        <h3 class="mt-4 font-display text-xl font-semibold text-bone">Build timely follow-up</h3>
+        <p class="mt-3 text-sm leading-relaxed text-mute">Connect the useful tools you already use and set clear stopping points for replies or bookings.</p>
+      </article>
+      <article class="rounded-2xl border border-line bg-ink-2/70 p-6">
+        <p class="font-mono text-xs text-signal">04 / SEE WHAT WORKS</p>
+        <h3 class="mt-4 font-display text-xl font-semibold text-bone">Measure the path</h3>
+        <p class="mt-3 text-sm leading-relaxed text-mute">Create a baseline for captured, contacted, and booked inquiries so the next decision has evidence.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="border-b border-line py-20 md:py-28" aria-labelledby="fit-heading">
+  <div class="shell">
+    <div class="max-w-3xl">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">A focused first project</p>
+      <h2 id="fit-heading" class="mt-4 font-display text-title font-bold leading-tight text-bone">Good fit when leads are coming in, but follow-through is hard to see.</h2>
+    </div>
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      <article class="border-t border-line-strong pt-5">
+        <h3 class="font-display text-lg font-semibold text-bone">Missed calls or form leads</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">New inquiries are split across phones, inboxes, spreadsheets, and platforms.</p>
+      </article>
+      <article class="border-t border-line-strong pt-5">
+        <h3 class="font-display text-lg font-semibold text-bone">Unclear responsibility</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">The team cannot quickly tell who owns a response or whether it happened.</p>
+      </article>
+      <article class="border-t border-line-strong pt-5">
+        <h3 class="font-display text-lg font-semibold text-bone">Follow-up without a system</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">Reminders and check-ins depend on memory, with no reliable stop when someone replies or books.</p>
+      </article>
+    </div>
+    <div class="mt-14 flex flex-col justify-between gap-5 rounded-2xl border border-line bg-ink-2 p-6 sm:flex-row sm:items-center sm:p-8">
+      <div>
+        <h3 class="font-display text-xl font-semibold text-bone">Start with a short, scoped conversation.</h3>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-mute">We’ll review your current inquiry path and identify what is worth fixing first. Any implementation is scoped before work begins.</p>
+      </div>
+      <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="inline-flex shrink-0 items-center justify-center rounded-full border border-line-strong px-5 py-3 text-sm font-semibold text-bone transition hover:border-signal hover:text-signal">Book a scoping call</a>
+    </div>
+  </div>
+</section>
+
+<section id="lead-review" class="scroll-mt-24 py-20 md:py-28" aria-labelledby="lead-review-heading">
+  <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">Tell us where it breaks</p>
+      <h2 id="lead-review-heading" class="mt-4 font-display text-title font-bold leading-tight text-bone">Request a lead-flow review.</h2>
+      <p class="mt-5 leading-relaxed text-mute">Share a few details about your business and what happens after an inquiry. We’ll use them to prepare a focused conversation about the next practical step.</p>
+      <div class="mt-8 space-y-3 text-sm text-mute">
+        <p><span class="text-signal">✓</span> Capture, routing, and follow-up reviewed together</p>
+        <p><span class="text-signal">✓</span> Work scoped around your current tools</p>
+        <p><span class="text-signal">✓</span> No commitment required to start the conversation</p>
+      </div>
+      <div class="mt-9 border-t border-line pt-6 text-sm">
+        <p class="font-mono text-xs uppercase tracking-wider text-dim">Prefer direct contact?</p>
+        <p class="mt-3"><a href="tel:+16028344239" class="font-semibold text-bone hover:text-signal">(602) 834-4239</a><span class="px-2 text-dim">·</span><a href="mailto:info@ziaflow.com" class="text-bone hover:text-signal">info@ziaflow.com</a></p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7">
+      <div class="rounded-3xl border border-line-strong bg-ink-2 p-6 sm:p-9">
+        <form id="homepage-sales-form" data-lead-form data-success-message="Thanks. Your request is saved. ZiaFlow will follow up about this inquiry." class="space-y-5">
+          <input type="hidden" name="form_type" value="homepage_sales_funnel" />
+          <input type="hidden" name="service_interest" value="Lead Capture & Follow-Up Sprint" />
+          <div class="absolute -left-[10000px] top-auto size-px overflow-hidden" aria-hidden="true">
+            <label for="homepage-website-url">Leave this field blank</label>
+            <input id="homepage-website-url" name="website_url" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="homepage-name" class="mb-2 block text-sm font-medium text-bone">Your name <span aria-hidden="true">*</span></label>
+              <input id="homepage-name" name="name" autocomplete="name" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="Full name" />
+            </div>
+            <div>
+              <label for="homepage-company" class="mb-2 block text-sm font-medium text-bone">Business name <span aria-hidden="true">*</span></label>
+              <input id="homepage-company" name="company" autocomplete="organization" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="Business or clinic" />
+            </div>
+            <div>
+              <label for="homepage-email" class="mb-2 block text-sm font-medium text-bone">Work email <span aria-hidden="true">*</span></label>
+              <input id="homepage-email" name="email" type="email" autocomplete="email" required class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="you@business.com" />
+            </div>
+            <div>
+              <label for="homepage-phone" class="mb-2 block text-sm font-medium text-bone">Phone <span class="text-dim">(optional)</span></label>
+              <input id="homepage-phone" name="phone" type="tel" autocomplete="tel" class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="(602) 555-0123" />
+            </div>
+          </div>
+
+          <div>
+            <label for="homepage-challenge" class="mb-2 block text-sm font-medium text-bone">Where does follow-through break down?</label>
+            <select id="homepage-challenge" name="lead_challenge" class="h-12 w-full rounded-xl border border-line-strong bg-ink px-4 text-sm text-bone focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30">
+              <option value="">Choose the closest match</option>
+              <option value="missed_calls">Missed calls or unanswered inquiries</option>
+              <option value="slow_response">Slow or inconsistent follow-up</option>
+              <option value="unclear_ownership">Unclear lead ownership or handoffs</option>
+              <option value="disconnected_tools">Disconnected forms, CRM, or scheduling tools</option>
+              <option value="measurement_gap">Hard to tell which leads become bookings</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="homepage-message" class="mb-2 block text-sm font-medium text-bone">Anything useful to know? <span class="text-dim">(optional)</span></label>
+            <textarea id="homepage-message" name="message" rows="3" class="w-full resize-y rounded-xl border border-line-strong bg-ink px-4 py-3 text-sm text-bone placeholder:text-dim focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/30" placeholder="A sentence or two about what happens after an inquiry is enough."></textarea>
+          </div>
+
+          <label class="flex items-start gap-3 text-sm leading-relaxed text-mute">
+            <input type="checkbox" name="marketing_consent" value="true" class="mt-1 size-4 accent-signal" />
+            <span>Email me occasional practical tips and ZiaFlow service updates. This is optional; I can unsubscribe at any time.</span>
+          </label>
+          <p class="text-xs leading-relaxed text-dim">Submitting asks ZiaFlow to contact you about this request. Email updates are optional. See the <a class="underline underline-offset-2 hover:text-bone" href="/privacy">privacy policy</a>.</p>
+          <p data-form-status class="hidden text-sm" aria-live="polite"></p>
+          <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-signal px-6 font-semibold text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">Request my lead-flow review</button>
+        </form>
+        <div data-form-success class="hidden rounded-xl border border-signal/40 bg-ink p-6" role="status" aria-live="polite">
+          <h3 class="font-display text-xl font-semibold text-bone">Request received.</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mute">Thanks for sharing. We’ll review the details and follow up about this inquiry.</p>
+          <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex rounded-full border border-line-strong px-4 py-2.5 text-sm font-semibold text-bone hover:border-signal">Book a scoping call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="border-t border-line py-16 md:py-20" aria-labelledby="faq-heading">
+  <div class="shell grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-4">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">Before we talk</p>
+      <h2 id="faq-heading" class="mt-4 font-display text-3xl font-bold text-bone">A few useful answers.</h2>
+    </div>
+    <div class="space-y-7 md:col-span-7 md:col-start-6">
+      <article class="border-b border-line pb-6">
+        <h3 class="font-display text-lg font-semibold text-bone">What is the Lead Capture &amp; Follow-Up Sprint?</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">A scoped engagement to review inquiry capture, ownership, response, follow-up, and measurement, then address the agreed gaps.</p>
+      </article>
+      <article class="border-b border-line pb-6">
+        <h3 class="font-display text-lg font-semibold text-bone">Do I need to replace my CRM or buy ads?</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">No. The first review starts with your current tools and inquiry flow. Any additional platform or paid media work is discussed and scoped separately.</p>
+      </article>
+      <article class="border-b border-line pb-6">
+        <h3 class="font-display text-lg font-semibold text-bone">Who is this for?</h3>
+        <p class="mt-2 text-sm leading-relaxed text-mute">Arizona service businesses and appointment-driven teams that want a clearer, more reliable process from first inquiry to booked work.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { bindLeadForms } from '@/utils/lead-form';
+  bindLeadForms();
+</script>
