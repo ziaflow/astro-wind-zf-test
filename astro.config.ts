@@ -54,6 +54,7 @@ export default defineConfig({
         !page.includes('/category/') &&
         !page.includes('/tag/') &&
         !page.includes('/form-test') &&
+        !page.includes('/sentry-test') &&
         !page.includes('/kairo-preview') &&
         !page.includes('/posts') &&
         !page.endsWith('/ziaflow') &&

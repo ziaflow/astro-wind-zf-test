@@ -80,5 +80,8 @@ test('negative counts or invalid dates reject cleanly', async () => {
     assert.fail('should not write invalid metric');
   };
 
-  await assert.rejects(run(env, fetcher, () => {}), /negative or invalid/);
+  await assert.rejects(
+    run(env, fetcher, () => {}),
+    /negative or invalid/
+  );
 });

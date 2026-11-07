@@ -1,0 +1,108 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Sentry Verification Test',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 py-16 mx-auto max-w-4xl lg:py-20 text-center">
+    <h1 class="text-3xl font-bold mb-4">Sentry Verification Test</h1>
+    <p class="text-muted dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+      Click the button below to test Error Monitoring, Structured Logging, Metrics, and Session Replay in Sentry.
+    </p>
+
+    <!-- Main Sentry test trigger -->
+    <div
+      class="mb-10 p-8 bg-gray-50 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 flex flex-col items-center"
+    >
+      <button
+        id="error-button"
+        class="px-6 py-3 font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-lg transition transform hover:-translate-y-0.5"
+      >
+        Throw test error
+      </button>
+      <p id="status-message" class="mt-4 text-sm text-gray-500 font-mono"></p>
+    </div>
+
+    <!-- Server-side API tests -->
+    <div class="p-6 bg-gray-50 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 text-left">
+      <h2 class="text-xl font-semibold mb-4 text-center">Server-Side Telemetry (API Route)</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button
+          id="server-info-btn"
+          class="px-5 py-2.5 font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow transition"
+        >
+          Server Log (Info)
+        </button>
+        <button
+          id="server-warn-btn"
+          class="px-5 py-2.5 font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow transition"
+        >
+          Server Log (Warn)
+        </button>
+        <button
+          id="server-error-btn"
+          class="px-5 py-2.5 font-medium text-white bg-rose-700 hover:bg-rose-800 rounded-lg shadow transition"
+        >
+          Server Handled Error
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import * as Sentry from '@sentry/astro';
+
+    function handleClick() {
+      const statusEl = document.querySelector('#status-message');
+      if (statusEl) {
+        statusEl.textContent = 'Sending structured log, metric, and throwing error...';
+      }
+
+      // Send a structured log before throwing the error
+      Sentry.logger?.info(
+        Sentry.logger?.fmt
+          ? Sentry.logger.fmt`User ${'sentry-test'} triggered test error button`
+          : 'User sentry-test triggered test error button',
+        {
+          action: 'test_error_button_click',
+        }
+      );
+
+      // Send a test metric before throwing the error
+      Sentry.metrics?.count('test_counter', 1);
+
+      // Throw test error
+      throw new Error('This is a test error');
+    }
+
+    const errorButton = document.querySelector('#error-button');
+    if (errorButton) {
+      errorButton.addEventListener('click', handleClick);
+    }
+
+    // Server-side test triggers
+    async function triggerServer(type: 'info' | 'warn' | 'error') {
+      const statusEl = document.querySelector('#status-message');
+      if (statusEl) statusEl.textContent = `Calling /api/sentry-test?type=${type}...`;
+      try {
+        const res = await fetch(`/api/sentry-test?type=${type}`, { method: 'POST' });
+        const data = await res.json();
+        if (statusEl) statusEl.textContent = `Server responded (${res.status}): ${JSON.stringify(data)}`;
+      } catch (err: unknown) {
+        if (statusEl)
+          statusEl.textContent = `Server request failed: ${err instanceof Error ? err.message : String(err)}`;
+      }
+    }
+
+    document.querySelector('#server-info-btn')?.addEventListener('click', () => triggerServer('info'));
+    document.querySelector('#server-warn-btn')?.addEventListener('click', () => triggerServer('warn'));
+    document.querySelector('#server-error-btn')?.addEventListener('click', () => triggerServer('error'));
+  </script>
+</Layout>

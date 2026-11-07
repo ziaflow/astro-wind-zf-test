@@ -74,6 +74,7 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
 {
   customerIoWriteKey && (
     <script is:inline define:vars={{ customerIoWriteKey }}>
+      /* eslint-disable */
       if (customerIoWriteKey && window.__zfIsProdHost) {
         !(function () {
           var i = 'cioanalytics',
