@@ -1,0 +1,32 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import { site } from '@/data/site';
+---
+
+<aside
+  class="lg:hidden fixed bottom-0 inset-x-0 z-[55] bg-ink/95 border-t border-line-strong backdrop-blur-xl px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.7)]"
+  aria-label="Quick mobile contact and booking options"
+>
+  <div class="shell flex items-center gap-2">
+    <a
+      href="tel:+16028344239"
+      class="flex-1 flex items-center justify-center gap-2 h-11 rounded-full border border-line-strong bg-ink-2 px-3 text-xs font-mono font-bold text-bone hover:border-signal hover:text-signal transition-colors"
+      aria-label="Direct phone call (602) 834-4239"
+    >
+      <span class="size-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+      <Icon name="phone" class="size-3.5 shrink-0" />
+      <span class="truncate">(602) 834-4239</span>
+    </a>
+
+    <a
+      href={site.cta.primary.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex-1 flex items-center justify-center gap-1.5 h-11 rounded-full bg-signal px-3 text-xs font-semibold text-bone hover:bg-signal-dark transition-colors shadow-sm"
+      aria-label="Book a scoping consultation"
+    >
+      <span class="truncate">Book Scoping Call</span>
+      <Icon name="arrow-up-right" class="size-3.5 shrink-0" />
+    </a>
+  </div>
+</aside>
