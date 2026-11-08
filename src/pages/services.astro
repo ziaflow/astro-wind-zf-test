@@ -1,4 +1,5 @@
 ---
+import { pagesOfKind } from '~/data/expansion-pages';
 import Layout from '@/layouts/layout.astro';
 import PageHero from '@/components/shared/page-hero.astro';
 import Icon from '@/components/shared/icons/icon.astro';
@@ -49,8 +50,8 @@ const serviceCatalog = [
     title: 'Google Local Service Ads (LSA)',
     href: '/services/local-service-ads',
     summary:
-      'Pay-per-lead Google Guaranteed campaign management, dispute protection, and instant lead triage for Phoenix home and commercial contractors.',
-    highlights: ['Google Guaranteed Verification', 'Invalid Lead Dispute Management', 'Direct Call & Message Routing'],
+      'Local Services Ads eligibility review, verification support, service-area settings, and inquiry routing for Arizona service businesses.',
+    highlights: ['Eligibility & Verification Review', 'Lead Quality & Billing Review', 'Call & Message Routing'],
   },
   {
     category: 'Local Authority',
@@ -129,6 +130,7 @@ const serviceCatalog = [
     highlights: ['Row-Level Security (RLS) Audits', 'HMAC Webhook Verification', 'Zero-Downtime CI/CD Previews'],
   },
 ];
+const newServices = pagesOfKind('service');
 ---
 
 <Layout
@@ -194,6 +196,29 @@ const serviceCatalog = [
         ))
       }
     </div>
+  </section>
+
+  <section class="shell border-t border-line py-16 md:py-24" aria-labelledby="expanded-services-title">
+    <p class="font-mono text-xs uppercase tracking-widest text-signal">Focused project scopes</p>
+    <h2 id="expanded-services-title" class="mt-4 font-display text-3xl font-bold text-bone">
+      Find the next part of your system.
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        newServices.map((page) => (
+          <a href={page.path} class="rounded-2xl border border-line bg-ink-2 p-7 transition-colors hover:border-signal">
+            <>
+              <h3 class="font-display text-xl font-bold text-bone">{page.heading}</h3>
+              <p class="mt-4 text-sm leading-relaxed text-mute">{page.description}</p>
+              <span class="mt-6 inline-block text-sm text-signal">Explore the scope →</span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+    <nav aria-label="Industry and location services" class="mt-10 flex flex-wrap gap-6 text-sm text-signal">
+      <a href="/industries">Explore industry workflows →</a><a href="/locations/arizona">Arizona service coverage →</a>
+    </nav>
   </section>
 
   <HowItWorks />

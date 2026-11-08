@@ -1,0 +1,492 @@
+{
+  "updated": "2026-11-04",
+  "scope": "ZiaFlow Arizona service, channel, industry and location expansion",
+  "publicationModel": "Explicit editorial pages only. Planned topics do not generate routes. Existing root blog URLs remain unchanged.",
+  "searchEvidence": {
+    "provider": "GSC SEO & Content Planner",
+    "property": "sc-domain:ziaflow.com",
+    "effectiveStart": "2026-10-30",
+    "effectiveEnd": "2026-11-01",
+    "access": "free_recent_three_days",
+    "impressions": 26,
+    "clicks": 0,
+    "comparisonAvailable": false,
+    "limitations": [
+      "Not a keyword-volume estimate.",
+      "Top rows are partial, not a complete demand inventory.",
+      "No claim that the requested channels or locations are already validated opportunities."
+    ]
+  },
+  "topics": [
+    {
+      "topic": "Google Search Ads / PPC",
+      "group": "channel",
+      "canonicalHub": "/services/ppc",
+      "stage": "existing",
+      "intent": "Capture an active search for an offered service.",
+      "nextStep": "Expand the current PPC hub; avoid a duplicate Google Search landing page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Google Local Services Ads",
+      "group": "channel",
+      "canonicalHub": "/services/local-service-ads",
+      "stage": "existing",
+      "intent": "Evaluate eligibility, setup, inquiry handling, and account operations.",
+      "nextStep": "Existing URL refreshed in this batch: Google Verified terminology, conditional screening and no lead-credit guarantees. Verify the rendered page before release.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Microsoft Ads / Bing Ads",
+      "group": "channel",
+      "canonicalHub": "/services/microsoft-ads",
+      "stage": "preview",
+      "intent": "Evaluate a separate paid-search test.",
+      "nextStep": "Review the new service page and prepare a channel comparison guide.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "LinkedIn Ads",
+      "group": "channel",
+      "canonicalHub": "/services/linkedin-ads",
+      "stage": "preview",
+      "intent": "Assess a B2B audience, offer, and sales handoff.",
+      "nextStep": "Validate an appropriate B2B use case and creative scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Facebook Ads",
+      "group": "channel",
+      "canonicalHub": "/services/social-media",
+      "stage": "planned-section",
+      "intent": "Plan Meta acquisition and inquiry follow-up.",
+      "nextStep": "Add a Meta section and a creative/testing brief; verify current account capabilities.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Instagram Ads",
+      "group": "channel",
+      "canonicalHub": "/services/social-media",
+      "stage": "planned-section",
+      "intent": "Assess visual creative, landing experience, and social inquiry handling.",
+      "nextStep": "Share the Meta hub initially; split only for a distinct service or search intent.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "TikTok Ads",
+      "group": "channel",
+      "canonicalHub": "/services/social-media",
+      "stage": "planned-guide",
+      "intent": "Assess creative capacity and a bounded consumer campaign.",
+      "nextStep": "Draft a channel-fit checklist before a dedicated commercial page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Reddit Ads",
+      "group": "channel",
+      "canonicalHub": "/services/ppc",
+      "stage": "planned-guide",
+      "intent": "Assess community relevance, creative, and lead quality.",
+      "nextStep": "Research platform policies and document a concrete audience/use case.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Yelp Ads",
+      "group": "channel",
+      "canonicalHub": "/services/ppc",
+      "stage": "planned-guide",
+      "intent": "Review local inquiry quality, spend, and response handling.",
+      "nextStep": "Separate advertising from organic profile and review-management work.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Nextdoor Ads",
+      "group": "channel",
+      "canonicalHub": "/services/ppc",
+      "stage": "planned-guide",
+      "intent": "Assess neighborhood targeting against actual service coverage.",
+      "nextStep": "Verify geographic controls and a relevant home-service offer.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Social advertising",
+      "group": "channel",
+      "canonicalHub": "/services/social-media",
+      "stage": "existing",
+      "intent": "Choose a suitable social channel and operating workflow.",
+      "nextStep": "Add comparison content and channel-specific delivery boundaries.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Email marketing",
+      "group": "service",
+      "canonicalHub": "/services/email-marketing",
+      "stage": "preview",
+      "intent": "Lifecycle messaging and consent-aware follow-up.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "CRM setup",
+      "group": "service",
+      "canonicalHub": "/services/crm",
+      "stage": "preview",
+      "intent": "Inquiry ownership, stages, and integrations.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Website maintenance",
+      "group": "service",
+      "canonicalHub": "/services/website-maintenance",
+      "stage": "preview",
+      "intent": "Operational checks and platform upkeep.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Email setup",
+      "group": "service",
+      "canonicalHub": "/services/email-setup",
+      "stage": "preview",
+      "intent": "Business-domain mail and form delivery.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Technical SEO",
+      "group": "service",
+      "canonicalHub": "/services/technical-seo",
+      "stage": "preview",
+      "intent": "Crawl, indexing, routes, and implementation.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "SEO audit",
+      "group": "service",
+      "canonicalHub": "/services/seo-audit",
+      "stage": "preview",
+      "intent": "Evidence-backed diagnosis and prioritized scope.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "PPC audit",
+      "group": "service",
+      "canonicalHub": "/services/ppc-audit",
+      "stage": "preview",
+      "intent": "Conversion definitions, targeting, and destination audit.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "AI search / AEO / GEO",
+      "group": "service",
+      "canonicalHub": "/services/ai-search",
+      "stage": "preview",
+      "intent": "Clear answers and accessible, useful content.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "SEO / Phoenix SEO",
+      "group": "service",
+      "canonicalHub": "/services/seo",
+      "stage": "existing",
+      "intent": "Organic discovery for actual services.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Data analysis",
+      "group": "service",
+      "canonicalHub": "/services/performance-tracking",
+      "stage": "existing",
+      "intent": "Source quality, marketing interpretation, and verified outcomes.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Workflow automation",
+      "group": "service",
+      "canonicalHub": "/services/automation",
+      "stage": "existing",
+      "intent": "Improve the inquiry-to-next-action workflow.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "AI tools",
+      "group": "service",
+      "canonicalHub": "/services/software",
+      "stage": "existing",
+      "intent": "Scope a specific operator task and human controls.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Ecommerce",
+      "group": "service",
+      "canonicalHub": "/services/ecommerce",
+      "stage": "existing",
+      "intent": "Storefront, checkout boundaries, and retention workflow.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Shopify",
+      "group": "service",
+      "canonicalHub": "/services/ecommerce",
+      "stage": "planned-section",
+      "intent": "Platform-specific ecommerce implementation.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "WordPress",
+      "group": "service",
+      "canonicalHub": "/services/web-development",
+      "stage": "planned-section",
+      "intent": "Site implementation and maintenance assessment.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Wix",
+      "group": "service",
+      "canonicalHub": "/services/web-development",
+      "stage": "planned-section",
+      "intent": "Platform-specific website work and integration constraints.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Conversion optimization",
+      "group": "service",
+      "canonicalHub": "/services/cro",
+      "stage": "existing",
+      "intent": "Observe friction and test useful changes.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Web development",
+      "group": "service",
+      "canonicalHub": "/services/web-development",
+      "stage": "existing",
+      "intent": "Business website implementation and inquiry paths.",
+      "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Home services",
+      "group": "industry",
+      "canonicalHub": "/industries/home-services",
+      "stage": "preview",
+      "intent": "Service-area campaigns and dispatch ownership.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "HVAC",
+      "group": "industry",
+      "canonicalHub": "/industries/home-services",
+      "stage": "planned-guide",
+      "intent": "Separate repair, maintenance, and replacement inquiries.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Plumbers / plumbing",
+      "group": "industry",
+      "canonicalHub": "/industries/home-services",
+      "stage": "planned-guide",
+      "intent": "Urgent routing, scheduling, and coverage.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Roofers / roofing",
+      "group": "industry",
+      "canonicalHub": "/industries/home-services",
+      "stage": "planned-guide",
+      "intent": "Estimate qualification and inspection scheduling.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "General contractors",
+      "group": "industry",
+      "canonicalHub": "/industries/home-services",
+      "stage": "planned-guide",
+      "intent": "Project-fit qualification and follow-up.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Law / legal / lawyers / attorneys",
+      "group": "industry",
+      "canonicalHub": "/industries/legal",
+      "stage": "preview",
+      "intent": "Public practice information and administrative intake.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Healthcare",
+      "group": "industry",
+      "canonicalHub": "/industries/healthcare",
+      "stage": "preview",
+      "intent": "Public marketing and approved administrative destinations.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Doctors / medical practices",
+      "group": "industry",
+      "canonicalHub": "/industries/healthcare",
+      "stage": "planned-guide",
+      "intent": "Practice information, scheduling, and privacy boundaries.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Health clinics",
+      "group": "industry",
+      "canonicalHub": "/industries/healthcare",
+      "stage": "planned-guide",
+      "intent": "Public service information and administrative inquiry routing.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "IV clinics",
+      "group": "industry",
+      "canonicalHub": "/industries/healthcare",
+      "stage": "planned-guide",
+      "intent": "Clinic-reviewed service claims and approved scheduling.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "HIPAA",
+      "group": "industry",
+      "canonicalHub": "/industries/healthcare",
+      "stage": "needs-specialist-review",
+      "intent": "Data-flow and vendor-agreement assessment; no blanket certification claim.",
+      "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Phoenix",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Phoenix service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Scottsdale",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Scottsdale service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Tucson",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Tucson service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Glendale",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Glendale service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Mesa",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Mesa service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Tempe",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Tempe service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Chandler",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Chandler service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Gilbert",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Gilbert service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "Peoria",
+      "group": "location",
+      "canonicalHub": "/locations/arizona",
+      "stage": "planned-local-brief",
+      "intent": "Assess a real Peoria service territory and a specific customer need.",
+      "nextStep": "Require accurate coverage, useful local operating detail, and query evidence; do not claim an office or generate every service combination.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "85302",
+      "group": "zip",
+      "canonicalHub": "/locations/arizona",
+      "stage": "coverage-validation",
+      "intent": "Check whether ZIP 85302 belongs in the client’s actual service and campaign coverage.",
+      "nextStep": "Verify boundaries and operating coverage. No independent ZIP landing page by default.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    },
+    {
+      "topic": "85251",
+      "group": "zip",
+      "canonicalHub": "/locations/arizona",
+      "stage": "coverage-validation",
+      "intent": "Check whether ZIP 85251 belongs in the client’s actual service and campaign coverage.",
+      "nextStep": "Verify boundaries and operating coverage. No independent ZIP landing page by default.",
+      "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
+    }
+  ],
+  "reviewPolicy": {
+    "checks": [
+      "Technical route and form verification",
+      "Claims linked to evidence or explicitly framed as a hypothesis",
+      "No unverified partner status, credentials, results, offices or HIPAA compliance",
+      "Distinct commercial intent and useful page-specific content",
+      "Named reviewer and deployment evidence before production publication"
+    ],
+    "consolidation": "Review after sufficient indexed observation; day 60 is a review checkpoint, not an automatic deletion job.",
+    "primaryBusinessOutcome": "Accepted non-test inquiry receipts; qualification and revenue remain separate."
+  }
+}
