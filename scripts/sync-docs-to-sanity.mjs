@@ -12,7 +12,6 @@
  *   node scripts/sync-docs-to-sanity.mjs --test
  */
 
-import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
