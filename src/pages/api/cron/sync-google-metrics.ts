@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ request, url }) => {
 
   try {
     const logs: string[] = [];
-    await runGoogleMetricsSync(env, fetch, (msg) => logs.push(msg));
+    await runGoogleMetricsSync(env, fetch, (msg: string) => logs.push(msg));
     return new Response(JSON.stringify({ success: true, logs }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

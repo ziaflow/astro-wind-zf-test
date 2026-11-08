@@ -18,6 +18,7 @@ import sanity from '@sanity/astro';
 import sentry from '@sentry/astro';
 
 import vercel from '@astrojs/vercel';
+import { unified } from '@astrojs/markdown-remark';
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -115,10 +116,10 @@ export default defineConfig({
     domains: ['cdn.pixabay.com', 'gmldsdtmahtgrbwwowtn.supabase.co'],
   },
 
-  markdown: {
+  markdown: unified({
     remarkPlugins: [readingTimeRemarkPlugin],
     rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
-  },
+  }),
 
   vite: {
     resolve: {

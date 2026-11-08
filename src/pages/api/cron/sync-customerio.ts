@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   try {
     const logs: string[] = [];
-    await runCustomerIoSync(process.env, fetch, (msg) => logs.push(msg));
+    await runCustomerIoSync(process.env, fetch, (msg: string) => logs.push(msg));
     return new Response(JSON.stringify({ success: true, logs }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
