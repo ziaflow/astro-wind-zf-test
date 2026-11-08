@@ -1,0 +1,67 @@
+---
+import type { postPresentation } from '~/lib/sanity-editorial';
+interface Props {
+  authors: ReturnType<typeof postPresentation>['authors'];
+}
+const { authors } = Astro.props;
+---
+
+<div class="mb-8 space-y-4" aria-label="Article authors">
+  {
+    authors.length ? (
+      authors.map((author) => (
+        <div class="flex items-start gap-3">
+          {author.imageUrl && (
+            <img
+              src={author.imageUrl}
+              alt=""
+              width="48"
+              height="48"
+              class="h-12 w-12 rounded-full object-cover"
+              loading="lazy"
+            />
+          )}
+          <div>
+            <p class="font-medium text-bone">
+              By{' '}
+              {author.profileUrl ? (
+                <a class="underline" href={author.profileUrl} rel="author">
+                  {author.name}
+                </a>
+              ) : (
+                author.name
+              )}
+            </p>
+            {author.role && <p class="text-sm text-mute">{author.role}</p>}
+            {author.bio && <p class="mt-1 text-sm text-mute">{author.bio}</p>}
+            {author.credentials.length > 0 && (
+              <ul class="text-sm text-mute" aria-label="Credentials">
+                {author.credentials.map((credential) => (
+                  <li>{credential}</li>
+                ))}
+              </ul>
+            )}
+            {author.socialUrls.length > 0 && (
+              <ul class="flex flex-wrap gap-3 text-sm">
+                {author.socialUrls.map((url, index) => (
+                  <li>
+                    <a class="underline" href={url}>
+                      Profile {index + 1}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))
+    ) : (
+      <p class="text-sm text-mute">
+        By{' '}
+        <a href="/about" class="underline">
+          ZiaFlow
+        </a>
+      </p>
+    )
+  }
+</div>

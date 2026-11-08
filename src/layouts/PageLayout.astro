@@ -10,6 +10,7 @@ const { metadata } = Astro.props;
 ---
 
 <KairoLayout title={metadata?.title} description={metadata?.description} metadata={metadata}>
+  <Fragment slot="head"><slot name="head" /></Fragment>
   <div class="pt-20">
     <slot />
   </div>
