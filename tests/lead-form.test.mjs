@@ -102,3 +102,19 @@ test('accepted-lead analytics exclude email and message content', async () => {
   assert.equal(event.email, undefined);
   assert.equal(event.message, undefined);
 });
+test('short-lead form preserves form_type short_lead, company, and service_interest', async () => {
+  let capturedBody;
+  const app = fixture(async (_url, options) => {
+    capturedBody = JSON.parse(options.body);
+    return Response.json({ submission_id: 'short-1', duplicate: false });
+  });
+  app.fields.form_type = 'short_lead';
+  app.fields.company = 'Phoenix AC Pro';
+  app.fields.service_interest = 'Lead Capture & Follow-Up Sprint';
+  await app.submit();
+  assert.equal(capturedBody.form_type, 'short_lead');
+  assert.equal(capturedBody.company, 'Phoenix AC Pro');
+  assert.equal(capturedBody.service_interest, 'Lead Capture & Follow-Up Sprint');
+  assert.equal(app.window.dataLayer[0].form_type, 'short_lead');
+  assert.equal(app.window.dataLayer[0].email, undefined);
+});
