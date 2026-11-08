@@ -3,11 +3,43 @@ import HomepageSalesFunnel from '@/components/home/homepage-sales-funnel.astro';
 import Layout from '@/layouts/layout.astro';
 
 export const prerender = true;
+
+const homepageFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the Lead Capture & Follow-Up Sprint?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A scoped engagement to review inquiry capture, ownership, response, follow-up, and measurement, then address the agreed gaps.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to replace my CRM or buy ads?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. The first review starts with your current tools and inquiry flow. Any additional platform or paid media work is discussed and scoped separately.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Who is this for?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Arizona service businesses and appointment-driven teams that want a clearer, more reliable process from first inquiry to booked work.',
+      },
+    },
+  ],
+};
 ---
 
 <Layout
   title="Lead Capture & Follow-Up Sprint for Arizona Service Businesses | ZiaFlow"
   description="Fix the gap between new inquiries and booked work. ZiaFlow helps Arizona service businesses improve lead capture, ownership, response, follow-up, and measurement."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
   <HomepageSalesFunnel />
 </Layout>
