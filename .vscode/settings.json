@@ -16,5 +16,6 @@
   "chatgpt.runCodexInWindowsSubsystemForLinux": true,
   "geminicodeassist.project": "astrowebsite-a9a91",
   "antigravity.autoOpenFiles": true,
-  "containers.contexts.showInStatusBar": true
+  "containers.contexts.showInStatusBar": true,
+  "scm.alwaysShowRepositories": true
 }
