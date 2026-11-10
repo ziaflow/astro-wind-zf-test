@@ -1,5 +1,8 @@
 # Kairo Template Modernization & Full Branch Reconciliation Plan
 
+> Status reconciled November 7, 2026: see [verified GitHub/Vercel status](../../implementation-status-2026-11-07.md). Historical schedules and metrics below are not current completion evidence.
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Reconcile and close out active feature branches, update Astro, Node, Vercel adapter, and dependencies to the latest stable Kairo template baseline, and revise all website routes and components to ensure end-to-end functionality.
@@ -55,6 +58,8 @@ Expected: Only `main` and necessary active branches remain.
 
 ### Task 2: Reconcile and Merge High-Value Feature & Fix Branches into `main`
 
+All five merges are confirmed by GitHub (PRs #65, #64, #48, #66 and #54). Commands below are historical; do not repeat completed merges. Associated full-suite checks remain unverified for the deployed SHA.
+
 **Files:**
 - Merge targets:
   - `origin/content/arizona-services-industries-2026-11-04` (Arizona services/industry expansion pages)
@@ -67,23 +72,23 @@ Expected: Only `main` and necessary active branches remain.
 - Consumes: Remote tracking branches
 - Produces: Consolidated `main` with all completed November 2026 fixes and content
 
-- [ ] **Step 1: Merge `origin/fix/reporting-security` (`pr/65`)**
+- [x] **Step 1: Merge `origin/fix/reporting-security` (`pr/65`)**
 Run: `git merge origin/fix/reporting-security -m "Merge PR #65: restrict reporting view and fail closed on webhook auth"`
 Verify: `npm run check` and `node tests/reporting-view-access.test.mjs`
 
-- [ ] **Step 2: Merge `origin/fix/google-daily-metrics-import` (`pr/64`)**
+- [x] **Step 2: Merge `origin/fix/google-daily-metrics-import` (`pr/64`)**
 Run: `git merge origin/fix/google-daily-metrics-import -m "Merge PR #64: replace sample Google telemetry with real daily API imports"`
 Verify: `npm run check` and `node tests/google-metrics-sync.test.mjs`
 
-- [ ] **Step 3: Merge `origin/seo/automation-relevance-2026-11-03`**
+- [x] **Step 3: Merge `origin/seo/automation-relevance-2026-11-03`**
 Run: `git merge origin/seo/automation-relevance-2026-11-03 -m "Merge branch 'seo/automation-relevance': practical CRM and follow-up guidance"`
 Verify: `npm run check:eslint && npm run check:prettier`
 
-- [ ] **Step 4: Merge `origin/fix/sanity-draft-schema-2026-11-05`**
+- [x] **Step 4: Merge `origin/fix/sanity-draft-schema-2026-11-05`**
 Run: `git merge origin/fix/sanity-draft-schema-2026-11-05 -m "Merge branch 'fix/sanity-draft-schema': draft-safe Sanity editorial checks and schema"`
 Verify: `node tests/sanity-editorial-schema.test.mjs && node tests/sanity-editorial.test.mjs`
 
-- [ ] **Step 5: Merge `origin/content/arizona-services-industries-2026-11-04`**
+- [x] **Step 5: Merge `origin/content/arizona-services-industries-2026-11-04`**
 Run: `git merge origin/content/arizona-services-industries-2026-11-04 -m "Merge branch 'content/arizona-services-industries': Arizona expansion pages"`
 Verify: `npm run check` and `npm run test:intake`
 
@@ -189,7 +194,8 @@ Expected: Build passes with 0 broken internal links.
 Run: `npm run test:browser`
 Expected: Critical browser journeys pass on Chromium.
 
-- [ ] **Step 5: Push verified release live to `origin/main`**
+- [x] **Step 5: Production deployment observed (end-to-end verification still pending)**
+GitHub main and Vercel production both report `1955646`; READY is confirmed, but Steps 1–4 above are not established by this check. The original push instructions below are historical.
 Run: `git push origin main`
 Expected: Remote receives new commit range and triggers successful Vercel production deployment.
 

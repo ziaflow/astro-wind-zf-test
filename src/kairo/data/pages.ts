@@ -115,7 +115,7 @@ export const journalPage = {
 export const aboutPage = {
   meta: {
     title: 'About ZiaFlow',
-    description: `Meet ZiaFlow in Phoenix, AZ. We build fast websites, automated lead capture, and 60-second follow-up systems that turn inquiries into booked work.`,
+    description: `ZiaFlow engineers high-converting websites, automated intake pipelines, and rapid CRM follow-up systems for Arizona service businesses. Call (602) 834-4239.`,
   },
   hero: {
     lines: ['Systems built', 'to turn inquiries', 'into booked work.'],

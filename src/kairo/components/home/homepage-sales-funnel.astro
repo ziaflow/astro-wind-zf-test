@@ -1,5 +1,6 @@
 ---
 import { site } from '@/data/site';
+import ShortLeadForm from '@/components/forms/short-lead-form.astro';
 ---
 
 <section class="relative isolate overflow-hidden border-b border-line">
@@ -18,46 +19,32 @@ import { site } from '@/data/site';
         ownership, fast response, follow-up, and measurement.
       </p>
       <div class="mt-9 flex flex-wrap items-center gap-3">
-        <a href="#lead-review" class="btn h-13 rounded-full bg-bone px-6 font-semibold text-ink hover:bg-white" data-btn>
+        <a href="#hero-lead-form" class="btn h-13 rounded-full bg-bone px-6 font-semibold text-ink hover:bg-white" data-btn>
           <span class="btn-fill bg-white" aria-hidden="true"></span>
           <span>Request a lead-flow review</span>
         </a>
         <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="inline-flex h-13 items-center rounded-full border border-line-strong px-6 text-sm font-medium text-bone transition hover:border-bone">
           Book a scoping call
         </a>
+        <a
+          href="tel:+16028344239"
+          class="inline-flex h-13 items-center gap-2 rounded-full border border-line-strong bg-ink-2 px-5 text-sm font-mono font-bold text-bone transition hover:border-signal hover:text-signal"
+          aria-label="Direct phone line (602) 834-4239"
+        >
+          <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>(602) 834-4239</span>
+        </a>
       </div>
       <p class="mt-5 text-xs text-dim">For home services, clinics, and other appointment-driven teams across Arizona.</p>
     </div>
 
     <div class="lg:col-span-6">
-      <div class="rounded-3xl border border-line-strong bg-ink-2/90 p-5 shadow-[0_30px_100px_-40px_rgb(0_0_0/0.9)] sm:p-8">
-        <div class="flex items-center justify-between gap-4 border-b border-line pb-5">
-          <div>
-            <p class="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-dim">A practical path</p>
-            <h2 class="mt-2 font-display text-xl font-bold text-bone sm:text-2xl">From first contact to next step</h2>
-          </div>
-          <span class="rounded-full border border-signal/40 px-3 py-1 font-mono text-[0.62rem] uppercase tracking-wider text-signal">The Sprint</span>
-        </div>
-        <ol class="mt-2 divide-y divide-line">
-          <li class="flex items-center gap-4 py-5">
-            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">01</span>
-            <div><h3 class="font-semibold text-bone">Capture</h3><p class="mt-1 text-sm text-mute">Calls, forms, and referral inquiries land somewhere visible.</p></div>
-          </li>
-          <li class="flex items-center gap-4 py-5">
-            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">02</span>
-            <div><h3 class="font-semibold text-bone">Assign</h3><p class="mt-1 text-sm text-mute">A person owns the response, with a clear handoff.</p></div>
-          </li>
-          <li class="flex items-center gap-4 py-5">
-            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">03</span>
-            <div><h3 class="font-semibold text-bone">Follow up</h3><p class="mt-1 text-sm text-mute">A useful next step is sent, with reply and booking exits.</p></div>
-          </li>
-          <li class="flex items-center gap-4 py-5">
-            <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-xs text-signal">04</span>
-            <div><h3 class="font-semibold text-bone">Measure</h3><p class="mt-1 text-sm text-mute">Track what arrived, who handled it, and what happened next.</p></div>
-          </li>
-        </ol>
-        <p class="mt-2 border-t border-line pt-5 text-xs leading-relaxed text-dim">Start with the systems and leads you already have. The first step is finding where handoffs break.</p>
-      </div>
+      <ShortLeadForm
+        id="hero-lead-form"
+        defaultService="Lead Capture & Follow-Up Sprint"
+        title="Request a Lead-Flow Review"
+        subtitle="Share your business details for rapid engineering follow-up on your website, lead intake, or automation."
+      />
     </div>
   </div>
 </section>
@@ -143,13 +130,12 @@ import { site } from '@/data/site';
     </div>
 
     <div class="lg:col-span-7">
-      <div class="rounded-3xl border border-line-strong bg-ink-2 p-7 sm:p-10">
-        <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">Next step</p>
-        <h3 class="mt-4 font-display text-2xl font-bold text-bone">Tell us about your lead flow.</h3>
-        <p class="mt-4 max-w-[56ch] text-sm leading-relaxed text-mute">Use the existing project intake to share your business details, service interest, and what you want to improve. We’ll review your request and follow up about that inquiry.</p>
-        <a href="/contact#form" class="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-signal px-6 font-semibold text-white transition hover:brightness-110 sm:w-auto">Open the project intake</a>
-        <p class="mt-4 text-xs leading-relaxed text-dim">Prefer to choose a time now? <a href={site.cta.primary.href} target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-bone">Book a scoping call</a>.</p>
-      </div>
+      <ShortLeadForm
+        id="lead-review-form"
+        defaultService="Lead Capture & Follow-Up Sprint"
+        title="Ready to fix your inquiry path?"
+        subtitle="Share your business details and primary focus area. Our Phoenix team will review your inquiry and follow up directly."
+      />
     </div>
   </div>
 </section>

@@ -1,9 +1,14 @@
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
+
+// Load .env and .env.local if present
+if (fs.existsSync('.env')) dotenv.config({ path: '.env' });
+if (fs.existsSync('.env.local')) dotenv.config({ path: '.env.local', override: true });
 
 /**
  * Script to submit URLs to IndexNow (Bing, Yandex, etc.)
- * This runs after the build process completes.
+ * This runs after the build process completes or as part of daily sync.
  */
 
 const SITE_URL = 'https://ziaflow.com';
@@ -19,20 +24,23 @@ async function submitToIndexNow() {
       return;
     }
 
-    // 1. Find all sitemap files in the dist directory
-    const files = fs.readdirSync(DIST_DIR);
-    const sitemapFiles = files.filter(
-      (f) => f.startsWith('sitemap-') && f.endsWith('.xml') && f !== 'sitemap-index.xml'
-    );
-
+    // 1. Find all sitemap files in dist/ or dist/client/
+    const searchDirs = [DIST_DIR, path.join(DIST_DIR, 'client')].filter((d) => fs.existsSync(d));
     let allUrls = [];
 
-    for (const file of sitemapFiles) {
-      const filePath = path.join(DIST_DIR, file);
-      const content = fs.readFileSync(filePath, 'utf-8');
-      const matches = content.matchAll(/<loc>(.*?)<\/loc>/g);
-      for (const match of matches) {
-        allUrls.push(match[1]);
+    for (const dir of searchDirs) {
+      const files = fs.readdirSync(dir);
+      const sitemapFiles = files.filter(
+        (f) => f.startsWith('sitemap-') && f.endsWith('.xml') && f !== 'sitemap-index.xml'
+      );
+
+      for (const file of sitemapFiles) {
+        const filePath = path.join(dir, file);
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const matches = content.matchAll(/<loc>(.*?)<\/loc>/g);
+        for (const match of matches) {
+          allUrls.push(match[1]);
+        }
       }
     }
 

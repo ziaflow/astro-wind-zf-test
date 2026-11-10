@@ -1,6 +1,9 @@
 # ZiaFlow service, industry, and Arizona expansion
 
-Updated November 4, 2026. Implementation is staged in a pull request; this document does not claim production publication or search results.
+> Status reconciled November 7, 2026: see [verified GitHub/Vercel status](implementation-status-2026-11-07.md). Historical schedules and metrics below are not current completion evidence.
+
+
+Updated November 7, 2026. PR #54 is merged. Vercel production matches main at `1955646`; individual deployed-page behavior, indexing and search results remain unverified.
 
 ## What exists and what this adds
 
@@ -8,7 +11,7 @@ The established URLs for PPC, SEO, automation, web development, ecommerce, socia
 
 This batch adds 10 distinct service pages, three industry hubs, and an Arizona service-area hub. Industries and locations have browsable directory pages. The existing services directory links the new service pages and the two directories. Three original supporting articles are saved with `draft: true`; the existing content loader excludes them from the public blog.
 
-The 51-topic registry in `content-expansion-plan.json` maps every requested channel, service family, vertical, city, and initial ZIP topic to an existing hub, a preview page, a planned section, a guide, or an evidence requirement. A planned record does not generate a route. There is no service × channel × industry × city × ZIP Cartesian product.
+The 51-topic registry in `content-expansion-plan.json` maps every requested channel, service family, vertical, city, and initial ZIP topic to an existing hub, a merged page pending live verification, a planned section, a guide, or an evidence requirement. A planned record does not generate a route. There is no service × channel × industry × city × ZIP Cartesian product.
 
 New pages use the existing Kairo layout and brand tokens. The page-specific business inquiry form uses the existing `/api/contact` contract and shared browser handler. It passes the actual source path and service interest, preserves retry keys, and does not add promotional enrollment or a new data store. Tests mock the API; verification does not send messages or create real lead records.
 

@@ -1,7 +1,10 @@
 # ZiaFlow Architecture & Execution Plan
 
-**Last Updated:** October 30, 2026 (America/Phoenix)  
-**Branch:** `feature/kairo-redesign` (PR #41)  
+> Status reconciled November 7, 2026: see [verified GitHub/Vercel status](docs/implementation-status-2026-11-07.md). Historical schedules and metrics below are not current completion evidence.
+
+
+**Last Updated:** November 7, 2026 (America/Phoenix)  
+**Current production branch:** `main` at `1955646`; `feature/kairo-redesign` is historical.  
 **Production URL:** [https://ziaflow.com](https://ziaflow.com)  
 **Vercel Preview URL:** [https://astro-wind-zf-test-git-feature-5cfddc-jeremys224-4312s-projects.vercel.app](https://astro-wind-zf-test-git-feature-5cfddc-jeremys224-4312s-projects.vercel.app)
 
@@ -54,7 +57,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
   - Updated `src/components/seo/LocalBusinessSchema.astro` to source the live brand logo from Supabase storage.
 - [x] **Intake & Receipt Persistence (`src/pages/api/contact.ts` & `src/lib/contact-intake.ts`):**
   - Deduplicated receipt ledger in `lead_submissions` with idempotency keys.
-  - Atomic RPC transactions routing qualified inquiries into `leads`.
+  - RPC intake exists in `contact-intake.ts`; `/api/contact` uses separate receipt and lead writes. Atomicity across both paths is not established.
   - Server-controlled test isolation (`is_test = true`).
   - Gated telemetry: Microsoft Clarity, GA4, and Customer.io restricted strictly to production hosts (`(www.)?ziaflow.com`).
 
@@ -67,7 +70,9 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
   - `/services/web-development`: Focused on speed, mobile task completion, and clean code ownership.
   - `/services/cro`, `/services/ppc`, `/services/local-service-ads`: Aligned with verified inquiry generation rather than speculative booking claims.
 
-### D. Verification & CI/CD Health
+### D. Historical Verification & CI/CD Health
+
+These recorded passes were not rerun for the current production SHA; see the status reference above.
 
 - [x] **Unit & Integration Tests:** 42 / 42 passing (`tests/growth-tools.test.mjs`, `tests/growth-welcome.test.mjs`, `tests/telemetry-freshness.test.mjs`, `tests/contact-capture.test.mjs`, `tests/clarity-sync.test.mjs`, `tests/redirects-and-404.test.mjs`).
 - [x] **Type Checking:** 0 errors (`npx tsc --noEmit` and `astro check`).
@@ -123,11 +128,11 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 | Priority |                                                            Issue / PR                                                            | Focus Area                            | Action Item                                                                                                                                    | Target Deadline | Completion Criterion                                                                                      |     Status      |
 | :------: | :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------- | :-------------: | :-------------------------------------------------------------------------------------------------------- | :-------------: |
 |  **P0**  |                                  [#56](https://github.com/ziaflow/astro-wind-zf-test/issues/56)                                  | **Lead Event Triggers**               | Audit GTM (`GTM-5Q2JZPVG`) container tags & GA4 Custom Events to remove page-load triggers for `generate_lead` & `ads_conversion_Contact_Us_1` |   Nov 7, 2026   | Page visit/reload produces 0 conversion events; only verified form submission generates 1 event           |   In Progress   |
-|  **P0**  | [#57](https://github.com/ziaflow/astro-wind-zf-test/issues/57) / [PR #53](https://github.com/ziaflow/astro-wind-zf-test/pull/53) | **QA Traffic Isolation**              | Respect QA exclusions when tracking saved website inquiries and gate client analytics scripts                                                  |   Nov 7, 2026   | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | Ready for Merge |
+|  **P0**  | [#57](https://github.com/ziaflow/astro-wind-zf-test/issues/57) / [PR #53](https://github.com/ziaflow/astro-wind-zf-test/pull/53) | **QA Traffic Isolation**              | Respect QA exclusions when tracking saved website inquiries and gate client analytics scripts                                                  |   Nov 7, 2026   | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | Draft / unmerged |
 |  **P1**  |                                 [PR #49](https://github.com/ziaflow/astro-wind-zf-test/pull/49)                                  | **404 Elimination**                   | Map 33 legacy endpoints and variants to permanent 301 redirects and enhance recovery UI                                                        |   Nov 4, 2026   | Zero unmapped legacy URLs in GSC; build link check passes 100%                                            |  **Merged** ✅  |
 |  **P1**  |                                  [#58](https://github.com/ziaflow/astro-wind-zf-test/issues/58)                                  | **GA4 & GSC Reconciliation**          | Align date windows, hostnames, and property streams between GSC (19 clicks) and GA4 (51 google/organic sessions)                               |  Nov 14, 2026   | Documented reconciliation accounting for attribution models and measurement delays                        |    Scheduled    |
 |  **P1**  |                                  [#59](https://github.com/ziaflow/astro-wind-zf-test/issues/59)                                  | **Traffic Anomaly Audit**             | Cross-reference Oct 14 and Oct 24 GA4 spikes against Clarity bot logs and edge access logs                                                     |  Nov 14, 2026   | Verified attribution classifying anomalous traffic                                                        |    Scheduled    |
-|  **P2**  | [#60](https://github.com/ziaflow/astro-wind-zf-test/issues/60) / [PR #54](https://github.com/ziaflow/astro-wind-zf-test/pull/54) | **Arizona Services & Hubs Expansion** | Editorial review of 14 new editorial hubs & 51-topic registry before production merge                                                          |  Nov 21, 2026   | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed                |    In Review    |
+|  **P2**  | [#60](https://github.com/ziaflow/astro-wind-zf-test/issues/60) / [PR #54](https://github.com/ziaflow/astro-wind-zf-test/pull/54) | **Arizona Services & Hubs Expansion** | PR #54 merged; verify deployed hubs, indexing and inquiry behavior                                                          |  Nov 21, 2026   | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed                | Merged; live verification pending |
 
 ---
 
@@ -136,11 +141,11 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 | Priority | Focus Area                   | Action Item                                                                                                                                        | Completion Criterion                                                                                      |    Status     |
 | :------: | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | :-----------: |
 |  **P0**  | **Lead Event Triggers**      | Audit GTM (`GTM-5Q2JZPVG`) container tags and GA4 Custom Events to remove page-load triggers for `generate_lead` and `ads_conversion_Contact_Us_1` | Page visit or reload produces 0 conversion events; only verified form submission generates 1 event        |  In Progress  |
-|  **P0**  | **QA Traffic Isolation**     | Gate client-side analytics scripts and server intake against internal QA parameters                                                                | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | **Completed** |
-|  **P1**  | **404 Elimination**          | Map 33 legacy endpoints and variants to permanent 301 redirects and enhance recovery UI                                                            | Zero unmapped legacy URLs in GSC; build link check passes 100%                                            | **Completed** |
+|  **P0**  | **QA Traffic Isolation**     | Gate client-side analytics scripts and server intake against internal QA parameters                                                                | Internal QA visits (`utm_source=internal-qa`) produce 0 GA4/Clarity events; intake records `is_test=true` | **Partial; verification pending** |
+|  **P1**  | **404 Elimination**          | Map 33 legacy endpoints and variants to permanent 301 redirects and enhance recovery UI                                                            | Zero unmapped legacy URLs in GSC; build link check passes 100%                                            | **Partial; verification pending** |
 |  **P1**  | **GA4 & GSC Reconciliation** | Align date windows, hostnames, and property streams between GSC (19 clicks) and GA4 (51 google/organic sessions)                                   | Documented reconciliation accounting for attribution models and measurement delays                        |   Scheduled   |
 |  **P1**  | **Traffic Anomaly Audit**    | Cross-reference Oct 14 and Oct 24 GA4 spikes against Clarity bot logs and edge access logs                                                         | Verified attribution classifying anomalous traffic                                                        |   Scheduled   |
-|  **P2**  | **Commercial SEO Sprint**    | Optimize `/services/automation` for high-intent local queries (`marketing automation phoenix`: 52 impr, pos 12.2)                                  | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed                |   Scheduled   |
+|  **P2**  | **Commercial SEO Sprint**    | Optimize `/services/automation` for high-intent local queries (`marketing automation phoenix`: 52 impr, pos 12.2)                                  | Specific Phoenix client workflows, deliverables, case proof, and internal linking deployed                | Merged via PR #48; outcomes unverified |
 
 ---
 
@@ -153,7 +158,7 @@ ZiaFlow engineers high-performance websites and verified lead follow-up systems 
 
 ## 6. Sanity Content Lake & Strategic Keyword Knowledge Base
 
-### A. Sanity CMS Content Lake Inventory (Project `92p0tpps`, Dataset `production`)
+### A. Historical Sanity CMS Content Lake Inventory (Project `92p0tpps`, Dataset `production`)
 
 A comprehensive query of the live Sanity Content Lake revealed **16 draft articles** currently held in `drafts.*` status (0 published articles):
 

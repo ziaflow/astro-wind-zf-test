@@ -1,6 +1,9 @@
 # ZiaFlow SEO and conversion execution plan
 
-Updated October 28, 2026 (America/Phoenix) — Accelerated Day-by-Day Schedule.
+> Status reconciled November 7, 2026: see [verified GitHub/Vercel status](implementation-status-2026-11-07.md). Historical schedules and metrics below are not current completion evidence.
+
+
+Status reconciled November 7, 2026 (America/Phoenix). The original October 28 schedule is retained below as historical planning.
 
 ## Business objective and boundaries
 
@@ -18,8 +21,8 @@ Keep the existing Astro/Tailwind website, Supabase evidence store, GitHub review
 - Clarity sync succeeds and stores rolling 24-hour URL aggregates. Do not sum URL sessions into unique site sessions or sum successive snapshots.
 - Current lead view reported zero confirmed inquiries on October 22, excluding five test observations at the last check. Accepted forms are not qualified leads.
 - GA4 reporting ingestion, verified booking outcomes, qualification, signed agreements, payments, and production Customer.io delivery are not yet established as a complete measured funnel.
-- Current Vercel production deployment is READY at b22f9a3ef806179b0e3b1e8b99d059be83c51d75.
-- Source and direct HTML verification: homepage hero links to #form while rendered homepage has no id=form. This is a reproducible functional defect independent of traffic volume.
+- Current verified Vercel production deployment is READY at `1955646a26f22401ae60e5994991692c7d974d3f`; see the status reference above.
+- Historical source and direct HTML verification (superseded by the deployed homepage funnel; recheck current CTA behavior): homepage hero links to #form while rendered homepage has no id=form. This is a reproducible functional defect independent of traffic volume.
 - Current main source mixes web/marketing metadata with AI/enterprise hero content; it includes numerical performance and compliance claims requiring substantiation. A cached search-rendered version differs from current main/direct HTML: always verify the deployed version rather than trusting cached text.
 - GSC provider access is trial_full through October 27. The monitor must flag access restrictions before they silently stop refreshes.
 

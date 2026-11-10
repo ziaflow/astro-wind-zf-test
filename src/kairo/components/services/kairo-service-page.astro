@@ -5,7 +5,7 @@ import Icon from '@/components/shared/icons/icon.astro';
 import Button from '@/components/shared/ui/button.astro';
 import RoiCalculator from '@/components/home/roi-calculator.astro';
 import AuditSection from '@/components/home/audit-section.astro';
-import SalesForm from '@/components/pricing/sales-form.astro';
+import ShortLeadForm from '@/components/forms/short-lead-form.astro';
 import Cta from '@/components/shared/cta.astro';
 import ServiceSchema from '~/components/seo/ServiceSchema.astro';
 import { site } from '@/data/site';
@@ -48,6 +48,8 @@ interface Props {
   faqs: ServiceFaq[];
   relatedLinks?: RelatedLink[];
   showRoiCalculator?: boolean;
+  defaultService?: string;
+  formTitle?: string;
 }
 
 const {
@@ -70,7 +72,23 @@ const {
     { label: 'Explore Arizona Case Studies', href: '/case-studies', category: 'Case Studies' },
   ],
   showRoiCalculator = true,
+  defaultService: customDefaultService,
+  formTitle,
 } = Astro.props;
+
+const inferredService =
+  customDefaultService ||
+  (title.toLowerCase().includes('automation')
+    ? 'Marketing Automation & AI Workflows'
+    : title.toLowerCase().includes('seo') || title.toLowerCase().includes('gmb')
+      ? 'Local Phoenix SEO & GBP Optimization'
+      : title.toLowerCase().includes('lsa') || title.toLowerCase().includes('ppc') || title.toLowerCase().includes('ad')
+        ? 'Google Local Service Ads (LSA) & PPC'
+        : title.toLowerCase().includes('web') || title.toLowerCase().includes('cro')
+          ? 'Custom Website & CRO Engineering'
+          : title.toLowerCase().includes('software') || title.toLowerCase().includes('cloud')
+            ? 'Custom Software / Full-Stack App'
+            : 'Lead Capture & Follow-Up Sprint');
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -86,7 +104,7 @@ const faqSchema = {
 };
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} hidePreFooterLeadForm={true}>
   <ServiceSchema slot="head" name={title} description={description} url={url} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
@@ -105,8 +123,16 @@ const faqSchema = {
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-3 shrink-0">
-        <Button label={site.cta.primary.label} href={site.cta.primary.href} />
-        <Button label="Request Free Audit" href="#audit" variant="outline" />
+        <a
+          href="tel:+16028344239"
+          class="inline-flex items-center gap-2 rounded-full border border-line-strong bg-ink-2 px-4 py-2.5 text-xs font-mono font-bold text-bone hover:border-signal hover:text-signal transition-colors"
+          aria-label="Direct phone call (602) 834-4239"
+        >
+          <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>(602) 834-4239</span>
+        </a>
+        <Button label="Request Service Scope" href="#lead-form" />
+        <Button label="Book Consultation" href={site.cta.primary.href} variant="outline" target="_blank" />
       </div>
     </div>
   </section>
@@ -228,6 +254,14 @@ const faqSchema = {
 
   <!-- Embedded Lead Funnel & Forensic Audit -->
   <AuditSection />
-  <SalesForm />
+  <section class="shell py-20 md:py-28 border-t border-line" id="lead-form">
+    <div class="max-w-4xl mx-auto">
+      <ShortLeadForm
+        defaultService={inferredService}
+        title={formTitle || "Discuss your project scope & follow-up."}
+        subtitle="Share your business details for rapid engineering follow-up on your website, lead intake, or automation."
+      />
+    </div>
+  </section>
   <Cta />
 </Layout>

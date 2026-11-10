@@ -53,6 +53,14 @@ export async function run(env = process.env, fetcher = fetch) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    const fs = await import('node:fs');
+    const dotenv = await import('dotenv');
+    if (fs.existsSync('.env')) dotenv.config({ path: '.env' });
+    if (fs.existsSync('.env.local')) dotenv.config({ path: '.env.local', override: true });
+  } catch {
+    // ignore if dotenv not available
+  }
   run().catch((error) => {
     // Never print response bodies, credentials, or raw network errors.
     console.error(

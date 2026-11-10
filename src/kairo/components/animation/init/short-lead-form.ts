@@ -125,7 +125,7 @@ export default function init() {
           activeIdempotencyKey = newIdempotencyKey();
           if (statusEl) {
             statusEl.className = 'mt-4 min-h-6 text-sm text-emerald-400 font-medium';
-            statusEl.textContent = `Thank you, ${name.split(' ')[0]}! Your project details have been recorded. Our Phoenix team will be in touch shortly.`;
+            statusEl.innerHTML = `Thank you, ${name.split(' ')[0]}! Your project details have been recorded. <a href="https://calendly.com/jeremy-sanchez-ziaflow" target="_blank" rel="noopener noreferrer" class="underline font-bold text-bone hover:text-signal ml-1 inline-flex items-center gap-1">Want to pick a consultation time now? Open calendar &rarr;</a>`;
           }
           form.reset();
         } else {

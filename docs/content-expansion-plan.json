@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04",
+  "updated": "2026-11-07",
   "scope": "ZiaFlow Arizona service, channel, industry and location expansion",
   "publicationModel": "Explicit editorial pages only. Planned topics do not generate routes. Existing root blog URLs remain unchanged.",
   "searchEvidence": {
@@ -33,14 +33,14 @@
       "canonicalHub": "/services/local-service-ads",
       "stage": "existing",
       "intent": "Evaluate eligibility, setup, inquiry handling, and account operations.",
-      "nextStep": "Existing URL refreshed in this batch: Google Verified terminology, conditional screening and no lead-credit guarantees. Verify the rendered page before release.",
+      "nextStep": "Existing URL refreshed in this batch: Google Verified terminology, conditional screening and no lead-credit guarantees. Verify the rendered production page after the merged release.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
     },
     {
       "topic": "Microsoft Ads / Bing Ads",
       "group": "channel",
       "canonicalHub": "/services/microsoft-ads",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Evaluate a separate paid-search test.",
       "nextStep": "Review the new service page and prepare a channel comparison guide.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -49,7 +49,7 @@
       "topic": "LinkedIn Ads",
       "group": "channel",
       "canonicalHub": "/services/linkedin-ads",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Assess a B2B audience, offer, and sales handoff.",
       "nextStep": "Validate an appropriate B2B use case and creative scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -121,7 +121,7 @@
       "topic": "Email marketing",
       "group": "service",
       "canonicalHub": "/services/email-marketing",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Lifecycle messaging and consent-aware follow-up.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -130,7 +130,7 @@
       "topic": "CRM setup",
       "group": "service",
       "canonicalHub": "/services/crm",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Inquiry ownership, stages, and integrations.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -139,7 +139,7 @@
       "topic": "Website maintenance",
       "group": "service",
       "canonicalHub": "/services/website-maintenance",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Operational checks and platform upkeep.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -148,7 +148,7 @@
       "topic": "Email setup",
       "group": "service",
       "canonicalHub": "/services/email-setup",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Business-domain mail and form delivery.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -157,7 +157,7 @@
       "topic": "Technical SEO",
       "group": "service",
       "canonicalHub": "/services/technical-seo",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Crawl, indexing, routes, and implementation.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -166,7 +166,7 @@
       "topic": "SEO audit",
       "group": "service",
       "canonicalHub": "/services/seo-audit",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Evidence-backed diagnosis and prioritized scope.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -175,7 +175,7 @@
       "topic": "PPC audit",
       "group": "service",
       "canonicalHub": "/services/ppc-audit",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Conversion definitions, targeting, and destination audit.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -184,7 +184,7 @@
       "topic": "AI search / AEO / GEO",
       "group": "service",
       "canonicalHub": "/services/ai-search",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Clear answers and accessible, useful content.",
       "nextStep": "Keep one primary commercial hub; support it with a distinct guide and verified implementation scope.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -283,7 +283,7 @@
       "topic": "Home services",
       "group": "industry",
       "canonicalHub": "/industries/home-services",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Service-area campaigns and dispatch ownership.",
       "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -328,7 +328,7 @@
       "topic": "Law / legal / lawyers / attorneys",
       "group": "industry",
       "canonicalHub": "/industries/legal",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Public practice information and administrative intake.",
       "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -337,7 +337,7 @@
       "topic": "Healthcare",
       "group": "industry",
       "canonicalHub": "/industries/healthcare",
-      "stage": "preview",
+      "stage": "merged-pending-live-verification",
       "intent": "Public marketing and approved administrative destinations.",
       "nextStep": "Use the industry hub initially; require distinct operational detail and qualified review before a separate page.",
       "demandEvidence": "user-requested hypothesis; validate query/page evidence before splitting further"
@@ -488,5 +488,14 @@
     ],
     "consolidation": "Review after sufficient indexed observation; day 60 is a review checkpoint, not an automatic deletion job.",
     "primaryBusinessOutcome": "Accepted non-test inquiry receipts; qualification and revenue remain separate."
+  },
+  "implementationStatus": {
+    "evidence": "implementation-status-2026-11-07.md",
+    "pullRequest": 54,
+    "mergeStatus": "merged",
+    "productionCommit": "1955646a26f22401ae60e5994991692c7d974d3f",
+    "deploymentStatus": "READY",
+    "livePageVerification": "pending",
+    "searchOutcomeVerification": "pending"
   }
 }
