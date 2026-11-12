@@ -11,6 +11,9 @@ import {
   type SanityPost,
 } from '~/lib/sanity-editorial';
 import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import Cta from '@/components/shared/cta.astro';
 
 export const prerender = true;
 
@@ -116,4 +119,7 @@ const formattedDate = (value: string) =>
       </div>
     </article>
   </section>
+  <AuditSection />
+  <SalesForm />
+  <Cta />
 </Layout>

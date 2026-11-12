@@ -61,6 +61,7 @@ export interface MetaData {
 
   openGraph?: MetaDataOpenGraph;
   twitter?: MetaDataTwitter;
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export interface MetaDataRobots {

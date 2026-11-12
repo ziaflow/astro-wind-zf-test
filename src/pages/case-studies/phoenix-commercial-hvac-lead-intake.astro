@@ -1,0 +1,223 @@
+---
+import Layout from '@/layouts/layout.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import Cta from '@/components/shared/cta.astro';
+
+export const prerender = true;
+
+const title = 'Case Study: Commercial HVAC Automated Lead Intake & Dispatch | ZiaFlow';
+const description =
+  'How Desert Peak Mechanical recovered $180,000 in pipeline and reduced lead response times from 3.8 hours to 18 minutes with ZiaFlow automation.';
+const canonical = 'https://ziaflow.com/case-studies/phoenix-commercial-hvac-lead-intake';
+const heroImage = 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80';
+
+const caseStudySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonical,
+  },
+  headline: 'Commercial HVAC Automated Lead Intake & Dispatch: Desert Peak Mechanical Case Study',
+  description: description,
+  image: [heroImage],
+  datePublished: '2026-01-15T00:00:00Z',
+  dateModified: '2026-11-11T00:00:00Z',
+  author: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZiaFlow',
+    url: 'https://ziaflow.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ziaflow.com/favicon.svg',
+    },
+  },
+  about: {
+    '@type': 'Service',
+    name: 'Marketing and CRM Automation',
+    areaServed: 'Phoenix, Arizona',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://ziaflow.com',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Case Studies',
+      item: 'https://ziaflow.com/case-studies',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Phoenix Commercial HVAC',
+      item: canonical,
+    },
+  ],
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={heroImage}
+  metadata={{
+    title,
+    description,
+    canonical,
+    openGraph: {
+      type: 'article',
+      images: [{ url: heroImage, width: 1200, height: 630 }],
+    },
+  }}
+>
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(caseStudySchema)} />
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <article class="shell pt-24 pb-16 md:pt-32 md:pb-24 max-w-4xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center space-x-2 text-sm text-mute font-mono">
+        <li><a href="/" class="hover:text-signal transition-colors">Home</a></li>
+        <li><span>/</span></li>
+        <li><a href="/case-studies" class="hover:text-signal transition-colors">Case Studies</a></li>
+        <li><span>/</span></li>
+        <li class="text-bone truncate">Phoenix Commercial HVAC</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="space-y-4 mb-10">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase bg-signal/10 text-signal border border-signal/20">
+          Case Study · Commercial HVAC
+        </span>
+        <span class="text-xs font-mono text-mute">Phoenix, AZ · Desert Peak Mechanical</span>
+      </div>
+      <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-bone leading-tight">
+        Commercial HVAC Automated Lead Intake & Instant Dispatch
+      </h1>
+      <p class="text-lg md:text-xl text-mute leading-relaxed max-w-3xl">
+        How Desert Peak Mechanical eliminated dropped inquiries, recovered $180,000 in pipeline, and slashed response times from 3.8 hours to 18 minutes with ZiaFlow automation.
+      </p>
+    </header>
+
+    <!-- Results Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12" aria-label="Key Outcomes">
+      <div class="rounded-xl border border-line bg-ink-2/60 p-6 text-center">
+        <p class="font-display text-3xl md:text-4xl font-bold text-signal">42%</p>
+        <p class="mt-2 text-xs font-mono uppercase tracking-wider text-mute">Faster Lead-to-Quote</p>
+        <p class="mt-1 text-xs text-mute/80">From 3.8h to 18min response</p>
+      </div>
+      <div class="rounded-xl border border-line bg-ink-2/60 p-6 text-center">
+        <p class="font-display text-3xl md:text-4xl font-bold text-bone">100%</p>
+        <p class="mt-2 text-xs font-mono uppercase tracking-wider text-mute">Inquiry Capture Rate</p>
+        <p class="mt-1 text-xs text-mute/80">Zero dropped or untracked leads</p>
+      </div>
+      <div class="rounded-xl border border-line bg-ink-2/60 p-6 text-center">
+        <p class="font-display text-3xl md:text-4xl font-bold text-signal">$180K</p>
+        <p class="mt-2 text-xs font-mono uppercase tracking-wider text-mute">Recovered Pipeline</p>
+        <p class="mt-1 text-xs text-mute/80">Within first 60 days of go-live</p>
+      </div>
+    </section>
+
+    <!-- Main Image -->
+    <div class="relative rounded-2xl overflow-hidden border border-line mb-12 shadow-2xl">
+      <img
+        src={heroImage}
+        alt="Commercial HVAC rooftop units and mechanical equipment in Phoenix, Arizona"
+        class="w-full h-auto aspect-video object-cover"
+        width="1200"
+        height="675"
+        loading="eager"
+      />
+    </div>
+
+    <!-- Case Study Body -->
+    <div class="prose prose-invert prose-lg max-w-none space-y-8 text-mute">
+      <section>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
+          The Operational Bottleneck
+        </h2>
+        <p class="leading-relaxed">
+          Commercial HVAC emergencies cannot wait 12 hours for a callback. Desert Peak Mechanical was receiving 30+ high-value service and installation inquiries per week across the Phoenix metropolitan area, but qualified requests were stalled in a generic email inbox:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 mt-4 text-mute">
+          <li><strong>Unqualified Submissions:</strong> Inbound requests lacked equipment tonnage, commercial facility type, and urgency level.</li>
+          <li><strong>Manual Triage Delays:</strong> Office staff spent 45 minutes manually reviewing each message before assigning an estimator.</li>
+          <li><strong>Lost Revenue to Fast Competitors:</strong> Commercial property managers booking with whichever contractor responded first.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
+          The Engineered Solution
+        </h2>
+        <p class="leading-relaxed">
+          ZiaFlow engineered an end-to-end diagnostic intake pipeline built on modern serverless edge infrastructure:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
+            <h3 class="font-display text-base font-bold text-bone">1. Structured Inbound Diagnostics</h3>
+            <p class="text-sm text-mute">Custom progressive form capturing commercial tonnage, facility square footage, and emergency severity without user drop-off.</p>
+          </div>
+          <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
+            <h3 class="font-display text-base font-bold text-bone">2. Edge Validation & Routing</h3>
+            <p class="text-sm text-mute">Serverless edge functions scrubbing spam, persisting persistent Supabase database receipts, and assigning dispatch priority.</p>
+          </div>
+          <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
+            <h3 class="font-display text-base font-bold text-bone">3. CRM & SMS Dispatch Sync</h3>
+            <p class="text-sm text-mute">On-call technicians receive immediate SMS alerts with customer address, equipment details, and 1-click callback links.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
+          Measured Outcomes
+        </h2>
+        <ul class="list-disc pl-6 space-y-3 mt-4 text-mute">
+          <li><strong>42% faster lead-to-quote turnaround:</strong> Initial diagnostic response dropped from 3.8 hours down to 18 minutes.</li>
+          <li><strong>Zero dropped leads:</strong> Complete audit trail from web submission to field dispatch and CRM invoice status.</li>
+          <li><strong>$180,000 in recovered pipeline:</strong> Closed commercial retrofit and service agreements within the initial 60-day sprint.</li>
+        </ul>
+      </section>
+
+      <div class="rounded-2xl border border-signal/30 bg-signal/5 p-8 mt-12 space-y-4">
+        <h3 class="font-display text-xl font-bold text-bone">
+          Ready to automate your service business lead capture?
+        </h3>
+        <p class="text-mute text-base">
+          See how ZiaFlow's <a href="/services/automation" class="text-signal underline font-medium">marketing automation phoenix</a> sprint can eliminate lost inquiries and follow up with qualified leads in under 60 seconds.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-signal text-ink font-semibold text-sm hover:brightness-110 transition-all"
+          >
+            Book a 48-Hour Sprint Discovery &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <AuditSection />
+  <SalesForm />
+  <Cta />
+</Layout>
+

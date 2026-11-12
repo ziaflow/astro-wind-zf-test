@@ -1,5 +1,6 @@
 ---
 import HomepageSalesFunnel from '@/components/home/homepage-sales-funnel.astro';
+import EvidenceBenchmarks from '@/components/home/evidence-benchmarks.astro';
 import Layout from '@/layouts/layout.astro';
 
 export const prerender = true;
@@ -37,9 +38,10 @@ const homepageFaqSchema = {
 ---
 
 <Layout
-  title="Lead Capture & Follow-Up Sprint for Arizona Service Businesses | ZiaFlow"
-  description="Fix the gap between new inquiries and booked work. ZiaFlow helps Arizona service businesses improve lead capture, ownership, response, follow-up, and measurement."
+  title="Lead Capture & Automated Follow-Up in 48 Hours | Phoenix, AZ | ZiaFlow"
+  description="Stop losing qualified leads. ZiaFlow connects website inquiries, instant SMS routing, and automated follow-up for Phoenix service businesses in 48 hours."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
   <HomepageSalesFunnel />
+  <EvidenceBenchmarks />
 </Layout>

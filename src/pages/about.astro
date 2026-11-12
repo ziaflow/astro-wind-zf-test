@@ -5,6 +5,8 @@ import Timeline from '@/components/about/timeline.astro';
 import Values from '@/components/about/values.astro';
 import Team from '@/components/about/team.astro';
 import Roles from '@/components/about/roles.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
 import Cta from '@/components/shared/cta.astro';
 import { aboutPage } from '@/data/pages';
 
@@ -17,5 +19,7 @@ export const prerender = true;
   <Values />
   <Team />
   <Roles />
+  <AuditSection />
+  <SalesForm />
   <Cta />
 </Layout>

@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /form-test
+Disallow: /customers/
+Disallow: /customers
+Disallow: /sentry-test
+Disallow: /kairo-preview
+
+Sitemap: https://ziaflow.com/sitemap-index.xml

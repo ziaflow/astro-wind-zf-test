@@ -25,43 +25,64 @@
       "permanent": true
     },
     {
-      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ziaflow.com"
+        }
+      ],
+      "destination": "https://ziaflow.com/:path*",
       "permanent": true
     },
     {
-      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
+      "permanent": true
+    },
+    {
+      "source": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
+      "permanent": true
+    },
+    {
+      "source": "/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
       "permanent": true
     },
     {
       "source": "/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
       "permanent": true
     },
     {
       "source": "/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
+      "permanent": true
+    },
+    {
+      "source": "/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
       "permanent": true
     },
     {
       "source": "/guide-to-web-development-2026",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
       "permanent": true
     },
     {
       "source": "/2026-web-development-guide",
-      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites",
+      "destination": "/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites",
       "permanent": true
     },
     {
-      "source": "/case-studies/phoenix-commercial-hvac-lead-intake",
-      "destination": "/phoenix-commercial-hvac-lead-intake",
+      "source": "/phoenix-commercial-hvac-lead-intake",
+      "destination": "/case-studies/phoenix-commercial-hvac-lead-intake",
       "permanent": true
     },
     {
-      "source": "/case-studies/:path*",
-      "destination": "/services/automation",
+      "source": "/case-studies/phoenix-commercial-hvac",
+      "destination": "/case-studies/phoenix-commercial-hvac-lead-intake",
       "permanent": true
     }
   ],
@@ -72,6 +93,41 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    },
+    {
+      "source": "/customers/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/customers",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/form-test",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     },

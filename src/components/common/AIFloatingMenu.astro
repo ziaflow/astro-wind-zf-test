@@ -669,11 +669,15 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
           const body = await res.json().catch(() => ({}));
           if (res.ok) {
             if (!body.duplicate) {
+              const eventProps = {
+                form_name: 'ai_quick_triage',
+                service_interest: payload.service_interest,
+                page_path: window.location.pathname,
+              };
               if (window.dataLayer) {
                 window.dataLayer.push({
                   event: 'form_submission',
-                  form_name: 'ai_quick_triage',
-                  service_interest: payload.service_interest,
+                  ...eventProps,
                 });
               }
               if (typeof window.gtag === 'function') {
@@ -682,6 +686,15 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
                   event_label: 'ai_quick_triage',
                   value: 1,
                 });
+              }
+              const win = window as any;
+              if (win._cio && typeof win._cio.identify === 'function' && payload.email) {
+                win._cio.identify({ id: payload.email, email: payload.email, name: payload.name, phone: payload.phone });
+              }
+              if (win._cio && typeof win._cio.track === 'function') {
+                win._cio.track('form_submission', eventProps);
+              } else if (win.analytics && typeof win.analytics.track === 'function') {
+                win.analytics.track('form_submission', eventProps);
               }
             }
             activeKey = makeKey();

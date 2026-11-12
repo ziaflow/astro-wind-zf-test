@@ -247,12 +247,16 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
 
         if (response.ok) {
           if (!body.duplicate) {
+            const eventProps = {
+              form_name: 'audit_booking',
+              email: payload.email,
+              company: payload.company,
+              page_path: window.location.pathname,
+            };
             if (window.dataLayer) {
               window.dataLayer.push({
                 event: 'form_submission',
-                form_name: 'audit_booking',
-                email: payload.email,
-                company: payload.company,
+                ...eventProps,
               });
             }
             if (typeof window.gtag === 'function') {
@@ -261,6 +265,14 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
                 event_label: 'audit_booking',
                 value: 1,
               });
+            }
+            if (window._cio && typeof window._cio.identify === 'function' && payload.email) {
+              window._cio.identify({ id: payload.email, email: payload.email, name: payload.name, company: payload.company });
+            }
+            if (window._cio && typeof window._cio.track === 'function') {
+              window._cio.track('form_submission', eventProps);
+            } else if (window.analytics && typeof window.analytics.track === 'function') {
+              window.analytics.track('form_submission', eventProps);
             }
           }
           activeAuditKey = makeAuditKey();

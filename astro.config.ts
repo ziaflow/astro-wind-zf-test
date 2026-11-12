@@ -55,6 +55,7 @@ export default defineConfig({
         !page.includes('/category/') &&
         !page.includes('/tag/') &&
         !page.includes('/form-test') &&
+        !page.includes('/customers') &&
         !page.includes('/sentry-test') &&
         !page.includes('/kairo-preview') &&
         !page.includes('/posts') &&
@@ -64,7 +65,16 @@ export default defineConfig({
       priority: 0.7,
       lastmod: new Date(),
     }),
-    robotsTxt(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/customers/', '/form-test', '/decapcms/', '/studio/', '/api/'],
+        },
+      ],
+      sitemap: 'https://ziaflow.com/sitemap-index.xml',
+    }),
     mdx(),
     icon({
       include: {

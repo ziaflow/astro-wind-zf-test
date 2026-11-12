@@ -54,16 +54,30 @@ export function bindLeadForms() {
         // Honeypot responses have no receipt. Never count them as accepted leads.
         if (result.submission_id && !result.duplicate) {
           try {
-            const analytics = window as Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+            const win = window as unknown as {
+              dataLayer?: Record<string, unknown>[];
+              gtag?: (...args: unknown[]) => void;
+              _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
+              analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
+            };
             const properties = {
               form_type: payload.form_type,
               page_path: payload.page,
               submission_id: result.submission_id,
             };
-            if (typeof analytics.gtag === 'function') analytics.gtag('event', 'generate_lead', properties);
-            else {
-              analytics.dataLayer = analytics.dataLayer || [];
-              analytics.dataLayer.push({ event: 'generate_lead', ...properties });
+            if (typeof win.gtag === 'function') {
+              win.gtag('event', 'generate_lead', properties);
+            } else {
+              win.dataLayer = win.dataLayer || [];
+              win.dataLayer.push({ event: 'generate_lead', ...properties });
+            }
+            if (win._cio && typeof win._cio.identify === 'function' && payload.email) {
+              win._cio.identify({ id: payload.email, email: payload.email, name: payload.name, company: payload.company });
+            }
+            if (win._cio && typeof win._cio.track === 'function') {
+              win._cio.track('form_submission', properties);
+            } else if (win.analytics && typeof win.analytics.track === 'function') {
+              win.analytics.track('form_submission', properties);
             }
           } catch {
             // Analytics availability must never turn a saved inquiry into an error.

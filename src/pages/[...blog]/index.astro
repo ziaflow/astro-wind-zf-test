@@ -82,6 +82,22 @@ const blogPostingSchema = {
     },
   },
 };
+
+const postFaqs = post.metadata?.faqs;
+const faqSchema = Array.isArray(postFaqs) && postFaqs.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: postFaqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    }
+  : null;
 ---
 
 <KairoLayout
@@ -95,6 +111,9 @@ const blogPostingSchema = {
   }}
 >
   <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  {faqSchema && (
+    <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
   <div class="pt-24">
     <SinglePost post={{ ...post, image: image }} url={url}>
       {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}

@@ -13,8 +13,15 @@ export const prerender = true;
 <Layout
   title="Client Operations & Case Studies | ZiaFlow"
   description={customersPage.meta.description}
-  metadata={{ canonical: 'https://ziaflow.com/case-studies' }}
+  metadata={{
+    canonical: 'https://ziaflow.com/case-studies',
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }}
 >
+  <meta slot="head" name="robots" content="noindex, nofollow" />
   <PageHero lines={customersPage.hero.lines} intro={customersPage.hero.intro} accent={1} />
   <StoryGrid />
   <ResultsBand />

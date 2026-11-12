@@ -3,6 +3,7 @@ import Layout from '@/layouts/layout.astro';
 import PageHero from '@/components/shared/page-hero.astro';
 import RoiCalculator from '@/components/home/roi-calculator.astro';
 import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
 import Cta from '@/components/shared/cta.astro';
 import { tools } from '~/lib/growth-tools/engine.mjs';
 
@@ -71,5 +72,6 @@ export const prerender = true;
 
   <RoiCalculator />
   <AuditSection />
+  <SalesForm />
   <Cta />
 </Layout>

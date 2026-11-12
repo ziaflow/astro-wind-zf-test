@@ -26,16 +26,22 @@ async function getRedirects(): Promise<SanityRedirect[]> {
     lastFetched = now;
     return redirects;
   } catch (err) {
+    cachedRedirects = [];
+    lastFetched = now;
     console.error('Failed to fetch redirects from Sanity:', err);
-    return cachedRedirects || [];
+    return [];
   }
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  // 301 Redirect HTTP -> HTTPS (only in production)
+  // 301 Redirect HTTP -> HTTPS and www -> non-www (only in production)
   if (!import.meta.env.DEV) {
     const forwardedProto = context.request.headers.get('x-forwarded-proto');
-    if (forwardedProto === 'http' || context.url.protocol === 'http:') {
+    const host = context.request.headers.get('host') || context.url.hostname;
+    const isHttp = forwardedProto === 'http' || context.url.protocol === 'http:';
+    const isWww = host === 'www.ziaflow.com' || context.url.hostname === 'www.ziaflow.com';
+
+    if (isHttp || isWww) {
       const httpsUrl = new URL(context.url.pathname + context.url.search, 'https://ziaflow.com');
       return context.redirect(httpsUrl.toString(), 301);
     }

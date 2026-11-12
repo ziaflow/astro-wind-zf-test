@@ -33,7 +33,14 @@ const { story, next } = Astro.props;
   title={`${story.data.client} — ${story.data.industry} Case Study | ZiaFlow`}
   description={story.data.summary}
   image={story.data.cover}
+  metadata={{
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }}
 >
+  <meta slot="head" name="robots" content="noindex, nofollow" />
   <StoryHero story={story} />
   <StoryResults story={story} />
   <StoryBody story={story} />

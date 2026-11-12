@@ -106,7 +106,7 @@ const faqSchema = {
 
 <Layout title={title} description={description} hidePreFooterLeadForm={true}>
   <ServiceSchema slot="head" name={title} description={description} url={url} />
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <PageHero lines={heroLines} intro={heroIntro} accent={1} />
 

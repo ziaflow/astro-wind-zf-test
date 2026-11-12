@@ -131,13 +131,19 @@ export default function init() {
           const win = window as unknown as {
             dataLayer?: Record<string, unknown>[];
             gtag?: (...args: unknown[]) => void;
+            _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
+            analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
+          };
+          const eventProps = {
+            form_name: 'kairo_sales_form',
+            service_interest: serviceInterest,
+            company_size: size,
+            page_path: window.location.pathname,
           };
           if (win.dataLayer) {
             win.dataLayer.push({
               event: 'form_submission',
-              form_name: 'kairo_sales_form',
-              service_interest: serviceInterest,
-              company_size: size,
+              ...eventProps,
             });
           }
           if (typeof win.gtag === 'function') {
@@ -146,6 +152,14 @@ export default function init() {
               event_label: serviceInterest || 'kairo_sales_form',
               value: 1,
             });
+          }
+          if (win._cio && typeof win._cio.identify === 'function') {
+            win._cio.identify({ id: email, email, name, phone, company });
+          }
+          if (win._cio && typeof win._cio.track === 'function') {
+            win._cio.track('form_submission', eventProps);
+          } else if (win.analytics && typeof win.analytics.track === 'function') {
+            win.analytics.track('form_submission', eventProps);
           }
         }
         activeIdempotencyKey = newIdempotencyKey();

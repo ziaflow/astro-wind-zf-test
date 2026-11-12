@@ -1,5 +1,7 @@
 ---
 import Layout from '@/layouts/layout.astro';
+import AuditSection from '@/components/home/audit-section.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
 import type { ExpansionPage } from '~/data/expansion-pages';
 interface Props {
   title: string;
@@ -34,4 +36,6 @@ const { title, description, heading, pages } = Astro.props;
       >
     </nav>
   </section>
+  <AuditSection />
+  <SalesForm />
 </Layout>

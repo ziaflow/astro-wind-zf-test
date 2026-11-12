@@ -19,9 +19,9 @@ test('redirects in astro.config.ts cover all critical legacy endpoints without l
     '/local-visibility-check': '/growth-tools/local-visibility-check',
     '/website-project-estimator': '/growth-tools/website-project-estimator',
     '/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
     '/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
     '/blog/google-local-service-ads-in-2025': '/google-local-service-ads-in-2025',
     '/blog/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings':
@@ -29,7 +29,7 @@ test('redirects in astro.config.ts cover all critical legacy endpoints without l
     '/blog/reduce-bounce-rate-with-ai': '/reduce-bounce-rate-with-ai',
     '/blog/website-analysis-tasks': '/website-analysis-tasks',
     '/blog/website-conversion-checklist-for-phoenix-businesses': '/website-conversion-checklist-for-phoenix-businesses',
-    '/blog/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
+    '/blog/phoenix-commercial-hvac-lead-intake': '/case-studies/phoenix-commercial-hvac-lead-intake',
     '/services/astro': '/services/web-development',
     '/services/react': '/services/web-development',
     '/services/wix': '/services/web-development',
@@ -45,7 +45,7 @@ test('redirects in astro.config.ts cover all critical legacy endpoints without l
     '/about-ziaflow': '/about',
     '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
     '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-higher-converting-websites':
-      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+      '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   };
 
   for (const [from, to] of Object.entries(expectedMappings)) {

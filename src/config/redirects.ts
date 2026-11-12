@@ -17,31 +17,35 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/posts/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
   '/microsoft-ads-in-2026-the-complete-guide-to-advertising-beyond-google': '/services/ppc',
   '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-higher-converting-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/posts/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
+  '/posts/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
 
-  // Blog post legacy slug variations
+  // Blog post legacy slug variations - consolidated to primary canonical
   '/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
-  '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
+  '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-highconverting-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/blog/web-development-in-2026-a-practical-guide-to-building-faster-safer-conversion-ready-websites':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
+  '/blog/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites':
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/guide-to-web-development-2026':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
   '/2026-web-development-guide':
-    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-high-converting-websites',
+    '/web-development-in-2026-a-practical-guide-to-building-fast-secure-conversion-ready-websites',
 
   // Legacy /blog/:slug routes mapping to root /:slug
   '/blog/google-local-service-ads-in-2025': '/google-local-service-ads-in-2025',
@@ -50,7 +54,7 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/blog/reduce-bounce-rate-with-ai': '/reduce-bounce-rate-with-ai',
   '/blog/website-analysis-tasks': '/website-analysis-tasks',
   '/blog/website-conversion-checklist-for-phoenix-businesses': '/website-conversion-checklist-for-phoenix-businesses',
-  '/blog/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
+  '/blog/phoenix-commercial-hvac-lead-intake': '/case-studies/phoenix-commercial-hvac-lead-intake',
 
   // Legacy Service & Sub-technology Slugs
   '/services/astro': '/services/web-development',
@@ -58,9 +62,9 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/services/wix': '/services/web-development',
   '/services/shopify': '/services/ecommerce',
 
-  // Case Studies
-  '/case-studies/phoenix-commercial-hvac-lead-intake': '/phoenix-commercial-hvac-lead-intake',
-  '/case-studies/phoenix-commercial-hvac': '/phoenix-commercial-hvac-lead-intake',
+  // Case Studies - consolidated to /case-studies/:slug
+  '/phoenix-commercial-hvac-lead-intake': '/case-studies/phoenix-commercial-hvac-lead-intake',
+  '/case-studies/phoenix-commercial-hvac': '/case-studies/phoenix-commercial-hvac-lead-intake',
   '/case-studies/scottsdale-dental-patient-intake-automation': '/case-studies',
 
   // Empty / Legacy Categories & Taxonomies

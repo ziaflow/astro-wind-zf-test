@@ -142,7 +142,7 @@ export const aboutPage = {
 };
 
 export const notFoundPage = {
-  meta: { title: 'Page not found', description: "Page not found. Discover ZiaFlow's custom web development, local SEO, and automated lead capture solutions in Phoenix, AZ, or return to our homepage." },
+  meta: { title: '404: Page Not Found | ZiaFlow', description: "Page not found. Discover ZiaFlow's custom web development, local SEO, and automated lead capture solutions in Phoenix, AZ, or return to our homepage." },
   eyebrow: 'Error 404',
   lines: [{ text: 'This page' }, { text: 'slipped', accent: 'past us.' }],
   body: 'The page you are looking for does not exist or has been moved.',
