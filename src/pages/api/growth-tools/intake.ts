@@ -3,11 +3,19 @@ import { supabase } from '~/lib/supabase';
 import { sendReviewWelcome } from '~/lib/growth-tools/welcome.mjs';
 import { checkRateLimit } from '~/lib/growth-tools/rate-limit';
 import { getTool, assess, estimate, stackSummary, VERSION } from '~/lib/growth-tools/engine.mjs';
+import { logger } from '~/utils/sentry-logger';
 
 export const prerender = false;
 const json = (body: unknown, status = 200) => {
-  if (status >= 400)
-    console.warn(JSON.stringify({ scope: 'growth_intake', status, error: (body as { error?: string }).error }));
+  if (status >= 400) {
+    logger.warn('Growth tools intake request rejected', {
+      domain: 'growth_tools',
+      action: 'request_rejected',
+      endpoint: '/api/growth-tools/intake',
+      statusCode: status,
+      errorCode: (body as { error?: string }).error,
+    });
+  }
   return Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 };
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -178,7 +186,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       },
       { onConflict: 'id' }
     );
-    if (logError) console.warn(JSON.stringify({ scope: 'growth_intake', event: 'log_failed', submissionId: body.id }));
+    if (logError) {
+      logger.warn('Growth tools communication log insert failed', {
+        domain: 'growth_tools',
+        action: 'communication_log_failed',
+        submissionId: body.id,
+      });
+    }
     const welcome = await sendReviewWelcome({ email, name, tool: tool.title, submissionId: body.id });
     const metadata = {
       version: VERSION,
@@ -192,10 +206,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       is_test: name.startsWith('ZIAFLOW QA'),
     };
     const { error: updateError } = await supabase.from('contact_submissions').update({ metadata }).eq('id', body.id);
-    if (updateError)
-      console.warn(
-        JSON.stringify({ scope: 'growth_intake', event: 'receipt_status_log_failed', submissionId: body.id })
-      );
+    if (updateError) {
+      logger.warn('Growth tools receipt metadata update failed', {
+        domain: 'growth_tools',
+        action: 'receipt_status_update_failed',
+        submissionId: body.id,
+      });
+    }
     const { error: receiptLogError } = await supabase.from('communications_log').insert({
       channel: 'email',
       direction: 'outbound',
@@ -214,8 +231,20 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         is_test: name.startsWith('ZIAFLOW QA'),
       },
     });
-    if (receiptLogError)
-      console.warn(JSON.stringify({ scope: 'growth_intake', event: 'receipt_log_failed', submissionId: body.id }));
+    if (receiptLogError) {
+      logger.warn('Growth tools outbound receipt log failed', {
+        domain: 'growth_tools',
+        action: 'receipt_log_failed',
+        submissionId: body.id,
+      });
+    }
+    logger.info('Growth tools intake completed', {
+      domain: 'growth_tools',
+      action: 'intake_completed',
+      submissionId: body.id,
+      tool: tool.slug,
+      welcomeState: welcome.state,
+    });
     return json({ ok: true, status: 'pending_internal_review', welcome: welcome.state });
   } catch {
     return json({ ok: false, error: 'invalid_request' }, 400);

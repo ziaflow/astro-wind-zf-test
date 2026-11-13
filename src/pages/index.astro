@@ -38,10 +38,27 @@ const homepageFaqSchema = {
 ---
 
 <Layout
-  title="Lead Capture & Automated Follow-Up in 48 Hours | Phoenix, AZ | ZiaFlow"
+  title="48-Hour Lead Capture & Follow-Up | Phoenix, AZ | ZiaFlow"
   description="Stop losing qualified leads. ZiaFlow connects website inquiries, instant SMS routing, and automated follow-up for Phoenix service businesses in 48 hours."
 >
   <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(homepageFaqSchema)} />
   <HomepageSalesFunnel />
   <EvidenceBenchmarks />
+
+  <section class="border-t border-line py-20 md:py-24" aria-labelledby="homepage-faq-heading">
+    <div class="shell max-w-4xl">
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-signal">Frequently Asked Questions</p>
+      <h2 id="homepage-faq-heading" class="mt-4 font-display text-title font-bold leading-tight text-bone">
+        Common questions about the Lead Capture &amp; Follow-Up Sprint.
+      </h2>
+      <dl class="mt-10 divide-y divide-line border-t border-b border-line">
+        {homepageFaqSchema.mainEntity.map((item) => (
+          <div class="py-6">
+            <dt class="font-display text-lg font-semibold text-bone">{item.name}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-mute">{item.acceptedAnswer.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
 </Layout>

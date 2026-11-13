@@ -8,7 +8,6 @@ import RoiCalculator from '@/components/home/roi-calculator.astro';
 import Proof from '@/components/home/proof.astro';
 import AuditSection from '@/components/home/audit-section.astro';
 import SalesForm from '@/components/pricing/sales-form.astro';
-import Cta from '@/components/shared/cta.astro';
 
 export const prerender = true;
 
@@ -42,7 +41,7 @@ const serviceCatalog = [
     title: 'High-Speed Web Development (Astro)',
     href: '/services/web-development',
     summary:
-      'Sub-second websites engineered on Astro, Tailwind CSS, and Supabase—designed specifically to convert mobile service traffic into booked calls.',
+      'Sub-second websites engineered on Astro, Tailwind CSS, and Supabase, designed specifically to convert mobile service traffic into booked calls.',
     highlights: ['99+ PageSpeed Performance', 'Mobile-First Conversion Flows', 'Zero Bloated Plugin Lock-In'],
   },
   {
@@ -131,12 +130,26 @@ const serviceCatalog = [
   },
 ];
 const newServices = pagesOfKind('service');
+
+const servicesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'ZiaFlow Services Catalog',
+  itemListElement: serviceCatalog.map((srv, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: srv.title,
+    description: srv.summary,
+    url: `https://ziaflow.com${srv.href}`,
+  })),
+};
 ---
 
 <Layout
   title="Web Design, SEO & Lead Automation Services | ZiaFlow"
   description="Explore ZiaFlow's digital services in Phoenix, AZ: Lead Capture & Follow-Up Sprints, fast Astro web design, local SEO, Google LSAs, and custom software."
 >
+  <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(servicesSchema)} />
   <PageHero
     lines={['Systems engineered', 'for booked revenue.']}
     accent={1}
@@ -207,11 +220,9 @@ const newServices = pagesOfKind('service');
       {
         newServices.map((page) => (
           <a href={page.path} class="rounded-2xl border border-line bg-ink-2 p-7 transition-colors hover:border-signal">
-            <>
-              <h3 class="font-display text-xl font-bold text-bone">{page.heading}</h3>
-              <p class="mt-4 text-sm leading-relaxed text-mute">{page.description}</p>
-              <span class="mt-6 inline-block text-sm text-signal">Explore the scope →</span>
-            </>
+            <h3 class="font-display text-xl font-bold text-bone">{page.heading}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-mute">{page.description}</p>
+            <span class="mt-6 inline-block text-sm text-signal">Explore the scope →</span>
           </a>
         ))
       }
@@ -226,5 +237,4 @@ const newServices = pagesOfKind('service');
   <Proof />
   <AuditSection />
   <SalesForm />
-  <Cta />
 </Layout>

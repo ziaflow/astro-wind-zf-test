@@ -106,5 +106,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(match.to, status);
   }
 
-  return next();
+  const response = await next();
+  if (!response.headers.has('Document-Policy')) {
+    response.headers.set('Document-Policy', 'js-profiling');
+  }
+  return response;
 });

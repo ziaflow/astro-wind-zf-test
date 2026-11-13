@@ -24,13 +24,16 @@ function sanitizeAttributes(attributes?: LogAttributes): Record<string, unknown>
   const clean: Record<string, unknown> = {};
 
   for (const [key, val] of Object.entries(attributes)) {
+    // Omit absent optional attributes rather than logging null/undefined
+    if (val === undefined || val === null) continue;
+
     if (SENSITIVE_KEY_REGEX.test(key)) {
       clean[key] = '[REDACTED]';
-    } else if (typeof val === 'object' && val !== null) {
+    } else if (typeof val === 'object') {
       clean[key] = Array.isArray(val)
-        ? val.map((item) =>
-            typeof item === 'object' && item !== null ? sanitizeAttributes(item as LogAttributes) : item
-          )
+        ? val
+            .filter((item) => item !== undefined && item !== null)
+            .map((item) => (typeof item === 'object' ? sanitizeAttributes(item as LogAttributes) : item))
         : sanitizeAttributes(val as LogAttributes);
     } else {
       clean[key] = val;
@@ -40,6 +43,8 @@ function sanitizeAttributes(attributes?: LogAttributes): Record<string, unknown>
   return clean;
 }
 
+const isDev = () => Boolean(import.meta.env?.DEV);
+
 /**
  * Structured Sentry Logger following Sentry Observability best practices:
  * - Structured attributes over string interpolation (enables indexing & queryability)
@@ -48,10 +53,12 @@ function sanitizeAttributes(attributes?: LogAttributes): Record<string, unknown>
  * - Dual-reporting to terminal during development
  */
 export const logger = {
+  fmt: Sentry.logger?.fmt,
+
   trace(message: string, attributes?: LogAttributes) {
     const safeAttrs = sanitizeAttributes(attributes);
     Sentry.logger?.trace?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.debug(`[TRACE] ${message}`, safeAttrs);
     }
   },
@@ -59,7 +66,7 @@ export const logger = {
   debug(message: string, attributes?: LogAttributes) {
     const safeAttrs = sanitizeAttributes(attributes);
     Sentry.logger?.debug?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.debug(`[DEBUG] ${message}`, safeAttrs);
     }
   },
@@ -67,7 +74,7 @@ export const logger = {
   info(message: string, attributes?: LogAttributes) {
     const safeAttrs = sanitizeAttributes(attributes);
     Sentry.logger?.info?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.info(`[INFO] ${message}`, safeAttrs);
     }
   },
@@ -75,7 +82,7 @@ export const logger = {
   warn(message: string, attributes?: LogAttributes) {
     const safeAttrs = sanitizeAttributes(attributes);
     Sentry.logger?.warn?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.warn(`[WARN] ${message}`, safeAttrs);
     }
   },
@@ -87,7 +94,7 @@ export const logger = {
       safeAttrs.errorMessage = error.message;
     }
     Sentry.logger?.error?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.error(`[ERROR] ${message}`, safeAttrs, error || '');
     }
   },
@@ -99,7 +106,7 @@ export const logger = {
       safeAttrs.errorMessage = error.message;
     }
     Sentry.logger?.fatal?.(message, safeAttrs);
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.error(`[FATAL] ${message}`, safeAttrs, error || '');
     }
   },

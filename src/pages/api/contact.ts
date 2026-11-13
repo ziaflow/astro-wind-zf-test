@@ -1,8 +1,10 @@
 import type { APIRoute } from 'astro';
+import * as Sentry from '@sentry/astro';
 import nodemailer from 'nodemailer';
 import { createHash } from 'node:crypto';
 import { supabaseAdmin } from '~/lib/supabase-admin';
 import { deliverWithReceipt, pipelineBatch, sourcePath, type ReceiptPayload } from '~/lib/intake-delivery';
+import { logger } from '~/utils/sentry-logger';
 
 export const prerender = false;
 
@@ -64,7 +66,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 1. Honeypot check: if filled, silently drop the database insert and return 200 OK so bots are deceived
     if (websiteUrlHoneypot || data.botcheck) {
-      console.warn('[contact] honeypot triggered (website_url or botcheck filled); silently dropping insert');
+      logger.warn('Contact submission dropped by honeypot', {
+        domain: 'contact',
+        action: 'honeypot_rejected',
+        endpoint: '/api/contact',
+      });
       return json({ message: 'Thanks! We received your message.' }, 200);
     }
 
@@ -72,7 +78,12 @@ export const POST: APIRoute = async ({ request }) => {
     const CYRILLIC_REGEX = /[\u0400-\u04FF]/;
     const combinedContent = [name, email, message, company, serviceInterest].filter(Boolean).join(' ');
     if (CYRILLIC_REGEX.test(combinedContent)) {
-      console.warn('[contact] rejected: Cyrillic characters detected');
+      logger.warn('Contact submission rejected due to unsupported script', {
+        domain: 'contact',
+        action: 'content_rejected',
+        reason: 'cyrillic_detected',
+        endpoint: '/api/contact',
+      });
       return json({ message: 'Submissions containing unsupported characters are not allowed.' }, 400);
     }
 
@@ -83,7 +94,13 @@ export const POST: APIRoute = async ({ request }) => {
     const SUSPICIOUS_TLD_REGEX = /\b[\w.-]+\.(ru|su|рф)\b/i;
 
     if (HTML_TAG_REGEX.test(message) || urlMatches.length >= 2 || SUSPICIOUS_TLD_REGEX.test(combinedContent)) {
-      console.warn('[contact] rejected: excessive URLs, HTML markup, or blocked TLD detected in message');
+      logger.warn('Contact submission rejected by spam filter', {
+        domain: 'contact',
+        action: 'content_rejected',
+        reason: 'spam_pattern',
+        urlCount: urlMatches.length,
+        endpoint: '/api/contact',
+      });
       return json(
         { message: 'Messages containing promotional links, HTML tags, or blocked domains are not accepted.' },
         400
@@ -91,12 +108,22 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     if (!email || !EMAIL_PATTERN.test(email)) {
-      console.warn('[contact] rejected: missing or invalid email');
+      logger.warn('Contact submission rejected due to invalid email', {
+        domain: 'contact',
+        action: 'validation_failed',
+        reason: 'invalid_email',
+        endpoint: '/api/contact',
+      });
       return json({ message: 'A valid email is required' }, 400);
     }
 
     if (!supabaseAdmin) {
-      console.error('[contact] persistence unavailable: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not set');
+      logger.error('Contact persistence unavailable: Supabase admin client not configured', {
+        domain: 'contact',
+        action: 'persistence_check',
+        endpoint: '/api/contact',
+        statusCode: 503,
+      });
       return json({ message: 'We could not save your message. Please try again later.' }, 503);
     }
 
@@ -165,7 +192,16 @@ export const POST: APIRoute = async ({ request }) => {
         .eq('dedup_key', dedupKey)
         .single();
       if (lookupError || !existing) {
-        console.error('[contact] duplicate receipt lookup failed:', lookupError?.message);
+        logger.error(
+          'Contact duplicate receipt lookup failed',
+          {
+            domain: 'contact',
+            action: 'receipt_lookup',
+            endpoint: '/api/contact',
+            statusCode: 500,
+          },
+          lookupError
+        );
         return json({ message: 'We could not save your message. Please try again.' }, 500);
       }
       if (existing.payload.email !== email || existing.payload.message !== message) {
@@ -177,7 +213,16 @@ export const POST: APIRoute = async ({ request }) => {
       submissionId = existing.id;
       alreadyPersisted = existing.status === 'persisted';
     } else {
-      console.error('[contact] receipt insert failed:', receiptError?.message);
+      logger.error(
+        'Contact receipt insert failed',
+        {
+          domain: 'contact',
+          action: 'receipt_insert',
+          endpoint: '/api/contact',
+          statusCode: 500,
+        },
+        receiptError
+      );
       return json({ message: 'We could not save your message. Please try again.' }, 500);
     }
 
@@ -203,7 +248,17 @@ export const POST: APIRoute = async ({ request }) => {
       );
 
       if (leadError) {
-        console.error('[contact] lead insert failed for submission', submissionId, leadError.message);
+        logger.error(
+          'Contact lead upsert failed',
+          {
+            domain: 'contact',
+            action: 'lead_upsert',
+            submissionId,
+            endpoint: '/api/contact',
+            statusCode: 500,
+          },
+          leadError
+        );
         await supabaseAdmin
           .from('lead_submissions')
           .update({ error_detail: leadError.message.slice(0, 500) })
@@ -217,7 +272,17 @@ export const POST: APIRoute = async ({ request }) => {
         .eq('id', submissionId);
 
       if (statusError) {
-        console.error('[contact] receipt status update failed for submission', submissionId, statusError.message);
+        logger.error(
+          'Contact receipt status update failed',
+          {
+            domain: 'contact',
+            action: 'receipt_status_update',
+            submissionId,
+            endpoint: '/api/contact',
+            statusCode: 500,
+          },
+          statusError
+        );
         return json({ message: 'We could not save your message. Please try again.' }, 500);
       }
     }
@@ -298,10 +363,15 @@ export const POST: APIRoute = async ({ request }) => {
             })
           );
         } else delivery.pipeline = writeKey ? 'in_progress' : 'not_configured';
-      } catch {
+      } catch (deliveryErr) {
         // Preserve the successful intake, and surface recoverable dispatch status without exposing secrets.
         delivery.status = 'needs_review';
-        console.warn('[contact] delivery journal requires review for submission', submissionId);
+        logger.warn('Contact delivery journal requires review', {
+          domain: 'contact',
+          action: 'delivery_dispatch',
+          submissionId,
+          errorName: deliveryErr instanceof Error ? deliveryErr.name : 'UnknownError',
+        });
       }
     }
 
@@ -350,9 +420,25 @@ export const POST: APIRoute = async ({ request }) => {
           `,
         });
       } catch (mailErr) {
-        console.warn('SMTP Notification note (lead saved to database):', mailErr);
+        logger.warn('SMTP fallback notification failed after lead persistence', {
+          domain: 'contact',
+          action: 'smtp_fallback',
+          submissionId,
+          errorName: mailErr instanceof Error ? mailErr.name : 'UnknownError',
+        });
       }
     }
+
+    logger.info('Contact submission processed', {
+      domain: 'contact',
+      action: 'submission_completed',
+      submissionId,
+      duplicate: alreadyPersisted,
+      isTest: receiptIsTest,
+      sourcePath: pageSubmittedFrom,
+      deliveryWebhook: delivery.webhook,
+      deliveryPipeline: delivery.pipeline,
+    });
 
     return json(
       {
@@ -364,7 +450,17 @@ export const POST: APIRoute = async ({ request }) => {
       200
     );
   } catch (error) {
-    console.error('Contact Form Error:', error);
+    logger.error(
+      'Unhandled contact form error',
+      {
+        domain: 'contact',
+        action: 'unhandled_exception',
+        endpoint: '/api/contact',
+        statusCode: 500,
+      },
+      error
+    );
+    Sentry.captureException(error);
     return json({ message: 'Failed to send message' }, 500);
   }
 };

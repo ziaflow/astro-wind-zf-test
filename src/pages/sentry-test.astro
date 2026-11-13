@@ -66,6 +66,7 @@ const metadata = {
       }
 
       // Send a structured log before throwing the error
+      Sentry.logger.info('User triggered test log', { log_source: 'sentry_test' });
       Sentry.logger?.info(
         Sentry.logger?.fmt
           ? Sentry.logger.fmt`User ${'sentry-test'} triggered test error button`

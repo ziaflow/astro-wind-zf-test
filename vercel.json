@@ -101,6 +101,10 @@
         {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Document-Policy",
+          "value": "js-profiling"
         }
       ]
     },
