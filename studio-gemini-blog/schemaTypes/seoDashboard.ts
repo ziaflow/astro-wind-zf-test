@@ -59,7 +59,14 @@ export const seoDashboardType = defineType({
           type: 'object',
           fields: [
             defineField({name: 'keyword', title: 'Keyword Phrase', type: 'string'}),
-            defineField({name: 'priority', title: 'Priority Score (1-10)', type: 'number'}),
+            defineField({
+              name: 'priority',
+              title: 'Editorial Priority Estimate (1-10)',
+              type: 'number',
+              description:
+                'Manual planning estimate only. Not Google PageRank, a ranking score, keyword difficulty or a promised result.',
+              validation: (rule) => rule.min(1).max(10),
+            }),
           ],
         },
       ],
