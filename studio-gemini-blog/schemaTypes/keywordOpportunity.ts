@@ -44,20 +44,43 @@ export const keywordOpportunityType = defineType({
     }),
     defineField({
       name: 'averagePosition',
-      title: 'Average Position',
+      title: 'Search Console Average Position',
       type: 'number',
+      description:
+        'Search Console average position across impressions in the report window. This is not a fixed rank or Google PageRank score.',
+      validation: (rule) => rule.min(0),
     }),
     defineField({
       name: 'ctr',
       title: 'Click-Through Rate (%)',
       type: 'number',
-      description: 'CTR as a percentage (e.g. 5.2 for 5.2%)',
+      description:
+        'Store percentage points (5.2 means 5.2%, not 0.052). Match the source report and date range.',
+      validation: (rule) => rule.min(0).max(100),
     }),
     defineField({
       name: 'reportDateRange',
       title: 'Report Date Range',
       type: 'string',
       description: 'e.g., 2026-07-12 to 2026-10-11',
+    }),
+    defineField({
+      name: 'reportStartDate',
+      title: 'Report Start Date',
+      type: 'date',
+      description: 'Inclusive start date for this Search Console observation.',
+    }),
+    defineField({
+      name: 'reportEndDate',
+      title: 'Report End Date',
+      type: 'date',
+      description: 'Inclusive end date for this Search Console observation.',
+    }),
+    defineField({
+      name: 'capturedAt',
+      title: 'Captured At',
+      type: 'datetime',
+      description: 'When this snapshot was copied from its source. Refresh instead of presenting stale rankings as current.',
     }),
     defineField({
       name: 'recommendedAction',
