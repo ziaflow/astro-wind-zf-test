@@ -175,6 +175,64 @@ export const postType = defineType({
       initialValue: 'ai_drafted',
     }),
     defineField({
+      name: 'experienceNotes',
+      title: 'First-hand Experience & Limitations',
+      type: 'text',
+      rows: 4,
+      description:
+        'Record relevant first-hand use, project observations, methods and limitations. Distinguish direct experience from sourced facts or hypothetical examples. Do not invent experience or include confidential client details. Leave empty when not applicable.',
+    }),
+    defineField({
+      name: 'evidenceSources',
+      title: 'Sources & Claim Evidence (Editorial)',
+      type: 'array',
+      description:
+        'Keep verifiable sources for material claims. Cite useful sources in the article where appropriate. This internal evidence record is not a ranking signal or a substitute for clear, accurate content.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Source title',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'url',
+              title: 'Source URL',
+              type: 'url',
+              validation: (rule) => rule.required().uri({scheme: ['http', 'https']}),
+            }),
+            defineField({
+              name: 'sourceType',
+              title: 'Source type',
+              type: 'string',
+              options: {
+                list: [
+                  {title: 'Official or primary source', value: 'primary'},
+                  {title: 'Research or data source', value: 'research'},
+                  {title: 'Other reference', value: 'other'},
+                ],
+              },
+            }),
+            defineField({
+              name: 'supports',
+              title: 'Claim or detail supported',
+              type: 'text',
+              rows: 2,
+            }),
+            defineField({
+              name: 'checkedAt',
+              title: 'Last checked',
+              type: 'date',
+              description: 'Date this source was checked for the cited claim.',
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'editorNotes',
       title: 'Editor Notes & Review Checklist',
       type: 'text',
