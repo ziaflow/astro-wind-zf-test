@@ -72,7 +72,7 @@
     "limax": "4.1.0",
     "linkinator": "^7.5.1",
     "lodash.merge": "^4.6.2",
-    "nodemailer": "^7.0.10",
+    "nodemailer": "^10.3.1",
     "number-flow": "^0.6.2",
     "openai": "^6.9.0",
     "slugify": "^1.6.6",
