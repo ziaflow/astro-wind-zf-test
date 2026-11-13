@@ -62,19 +62,7 @@ export const POST: APIRoute = async ({ request }) => {
     delete otherData.website_url;
     delete otherData.botcheck;
 
-    // 1. Rate Limiting: max 50 submissions per minute per IP (defense-in-depth)
-    const { checkRateLimit, getClientIp } = await import('~/lib/rate-limiter');
-    const clientIp = getClientIp(request);
-    const { allowed, resetInSeconds } = checkRateLimit(clientIp, { maxRequests: 50, windowMs: 60_000 });
-    if (!allowed) {
-      console.warn(`[contact] rate limit exceeded for IP: ${clientIp}`);
-      return new Response(JSON.stringify({ message: 'Too many requests. Please wait before submitting again.' }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json', 'Retry-After': String(resetInSeconds) },
-      });
-    }
-
-    // 2. Honeypot check: if filled, silently drop the database insert and return 200 OK so bots are deceived
+    // 1. Honeypot check: if filled, silently drop the database insert and return 200 OK so bots are deceived
     if (websiteUrlHoneypot || data.botcheck) {
       console.warn('[contact] honeypot triggered (website_url or botcheck filled); silently dropping insert');
       return json({ message: 'Thanks! We received your message.' }, 200);

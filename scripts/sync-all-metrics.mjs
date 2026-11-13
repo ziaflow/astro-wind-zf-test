@@ -13,7 +13,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -32,15 +32,38 @@ const SUPABASE_URL = process.env.SUPABASE_URL || process.env.PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const CLARITY_TOKEN = process.env.CLARITY_API_TOKEN;
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY;
+const BING_WEBMASTER_API_KEY = process.env.BING_WEBMASTER_API_KEY;
+const BING_SITE_URL = process.env.BING_SITE_URL || 'https://ziaflow.com/';
 
 const results = {
   timestamp: new Date().toISOString(),
   clarity: { status: 'skipped', details: null },
   indexnow: { status: 'skipped', details: null },
+  bing: { status: 'skipped', details: null },
   google: { status: 'skipped', details: null },
   errors_and_issues: { status: 'skipped', details: null },
   freshness: { status: 'skipped', details: null },
 };
+
+function parseBingDate(rawDate) {
+  if (!rawDate) return new Date().toISOString().slice(0, 10);
+  const match = String(rawDate).match(/\/Date\((\d+)(?:[+-]\d+)?\)\//);
+  if (match) {
+    return new Date(Number(match[1])).toISOString().slice(0, 10);
+  }
+  const parsed = Date.parse(String(rawDate));
+  return Number.isFinite(parsed) ? new Date(parsed).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10);
+}
+
+function parseUrlPath(rawUrl) {
+  if (!rawUrl) return '/';
+  try {
+    const parsed = new URL(rawUrl);
+    return parsed.pathname + parsed.search || '/';
+  } catch {
+    return String(rawUrl).startsWith('/') ? String(rawUrl) : `/${String(rawUrl)}`;
+  }
+}
 
 async function syncClarity() {
   console.log('\n--- 1. Microsoft Clarity Sync ---');
@@ -166,6 +189,30 @@ async function syncClarity() {
 
     const inserted = await upsertRes.json();
     console.log(`✅ Clarity sync successful: upserted ${inserted.length} rows for ${today}`);
+
+    // Record run heartbeat in clarity_sync_runs so telemetry freshness checks pass
+    const slot = Math.floor(Date.now() / 8640000);
+    const runRes = await fetch(`${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/clarity_sync_runs?on_conflict=slot`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates,return=minimal',
+      },
+      body: JSON.stringify({
+        slot,
+        quota_date: today,
+        finished_at: new Date().toISOString(),
+        status: 'success',
+        rows_written: inserted.length,
+        payload: { source: 'sync-all-metrics', date: today },
+      }),
+    });
+    if (!runRes.ok) {
+      console.warn(`⚠️ Could not record clarity_sync_runs heartbeat: HTTP ${runRes.status}`);
+    }
+
     results.clarity = { status: 'success', rows_written: inserted.length, date: today };
   } catch (err) {
     console.error('❌ Clarity sync failed:', err.message);
@@ -242,8 +289,121 @@ async function syncIndexNow() {
   }
 }
 
+async function syncBingWebmaster() {
+  console.log('\n--- 3. Bing Webmaster Tools Sync ---');
+  if (!BING_WEBMASTER_API_KEY || !SUPABASE_URL || !SUPABASE_KEY) {
+    console.warn('⚠️ Missing BING_WEBMASTER_API_KEY or Supabase credentials. Skipping Bing Webmaster sync.');
+    results.bing.details = !BING_WEBMASTER_API_KEY ? 'Missing BING_WEBMASTER_API_KEY' : 'Missing Supabase credentials';
+    return;
+  }
+
+  try {
+    const encodedSite = encodeURIComponent(BING_SITE_URL);
+    const encodedKey = encodeURIComponent(BING_WEBMASTER_API_KEY);
+    const [queryRes, pageRes] = await Promise.all([
+      fetch(`https://ssl.bing.com/webmaster/api.svc/json/GetQueryStats?siteUrl=${encodedSite}&apikey=${encodedKey}`, {
+        signal: AbortSignal.timeout(30000),
+      }),
+      fetch(`https://ssl.bing.com/webmaster/api.svc/json/GetPageStats?siteUrl=${encodedSite}&apikey=${encodedKey}`, {
+        signal: AbortSignal.timeout(30000),
+      }),
+    ]);
+
+    if (!queryRes.ok) throw new Error(`Bing GetQueryStats HTTP ${queryRes.status}`);
+    if (!pageRes.ok) throw new Error(`Bing GetPageStats HTTP ${pageRes.status}`);
+
+    const queryJson = await queryRes.json();
+    const pageJson = await pageRes.json();
+    const queryRows = Array.isArray(queryJson?.d) ? queryJson.d : [];
+    const pageRows = Array.isArray(pageJson?.d) ? pageJson.d : [];
+
+    const deduped = new Map();
+    for (const item of queryRows) {
+      const date = parseBingDate(item.Date);
+      const query = String(item.Query || '').trim();
+      const row = {
+        date,
+        page_path: '*',
+        query,
+        clicks: Number(item.Clicks || 0),
+        impressions: Number(item.Impressions || 0),
+        avg_position: item.AvgImpressionPosition != null ? Number(item.AvgImpressionPosition) : null,
+      };
+      deduped.set(`${date}::*::${query}`, row);
+    }
+    for (const item of pageRows) {
+      const date = parseBingDate(item.Date);
+      const pagePath = parseUrlPath(item.Query || item.Url || '/');
+      const row = {
+        date,
+        page_path: pagePath,
+        query: '',
+        clicks: Number(item.Clicks || 0),
+        impressions: Number(item.Impressions || 0),
+        avg_position: item.AvgImpressionPosition != null ? Number(item.AvgImpressionPosition) : null,
+      };
+      deduped.set(`${date}::${pagePath}::`, row);
+    }
+
+    const rows = Array.from(deduped.values());
+    const base = SUPABASE_URL.replace(/\/$/, '');
+    const sbHeaders = {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      Prefer: 'resolution=merge-duplicates,return=minimal',
+    };
+
+    for (let i = 0; i < rows.length; i += 500) {
+      const upsertRes = await fetch(`${base}/rest/v1/metrics_bing_daily?on_conflict=date,page_path,query`, {
+        method: 'POST',
+        headers: sbHeaders,
+        body: JSON.stringify(rows.slice(i, i + 500)),
+      });
+      if (!upsertRes.ok) {
+        throw new Error(`Supabase metrics_bing_daily upsert HTTP ${upsertRes.status}: ${await upsertRes.text()}`);
+      }
+    }
+
+    const dates = rows.map((r) => r.date).sort();
+    const periodStart = dates[0] || new Date().toISOString().slice(0, 10);
+    const periodEnd = dates[dates.length - 1] || periodStart;
+
+    const snapRes = await fetch(
+      `${base}/rest/v1/analytics_source_snapshots?on_conflict=source,property,period_start,period_end,grain`,
+      {
+        method: 'POST',
+        headers: sbHeaders,
+        body: JSON.stringify({
+          source: 'bing',
+          property: BING_SITE_URL,
+          period_start: periodStart,
+          period_end: periodEnd,
+          grain: 'period_aggregate',
+          captured_at: new Date().toISOString(),
+          payload: {
+            query_rows: queryRows.length,
+            page_rows: pageRows.length,
+            total_clicks: rows.reduce((s, r) => s + r.clicks, 0),
+            total_impressions: rows.reduce((s, r) => s + r.impressions, 0),
+          },
+        }),
+      }
+    );
+    if (!snapRes.ok) {
+      console.warn(`⚠️ Could not record Bing snapshot in analytics_source_snapshots: HTTP ${snapRes.status}`);
+    }
+
+    console.log(`✅ Bing Webmaster sync successful: upserted ${rows.length} rows.`);
+    results.bing = { status: 'success', rows_written: rows.length };
+  } catch (err) {
+    console.error('❌ Bing Webmaster sync failed:', err.message);
+    results.bing = { status: 'failed', error: err.message };
+  }
+}
+
 async function syncGoogle() {
-  console.log('\n--- 3. Google Search Console & GA4 Sync ---');
+  console.log('\n--- 4. Google Search Console & GA4 Sync ---');
   const hasGoogleCreds =
     process.env.GOOGLE_CLIENT_ID &&
     process.env.GOOGLE_CLIENT_SECRET &&
@@ -263,6 +423,34 @@ async function syncGoogle() {
   try {
     const { run } = await import('./sync-google-metrics.mjs');
     await run();
+    if (SUPABASE_URL && SUPABASE_KEY) {
+      const end = process.env.SYNC_END_DATE || new Date(Date.now() - 3 * 86400000).toISOString().slice(0, 10);
+      const start = process.env.SYNC_START_DATE || new Date(Date.parse(end) - 6 * 86400000).toISOString().slice(0, 10);
+      const snapRes = await fetch(
+        `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/analytics_source_snapshots?on_conflict=source,property,period_start,period_end,grain`,
+        {
+          method: 'POST',
+          headers: {
+            apikey: SUPABASE_KEY,
+            Authorization: `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json',
+            Prefer: 'resolution=merge-duplicates,return=minimal',
+          },
+          body: JSON.stringify({
+            source: 'gsc',
+            property: 'sc-domain:ziaflow.com',
+            period_start: start,
+            period_end: end,
+            grain: 'period_aggregate',
+            captured_at: new Date().toISOString(),
+            payload: { synced_via: 'sync-all-metrics' },
+          }),
+        }
+      );
+      if (!snapRes.ok) {
+        console.warn(`⚠️ Could not record GSC snapshot heartbeat: HTTP ${snapRes.status}`);
+      }
+    }
     console.log('✅ Google GSC & GA4 sync completed successfully.');
     results.google = { status: 'success' };
   } catch (err) {
@@ -422,6 +610,7 @@ async function main() {
 
   await syncClarity();
   await syncIndexNow();
+  await syncBingWebmaster();
   await syncGoogle();
   await scanAndSyncErrorsAndIssues();
   await checkFreshness();
@@ -432,7 +621,11 @@ async function main() {
   console.log('========================================================\n');
 }
 
-main().catch((err) => {
-  console.error('Fatal sync error:', err);
-  process.exit(1);
-});
+export { parseBingDate, parseUrlPath, syncClarity, syncBingWebmaster, syncGoogle };
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((err) => {
+    console.error('Fatal sync error:', err);
+    process.exit(1);
+  });
+}

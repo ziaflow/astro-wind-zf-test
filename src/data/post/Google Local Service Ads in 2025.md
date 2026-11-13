@@ -183,7 +183,7 @@ Google’s AI now parses structured data, reviews, and authoritative external me
 ## Real-World LSA Success Stories
 
 - **Law Firm:** Doubled qualified leads with optimized profile and rapid review boosts, achieving 21% conversion.
-- **HVAC Company:** Grew lead volume 2.5x by expanding service zones and reducing response times below 5 minutes (see our [Phoenix Commercial HVAC Lead Intake Blueprint](/phoenix-commercial-hvac-lead-intake)).
+- **HVAC Company:** Grew lead volume 2.5x by expanding service zones and reducing response times below 5 minutes (see our [Phoenix Commercial HVAC Lead Intake Blueprint](/case-studies/phoenix-commercial-hvac-lead-intake)).
 - **Dental Clinic:** Increased conversions by 43% in 90 days through automated Google review acquisition and verification badge display.
 
 ---

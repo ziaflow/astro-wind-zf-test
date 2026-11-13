@@ -7,7 +7,53 @@ const newIdempotencyKey = () =>
     ? crypto.randomUUID()
     : `short-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
+const FOCUS_RING_CLASSES = ['ring-2', 'ring-signal'];
+
+const resolveFormCard = (targetId: string): HTMLElement | null => {
+  const el = document.getElementById(targetId);
+  if (!el) return null;
+  if (el.hasAttribute('data-lead-form-card')) return el;
+  return el.querySelector<HTMLElement>('[data-lead-form-card]');
+};
+
+const focusFormFirstInput = (targetId: string) => {
+  const card = resolveFormCard(targetId);
+  if (!card) return;
+  const firstInput = $<HTMLInputElement | HTMLSelectElement>(
+    'input[name="name"], input:not([type="hidden"]):not([tabindex="-1"]), select',
+    card,
+  );
+  if (firstInput) {
+    // preventScroll keeps smooth-scroll animations intact while still opening mobile keyboards on tap.
+    firstInput.focus({ preventScroll: true });
+  }
+  card.classList.add(...FOCUS_RING_CLASSES);
+  window.setTimeout(() => card.classList.remove(...FOCUS_RING_CLASSES), 1400);
+};
+
+const bindFocusLinks = () => {
+  if (document.documentElement.dataset.leadFocusBound === 'true') return;
+  document.documentElement.dataset.leadFocusBound = 'true';
+
+  document.addEventListener('click', (event) => {
+    const trigger = (event.target as Element | null)?.closest<HTMLElement>(
+      '[data-focus-form], a[href="#hero-lead-form"], a[href="#lead-review"], a[href="#lead-review-form"]',
+    );
+    if (!trigger) return;
+    const explicitId = trigger.dataset.focusForm;
+    const hrefHash = trigger instanceof HTMLAnchorElement ? trigger.getAttribute('href')?.slice(1) : '';
+    const targetId = explicitId || hrefHash;
+    if (targetId) focusFormFirstInput(targetId);
+  });
+
+  const initialHash = window.location.hash.slice(1);
+  if (initialHash === 'hero-lead-form' || initialHash === 'lead-review' || initialHash === 'lead-review-form') {
+    window.setTimeout(() => focusFormFirstInput(initialHash), 250);
+  }
+};
+
 export default function init() {
+  bindFocusLinks();
   const forms = $$<HTMLFormElement>('[data-short-lead-form]');
   if (!forms.length) return;
 
@@ -139,9 +185,13 @@ export default function init() {
           activeIdempotencyKey = newIdempotencyKey();
           if (statusEl) {
             statusEl.className = 'mt-4 min-h-6 text-sm text-emerald-400 font-medium';
-            statusEl.innerHTML = `Thank you, ${name.split(' ')[0]}! Your project details have been recorded. <a href="https://calendly.com/jeremy-sanchez-ziaflow" target="_blank" rel="noopener noreferrer" class="underline font-bold text-bone hover:text-signal ml-1 inline-flex items-center gap-1">Want to pick a consultation time now? Open calendar &rarr;</a>`;
+            statusEl.textContent = `Thank you, ${name.split(' ')[0]}! Redirecting to confirmation...`;
           }
           form.reset();
+          const thankYouUrl = `/thank-you?service=${encodeURIComponent(serviceInterest)}`;
+          window.setTimeout(() => {
+            window.location.assign(thankYouUrl);
+          }, 120);
         } else {
           if (statusEl) {
             statusEl.className = 'mt-4 min-h-6 text-sm text-signal';

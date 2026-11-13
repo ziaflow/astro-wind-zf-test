@@ -30,6 +30,7 @@ export function bindLeadForms() {
       const payload = {
         ...raw,
         name: raw.name || [raw.first_name, raw.last_name].filter(Boolean).join(' '),
+        email: typeof raw.email === 'string' ? raw.email : '',
         company: raw.company || raw.company_name || '',
         message: raw.message || raw.comments || '',
         page: window.location.pathname,

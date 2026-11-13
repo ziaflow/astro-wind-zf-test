@@ -30,6 +30,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   site: 'https://ziaflow.com',
   output: 'static',
+  trailingSlash: 'never',
   adapter: vercel(),
 
   // UX: Built-in link prefetching for fast page loads
@@ -49,18 +50,26 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap({
-      filter: (page) =>
-        !page.includes('/admin') &&
-        !page.includes('/staging') &&
-        !page.includes('/category/') &&
-        !page.includes('/tag/') &&
-        !page.includes('/form-test') &&
-        !page.includes('/customers') &&
-        !page.includes('/sentry-test') &&
-        !page.includes('/kairo-preview') &&
-        !page.includes('/posts') &&
-        !page.endsWith('/ziaflow') &&
-        !page.includes('/ziaflow/'),
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\/+$/, '') || '/';
+        const excludedPaths = ['/call-booked', '/thank-you', '/preview'];
+        if (excludedPaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+          return false;
+        }
+        return (
+          !page.includes('/admin') &&
+          !page.includes('/staging') &&
+          !page.includes('/category/') &&
+          !page.includes('/tag/') &&
+          !page.includes('/form-test') &&
+          !page.includes('/customers') &&
+          !page.includes('/sentry-test') &&
+          !page.includes('/kairo-preview') &&
+          !page.includes('/posts') &&
+          !page.endsWith('/ziaflow') &&
+          !page.includes('/ziaflow/')
+        );
+      },
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

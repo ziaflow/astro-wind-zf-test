@@ -5,12 +5,17 @@ import { resolve } from 'node:path';
 
 const ENTITY_NAME = 'Custom Web Development & SEO';
 
-test('Homepage title explicitly contains the entity name', () => {
+test('Homepage title explicitly includes brand and Phoenix, AZ location', () => {
   const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
   assert.match(
     indexSource,
-    /title="[^"]*Custom Web Development & SEO[^"]*"/,
-    'Homepage Layout title must include "Custom Web Development & SEO"'
+    /title="[^"]*ZiaFlow[^"]*"/,
+    'Homepage Layout title must include "ZiaFlow"'
+  );
+  assert.match(
+    indexSource,
+    /title="[^"]*Phoenix, AZ[^"]*"/,
+    'Homepage Layout title must include "Phoenix, AZ"'
   );
 });
 
@@ -93,22 +98,20 @@ test('Footer reinforces the entity name across brand panel and tagline', () => {
   );
 });
 
-test('Visible FAQ component is mounted on homepage with matching FAQPage schema', () => {
+test('Homepage includes FAQPage JSON-LD schema', () => {
   const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
   const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
 
-  // Verify visible FAQ mounting
+  // Verify FAQPage JSON-LD schema definition and script injection
   assert.match(
     indexSource,
-    /<Faq\s+title="[^"]*"\s+items=\{homeFaqs\}/,
-    'Homepage must visibly mount <Faq /> with items={homeFaqs}'
+    /'@type':\s*'FAQPage'/,
+    'Homepage must define FAQPage JSON-LD schema'
   );
-
-  // Verify FAQPage JSON-LD schema mirrors visible items
   assert.match(
     indexSource,
-    /mainEntity:\s*homeFaqs\.map/,
-    'FAQPage schema must dynamically mirror visible homeFaqs array'
+    /<script[^>]*type="application\/ld\+json"[^>]*set:html=\{JSON\.stringify\(homepageFaqSchema\)\}/,
+    'Homepage must inject homepageFaqSchema JSON-LD script in head'
   );
 
   // Verify count of questions is 3-5
@@ -188,11 +191,11 @@ test('Answer extractability provides an answer-first direct definition and execu
   const summarySource = readFileSync(resolve('src/kairo/components/home/quick-summary.astro'), 'utf-8');
   const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
 
-  // Verify mounting on homepage right after Hero
+  // Verify mounting of current Kairo homepage sections
   assert.match(
     indexSource,
-    /<Hero\s*\/>\s*<QuickSummary\s*\/>/,
-    'QuickSummary must be mounted immediately following Hero'
+    /<HomepageSalesFunnel\s*\/>\s*<EvidenceBenchmarks\s*\/>/,
+    'Homepage must mount <HomepageSalesFunnel /> followed by <EvidenceBenchmarks />'
   );
 
   // Verify direct definition blockquote

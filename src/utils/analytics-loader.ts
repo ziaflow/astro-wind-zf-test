@@ -10,8 +10,18 @@ type LoadTrigger = 'idle' | 'interaction';
 
 let hasLoaded = false;
 
+const isAnalyticsAllowed = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  const isElectron =
+    typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
+  if (isElectron) return false;
+  if (!/^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) return false;
+  if ((window as unknown as { __zfIsProdHost?: boolean }).__zfIsProdHost === false) return false;
+  return true;
+};
+
 const loadClarity = (clarityId?: string) => {
-  if (!clarityId || typeof window === 'undefined') return;
+  if (!clarityId || !isAnalyticsAllowed()) return;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((window as any).clarity) return;
 
@@ -28,7 +38,7 @@ const loadClarity = (clarityId?: string) => {
 };
 
 const loadGtm = (gtmId?: string) => {
-  if (!gtmId || typeof window === 'undefined') return;
+  if (!gtmId || !isAnalyticsAllowed()) return;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((window as any).dataLayer?.find?.((event: any) => event?.event === 'gtm.js')) return;
 
@@ -55,9 +65,9 @@ const onFirstInteraction = (callback: () => void) => {
 };
 
 export const bootstrapAnalytics = ({ gtmId, clarityId }: LoaderOptions, trigger: LoadTrigger = 'idle') => {
-  if (hasLoaded || typeof window === 'undefined') return;
+  if (hasLoaded || !isAnalyticsAllowed()) return;
   const loadVendors = () => {
-    if (hasLoaded) return;
+    if (hasLoaded || !isAnalyticsAllowed()) return;
     loadGtm(gtmId);
     loadClarity(clarityId);
     hasLoaded = true;
@@ -74,7 +84,7 @@ export const bootstrapAnalytics = ({ gtmId, clarityId }: LoaderOptions, trigger:
 };
 
 export const queueAnalyticsLoad = (options: LoaderOptions) => {
-  if (typeof window === 'undefined') return;
+  if (!isAnalyticsAllowed()) return;
   if (document.readyState === 'complete') {
     bootstrapAnalytics(options);
   } else {

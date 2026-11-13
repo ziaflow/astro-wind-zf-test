@@ -687,7 +687,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
                   value: 1,
                 });
               }
-              const win = window as any;
+              const win = window;
               if (win._cio && typeof win._cio.identify === 'function' && payload.email) {
                 win._cio.identify({ id: payload.email, email: payload.email, name: payload.name, phone: payload.phone });
               }

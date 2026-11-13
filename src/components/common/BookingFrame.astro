@@ -3,16 +3,81 @@ const bookingUrl = 'https://calendly.com/jeremy-sanchez-ziaflow';
 ---
 
 <div class="booking-frame" role="region" aria-label="Book with ZiaFlow">
-  <iframe src={bookingUrl} title="Book a consultation" loading="lazy" referrerpolicy="no-referrer" allowfullscreen
+  <iframe
+    data-booking-iframe
+    src={bookingUrl}
+    title="Book a consultation"
+    loading="lazy"
+    referrerpolicy="no-referrer"
+    allowfullscreen
   ></iframe>
 
   <div class="booking-fallback">
     <p>Having trouble with the calendar? Open the booking page in a new tab.</p>
-    <a class="booking-fallback__button" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+    <a
+      data-booking-fallback
+      data-cta="book-scoping-call"
+      class="booking-fallback__button"
+      href={bookingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Open Booking Portal
     </a>
   </div>
 </div>
+
+<script>
+  const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const currentParams = new URLSearchParams(window.location.search);
+  const utmEntries = UTM_KEYS.filter((key) => currentParams.get(key)).map((key) => [key, currentParams.get(key)!]);
+
+  if (utmEntries.length > 0) {
+    const appendUtms = (rawUrl: string) => {
+      const url = new URL(rawUrl);
+      for (const [k, v] of utmEntries) url.searchParams.set(k, v);
+      return url.toString();
+    };
+    const iframe = document.querySelector<HTMLIFrameElement>('[data-booking-iframe]');
+    if (iframe?.src) iframe.src = appendUtms(iframe.src);
+    const fallback = document.querySelector<HTMLAnchorElement>('[data-booking-fallback]');
+    if (fallback?.href) fallback.href = appendUtms(fallback.href);
+  }
+
+  window.addEventListener('message', (event) => {
+    if (!event.origin.endsWith('calendly.com')) return;
+    const payload = event.data;
+    if (!payload || typeof payload !== 'object' || payload.event !== 'calendly.event_scheduled') return;
+
+    const w = window as unknown as {
+      dataLayer?: Record<string, unknown>[];
+      gtag?: (...args: unknown[]) => void;
+      _cio?: { track?: (event: string, props?: unknown) => void };
+    };
+
+    if (w.dataLayer) {
+      w.dataLayer.push({
+        event: 'call_booked',
+        source: 'calendly_embed',
+        page_path: window.location.pathname,
+      });
+    }
+    if (typeof w.gtag === 'function') {
+      w.gtag('event', 'schedule_call', {
+        event_category: 'conversion',
+        event_label: 'calendly_embed',
+        value: 1,
+      });
+    }
+    if (w._cio && typeof w._cio.track === 'function') {
+      w._cio.track('call_booked', { source: 'calendly_embed', page_path: window.location.pathname });
+    }
+
+    window.setTimeout(() => {
+      window.location.assign('/call-booked?source=calendly');
+    }, 150);
+  });
+</script>
 
 <style>
   .booking-frame {

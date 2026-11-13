@@ -25,7 +25,10 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
       urlParams.get('internal_qa') === '1' ||
       isInternalUser;
 
-    window.__zfIsProdHost = !isInternalQA && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
+    const isElectron =
+      typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
+
+    window.__zfIsProdHost = !isElectron && !isInternalQA && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
     if (gaId && window.__zfIsProdHost) {
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -40,11 +43,13 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
 </script>
 
 <script is:inline>
-  window.clarity =
-    window.clarity ||
-    function (...args) {
-      (window.clarity.q = window.clarity.q || []).push(args);
-    };
+  if (window.__zfIsProdHost) {
+    window.clarity =
+      window.clarity ||
+      function (...args) {
+        (window.clarity.q = window.clarity.q || []).push(args);
+      };
+  }
 </script>
 
 <script is:inline define:vars={{ gtmId }}>
@@ -153,13 +158,31 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
   declare global {
     interface Window {
       clarity: (...args: unknown[]) => void;
+      dataLayer?: Record<string, unknown>[];
       __zfIsProdHost?: boolean;
     }
   }
 
-  const element = document.getElementById('clarity-setup');
-  if (element && window.__zfIsProdHost) {
-    const id = element.dataset.id;
+  const isElectron =
+    typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
+  const isProdHost =
+    !isElectron && Boolean(window.__zfIsProdHost) && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
+
+  const pushDataLayer = (payload: Record<string, unknown>) => {
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push(payload);
+    }
+  };
+
+  const trackClarityEvent = (eventName: string) => {
+    if (typeof window.clarity === 'function') {
+      window.clarity('event', eventName);
+    }
+  };
+
+  if (isProdHost) {
+    const element = document.getElementById('clarity-setup');
+    const id = element?.dataset.id;
     if (id) {
       Clarity.init(id);
 
@@ -186,16 +209,132 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
       document.addEventListener(
         'click',
         (e) => {
-          const target = e.target as HTMLElement;
+          const target = e.target as HTMLElement | null;
+          if (!target) return;
           if (!target.closest('a') && !target.closest('button') && !target.closest('input')) {
             if (target.innerText?.length < 50 && (target.classList.contains('icon') || target.title)) {
-              if (window.clarity) window.clarity('event', 'potential_dead_click');
+              trackClarityEvent('potential_dead_click');
             }
           }
         },
         { passive: true }
       );
     }
+
+    // Micro-conversion tracking: primary CTA clicks
+    document.addEventListener(
+      'click',
+      (e) => {
+        const target = e.target as HTMLElement | null;
+        const interactive = target?.closest('a, button') as HTMLElement | null;
+        if (!interactive) return;
+
+        const rawText = (interactive.textContent || '').replace(/\s+/g, ' ').trim();
+        const normalized = rawText.toLowerCase();
+        let ctaName = '';
+
+        if (normalized.includes('request a lead-flow review')) {
+          ctaName = 'request_lead_flow_review';
+        } else if (normalized.includes('book a scoping call')) {
+          ctaName = 'book_scoping_call';
+        }
+
+        if (!ctaName) return;
+
+        pushDataLayer({
+          event: 'cta_click',
+          cta_name: ctaName,
+          cta_text: rawText.slice(0, 100),
+          cta_href: interactive.getAttribute('href') || '',
+          page_path: window.location.pathname,
+        });
+        trackClarityEvent(`cta_click_${ctaName}`);
+      },
+      { passive: true }
+    );
+
+    // Micro-conversion tracking: form focus & abandonment
+    const focusedForms = new Set<HTMLFormElement>();
+    const dirtyForms = new WeakSet<HTMLFormElement>();
+    const submittedForms = new WeakSet<HTMLFormElement>();
+    const abandonedForms = new WeakSet<HTMLFormElement>();
+
+    const getFormIdentifier = (form: HTMLFormElement): string => {
+      if (form.id) return form.id;
+      if (form.hasAttribute('data-short-lead-form')) return 'short_lead_form';
+      if (form.hasAttribute('data-ai-triage-form')) return 'ai_triage_form';
+      return form.getAttribute('name') || 'unnamed_form';
+    };
+
+    const isTrackableField = (el: EventTarget | null): el is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement => {
+      if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement)) {
+        return false;
+      }
+      if (el instanceof HTMLInputElement && el.type === 'hidden') return false;
+      if (el.name === 'website_url') return false;
+      return true;
+    };
+
+    document.addEventListener(
+      'focusin',
+      (e) => {
+        if (!isTrackableField(e.target)) return;
+        const form = e.target.form;
+        if (!form || focusedForms.has(form)) return;
+
+        focusedForms.add(form);
+        const formId = getFormIdentifier(form);
+        pushDataLayer({
+          event: 'form_focus',
+          form_id: formId,
+          field_name: e.target.name || e.target.id || '',
+          page_path: window.location.pathname,
+        });
+        trackClarityEvent('form_focus');
+        if (typeof window.clarity === 'function') {
+          window.clarity('set', 'active_form', formId);
+        }
+      },
+      { passive: true }
+    );
+
+    const markFormDirty = (e: Event) => {
+      if (!isTrackableField(e.target)) return;
+      if (e.target.form) dirtyForms.add(e.target.form);
+    };
+    document.addEventListener('input', markFormDirty, { passive: true });
+    document.addEventListener('change', markFormDirty, { passive: true });
+
+    document.addEventListener(
+      'submit',
+      (e) => {
+        if (e.target instanceof HTMLFormElement) {
+          submittedForms.add(e.target);
+        }
+      },
+      { passive: true }
+    );
+
+    const reportAbandonment = () => {
+      focusedForms.forEach((form) => {
+        if (submittedForms.has(form) || abandonedForms.has(form)) return;
+        abandonedForms.add(form);
+        const hadInput = dirtyForms.has(form);
+        const formId = getFormIdentifier(form);
+        pushDataLayer({
+          event: 'form_abandon',
+          form_id: formId,
+          had_input: hadInput,
+          page_path: window.location.pathname,
+        });
+        trackClarityEvent(hadInput ? 'form_abandon_with_input' : 'form_abandon_no_input');
+      });
+    };
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') reportAbandonment();
+    });
+    window.addEventListener('pagehide', reportAbandonment);
   }
 </script>
 

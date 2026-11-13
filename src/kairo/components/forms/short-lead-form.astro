@@ -1,6 +1,5 @@
 ---
 import Icon from '@/components/shared/icons/icon.astro';
-import { site } from '@/data/site';
 
 export interface Props {
   title?: string;
@@ -33,8 +32,9 @@ const inputClass =
 
 <div
   id={id}
+  data-lead-form-card
   class:list={[
-    'relative rounded-3xl border border-line-strong bg-ink-2/90 p-6 sm:p-10 shadow-[0_20px_60px_-20px_rgb(0_0_0/0.8)]',
+    'scroll-mt-24 relative rounded-3xl border border-line-strong bg-ink-2/90 p-6 sm:p-10 shadow-[0_20px_60px_-20px_rgb(0_0_0/0.8)] transition-shadow duration-300',
     className,
   ]}
 >
@@ -165,9 +165,8 @@ const inputClass =
         </a>
       </div>
       <a
-        href={site.cta.primary.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/booking"
+        data-cta="book-scoping-call"
         class="inline-flex items-center gap-1 font-semibold text-bone hover:text-signal transition-colors underline underline-offset-4"
       >
         <span>Book calendar session directly</span>
