@@ -27,8 +27,12 @@ const customerIoWriteKey = import.meta.env.PUBLIC_CUSTOMER_IO_WRITE_KEY || impor
 
     const isElectron =
       typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
+    const isAutomated =
+      typeof navigator !== 'undefined' &&
+      (navigator.webdriver === true || /headless|bot|crawler|spider|lighthouse|pagespeed/i.test(navigator.userAgent));
 
-    window.__zfIsProdHost = !isElectron && !isInternalQA && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
+    window.__zfIsProdHost =
+      !isElectron && !isAutomated && !isInternalQA && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
     if (gaId && window.__zfIsProdHost) {
       window.dataLayer = window.dataLayer || [];
       function gtag() {
