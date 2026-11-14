@@ -52,15 +52,16 @@ export function bindLeadForms() {
         });
         const result = await response.json();
         if (!response.ok) throw new Error(result.message || 'We could not save your request. Please try again.');
-        // Honeypot responses have no receipt. Never count them as accepted leads.
-        if (result.submission_id && !result.duplicate) {
+        const win = window as unknown as {
+          __zfIsProdHost?: boolean;
+          dataLayer?: Record<string, unknown>[];
+          gtag?: (...args: unknown[]) => void;
+          _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
+          analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
+        };
+        // Honeypot/QA/test responses must never count as production leads.
+        if (result.submission_id && !result.duplicate && result.is_test !== true && win.__zfIsProdHost === true) {
           try {
-            const win = window as unknown as {
-              dataLayer?: Record<string, unknown>[];
-              gtag?: (...args: unknown[]) => void;
-              _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
-              analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
-            };
             const properties = {
               form_type: payload.form_type,
               page_path: payload.page,
