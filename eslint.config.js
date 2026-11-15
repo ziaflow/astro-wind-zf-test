@@ -65,6 +65,7 @@ export default [
       '.sanity',
       'studio-gemini-blog/dist',
       'studio-gemini-blog/.sanity',
+      'sanity-app-gemini-blog/**',
       'astro-wind-zf-test/**',
       'outputs/**',
     ],

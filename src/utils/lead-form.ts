@@ -57,7 +57,10 @@ export function bindLeadForms() {
           dataLayer?: Record<string, unknown>[];
           gtag?: (...args: unknown[]) => void;
           _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
-          analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
+          analytics?: {
+            identify?: (idOrProps: unknown, traits?: unknown) => void;
+            track?: (event: string, props?: unknown) => void;
+          };
         };
         // Honeypot/QA/test responses must never count as production leads.
         if (result.submission_id && !result.duplicate && result.is_test !== true && win.__zfIsProdHost === true) {
@@ -74,7 +77,12 @@ export function bindLeadForms() {
               win.dataLayer.push({ event: 'generate_lead', ...properties });
             }
             if (win._cio && typeof win._cio.identify === 'function' && payload.email) {
-              win._cio.identify({ id: payload.email, email: payload.email, name: payload.name, company: payload.company });
+              win._cio.identify({
+                id: payload.email,
+                email: payload.email,
+                name: payload.name,
+                company: payload.company,
+              });
             }
             if (win._cio && typeof win._cio.track === 'function') {
               win._cio.track('form_submission', properties);

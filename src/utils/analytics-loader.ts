@@ -12,8 +12,7 @@ let hasLoaded = false;
 
 const isAnalyticsAllowed = (): boolean => {
   if (typeof window === 'undefined') return false;
-  const isElectron =
-    typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
+  const isElectron = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().includes('electron');
   if (isElectron) return false;
   if (!/^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) return false;
   if ((window as unknown as { __zfIsProdHost?: boolean }).__zfIsProdHost === false) return false;

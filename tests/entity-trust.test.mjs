@@ -7,16 +7,8 @@ const ENTITY_NAME = 'Custom Web Development & SEO';
 
 test('Homepage title explicitly includes brand and Phoenix, AZ location', () => {
   const indexSource = readFileSync(resolve('src/pages/index.astro'), 'utf-8');
-  assert.match(
-    indexSource,
-    /title="[^"]*ZiaFlow[^"]*"/,
-    'Homepage Layout title must include "ZiaFlow"'
-  );
-  assert.match(
-    indexSource,
-    /title="[^"]*Phoenix, AZ[^"]*"/,
-    'Homepage Layout title must include "Phoenix, AZ"'
-  );
+  assert.match(indexSource, /title="[^"]*ZiaFlow[^"]*"/, 'Homepage Layout title must include "ZiaFlow"');
+  assert.match(indexSource, /title="[^"]*Phoenix, AZ[^"]*"/, 'Homepage Layout title must include "Phoenix, AZ"');
 });
 
 test('Homepage H1 explicitly includes the entity name', () => {
@@ -103,11 +95,7 @@ test('Homepage includes FAQPage JSON-LD schema', () => {
   const homeDataSource = readFileSync(resolve('src/kairo/data/home.ts'), 'utf-8');
 
   // Verify FAQPage JSON-LD schema definition and script injection
-  assert.match(
-    indexSource,
-    /'@type':\s*'FAQPage'/,
-    'Homepage must define FAQPage JSON-LD schema'
-  );
+  assert.match(indexSource, /'@type':\s*'FAQPage'/, 'Homepage must define FAQPage JSON-LD schema');
   assert.match(
     indexSource,
     /<script[^>]*type="application\/ld\+json"[^>]*set:html=\{JSON\.stringify\(homepageFaqSchema\)\}/,

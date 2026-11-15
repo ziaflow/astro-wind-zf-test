@@ -689,7 +689,12 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
               }
               const win = window;
               if (win._cio && typeof win._cio.identify === 'function' && payload.email) {
-                win._cio.identify({ id: payload.email, email: payload.email, name: payload.name, phone: payload.phone });
+                win._cio.identify({
+                  id: payload.email,
+                  email: payload.email,
+                  name: payload.name,
+                  phone: payload.phone,
+                });
               }
               if (win._cio && typeof win._cio.track === 'function') {
                 win._cio.track('form_submission', eventProps);

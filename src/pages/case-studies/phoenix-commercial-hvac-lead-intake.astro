@@ -103,7 +103,9 @@ const breadcrumbSchema = {
     <!-- Header -->
     <header class="space-y-4 mb-10">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase bg-signal/10 text-signal border border-signal/20">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase bg-signal/10 text-signal border border-signal/20"
+        >
           Case Study · Commercial HVAC
         </span>
         <span class="text-xs font-mono text-mute">Phoenix, AZ · Desert Peak Mechanical</span>
@@ -112,7 +114,8 @@ const breadcrumbSchema = {
         Commercial HVAC Automated Lead Intake & Instant Dispatch
       </h1>
       <p class="text-lg md:text-xl text-mute leading-relaxed max-w-3xl">
-        How Desert Peak Mechanical eliminated dropped inquiries, recovered $180,000 in pipeline, and slashed response times from 3.8 hours to 18 minutes with ZiaFlow automation.
+        How Desert Peak Mechanical eliminated dropped inquiries, recovered $180,000 in pipeline, and slashed response
+        times from 3.8 hours to 18 minutes with ZiaFlow automation.
       </p>
     </header>
 
@@ -150,59 +153,82 @@ const breadcrumbSchema = {
     <!-- Case Study Body -->
     <div class="prose prose-invert prose-lg max-w-none space-y-8 text-mute">
       <section>
-        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
-          The Operational Bottleneck
-        </h2>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">The Operational Bottleneck</h2>
         <p class="leading-relaxed">
-          Commercial HVAC emergencies cannot wait 12 hours for a callback. Desert Peak Mechanical was receiving 30+ high-value service and installation inquiries per week across the Phoenix metropolitan area, but qualified requests were stalled in a generic email inbox:
+          Commercial HVAC emergencies cannot wait 12 hours for a callback. Desert Peak Mechanical was receiving 30+
+          high-value service and installation inquiries per week across the Phoenix metropolitan area, but qualified
+          requests were stalled in a generic email inbox:
         </p>
         <ul class="list-disc pl-6 space-y-2 mt-4 text-mute">
-          <li><strong>Unqualified Submissions:</strong> Inbound requests lacked equipment tonnage, commercial facility type, and urgency level.</li>
-          <li><strong>Manual Triage Delays:</strong> Office staff spent 45 minutes manually reviewing each message before assigning an estimator.</li>
-          <li><strong>Lost Revenue to Fast Competitors:</strong> Commercial property managers booking with whichever contractor responded first.</li>
+          <li>
+            <strong>Unqualified Submissions:</strong> Inbound requests lacked equipment tonnage, commercial facility type,
+            and urgency level.
+          </li>
+          <li>
+            <strong>Manual Triage Delays:</strong> Office staff spent 45 minutes manually reviewing each message before assigning
+            an estimator.
+          </li>
+          <li>
+            <strong>Lost Revenue to Fast Competitors:</strong> Commercial property managers booking with whichever contractor
+            responded first.
+          </li>
         </ul>
       </section>
 
       <section>
-        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
-          The Engineered Solution
-        </h2>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">The Engineered Solution</h2>
         <p class="leading-relaxed">
           ZiaFlow engineered an end-to-end diagnostic intake pipeline built on modern serverless edge infrastructure:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
             <h3 class="font-display text-base font-bold text-bone">1. Structured Inbound Diagnostics</h3>
-            <p class="text-sm text-mute">Custom progressive form capturing commercial tonnage, facility square footage, and emergency severity without user drop-off.</p>
+            <p class="text-sm text-mute">
+              Custom progressive form capturing commercial tonnage, facility square footage, and emergency severity
+              without user drop-off.
+            </p>
           </div>
           <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
             <h3 class="font-display text-base font-bold text-bone">2. Edge Validation & Routing</h3>
-            <p class="text-sm text-mute">Serverless edge functions scrubbing spam, persisting persistent Supabase database receipts, and assigning dispatch priority.</p>
+            <p class="text-sm text-mute">
+              Serverless edge functions scrubbing spam, persisting persistent Supabase database receipts, and assigning
+              dispatch priority.
+            </p>
           </div>
           <div class="rounded-xl border border-line bg-ink-2/40 p-5 space-y-2">
             <h3 class="font-display text-base font-bold text-bone">3. CRM & SMS Dispatch Sync</h3>
-            <p class="text-sm text-mute">On-call technicians receive immediate SMS alerts with customer address, equipment details, and 1-click callback links.</p>
+            <p class="text-sm text-mute">
+              On-call technicians receive immediate SMS alerts with customer address, equipment details, and 1-click
+              callback links.
+            </p>
           </div>
         </div>
       </section>
 
       <section>
-        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">
-          Measured Outcomes
-        </h2>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-bone mb-4">Measured Outcomes</h2>
         <ul class="list-disc pl-6 space-y-3 mt-4 text-mute">
-          <li><strong>42% faster lead-to-quote turnaround:</strong> Initial diagnostic response dropped from 3.8 hours down to 18 minutes.</li>
-          <li><strong>Zero dropped leads:</strong> Complete audit trail from web submission to field dispatch and CRM invoice status.</li>
-          <li><strong>$180,000 in recovered pipeline:</strong> Closed commercial retrofit and service agreements within the initial 60-day sprint.</li>
+          <li>
+            <strong>42% faster lead-to-quote turnaround:</strong> Initial diagnostic response dropped from 3.8 hours down
+            to 18 minutes.
+          </li>
+          <li>
+            <strong>Zero dropped leads:</strong> Complete audit trail from web submission to field dispatch and CRM invoice
+            status.
+          </li>
+          <li>
+            <strong>$180,000 in recovered pipeline:</strong> Closed commercial retrofit and service agreements within the
+            initial 60-day sprint.
+          </li>
         </ul>
       </section>
 
       <div class="rounded-2xl border border-signal/30 bg-signal/5 p-8 mt-12 space-y-4">
-        <h3 class="font-display text-xl font-bold text-bone">
-          Ready to automate your service business lead capture?
-        </h3>
+        <h3 class="font-display text-xl font-bold text-bone">Ready to automate your service business lead capture?</h3>
         <p class="text-mute text-base">
-          See how ZiaFlow's <a href="/services/automation" class="text-signal underline font-medium">marketing automation phoenix</a> sprint can eliminate lost inquiries and follow up with qualified leads in under 60 seconds.
+          See how ZiaFlow's <a href="/services/automation" class="text-signal underline font-medium"
+            >marketing automation phoenix</a
+          > sprint can eliminate lost inquiries and follow up with qualified leads in under 60 seconds.
         </p>
         <div class="pt-2">
           <a
@@ -220,4 +246,3 @@ const breadcrumbSchema = {
   <SalesForm />
   <Cta />
 </Layout>
-

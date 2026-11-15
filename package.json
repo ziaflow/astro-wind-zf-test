@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "sanity": "cd studio-gemini-blog && npm run dev",
+    "sanity:app": "cd sanity-app-gemini-blog && npm run dev",
     "build": "astro build",
     "postbuild": "npm run check:links && npm run indexnow",
     "preview": "astro preview",

@@ -455,7 +455,10 @@ const tool = getTool(slug)!;
           dataLayer?: Record<string, unknown>[];
           gtag?: (...args: unknown[]) => void;
           _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
-          analytics?: { identify?: (idOrProps: unknown, traits?: unknown) => void; track?: (event: string, props?: unknown) => void };
+          analytics?: {
+            identify?: (idOrProps: unknown, traits?: unknown) => void;
+            track?: (event: string, props?: unknown) => void;
+          };
         };
         const eventProps = {
           form_name: `growth_tool_${slug}`,

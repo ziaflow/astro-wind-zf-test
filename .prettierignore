@@ -12,6 +12,9 @@ astro-wind-zf-test
 outputs
 studio-gemini-blog
 studio-gemini-blog/.sanity
+sanity-app-gemini-blog
+sanity-app-gemini-blog/**
+site-copy-export.md
 src/components/common/Analytics.astro
 src/kairo
 src/data/post-generated

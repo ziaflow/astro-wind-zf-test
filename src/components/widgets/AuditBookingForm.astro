@@ -267,7 +267,12 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
               });
             }
             if (window._cio && typeof window._cio.identify === 'function' && payload.email) {
-              window._cio.identify({ id: payload.email, email: payload.email, name: payload.name, company: payload.company });
+              window._cio.identify({
+                id: payload.email,
+                email: payload.email,
+                name: payload.name,
+                company: payload.company,
+              });
             }
             if (window._cio && typeof window._cio.track === 'function') {
               window._cio.track('form_submission', eventProps);
