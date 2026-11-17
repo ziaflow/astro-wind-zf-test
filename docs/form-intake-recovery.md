@@ -1,6 +1,8 @@
 # Website form intake and delivery recovery
 
-All contact, audit, booking-audit and quick inquiry forms post to `/api/contact`.
+Contact, audit, booking-audit and quick inquiry handlers can post to `/api/contact`.
+The generic form can instead use Web3Forms, depending on configuration; that path
+does not dispatch the server-side `form_submit` event described below.
 The shared browser handler locks submission while a request is pending, keeps its
 idempotency key after a failed response, and records `generate_lead` only after a
 new receipt is returned. Analytics events contain receipt and form identifiers,
@@ -24,11 +26,11 @@ on the receipt. This matches the existing **Website Lead – Welcome & Sales
 Pipeline** event trigger. The separate intake webhook remains responsible for
 immediate confirmation and internal notification.
 
-The nurture automation is still draft. Activation is a separate release step:
-verify actual source ingestion and profile association, suppress its redundant
-welcome/internal-alert steps if the intake webhook remains enabled, and test the
-booking exit and reply/disqualification behavior before starting it. This change
-does not activate it or certify a seven-day journey.
+The **Website Lead – Welcome & Sales Pipeline** campaign was observed running in
+Customer.io. Verify actual source ingestion and profile association, review its
+welcome/internal-alert steps against the intake webhook for duplicate messaging,
+and test booking exit and reply/disqualification behavior. A running campaign
+does not establish that a specific inquiry was received or that email was delivered.
 
 ## Dispatch journal and retry policy
 

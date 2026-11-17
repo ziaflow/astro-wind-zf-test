@@ -344,7 +344,7 @@ export const POST: APIRoute = async ({ request }) => {
         } else delivery.webhook = 'not_configured';
 
         // The existing server-intake Pipelines source identifies the person before the canonical event.
-        // The welcome/nurture campaign remains draft until separately reviewed and activated.
+        // Campaign state and downstream delivery must be verified in Customer.io.
         const writeKey = import.meta.env.CIO_CDP_WRITE_KEY;
         if (writeKey && delivery.webhook !== 'in_progress') {
           const endpoint =
