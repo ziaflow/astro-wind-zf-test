@@ -63,7 +63,7 @@ export function bindLeadForms() {
           };
         };
         // Honeypot/QA/test responses must never count as production leads.
-        if (result.submission_id && !result.duplicate && result.is_test !== true && win.__zfIsProdHost === true) {
+        if (result && typeof result.submission_id === 'string' && result.submission_id.trim().length > 0 && result.duplicate === false && result.is_test === false && result.analytics_eligible === true && win.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) {
           try {
             const properties = {
               form_type: payload.form_type,

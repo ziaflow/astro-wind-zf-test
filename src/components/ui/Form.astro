@@ -191,13 +191,20 @@ if (!useNodemailer && !resolvedAccessKey) {
 
             // Customer.io Lead Identification & Trigger Event
             try {
+              const eligible = data && typeof data.submission_id === 'string' && data.submission_id.trim().length > 0 && data.duplicate === false && data.is_test === false && data.analytics_eligible === true && window.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
+              const unverifiedWeb3 = actionUrl === 'https://api.web3forms.com/submit' && data?.success === true && window.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname);
+              if (!eligible && !unverifiedWeb3) throw new Error('Analytics ineligible');
               const parsedEntries = Object.fromEntries(formData.entries());
               const userEmail = parsedEntries.email;
               const userName = parsedEntries.name || '';
               const [firstName, ...restName] = String(userName).split(' ');
               const lastName = restName.join(' ');
 
-              if (userEmail) {
+              if (unverifiedWeb3 && !eligible) {
+                const props = { page_path: window.location.pathname };
+                if (typeof window.analytics?.track === 'function') window.analytics.track('contact_form_submitted_unverified', props);
+                else if (typeof window._cio?.track === 'function') window._cio.track('contact_form_submitted_unverified', props);
+              } else if (userEmail) {
                 const cioTraits = {
                   id: userEmail,
                   email: userEmail,
@@ -208,21 +215,19 @@ if (!useNodemailer && !resolvedAccessKey) {
                   created_at: Math.floor(Date.now() / 1000),
                 };
                 const cioProps = {
-                  message: parsedEntries.message || '',
-                  page_url: window.location.href,
+                  page_path: window.location.pathname,
                   service_interest: parsedEntries.service_interest || '',
-                  phone: parsedEntries.phone || '',
                 };
                 if (window.analytics && typeof window.analytics.identify === 'function') {
                   window.analytics.identify(userEmail, cioTraits);
                   window.analytics.track('contact_form_submitted', cioProps);
                 } else if (window._cio && typeof window._cio.identify === 'function') {
                   window._cio.identify(cioTraits);
-                  window._cio.track('contact_form_submitted', cioProps);
+                  window._cio.track(eligible ? 'contact_form_submitted' : 'contact_form_submitted_unverified', cioProps);
                 }
               }
             } catch (cioErr) {
-              console.warn('Customer.io client dispatch note:', cioErr);
+              // Analytics must not affect the success response.
             }
 
             delete form.dataset.idempotencyKey;

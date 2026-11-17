@@ -141,12 +141,13 @@ export default function init() {
 
         const body = (await res.json().catch(() => ({}))) as {
           message?: string;
-          duplicate?: boolean;
+          duplicate?: boolean; is_test?: boolean; analytics_eligible?: boolean;
           submission_id?: string;
         };
 
         if (res.ok) {
-          if (!body.duplicate) {
+          if (body && typeof body.submission_id === 'string' && body.submission_id.trim().length > 0 && body.duplicate === false && body.is_test === false && body.analytics_eligible === true && (window as unknown as { __zfIsProdHost?: boolean }).__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) {
+            try {
             const win = window as unknown as {
               dataLayer?: Record<string, unknown>[];
               gtag?: (...args: unknown[]) => void;
@@ -180,6 +181,7 @@ export default function init() {
             } else if (win.analytics && typeof win.analytics.track === 'function') {
               win.analytics.track('form_submission', eventProps);
             }
+            } catch { /* Tracking must not affect a saved submission. */ }
           }
 
           activeIdempotencyKey = newIdempotencyKey();

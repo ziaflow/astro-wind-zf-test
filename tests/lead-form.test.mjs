@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import test from 'node:test';
-import ts from 'typescript';
+import { stripTypeScriptTypes } from 'node:module';
 
 function fixture(fetchImpl, trackingAllowed = true) {
   let submit,
@@ -26,12 +26,10 @@ function fixture(fetchImpl, trackingAllowed = true) {
   };
   const window = {
     __zfIsProdHost: trackingAllowed,
-    location: { pathname: '/audit', origin: 'https://ziaflow.com', search: '?utm_source=qa&utm_campaign=form-test' },
+    location: { pathname: '/audit', origin: 'https://ziaflow.com', hostname: 'ziaflow.com', search: '?utm_source=qa&utm_campaign=form-test' },
   };
   const module = { exports: {} };
-  const compiled = ts.transpileModule(readFileSync(new URL('../src/utils/lead-form.ts', import.meta.url), 'utf8'), {
-    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
-  }).outputText;
+  const compiled = stripTypeScriptTypes(readFileSync(new URL('../src/utils/lead-form.ts', import.meta.url), 'utf8')).replace('export function bindLeadForms()', 'module.exports.bindLeadForms = function bindLeadForms()');
   runInNewContext(compiled, {
     module,
     exports: module.exports,
@@ -62,7 +60,7 @@ test('a slow response locks the button and concurrent clicks issue one request',
   assert.equal(app.button.disabled, true);
   await app.submit();
   assert.equal(calls, 1);
-  release(Response.json({ submission_id: 'receipt-1' }));
+  release(Response.json({ submission_id: 'receipt-1', duplicate: false, is_test: false, analytics_eligible: true }));
   await first;
   assert.equal(app.button.disabled, false);
   assert.equal(app.window.dataLayer.length, 1);
@@ -95,7 +93,7 @@ test('honeypot acknowledgments do not count as conversions', async () => {
   assert.equal(app.window.dataLayer, undefined);
 });
 test('accepted-lead analytics exclude email and message content', async () => {
-  const app = fixture(async () => Response.json({ submission_id: 'receipt-1', duplicate: false }));
+  const app = fixture(async () => Response.json({ submission_id: 'receipt-1', duplicate: false, is_test: false, analytics_eligible: true }));
   await app.submit();
   const event = app.window.dataLayer[0];
   assert.equal(event.event, 'generate_lead');
@@ -107,7 +105,7 @@ test('short-lead form preserves form_type short_lead, company, and service_inter
   let capturedBody;
   const app = fixture(async (_url, options) => {
     capturedBody = JSON.parse(options.body);
-    return Response.json({ submission_id: 'short-1', duplicate: false });
+    return Response.json({ submission_id: 'short-1', duplicate: false, is_test: false, analytics_eligible: true });
   });
   app.fields.form_type = 'short_lead';
   app.fields.company = 'Phoenix AC Pro';
@@ -144,5 +142,20 @@ test('binding a form does not emit a lead event on page load', () => {
   const app = fixture(async () => {
     throw new Error('No submission expected');
   });
+  assert.equal(app.window.dataLayer, undefined);
+});
+
+test('incomplete or malformed confirmations fail closed', async () => {
+  for (const result of [null, {}, { submission_id: 'id', duplicate: false }, { submission_id: 'id', duplicate: false, is_test: false }, { submission_id: 'id', duplicate: true, is_test: false, analytics_eligible: true }, { submission_id: 42, duplicate: false, is_test: false, analytics_eligible: true }, { submission_id: ' ', duplicate: false, is_test: false, analytics_eligible: true }]) {
+    const app = fixture(async () => Response.json(result));
+    await app.submit();
+    assert.equal(app.window.dataLayer, undefined);
+    assert.match(app.status.textContent, /received/);
+  }
+});
+test('a nonproduction hostname cannot emit even if the host flag is set', async () => {
+  const app = fixture(async () => Response.json({ submission_id: 'id', duplicate: false, is_test: false, analytics_eligible: true }));
+  app.window.location.hostname = 'preview.example.com';
+  await app.submit();
   assert.equal(app.window.dataLayer, undefined);
 });

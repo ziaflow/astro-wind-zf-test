@@ -451,41 +451,44 @@ const tool = getTool(slug)!;
         });
         const data = await response.json();
         if (!response.ok || !data.ok) throw new Error();
-        const win = window as unknown as {
-          dataLayer?: Record<string, unknown>[];
-          gtag?: (...args: unknown[]) => void;
-          _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
-          analytics?: {
-            identify?: (idOrProps: unknown, traits?: unknown) => void;
-            track?: (event: string, props?: unknown) => void;
-          };
-        };
-        const eventProps = {
-          form_name: `growth_tool_${slug}`,
-          service_interest: tool.service,
-          email: fields.email,
-          page_path: window.location.pathname,
-        };
-        if (win.dataLayer) {
-          win.dataLayer.push({
-            event: 'form_submission',
-            ...eventProps,
-          });
-        }
-        if (typeof win.gtag === 'function') {
-          win.gtag('event', 'generate_lead', {
-            event_category: 'growth_tool',
-            event_label: slug,
-            value: 1,
-          });
-        }
-        if (win._cio && typeof win._cio.identify === 'function' && fields.email) {
-          win._cio.identify({ id: fields.email, email: fields.email, name: fields.name, company: fields.company });
-        }
-        if (win._cio && typeof win._cio.track === 'function') {
-          win._cio.track('form_submission', eventProps);
-        } else if (win.analytics && typeof win.analytics.track === 'function') {
-          win.analytics.track('form_submission', eventProps);
+        if (data.duplicate === false && data.is_test === false && data.analytics_eligible === true && window.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) {
+        try {
+            const win = window as unknown as {
+              dataLayer?: Record<string, unknown>[];
+              gtag?: (...args: unknown[]) => void;
+              _cio?: { identify?: (props: unknown) => void; track?: (event: string, props: unknown) => void };
+              analytics?: {
+                identify?: (idOrProps: unknown, traits?: unknown) => void;
+                track?: (event: string, props?: unknown) => void;
+              };
+            };
+            const eventProps = {
+              form_name: `growth_tool_${slug}`,
+              service_interest: tool.service,
+              page_path: window.location.pathname,
+            };
+            if (win.dataLayer) {
+              win.dataLayer.push({
+                event: 'form_submission',
+                ...eventProps,
+              });
+            }
+            if (typeof win.gtag === 'function') {
+              win.gtag('event', 'generate_lead', {
+                event_category: 'growth_tool',
+                event_label: slug,
+                value: 1,
+              });
+            }
+            if (win._cio && typeof win._cio.identify === 'function' && fields.email) {
+              win._cio.identify({ id: fields.email, email: fields.email, name: fields.name, company: fields.company });
+            }
+            if (win._cio && typeof win._cio.track === 'function') {
+              win._cio.track('form_submission', eventProps);
+            } else if (win.analytics && typeof win.analytics.track === 'function') {
+              win.analytics.track('form_submission', eventProps);
+            }
+        } catch { /* Analytics must not affect a saved request. */ }
         }
         output.textContent =
           data.welcome === 'accepted'

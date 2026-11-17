@@ -134,6 +134,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         };
     }
     if (!supabase) return json({ ok: false, error: 'intake_unavailable' }, 503);
+    const isTest = process.env.VERCEL_ENV !== 'production' || name.startsWith('ZIAFLOW QA');
     const consentText = 'Also send me occasional ZiaFlow advice and service updates. I can unsubscribe.';
     const { error } = await supabase.from('contact_submissions').insert({
       id: body.id,
@@ -182,7 +183,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         content: 'Review requested: ' + tool.title,
         page_path: pagePath,
         form_id: formId,
-        metadata: { submissionId: body.id, tool: tool.slug, is_test: name.startsWith('ZIAFLOW QA') },
+        metadata: { submissionId: body.id, tool: tool.slug, is_test: isTest },
       },
       { onConflict: 'id' }
     );
@@ -203,7 +204,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       customerio_dispatch: welcome.state,
       welcome,
       communication_logged: !logError,
-      is_test: name.startsWith('ZIAFLOW QA'),
+      is_test: isTest,
     };
     const { error: updateError } = await supabase.from('contact_submissions').update({ metadata }).eq('id', body.id);
     if (updateError) {
@@ -228,7 +229,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         provider_state: welcome.state,
         delivery_id: welcome.deliveryId || null,
         reason: welcome.reason || null,
-        is_test: name.startsWith('ZIAFLOW QA'),
+        is_test: isTest,
       },
     });
     if (receiptLogError) {
@@ -245,7 +246,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       tool: tool.slug,
       welcomeState: welcome.state,
     });
-    return json({ ok: true, status: 'pending_internal_review', welcome: welcome.state });
+    return json({ ok: true, status: 'pending_internal_review', duplicate: false, is_test: isTest, analytics_eligible: !isTest, welcome: welcome.state });
   } catch {
     return json({ ok: false, error: 'invalid_request' }, 400);
   }

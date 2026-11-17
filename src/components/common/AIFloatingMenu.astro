@@ -668,7 +668,8 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
           });
           const body = await res.json().catch(() => ({}));
           if (res.ok) {
-            if (!body.duplicate) {
+            if (body && typeof body.submission_id === 'string' && body.submission_id.trim().length > 0 && body.duplicate === false && body.is_test === false && body.analytics_eligible === true && window.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) {
+              try {
               const eventProps = {
                 form_name: 'ai_quick_triage',
                 service_interest: payload.service_interest,
@@ -701,6 +702,7 @@ const rootId = isInline ? undefined : 'aiSummaryFloat';
               } else if (win.analytics && typeof win.analytics.track === 'function') {
                 win.analytics.track('form_submission', eventProps);
               }
+              } catch { /* Tracking must not affect a saved submission. */ }
             }
             activeKey = makeKey();
             triageStatus.style.color = '#34d399';

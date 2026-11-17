@@ -246,10 +246,10 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
         const body = await response.json().catch(() => ({}));
 
         if (response.ok) {
-          if (!body.duplicate) {
+          if (body && typeof body.submission_id === 'string' && body.submission_id.trim().length > 0 && body.duplicate === false && body.is_test === false && body.analytics_eligible === true && window.__zfIsProdHost === true && /^(www\.)?ziaflow\.com$/i.test(window.location.hostname)) {
+            try {
             const eventProps = {
               form_name: 'audit_booking',
-              email: payload.email,
               company: payload.company,
               page_path: window.location.pathname,
             };
@@ -279,6 +279,7 @@ const { id = 'audit-form', class: className = '' } = Astro.props;
             } else if (window.analytics && typeof window.analytics.track === 'function') {
               window.analytics.track('form_submission', eventProps);
             }
+            } catch { /* Tracking must not affect a saved submission. */ }
           }
           activeAuditKey = makeAuditKey();
           form.classList.add('hidden');

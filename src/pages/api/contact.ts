@@ -169,6 +169,7 @@ export const POST: APIRoute = async ({ request }) => {
     // 1. Receipt (restricted table; holds the raw payload). A unique dedup_key makes retries idempotent.
     let submissionId: string;
     let alreadyPersisted = false;
+    let duplicateReceipt = false;
 
     const { data: inserted, error: receiptError } = await supabaseAdmin
       .from('lead_submissions')
@@ -185,6 +186,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (inserted) {
       submissionId = inserted.id;
     } else if (receiptError?.code === '23505') {
+      duplicateReceipt = true;
       // Retry or simultaneous duplicate: reuse the existing receipt instead of creating another.
       const { data: existing, error: lookupError } = await supabaseAdmin
         .from('lead_submissions')
@@ -444,7 +446,9 @@ export const POST: APIRoute = async ({ request }) => {
       {
         message: 'Thanks! We received your message.',
         submission_id: submissionId,
-        duplicate: alreadyPersisted,
+        duplicate: duplicateReceipt,
+        is_test: receiptIsTest,
+        analytics_eligible: !duplicateReceipt && receiptIsTest === false,
         delivery,
       },
       200
