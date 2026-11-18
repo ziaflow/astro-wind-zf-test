@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@sanity/blueprints": "0.34.1"
+  },
+  "name": "ziaflow-sanity-blueprints",
+  "type": "module",
+  "private": true
+}
