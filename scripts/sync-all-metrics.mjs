@@ -411,13 +411,12 @@ async function syncGoogle() {
     process.env.GA4_PROPERTY_ID;
 
   if (!hasGoogleCreds) {
-    console.log('ℹ️ Google direct OAuth credentials not present in local environment.');
-    console.log('   (Scheduled daily import runs via GitHub Actions: .github/workflows/google-metrics-sync.yml)');
+    console.warn('Google metrics sync skipped: missing credentials.');
     results.google = {
-      status: 'active_in_ci',
-      details: 'Runs daily via .github/workflows/google-metrics-sync.yml with GitHub Secrets',
+      status: 'skipped',
+      details: 'Missing Google credentials',
     };
-    return;
+    return results.google;
   }
 
   try {
@@ -619,6 +618,7 @@ async function main() {
   console.log('📊 Daily Sync Results Summary:');
   console.log(JSON.stringify(results, null, 2));
   console.log('========================================================\n');
+  if (results.google.status !== 'success') process.exitCode = 1;
 }
 
 export { parseBingDate, parseUrlPath, syncClarity, syncBingWebmaster, syncGoogle };
