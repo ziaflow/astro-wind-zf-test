@@ -56,6 +56,7 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
       for (let time = Date.parse(start); time <= Date.parse(end); time += 86400000) {
         date = new Date(time).toISOString().slice(0, 10);
         const rows = [];
+        const sourcePages = [];
         for (let offset = 0; ; offset += 25000) {
           const data =
             source === 'ga4'
@@ -115,6 +116,7 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
               });
             } else {
               const page = new URL(row.keys[0]);
+              sourcePages.push(page.href);
               if (!['ziaflow.com', 'www.ziaflow.com'].includes(page.hostname))
                 throw new Error('GSC report: unexpected hostname');
               // Keep URL query strings: stripping them would merge distinct GSC keys.
@@ -133,8 +135,34 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
           if (!batch.length) throw new Error('Report pagination stalled');
         }
         const keys = rows.map((row) => JSON.stringify([row.page_path, row.query]));
-        if (new Set(keys).size !== keys.length)
+        if (new Set(keys).size !== keys.length) {
+          if (source === 'gsc') {
+            const seen = new Map();
+            for (let i = 0; i < keys.length; i++) {
+              if (seen.has(keys[i])) {
+                const previous = new URL(seen.get(keys[i]));
+                const current = new URL(sourcePages[i]);
+                log(
+                  JSON.stringify({
+                    source,
+                    date,
+                    collision:
+                      previous.href === current.href
+                        ? 'same-url'
+                        : previous.host !== current.host
+                          ? 'different-host'
+                          : previous.protocol !== current.protocol
+                            ? 'different-protocol'
+                            : 'other-url-difference',
+                  })
+                );
+                break;
+              }
+              seen.set(keys[i], sourcePages[i]);
+            }
+          }
           throw new Error('Report contains colliding page keys; refusing lossy import');
+        }
         for (let offset = 0; offset < rows.length; offset += 500) {
           await request(
             `${base}/rest/v1/metrics_${source}_daily?on_conflict=${source === 'ga4' ? 'date,page_path' : 'date,page_path,query'}`,
