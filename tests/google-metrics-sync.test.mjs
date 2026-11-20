@@ -28,7 +28,7 @@ test('real provider rows map to existing unique keys and reruns use merge upsert
         rows: [{ keys: ['https://ziaflow.com/?q=a', 'query'], clicks: 1, impressions: 10, ctr: 0.1, position: 2 }],
       });
     writes.push({ url, options, body: JSON.parse(options.body) });
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 201 });
   };
   await run(env, fetcher, () => {});
   await run(env, fetcher, () => {});

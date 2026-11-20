@@ -10,7 +10,7 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
       signal: AbortSignal.timeout(60000),
     });
     if (!response.ok) throw new Error(`${stage}: HTTP ${response.status}`);
-    return response.status === 204 ? null : response.json();
+    return response.status === 204 || headers.Prefer?.includes('return=minimal') ? null : response.json();
   }
   const required = [
     'SUPABASE_SERVICE_ROLE_KEY',
