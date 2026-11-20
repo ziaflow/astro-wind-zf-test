@@ -1,0 +1,2577 @@
+{
+  "origin": "https://ziaflow.com",
+  "captured_at": "2026-10-24T01:05:41.932910+00:00",
+  "read_only": true,
+  "truncated": false,
+  "discovery_errors": [
+    {
+      "url": "https://ziaflow.com/sitemap.xml",
+      "status": 404
+    }
+  ],
+  "pages": [
+    {
+      "requested_url": "https://ziaflow.com/",
+      "final_url": "https://ziaflow.com/",
+      "status": 200,
+      "titles": [
+        "Phoenix Web Development & Digital Marketing Agency | ZiaFlow"
+      ],
+      "descriptions": [
+        "Custom websites, strategic SEO, PPC, and automation for Arizona businesses. Call (602) 834-4239 or schedule a free consultation with our Phoenix team."
+      ],
+      "canonicals": [
+        "https://ziaflow.com"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Engineering the Future |Custom Software & AI SolutionsThat Power Growth"
+      ],
+      "og_title": [
+        "ZiaFlow | Custom Software & AI Automation Agents",
+        "Phoenix Web Development & Digital Marketing Agency | ZiaFlow"
+      ],
+      "og_description": [
+        "Deploy autonomous AI agents, HIPAA-compliant voice assistants, and custom software. Call (602) 834-4239 to engineer your growth solutions with ZiaFlow.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona businesses. Call (602) 834-4239 or schedule a free consultation with our Phoenix team."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "GeoCoordinates",
+        "ImageObject",
+        "OpeningHoursSpecification",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [
+        "form"
+      ],
+      "main_text_sha256": "72ace5354d81932dca52df1487f7357d4ddff289e6d93859c501e2dfac8a7825",
+      "main_text_characters": 6606,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/about",
+      "final_url": "https://ziaflow.com/about",
+      "status": 200,
+      "titles": [
+        "About ZiaFlow - Digital Transformation Partners \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Learn about ZiaFlow, Phoenix digital transformation partner helping businesses scale with custom software, workflow automation, and SEO."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/about"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Empowering businesses throughDigital Transformation"
+      ],
+      "og_title": [
+        "About ZiaFlow - Digital Transformation Partners",
+        "About ZiaFlow - Digital Transformation Partners"
+      ],
+      "og_description": [
+        "Learn about ZiaFlow, Phoenix digital transformation partner helping businesses scale with custom software, workflow automation, and SEO.",
+        "Learn about ZiaFlow, Phoenix digital transformation partner helping businesses scale with custom software, workflow automation, and SEO."
+      ],
+      "schema_types": [
+        "Answer",
+        "ContactPoint",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "PostalAddress",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "902b40e4c80e70d880d3ea43b26db93239d394a2e5a9c2303e0c36e23f7aeff7",
+      "main_text_characters": 4353,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/blog",
+      "final_url": "https://ziaflow.com/blog",
+      "status": 200,
+      "titles": [
+        "Blog \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Insights, tutorials, and practical strategies on AI automation, technical SEO, and conversion optimization from the ZiaFlow engineering team."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/blog"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "The Blog"
+      ],
+      "og_title": [
+        "Blog",
+        "Blog"
+      ],
+      "og_description": [
+        "Insights, tutorials, and practical strategies on AI automation, technical SEO, and conversion optimization from the ZiaFlow engineering team.",
+        "Insights, tutorials, and practical strategies on AI automation, technical SEO, and conversion optimization from the ZiaFlow engineering team."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "21f4f8cbbb55fabf8a9c656355f41e17485b85bf3c361e4cb7cc49fd4e76c864",
+      "main_text_characters": 1735,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/booking",
+      "final_url": "https://ziaflow.com/booking",
+      "status": 200,
+      "titles": [
+        "Book a Strategy Session | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Schedule a free strategy session with ZiaFlow. Access the Microsoft Bookings calendar to reserve your spot in seconds."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/booking"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Schedule Your Call with ZiaFlow"
+      ],
+      "og_title": [
+        "Book a Strategy Session | ZiaFlow",
+        "Book a Strategy Session | ZiaFlow"
+      ],
+      "og_description": [
+        "Schedule a free strategy session with ZiaFlow. Access the Microsoft Bookings calendar to reserve your spot in seconds.",
+        "Schedule a free strategy session with ZiaFlow. Access the Microsoft Bookings calendar to reserve your spot in seconds."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "65bdc988069532e89cac940fbfda932c9ca852209706b01fe7dacfd7d66c592e",
+      "main_text_characters": 304,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/category/ai-automation",
+      "final_url": "https://ziaflow.com/category/ai-automation",
+      "status": 200,
+      "titles": [
+        "Category 'AI Automation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Browse in-depth articles, case studies, and actionable insights on AI Automation from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/category/ai-automation"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "AI Automation"
+      ],
+      "og_title": [
+        "Category 'AI Automation' ",
+        "Category 'AI Automation' "
+      ],
+      "og_description": [
+        "Browse in-depth articles, case studies, and actionable insights on AI Automation from ZiaFlow.",
+        "Browse in-depth articles, case studies, and actionable insights on AI Automation from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "aa78fcc37a6b69d390375d67bbe31a973ab81b6eeb6c6ec9e36cf5c63032619f",
+      "main_text_characters": 268,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/category/conversion-optimization",
+      "final_url": "https://ziaflow.com/category/conversion-optimization",
+      "status": 200,
+      "titles": [
+        "Category 'Conversion Optimization' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Browse in-depth articles, case studies, and actionable insights on Conversion Optimization from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/category/conversion-optimization"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Conversion Optimization"
+      ],
+      "og_title": [
+        "Category 'Conversion Optimization' ",
+        "Category 'Conversion Optimization' "
+      ],
+      "og_description": [
+        "Browse in-depth articles, case studies, and actionable insights on Conversion Optimization from ZiaFlow.",
+        "Browse in-depth articles, case studies, and actionable insights on Conversion Optimization from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "1375d925eb4426aff9221639c88e59820990239af67738b0c9cc0096fba9c0d4",
+      "main_text_characters": 342,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/category/marketing-automation",
+      "final_url": "https://ziaflow.com/category/marketing-automation",
+      "status": 200,
+      "titles": [
+        "Category 'Marketing Automation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Browse in-depth articles, case studies, and actionable insights on Marketing Automation from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/category/marketing-automation"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Marketing Automation"
+      ],
+      "og_title": [
+        "Category 'Marketing Automation' ",
+        "Category 'Marketing Automation' "
+      ],
+      "og_description": [
+        "Browse in-depth articles, case studies, and actionable insights on Marketing Automation from ZiaFlow.",
+        "Browse in-depth articles, case studies, and actionable insights on Marketing Automation from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "d1d0d4e80eb395f6bfb806b9c6b3873263cf0853d2fd3e7bc35ee92b6e067d6e",
+      "main_text_characters": 377,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/category/paid-search",
+      "final_url": "https://ziaflow.com/category/paid-search",
+      "status": 200,
+      "titles": [
+        "Category 'Paid Search' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Browse in-depth articles, case studies, and actionable insights on Paid Search from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/category/paid-search"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Paid Search"
+      ],
+      "og_title": [
+        "Category 'Paid Search' ",
+        "Category 'Paid Search' "
+      ],
+      "og_description": [
+        "Browse in-depth articles, case studies, and actionable insights on Paid Search from ZiaFlow.",
+        "Browse in-depth articles, case studies, and actionable insights on Paid Search from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "50a74667d3c3773d3ecd78a72380379db2406275981f5df37b4ab458bd84c2fd",
+      "main_text_characters": 300,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/category/web-development",
+      "final_url": "https://ziaflow.com/category/web-development",
+      "status": 200,
+      "titles": [
+        "Category 'Web Development' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Browse in-depth articles, case studies, and actionable insights on Web Development from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/category/web-development"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Web Development"
+      ],
+      "og_title": [
+        "Category 'Web Development' ",
+        "Category 'Web Development' "
+      ],
+      "og_description": [
+        "Browse in-depth articles, case studies, and actionable insights on Web Development from ZiaFlow.",
+        "Browse in-depth articles, case studies, and actionable insights on Web Development from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "5cd8e66168ed56c2f4ba39acdf628b0e5be897421ff8208fbe1cdb54247d3b6a",
+      "main_text_characters": 403,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/contact",
+      "final_url": "https://ziaflow.com/contact",
+      "status": 200,
+      "titles": [
+        "Contact Our Phoenix Digital Agency \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Get in touch with ZiaFlow. Call (602) 834-4239 or schedule your free consultation for custom development, automation, and digital marketing solutions."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/contact"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Contact the ZiaFlow Team"
+      ],
+      "og_title": [
+        "Contact Our Phoenix Digital Agency",
+        "Contact Our Phoenix Digital Agency"
+      ],
+      "og_description": [
+        "Get in touch with ZiaFlow. Call (602) 834-4239 or schedule your free consultation for custom development, automation, and digital marketing solutions.",
+        "Get in touch with ZiaFlow. Call (602) 834-4239 or schedule your free consultation for custom development, automation, and digital marketing solutions."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "cc833e9b03c0a92863de939d08726a5e942c514ed44c7d6c57f53e489adf999d",
+      "main_text_characters": 2209,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/form-test",
+      "final_url": "https://ziaflow.com/form-test",
+      "status": 200,
+      "titles": [
+        "Form Test \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/form-test"
+      ],
+      "robots": [
+        "noindex,nofollow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Form Test"
+      ],
+      "og_title": [
+        "Form Test",
+        "Form Test"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "5af6bca45007fc1fbeb4eef8b5baf820bd7d156cc0f9ec5273aaba63eee443db",
+      "main_text_characters": 43,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/google-local-service-ads-in-2025",
+      "final_url": "https://ziaflow.com/google-local-service-ads-in-2025",
+      "status": 200,
+      "titles": [
+        "Google Local Service Ads in 2025: Local Search Blueprint \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Learn how Google Local Service Ads dominate local search with pay-per-lead, verified trust badges, and AI optimization for unbeatable conversion and ROI."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/google-local-service-ads-in-2025"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Google Local Service Ads in 2025: Local Search Blueprint"
+      ],
+      "og_title": [
+        "Google Local Service Ads in 2025: Local Search Blueprint",
+        "Google Local Service Ads in 2025: Local Search Blueprint"
+      ],
+      "og_description": [
+        "Learn how Google Local Service Ads dominate local search with pay-per-lead, verified trust badges, and AI optimization for unbeatable conversion and ROI.",
+        "Learn how Google Local Service Ads dominate local search with pay-per-lead, verified trust badges, and AI optimization for unbeatable conversion and ROI."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "8f96af5cb65d4ac75ddf1e3d32b6ce73e6cc8e609e86cf50022cdba62ac8c5ed",
+      "main_text_characters": 6810,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings",
+      "final_url": "https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings",
+      "status": 200,
+      "titles": [
+        "Marketing Automation for Arizona Service Businesses \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Marketing automation delivers 544% ROI for Phoenix service businesses. Discover proven workflows that increase bookings 60%+ with automated response and reminders."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/marketing-automation-for-arizona-service-businesses-save-time-increase-bookings"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Marketing Automation for Arizona Service Businesses"
+      ],
+      "og_title": [
+        "Marketing Automation for Arizona Service Businesses",
+        "Marketing Automation for Arizona Service Businesses"
+      ],
+      "og_description": [
+        "Marketing automation delivers 544% ROI for Phoenix service businesses. Discover proven workflows that increase bookings 60%+ with automated response and reminders.",
+        "Marketing automation delivers 544% ROI for Phoenix service businesses. Discover proven workflows that increase bookings 60%+ with automated response and reminders."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "4efc78375894f5bf9e853273af0951a36940e67f43c57cbf110e40f218f10327",
+      "main_text_characters": 9008,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/platforms/callrail",
+      "final_url": "https://ziaflow.com/platforms/callrail",
+      "status": 200,
+      "titles": [
+        "CallRail Call Tracking | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "CallRail call tracking setup for service businesses: which campaigns and pages produce phone calls, with call recordings and source attribution."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/platforms/callrail"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "CallRail"
+      ],
+      "og_title": [
+        "CallRail Call Tracking | ZiaFlow",
+        "CallRail Call Tracking | ZiaFlow"
+      ],
+      "og_description": [
+        "CallRail call tracking setup for service businesses: which campaigns and pages produce phone calls, with call recordings and source attribution.",
+        "CallRail call tracking setup for service businesses: which campaigns and pages produce phone calls, with call recordings and source attribution."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "02672c9a07be30977c8a2541a023c259ec3f5e1d1983fab89002ecf91b52d45c",
+      "main_text_characters": 1131,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/posts",
+      "final_url": "https://ziaflow.com/posts",
+      "status": 200,
+      "titles": [
+        "Blog Posts \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Archive of recent articles, updates, and digital marketing insights from ZiaFlow."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/posts"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Latest Posts"
+      ],
+      "og_title": [
+        "Blog Posts",
+        "Blog Posts"
+      ],
+      "og_description": [
+        "Archive of recent articles, updates, and digital marketing insights from ZiaFlow.",
+        "Archive of recent articles, updates, and digital marketing insights from ZiaFlow."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "36b32a846ec27886cf0825b83928789c9ccefed8052c58977043a1d5b8e108a1",
+      "main_text_characters": 65,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/pricing",
+      "final_url": "https://ziaflow.com/pricing",
+      "status": 200,
+      "titles": [
+        "Pricing & Transparent Packages \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Explore flexible, transparent pricing for digital transformation, custom software, and AI automation tailored to your business goals."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/pricing"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Stellar Pricing for Every Journey"
+      ],
+      "og_title": [
+        "Pricing & Transparent Packages",
+        "Pricing & Transparent Packages"
+      ],
+      "og_description": [
+        "Explore flexible, transparent pricing for digital transformation, custom software, and AI automation tailored to your business goals.",
+        "Explore flexible, transparent pricing for digital transformation, custom software, and AI automation tailored to your business goals."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "16eeb4e6b1657e69d44a7ab4e03ed5bfb940b73f8b326a9dfb4f42367cc9cdde",
+      "main_text_characters": 2749,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/privacy",
+      "final_url": "https://ziaflow.com/privacy",
+      "status": 200,
+      "titles": [
+        "Privacy Policy \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Read the ZiaFlow Privacy Policy to learn how we protect your personal information, handle customer data, and maintain transparency."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/privacy"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Privacy Policy"
+      ],
+      "og_title": [
+        "Privacy Policy",
+        "Privacy Policy"
+      ],
+      "og_description": [
+        "Read the ZiaFlow Privacy Policy to learn how we protect your personal information, handle customer data, and maintain transparency.",
+        "Read the ZiaFlow Privacy Policy to learn how we protect your personal information, handle customer data, and maintain transparency."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "6ec1026b4b45f23545b1e7e3efede128518fdaf1c16f0835a9c49e627995e7d4",
+      "main_text_characters": 5987,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/reduce-bounce-rate-with-ai",
+      "final_url": "https://ziaflow.com/reduce-bounce-rate-with-ai",
+      "status": 200,
+      "titles": [
+        "Reduce Bounce Rate with AI: A Practical Guide \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Stop focusing on passive fixes. Learn the Diagnose \u2192 Fix \u2192 Automate framework to turn high bounce rates into high engagement using AI agents."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/reduce-bounce-rate-with-ai"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Reduce Bounce Rate with AI: A Practical Guide"
+      ],
+      "og_title": [
+        "Reduce Bounce Rate with AI: A Practical Guide",
+        "Reduce Bounce Rate with AI: A Practical Guide"
+      ],
+      "og_description": [
+        "Stop focusing on passive fixes. Learn the Diagnose \u2192 Fix \u2192 Automate framework to turn high bounce rates into high engagement using AI agents.",
+        "Stop focusing on passive fixes. Learn the Diagnose \u2192 Fix \u2192 Automate framework to turn high bounce rates into high engagement using AI agents."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "482783e6f57910dd86c7dc006c8e910a8f9ff00419588d938c51a7f18c1d73a6",
+      "main_text_characters": 8119,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services",
+      "final_url": "https://ziaflow.com/services",
+      "status": 200,
+      "titles": [
+        "Phoenix Home Service Marketing | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call (602) 834-4239 to grow your booked leads."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Phoenix Home Service Marketing - Google Local Service Ads & Google Business Profile"
+      ],
+      "og_title": [
+        "Phoenix Home Service Marketing | ZiaFlow",
+        "Phoenix Home Service Marketing | ZiaFlow"
+      ],
+      "og_description": [
+        "Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call (602) 834-4239 to grow your booked leads.",
+        "Google Local Service Ads, Google Business Profile optimization, and review automation for Arizona companies. Call (602) 834-4239 to grow your booked leads."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [
+        "lsa-guide"
+      ],
+      "main_text_sha256": "da564944099bd5c2f3019f0fe5e101143bf257a06e5c82ab2358f8527e7c1224",
+      "main_text_characters": 4844,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/automation",
+      "final_url": "https://ziaflow.com/services/automation",
+      "status": 200,
+      "titles": [
+        "Business Automation & AI Workflow Systems \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Scale client intake, CRM workflows, and 24/7 lead qualification for Arizona service businesses. Eliminate bottlenecks with custom automation."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/automation"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "The Automation Layer"
+      ],
+      "og_title": [
+        "Business Automation & AI Workflow Systems",
+        "Business Automation & AI Workflow Systems"
+      ],
+      "og_description": [
+        "Scale client intake, CRM workflows, and 24/7 lead qualification for Arizona service businesses. Eliminate bottlenecks with custom automation.",
+        "Scale client intake, CRM workflows, and 24/7 lead qualification for Arizona service businesses. Eliminate bottlenecks with custom automation."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f308da495d216f0df9506f989d8c4c9a38d2eaa85df905280eb482c3324eef24",
+      "main_text_characters": 981,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/cloud",
+      "final_url": "https://ziaflow.com/services/cloud",
+      "status": 200,
+      "titles": [
+        "Cloud Infrastructure & Managed Hosting \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Secure, resilient cloud architecture on AWS and Azure. Engineered for speed, strict compliance, and maximum uptime for growing applications."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/cloud"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Enterprise-Grade Infrastructure"
+      ],
+      "og_title": [
+        "Cloud Infrastructure & Managed Hosting",
+        "Cloud Infrastructure & Managed Hosting"
+      ],
+      "og_description": [
+        "Secure, resilient cloud architecture on AWS and Azure. Engineered for speed, strict compliance, and maximum uptime for growing applications.",
+        "Secure, resilient cloud architecture on AWS and Azure. Engineered for speed, strict compliance, and maximum uptime for growing applications."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "8f2828b03d5b8f2a70b62751c2cc4dd12433ed84c69fc06d3e6229b1bc610589",
+      "main_text_characters": 689,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/cro",
+      "final_url": "https://ziaflow.com/services/cro",
+      "status": 200,
+      "titles": [
+        "Conversion Rate Optimization (CRO) Services \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Turn website visitors into paying clients with data-driven CRO, UX forensics, and rigorous A/B testing. Maximize revenue from current traffic."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/cro"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Diagnose \u2192 Fix \u2192 Convert"
+      ],
+      "og_title": [
+        "Conversion Rate Optimization (CRO) Services",
+        "Conversion Rate Optimization (CRO) Services"
+      ],
+      "og_description": [
+        "Turn website visitors into paying clients with data-driven CRO, UX forensics, and rigorous A/B testing. Maximize revenue from current traffic.",
+        "Turn website visitors into paying clients with data-driven CRO, UX forensics, and rigorous A/B testing. Maximize revenue from current traffic."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "b3f877744e1f8c43b4fcc364955aa5a002f49450a716085cc2c799f2e81a4280",
+      "main_text_characters": 697,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/ecommerce",
+      "final_url": "https://ziaflow.com/services/ecommerce",
+      "status": 200,
+      "titles": [
+        "Ecommerce Solutions | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Custom Shopify and WooCommerce solutions that turn your website into a revenue engine."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/ecommerce"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "24/7 Revenue Infrastructure"
+      ],
+      "og_title": [
+        "Ecommerce Solutions | ZiaFlow",
+        "Ecommerce Solutions | ZiaFlow"
+      ],
+      "og_description": [
+        "Custom Shopify and WooCommerce solutions that turn your website into a revenue engine.",
+        "Custom Shopify and WooCommerce solutions that turn your website into a revenue engine."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "7a1cb6b70ffa596e2e985012935c2dce48d24adc7358289c0853516f5d1ee048",
+      "main_text_characters": 726,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/gmb-optimization",
+      "final_url": "https://ziaflow.com/services/gmb-optimization",
+      "status": 200,
+      "titles": [
+        "Google Business Profile (GMB) Optimization \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Dominate Google Maps and local 3-pack search in Phoenix. Capture high-intent customers with optimized Google Business Profiles. Call (602) 834-4239."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/gmb-optimization"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Your Local Storefront"
+      ],
+      "og_title": [
+        "Google Business Profile (GMB) Optimization",
+        "Google Business Profile (GMB) Optimization"
+      ],
+      "og_description": [
+        "Dominate Google Maps and local 3-pack search in Phoenix. Capture high-intent customers with optimized Google Business Profiles. Call (602) 834-4239.",
+        "Dominate Google Maps and local 3-pack search in Phoenix. Capture high-intent customers with optimized Google Business Profiles. Call (602) 834-4239."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "429509fea772b1bea34e502c80269942470aec4e349314b57512610675e1b7f7",
+      "main_text_characters": 689,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/local-service-ads",
+      "final_url": "https://ziaflow.com/services/local-service-ads",
+      "status": 200,
+      "titles": [
+        "Google Local Service Ads (LSA) Management \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Get Google Guaranteed at the top of Phoenix search results. Pay-per-lead calls, dispute protection, and verification management for contractors."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/local-service-ads"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Verified Trust at the Top"
+      ],
+      "og_title": [
+        "Google Local Service Ads (LSA) Management",
+        "Google Local Service Ads (LSA) Management"
+      ],
+      "og_description": [
+        "Get Google Guaranteed at the top of Phoenix search results. Pay-per-lead calls, dispute protection, and verification management for contractors.",
+        "Get Google Guaranteed at the top of Phoenix search results. Pay-per-lead calls, dispute protection, and verification management for contractors."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "603fe4be6d7eb2d357bd9e2f019de3bc624d2739b0f211f81cb0438b5e450e55",
+      "main_text_characters": 638,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/performance-tracking",
+      "final_url": "https://ziaflow.com/services/performance-tracking",
+      "status": 200,
+      "titles": [
+        "Performance Tracking & Analytics | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Forensic data tracking and custom dashboards for real-time ROI measurement."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/performance-tracking"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Data-Driven Transparency"
+      ],
+      "og_title": [
+        "Performance Tracking & Analytics | ZiaFlow",
+        "Performance Tracking & Analytics | ZiaFlow"
+      ],
+      "og_description": [
+        "Forensic data tracking and custom dashboards for real-time ROI measurement.",
+        "Forensic data tracking and custom dashboards for real-time ROI measurement."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "ef83c9d345b6ed87d9bed48af1e18f5a2f8e1316bb3da48da02b9038d5e85a21",
+      "main_text_characters": 648,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/ppc",
+      "final_url": "https://ziaflow.com/services/ppc",
+      "status": 200,
+      "titles": [
+        "PPC Management & Google Ads Campaigns \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Drive qualified leads with high-ROI pay-per-click management for Google and Microsoft Ads. Target high-intent buyers ready to convert today."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/ppc"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Instant Speed & Cash Flow"
+      ],
+      "og_title": [
+        "PPC Management & Google Ads Campaigns",
+        "PPC Management & Google Ads Campaigns"
+      ],
+      "og_description": [
+        "Drive qualified leads with high-ROI pay-per-click management for Google and Microsoft Ads. Target high-intent buyers ready to convert today.",
+        "Drive qualified leads with high-ROI pay-per-click management for Google and Microsoft Ads. Target high-intent buyers ready to convert today."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "7ab29eabb03ee7338d0568569e54e40515b27c114e2bd432521bbb1611a33926",
+      "main_text_characters": 705,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/review-management",
+      "final_url": "https://ziaflow.com/services/review-management",
+      "status": 200,
+      "titles": [
+        "Review Management & Reputation | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Automated review requests and reputation management for service businesses."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/review-management"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Automated Social Proof"
+      ],
+      "og_title": [
+        "Review Management & Reputation | ZiaFlow",
+        "Review Management & Reputation | ZiaFlow"
+      ],
+      "og_description": [
+        "Automated review requests and reputation management for service businesses.",
+        "Automated review requests and reputation management for service businesses."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f45eda93d162de5cf95c77ee300a677b3bfdc154f3877dbfd34b8f148d294f41",
+      "main_text_characters": 673,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/seo",
+      "final_url": "https://ziaflow.com/services/seo",
+      "status": 200,
+      "titles": [
+        "SEO Services - Phoenix & Arizona | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Technical SEO and content strategies that build lasting market authority."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/seo"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Lasting Market Authority"
+      ],
+      "og_title": [
+        "SEO Services - Phoenix & Arizona | ZiaFlow",
+        "SEO Services - Phoenix & Arizona | ZiaFlow"
+      ],
+      "og_description": [
+        "Technical SEO and content strategies that build lasting market authority.",
+        "Technical SEO and content strategies that build lasting market authority."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "e4be5b01058eeb83df6cf77275a89b81f985cdf0c1bc8216fe9432e6743ab98f",
+      "main_text_characters": 697,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/social-media",
+      "final_url": "https://ziaflow.com/services/social-media",
+      "status": 200,
+      "titles": [
+        "Social Media Marketing | ZiaFlow \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Strategic social media management that builds trust and drives revenue."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/social-media"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Strategic Asset Building"
+      ],
+      "og_title": [
+        "Social Media Marketing | ZiaFlow",
+        "Social Media Marketing | ZiaFlow"
+      ],
+      "og_description": [
+        "Strategic social media management that builds trust and drives revenue.",
+        "Strategic social media management that builds trust and drives revenue."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "fc1b330a766ff2fa28b2dd363eb4a52c385093376c76f98024dd22be644f2447",
+      "main_text_characters": 742,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/software",
+      "final_url": "https://ziaflow.com/services/software",
+      "status": 200,
+      "titles": [
+        "Custom Software & Internal Tool Development \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Bespoke operational tools, portals, and custom software for scaling businesses. Streamline workflow bottlenecks and build proprietary software assets."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/software"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Bespoke Operational Tools"
+      ],
+      "og_title": [
+        "Custom Software & Internal Tool Development",
+        "Custom Software & Internal Tool Development"
+      ],
+      "og_description": [
+        "Bespoke operational tools, portals, and custom software for scaling businesses. Streamline workflow bottlenecks and build proprietary software assets.",
+        "Bespoke operational tools, portals, and custom software for scaling businesses. Streamline workflow bottlenecks and build proprietary software assets."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "7100719ba622d8aa5561099723af5dd77b81cf7d00ef7ccb08493d5ab5753d03",
+      "main_text_characters": 700,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/services/web-development",
+      "final_url": "https://ziaflow.com/services/web-development",
+      "status": 200,
+      "titles": [
+        "Web Development & Performance Engineering \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "High-converting, lightning-fast websites built for speed and engagement. Forensic audits, responsive architecture, and SEO-engineered frameworks."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/services/web-development"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Engineered for Conversion"
+      ],
+      "og_title": [
+        "Web Development & Performance Engineering",
+        "Web Development & Performance Engineering"
+      ],
+      "og_description": [
+        "High-converting, lightning-fast websites built for speed and engagement. Forensic audits, responsive architecture, and SEO-engineered frameworks.",
+        "High-converting, lightning-fast websites built for speed and engagement. Forensic audits, responsive architecture, and SEO-engineered frameworks."
+      ],
+      "schema_types": [
+        "AggregateRating",
+        "Answer",
+        "City",
+        "FAQPage",
+        "ImageObject",
+        "Offer",
+        "OfferCatalog",
+        "Organization",
+        "PostalAddress",
+        "ProfessionalService",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "1c8e75ce8db4680c57bf7717ffa1e7718deaecb378b10a7318b44c71fe94ad2e",
+      "main_text_characters": 714,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/a/b-testing",
+      "final_url": "https://ziaflow.com/tag/a/b-testing",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'A/B testing' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/a/b-testing"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: A/B testing"
+      ],
+      "og_title": [
+        "Posts by tag 'A/B testing'",
+        "Posts by tag 'A/B testing'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "27055c96b50506e52abde18748894c175a0088191888f2f39c59be5950fed433",
+      "main_text_characters": 404,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/ai",
+      "final_url": "https://ziaflow.com/tag/ai",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'ai' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/ai"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: ai"
+      ],
+      "og_title": [
+        "Posts by tag 'ai'",
+        "Posts by tag 'ai'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "c5a689de50b2b3a5e4239d157c3b9f3a2246540ee210deb4e19b80a12a8d0982",
+      "main_text_characters": 262,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/ai-optimization",
+      "final_url": "https://ziaflow.com/tag/ai-optimization",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'ai-optimization' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/ai-optimization"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: ai-optimization"
+      ],
+      "og_title": [
+        "Posts by tag 'ai-optimization'",
+        "Posts by tag 'ai-optimization'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "babfcbd80ec232fe97316250398478eb70bbd3cda84b450603f56b3c260b91be",
+      "main_text_characters": 309,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/analytics",
+      "final_url": "https://ziaflow.com/tag/analytics",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'analytics' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/analytics"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: analytics"
+      ],
+      "og_title": [
+        "Posts by tag 'analytics'",
+        "Posts by tag 'analytics'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "e2d5dda1e66e4b6a8b7508070b7406b700a0419ba185579ac4a5698efd18da96",
+      "main_text_characters": 269,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/bounce-rate",
+      "final_url": "https://ziaflow.com/tag/bounce-rate",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'bounce rate' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/bounce-rate"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: bounce rate"
+      ],
+      "og_title": [
+        "Posts by tag 'bounce rate'",
+        "Posts by tag 'bounce rate'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "69262d26b497cd097b230b0d4bc3c68b5b986b72d5751b1d46822e72e998dc69",
+      "main_text_characters": 271,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/color-scheme",
+      "final_url": "https://ziaflow.com/tag/color-scheme",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'color scheme' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/color-scheme"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: color scheme"
+      ],
+      "og_title": [
+        "Posts by tag 'color scheme'",
+        "Posts by tag 'color scheme'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f7b34996428c51cd01ae85cdc2b3c8e08024484b24ee95e237c18cfb1bf4cf52",
+      "main_text_characters": 336,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/conversion-rate-optimization",
+      "final_url": "https://ziaflow.com/tag/conversion-rate-optimization",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'conversion rate optimization' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/conversion-rate-optimization"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: conversion rate optimization"
+      ],
+      "og_title": [
+        "Posts by tag 'conversion rate optimization'",
+        "Posts by tag 'conversion rate optimization'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "b3ca25ec79a145a2e38e8825784cddd62643d7b8dfb79249564725c236ddcf8e",
+      "main_text_characters": 421,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/cro",
+      "final_url": "https://ziaflow.com/tag/cro",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'cro' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/cro"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: cro"
+      ],
+      "og_title": [
+        "Posts by tag 'cro'",
+        "Posts by tag 'cro'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f38650f7bb2f325c734aaaee350905ee89c60134e1968e77ff49eed6ee8859f4",
+      "main_text_characters": 651,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/developer-tools",
+      "final_url": "https://ziaflow.com/tag/developer-tools",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'developer tools' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/developer-tools"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: developer tools"
+      ],
+      "og_title": [
+        "Posts by tag 'developer tools'",
+        "Posts by tag 'developer tools'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "bbf427eb02abdecbd394c50e94a357d6b2b98f879e91022d54c1009257ea8342",
+      "main_text_characters": 339,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/engagement",
+      "final_url": "https://ziaflow.com/tag/engagement",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'engagement' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/engagement"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: engagement"
+      ],
+      "og_title": [
+        "Posts by tag 'engagement'",
+        "Posts by tag 'engagement'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "3bd771d12ca82b308104a03f84b557ca608ccee4887cb28ace0fab91004c9271",
+      "main_text_characters": 270,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/google-ads",
+      "final_url": "https://ziaflow.com/tag/google-ads",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'google-ads' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/google-ads"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: google-ads"
+      ],
+      "og_title": [
+        "Posts by tag 'google-ads'",
+        "Posts by tag 'google-ads'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f8f82a4ab443b83336f793b34ff16dc7204b3f941789815caf2a20766205f712",
+      "main_text_characters": 304,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/icons",
+      "final_url": "https://ziaflow.com/tag/icons",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'icons' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/icons"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: icons"
+      ],
+      "og_title": [
+        "Posts by tag 'icons'",
+        "Posts by tag 'icons'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "ef48fc1826435ef7e15acd38394df4cedc5dcafac15da890aaeb88d437a70aa8",
+      "main_text_characters": 329,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/lead-generation",
+      "final_url": "https://ziaflow.com/tag/lead-generation",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'lead generation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/lead-generation"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: lead generation"
+      ],
+      "og_title": [
+        "Posts by tag 'lead generation'",
+        "Posts by tag 'lead generation'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "de7f1324cece7dc141fcb5bbebbeb81bed9fddac75604689d6f94d46fde82f6e",
+      "main_text_characters": 666,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/local-seo",
+      "final_url": "https://ziaflow.com/tag/local-seo",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'local-seo' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/local-seo"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: local-seo"
+      ],
+      "og_title": [
+        "Posts by tag 'local-seo'",
+        "Posts by tag 'local-seo'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "1af4340d15123901d5ea8d635324ca49c2bdc9ec217987e17ce45b7e4f89ae05",
+      "main_text_characters": 303,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/marketing-automation",
+      "final_url": "https://ziaflow.com/tag/marketing-automation",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'marketing automation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/marketing-automation"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: marketing automation"
+      ],
+      "og_title": [
+        "Posts by tag 'marketing automation'",
+        "Posts by tag 'marketing automation'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "07970568c7a29c0cf1fb1697740063d719f448fad6eb0fe8e9ef5c706ae5127d",
+      "main_text_characters": 382,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/page-speed",
+      "final_url": "https://ziaflow.com/tag/page-speed",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'page speed' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/page-speed"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: page speed"
+      ],
+      "og_title": [
+        "Posts by tag 'page speed'",
+        "Posts by tag 'page speed'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "0fee5dc7fdd127913df745648fa890e86bbf891c9c7397ddaca0cc4b0a696b7d",
+      "main_text_characters": 403,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/phoenix-business",
+      "final_url": "https://ziaflow.com/tag/phoenix-business",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'Phoenix business' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/phoenix-business"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: Phoenix business"
+      ],
+      "og_title": [
+        "Posts by tag 'Phoenix business'",
+        "Posts by tag 'Phoenix business'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "4991a03b9623f366bc5a8409dca47e6302acc2ce135c482ebf7779198b3c7ce8",
+      "main_text_characters": 766,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/pricing",
+      "final_url": "https://ziaflow.com/tag/pricing",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'pricing' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/pricing"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: pricing"
+      ],
+      "og_title": [
+        "Posts by tag 'pricing'",
+        "Posts by tag 'pricing'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "7fd45c71909dd28177ddcf7c1a0f47ba0dacb403ed018386df144496933c5678",
+      "main_text_characters": 331,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/review-automation",
+      "final_url": "https://ziaflow.com/tag/review-automation",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'review automation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/review-automation"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: review automation"
+      ],
+      "og_title": [
+        "Posts by tag 'review automation'",
+        "Posts by tag 'review automation'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "f9e18f7e5bfe7d3bcd22b565661b473aee26b0244261668989c393ba2c1d5e3e",
+      "main_text_characters": 379,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/web-development",
+      "final_url": "https://ziaflow.com/tag/web-development",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'web development' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/web-development"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: web development"
+      ],
+      "og_title": [
+        "Posts by tag 'web development'",
+        "Posts by tag 'web development'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "bf56c0cf70513581ef0065e27ab2d34abb28a870a84dab2e602b27111eca9371",
+      "main_text_characters": 408,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/website-analysis",
+      "final_url": "https://ziaflow.com/tag/website-analysis",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'website analysis' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/website-analysis"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: website analysis"
+      ],
+      "og_title": [
+        "Posts by tag 'website analysis'",
+        "Posts by tag 'website analysis'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "6b4df053c24b9f6a07c37b7b9f3f6be46a9614fa3f1409dc1656bcaf12cedcf4",
+      "main_text_characters": 340,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/tag/workflow-automation",
+      "final_url": "https://ziaflow.com/tag/workflow-automation",
+      "status": 200,
+      "titles": [
+        "Posts by tag 'workflow automation' \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/tag/workflow-automation"
+      ],
+      "robots": [
+        "noindex,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Tag: workflow automation"
+      ],
+      "og_title": [
+        "Posts by tag 'workflow automation'",
+        "Posts by tag 'workflow automation'"
+      ],
+      "og_description": [
+        "AI-driven SEO & conversion optimization for B2B SaaS and agencies. Call (602) 834-4239 to rank higher and convert better.",
+        "Custom websites, strategic SEO, PPC, and automation for Arizona service businesses. 50+ clients trust our Phoenix team for measurable growth. Book a free strategy session."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "db2e37ec9265a83451d22351ea0fd4e5d6f05236e1f2fdc2c16dda77a72326f8",
+      "main_text_characters": 381,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/terms",
+      "final_url": "https://ziaflow.com/terms",
+      "status": 200,
+      "titles": [
+        "Terms and Conditions \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Review the Terms and Conditions for using ZiaFlow digital transformation, software engineering, and marketing automation services."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/terms"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Terms and Conditions"
+      ],
+      "og_title": [
+        "Terms and Conditions",
+        "Terms and Conditions"
+      ],
+      "og_description": [
+        "Review the Terms and Conditions for using ZiaFlow digital transformation, software engineering, and marketing automation services.",
+        "Review the Terms and Conditions for using ZiaFlow digital transformation, software engineering, and marketing automation services."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "9c39faa5cd19374ca9f5b745042958e21bb593c35a397a2922c4c7e6786a687d",
+      "main_text_characters": 11565,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/website-analysis-tasks",
+      "final_url": "https://ziaflow.com/website-analysis-tasks",
+      "status": 200,
+      "titles": [
+        "How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "A practical guide on how to find pricing sections, extract icons, and generate color schemes from images using browser developer tools and online resources."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/website-analysis-tasks"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors"
+      ],
+      "og_title": [
+        "How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors",
+        "How to Tackle Website Analysis Tasks: Pricing, Icons, and Colors"
+      ],
+      "og_description": [
+        "A practical guide on how to find pricing sections, extract icons, and generate color schemes from images using browser developer tools and online resources.",
+        "A practical guide on how to find pricing sections, extract icons, and generate color schemes from images using browser developer tools and online resources."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "13c4b7fbfe7e888e9f508cb4b64558767578015761cfa7b979c8a1dc267d3773",
+      "main_text_characters": 6838,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/website-conversion-checklist-for-phoenix-businesses",
+      "final_url": "https://ziaflow.com/website-conversion-checklist-for-phoenix-businesses",
+      "status": 200,
+      "titles": [
+        "Website Conversion Checklist for Phoenix Businesses | CRO & Web Dev Tips \u2014 ZiaFlow"
+      ],
+      "descriptions": [
+        "Phoenix CRO checklist backed by data - page speed improvements boost conversions 40%+, trust badges add 12-42% lift, optimized forms increase leads 120%. Get your free 30-day audit."
+      ],
+      "canonicals": [
+        "https://ziaflow.com/website-conversion-checklist-for-phoenix-businesses"
+      ],
+      "robots": [
+        "index,follow"
+      ],
+      "x_robots_tag": null,
+      "h1s": [
+        "Website Conversion Checklist for Phoenix Businesses | CRO & Web Dev Tips"
+      ],
+      "og_title": [
+        "Website Conversion Checklist for Phoenix Businesses | CRO & Web Dev Tips",
+        "Website Conversion Checklist for Phoenix Businesses | CRO & Web Dev Tips"
+      ],
+      "og_description": [
+        "Phoenix CRO checklist backed by data - page speed improvements boost conversions 40%+, trust badges add 12-42% lift, optimized forms increase leads 120%. Get your free 30-day audit.",
+        "Phoenix CRO checklist backed by data - page speed improvements boost conversions 40%+, trust badges add 12-42% lift, optimized forms increase leads 120%. Get your free 30-day audit."
+      ],
+      "schema_types": [
+        "Answer",
+        "FAQPage",
+        "ImageObject",
+        "Organization",
+        "Question",
+        "SearchAction",
+        "Service",
+        "WebSite"
+      ],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "ce74f01baaebb7f417ce2f6e6dc3dac67190b2172a6727ed8cad795492b7cc95",
+      "main_text_characters": 12688,
+      "main_element_present": true
+    },
+    {
+      "requested_url": "https://ziaflow.com/ziaflow",
+      "final_url": "https://ziaflow.com/ziaflow",
+      "status": 200,
+      "titles": [],
+      "descriptions": [],
+      "canonicals": [],
+      "robots": [],
+      "x_robots_tag": null,
+      "h1s": [],
+      "og_title": [],
+      "og_description": [],
+      "schema_types": [],
+      "missing_same_page_fragments": [],
+      "main_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "main_text_characters": 0,
+      "main_element_present": false
+    }
+  ],
+  "limitations": [
+    "Public server HTML, not browser execution or Sanity inventory.",
+    "Redirects are followed; this does not record every intermediate hop.",
+    "Main text hash is evidence of rendered copy, not a backup of the copy.",
+    "No forms submitted, API routes crawled, credentials used or marketing sent."
+  ]
+}
