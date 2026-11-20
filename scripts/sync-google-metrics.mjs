@@ -55,7 +55,7 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
     try {
       for (let time = Date.parse(start); time <= Date.parse(end); time += 86400000) {
         date = new Date(time).toISOString().slice(0, 10);
-        const rows = [];
+        let rows = [];
         const sourcePages = [];
         for (let offset = 0; ; offset += 25000) {
           const data =
@@ -134,35 +134,47 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
           if (source === 'ga4' ? offset + batch.length >= (data.rowCount || 0) : batch.length < 25000) break;
           if (!batch.length) throw new Error('Report pagination stalled');
         }
-        const keys = rows.map((row) => JSON.stringify([row.page_path, row.query]));
-        if (new Set(keys).size !== keys.length) {
-          if (source === 'gsc') {
-            const seen = new Map();
-            for (let i = 0; i < keys.length; i++) {
-              if (seen.has(keys[i])) {
-                const previous = new URL(seen.get(keys[i]));
-                const current = new URL(sourcePages[i]);
-                log(
-                  JSON.stringify({
-                    source,
-                    date,
-                    collision:
-                      previous.href === current.href
-                        ? 'same-url'
-                        : previous.host !== current.host
-                          ? 'different-host'
-                          : previous.protocol !== current.protocol
-                            ? 'different-protocol'
-                            : 'other-url-difference',
-                  })
-                );
-                break;
-              }
-              seen.set(keys[i], sourcePages[i]);
-            }
+        const seen = new Map();
+        const uniqueRows = [];
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const key = JSON.stringify([row.page_path, row.query]);
+          const previous = seen.get(key);
+          if (!previous) {
+            seen.set(key, { row, page: sourcePages[i] });
+            uniqueRows.push(row);
+            continue;
           }
-          throw new Error('Report contains colliding page keys; refusing lossy import');
+          const first = source === 'gsc' && previous.page && new URL(previous.page);
+          const next = source === 'gsc' && new URL(sourcePages[i]);
+          if (
+            !first ||
+            !next ||
+            new Set([first.protocol, next.protocol]).size !== 2 ||
+            ![first.protocol, next.protocol].every((protocol) => ['http:', 'https:'].includes(protocol)) ||
+            first.href.replace(/^http:/, 'https:') !== next.href.replace(/^http:/, 'https:') ||
+            ![
+              previous.row.clicks,
+              previous.row.impressions,
+              previous.row.position,
+              row.clicks,
+              row.impressions,
+              row.position,
+            ].every(Number.isFinite) ||
+            previous.row.impressions < 0 ||
+            row.impressions < 0
+          )
+            throw new Error('Report contains colliding page keys; refusing lossy import');
+          const impressions = previous.row.impressions + row.impressions;
+          previous.row.position = impressions
+            ? (previous.row.position * previous.row.impressions + row.position * row.impressions) / impressions
+            : 0;
+          previous.row.clicks += row.clicks;
+          previous.row.impressions = impressions;
+          previous.row.ctr = impressions ? previous.row.clicks / impressions : 0;
+          previous.page = null;
         }
+        rows = uniqueRows;
         for (let offset = 0; offset < rows.length; offset += 500) {
           await request(
             `${base}/rest/v1/metrics_${source}_daily?on_conflict=${source === 'ga4' ? 'date,page_path' : 'date,page_path,query'}`,

@@ -82,3 +82,51 @@ test('thresholded GA4 reports never write misleading daily values', async () => 
     /sync failed/
   );
 });
+
+test('combines HTTP and HTTPS rows without losing clicks or impressions', async () => {
+  const writes = [];
+  await run(
+    env,
+    async (url, options) => {
+      if (url.includes('oauth2')) return json({ access_token: 'token' });
+      if (url.includes('analyticsdata')) return json({ rows: [] });
+      if (url.includes('webmasters'))
+        return json({
+          rows: [
+            { keys: ['http://ziaflow.com/page', 'query'], clicks: 2, impressions: 10, ctr: 0.2, position: 4 },
+            { keys: ['https://ziaflow.com/page', 'query'], clicks: 3, impressions: 30, ctr: 0.1, position: 8 },
+          ],
+        });
+      writes.push(JSON.parse(options.body));
+      return new Response(null, { status: 201 });
+    },
+    () => {}
+  );
+  assert.equal(writes[0].length, 1);
+  assert.deepEqual(
+    [writes[0][0].clicks, writes[0][0].impressions, writes[0][0].ctr, writes[0][0].position],
+    [5, 40, 0.125, 7]
+  );
+});
+
+test('refuses other collisions before writing Search Console data', async () => {
+  await assert.rejects(
+    run(
+      env,
+      async (url) => {
+        if (url.includes('oauth2')) return json({ access_token: 'token' });
+        if (url.includes('analyticsdata')) return json({ rows: [] });
+        if (url.includes('webmasters'))
+          return json({
+            rows: [
+              { keys: ['https://ziaflow.com/page', 'query'], clicks: 1, impressions: 1, ctr: 1, position: 1 },
+              { keys: ['https://www.ziaflow.com/page', 'query'], clicks: 1, impressions: 1, ctr: 1, position: 1 },
+            ],
+          });
+        assert.fail('colliding rows must not be written');
+      },
+      () => {}
+    ),
+    /sync failed/
+  );
+});
