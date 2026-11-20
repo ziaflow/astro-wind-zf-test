@@ -82,3 +82,38 @@ test('configured legacy secret requires matching credentials', async () => {
   assert.equal((await h.post({ 'x-cio-webhook-secret': 'test-legacy' })).status, 200);
   assert.equal(h.writes.length, 2);
 });
+
+test('normalizes modern and legacy Customer.io reporting events', async () => {
+  const h = setup({ CUSTOMER_IO_WEBHOOK_SECRET: 'test-legacy' });
+  const events = [
+    {
+      event_id: 'modern',
+      object_type: 'email',
+      metric: 'sent',
+      timestamp: 1700000000,
+      data: { recipient: 'Jane@EXAMPLE.COM' },
+    },
+    {
+      event_id: 'legacy',
+      event_type: 'email_opened',
+      timestamp: 1700000000,
+      data: { email_address: 'Jane@EXAMPLE.COM' },
+    },
+    {
+      event_id: 'identified',
+      object_type: 'customer',
+      metric: 'subscribed',
+      timestamp: 1700000000,
+      data: { identifiers: { email: 'Jane@EXAMPLE.COM' } },
+    },
+  ];
+  assert.equal((await h.post({ authorization: 'Bearer test-legacy' }, JSON.stringify(events))).status, 200);
+  assert.deepEqual(
+    Array.from(h.writes[0], (row) => [row.event_type, row.recipient]),
+    [
+      ['email_sent', 'jane@example.com'],
+      ['email_opened', 'jane@example.com'],
+      ['customer_subscribed', 'jane@example.com'],
+    ]
+  );
+});
