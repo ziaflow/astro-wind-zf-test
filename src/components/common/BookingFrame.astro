@@ -44,7 +44,9 @@ const bookingUrl = 'https://calendly.com/jeremy-sanchez-ziaflow';
   }
 
   window.addEventListener('message', (event) => {
-    if (!event.origin.endsWith('calendly.com')) return;
+    const bookingFrames = document.querySelectorAll<HTMLIFrameElement>('[data-booking-iframe]');
+    if (event.origin !== 'https://calendly.com' || !event.source) return;
+    if (!Array.from(bookingFrames).some((iframe) => iframe.contentWindow === event.source)) return;
     const payload = event.data;
     if (!payload || typeof payload !== 'object' || payload.event !== 'calendly.event_scheduled') return;
 
