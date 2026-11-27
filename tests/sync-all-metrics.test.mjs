@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseBingDate, parseUrlPath } from '../scripts/sync-all-metrics.mjs';
+import { parseBingDate, parseUrlPath, syncGoogle } from '../scripts/sync-all-metrics.mjs';
 
 test('parseBingDate parses Bing /Date(ms)/ and ISO timestamps', () => {
   assert.equal(parseBingDate('/Date(1762905600000-0800)/'), '2025-11-12');
@@ -11,4 +11,14 @@ test('parseUrlPath normalizes full URLs and relative paths', () => {
   assert.equal(parseUrlPath('https://ziaflow.com/services/seo?utm=1'), '/services/seo?utm=1');
   assert.equal(parseUrlPath('/contact'), '/contact');
   assert.equal(parseUrlPath('services/ppc'), '/services/ppc');
+});
+
+test('missing Google credentials reports a skipped import', async () => {
+  const original = process.env.GOOGLE_CLIENT_ID;
+  delete process.env.GOOGLE_CLIENT_ID;
+  try {
+    assert.deepEqual(await syncGoogle(), { status: 'skipped', details: 'Missing Google credentials' });
+  } finally {
+    if (original !== undefined) process.env.GOOGLE_CLIENT_ID = original;
+  }
 });

@@ -72,4 +72,3 @@ test('collector evidence distinguishes confirmed empty results from unknown ware
   ]);
   assert.deepEqual(checkFreshness(clarity, gsc, undefined, now), ['GA4: reporting date unknown']);
 });
-
