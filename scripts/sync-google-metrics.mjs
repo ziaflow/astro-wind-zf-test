@@ -1,4 +1,15 @@
 import { pathToFileURL } from 'node:url';
+import { randomUUID } from 'node:crypto';
+
+export async function writeReceipt(base, key, receipt, fetcher = fetch) {
+  const response = await fetcher(`${base}/rest/v1/google_metrics_receipts?on_conflict=id`, {
+    method: 'POST',
+    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', Prefer: 'resolution=ignore-duplicates,return=minimal' },
+    body: JSON.stringify(receipt),
+    signal: AbortSignal.timeout(60000),
+  });
+  if (!response.ok) throw new Error(`Receipt write: HTTP ${response.status}`);
+}
 
 // Deliberately server-only: no anon-key fallback and no fabricated/aggregate input.
 export async function run(env = process.env, fetcher = fetch, log = console.log) {
@@ -52,8 +63,18 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
   let failed = false;
   for (const source of ['ga4', 'gsc']) {
     let date;
+    let receiptAttempted = false;
+    const persist = async (status, rowsWritten) => {
+      if (env.GOOGLE_METRICS_RECEIPTS_ENABLED !== 'true') return;
+      receiptAttempted = true;
+      await writeReceipt(base, env.SUPABASE_SERVICE_ROLE_KEY, {
+        id: randomUUID(), source, property: source === 'ga4' ? `properties/${env.GA4_PROPERTY_ID}` : 'sc-domain:ziaflow.com',
+        reporting_date: date, status, rows_written: rowsWritten,
+      }, fetcher);
+    };
     try {
       for (let time = Date.parse(start); time <= Date.parse(end); time += 86400000) {
+        receiptAttempted = false;
         date = new Date(time).toISOString().slice(0, 10);
         let rows = [];
         const sourcePages = [];
@@ -188,10 +209,15 @@ export async function run(env = process.env, fetcher = fetch, log = console.log)
             `${source} upsert`
           );
         }
+        await persist(rows.length ? 'success' : 'empty', rows.length);
         log(JSON.stringify({ source, date, status: rows.length ? 'success' : 'empty', rows_written: rows.length }));
       }
     } catch (error) {
       failed = true;
+      if (date && !receiptAttempted) {
+        try { await persist('failed', null); }
+        catch { log(JSON.stringify({ source, date, status: 'receipt_write_failed' })); }
+      }
       // Only messages constructed here are safe. Never log provider bodies or network errors.
       const safe = /^(GA4 report:|GSC report:|ga4 upsert:|gsc upsert:|Report )/.test(error.message)
         ? error.message
