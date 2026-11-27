@@ -8,15 +8,12 @@ interface CustomerIoWebhookEvent {
   event_id?: string;
   id?: string;
   event_type?: string;
-  object_type?: string;
   metric?: string;
   type?: string;
   timestamp?: number | string;
   data?: {
     recipient?: string;
     email?: string;
-    email_address?: string;
-    identifiers?: { email?: string };
     delivery_id?: string | number;
     action_id?: string | number;
     campaign_id?: string | number;
@@ -142,15 +139,8 @@ export const POST: APIRoute = async ({ request }) => {
   // 4. Normalize records for idempotent upsert
   const records = events.map((event) => {
     const data = event.data || {};
-    const recipient = String(
-      data.recipient || data.email || data.email_address || data.identifiers?.email || event.recipient || 'unknown'
-    ).toLowerCase();
-    const eventType = String(
-      event.event_type ||
-        (event.object_type && event.metric
-          ? `${event.object_type}_${event.metric}`
-          : event.metric || event.type || 'unknown')
-    );
+    const recipient = String(data.recipient || data.email || event.recipient || 'unknown').toLowerCase();
+    const eventType = String(event.event_type || event.metric || event.type || 'unknown');
     const deliveryId = data.delivery_id ? String(data.delivery_id) : null;
     const actionId = data.action_id ? String(data.action_id) : null;
     const campaignId = data.campaign_id ? String(data.campaign_id) : null;
